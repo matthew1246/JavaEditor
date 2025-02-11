@@ -1071,7 +1071,7 @@ public class Main {
 		addjar.addActionListener((ev) -> {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Preferences preferences=storeselectedfile.get(fileName);
-			if(preferences == null || preferences.jars.size() == 0) {
+			/*if(preferences == null || preferences.jars.size() == 0) {
 				String directory = fileName.replaceAll("[^\\\\]+\\.java","");
 				JFileChooser filechooser = new JFileChooser(new File(directory));
 				int result = filechooser.showOpenDialog(frame);
@@ -1081,6 +1081,7 @@ public class Main {
 				}
 			}
 			else {
+			*/
 				JFrame jarframe = new JFrame();
 				JPanel jarpanel = new JPanel();
 				GridLayout gridlayout = new GridLayout(preferences.jars.size(),1);
@@ -1138,7 +1139,7 @@ public class Main {
 
 				jarframe.pack();
 				jarframe.setVisible(true);
-			}
+			//}
 		});
 		filenamescombobox.addItemListener(ev-> {
 			if(ev.getStateChange() == ItemEvent.DESELECTED) {
