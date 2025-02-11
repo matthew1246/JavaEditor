@@ -6,10 +6,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\Main.java": {
     "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\Muck.jar"
-    ],
+    "jars": [],
     "caretposition": 60949
   },
   "Main": {
