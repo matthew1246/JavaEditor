@@ -1,0 +1,31 @@
+{
+  "JOptionPane": [
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showConfirmDialog",
+    "showMessageDialog"
+  ],
+  "List": [
+    "size",
+    "toArray",
+    "add"
+  ],
+  "StackOverflowError": [
+    "printStackTrace",
+    "printStackTrace",
+    "printStackTrace"
+  ],
+  "RemoveAll": [
+    "Strings"
+  ],
+  "HttpCookie": [
+    "setMaxAge"
+  ],
+  "System": [
+    "out"
+  ],
+  "PrintStream": [
+    "println"
+  ]
+}

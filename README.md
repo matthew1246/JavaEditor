@@ -9,3 +9,6 @@ javac -cp gson-2.10.1;Muck.jar;. Main.java
 To run compiled code:
 java -cp gson-2.10.1;Muck.jar;. Main
 
+Main is the starter class for all this code.
+
+
