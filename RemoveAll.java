@@ -79,26 +79,36 @@ public class RemoveAll {
 		matcher.appendTail(stringbuilder);
 		wholetext=stringbuilder.toString();
 		
-		System.out.println(wholetext);
 		return wholetext;
 	}
 	
 	public static String LeftCurlyBraceInsideComments(String wholetext) {
 		try {
-			Pattern pattern=Pattern.compile("/\\*.+\\*/");
+			Pattern pattern=Pattern.compile("(?s)/\\*.*?\\*/");
 			Matcher matcher=pattern.matcher(wholetext);
 			StringBuilder stringbuilder = new StringBuilder();
 			while(matcher.find()) {
-				// String change=matcher.group();
 				String change=matcher.group();
-				change=change.replaceAll("\\{|\\}"," ");
+				change=change.replaceAll("\\{"," ");
 				matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(change));
 			}
 			matcher.appendTail(stringbuilder);
 			wholetext=stringbuilder.toString();
 			//System.out.println(wholetext);
-			wholetext=Comments(wholetext);
+			
+			pattern=Pattern.compile("(?s)/\\*.*?\\*/");
+			matcher=pattern.matcher(wholetext);
+			stringbuilder = new StringBuilder();
+			while(matcher.find()) {
+				String change=matcher.group();
+				change=change.replaceAll("\\}"," ");
+				matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(change));
+			}
+			matcher.appendTail(stringbuilder);
+			wholetext=stringbuilder.toString();
 			//System.out.println(wholetext);
+			
+			wholetext=Comments(wholetext);
 			wholetext=Strings(wholetext);
 		}
 		catch(StackOverflowError error) {
