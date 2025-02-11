@@ -809,7 +809,7 @@ public class Main {
 							Preferences preferences=storeselectedfile.get(fileName);
 							String main=preferences.starterclass;
 							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
-							if(!main.equals("")) {
+							if(!fileName.equals("")) {
 								List<String> jars = preferences.jars;
 								for(String jar:jars) {
 									jar = getFileName(jar);
@@ -818,7 +818,7 @@ public class Main {
 									//output.write(" "+jar);
 								}
 							}
-							else {
+							if(main.equals("")) {
 								main = fileName.replaceAll(".+\\\\","");
 								main = main.replaceAll("\\.java","");
 							}
@@ -908,7 +908,7 @@ public class Main {
 						Preferences preferences=storeselectedfile.get(fileName);
 						String main=preferences.starterclass;
 						String dir = fileName.replaceAll("[^\\\\]+\\.java","");
-						if(!main.equals("")) {
+						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
 							for(String jar:jars) {
 								jar = getFileName(jar);
@@ -917,7 +917,7 @@ public class Main {
 								//output.write(" "+jar);
 							}
 						}
-						else {
+						if(main.equals("")) {
 							main=fileName.replaceAll(".+\\\\","");
 							main = main.replaceAll("\\.java","");
 						}

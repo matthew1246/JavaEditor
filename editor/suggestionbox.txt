@@ -10,6 +10,10 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -49,5 +53,10 @@
     "replaceAll",
     "replaceAll",
     "replaceAll"
+  ],
+  "Main": [
+    "equals",
+    "equals",
+    "equals"
   ]
 }
