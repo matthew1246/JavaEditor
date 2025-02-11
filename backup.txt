@@ -1,125 +1,15 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\Main.java",
     "jars": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\NoFileOpen.java": {
-    "starterclass": "Main",
-    "jars": [],
-    "caretposition": 987
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
+  "C:\\Users\\Owner\\Documents\\javaeditor\\Main.java": {
     "starterclass": "Main",
     "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\Muck.jar"
     ],
-    "caretposition": 28945
-  },
-  "C:\\Users\\Owner\\Documents\\git\\onlinedatabase\\Main.java": {
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\onlinedatabase\\nashorn-core-15.4.jar",
-      "C:\\Users\\Owner\\Documents\\git\\onlinedatabase\\asm-9.5.jar",
-      "C:\\Users\\Owner\\Documents\\git\\onlinedatabase\\asm-commons-9.5.jar",
-      "C:\\Users\\Owner\\Documents\\git\\onlinedatabase\\asm-tree-9.5.jar",
-      "C:\\Users\\Owner\\Documents\\git\\onlinedatabase\\asm-util-9.5.jar"
-    ],
-    "caretposition": 81
-  },
-  "C:\\Users\\Owner\\Documents\\git\\onlinedatabase\\OnlineDatabase.java": {
-    "starterclass": "",
-    "jars": [],
-    "caretposition": 62
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\Compile.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 1485
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\MSDOS.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 110
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\FileListModifier.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\git\\compression\\Main.java": {
-    "starterclass": "",
-    "jars": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\RenameVariable.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\SuggestionBoxSelected.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 1636
-  },
-  "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java": {
-    "starterclass": "",
-    "jars": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\CommandLine.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 559
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\AllFiles.java": {
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 300
-  },
-  "Main": {
-    "starterclass": "",
-    "jars": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\git\\boggle\\Main.java": {
-    "starterclass": "",
-    "jars": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\git\\notepad\\RemoveAll.java": {
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
-    ],
-    "caretposition": 3311
-  },
-  "C:\\Users\\Owner\\Documents\\git\\dates\\Main.java": {
-    "starterclass": "",
-    "jars": [],
-    "caretposition": 0
+    "caretposition": 4360
   }
 }
