@@ -3,6 +3,10 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -26,15 +30,20 @@
     "out",
     "out",
     "out",
+    "out",
     "out"
   ],
   "PrintStream": [
     "println",
     "println",
     "println",
+    "println",
     "println"
   ],
   "String": [
+    "replaceAll",
+    "replaceAll",
+    "replaceAll",
     "replaceAll",
     "replaceAll"
   ]

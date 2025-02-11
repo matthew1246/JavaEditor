@@ -52,8 +52,34 @@ public class RemoveAll {
 	** This remove all single line comments from a string.
 	*/
 	public static String Comments(String wholetext) {
-		wholetext=wholetext.replaceAll("//","");
+		/*wholetext=wholetext.replaceAll("//","");
 		wholetext=wholetext.replaceAll("//\\}","");
+		*/
+		Pattern pattern=Pattern.compile("\\s*//.*\\}.*");
+		Matcher matcher=pattern.matcher(wholetext);
+		StringBuilder stringbuilder = new StringBuilder();
+		while(matcher.find()) {
+			String change=matcher.group();
+			change=change.replaceAll("\\}"," ");
+			matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(change));
+		}
+		matcher.appendTail(stringbuilder);
+		wholetext=stringbuilder.toString();
+		
+		pattern=Pattern.compile("\\s*//.*\\{.*");
+		matcher=pattern.matcher(wholetext);
+		stringbuilder = new StringBuilder();
+		while(matcher.find()) {
+			String change=matcher.group();
+			// JOptionPane.showMessageDialog(null,change);
+			change=change.replaceAll("\\{"," ");
+			// JOptionPane.showMessageDialog(null,change);
+			matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(change));
+		}
+		matcher.appendTail(stringbuilder);
+		wholetext=stringbuilder.toString();
+		
+		System.out.println(wholetext);
 		return wholetext;
 	}
 	
