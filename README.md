@@ -1,5 +1,6 @@
 # JavaEditor
 
+To run the code: java -jar Main.jar
 Main.jar is the latest source code made by Java 23.
 For earlier releases of Java, there is ForJava22_Main.jar
 for Java 22 and ForJava21_Main.jar for Java 21.
