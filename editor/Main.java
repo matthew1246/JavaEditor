@@ -789,7 +789,7 @@ public class Main {
 					JComboBox<Integer> combobox = new JComboBox<Integer>();
 					for(int i = 0; i < 23; i++) {
 						combobox.addItem(i+1);
-					}
+					}					
 					combobox.setSelectedItem(23);
 					panelversion.add(combobox);
 					JButton compiley = new JButton("compile");
@@ -809,6 +809,7 @@ public class Main {
 							Preferences preferences=storeselectedfile.get(fileName);
 							String main=preferences.starterclass;
 							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
+							JOptionPane.showMessageDialog(null,main+" "+fileName);
 							if(!fileName.equals("")) {
 								List<String> jars = preferences.jars;
 								for(String jar:jars) {
@@ -821,6 +822,21 @@ public class Main {
 							if(main.equals("")) {
 								main = fileName.replaceAll(".+\\\\","");
 								main = main.replaceAll("\\.java","");
+								if(!fileName.equals("")) {
+									storeselectedfile.set(fileName);
+									LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
+									linkedhashmap.get(fileName).starterclass=main;
+									storeselectedfile.setBackup(linkedhashmap);
+									BufferedReader input = new BufferedReader(new FileReader("backup.txt"));
+									String lines = "";
+									while(true) {
+										String line = input.readLine();
+										if(line == null)
+											break;
+										lines+=line;
+									}
+									JOptionPane.showMessageDialog(null,lines);
+								}
 							}
 							FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
 							BufferedWriter output = new BufferedWriter(filewriter);
@@ -854,11 +870,14 @@ public class Main {
 								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 								output2.write("\n");
-								storeselectedfile = new StoreSelectedFile();
-								preferences=storeselectedfile.get(main);
+								
 								commandline = new CommandLine();
-								for(String jar:preferences.jars) {
-									commandline.add(jar);
+								if(!fileName.equals("")) {
+									storeselectedfile = new StoreSelectedFile();
+									preferences=storeselectedfile.get(fileName);
+									for(String jar:preferences.jars) {
+										commandline.add(jar);
+									}
 								}
 								output2.write("java -jar "+commandline.getClasspath(commandline.java_star_nor_dot)+"ForJava"+javaversionnumber+"_"+main+".jar");
 								output2.write("\n");
@@ -908,6 +927,7 @@ public class Main {
 						Preferences preferences=storeselectedfile.get(fileName);
 						String main=preferences.starterclass;
 						String dir = fileName.replaceAll("[^\\\\]+\\.java","");
+						JOptionPane.showMessageDialog(null,main+" "+fileName);
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
 							for(String jar:jars) {
@@ -917,10 +937,27 @@ public class Main {
 								//output.write(" "+jar);
 							}
 						}
-						if(main.equals("")) {
-							main=fileName.replaceAll(".+\\\\","");
-							main = main.replaceAll("\\.java","");
+						if(!fileName.equals("")) {
+							if(main.equals("")) {
+								main=fileName.replaceAll(".+\\\\","");
+								main = main.replaceAll("\\.java","");
+							}
+							storeselectedfile.set(fileName);
+							LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
+							linkedhashmap.get(fileName).starterclass=main;
+							storeselectedfile.setBackup(linkedhashmap);
+							
+							BufferedReader input = new BufferedReader(new FileReader("backup.txt"));
+							String lines = "";
+							while(true) {
+								String line = input.readLine();
+								if(line == null)
+									break;
+								lines+=line;
+							}
+							JOptionPane.showMessageDialog(null,lines);
 						}
+						
 						FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
 						BufferedWriter output = new BufferedWriter(filewriter);
 						output.write("Manifest-Version: 1.0");
@@ -954,12 +991,17 @@ public class Main {
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 							output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
 							output2.write("\n");
-							storeselectedfile = new StoreSelectedFile();
-							preferences=storeselectedfile.get(main);
+							
 							commandline = new CommandLine();
-							for(String jar:preferences.jars) {
-								commandline.add(jar);
+							/*if(!fileName.equals("")) {
+								storeselectedfile = new StoreSelectedFile();
+								preferences=storeselectedfile.get(main);
+	
+								for(String jar:preferences.jars) {
+									commandline.add(jar);
+								}
 							}
+							*/
 							output2.write("java -jar "+commandline.getClasspath(commandline.java_star_nor_dot)+main+".jar");
 							output2.write("\n");
 							output2.write("\n");
@@ -2011,8 +2053,9 @@ class OpenDefaultContent {
 		try {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		this.fileName = storeselectedfile.get();
-		
+		JOptionPane.showMessageDialog(null,"fileName is "+this.fileName);	
 		File file2 = new File(fileName); 
+		JOptionPane.showMessageDialog(null,"fileName is "+fileName);
 		if(!file2.exists()) {
 			JOptionPane.showMessageDialog(null,"No previous file found.");
 			this.fileName = "";

@@ -5,24 +5,11 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java": {
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
     "caretposition": 0
-  },
-  "Main": {
-    "starterclass": "",
-    "jars": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\StoreSelectedFile.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
-    ],
-    "caretposition": 230
   }
 }

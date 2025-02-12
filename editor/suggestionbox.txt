@@ -14,6 +14,9 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -48,6 +51,11 @@
     "println"
   ],
   "String": [
+    "equals",
+    "equals",
+    "hashCode",
+    "equals",
+    "equals",
     "replaceAll",
     "replaceAll",
     "replaceAll",
@@ -58,5 +66,27 @@
     "equals",
     "equals",
     "equals"
+  ],
+  "Preferences": [
+    "starterclass",
+    "starterclass"
+  ],
+  "StoreSelectedFile": [
+    "set",
+    "set",
+    "set",
+    "setBackup",
+    "setStarterClass"
+  ],
+  "BufferedReader": [
+    "readLine",
+    "readLine",
+    "readLine",
+    "readLine",
+    "lines",
+    "lines"
+  ],
+  "LinkedHashMap": [
+    "get"
   ]
 }

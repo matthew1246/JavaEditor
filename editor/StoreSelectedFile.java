@@ -5,7 +5,7 @@ import com.google.gson.reflect.*;
 import javax.swing.JOptionPane;
 public class StoreSelectedFile {
 	FileWriter filewriter;
-	public static void main(String[] args) {
+	public static void main(String[] args) 	{
 		Gson gson = new Gson();
 		LinkedHashMap<String,Preferences> linkedhashmap = new LinkedHashMap<String,Preferences>();
 		Preferences preferences=new Preferences();
