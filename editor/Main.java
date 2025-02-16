@@ -2175,20 +2175,28 @@ class CurlyBraceKeyListener implements KeyListener {
 				
 				Class<?> property = getClassQuestionMark(classname,text);
 				for(int i = 1; i < properties.length; i++) {
-					Member[] methodsandproperties=getAllPropertyAndMethods(property);
+					//Member[] methodsandproperties=getAllPropertyAndMethods(property);
+					Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
 					String last=properties[i];
-					escapey:for(Member member:methodsandproperties) {
-						if(member instanceof Field) {
-							String name=member.getName();
+					escapey:for(Object member:methodsandproperties) {
+						if(member instanceof Field) {						
+							String name=((Member)member).getName();
 							if(last.equals(name)) {
 								property=((Field)member).getType();
 								break escapey;
 							}
 						}
-						else { // Member is a method
-							String name=member.getName();
+						else if(member instanceof Method) { // Member is a method
+							String name=((Member)member).getName();
 							if(last.equals(name)) {
 								property=((Method)member).getReturnType();
+								break escapey;
+							}
+						}
+						else if(member.getClass().isEnum()) { // Is a Enum
+							String name=((Enum)member).name();
+							if(last.equals(name)) {
+								property=((Enum)member).getDeclaringClass();
 								break escapey;
 							}
 						}
@@ -2539,17 +2547,23 @@ class CurlyBraceKeyListener implements KeyListener {
 			suggestionbox.setTitle(classquestionmark.getName());
 			suggestionbox.setSize(100,500);
 			JPanel panelgridlayout = new JPanel();
-			
-			Member[] unorderedmethods=getAllPropertyAndMethods(classquestionmark);
-			final Member[] methods = suggestionboxselected.Reordered(unorderedmethods,classquestionmark);
+			//Member[] unorderedmethods=getAllPropertyAndMethods(classquestionmark);
+			Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(classquestionmark);
+			final Object[] methods = suggestionboxselected.Reordered(unorderedmethods,classquestionmark);
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
 			panelgridlayout.setLayout(gridlayout);
 			JTextField search_textfield=new JTextField();
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
-				labels[i] = new JLabel(methods[i].getName());
-				panelgridlayout.add(labels[i]);
+				if(methods[i] instanceof Method) {
+					labels[i] = new JLabel(((Method)methods[i]).getName());
+					panelgridlayout.add(labels[i]);
+				}
+				else if(methods[i].getClass().isEnum()) {
+					labels[i] = new JLabel( ((Enum)methods[i]).name());
+					panelgridlayout.add(labels[i]);
+				}
 			}
 			JScrollPane scrollpane = new JScrollPane(panelgridlayout);
 			int red = 94;
@@ -2699,7 +2713,22 @@ class CurlyBraceKeyListener implements KeyListener {
 		Member[] properties = classquestionmark.getDeclaredFields();
 		return addMembersToMembers(methods4,properties);
 	}
-	
+	public Object[] getAllPropertyAndMethodsAndEnums(Class<?> classquestionmark) {
+		Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
+		Enum[] enums=(Enum[])classquestionmark.getEnumConstants();
+		int amount_of_enums = 0;
+		if(enums != null) {
+			amount_of_enums = enums.length;
+		}
+		Object[] propertiesandmethodsandenums=new Object[propertiesandmethods.length+amount_of_enums];
+		for(int i = 0; i < propertiesandmethods.length; i++) {
+			propertiesandmethodsandenums[i] = propertiesandmethods[i];
+		}
+		for(int i = 0; i < amount_of_enums; i++) {
+			propertiesandmethodsandenums[propertiesandmethods.length+i]=enums[i];
+		}
+		return propertiesandmethodsandenums;
+	}
 	public List<Class<?>> getAncestorsForClassQuestionMark(Class<?> classquestionmark) {
 		List<Class<?>> list = new ArrayList<Class<?>>();
 		Class<?> superclass=classquestionmark.getSuperclass();

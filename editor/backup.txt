@@ -10,6 +10,32 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 0
+    "caretposition": 87083
+  },
+  "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 4359
+  },
+  "C:\\Users\\Owner\\Documents\\git\\notepad\\RemoveAll.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 3774
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\RenameVariable.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 212
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\SuggestionBoxSelected.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 3699
   }
 }

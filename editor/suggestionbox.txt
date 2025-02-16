@@ -41,6 +41,7 @@
     "out",
     "out",
     "out",
+    "out",
     "out"
   ],
   "PrintStream": [
@@ -48,9 +49,12 @@
     "println",
     "println",
     "println",
+    "println",
     "println"
   ],
   "String": [
+    "equals",
+    "equals",
     "equals",
     "equals",
     "hashCode",
@@ -88,5 +92,15 @@
   ],
   "LinkedHashMap": [
     "get"
+  ],
+  "Class": [
+    "getEnumConstants"
+  ],
+  "Object": [
+    "getClass"
+  ],
+  "JPanel": [
+    "setMinimumSize",
+    "repaint"
   ]
 }
