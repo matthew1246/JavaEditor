@@ -17,10 +17,41 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
   "List": [
+    "get",
+    "size",
+    "size",
+    "size",
+    "get",
+    "size",
+    "size",
+    "get",
+    "size",
+    "size",
+    "size",
+    "get",
+    "get",
+    "get",
+    "get",
+    "get",
+    "size",
+    "get",
+    "size",
+    "get",
+    "get",
+    "size",
+    "size",
+    "add",
     "size",
     "toArray",
     "add"
@@ -50,9 +81,21 @@
     "println",
     "println",
     "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
     "println"
   ],
   "String": [
+    "replaceAll",
     "equals",
     "equals",
     "equals",
@@ -102,5 +145,21 @@
   "JPanel": [
     "setMinimumSize",
     "repaint"
+  ],
+  "Array": [
+    "get"
+  ],
+  "Exception": [
+    "printStackTrace",
+    "printStackTrace"
+  ],
+  "ClassLoader": [
+    "defineClass",
+    "getSystemClassLoader"
+  ],
+  "FileNotFoundException": [
+    "printStackTrace",
+    "printStackTrace",
+    "printStackTrace"
   ]
 }

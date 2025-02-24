@@ -2506,7 +2506,11 @@ class CurlyBraceKeyListener implements KeyListener {
 			if(classname.contains("<") && classname.contains(">")) {
 				classname = classname.replaceAll("<.+>","");
 			}
-			Class<?> classquestionmark=Class.forName(classname);
+			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
+			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);
+			Class<?> classquestionmark=classloader.loadClass(classname);
+			
+			// Class<?> classquestionmark=Class.forName();
 			return classquestionmark;
 		} catch(ClassNotFoundException ex3) {
 			String[] lines = text.split("\n");
