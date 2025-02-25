@@ -44,14 +44,14 @@ public class SuggestionBoxSelected {
 					if(member instanceof Member) {					
 						if(methodname.equals(((Member)member).getName())) {
 							nameslist.remove(member);
-							nameslist.addFirst(member);
+							nameslist.add(0,member);
 							break;
 						}
 					}
 					else if(member.getClass().isEnum()) {
 						if( methodname.equals( ((Enum)member).name() )) {
 							nameslist.remove(member);
-							nameslist.addFirst(member);
+							nameslist.add(0,member);
 							break;
 						}
 					}
@@ -77,7 +77,7 @@ public class SuggestionBoxSelected {
 					Member member = nameslist.get(j);
 					if(methodname.equals(member.getName())) {
 						nameslist.remove(member);
-						nameslist.addFirst(member);
+						nameslist.add(0,member);						
 						break;
 					}
 				}
@@ -101,7 +101,7 @@ public class SuggestionBoxSelected {
 		if(list == null) {
 			list = new ArrayList<String>();
 		}
-		list.addFirst(methodorproperty);
+		list.add(0,methodorproperty);		
 		linkedhashmap.put(classy,list);
 		setBackup();
 	}
