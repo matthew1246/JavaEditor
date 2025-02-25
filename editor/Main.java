@@ -1386,6 +1386,8 @@ public class Main {
 					System.out.println("dir is: "+dir);
 					
 					JFileChooser fileChooser = new JFileChooser(new File(dir));
+					FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
+					fileChooser.setFileFilter(filenameextensionfilter);
 					int status =fileChooser.showSaveDialog(frame);
 					if(status == JFileChooser.APPROVE_OPTION) {
 						File file = fileChooser.getSelectedFile();
