@@ -2071,7 +2071,7 @@ class SaveActionListener implements ActionListener {
 			}
 			else {
 				JFileChooser fileChooser = new JFileChooser(".");
-				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Create Java File","java");
+				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
 				fileChooser.setFileFilter(filenameextensionfilter);
 				fileChooser.setDialogTitle("Choose a file name for your typed code.");
 				int status =fileChooser.showSaveDialog(main.frame);

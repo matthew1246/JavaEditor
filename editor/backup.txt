@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
     "jars": [],
     "caretposition": 0
   },
@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 85090
+    "caretposition": 69365
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "",
@@ -46,7 +46,7 @@
   "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java": {
     "starterclass": "Main",
     "jars": [],
-    "caretposition": 2408
+    "caretposition": 6876
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java": {
     "starterclass": "Main",
@@ -79,7 +79,7 @@
     "caretposition": 65
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Tracker.java": {
-    "starterclass": "",
+    "starterclass": "Tracker",
     "jars": [],
     "caretposition": 125
   },
@@ -89,6 +89,38 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\ClassInFolderClassLoader.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\OpenNewWindowOpenFilesList.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 197
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\NoFileOpen.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 208
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\TestSaveAsFileChooser.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\TestTooey.java": {
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",

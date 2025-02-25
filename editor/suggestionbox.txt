@@ -24,6 +24,8 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -76,6 +78,8 @@
     "out"
   ],
   "PrintStream": [
+    "println",
+    "println",
     "println",
     "println",
     "println",
