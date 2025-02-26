@@ -1079,6 +1079,8 @@ public class Main {
 			/*if(preferences == null || preferences.jars.size() == 0) {
 				String directory = fileName.replaceAll("[^\\\\]+\\.java","");
 				JFileChooser filechooser = new JFileChooser(new File(directory));
+				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .jar","jar");
+				fileChooser.setFileFilter(filenameextensionfilter);
 				int result = filechooser.showOpenDialog(frame);
 				if(result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = filechooser.getSelectedFile();
@@ -1115,6 +1117,8 @@ public class Main {
 				add.addActionListener( (ev1) -> {
 					String directory = fileName.replaceAll("[^\\\\]+\\.java","");
 					JFileChooser filechooser = new JFileChooser(new File(directory));
+					FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .jar","jar");
+					filechooser.setFileFilter(filenameextensionfilter);
 					int result = filechooser.showOpenDialog(frame);
 					if(result == JFileChooser.APPROVE_OPTION) {
 						File selectedFile = filechooser.getSelectedFile();
@@ -1445,6 +1449,8 @@ public class Main {
 						}
 						
 						JFileChooser filechooser = new JFileChooser(new File(dir));
+						FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
+						filechooser.setFileFilter(filenameextensionfilter);
 						int result = filechooser.showOpenDialog(frame);
 						if(result == JFileChooser.APPROVE_OPTION) {
 							File selectedFile = filechooser.getSelectedFile();
@@ -2108,6 +2114,8 @@ class OpenActionListener implements ActionListener {
 		System.out.println("dir is: "+dir);
 
 		JFileChooser filechooser = new JFileChooser(new File(dir));
+		FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
+		filechooser.setFileFilter(filenameextensionfilter);
 		int result = filechooser.showOpenDialog(main.frame);
 		if(result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = filechooser.getSelectedFile();
