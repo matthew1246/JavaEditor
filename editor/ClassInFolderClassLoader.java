@@ -29,11 +29,9 @@ public class ClassInFolderClassLoader extends ClassLoader {
 		return classquestionmark;
 		} catch(FileNotFoundException ex) {
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null,"FileNotFoundException in ClassInFolderClassLoader");
 			throw new ClassNotFoundException("File could not be found!");
 		} catch(IOException ex) {
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null,"IOException in ClassInFolderClassLoader");
 			throw new ClassNotFoundException("IOException "+ex.getMessage());
 		}
 	}
