@@ -2112,7 +2112,6 @@ class OpenActionListener implements ActionListener {
 			dir = System.getProperty("user.home");
 		}
 		System.out.println("dir is: "+dir);
-
 		JFileChooser filechooser = new JFileChooser(new File(dir));
 		FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
 		filechooser.setFileFilter(filenameextensionfilter);
@@ -2517,12 +2516,16 @@ class CurlyBraceKeyListener implements KeyListener {
 				classname = classname.replaceAll("<.+>","");
 			}
 			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
+			JOptionPane.showMessageDialog(null,main.fileName);
 			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);
-			Class<?> classquestionmark=classloader.loadClass(classname);
-			
+			JOptionPane.showMessageDialog(null,"dir is "+dir+" classname is "+classname);
+			JOptionPane.showMessageDialog(null,"b1");
+			Class<?> classquestionmark=classloader.loadClass(dir+classname);
+			JOptionPane.showMessageDialog(null,"b2");
 			// Class<?> classquestionmark=Class.forName();
 			return classquestionmark;
 		} catch(ClassNotFoundException ex3) {
+			JOptionPane.showMessageDialog(null,"ClassNotFoundException ex3");
 			String[] lines = text.split("\n");
 			try {
 				for(int i = 0; i < lines.length; i++) {

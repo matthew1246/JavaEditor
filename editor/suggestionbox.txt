@@ -26,10 +26,21 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
   "List": [
+    "size",
     "get",
     "size",
     "size",
@@ -100,6 +111,7 @@
   ],
   "String": [
     "replaceAll",
+    "replaceAll",
     "equals",
     "equals",
     "equals",
@@ -158,6 +170,7 @@
     "printStackTrace"
   ],
   "ClassLoader": [
+    "getSystemClassLoader",
     "defineClass",
     "getSystemClassLoader"
   ],
