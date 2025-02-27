@@ -11,13 +11,20 @@ public class ClassInFolderClassLoader extends ClassLoader {
 	protected Class<?> findClass(String classname) throws ClassNotFoundException {
 		try {
 		JOptionPane.showMessageDialog(null,"supery "+folder+classname+".class");
-		//FileInputStream fileinputstream = new FileInputStream(folder+classname+".class");
-		FileInputStream fileinputstream = new FileInputStream(classname+".class");
+		FileInputStream fileinputstream;
+		if(classname.contains("\\")) {
+			fileinputstream = new FileInputStream(classname+".class");
+		}
+		else {
+			fileinputstream = new FileInputStream(folder+classname+".class");
+		}
 		byte[] bytes=new byte[fileinputstream.available()];
 		fileinputstream.read(bytes);
 		if(bytes == null) throw new ClassNotFoundException("Class "+classname+" not found.");
 		
-		classname = classname.replace(folder,"");
+		if(classname.contains("\\")) {
+			classname = classname.replace(folder,"");
+		}
 		Class<?> classquestionmark=defineClass(classname,bytes,0,bytes.length);
 		return classquestionmark;
 		} catch(FileNotFoundException ex) {

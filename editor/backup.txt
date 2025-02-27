@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 86066
+    "caretposition": 86072
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "",
@@ -41,17 +41,17 @@
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
     "starterclass": "Main",
     "jars": [],
-    "caretposition": 636
+    "caretposition": 638
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java": {
     "starterclass": "Main",
     "jars": [],
-    "caretposition": 5511
+    "caretposition": 6187
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java": {
     "starterclass": "Main",
     "jars": [],
-    "caretposition": 7865
+    "caretposition": 7315
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculateThreaded.java": {
     "starterclass": "",
@@ -61,7 +61,7 @@
   "C:\\Users\\Owner\\Documents\\git\\chess\\Checkmate.java": {
     "starterclass": "Main",
     "jars": [],
-    "caretposition": 805
+    "caretposition": 360
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\AllMoves.java": {
     "starterclass": "",
@@ -94,7 +94,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 811
+    "caretposition": 582
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\OpenNewWindowOpenFilesList.java": {
     "starterclass": "",
