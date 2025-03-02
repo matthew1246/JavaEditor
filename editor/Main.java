@@ -2561,15 +2561,27 @@ class CurlyBraceKeyListener implements KeyListener {
 			JPanel panelgridlayout = new JPanel();
 			//Member[] unorderedmethods=getAllPropertyAndMethods(classquestionmark);
 			Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(classquestionmark);
+			for(Object object:unorderedmethods) {
+				if(object instanceof Member) {
+					System.out.println(((Member)object).getName());
+				}
+			}
+			System.out.println();
+			System.out.println();
 			final Object[] methods = suggestionboxselected.Reordered(unorderedmethods,classquestionmark);
+			for(Object object:methods) {
+				if(object instanceof Member) {
+					System.out.println(((Member)object).getName());
+				}
+			}
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
 			panelgridlayout.setLayout(gridlayout);
 			JTextField search_textfield=new JTextField();
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
-				if(methods[i] instanceof Method) {
-					labels[i] = new JLabel(((Method)methods[i]).getName());
+				if(methods[i] instanceof Member) {
+					labels[i] = new JLabel(((Member)methods[i]).getName());
 					panelgridlayout.add(labels[i]);
 				}
 				else if(methods[i].getClass().isEnum()) {

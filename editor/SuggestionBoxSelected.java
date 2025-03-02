@@ -35,9 +35,17 @@ public class SuggestionBoxSelected {
 			List<Object> nameslist = new LinkedList<Object>();
 			for(int i = 0; i < members.length; i++) {
 				Object member=members[i];
+				/*if(member instanceof Member) {
+					System.out.println(((Member)member).getName());
+				}
+				else if(member.getClass().isEnum()) {
+					System.out.println("Enum is "+((Enum)member).name());
+				}
+				else {
+					System.out.println("Enums");
+				}*/
 				nameslist.add(member);
 			}
-			
 			for(String methodname:linkedhashmap.get(classname)) {
 				for(int j = 0; j < nameslist.size(); j++) {
 					Object member = nameslist.get(j);

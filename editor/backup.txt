@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 73483
+    "caretposition": 88191
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "",
@@ -36,7 +36,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 3153
+    "caretposition": 1644
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
     "starterclass": "Main",

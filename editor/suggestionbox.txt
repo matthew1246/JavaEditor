@@ -109,6 +109,12 @@
     "println",
     "println",
     "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
     "println"
   ],
   "String": [
