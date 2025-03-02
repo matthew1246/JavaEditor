@@ -49,15 +49,15 @@ public class SuggestionBoxSelected {
 			for(String methodname:linkedhashmap.get(classname)) {
 				for(int j = 0; j < nameslist.size(); j++) {
 					Object member = nameslist.get(j);
-					if(member instanceof Member) {					
-						if(methodname.equals(((Member)member).getName())) {
+					if(member.getClass().isEnum()) {
+						if( methodname.equals( ((Enum)member).name() )) {
 							nameslist.remove(member);
 							nameslist.add(0,member);
 							break;
 						}
 					}
-					else if(member.getClass().isEnum()) {
-						if( methodname.equals( ((Enum)member).name() )) {
+					else if(member instanceof Member) {					
+						if(methodname.equals(((Member)member).getName())) {
 							nameslist.remove(member);
 							nameslist.add(0,member);
 							break;

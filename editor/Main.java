@@ -2188,7 +2188,14 @@ class CurlyBraceKeyListener implements KeyListener {
 					Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
 					String last=properties[i];
 					escapey:for(Object member:methodsandproperties) {
-						if(member instanceof Field) {						
+						if(member.getClass().isEnum()) { // Is a Enum
+							String name=((Enum)member).name();
+							if(last.equals(name)) {
+								property=((Enum)member).getDeclaringClass();
+								break escapey;
+							}
+						}
+						else if(member instanceof Field) {						
 							String name=((Member)member).getName();
 							if(last.equals(name)) {
 								property=((Field)member).getType();
@@ -2199,13 +2206,6 @@ class CurlyBraceKeyListener implements KeyListener {
 							String name=((Member)member).getName();
 							if(last.equals(name)) {
 								property=((Method)member).getReturnType();
-								break escapey;
-							}
-						}
-						else if(member.getClass().isEnum()) { // Is a Enum
-							String name=((Enum)member).name();
-							if(last.equals(name)) {
-								property=((Enum)member).getDeclaringClass();
 								break escapey;
 							}
 						}
@@ -2580,12 +2580,12 @@ class CurlyBraceKeyListener implements KeyListener {
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
-				if(methods[i] instanceof Member) {
-					labels[i] = new JLabel(((Member)methods[i]).getName());
-					panelgridlayout.add(labels[i]);
-				}
 				if(methods[i].getClass().isEnum()) {
 					labels[i] = new JLabel( ((Enum)methods[i]).name());
+					panelgridlayout.add(labels[i]);
+				}
+				else if(methods[i] instanceof Member) {
+					labels[i] = new JLabel(((Member)methods[i]).getName());
 					panelgridlayout.add(labels[i]);
 				}
 			}

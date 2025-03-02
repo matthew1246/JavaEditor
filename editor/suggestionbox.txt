@@ -82,6 +82,8 @@
     "setMaxAge"
   ],
   "System": [
+    "lineSeparator",
+    "bootLayer",
     "out",
     "out",
     "out",
