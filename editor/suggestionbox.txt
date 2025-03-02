@@ -37,6 +37,8 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -136,6 +138,7 @@
     "replaceAll"
   ],
   "Main": [
+    "scrollToCaretPosition",
     "equals",
     "equals",
     "equals"

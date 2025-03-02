@@ -124,14 +124,17 @@ public class Control_F {
 							}
 							x++;
 							if(line.contains(find)) {
+								//main.scrollToCaretPosition(x);
 								if(!main.fileName.equals(newfilename)) {
 									main.fileName = newfilename;
 									main.open(filename);
 								}
 								count++;
+								JOptionPane.showMessageDialog(null,z+" "+count);
 								if(z == count) {
-									if(i == (lines.length-1) )
+									if(i == (lines.length-1) ) {
 										z = 0;
+									}
 									break;
 								}
 							}
@@ -158,15 +161,18 @@ public class Control_F {
 						}
 						if(z == 0)
 							liveiterator.remove(filename);
-						if(x < (textarea.getText().length()-1) ) {
+						if(x < (text.length()-1) ) {
 							main.scrollToCaretPosition(x);
 							return;
 						}
 						else {
-							main.scrollToCaretPosition(textarea.getText().length()-1);
+							main.scrollToCaretPosition(text.length()-1);
 							z = 0;
 							return;
 						}
+					}
+					else {
+						z = 0;
 					}
 				} catch(FileNotFoundException ex) {
 					ex.printStackTrace();
@@ -177,4 +183,4 @@ public class Control_F {
 			}
 		}
 	}
-}
+}
