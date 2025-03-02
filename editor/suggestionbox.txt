@@ -36,6 +36,7 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -107,6 +108,7 @@
     "println",
     "println",
     "println",
+    "println",
     "println"
   ],
   "String": [
@@ -153,6 +155,7 @@
     "get"
   ],
   "Class": [
+    "getName",
     "getEnumConstants"
   ],
   "Object": [
@@ -178,5 +181,8 @@
     "printStackTrace",
     "printStackTrace",
     "printStackTrace"
+  ],
+  "GridBagConstraints": [
+    "clone"
   ]
 }

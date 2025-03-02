@@ -28,10 +28,10 @@ public class ClassInFolderClassLoader extends ClassLoader {
 		Class<?> classquestionmark=defineClass(classname,bytes,0,bytes.length);
 		return classquestionmark;
 		} catch(FileNotFoundException ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			throw new ClassNotFoundException("File could not be found!");
 		} catch(IOException ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			throw new ClassNotFoundException("IOException "+ex.getMessage());
 		}
 	}
