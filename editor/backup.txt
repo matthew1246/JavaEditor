@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\SuggestionBoxSelected.java",
     "jars": [],
     "caretposition": 0
   },
@@ -146,6 +146,6 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Control_F.java": {
     "starterclass": "Main",
     "jars": [],
-    "caretposition": 5368
+    "caretposition": 4220
   }
 }

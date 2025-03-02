@@ -28,6 +28,7 @@ public class Control_F {
 		this.replaceinput = replaceinput;
 		this.casey = casey;
 	}
+	public String filename = "";
 	public int z = 0;
 	public void Find(String find) {
 		if(!searchall.isSelected()) {
@@ -100,7 +101,8 @@ public class Control_F {
 			String dir =main.fileName.replaceAll("[^\\\\]+\\.java","");
 			while(liveiterator.hasNext()) {
 				try {
-					String filename = liveiterator.next();
+					if(z == 0)
+						filename = liveiterator.next();
 					String newfilename = dir+filename;
 					Path path = Paths.get(newfilename);
 					String text = Files.readString(path,StandardCharsets.UTF_8);
@@ -130,7 +132,6 @@ public class Control_F {
 									main.open(filename);
 								}
 								count++;
-								JOptionPane.showMessageDialog(null,z+" "+count);
 								if(z == count) {
 									if(i == (lines.length-1) ) {
 										z = 0;
