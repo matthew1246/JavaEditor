@@ -10,7 +10,6 @@ public class ClassInFolderClassLoader extends ClassLoader {
 	
 	protected Class<?> findClass(String classname) throws ClassNotFoundException {
 		try {
-		JOptionPane.showMessageDialog(null,"supery "+folder+classname+".class");
 		FileInputStream fileinputstream;
 		if(classname.contains("\\")) {
 			fileinputstream = new FileInputStream(classname+".class");
