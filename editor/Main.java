@@ -2584,7 +2584,7 @@ class CurlyBraceKeyListener implements KeyListener {
 					labels[i] = new JLabel(((Member)methods[i]).getName());
 					panelgridlayout.add(labels[i]);
 				}
-				else if(methods[i].getClass().isEnum()) {
+				if(methods[i].getClass().isEnum()) {
 					labels[i] = new JLabel( ((Enum)methods[i]).name());
 					panelgridlayout.add(labels[i]);
 				}
