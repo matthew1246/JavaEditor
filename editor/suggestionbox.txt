@@ -89,6 +89,7 @@
     "setMaxAge"
   ],
   "System": [
+    "identityHashCode",
     "out",
     "out",
     "out",
@@ -225,6 +226,8 @@
     "clazz"
   ],
   "TestEnum": [
+    "TestEnum$Size",
+    "TestEnum$Size",
     "TestEnum$Size"
   ]
 }

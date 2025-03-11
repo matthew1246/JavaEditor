@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 94559
+    "caretposition": 94952
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "",
@@ -149,12 +149,12 @@
     "caretposition": 4220
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\TestEnum.java": {
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 25
+    "caretposition": 33
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Compile.java": {
     "starterclass": "",
