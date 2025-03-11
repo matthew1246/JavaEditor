@@ -7,7 +7,6 @@ public class ClassInFolderClassLoader extends ClassLoader {
 		super(ClassLoader.getSystemClassLoader());
 		this.folder = folder;
 	}
-	
 	protected Class<?> findClass(String classname) throws ClassNotFoundException {
 		try {
 		FileInputStream fileinputstream;

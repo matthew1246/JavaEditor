@@ -42,6 +42,7 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -187,6 +188,7 @@
     "get"
   ],
   "Class": [
+    "getName",
     "getEnumConstants",
     "getName",
     "getEnumConstants"
@@ -221,5 +223,8 @@
   ],
   "Pattern": [
     "clazz"
+  ],
+  "TestEnum": [
+    "TestEnum$Size"
   ]
 }

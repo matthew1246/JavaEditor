@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 96062
+    "caretposition": 94559
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "",
@@ -94,7 +94,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 802
+    "caretposition": 196
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\OpenNewWindowOpenFilesList.java": {
     "starterclass": "",
@@ -154,7 +154,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 35
+    "caretposition": 25
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Compile.java": {
     "starterclass": "",
