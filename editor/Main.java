@@ -2188,10 +2188,10 @@ class CurlyBraceKeyListener implements KeyListener {
 					Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
 					String last=properties[i];
 					escapey:for(Object member:methodsandproperties) {
-						if(member.getClass().isEnum()) { // Is a Enum
-							String name=((Enum)member).name();
+						if(member instanceof Class<?> && ( ((Class<?>)member).isEnum() || ((Class<?>)member).isInterface()) ) { // Is a Enum						
+							String name=((Class<?>)member).getName();
 							if(last.equals(name)) {
-								property=((Enum)member).getDeclaringClass();
+								property=(Class<?>)member;
 								break escapey;
 							}
 						}
@@ -2206,6 +2206,13 @@ class CurlyBraceKeyListener implements KeyListener {
 							String name=((Member)member).getName();
 							if(last.equals(name)) {
 								property=((Method)member).getReturnType();
+								break escapey;
+							}
+						}
+						else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
+							String name=((Class<?>)member).getName();
+							if(last.equals(name)) {
+								property=(Class<?>)member;
 								break escapey;
 							}
 						}
@@ -2562,16 +2569,16 @@ class CurlyBraceKeyListener implements KeyListener {
 			//Member[] unorderedmethods=getAllPropertyAndMethods(classquestionmark);
 			Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(classquestionmark);
 			for(Object object:unorderedmethods) {
-				if(object instanceof Member) {
-					System.out.println(((Member)object).getName());
+				if(object instanceof Enum) {
+					System.out.println(((Enum)object).name());
 				}
 			}
 			System.out.println();
 			System.out.println();
 			final Object[] methods = suggestionboxselected.Reordered(unorderedmethods,classquestionmark);
 			for(Object object:methods) {
-				if(object instanceof Member) {
-					System.out.println(((Member)object).getName());
+				if(object instanceof Enum) {
+					System.out.println(((Enum)object).name());
 				}
 			}
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
@@ -2580,12 +2587,16 @@ class CurlyBraceKeyListener implements KeyListener {
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
-				if(methods[i].getClass().isEnum()) {
-					labels[i] = new JLabel( ((Enum)methods[i]).name());
+				if(methods[i] instanceof Class<?> && ( ((Class<?>)methods[i]).isEnum() || ((Class<?>)methods[i]).isInterface() ) ) {
+					labels[i] = new JLabel( ((Class<?>)methods[i]).getName());
 					panelgridlayout.add(labels[i]);
 				}
 				else if(methods[i] instanceof Member) {
 					labels[i] = new JLabel(((Member)methods[i]).getName());
+					panelgridlayout.add(labels[i]);
+				}
+				else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
+					labels[i] = new JLabel( ((Class<?>)methods[i]).getName());
 					panelgridlayout.add(labels[i]);
 				}
 			}
@@ -2656,6 +2667,12 @@ class CurlyBraceKeyListener implements KeyListener {
 						suggestionboxselected.Save(classquestionmark.getSimpleName(),selected);
 						String methodorproperty = "";
 						breaky:for(int i = 0; i < labels.length; i++) {
+							if(labels[i] == null) {
+								JOptionPane.showMessageDialog(null,"labels[i] is null");
+							}
+							if(selected_label2 == null) {
+								JOptionPane.showMessageDialog(null,"selected_label2 is null");
+							}
 							if(labels[i].equals(selected_label2)) {
 								if(methods[i] instanceof Method) {
 									methodorproperty = "(";
@@ -2739,7 +2756,8 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public Object[] getAllPropertyAndMethodsAndEnums(Class<?> classquestionmark) {
 		Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
-		Enum[] enums=(Enum[])classquestionmark.getEnumConstants();
+		Class<?>[] enums=classquestionmark.getDeclaredClasses();
+		//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
 		int amount_of_enums = 0;
 		if(enums != null) {
 			amount_of_enums = enums.length;

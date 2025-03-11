@@ -39,6 +39,9 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
@@ -81,9 +84,23 @@
     "Strings"
   ],
   "HttpCookie": [
+    "header",
     "setMaxAge"
   ],
   "System": [
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
+    "getLogger",
+    "out",
+    "out",
     "lineSeparator",
     "bootLayer",
     "out",
@@ -94,6 +111,10 @@
     "out"
   ],
   "PrintStream": [
+    "println",
+    "println",
+    "println",
+    "println",
     "println",
     "println",
     "println",
@@ -166,10 +187,12 @@
     "get"
   ],
   "Class": [
+    "getEnumConstants",
     "getName",
     "getEnumConstants"
   ],
   "Object": [
+    "getClass",
     "getClass"
   ],
   "JPanel": [
@@ -195,5 +218,8 @@
   ],
   "GridBagConstraints": [
     "clone"
+  ],
+  "Pattern": [
+    "clazz"
   ]
 }

@@ -49,8 +49,8 @@ public class SuggestionBoxSelected {
 			for(String methodname:linkedhashmap.get(classname)) {
 				for(int j = 0; j < nameslist.size(); j++) {
 					Object member = nameslist.get(j);
-					if(member.getClass().isEnum()) {
-						if( methodname.equals( ((Enum)member).name() )) {
+					if( member instanceof Class<?> && ( ((Class<?>)member).isEnum() || ((Class<?>)member).isInterface() ) ) {
+						if( methodname.equals( ((Class<?>)member).getName() )) {
 							nameslist.remove(member);
 							nameslist.add(0,member);
 							break;
@@ -58,6 +58,13 @@ public class SuggestionBoxSelected {
 					}
 					else if(member instanceof Member) {					
 						if(methodname.equals(((Member)member).getName())) {
+							nameslist.remove(member);
+							nameslist.add(0,member);
+							break;
+						}
+					}
+					else { // if( member instanceof Class<?> && ((Class<?>)member).isLocalClass() )
+						if( methodname.equals( ((Class<?>)member).getName() )) {
 							nameslist.remove(member);
 							nameslist.add(0,member);
 							break;
