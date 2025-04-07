@@ -43,10 +43,25 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
   "List": [
+    "get",
+    "get",
+    "get",
+    "size",
+    "add",
+    "size",
+    "size",
+    "size",
+    "size",
+    "size",
+    "size",
+    "add",
+    "add",
     "size",
     "get",
     "size",
@@ -89,6 +104,12 @@
     "setMaxAge"
   ],
   "System": [
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
+    "out",
     "identityHashCode",
     "out",
     "out",
@@ -142,9 +163,16 @@
     "println",
     "println",
     "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
+    "println",
     "println"
   ],
   "String": [
+    "equals",
     "replaceAll",
     "replaceAll",
     "equals",
@@ -229,5 +257,31 @@
     "TestEnum$Size",
     "TestEnum$Size",
     "TestEnum$Size"
+  ],
+  "Piece": [
+    "getJ",
+    "previousmoves",
+    "getColour",
+    "getColour"
+  ],
+  "AllMoves": [
+    "getHashMap",
+    "remove",
+    "remove",
+    "remove",
+    "remove",
+    "remove"
+  ],
+  "HashMap": [
+    "get",
+    "get",
+    "get",
+    "get",
+    "get",
+    "get",
+    "get"
+  ],
+  "ChessBoard": [
+    "reset"
   ]
 }
