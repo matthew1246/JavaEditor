@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.*;
 import javax.swing.*;
 import java.lang.reflect.Member;
+import java.lang.reflect.Method;
 public class SuggestionBoxSelected {
 	private LinkedHashMap<String,ArrayList<String>> linkedhashmap;
 	public SuggestionBoxSelected() {
@@ -49,7 +50,14 @@ public class SuggestionBoxSelected {
 			for(String methodname:linkedhashmap.get(classname)) {
 				for(int j = 0; j < nameslist.size(); j++) {
 					Object member = nameslist.get(j);
-					if( member instanceof Class<?> && ( ((Class<?>)member).isEnum() || ((Class<?>)member).isInterface() ) ) {
+					if(member instanceof Method) {
+						if(methodname.equals(((Method)member).getName())) {
+							nameslist.remove(member);
+							nameslist.add(0,member);
+							break;
+						}
+					}
+					else if( member instanceof Class<?> && ((Class<?>)member).isEnum() || ( ((Class<?>)member).isInterface() ) ) {
 						if( methodname.equals( ((Class<?>)member).getName() )) {
 							nameslist.remove(member);
 							nameslist.add(0,member);

@@ -2188,7 +2188,27 @@ class CurlyBraceKeyListener implements KeyListener {
 					Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
 					String last=properties[i];
 					escapey:for(Object member:methodsandproperties) {
-						if(member instanceof Class<?> && ( ((Class<?>)member).isEnum() || ((Class<?>)member).isInterface()) ) { // Is a Enum						
+						if(member instanceof Method) {
+							String name = ((Method)member).getName();
+							if(name.contains("$")) {
+								name=name.replaceAll(".+\\$","");
+							}
+							if(last.equals(name)) {
+								property=(Class<?>)member;
+								break escapey;
+							}
+						}
+						else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
+							String name=((Class<?>)member).getName();
+							if(name.contains("$")) {
+								name=name.replaceAll(".+\\$","");
+							}
+							if(last.equals(name)) {
+								property=(Class<?>)member;
+								break escapey;
+							}
+						}
+						if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
 							String name=((Class<?>)member).getName();
 							if(name.contains("$")) {
 								name=name.replaceAll(".+\\$","");
@@ -2200,6 +2220,9 @@ class CurlyBraceKeyListener implements KeyListener {
 						}
 						else if(member instanceof Field) {						
 							String name=((Member)member).getName();
+							if(name.contains("$")) {
+								name=name.replaceAll(".+\\$","");
+							}
 							if(last.equals(name)) {
 								property=((Field)member).getType();
 								break escapey;
@@ -2207,6 +2230,9 @@ class CurlyBraceKeyListener implements KeyListener {
 						}
 						else if(member instanceof Method) { // Member is a method
 							String name=((Member)member).getName();
+							if(name.contains("$")) {
+								name=name.replaceAll(".+\\$","");
+							}
 							if(last.equals(name)) {
 								property=((Method)member).getReturnType();
 								break escapey;
@@ -2214,6 +2240,9 @@ class CurlyBraceKeyListener implements KeyListener {
 						}
 						else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
 							String name=((Class<?>)member).getName();
+							if(name.contains("$")) {
+								name=name.replaceAll(".+\\$","");
+							}
 							if(last.equals(name)) {
 								property=(Class<?>)member;
 								break escapey;
@@ -2590,7 +2619,24 @@ class CurlyBraceKeyListener implements KeyListener {
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
-				if(methods[i] instanceof Class<?> && ( ((Class<?>)methods[i]).isEnum() || ((Class<?>)methods[i]).isInterface() ) ) {
+				if(methods[i] instanceof Method) {
+					String name=((Method)methods[i]).getName();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
+					panelgridlayout.add(labels[i]);
+				}
+				else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
+					String name=((Class<?>)methods[i]).getName();
+					//String name=((Enum)methods[i]).name();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
+					panelgridlayout.add(labels[i]);
+				}
+				if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
 					String name=((Class<?>)methods[i]).getName();
 					if(name.contains("$")) {
 						name=name.replaceAll(".+\\$","");
@@ -2599,11 +2645,19 @@ class CurlyBraceKeyListener implements KeyListener {
 					panelgridlayout.add(labels[i]);
 				}
 				else if(methods[i] instanceof Member) {
-					labels[i] = new JLabel(((Member)methods[i]).getName());
+					String name=((Member)methods[i]).getName();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
 					panelgridlayout.add(labels[i]);
 				}
 				else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
-					labels[i] = new JLabel( ((Class<?>)methods[i]).getName());
+					String name= methods[i].toString();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
 					panelgridlayout.add(labels[i]);
 				}
 			}
@@ -2762,21 +2816,27 @@ class CurlyBraceKeyListener implements KeyListener {
 		return addMembersToMembers(methods4,properties);
 	}
 	public Object[] getAllPropertyAndMethodsAndEnums(Class<?> classquestionmark) {
-		Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
-		Class<?>[] enums=classquestionmark.getDeclaredClasses();
-		//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
-		int amount_of_enums = 0;
-		if(enums != null) {
-			amount_of_enums = enums.length;
+		if(classquestionmark.isEnum()) {
+			List<Object> list = new ArrayList<Object>();
+			return classquestionmark.getEnumConstants();
 		}
-		Object[] propertiesandmethodsandenums=new Object[propertiesandmethods.length+amount_of_enums];
-		for(int i = 0; i < propertiesandmethods.length; i++) {
-			propertiesandmethodsandenums[i] = propertiesandmethods[i];
+		else {		
+			Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
+			Class<?>[] enums=classquestionmark.getDeclaredClasses();
+			//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
+			int amount_of_enums = 0;
+			if(enums != null) {
+				amount_of_enums = enums.length;
+			}
+			Object[] propertiesandmethodsandenums=new Object[propertiesandmethods.length+amount_of_enums];
+			for(int i = 0; i < propertiesandmethods.length; i++) {
+				propertiesandmethodsandenums[i] = propertiesandmethods[i];
+			}
+			for(int i = 0; i < amount_of_enums; i++) {
+				propertiesandmethodsandenums[propertiesandmethods.length+i]=enums[i];
+			}
+			return propertiesandmethodsandenums;
 		}
-		for(int i = 0; i < amount_of_enums; i++) {
-			propertiesandmethodsandenums[propertiesandmethods.length+i]=enums[i];
-		}
-		return propertiesandmethodsandenums;
 	}
 	public List<Class<?>> getAncestorsForClassQuestionMark(Class<?> classquestionmark) {
 		List<Class<?>> list = new ArrayList<Class<?>>();

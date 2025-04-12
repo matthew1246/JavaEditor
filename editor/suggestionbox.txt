@@ -45,10 +45,14 @@
     "showMessageDialog",
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
     "showConfirmDialog",
     "showMessageDialog"
   ],
   "List": [
+    "size",
+    "toArray",
+    "add",
     "get",
     "get",
     "get",
@@ -172,6 +176,7 @@
     "println"
   ],
   "String": [
+    "equals",
     "replaceAll",
     "contains",
     "equals",
@@ -220,6 +225,11 @@
     "get"
   ],
   "Class": [
+    "getEnumConstants",
+    "isEnum",
+    "isEnum",
+    "isEnum",
+    "isEnum",
     "getName",
     "getEnumConstants",
     "getName",
@@ -257,6 +267,19 @@
     "clazz"
   ],
   "TestEnum": [
+    "Size",
+    "Size",
+    "Size",
+    "Size",
+    "Size",
+    "TestEnum$Size",
+    "TestEnum$Size",
+    "Size",
+    "Size",
+    "Size",
+    "Size",
+    "Size",
+    "Size",
     "Size",
     "TestEnum$Size",
     "TestEnum$Size",
