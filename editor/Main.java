@@ -2190,6 +2190,9 @@ class CurlyBraceKeyListener implements KeyListener {
 					escapey:for(Object member:methodsandproperties) {
 						if(member instanceof Class<?> && ( ((Class<?>)member).isEnum() || ((Class<?>)member).isInterface()) ) { // Is a Enum						
 							String name=((Class<?>)member).getName();
+							if(name.contains("$")) {
+								name=name.replaceAll(".+\\$","");
+							}
 							if(last.equals(name)) {
 								property=(Class<?>)member;
 								break escapey;
@@ -2588,7 +2591,11 @@ class CurlyBraceKeyListener implements KeyListener {
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
 				if(methods[i] instanceof Class<?> && ( ((Class<?>)methods[i]).isEnum() || ((Class<?>)methods[i]).isInterface() ) ) {
-					labels[i] = new JLabel( ((Class<?>)methods[i]).getName());
+					String name=((Class<?>)methods[i]).getName();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
 					panelgridlayout.add(labels[i]);
 				}
 				else if(methods[i] instanceof Member) {

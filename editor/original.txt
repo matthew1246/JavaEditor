@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\git\\chess\\NormalNode.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\TestEnum.java",
     "jars": [],
     "caretposition": 0
   },
@@ -36,7 +36,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 3757
+    "caretposition": 3812
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
     "starterclass": "Main",

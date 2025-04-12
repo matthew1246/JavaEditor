@@ -172,6 +172,8 @@
     "println"
   ],
   "String": [
+    "replaceAll",
+    "contains",
     "equals",
     "replaceAll",
     "replaceAll",
@@ -189,6 +191,7 @@
     "replaceAll"
   ],
   "Main": [
+    "deselected",
     "scrollToCaretPosition",
     "equals",
     "equals",
@@ -254,6 +257,9 @@
     "clazz"
   ],
   "TestEnum": [
+    "Size",
+    "TestEnum$Size",
+    "TestEnum$Size",
     "TestEnum$Size",
     "TestEnum$Size",
     "TestEnum$Size"
