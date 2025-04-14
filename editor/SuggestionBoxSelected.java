@@ -5,6 +5,7 @@ import com.google.gson.reflect.*;
 import javax.swing.*;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 public class SuggestionBoxSelected {
 	private LinkedHashMap<String,ArrayList<String>> linkedhashmap;
 	public SuggestionBoxSelected() {
@@ -52,6 +53,13 @@ public class SuggestionBoxSelected {
 					Object member = nameslist.get(j);
 					if(member instanceof Method) {
 						if(methodname.equals(((Method)member).getName())) {
+							nameslist.remove(member);
+							nameslist.add(0,member);
+							break;
+						}
+					}
+					else if(member instanceof Field) {
+						if(methodname.equals(((Field)member).getName())) {
 							nameslist.remove(member);
 							nameslist.add(0,member);
 							break;

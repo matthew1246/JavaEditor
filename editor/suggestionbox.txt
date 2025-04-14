@@ -177,6 +177,7 @@
   ],
   "String": [
     "equals",
+    "equals",
     "replaceAll",
     "contains",
     "equals",
