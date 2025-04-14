@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java",
     "jars": [],
     "caretposition": 0
   },
@@ -13,8 +13,11 @@
     "caretposition": 90536
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
-    "starterclass": "",
-    "jars": [],
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\git\\notepad\\Muck.jar"
+    ],
     "caretposition": 4359
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\RemoveAll.java": {
@@ -131,7 +134,7 @@
   "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java": {
     "starterclass": "Muck",
     "jars": [],
-    "caretposition": 0
+    "caretposition": 367
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Pieces.java": {
     "starterclass": "",
@@ -186,7 +189,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 0
+    "caretposition": 2249
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\StoreSelectedFile.java": {
     "starterclass": "",
@@ -207,6 +210,16 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java": {
+    "starterclass": "Muck",
+    "jars": [],
+    "caretposition": 2167
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muck\\Main.java": {
+    "starterclass": "",
+    "jars": [],
     "caretposition": 0
   }
 }

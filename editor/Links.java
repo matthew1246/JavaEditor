@@ -39,7 +39,7 @@ public class Links {
 	}
 	
 	public String getLink(String sublink) {
-		 return "https://docs.oracle.com/javase/8/docs/api/index.html?"+sublink;
+		 return "https://docs.oracle.com/javase/8/docs/api/?"+sublink;
 	}
 	
 	public boolean isSublink(String line) {
@@ -77,11 +77,6 @@ public class Links {
 			for(int i = 0; i < classes.size(); i++) {
 				String sublink = classes.get(i);
 				String link = getLink(sublink);
-				link = link.replace("https://docs.oracle.com","");
-				link=link.substring(0,link.length()-5);
-				link = link.replaceAll("\\.","/");
-				link="https://docs.oracle.com"+link;
-				link+=".html";
 				// Runtime.getRuntime().exec("cmd /c start chrome "+link);
 				java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
 			}
