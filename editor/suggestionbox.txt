@@ -2,6 +2,12 @@
   "TestEnum": [
     "Size",
     "Size",
+    "Test",
+    "Size",
+    "Test",
+    "Size",
+    "Size",
+    "Size",
     "Test"
   ]
 }

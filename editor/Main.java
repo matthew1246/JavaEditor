@@ -2636,7 +2636,7 @@ class CurlyBraceKeyListener implements KeyListener {
 					labels[i] = new JLabel(name);
 					panelgridlayout.add(labels[i]);
 				}
-				if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
+				else if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
 					String name=((Class<?>)methods[i]).getName();
 					if(name.contains("$")) {
 						name=name.replaceAll(".+\\$","");
