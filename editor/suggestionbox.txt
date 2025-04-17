@@ -6,9 +6,14 @@
     "Size",
     "Size",
     "Size",
+    "Size",
+    "Size",
+    "Size",
     "Size"
   ],
   "Size": [
+    "large",
+    "small",
     "medium",
     "large"
   ]
