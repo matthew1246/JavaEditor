@@ -65,8 +65,8 @@ public class SuggestionBoxSelected {
 							break;
 						}
 					}
-					else if( member instanceof Class<?> && ((Class<?>)member).isEnum() || ( ((Class<?>)member).isInterface() ) ) {
-						if( methodname.equals( ((Class<?>)member).getName() )) {
+					else if( member instanceof Enum) {
+						if( methodname.equals( ((Enum)member).name() )) {
 							nameslist.remove(member);
 							nameslist.add(0,member);
 							break;

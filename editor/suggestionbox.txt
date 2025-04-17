@@ -6,12 +6,10 @@
     "Size",
     "Size",
     "Size",
-    "Test",
-    "Size",
-    "Test",
-    "Size",
-    "Size",
-    "Size",
-    "Test"
+    "Size"
+  ],
+  "Size": [
+    "medium",
+    "large"
   ]
 }

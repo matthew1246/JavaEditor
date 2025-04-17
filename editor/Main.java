@@ -2198,26 +2198,6 @@ class CurlyBraceKeyListener implements KeyListener {
 								break escapey;
 							}
 						}
-						else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
-						if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
 						else if(member instanceof Field) {						
 							String name=((Member)member).getName();
 							if(name.contains("$")) {
@@ -2228,13 +2208,23 @@ class CurlyBraceKeyListener implements KeyListener {
 								break escapey;
 							}
 						}
-						else if(member instanceof Method) { // Member is a method
-							String name=((Member)member).getName();
+						else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
+							String name=((Class<?>)member).getName();
 							if(name.contains("$")) {
 								name=name.replaceAll(".+\\$","");
 							}
 							if(last.equals(name)) {
-								property=((Method)member).getReturnType();
+								property=(Class<?>)member;
+								break escapey;
+							}
+						}
+						else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
+							String name=((Class<?>)member).getName();
+							if(name.contains("$")) {
+								name=name.replaceAll(".+\\$","");
+							}
+							if(last.equals(name)) {
+								property=(Class<?>)member;
 								break escapey;
 							}
 						}
