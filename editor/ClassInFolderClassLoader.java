@@ -14,7 +14,7 @@ public class ClassInFolderClassLoader extends ClassLoader {
 			fileinputstream = new FileInputStream(classname+".class");
 		}
 		else {
-			if(classname.contains("$")) {
+			/*if(classname.contains("$")) {
 				String[] classes=classname.split("$");
 				String class1 = classes[0];
 				Class<?> parent=findClass(class1);
@@ -22,7 +22,7 @@ public class ClassInFolderClassLoader extends ClassLoader {
 				for(Class<?> class2 : classes2) {
 					if(classes[1].equals(class2.getName())) {
 						parent
-			}
+			}*/
 			fileinputstream = new FileInputStream(folder+classname+".class");
 		}
 		byte[] bytes=new byte[fileinputstream.available()];

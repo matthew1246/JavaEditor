@@ -2545,7 +2545,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				classname = classname.replaceAll("<.+>","");
 			}
 			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
-			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);
+			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);			
 			Class<?> classquestionmark=classloader.loadClass(dir+classname);
 			// Class<?> classquestionmark=Class.forName();
 			return classquestionmark;
