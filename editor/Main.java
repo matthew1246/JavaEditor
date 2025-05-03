@@ -2808,11 +2808,28 @@ class CurlyBraceKeyListener implements KeyListener {
 	public Object[] getAllPropertyAndMethodsAndEnums(Class<?> classquestionmark) {
 		if(classquestionmark.isEnum()) {
 			List<Object> list = new ArrayList<Object>();
-			return classquestionmark.getEnumConstants();
+			Field[] fields= classquestionmark.getDeclaredFields();
+			for(Field field : fields) {
+				if(field.isEnumConstant()) {
+					field.setAccessible(true);
+					list.add(field);
+				}
+			}
+			return list.toArray(new Object[list.size()]);
 		}
 		else {		
 			Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
 			Class<?>[] enums=classquestionmark.getDeclaredClasses();
+			for(Class<?> enum1:enums) {
+				if(enum1.isEnum()) {
+					Field[] fields= enum1.getDeclaredFields();
+					for(Field field : fields) {
+						if(field.isEnumConstant()) {
+							field.setAccessible(true);
+						}
+					}
+				}
+			}
 			//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
 			int amount_of_enums = 0;
 			if(enums != null) {
