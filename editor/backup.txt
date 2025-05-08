@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\TestEnum.java",
     "jars": [],
     "caretposition": 0
   },
@@ -99,7 +99,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 892
+    "caretposition": 761
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\OpenNewWindowOpenFilesList.java": {
     "starterclass": "",
@@ -159,7 +159,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 33
+    "caretposition": 34
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Compile.java": {
     "starterclass": "",

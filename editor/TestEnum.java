@@ -1,5 +1,5 @@
 public class TestEnum {
-	public enum Size {
+	private enum Size {
 		small,medium,large
 	}
 	public void Test() {

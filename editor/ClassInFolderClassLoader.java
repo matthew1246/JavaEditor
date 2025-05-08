@@ -7,6 +7,14 @@ public class ClassInFolderClassLoader extends ClassLoader {
 		super(ClassLoader.getSystemClassLoader());
 		this.folder = folder;
 	}
+	@Override 
+	public Class<?> loadClass(String name) throws ClassNotFoundException {
+		if(!name.contains("\\") && !name.contains(".")) {
+			name=folder+name;
+		}
+		JOptionPane.showMessageDialog(null,"loadClass:"+name);
+		return super.loadClass(name);
+	}
 	protected Class<?> findClass(String classname) throws ClassNotFoundException {
 		try {
 		FileInputStream fileinputstream;
