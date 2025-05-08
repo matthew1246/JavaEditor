@@ -12,7 +12,6 @@ public class ClassInFolderClassLoader extends ClassLoader {
 		if(!name.contains("\\") && !name.contains(".")) {
 			name=folder+name;
 		}
-		JOptionPane.showMessageDialog(null,"loadClass:"+name);
 		return super.loadClass(name);
 	}
 	protected Class<?> findClass(String classname) throws ClassNotFoundException {

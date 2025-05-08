@@ -17,9 +17,13 @@
     "Size",
     "Size",
     "Size",
+    "Size",
+    "Size",
     "Size"
   ],
   "Size": [
+    "small",
+    "large",
     "large",
     "medium",
     "medium",
