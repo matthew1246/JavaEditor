@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\TestEnum.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
     "jars": [],
     "caretposition": 0
   },
