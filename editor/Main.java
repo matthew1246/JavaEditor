@@ -2850,7 +2850,6 @@ class CurlyBraceKeyListener implements KeyListener {
 		Class<?> superclass=classquestionmark.getSuperclass();
 		while(superclass != null) {
 			list.add(superclass);
-			System.out.println(superclass.getName());
 			superclass = superclass.getSuperclass();
 		}
 		return list;

@@ -4,6 +4,7 @@
     "Size",
     "Size",
     "Size",
+    "Size",
     "Test",
     "Size",
     "Size",
@@ -29,6 +30,7 @@
     "Size"
   ],
   "Size": [
+    "small",
     "large",
     "large",
     "medium",
@@ -280,5 +282,10 @@
   "JOptionPane": [
     "showMessageDialog",
     "updateUI"
+  ],
+  "Auto": [
+    "Hello",
+    "Hello",
+    "main"
   ]
 }
