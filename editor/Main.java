@@ -70,6 +70,9 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import javax.swing.SwingConstants;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
 public class Main {
 	public JMenuItem generatejar;
 	public JButton deprecated;	
@@ -2727,6 +2730,15 @@ class CurlyBraceKeyListener implements KeyListener {
 							if(labels[i].equals(selected_label2)) {
 								if(methods[i] instanceof Method) {
 									methodorproperty = "(";
+									if(((Method)methods[i]).getParameterCount() > 0) {
+										Parameter[] parametertypes=((Method)methods[i]).getParameters();
+										String[] variabletypes= new String[parametertypes.length];
+										for(int j = 0; j < parametertypes.length; j++) {
+											variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
+										}
+										methodorproperty+=String.join(",",variabletypes);
+									}
+									methodorproperty+=")";
 									break breaky;
 								}
 							}

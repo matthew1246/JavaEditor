@@ -1,6 +1,10 @@
 {
   "TestEnum": [
     "Size",
+    "Test",
+    "Size",
+    "Size",
+    "Size",
     "Size",
     "Size",
     "Size",
@@ -30,6 +34,8 @@
     "Size"
   ],
   "Size": [
+    "large",
+    "medium",
     "small",
     "large",
     "large",
@@ -74,10 +80,14 @@
     "add"
   ],
   "Class": [
+    "getSimpleName",
+    "getSimpleName",
+    "getName",
     "getDeclaredClasses",
     "isEnum"
   ],
   "String": [
+    "join",
     "contains",
     "contains",
     "split",
@@ -179,6 +189,8 @@
     "println"
   ],
   "ChessBoard": [
+    "getMoves",
+    "getMoves",
     "getCell",
     "getCell",
     "getCell",
@@ -281,11 +293,53 @@
   ],
   "JOptionPane": [
     "showMessageDialog",
+    "showMessageDialog",
     "updateUI"
   ],
   "Auto": [
+    "main",
+    "Hello",
+    "Hello",
+    "Hello",
     "Hello",
     "Hello",
     "main"
+  ],
+  "Main": [
+    "getFileName",
+    "runJavaProgramFromMSDOS",
+    "0",
+    "curlybracekeylistener"
+  ],
+  "TypeVariable": [
+    "getBounds"
+  ],
+  "Object": [
+    "getClass",
+    "finalize",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait",
+    "wait"
+  ],
+  "Parameter": [
+    "getType"
   ]
 }

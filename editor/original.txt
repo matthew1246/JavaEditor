@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
     "jars": [],
     "caretposition": 0
   },
