@@ -73,6 +73,7 @@ import javax.swing.SwingConstants;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
+import javax.swing.JTabbedPane;
 public class Main {
 	public JMenuItem generatejar;
 	public JButton deprecated;	
@@ -207,7 +208,10 @@ public class Main {
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 		scrollpane = new JScrollPane(textarea);
-		frame.getContentPane().add(scrollpane);
+		JTabbedPane tabbedpane = new JTabbedPane();
+		tabbedpane.add(getFileName(fileName),scrollpane);
+		
+		frame.getContentPane().add(tabbedpane);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//JMenuBar menubar = new JMenuBar();

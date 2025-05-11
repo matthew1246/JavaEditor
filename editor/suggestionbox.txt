@@ -307,6 +307,7 @@
   ],
   "Main": [
     "getFileName",
+    "getFileName",
     "runJavaProgramFromMSDOS",
     "0",
     "curlybracekeylistener"
@@ -341,5 +342,11 @@
   ],
   "Parameter": [
     "getType"
+  ],
+  "JTabbedPane": [
+    "add",
+    "add",
+    "add",
+    "add"
   ]
 }
