@@ -345,8 +345,16 @@
   ],
   "JTabbedPane": [
     "add",
+    "getTabCount",
+    "setComponentAt",
+    "add",
+    "add",
     "add",
     "add",
     "add"
+  ],
+  "Graphics": [
+    "drawLine",
+    "drawLine"
   ]
 }

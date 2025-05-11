@@ -210,6 +210,7 @@ public class Main {
 		scrollpane = new JScrollPane(textarea);
 		JTabbedPane tabbedpane = new JTabbedPane();
 		tabbedpane.add(getFileName(fileName),scrollpane);
+		tabbedpane.add("+",null);
 		
 		frame.getContentPane().add(tabbedpane);
 		
