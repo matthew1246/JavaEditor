@@ -221,6 +221,7 @@ public class Main {
 				String title=tabbedpane.getTitleAt(index);
 				if(title.equals("+")) {
 					tabbedpane.addTab("Test",new JPanel());
+					tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-1);
 				}
 				/*OpenActionListener oal=new OpenActionListener(Main.this);
 				oal.actionPerformed(null);
@@ -228,7 +229,7 @@ public class Main {
 				//tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-1);
 			}
 		});	
-		tabbedpane.add("+",pluspanel);
+		tabbedpane.addTab("+",pluspanel);
 		
 		frame.getContentPane().add(tabbedpane);
 		
