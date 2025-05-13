@@ -1,6 +1,7 @@
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
+import javax.swing.event.ChangeEvent;
 import java.awt.Point;
 import javax.swing.text.BadLocationException;
 import javax.swing.tree.TreePath;
@@ -74,6 +75,7 @@ import java.lang.reflect.TypeVariable;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeListener;
 public class Main {
 	public JMenuItem generatejar;
 	public JButton deprecated;	
@@ -109,7 +111,7 @@ public class Main {
 	public JCheckBox jarcheckbox = new JCheckBox();
 	public JButton reload;
 	public JButton addjar=new JButton("jar");
-	public OpenActionListener oal = new OpenActionListener(this);
+	public OpenActionListener oal = new OpenActionListener(this);	
 	public JFrame frame;
 	public JTextArea textarea;
 	public String fileName = "";
@@ -210,7 +212,23 @@ public class Main {
 		scrollpane = new JScrollPane(textarea);
 		JTabbedPane tabbedpane = new JTabbedPane();
 		tabbedpane.add(getFileName(fileName),scrollpane);
-		tabbedpane.add("+",null);
+		JPanel pluspanel = new JPanel();
+		tabbedpane.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent changeevent) {
+				JTabbedPane tabbedpane=(JTabbedPane)changeevent.getSource();
+				int index=tabbedpane.getSelectedIndex();
+				String title=tabbedpane.getTitleAt(index);
+				if(title.equals("+")) {
+					tabbedpane.addTab("Test",new JPanel());
+				}
+				/*OpenActionListener oal=new OpenActionListener(Main.this);
+				oal.actionPerformed(null);
+				*/
+				//tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-1);
+			}
+		});	
+		tabbedpane.add("+",pluspanel);
 		
 		frame.getContentPane().add(tabbedpane);
 		
@@ -2189,7 +2207,6 @@ class CurlyBraceKeyListener implements KeyListener {
 				String[] properties = editedline.split("\\.");
 				String first = properties[0];
 				String classname=getClassName(first,text);
-				
 				Class<?> property = getClassQuestionMark(classname,text);
 				for(int i = 1; i < properties.length; i++) {
 					//Member[] methodsandproperties=getAllPropertyAndMethods(property);

@@ -80,6 +80,7 @@
     "add"
   ],
   "Class": [
+    "getName",
     "getSimpleName",
     "getSimpleName",
     "getName",
@@ -87,6 +88,7 @@
     "isEnum"
   ],
   "String": [
+    "equals",
     "join",
     "contains",
     "contains",
@@ -294,6 +296,7 @@
   "JOptionPane": [
     "showMessageDialog",
     "showMessageDialog",
+    "showMessageDialog",
     "updateUI"
   ],
   "Auto": [
@@ -344,6 +347,12 @@
     "getType"
   ],
   "JTabbedPane": [
+    "getTitleAt",
+    "getSelectedIndex",
+    "getSelectedComponent",
+    "getTabCount",
+    "setSelectedIndex",
+    "add",
     "add",
     "getTabCount",
     "setComponentAt",
@@ -356,5 +365,11 @@
   "Graphics": [
     "drawLine",
     "drawLine"
+  ],
+  "JPanel": [
+    "addMouseListener"
+  ],
+  "OpenActionListener": [
+    "actionPerformed"
   ]
 }
