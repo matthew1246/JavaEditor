@@ -217,20 +217,52 @@ public class Main {
 		tabbedpane.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent changeevent) {
-				JTabbedPane tabbedpane=(JTabbedPane)changeevent.getSource();
-				int index=tabbedpane.getSelectedIndex();
-				String title=tabbedpane.getTitleAt(index);
-				if(title.equals("+")) {
-					Component plustab = tabbedpane.getComponentAt(index);
-					tabbedpane.remove(plustab);
-					tabbedpane.addTab("Test",new JPanel());
-					tabbedpane.addTab("+",plustab);
-					tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+				try {
+					JTabbedPane tabbedpane=(JTabbedPane)changeevent.getSource();
+					int index=tabbedpane.getSelectedIndex();
+					String title=tabbedpane.getTitleAt(index);
+					if(title.equals("+")) {
+						Component plustab = tabbedpane.getComponentAt(index);
+						tabbedpane.remove(plustab);
+						
+						String dir = Main.this.fileName;
+						if(!dir.equals("")) {
+							dir = dir.replaceAll("[^\\\\]+\\.java","");
+						}
+						else {
+							dir = System.getProperty("user.home");
+						}
+						JFileChooser filechooser = new JFileChooser(new File(dir));
+						FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
+						filechooser.setFileFilter(filenameextensionfilter);
+						int result = filechooser.showOpenDialog(Main.this.frame);
+						if(result == JFileChooser.APPROVE_OPTION) {
+							File selectedFile = filechooser.getSelectedFile();
+							JTextArea textarea2 = new JTextArea();
+							Font originalFont = textarea.getFont();
+							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+							JScrollPane scrollpane2 = new JScrollPane(textarea2);
+							String directoryandfilename = selectedFile.getPath();
+							String filename = Main.this.getFileName(directoryandfilename);
+							
+							Path path = Paths.get(directoryandfilename);
+							String lines = Files.readString(path,StandardCharsets.UTF_8);
+							textarea2.setTabSize(4);
+							textarea2.setText(lines);
+							
+							tabbedpane.addTab(filename,scrollpane2);
+						}
+						tabbedpane.addTab("+",plustab);
+						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+					}
+					/*OpenActionListener oal=new OpenActionListener(Main.this);
+					oal.actionPerformed(null);
+					*/
+					//tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-1);
+				} catch(IOException ex) {
+					ex.printStackTrace();
 				}
-				/*OpenActionListener oal=new OpenActionListener(Main.this);
-				oal.actionPerformed(null);
-				*/
-				//tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-1);
 			}
 		});	
 		tabbedpane.addTab("+",pluspanel);
@@ -598,7 +630,7 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		textarea.requestFocus();
-		textarea.setTabSize(4);
+		textarea.setTabSize(4);		
 	}
 	public void updateMethodComboBox(ActionEvent ie) {
 		if(classnamescombobox.hasFocus()) {
@@ -2142,7 +2174,6 @@ class OpenActionListener implements ActionListener {
 		else {
 			dir = System.getProperty("user.home");
 		}
-		System.out.println("dir is: "+dir);
 		JFileChooser filechooser = new JFileChooser(new File(dir));
 		FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
 		filechooser.setFileFilter(filenameextensionfilter);

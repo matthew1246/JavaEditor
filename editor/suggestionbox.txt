@@ -309,6 +309,8 @@
     "main"
   ],
   "Main": [
+    "toString",
+    "getFileName",
     "getFileName",
     "getFileName",
     "runJavaProgramFromMSDOS",
@@ -347,6 +349,7 @@
     "getType"
   ],
   "JTabbedPane": [
+    "addTab",
     "getComponentAt",
     "addTab",
     "remove",
@@ -379,5 +382,11 @@
   ],
   "OpenActionListener": [
     "actionPerformed"
+  ],
+  "JTextArea": [
+    "setText"
+  ],
+  "IOException": [
+    "printStackTrace"
   ]
 }
