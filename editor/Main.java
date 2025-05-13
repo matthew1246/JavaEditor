@@ -76,6 +76,7 @@ import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
+import java.awt.Component;
 public class Main {
 	public JMenuItem generatejar;
 	public JButton deprecated;	
@@ -220,8 +221,11 @@ public class Main {
 				int index=tabbedpane.getSelectedIndex();
 				String title=tabbedpane.getTitleAt(index);
 				if(title.equals("+")) {
+					Component plustab = tabbedpane.getComponentAt(index);
+					tabbedpane.remove(plustab);
 					tabbedpane.addTab("Test",new JPanel());
-					tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-1);
+					tabbedpane.addTab("+",plustab);
+					tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 				}
 				/*OpenActionListener oal=new OpenActionListener(Main.this);
 				oal.actionPerformed(null);

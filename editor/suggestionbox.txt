@@ -347,6 +347,11 @@
     "getType"
   ],
   "JTabbedPane": [
+    "getComponentAt",
+    "addTab",
+    "remove",
+    "setSelectedIndex",
+    "getSelectedIndex",
     "getTabCount",
     "setSelectedIndex",
     "setSelectedComponent",
