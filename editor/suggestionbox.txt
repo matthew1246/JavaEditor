@@ -64,6 +64,10 @@
   ],
   "List": [
     "add",
+    "get",
+    "add",
+    "add",
+    "add",
     "add",
     "size",
     "size",
@@ -88,6 +92,7 @@
     "isEnum"
   ],
   "String": [
+    "equals",
     "equals",
     "join",
     "contains",
@@ -309,6 +314,8 @@
     "main"
   ],
   "Main": [
+    "textarea",
+    "fileName",
     "toString",
     "getFileName",
     "getFileName",
@@ -349,6 +356,10 @@
     "getType"
   ],
   "JTabbedPane": [
+    "getSelectedComponent",
+    "getSelectedIndex",
+    "getTabComponentAt",
+    "getComponentAt",
     "addTab",
     "getComponentAt",
     "addTab",
@@ -388,5 +399,9 @@
   ],
   "IOException": [
     "printStackTrace"
+  ],
+  "JScrollPane": [
+    "getViewport",
+    "getViewport"
   ]
 }

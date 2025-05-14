@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.util.regex.*;
 class Content {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
 	public JTextArea textArea;
 	public Content(JTextArea textArea) {
 		this.textArea = textArea;

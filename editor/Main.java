@@ -78,6 +78,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
 import java.awt.Component;
 public class Main {
+	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JMenuItem generatejar;
 	public JButton deprecated;	
 	public static Muck muck = new Muck();
@@ -211,9 +212,10 @@ public class Main {
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 		scrollpane = new JScrollPane(textarea);
-		JTabbedPane tabbedpane = new JTabbedPane();
 		tabbedpane.add(getFileName(fileName),scrollpane);
 		JPanel pluspanel = new JPanel();
+		List<String> fileNames = new LinkedList<String>();
+		fileNames.add(fileName);
 		tabbedpane.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent changeevent) {
@@ -244,6 +246,7 @@ public class Main {
 
 							JScrollPane scrollpane2 = new JScrollPane(textarea2);
 							String directoryandfilename = selectedFile.getPath();
+							fileNames.add(directoryandfilename);
 							String filename = Main.this.getFileName(directoryandfilename);
 							
 							Path path = Paths.get(directoryandfilename);
@@ -252,14 +255,13 @@ public class Main {
 							textarea2.setText(lines);
 							
 							tabbedpane.addTab(filename,scrollpane2);
+							tabbedpane.addTab("+",plustab);
+							tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						}
-						tabbedpane.addTab("+",plustab);
-						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 					}
-					/*OpenActionListener oal=new OpenActionListener(Main.this);
-					oal.actionPerformed(null);
-					*/
-					//tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-1);
+					Main.this.fileName=fileNames.get(tabbedpane.getSelectedIndex());
+					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				} catch(IOException ex) {
 					ex.printStackTrace();
 				}
@@ -1583,7 +1585,7 @@ public class Main {
 			}		
 		});
 			
-		compile.addActionListener(new ActionListener() {
+		compile.addActionListener(new ActionListener() {								
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(fileName.equals("")) {
