@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.util.regex.*;
 class Content {
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		System.out.println("Hello World 2!");
 	}
 	public JTextArea textArea;
 	public Content(JTextArea textArea) {
