@@ -132,6 +132,11 @@ public class SuggestionBoxSelected {
 		if(list == null) {
 			list = new ArrayList<String>();
 		}
+		else {
+			if(list.contains(methodorproperty)) {
+				list.remove(methodorproperty);
+			}
+		}
 		list.add(0,methodorproperty);		
 		linkedhashmap.put(classy,list);
 		setBackup();
