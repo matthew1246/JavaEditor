@@ -834,6 +834,9 @@ public class Main {
 			if(caretposition != 0)
 			scrollToCaretPosition(caretposition);
 			//deselected="";
+			int selectedtab = tabbedpane.getSelectedIndex();
+			fileNames.set(selectedtab,fileName);
+			tabbedpane.setTitleAt(selectedtab,getFileName(fileName));
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
