@@ -63,6 +63,9 @@
     "isEnumConstant"
   ],
   "List": [
+    "get",
+    "get",
+    "indexOf",
     "add",
     "get",
     "add",
@@ -314,6 +317,12 @@
     "main"
   ],
   "Main": [
+    "getFileName",
+    "fileName",
+    "tabbedpane",
+    "tabbedpane",
+    "fileNames",
+    "fileName",
     "textarea",
     "fileName",
     "toString",
@@ -356,6 +365,17 @@
     "getType"
   ],
   "JTabbedPane": [
+    "setTitleAt",
+    "getModel",
+    "getTabComponentAt",
+    "getSelectedIndex",
+    "setSelectedIndex",
+    "getSelectedIndex",
+    "setSelectedIndex",
+    "setSelectedIndex",
+    "getSelectedComponent",
+    "getSelectedIndex",
+    "setSelectedIndex",
     "getSelectedComponent",
     "getSelectedIndex",
     "getTabComponentAt",

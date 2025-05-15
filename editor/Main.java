@@ -83,7 +83,7 @@ public class Main {
 	public JButton deprecated;	
 	public static Muck muck = new Muck();
 	public Expandable expandable;
-	public JComboBox<String> filenamescombobox = new JComboBox<String>();
+	public JComboBox<String> filenamescombobox = new JComboBox<String>();	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
@@ -179,6 +179,7 @@ public class Main {
 	public void setSize(JComponent component) {
 		component.setMinimumSize(component.getPreferredSize());
 	}
+	public List<String> fileNames = new LinkedList<String>();
 	public JScrollPane scrollpane;
 	public void setLayout() {
 		JMenuBar menubar = new InnerGridBagLayout();
@@ -214,7 +215,6 @@ public class Main {
 		scrollpane = new JScrollPane(textarea);
 		tabbedpane.add(getFileName(fileName),scrollpane);
 		JPanel pluspanel = new JPanel();
-		List<String> fileNames = new LinkedList<String>();
 		fileNames.add(fileName);
 		tabbedpane.addChangeListener(new ChangeListener() {
 			@Override
@@ -2184,6 +2184,9 @@ class OpenActionListener implements ActionListener {
 			File selectedFile = filechooser.getSelectedFile();
 			String original = main.fileName;
 			main.fileName = selectedFile.getPath();
+			int selectedtab = main.tabbedpane.getSelectedIndex();
+			main.fileNames.set(selectedtab,main.fileName);
+			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));
 			if(original.equals(""))
 				main.git = new Git(main.fileName);
 			main.open(main.getFileName(main.fileName));
