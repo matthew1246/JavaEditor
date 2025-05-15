@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\SuggestionBoxSelected.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
     "jars": [],
     "caretposition": 0
   },
