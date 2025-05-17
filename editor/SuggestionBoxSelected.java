@@ -137,7 +137,7 @@ public class SuggestionBoxSelected {
 				list.remove(methodorproperty);
 			}
 		}
-		list.add(0,methodorproperty);		
+		list.add(methodorproperty);		
 		linkedhashmap.put(classy,list);
 		setBackup();
 	}

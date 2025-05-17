@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\SuggestionBoxSelected.java",
     "jars": [],
     "caretposition": 0
   },
@@ -39,7 +39,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 2270
+    "caretposition": 4185
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
     "starterclass": "Main",

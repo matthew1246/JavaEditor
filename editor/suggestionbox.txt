@@ -1,13 +1,6 @@
 {
   "JOptionPane": [
-    "showMessageDialog"
-  ],
-  "System": [
-    "out",
-    "out"
-  ],
-  "PrintStream": [
-    "println",
-    "println"
+    "showMessageDialog",
+    "getRootFrame"
   ]
 }
