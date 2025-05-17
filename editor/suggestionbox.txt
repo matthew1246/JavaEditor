@@ -1,6 +1,23 @@
 {
   "JOptionPane": [
     "getRootFrame",
-    "showMessageDialog"
+    "showMessageDialog",
+    "YES_NO_OPTION",
+    "getValue",
+    "createDialog",
+    "showOptionDialog",
+    "YES_OPTION",
+    "NO_OPTION",
+    "QUESTION_MESSAGE"
+  ],
+  "Main": [
+    "frame",
+    "textarea"
+  ],
+  "JDialog": [
+    "show"
+  ],
+  "UIManager": [
+    "getIcon"
   ]
 }

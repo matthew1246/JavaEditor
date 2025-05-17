@@ -77,6 +77,8 @@ import java.lang.reflect.Type;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
 import java.awt.Component;
+import javax.swing.JDialog;
+import javax.swing.UIManager;
 public class Main {
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JMenuItem generatejar;
@@ -847,8 +849,9 @@ public class Main {
 	String deselected = "";
 	public void setListeners() {
 		generatejar.addActionListener((ev) -> {
-			int yesorno=JOptionPane.showConfirmDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION);
-			switch(yesorno) {
+			String[] options={"Yes","No"};
+			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+			switch(option) {
 				case JOptionPane.YES_OPTION:
 					JFrame getjavaversion = new JFrame();
 					JPanel panelversion = new JPanel();
