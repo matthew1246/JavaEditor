@@ -1,6 +1,6 @@
 {
   "JOptionPane": [
-    "showMessageDialog",
-    "getRootFrame"
+    "getRootFrame",
+    "showMessageDialog"
   ]
 }
