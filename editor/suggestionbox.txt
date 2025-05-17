@@ -19,5 +19,17 @@
   ],
   "UIManager": [
     "getIcon"
+  ],
+  "List": [
+    "size",
+    "get"
+  ],
+  "String": [
+    "equals",
+    "startsWith"
+  ],
+  "JFrame": [
+    "disable",
+    "dispose"
   ]
 }

@@ -2574,6 +2574,17 @@ class CurlyBraceKeyListener implements KeyListener {
 											label.setBackground(new Color(red,green,blue));
 										}
 									}
+									boolean containsVariable = false;
+									for(int i = 0; i < variablenames.size(); i++) {
+										String variablename=variablenames.get(i);
+										if(variablename.startsWith(methodname)) {
+											containsVariable = true;
+											break;											
+										}
+									}
+									if(!containsVariable) {
+										suggestionbox.dispose();
+									}
 								}
 							}
 							@Override
@@ -2594,7 +2605,8 @@ class CurlyBraceKeyListener implements KeyListener {
 					JOptionPane.showMessageDialog(null,ex.getMessage());
 				}
 			}
-		}*/
+		}
+		*/
 		if(isControlDown) {
 			isControlDown = false;
 		}
