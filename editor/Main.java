@@ -2428,10 +2428,10 @@ class CurlyBraceKeyListener implements KeyListener {
 									if(selected_label2.getText().startsWith(selected)) {
 										//suggestionboxselected.Save(classquestionmark.getSimpleName(),selected);
 										selected=selected_label2.getText().replaceFirst(variablename,"");
-										String firsthalf=text.substring(0,caretposition)+selected;
-										String second =text.substring(caretposition,text.length());
+										String firsthalf=text.substring(0,caretposition+1)+selected;
+										String second =text.substring(caretposition+1,text.length());
 										textarea.setText(firsthalf+second);
-										textarea.setCaretPosition(caretposition+selected.length());
+										textarea.setCaretPosition(caretposition+1+selected.length());
 									}
 									else {
 										selected=selected.replaceFirst(variablename,"");
