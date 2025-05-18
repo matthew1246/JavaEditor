@@ -2315,110 +2315,17 @@ class CurlyBraceKeyListener implements KeyListener {
 				Popup(property,caretposition);
 			}
 		}
-		if(ev.isControlDown()) {
-			isControlDown = true;
-		}
-	}
-	public boolean is_content_update = false;
-	public void keyReleased(KeyEvent ev) {
-		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
-			positiontracker.add();
-		}
-		int value = ev.getKeyCode();
-		switch(value) {
-			case KeyEvent.VK_Z:
-				if(ev.isControlDown()) {
-					Selection selection=positiontracker.previous();
-					textarea.setText(selection.wholetext);
-					textarea.setCaretPosition(selection.cursor);
-				}
-				break;
-			case KeyEvent.VK_Y:
-				if(ev.isControlDown()) {
-					Selection selection=positiontracker.next();
-					textarea.setText(selection.wholetext);
-					textarea.setCaretPosition(selection.cursor);
-				}
-			break;
-			case KeyEvent.VK_SHIFT:
-				isShift = false;
-				break;
-			case KeyEvent.VK_TAB:
-				isTab = false;
-				if(!isShift)
-					selectedlines.TabMultipleLinesOutput();
-				else selectedlines.ShiftTabOutput();
-			break;
-			default:
-				renamevariable.replace();
-			break;
-		}
 		
-		if(!main.go_to_line_is_executed) {
-			is_content_update = true;
-			Content content = new Content(textarea);
-			char character = ev.getKeyChar();
-			if(character == '\n') {
-				content.NewLineCharacter();
-			}
-			else if(character == ';') {
-				content.Semicolon();
-			}			
-			else if(character == '{') {
-				content.LeftCurlyBrace();
-			}
-	 
-			else if(character == '}') {
-				content.RightCurlyBrace();
-			}
-			is_content_update = false;
-		}
-		else {
-			main.go_to_line_is_executed = false;
-		}
-		if(isControlDown && ev.getKeyCode() == KeyEvent.VK_D) {
-			int oldcaretposition = textarea.getCaretPosition();
-			Middle middle = new Middle(textarea);
-			
-			String[] first_half_lines = middle.first_half_lines;
-			String[] first_half = new String[first_half_lines.length-1];
-			for(int i = 0; i < first_half.length; i++) {
-				first_half[i] = first_half_lines[i];
-			}
-			String first_half_string=String.join("\n",first_half);
-			
-			String secondhalf = middle.second;
-			String[] secondhalflines = secondhalf.split("\n");
-			String[] array = new String[secondhalflines.length-1];
-			for(int i = 0; i < array.length; i++) {
-				array[i] = secondhalflines[i+1];
-			}
-			String secondhalfstring = String.join("\n",array);
-			
-			textarea.setText(first_half_string+"\n"+secondhalfstring);
-			textarea.setCaretPosition(oldcaretposition);
-		}
-		else if(isControlDown && ev.getKeyCode() == KeyEvent.VK_R) {
-			try {
-				String lines = Files.readString(Paths.get(main.fileName),StandardCharsets.UTF_8);
-				int caretposition = textarea.getCaretPosition();
-				textarea.setText(lines);
-				textarea.setCaretPosition(caretposition);
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
 		/**
 		** This is a variable suggestion box not a method
 		** suggestsuggestionbox.
 		*/
-		/*
 		int caretposition = textarea.getCaretPosition();
 		Middle middle = new Middle(textarea);
 		String line=middle.getCurrentLine();
-		Pattern pattern=Pattern.compile("(?<![a-z0-9A-Z]\\s*)([a-z0-9A-Z]+)\\z");
+		line=line+ev.getKeyChar();
+		Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
 		Matcher matcher=pattern.matcher(line);
-		
 		if(matcher.find()) {
 			List<String> variablenames = new ArrayList<String>();
 			String text = textarea.getText();
@@ -2606,7 +2513,99 @@ class CurlyBraceKeyListener implements KeyListener {
 				}
 			}
 		}
-		*/
+		if(ev.isControlDown()) {
+			isControlDown = true;
+		}
+	}
+	public boolean is_content_update = false;
+	public void keyReleased(KeyEvent ev) {
+		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
+			positiontracker.add();
+		}
+		int value = ev.getKeyCode();
+		switch(value) {
+			case KeyEvent.VK_Z:
+				if(ev.isControlDown()) {
+					Selection selection=positiontracker.previous();
+					textarea.setText(selection.wholetext);
+					textarea.setCaretPosition(selection.cursor);
+				}
+				break;
+			case KeyEvent.VK_Y:
+				if(ev.isControlDown()) {
+					Selection selection=positiontracker.next();
+					textarea.setText(selection.wholetext);
+					textarea.setCaretPosition(selection.cursor);
+				}
+			break;
+			case KeyEvent.VK_SHIFT:
+				isShift = false;
+				break;
+			case KeyEvent.VK_TAB:
+				isTab = false;
+				if(!isShift)
+					selectedlines.TabMultipleLinesOutput();
+				else selectedlines.ShiftTabOutput();
+			break;
+			default:
+				renamevariable.replace();
+			break;
+		}
+		
+		if(!main.go_to_line_is_executed) {
+			is_content_update = true;
+			Content content = new Content(textarea);
+			char character = ev.getKeyChar();
+			if(character == '\n') {
+				content.NewLineCharacter();
+			}
+			else if(character == ';') {
+				content.Semicolon();
+			}			
+			else if(character == '{') {
+				content.LeftCurlyBrace();
+			}
+	 
+			else if(character == '}') {
+				content.RightCurlyBrace();
+			}
+			is_content_update = false;
+		}
+		else {
+			main.go_to_line_is_executed = false;
+		}
+		if(isControlDown && ev.getKeyCode() == KeyEvent.VK_D) {
+			int oldcaretposition = textarea.getCaretPosition();
+			Middle middle = new Middle(textarea);
+			
+			String[] first_half_lines = middle.first_half_lines;
+			String[] first_half = new String[first_half_lines.length-1];
+			for(int i = 0; i < first_half.length; i++) {
+				first_half[i] = first_half_lines[i];
+			}
+			String first_half_string=String.join("\n",first_half);
+			
+			String secondhalf = middle.second;
+			String[] secondhalflines = secondhalf.split("\n");
+			String[] array = new String[secondhalflines.length-1];
+			for(int i = 0; i < array.length; i++) {
+				array[i] = secondhalflines[i+1];
+			}
+			String secondhalfstring = String.join("\n",array);
+			
+			textarea.setText(first_half_string+"\n"+secondhalfstring);
+			textarea.setCaretPosition(oldcaretposition);
+		}
+		else if(isControlDown && ev.getKeyCode() == KeyEvent.VK_R) {
+			try {
+				String lines = Files.readString(Paths.get(main.fileName),StandardCharsets.UTF_8);
+				int caretposition = textarea.getCaretPosition();
+				textarea.setText(lines);
+				textarea.setCaretPosition(caretposition);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 		if(isControlDown) {
 			isControlDown = false;
 		}
