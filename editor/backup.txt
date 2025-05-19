@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
-    "caretposition": 83331
+    "caretposition": 80616
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -312,5 +312,13 @@
       "C:\\Users\\Owner\\Documents\\git\\notepad\\gson-2.10.1.jar"
     ],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\VariableSuggestionBoxSelected.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 1352
   }
 }

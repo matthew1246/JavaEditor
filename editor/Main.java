@@ -2222,6 +2222,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	private boolean isTab = false;
 	private SelectedLines selectedlines;
 	public PositionTracker positiontracker;
+	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public void keyPressed(KeyEvent ev) {
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
@@ -2318,7 +2319,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		
 		/**
 		** This is a variable suggestion box not a method
-		** suggestsuggestionbox.
+		** suggestionbox.
 		*/
 		int caretposition = textarea.getCaretPosition();
 		Middle middle = new Middle(textarea);
@@ -2360,6 +2361,11 @@ class CurlyBraceKeyListener implements KeyListener {
 						JLabel[] labels = new JLabel[variablenames2.size()];
 						for(int i = 0; i < variablenames2.size(); i++) {
 							labels[i] = new JLabel(variablenames2.get(i));
+						}
+						labels = variablesuggestionboxselected.Reordered(labels,search_textfield.getText());
+						JOptionPane.showMessageDialog(null,labels[0].getText());
+						JOptionPane.showMessageDialog(null,(panelgridlayout==null)+"");
+						for(int i = 0; i < labels.length; i++) {
 							panelgridlayout.add(labels[i]);
 						}
 						JScrollPane scrollpane = new JScrollPane(panelgridlayout);
@@ -2368,135 +2374,8 @@ class CurlyBraceKeyListener implements KeyListener {
 						int blue = 236;
 						labels[0].setOpaque(true);
 						labels[0].setBackground(new Color(red,green,blue));
-						KeyListener keylistener = new KeyListener() {
-							LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels);
-							int selected_index = 0;
-							@Override
-							public void keyPressed(KeyEvent keyevent) {
-								if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-									labels[selected_index].setOpaque(false);
-									labels[selected_index].setBackground(new JLabel().getBackground());
-									panelgridlayout.validate();
-									panelgridlayout.repaint();
-									int live_index = liveiterator.indexOf(labels[selected_index]);						
-									if( live_index < (liveiterator.list.size()-1) ) {									
-										live_index++;
-										JLabel selected_label=liveiterator.list.get(live_index);
-										selected_label.setOpaque(true);
-										selected_label.setBackground(new Color(red,green,blue));
-										panelgridlayout.validate();
-										panelgridlayout.repaint();
-										
-										label3:for(int i = 0; i < labels.length; i++) {
-											if(selected_label.equals(labels[i])) {
-												selected_index = i;
-												break label3;
-											}
-										}
-									}
-								}
-								else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-									labels[selected_index].setOpaque(false);
-									labels[selected_index].setBackground(new JLabel().getBackground());
-									panelgridlayout.validate();
-									panelgridlayout.repaint();
-									int live_index = liveiterator.indexOf(labels[selected_index]);
-									if(live_index > 0) {
-										live_index--;
-										JLabel selected_label=liveiterator.list.get(live_index);
-										selected_label.setOpaque(true);
-										selected_label.setBackground(new Color(red,green,blue));
-										panelgridlayout.validate();
-										panelgridlayout.repaint();
-										
-										label4:for(int i = 0; i < labels.length; i++) {
-											if(selected_label.equals(labels[i])) {
-												selected_index = i;
-												break label4;
-											}
-										}
-									}
-								}
-							}
-							@Override
-							public void keyReleased(KeyEvent keyevent) {
-								if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-									suggestionbox.dispose();
-									String text = textarea.getText();
-									String selected = search_textfield.getText().trim();
-									JLabel selected_label2 =labels[selected_index];
-									if(selected_label2.getText().startsWith(selected)) {
-										//suggestionboxselected.Save(classquestionmark.getSimpleName(),selected);
-										selected=selected_label2.getText().replaceFirst(variablename,"");
-										String firsthalf=text.substring(0,caretposition+1)+selected;
-										String second =text.substring(caretposition+1,text.length());
-										textarea.setText(firsthalf+second);
-										textarea.setCaretPosition(caretposition+1+selected.length());
-									}
-									else {
-										selected=selected.replaceFirst(variablename,"");
-										String firsthalf=text.substring(0,caretposition)+selected;
-										String second =text.substring(caretposition,text.length());
-										textarea.setText(firsthalf+second);
-										textarea.setCaretPosition(caretposition+selected.length());
-									}
-								}
-								else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-									liveiterator.reset();
-									while(liveiterator.hasNext()) {
-										JLabel label = liveiterator.next();
-										panelgridlayout.remove(label);
-									}
-									liveiterator = new LiveIterator<JLabel>(labels);	
-									String methodname=search_textfield.getText();	
-									for(JLabel label:labels) {
-										if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
-											liveiterator.remove(label);
-										}
-									}
-									
-									gridlayout.setRows(liveiterator.list.size()+1);
-									liveiterator.reset();
-									while(liveiterator.hasNext()) {
-										JLabel label = liveiterator.next();
-										panelgridlayout.add(label);
-									}
-									panelgridlayout.validate();
-									panelgridlayout.repaint();
-									suggestionbox.pack();	
-									JLabel selected_label = labels[selected_index];
-									if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
-										selected_label.setOpaque(false);
-										selected_label.setBackground(new JLabel().getBackground());
-										
-										if(liveiterator.list.size() != 0) {
-											JLabel label=liveiterator.list.get(0);
-											labelly2:for(int i = 0; i < labels.length; i++) {
-												if(label.equals(labels[i])) {
-													selected_index=i;
-													break labelly2;
-												}
-											}
-											label.setOpaque(true);
-											label.setBackground(new Color(red,green,blue));
-										}
-									}
-									boolean containsVariable = false;
-									for(int i = 0; i < variablenames.size(); i++) {
-										String variablename=variablenames.get(i);
-										if(variablename.startsWith(methodname)) {
-											containsVariable = true;
-											break;											
-										}
-									}
-									if(!containsVariable) {
-										suggestionbox.dispose();
-									}
-								}
-							}
-							@Override
-							public void keyTyped(KeyEvent ev) { }
-						};
+						KeyListener keylistener = new AutoKeyListener(labels,panelgridlayout,main,suggestionbox,search_textfield,variablename,caretposition,gridlayout,variablenames);
+						
 						search_textfield.addKeyListener(keylistener);
 						//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
 						suggestionbox.add(scrollpane);
@@ -2985,5 +2864,158 @@ class CurlyBraceKeyListener implements KeyListener {
 					selectedlines.TabMultipleLinesOutput();
 			break;
 		}*/
+	}	
+}
+class AutoKeyListener implements KeyListener {
+	LiveIterator<JLabel> liveiterator;
+	private JLabel[] labels;
+	private JPanel panelgridlayout;
+	private Main main;
+	private JFrame suggestionbox;
+	private JTextField search_textfield;
+	private String variablename;
+	private int caretposition;
+	private GridLayout gridlayout;
+	private List<String> variablenames;
+	public AutoKeyListener(JLabel[] labels,JPanel panelgridlayout,Main main,JFrame suggestionbox,JTextField search_textfield,String variablename,int caretposition,GridLayout gridlayout,List<String> variablenames) {
+		liveiterator = new LiveIterator<JLabel>(labels);
+		this.labels = labels;
+		this.panelgridlayout = panelgridlayout;
+		this.main = main;
+		this.suggestionbox = suggestionbox;
+		this.search_textfield = search_textfield;
+		this.variablename=variablename;
+		this.caretposition = caretposition;
+		this.gridlayout = gridlayout;
+		this.variablenames = variablenames;
 	}
-}
+	int selected_index = 0;
+	int red = 94;
+	int green = 167;
+	int blue = 236;
+	@Override
+	public void keyPressed(KeyEvent keyevent) {
+		if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
+			labels[selected_index].setOpaque(false);
+			labels[selected_index].setBackground(new JLabel().getBackground());
+			panelgridlayout.validate();
+			panelgridlayout.repaint();
+			int live_index = liveiterator.indexOf(labels[selected_index]);						
+			if( live_index < (liveiterator.list.size()-1) ) {									
+				live_index++;
+				JLabel selected_label=liveiterator.list.get(live_index);
+				selected_label.setOpaque(true);
+				selected_label.setBackground(new Color(red,green,blue));
+				panelgridlayout.validate();
+				panelgridlayout.repaint();
+				label3:for(int i = 0; i < labels.length; i++) {
+					if(selected_label.equals(labels[i])) {
+						selected_index = i;
+						break label3;
+					}
+				}
+			}
+		}
+		else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
+			labels[selected_index].setOpaque(false);
+			labels[selected_index].setBackground(new JLabel().getBackground());
+			panelgridlayout.validate();
+			panelgridlayout.repaint();
+			int live_index = liveiterator.indexOf(labels[selected_index]);
+			if(live_index > 0) {
+				live_index--;
+				JLabel selected_label=liveiterator.list.get(live_index);
+				selected_label.setOpaque(true);
+				selected_label.setBackground(new Color(red,green,blue));
+				panelgridlayout.validate();
+				panelgridlayout.repaint();
+				
+				label4:for(int i = 0; i < labels.length; i++) {
+					if(selected_label.equals(labels[i])) {
+						selected_index = i;
+						break label4;
+					}
+				}
+			}
+		}
+	}
+	@Override
+	public void keyReleased(KeyEvent keyevent) {
+		if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
+			suggestionbox.dispose();
+			String text = main.textarea.getText();	
+			String selected = search_textfield.getText().trim();
+			JLabel selected_label2 =labels[selected_index];
+			if(selected_label2.getText().startsWith(selected)) {
+				CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
+				selected=selected_label2.getText().replaceFirst(variablename,"");
+				String firsthalf=text.substring(0,caretposition+1)+selected;
+				String second =text.substring(caretposition+1,text.length());
+				main.textarea.setText(firsthalf+second);
+				main.textarea.setCaretPosition(caretposition+1+selected.length());
+			}
+			else {
+				selected=selected.replaceFirst(variablename,"");
+				String firsthalf=text.substring(0,caretposition)+selected;
+				String second =text.substring(caretposition,text.length());
+				main.textarea.setText(firsthalf+second);
+				main.textarea.setCaretPosition(caretposition+selected.length());
+			}
+		}
+		else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+			liveiterator.reset();
+			while(liveiterator.hasNext()) {
+				JLabel label = liveiterator.next();
+				panelgridlayout.remove(label);
+			}
+			liveiterator = new LiveIterator<JLabel>(labels);	
+			String methodname=search_textfield.getText();	
+			for(JLabel label:labels) {
+				if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
+					liveiterator.remove(label);
+				}
+			}
+			
+			gridlayout.setRows(liveiterator.list.size()+1);
+			liveiterator.reset();
+			liveiterator.list=CurlyBraceKeyListener.variablesuggestionboxselected.Reordered(liveiterator.list,methodname);
+			while(liveiterator.hasNext()) {
+				JLabel label = liveiterator.next();
+				panelgridlayout.add(label);
+			}
+			panelgridlayout.validate();
+			panelgridlayout.repaint();
+			suggestionbox.pack();	
+			JLabel selected_label = labels[selected_index];
+			if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
+				selected_label.setOpaque(false);
+				selected_label.setBackground(new JLabel().getBackground());
+				if(liveiterator.list.size() != 0) {
+					JLabel label=liveiterator.list.get(0);
+					labelly2:for(int i = 0; i < labels.length; i++) {
+						if(label.equals(labels[i])) {
+							selected_index=i;
+							break labelly2;
+						}
+					}
+					label.setOpaque(true);
+					label.setBackground(new Color(red,green,blue));
+				}
+			}
+			boolean containsVariable = false;
+			for(int i = 0; i < variablenames.size(); i++) {
+				String variablename=variablenames.get(i);
+				if(variablename.startsWith(methodname)) {
+					containsVariable = true;
+					break;											
+				}
+			}
+			if(!containsVariable) {
+				suggestionbox.dispose();
+			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent ev) { }
+}

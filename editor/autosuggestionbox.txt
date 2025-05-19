@@ -1,0 +1,113 @@
+{
+  "t": [
+    "textarea"
+  ],
+  "null": [
+    "null"
+  ],
+  "me": [
+    "methodname"
+  ],
+  "variablesu": [
+    "variablesuggestionboxselected"
+  ],
+  "se": [
+    "search_textfield"
+  ],
+  "nu": [
+    "null"
+  ],
+  "lab": [
+    "label"
+  ],
+  "labe": [
+    "label"
+  ],
+  "la": [
+    "label"
+  ],
+  "li": [
+    "liveiterator"
+  ],
+  "l": [
+    "liveiterator",
+    "label"
+  ],
+  "p": [
+    "panelgridlayout"
+  ],
+  "mai": [
+    "main"
+  ],
+  "ma": [
+    "main"
+  ],
+  "sug": [
+    "suggestionbox"
+  ],
+  "su": [
+    "suggestionbox"
+  ],
+  "sea": [
+    "search_textfield"
+  ],
+  "s": [
+    "search_textfield"
+  ],
+  "var": [
+    "variablename",
+    "variablenames"
+  ],
+  "v": [
+    "variablename"
+  ],
+  "va": [
+    "variablename",
+    "variablenames"
+  ],
+  "car": [
+    "caretposition"
+  ],
+  "c": [
+    "caretposition"
+  ],
+  "ca": [
+    "caretposition"
+  ],
+  "m": [
+    "main"
+  ],
+  "gr": [
+    "gridlayout"
+  ],
+  "livei": [
+    "liveiterator"
+  ],
+  "liv": [
+    "liveiterator"
+  ],
+  "live": [
+    "liveiterator"
+  ],
+  "f": [
+    "filereader"
+  ],
+  "liveit": [
+    "liveiterator"
+  ],
+  "liveite": [
+    "liveiterator"
+  ],
+  "label": [
+    "label"
+  ],
+  "nul": [
+    "null"
+  ],
+  "pa": [
+    "panelgridlayout"
+  ],
+  "pan": [
+    "panelgridlayout"
+  ]
+}

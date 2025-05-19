@@ -21,8 +21,11 @@
     "getIcon"
   ],
   "List": [
+    "remove",
     "size",
-    "get"
+    "get",
+    "add",
+    "set"
   ],
   "String": [
     "equals",
@@ -35,5 +38,26 @@
   "KeyEvent": [
     "getKeyText",
     "getKeyChar"
+  ],
+  "JLabel": [
+    "getText"
+  ],
+  "VariableSuggestionBoxSelected": [
+    "Reordered"
+  ],
+  "LiveIterator": [
+    "hasNext",
+    "next",
+    "Add",
+    "list"
+  ],
+  "System": [
+    "out"
+  ],
+  "PrintStream": [
+    "println"
+  ],
+  "JTextField": [
+    "getText"
   ]
 }
