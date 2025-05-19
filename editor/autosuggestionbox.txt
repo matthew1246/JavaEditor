@@ -109,5 +109,33 @@
   ],
   "pan": [
     "panelgridlayout"
+  ],
+  "meth": [
+    "methodname"
+  ],
+  "tex": [
+    "text"
+  ],
+  "text": [
+    "textarea"
+  ],
+  "care": [
+    "caretposition"
+  ],
+  "fi": [
+    "first",
+    "filereader"
+  ],
+  "sec": [
+    "second"
+  ],
+  "first": [
+    "first"
+  ],
+  "imp": [
+    "imports"
+  ],
+  "": [
+    "main"
   ]
 }

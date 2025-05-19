@@ -29,11 +29,15 @@
   ],
   "String": [
     "equals",
-    "startsWith"
+    "startsWith",
+    "substring",
+    "length",
+    "trim"
   ],
   "JFrame": [
     "disable",
-    "dispose"
+    "dispose",
+    "addWindowListener"
   ],
   "KeyEvent": [
     "getKeyText",
@@ -59,5 +63,10 @@
   ],
   "JTextField": [
     "getText"
+  ],
+  "JTextArea": [
+    "getText",
+    "setText",
+    "setCaretPosition"
   ]
 }

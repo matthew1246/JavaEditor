@@ -79,6 +79,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.Component;
 import javax.swing.JDialog;
 import javax.swing.UIManager;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 public class Main {
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JMenuItem generatejar;
@@ -2010,7 +2012,7 @@ public class Main {
 						
 						
 						scrollToCaretPosition(integer2);
-						
+											
 						JOptionPane.showMessageDialog(null,verticalscrollbar.getValue()+" "+integer2);
 						*/
 					}
@@ -2886,6 +2888,11 @@ class AutoKeyListener implements KeyListener {
 		this.caretposition = caretposition;
 		this.gridlayout = gridlayout;
 		this.variablenames = variablenames;
+		suggestionbox.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				EnterText();
+			}
+		});
 	}
 	int selected_index = 0;
 	int red = 94;
@@ -3009,11 +3016,21 @@ class AutoKeyListener implements KeyListener {
 				}
 			}
 			if(!containsVariable) {
-				suggestionbox.dispose();
+				EnterText();
 			}
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent ev) { }
+	
+	public void EnterText() {
+		String input=search_textfield.getText().trim();
+		String text = main.textarea.getText();
+		String first=text.substring(0,caretposition);
+		String second = text.substring(caretposition+1,text.length());
+		main.textarea.setText(first+input+second);
+		main.textarea.setCaretPosition(caretposition+input.length());
+		suggestionbox.dispose();
+	}
 }
