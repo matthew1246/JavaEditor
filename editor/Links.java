@@ -9,7 +9,7 @@ public class Links {
 			System.out.println(importname);
 		}
 	}
-	private HashMap<String,List<String>> hashmap = new HashMap<String,List<String>>();
+	public HashMap<String,List<String>> hashmap = new HashMap<String,List<String>>();
 	private List<String> sublinks = new ArrayList<String>();
 	public Links() {
 		try {

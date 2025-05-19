@@ -50,7 +50,7 @@ public class VariableSuggestionBoxSelected {
 				}
 			}
 			for(String variablename:linkedhashmap.get(textfieldinput)) {
-				liveiterator.list.set(0,new JLabel(variablename));
+				liveiterator.list.add(0,new JLabel(variablename));
 			}
 			return liveiterator.list;
 		}

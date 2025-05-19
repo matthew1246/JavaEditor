@@ -62,14 +62,15 @@
     "variablename"
   ],
   "va": [
-    "variablename",
-    "variablenames"
+    "variablenames",
+    "variablename"
   ],
   "car": [
     "caretposition"
   ],
   "c": [
-    "caretposition"
+    "caretposition",
+    "capitolpattern"
   ],
   "ca": [
     "caretposition"
@@ -137,5 +138,71 @@
   ],
   "": [
     "main"
+  ],
+  "main": [
+    "main"
+  ],
+  "mu": [
+    "muck"
+  ],
+  "lin": [
+    "line"
+  ],
+  "comp": [
+    "compile"
+  ],
+  "pattern": [
+    "pattern"
+  ],
+  "pat": [
+    "pattern"
+  ],
+  "match": [
+    "matcher"
+  ],
+  "cap": [
+    "capitolpattern"
+  ],
+  "cl": [
+    "classname"
+  ],
+  "variab": [
+    "variablenames"
+  ],
+  "class": [
+    "classname"
+  ],
+  "Sys": [
+    "System"
+  ],
+  "Syst": [
+    "System"
+  ],
+  "int": [
+    "integer2"
+  ],
+  "Ent": [
+    "Entityresolver2"
+  ],
+  "Sy": [
+    "Synthinternalframeui"
+  ],
+  "S": [
+    "Sslsessionbindinglistener"
+  ],
+  "Jop": [
+    "Joptionpane"
+  ],
+  "sel": [
+    "selected_label2"
+  ],
+  "ind": [
+    "index"
+  ],
+  "selected": [
+    "selected_label2"
+  ],
+  "selected_label2": [
+    "selected_label2"
   ]
 }

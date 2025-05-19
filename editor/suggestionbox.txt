@@ -24,15 +24,15 @@
     "remove",
     "size",
     "get",
-    "add",
-    "set"
+    "set",
+    "add"
   ],
   "String": [
     "equals",
     "startsWith",
+    "trim",
     "substring",
-    "length",
-    "trim"
+    "length"
   ],
   "JFrame": [
     "disable",
@@ -50,10 +50,10 @@
     "Reordered"
   ],
   "LiveIterator": [
-    "hasNext",
-    "next",
     "Add",
-    "list"
+    "list",
+    "hasNext",
+    "next"
   ],
   "System": [
     "out"
@@ -68,5 +68,22 @@
     "getText",
     "setText",
     "setCaretPosition"
+  ],
+  "Muck": [
+    "links"
+  ],
+  "Links": [
+    "hashmap"
+  ],
+  "HashMap": [
+    "KeyIterator",
+    "keySet"
+  ],
+  "Matcher": [
+    "find"
+  ],
+  "JPanel": [
+    "getComponentPopupMenu",
+    "getComponents"
   ]
 }

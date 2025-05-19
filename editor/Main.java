@@ -2342,6 +2342,15 @@ class CurlyBraceKeyListener implements KeyListener {
 			while(matcher3.find()) {
 				variablenames.add(matcher3.group(4));
 			}
+			
+			// Add Java API classes
+			Pattern pattern6=Pattern.compile("^[A-Z]");
+			Matcher capitolpattern=pattern6.matcher(variablename);
+			if(capitolpattern.find()) {
+				for(String classname:Main.muck.links.hashmap.keySet()) {
+					variablenames.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
+				}
+			}
 			if(variablenames.size() > 0) {
 				try {
 					List<String> variablenames2 = new ArrayList<String>();
@@ -2364,7 +2373,16 @@ class CurlyBraceKeyListener implements KeyListener {
 						for(int i = 0; i < variablenames2.size(); i++) {
 							labels[i] = new JLabel(variablenames2.get(i));
 						}
+						/*for(int i = 0; i < labels.length; i++) {
+							System.out.println(labels[i].getText());
+						}
+						System.out.println("******");
+						*/
 						labels = variablesuggestionboxselected.Reordered(labels,search_textfield.getText());
+						/*for(int i = 0; i < labels.length; i++) {
+							System.out.println(labels[i].getText());
+						}
+						*/
 						for(int i = 0; i < labels.length; i++) {
 							panelgridlayout.add(labels[i]);
 						}
@@ -2947,24 +2965,38 @@ class AutoKeyListener implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent keyevent) {
 		if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-			suggestionbox.dispose();
 			String text = main.textarea.getText();	
 			String selected = search_textfield.getText().trim();
-			JLabel selected_label2 =labels[selected_index];
+			JLabel selected_label2 =null;
+			//JLabel selected_label2 =labels[selected_index];
+			Component[] components=panelgridlayout.getComponents();
+			for(int i = 0; i < components.length; i++) {
+				if(components[i] instanceof JLabel) {
+					JLabel jlabel=(JLabel)components[i];
+					if(jlabel.isOpaque()) {
+						selected_label2 = jlabel;
+						break;
+					}
+				}
+			}
 			if(selected_label2.getText().startsWith(selected)) {
 				CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
-				selected=selected_label2.getText().replaceFirst(variablename,"");
+				/*selected=selected_label2.getText().replaceFirst(variablename,"");
 				String firsthalf=text.substring(0,caretposition+1)+selected;
 				String second =text.substring(caretposition+1,text.length());
 				main.textarea.setText(firsthalf+second);
 				main.textarea.setCaretPosition(caretposition+1+selected.length());
+				*/
+				EnterText(selected_label2.getText());
 			}
 			else {
-				selected=selected.replaceFirst(variablename,"");
+				/*selected=selected.replaceFirst(variablename,"");
 				String firsthalf=text.substring(0,caretposition)+selected;
 				String second =text.substring(caretposition,text.length());
 				main.textarea.setText(firsthalf+second);
 				main.textarea.setCaretPosition(caretposition+selected.length());
+				*/
+				EnterText();
 			}
 		}
 		else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
@@ -3024,13 +3056,16 @@ class AutoKeyListener implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent ev) { }
 	
-	public void EnterText() {
-		String input=search_textfield.getText().trim();
+	public void EnterText(String input) {
 		String text = main.textarea.getText();
 		String first=text.substring(0,caretposition);
 		String second = text.substring(caretposition+1,text.length());
 		main.textarea.setText(first+input+second);
 		main.textarea.setCaretPosition(caretposition+input.length());
 		suggestionbox.dispose();
+	}
+	public void EnterText() {
+		String input=search_textfield.getText().trim();
+		EnterText(input);
 	}
 }
