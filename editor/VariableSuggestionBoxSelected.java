@@ -58,7 +58,30 @@ public class VariableSuggestionBoxSelected {
 			JOptionPane.showMessageDialog(null,textfieldinput);
 		}	
 		return labels;
+	}
+	public List<String> ReorderedStrings(List<String> labels,String textfieldinput) {
+		LiveIterator<String> liveiterator = new LiveIterator<String>(labels,true); // clone List
+		try {
+		if(linkedhashmap.get(textfieldinput) != null) {
+			loopy: for(String variablename:linkedhashmap.get(textfieldinput)) {
+				while(liveiterator.hasNext()) {
+					String label = (String)liveiterator.next();
+					if(label.equals(variablename)) {
+						liveiterator.remove(label);
+					}
+				}
+			}
+			for(String variablename:linkedhashmap.get(textfieldinput)) {
+				liveiterator.list.add(0,variablename);
+			}
+			return liveiterator.list;
+		}
+		} catch (NoSuchMethodError error) {
+			JOptionPane.showMessageDialog(null,textfieldinput);
+		}	
+		return labels;
 	}	
+	
 	/*
 	** This gets method or property last selected.
 	*/

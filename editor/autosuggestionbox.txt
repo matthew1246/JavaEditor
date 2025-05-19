@@ -60,7 +60,8 @@
     "variablenames"
   ],
   "v": [
-    "variablename"
+    "variablename",
+    "variablenames2"
   ],
   "va": [
     "variablenames",
@@ -236,5 +237,11 @@
   ],
   "varia": [
     "variablename"
+  ],
+  "input": [
+    "input"
+  ],
+  "variablenames": [
+    "variablenames2"
   ]
 }

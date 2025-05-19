@@ -2224,7 +2224,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	private boolean isTab = false;
 	private SelectedLines selectedlines;
 	public PositionTracker positiontracker;
-	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
+	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();		
 	public void keyPressed(KeyEvent ev) {
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
@@ -3052,6 +3052,8 @@ class AutoKeyListener {
 			}
 			if(variablenames2.size() > 0) {
 				gridlayout.setRows(1+variablenames2.size());
+				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input);
+				
 				for(int i = 0; i < variablenames2.size(); i++) {
 					JLabel label = new JLabel(variablenames2.get(i));
 					if(i == 0) {
