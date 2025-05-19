@@ -2859,8 +2859,8 @@ class AutoKeyListener {
 		//GridLayout gridlayout=new GridLayout(variablenames2.size()+1,1);
 		gridlayout=new GridLayout(1,1);
 		panelgridlayout.setLayout(gridlayout);
-		search_textfield=new JTextField();
-		//search_textfield.setText(variablename);
+		search_textfield=new JTextField();search_textfield=new JTextField();
+		search_textfield.setText(variablename.trim());
 		panelgridlayout.add(search_textfield);
 		JScrollPane scrollpane = new JScrollPane(panelgridlayout);
 		
