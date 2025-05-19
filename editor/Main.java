@@ -2363,8 +2363,6 @@ class CurlyBraceKeyListener implements KeyListener {
 							labels[i] = new JLabel(variablenames2.get(i));
 						}
 						labels = variablesuggestionboxselected.Reordered(labels,search_textfield.getText());
-						JOptionPane.showMessageDialog(null,labels[0].getText());
-						JOptionPane.showMessageDialog(null,(panelgridlayout==null)+"");
 						for(int i = 0; i < labels.length; i++) {
 							panelgridlayout.add(labels[i]);
 						}
