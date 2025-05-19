@@ -204,5 +204,36 @@
   ],
   "selected_label2": [
     "selected_label2"
+  ],
+  "data": [
+    "data"
+  ],
+  "List": [
+    "List",
+    "Listmodel"
+  ],
+  "in": [
+    "input"
+  ],
+  "variablenames2": [
+    "variablenames2"
+  ],
+  "pane": [
+    "panelgridlayout"
+  ],
+  "gri": [
+    "gridlayout"
+  ],
+  "jlabe": [
+    "jlabel"
+  ],
+  "Ov": [
+    "Override"
+  ],
+  "mat": [
+    "matcher"
+  ],
+  "varia": [
+    "variablename"
   ]
 }

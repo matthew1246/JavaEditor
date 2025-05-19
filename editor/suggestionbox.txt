@@ -84,6 +84,12 @@
   ],
   "JPanel": [
     "getComponentPopupMenu",
-    "getComponents"
+    "getComponents",
+    "add",
+    "remove"
+  ],
+  "GridLayout": [
+    "getRows",
+    "setRows"
   ]
 }

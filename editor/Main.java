@@ -2330,85 +2330,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
 		Matcher matcher=pattern.matcher(line);
 		if(matcher.find()) {
-			List<String> variablenames = new ArrayList<String>();
-			String text = textarea.getText();
-			String variablename=matcher.group(1);
-			Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
-			Matcher matcher2=pattern2.matcher(text.substring(0,caretposition));
-			while(matcher2.find()) {
-				variablenames.addFirst(matcher2.group(4));
-			}
-			Matcher matcher3=pattern2.matcher(text.substring(caretposition,text.length()));
-			while(matcher3.find()) {
-				variablenames.add(matcher3.group(4));
-			}
-			
-			// Add Java API classes
-			Pattern pattern6=Pattern.compile("^[A-Z]");
-			Matcher capitolpattern=pattern6.matcher(variablename);
-			if(capitolpattern.find()) {
-				for(String classname:Main.muck.links.hashmap.keySet()) {
-					variablenames.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
-				}
-			}
-			if(variablenames.size() > 0) {
-				try {
-					List<String> variablenames2 = new ArrayList<String>();
-					for(String variablename2:variablenames) {
-						if(variablename2.startsWith(variablename))
-							variablenames2.add(variablename2);
-					}
-					if(variablenames2.size() > 0) {
-						JFrame suggestionbox = new JFrame();			
-						suggestionbox.setTitle("Variable name suggestion box");
-						suggestionbox.setSize(100,500);
-						JPanel panelgridlayout = new JPanel();
-						
-						GridLayout gridlayout=new GridLayout(variablenames2.size()+1,1);
-						panelgridlayout.setLayout(gridlayout);
-						JTextField search_textfield=new JTextField();
-						search_textfield.setText(variablename);
-						panelgridlayout.add(search_textfield);
-						JLabel[] labels = new JLabel[variablenames2.size()];
-						for(int i = 0; i < variablenames2.size(); i++) {
-							labels[i] = new JLabel(variablenames2.get(i));
-						}
-						/*for(int i = 0; i < labels.length; i++) {
-							System.out.println(labels[i].getText());
-						}
-						System.out.println("******");
-						*/
-						labels = variablesuggestionboxselected.Reordered(labels,search_textfield.getText());
-						/*for(int i = 0; i < labels.length; i++) {
-							System.out.println(labels[i].getText());
-						}
-						*/
-						for(int i = 0; i < labels.length; i++) {
-							panelgridlayout.add(labels[i]);
-						}
-						JScrollPane scrollpane = new JScrollPane(panelgridlayout);
-						int red = 94;
-						int green = 167;
-						int blue = 236;
-						labels[0].setOpaque(true);
-						labels[0].setBackground(new Color(red,green,blue));
-						KeyListener keylistener = new AutoKeyListener(labels,panelgridlayout,main,suggestionbox,search_textfield,variablename,caretposition,gridlayout,variablenames);
-						
-						search_textfield.addKeyListener(keylistener);
-						//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
-						suggestionbox.add(scrollpane);
-						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
-						Point screencoordinates= new Point((int)rectanglecoords.getX(),(int)rectanglecoords.getY());
-						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
-						suggestionbox.setLocation(screencoordinates);
-						//suggestionbox.pack();
-						suggestionbox.setVisible(true);
-					}
-				} catch(BadLocationException ex) {
-					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null,ex.getMessage());
-				}
-			}
+			AutoKeyListener autokeylistener = new AutoKeyListener(main,line,caretposition);
 		}
 		if(ev.isControlDown()) {
 			isControlDown = true;
@@ -2561,7 +2483,10 @@ class CurlyBraceKeyListener implements KeyListener {
 			}
 		}
 	}
-	public static SuggestionBoxSelected suggestionboxselected = new SuggestionBoxSelected();		
+	public static SuggestionBoxSelected suggestionboxselected = new SuggestionBoxSelected();
+	public static int red = 94;
+	public static int green = 167;
+	public static int blue = 236;		
 	public void Popup(Class<?> classquestionmark,int caretposition) {
 		try {
 			JFrame suggestionbox = new JFrame();			
@@ -2632,11 +2557,9 @@ class CurlyBraceKeyListener implements KeyListener {
 				}
 			}
 			JScrollPane scrollpane = new JScrollPane(panelgridlayout);
-			int red = 94;
-			int green = 167;
-			int blue = 236;
+			
 			labels[0].setOpaque(true);
-			labels[0].setBackground(new Color(red,green,blue));
+			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
 				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels);
 				int selected_index = 0;
@@ -2884,177 +2807,276 @@ class CurlyBraceKeyListener implements KeyListener {
 		}*/
 	}	
 }
-class AutoKeyListener implements KeyListener {
-	LiveIterator<JLabel> liveiterator;
-	private JLabel[] labels;
+class AutoKeyListener {
 	private JPanel panelgridlayout;
 	private Main main;
 	private JFrame suggestionbox;
 	private JTextField search_textfield;
 	private String variablename;
-	private int caretposition;
 	private GridLayout gridlayout;
-	private List<String> variablenames;
-	public AutoKeyListener(JLabel[] labels,JPanel panelgridlayout,Main main,JFrame suggestionbox,JTextField search_textfield,String variablename,int caretposition,GridLayout gridlayout,List<String> variablenames) {
-		liveiterator = new LiveIterator<JLabel>(labels);
-		this.labels = labels;
-		this.panelgridlayout = panelgridlayout;
+	
+	public List<String> data = new ArrayList<String>();
+	public int caretposition;
+	public AutoKeyListener(Main main,String variablename,int caretposition) {
 		this.main = main;
-		this.suggestionbox = suggestionbox;
-		this.search_textfield = search_textfield;
 		this.variablename=variablename;
 		this.caretposition = caretposition;
-		this.gridlayout = gridlayout;
-		this.variablenames = variablenames;
+		
+		setLayout();
+		setListeners();
+		data=getData(variablename);
+		fillData();
+		
+		
+		/*
+					labels = variablesuggestionboxselected.Reordered(labels,search_textfield.getText());
+					
+					for(int i = 0; i < labels.length; i++) {
+						panelgridlayout.add(labels[i]);
+					}
+
+					int red = 94;
+					int green = 167;
+					int blue = 236;
+					labels[0].setOpaque(true);
+					labels[0].setBackground(new Color(red,green,blue));
+					//KeyListener keylistener = new AutoKeyListener(labels,panelgridlayout,main,suggestionbox,search_textfield,variablename,caretposition,gridlayout,variablenames);
+				}
+			} catch(BadLocationException ex) {
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null,ex.getMessage());
+			}
+		}
+		*/
+		
+	}
+	public void setLayout() {
+		suggestionbox = new JFrame();			
+		suggestionbox.setTitle("Variable name suggestion box");
+		suggestionbox.setSize(100,500);
+		panelgridlayout = new JPanel();
+		
+		//GridLayout gridlayout=new GridLayout(variablenames2.size()+1,1);
+		gridlayout=new GridLayout(1,1);
+		panelgridlayout.setLayout(gridlayout);
+		search_textfield=new JTextField();
+		//search_textfield.setText(variablename);
+		panelgridlayout.add(search_textfield);
+		JScrollPane scrollpane = new JScrollPane(panelgridlayout);
+		
+		//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
+		suggestionbox.add(scrollpane);
+		try {
+			Rectangle2D rectanglecoords=main.textarea.modelToView2D(caretposition);
+			Point screencoordinates= new Point((int)rectanglecoords.getX(),(int)rectanglecoords.getY());
+			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
+			suggestionbox.setLocation(screencoordinates);
+			//suggestionbox.pack();
+			suggestionbox.setVisible(true);
+		} catch(BadLocationException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void setListeners() {
 		suggestionbox.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				EnterText();
 			}
 		});
-	}
-	int selected_index = 0;
-	int red = 94;
-	int green = 167;
-	int blue = 236;
-	@Override
-	public void keyPressed(KeyEvent keyevent) {
-		if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-			labels[selected_index].setOpaque(false);
-			labels[selected_index].setBackground(new JLabel().getBackground());
-			panelgridlayout.validate();
-			panelgridlayout.repaint();
-			int live_index = liveiterator.indexOf(labels[selected_index]);						
-			if( live_index < (liveiterator.list.size()-1) ) {									
-				live_index++;
-				JLabel selected_label=liveiterator.list.get(live_index);
-				selected_label.setOpaque(true);
-				selected_label.setBackground(new Color(red,green,blue));
-				panelgridlayout.validate();
-				panelgridlayout.repaint();
-				label3:for(int i = 0; i < labels.length; i++) {
-					if(selected_label.equals(labels[i])) {
-						selected_index = i;
-						break label3;
-					}
-				}
-			}
-		}
-		else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-			labels[selected_index].setOpaque(false);
-			labels[selected_index].setBackground(new JLabel().getBackground());
-			panelgridlayout.validate();
-			panelgridlayout.repaint();
-			int live_index = liveiterator.indexOf(labels[selected_index]);
-			if(live_index > 0) {
-				live_index--;
-				JLabel selected_label=liveiterator.list.get(live_index);
-				selected_label.setOpaque(true);
-				selected_label.setBackground(new Color(red,green,blue));
-				panelgridlayout.validate();
-				panelgridlayout.repaint();
-				
-				label4:for(int i = 0; i < labels.length; i++) {
-					if(selected_label.equals(labels[i])) {
-						selected_index = i;
-						break label4;
-					}
-				}
-			}
-		}
-	}
-	@Override
-	public void keyReleased(KeyEvent keyevent) {
-		if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-			String text = main.textarea.getText();	
-			String selected = search_textfield.getText().trim();
-			JLabel selected_label2 =null;
-			//JLabel selected_label2 =labels[selected_index];
-			Component[] components=panelgridlayout.getComponents();
-			for(int i = 0; i < components.length; i++) {
-				if(components[i] instanceof JLabel) {
-					JLabel jlabel=(JLabel)components[i];
-					if(jlabel.isOpaque()) {
-						selected_label2 = jlabel;
-						break;
-					}
-				}
-			}
-			if(selected_label2.getText().startsWith(selected)) {
-				CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
-				/*selected=selected_label2.getText().replaceFirst(variablename,"");
-				String firsthalf=text.substring(0,caretposition+1)+selected;
-				String second =text.substring(caretposition+1,text.length());
-				main.textarea.setText(firsthalf+second);
-				main.textarea.setCaretPosition(caretposition+1+selected.length());
-				*/
-				EnterText(selected_label2.getText());
-			}
-			else {
-				/*selected=selected.replaceFirst(variablename,"");
-				String firsthalf=text.substring(0,caretposition)+selected;
-				String second =text.substring(caretposition,text.length());
-				main.textarea.setText(firsthalf+second);
-				main.textarea.setCaretPosition(caretposition+selected.length());
-				*/
-				EnterText();
-			}
-		}
-		else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-			liveiterator.reset();
-			while(liveiterator.hasNext()) {
-				JLabel label = liveiterator.next();
-				panelgridlayout.remove(label);
-			}
-			liveiterator = new LiveIterator<JLabel>(labels);	
-			String methodname=search_textfield.getText();	
-			for(JLabel label:labels) {
-				if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
-					liveiterator.remove(label);
-				}
-			}
-			
-			gridlayout.setRows(liveiterator.list.size()+1);
-			liveiterator.reset();
-			liveiterator.list=CurlyBraceKeyListener.variablesuggestionboxselected.Reordered(liveiterator.list,methodname);
-			while(liveiterator.hasNext()) {
-				JLabel label = liveiterator.next();
-				panelgridlayout.add(label);
-			}
-			panelgridlayout.validate();
-			panelgridlayout.repaint();
-			suggestionbox.pack();	
-			JLabel selected_label = labels[selected_index];
-			if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
-				selected_label.setOpaque(false);
-				selected_label.setBackground(new JLabel().getBackground());
-				if(liveiterator.list.size() != 0) {
-					JLabel label=liveiterator.list.get(0);
-					labelly2:for(int i = 0; i < labels.length; i++) {
-						if(label.equals(labels[i])) {
-							selected_index=i;
-							break labelly2;
+		search_textfield.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent keyevent) {
+				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
+					/*labels[selected_index].setOpaque(false);
+					labels[selected_index].setBackground(new JLabel().getBackground());
+					panelgridlayout.validate();
+					panelgridlayout.repaint();
+					int live_index = liveiterator.indexOf(labels[selected_index]);						
+					if( live_index < (liveiterator.list.size()-1) ) {									
+						live_index++;
+						JLabel selected_label=liveiterator.list.get(live_index);
+						selected_label.setOpaque(true);
+						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+						panelgridlayout.validate();
+						panelgridlayout.repaint();
+						label3:for(int i = 0; i < labels.length; i++) {
+							if(selected_label.equals(labels[i])) {
+								selected_index = i;
+								break label3;
+							}
 						}
 					}
-					label.setOpaque(true);
-					label.setBackground(new Color(red,green,blue));
+					*/
+				}
+				else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
+					/*labels[selected_index].setOpaque(false);
+					labels[selected_index].setBackground(new JLabel().getBackground());
+					panelgridlayout.validate();
+					panelgridlayout.repaint();
+					int live_index = liveiterator.indexOf(labels[selected_index]);
+					if(live_index > 0) {
+						live_index--;
+						JLabel selected_label=liveiterator.list.get(live_index);
+						selected_label.setOpaque(true);
+						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+						panelgridlayout.validate();
+						panelgridlayout.repaint();
+						
+						label4:for(int i = 0; i < labels.length; i++) {
+							if(selected_label.equals(labels[i])) {
+								selected_index = i;
+								break label4;
+							}
+						}
+					}
+					*/
 				}
 			}
-			boolean containsVariable = false;
-			for(int i = 0; i < variablenames.size(); i++) {
-				String variablename=variablenames.get(i);
-				if(variablename.startsWith(methodname)) {
-					containsVariable = true;
-					break;											
+			@Override
+			public void keyReleased(KeyEvent keyevent) {
+				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
+					String text = main.textarea.getText();	
+					String selected = search_textfield.getText().trim();
+					JLabel selected_label2 =null;
+					//JLabel selected_label2 =labels[selected_index];
+					
+					if(selected_label2.getText().startsWith(selected)) {
+						CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
+						/*selected=selected_label2.getText().replaceFirst(variablename,"");
+						String firsthalf=text.substring(0,caretposition+1)+selected;
+						String second =text.substring(caretposition+1,text.length());
+						main.textarea.setText(firsthalf+second);
+						main.textarea.setCaretPosition(caretposition+1+selected.length());
+						*/
+						EnterText(selected_label2.getText());
+					}
+					else {
+						/*selected=selected.replaceFirst(variablename,"");
+						String firsthalf=text.substring(0,caretposition)+selected;
+						String second =text.substring(caretposition,text.length());
+						main.textarea.setText(firsthalf+second);
+						main.textarea.setCaretPosition(caretposition+selected.length());
+						*/
+						EnterText();
+					}
+				}
+				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+					fillData();
+					/*liveiterator.reset();
+					while(liveiterator.hasNext()) {
+						JLabel label = liveiterator.next();
+						panelgridlayout.remove(label);
+					}
+					liveiterator = new LiveIterator<JLabel>(labels);	
+					String methodname=search_textfield.getText();	
+					for(JLabel label:labels) {
+						if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
+							liveiterator.remove(label);
+						}
+					}
+					
+					gridlayout.setRows(liveiterator.list.size()+1);
+					liveiterator.reset();
+					liveiterator.list=CurlyBraceKeyListener.variablesuggestionboxselected.Reordered(liveiterator.list,methodname);
+					while(liveiterator.hasNext()) {
+						JLabel label = liveiterator.next();
+						panelgridlayout.add(label);
+					}
+					
+					JLabel selected_label = labels[selected_index];
+					if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
+						selected_label.setOpaque(false);
+						selected_label.setBackground(new JLabel().getBackground());
+						if(liveiterator.list.size() != 0) {
+							JLabel label=liveiterator.list.get(0);
+							labelly2:for(int i = 0; i < labels.length; i++) {
+								if(label.equals(labels[i])) {
+									selected_index=i;
+									break labelly2;
+								}
+							}
+							
+						}
+					}
+					boolean containsVariable = false;
+					for(int i = 0; i < variablenames.size(); i++) {
+						String variablename=variablenames.get(i);
+						if(variablename.startsWith(methodname)) {
+							containsVariable = true;
+							break;											
+						}
+					}
+					if(!containsVariable) {
+						EnterText();
+					}
+					*/
 				}
 			}
-			if(!containsVariable) {
-				EnterText();
+			@Override public void keyTyped(KeyEvent ke) {
+			}
+		});
+	}
+	public List<String> getData(String variablename) {
+		List<String> variablenames = new ArrayList<String>();
+		String text = main.textarea.getText();
+		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
+		Matcher matcher2=pattern2.matcher(text.substring(0,caretposition));
+		while(matcher2.find()) {
+			variablenames.addFirst(matcher2.group(4));
+		}
+		Matcher matcher3=pattern2.matcher(text.substring(caretposition,text.length()));
+		while(matcher3.find()) {
+			variablenames.add(matcher3.group(4));
+		}
+		
+		// Add Java API classes
+		Pattern pattern6=Pattern.compile("^[A-Z]");
+		Matcher capitolpattern=pattern6.matcher(variablename);
+		if(capitolpattern.find()) {
+			for(String classname:Main.muck.links.hashmap.keySet()) {
+				variablenames.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
+			}
+		}
+		return variablenames;
+	}
+	public void fillData() {
+		String input=search_textfield.getText().trim();
+		if(data.size() > 0) {
+			List<String> variablenames2 = new ArrayList<String>();
+			for(String variablename2:data) {
+				if(variablename2.startsWith(input))
+					variablenames2.add(variablename2);
+			}
+			if(gridlayout.getRows() > 1) {
+				removeData();
+			}
+			if(variablenames2.size() > 0) {
+				gridlayout.setRows(1+variablenames2.size());
+				for(int i = 0; i < variablenames2.size(); i++) {
+					JLabel label = new JLabel(variablenames2.get(i));
+					if(i == 0) {
+						label.setOpaque(true);
+						label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					}
+					panelgridlayout.add(label);
+				}
+				panelgridlayout.validate();
+				panelgridlayout.repaint();
+				suggestionbox.pack();	
 			}
 		}
 	}
 
-	@Override
-	public void keyTyped(KeyEvent ev) { }
+	public void removeData() {
+		Component[] components=panelgridlayout.getComponents();
+		for(int i = 0; i < components.length; i++) {
+			if(components[i] instanceof JLabel) {
+				JLabel jlabel=(JLabel)components[i];
+				panelgridlayout.remove(jlabel);
+			}
+		}
+		gridlayout.setRows(1);
+	}
 	
 	public void EnterText(String input) {
 		String text = main.textarea.getText();
