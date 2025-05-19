@@ -22,10 +22,10 @@
   ],
   "List": [
     "remove",
-    "size",
-    "get",
     "set",
-    "add"
+    "add",
+    "size",
+    "get"
   ],
   "String": [
     "startsWith",
@@ -44,7 +44,9 @@
     "getKeyChar"
   ],
   "JLabel": [
-    "getText"
+    "getText",
+    "equals",
+    "hashCode"
   ],
   "VariableSuggestionBoxSelected": [
     "Reordered"

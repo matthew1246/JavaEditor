@@ -4,5 +4,38 @@
   ],
   "S": [
     "System"
+  ],
+  "Array": [
+    "Arraylist"
+  ],
+  "l": [
+    "labels"
+  ],
+  "la": [
+    "labels"
+  ],
+  "labels": [
+    "labels"
+  ],
+  "sele": [
+    "selected_label"
+  ],
+  "s": [
+    "selected_label"
+  ],
+  "sel": [
+    "selected_label"
+  ],
+  "ind": [
+    "index"
+  ],
+  "selected_l": [
+    "selected_label"
+  ],
+  "selected_": [
+    "selected_index"
+  ],
+  "selected": [
+    "selected_index"
   ]
 }

@@ -2887,49 +2887,34 @@ class AutoKeyListener {
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
 				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-					/*labels[selected_index].setOpaque(false);
-					labels[selected_index].setBackground(new JLabel().getBackground());
-					panelgridlayout.validate();
-					panelgridlayout.repaint();
-					int live_index = liveiterator.indexOf(labels[selected_index]);						
-					if( live_index < (liveiterator.list.size()-1) ) {									
-						live_index++;
-						JLabel selected_label=liveiterator.list.get(live_index);
-						selected_label.setOpaque(true);
-						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						label3:for(int i = 0; i < labels.length; i++) {
-							if(selected_label.equals(labels[i])) {
-								selected_index = i;
-								break label3;
-							}
+					List<JLabel> labels=getLabels();
+					JLabel selected_label=getSelected();
+					int selected_index = 0;
+					for(int i = 0; i < labels.size(); i++) {
+						if(selected_label.hashCode() == labels.get(i).hashCode()) {
+							selected_index = i;
+							break;
 						}
 					}
-					*/
+					selected_index++;
+					selected_label=labels.get(selected_index);
+					selected_label.setOpaque(true);
+					selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 				}
 				else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-					/*labels[selected_index].setOpaque(false);
-					labels[selected_index].setBackground(new JLabel().getBackground());
-					panelgridlayout.validate();
-					panelgridlayout.repaint();
-					int live_index = liveiterator.indexOf(labels[selected_index]);
-					if(live_index > 0) {
-						live_index--;
-						JLabel selected_label=liveiterator.list.get(live_index);
-						selected_label.setOpaque(true);
-						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						
-						label4:for(int i = 0; i < labels.length; i++) {
-							if(selected_label.equals(labels[i])) {
-								selected_index = i;
-								break label4;
-							}
+					List<JLabel> labels=getLabels();
+					JLabel selected_label=getSelected();
+					int selected_index = 0;
+					for(int i = 0; i < labels.size(); i++) {
+						if(selected_label.hashCode() == labels.get(i).hashCode()) {
+							selected_index = i;
+							break;
 						}
 					}
-					*/
+					selected_index--;
+					selected_label=labels.get(selected_index);
+					selected_label.setOpaque(true);
+					selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 				}
 			}
 			@Override
@@ -3105,5 +3090,14 @@ class AutoKeyListener {
 			}
 		}
 		return new JLabel("select label not found");
+	}
+	public List<JLabel> getLabels() {
+		List<JLabel> labels = new ArrayList<JLabel>();
+		for(Component component:panelgridlayout.getComponents()) {
+			if(component instanceof JLabel) {
+				labels.add((JLabel)component);
+			}
+		}
+		return labels;
 	}
 }
