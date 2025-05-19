@@ -2330,7 +2330,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
 		Matcher matcher=pattern.matcher(line);
 		if(matcher.find()) {
-			AutoKeyListener autokeylistener = new AutoKeyListener(main,line,caretposition);
+			AutoKeyListener autokeylistener = new AutoKeyListener(main,matcher.group(1),caretposition);
 		}
 		if(ev.isControlDown()) {
 			isControlDown = true;
@@ -2937,7 +2937,7 @@ class AutoKeyListener {
 				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 					String text = main.textarea.getText();	
 					String selected = search_textfield.getText().trim();
-					JLabel selected_label2 =null;
+					JLabel selected_label2 =getSelected();
 					//JLabel selected_label2 =labels[selected_index];
 					
 					if(selected_label2.getText().startsWith(selected)) {
@@ -3089,5 +3089,15 @@ class AutoKeyListener {
 	public void EnterText() {
 		String input=search_textfield.getText().trim();
 		EnterText(input);
+	}
+	public JLabel getSelected() {
+		for(Component component:panelgridlayout.getComponents()) {
+			if(component instanceof JLabel) {
+				if(component.isOpaque()) {
+					return (JLabel)component;
+				}
+			}
+		}
+		return new JLabel("select label not found");
 	}
 }

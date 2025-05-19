@@ -80,16 +80,20 @@
     "keySet"
   ],
   "Matcher": [
-    "find"
+    "find",
+    "group"
   ],
   "JPanel": [
     "getComponentPopupMenu",
-    "getComponents",
     "add",
-    "remove"
+    "remove",
+    "getComponents"
   ],
   "GridLayout": [
     "getRows",
     "setRows"
+  ],
+  "JComponent": [
+    "isOpaque"
   ]
 }

@@ -1,6 +1,7 @@
 {
   "t": [
-    "textarea"
+    "textarea",
+    "text"
   ],
   "null": [
     "null"
