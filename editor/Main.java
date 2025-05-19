@@ -3043,13 +3043,17 @@ class AutoKeyListener {
 		String input=search_textfield.getText().trim();
 		if(data.size() > 0) {
 			List<String> variablenames2 = new ArrayList<String>();
-			for(String variablename2:data) {
-				if(variablename2.startsWith(input))
-					variablenames2.add(variablename2);
+			if(!input.equals("")) {
+				for(String variablename2:data) {
+					if(variablename2.startsWith(input))
+						variablenames2.add(variablename2);
+				}
 			}
-			if(gridlayout.getRows() > 1) {
-				removeData();
+			else {
+				variablenames2=data;
 			}
+			removeData();
+			
 			if(variablenames2.size() > 0) {
 				gridlayout.setRows(1+variablenames2.size());
 				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input);

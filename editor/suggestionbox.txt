@@ -28,11 +28,11 @@
     "add"
   ],
   "String": [
-    "equals",
     "startsWith",
     "trim",
     "substring",
-    "length"
+    "length",
+    "equals"
   ],
   "JFrame": [
     "disable",
