@@ -2935,82 +2935,20 @@ class AutoKeyListener {
 					String text = main.textarea.getText();	
 					String selected = search_textfield.getText().trim();
 					JLabel selected_label2 =getSelected();
-					//JLabel selected_label2 =labels[selected_index];
-					
 					if(selected_label2.getText().startsWith(selected)) {
 						CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
-						/*selected=selected_label2.getText().replaceFirst(variablename,"");
-						String firsthalf=text.substring(0,caretposition+1)+selected;
-						String second =text.substring(caretposition+1,text.length());
-						main.textarea.setText(firsthalf+second);
-						main.textarea.setCaretPosition(caretposition+1+selected.length());
-						*/
 						EnterText(selected_label2.getText());
 					}
 					else {
-						/*selected=selected.replaceFirst(variablename,"");
-						String firsthalf=text.substring(0,caretposition)+selected;
-						String second =text.substring(caretposition,text.length());
-						main.textarea.setText(firsthalf+second);
-						main.textarea.setCaretPosition(caretposition+selected.length());
-						*/
 						EnterText();
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 					fillData();
-					/*liveiterator.reset();
-					while(liveiterator.hasNext()) {
-						JLabel label = liveiterator.next();
-						panelgridlayout.remove(label);
-					}
-					liveiterator = new LiveIterator<JLabel>(labels);	
-					String methodname=search_textfield.getText();	
-					for(JLabel label:labels) {
-						if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
-							liveiterator.remove(label);
-						}
-					}
-					
-					gridlayout.setRows(liveiterator.list.size()+1);
-					liveiterator.reset();
-					liveiterator.list=CurlyBraceKeyListener.variablesuggestionboxselected.Reordered(liveiterator.list,methodname);
-					while(liveiterator.hasNext()) {
-						JLabel label = liveiterator.next();
-						panelgridlayout.add(label);
-					}
-					
-					JLabel selected_label = labels[selected_index];
-					if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
-						selected_label.setOpaque(false);
-						selected_label.setBackground(new JLabel().getBackground());
-						if(liveiterator.list.size() != 0) {
-							JLabel label=liveiterator.list.get(0);
-							labelly2:for(int i = 0; i < labels.length; i++) {
-								if(label.equals(labels[i])) {
-									selected_index=i;
-									break labelly2;
-								}
-							}
-							
-						}
-					}
-					boolean containsVariable = false;
-					for(int i = 0; i < variablenames.size(); i++) {
-						String variablename=variablenames.get(i);
-						if(variablename.startsWith(methodname)) {
-							containsVariable = true;
-							break;											
-						}
-					}
-					if(!containsVariable) {
-						EnterText();
-					}
-					*/
 				}
 			}
-			@Override public void keyTyped(KeyEvent ke) {
-			}
+			@Override
+			public void keyTyped(KeyEvent ke) {}
 		});
 	}
 	public List<String> getData(String variablename) {
@@ -3052,9 +2990,8 @@ class AutoKeyListener {
 			removeData();
 			
 			if(variablenames2.size() > 0) {
-				gridlayout.setRows(1+variablenames2.size());
 				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input);
-				
+				gridlayout.setRows(1+variablenames2.size());
 				for(int i = 0; i < variablenames2.size(); i++) {
 					JLabel label = new JLabel(variablenames2.get(i));
 					if(i == 0) {
