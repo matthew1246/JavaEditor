@@ -3005,6 +3005,8 @@ class AutoKeyListener {
 		String text = main.textarea.getText();
 		String first=text.substring(0,caretposition);
 		String second = text.substring(caretposition+1,text.length());
+		input=input.replaceFirst(variablename,"");
+		input=text.substring(caretposition,caretposition+1)+input;
 		main.textarea.setText(first+input+second);
 		main.textarea.setCaretPosition(caretposition+input.length());
 		suggestionbox.dispose();

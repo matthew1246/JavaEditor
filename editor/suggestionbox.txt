@@ -30,9 +30,10 @@
   "String": [
     "startsWith",
     "trim",
-    "substring",
     "length",
-    "equals"
+    "equals",
+    "replaceFirst",
+    "substring"
   ],
   "JFrame": [
     "disable",

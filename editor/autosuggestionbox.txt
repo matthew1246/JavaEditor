@@ -75,5 +75,27 @@
   ],
   "main": [
     "main"
+  ],
+  "inp": [
+    "input"
+  ],
+  "var": [
+    "variablename"
+  ],
+  "te": [
+    "text",
+    "textarea"
+  ],
+  "i": [
+    "input"
+  ],
+  "ca": [
+    "caretposition"
+  ],
+  "textarea": [
+    "textarea"
+  ],
+  "textare": [
+    "textarea"
   ]
 }
