@@ -151,7 +151,7 @@ public class Main {
 			String lines = odc.getString();
 			open(getFileName(fileName));
 		}		
-		setListeners();			
+		setListeners();	
 	}
 	public String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
@@ -850,6 +850,7 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		setApiClasses();
 		generatejar.addActionListener((ev) -> {
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -2043,6 +2044,15 @@ public class Main {
 			}
 		}
 	}		
+	public List<String> apiclasses;
+	public void setApiClasses() {
+		if(apiclasses == null) {	
+			apiclasses=new ArrayList<String>();
+			for(String classname:Main.muck.links.hashmap.keySet()) {
+				apiclasses.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
+			}
+		}
+	}
 }
 class Expandable {
 	public Main main;
@@ -3022,21 +3032,12 @@ class AutoKeyListener {
 		}
 		return labels;
 	}
-	public static List<String> apiclasses;
-	{
-		if(apiclasses == null) {	
-			apiclasses=new ArrayList<String>();
-			for(String classname:Main.muck.links.hashmap.keySet()) {
-				AutoKeyListener.apiclasses.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
-			}
-		}
-	}
 	public List<String> getAPI(String variablename) {
 		// Add Java API classes
 		Pattern pattern6=Pattern.compile("^[A-Z]");
 		Matcher capitolpattern=pattern6.matcher(variablename);
 		if(capitolpattern.find()) {
-			return apiclasses;
+			return main.apiclasses;
 		}
 		else {
 			return new ArrayList<String>();

@@ -1,5 +1,7 @@
 {
   "t": [
+    "text",
+    "tab_keystroke",
     "textarea"
   ],
   "S": [
@@ -70,5 +72,8 @@
   ],
   "in": [
     "input"
+  ],
+  "main": [
+    "main"
   ]
 }
