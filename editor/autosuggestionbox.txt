@@ -42,5 +42,33 @@
   ],
   "se": [
     "selected_index"
+  ],
+  "String": [
+    "String"
+  ],
+  "api": [
+    "apiclasses"
+  ],
+  "null": [
+    "null"
+  ],
+  "inpu": [
+    "input"
+  ],
+  "ap": [
+    "apiclasses"
+  ],
+  "Arra": [
+    "Arraylist"
+  ],
+  "Strin": [
+    "String"
+  ],
+  "va": [
+    "variablenames2",
+    "variablename"
+  ],
+  "in": [
+    "input"
   ]
 }

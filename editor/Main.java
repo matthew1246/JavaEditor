@@ -2964,14 +2964,6 @@ class AutoKeyListener {
 			variablenames.add(matcher3.group(4));
 		}
 		
-		// Add Java API classes
-		Pattern pattern6=Pattern.compile("^[A-Z]");
-		Matcher capitolpattern=pattern6.matcher(variablename);
-		if(capitolpattern.find()) {
-			for(String classname:Main.muck.links.hashmap.keySet()) {
-				variablenames.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
-			}
-		}
 		return variablenames;
 	}
 	public void fillData() {
@@ -2983,12 +2975,16 @@ class AutoKeyListener {
 					if(variablename2.startsWith(input))
 						variablenames2.add(variablename2);
 				}
+				for(String apiclass:getAPI(input)) {
+					if(apiclass.startsWith(input))
+						variablenames2.add(apiclass);
+				}
 			}
 			else {
 				variablenames2=data;
 			}
-			removeData();
 			
+			removeData();
 			if(variablenames2.size() > 0) {
 				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input);
 				gridlayout.setRows(1+variablenames2.size());
@@ -3048,5 +3044,23 @@ class AutoKeyListener {
 			}
 		}
 		return labels;
+	}
+	public static List<String> apiclasses;
+	public List<String> getAPI(String variablename) {
+		if(apiclasses == null) {	
+			apiclasses=new ArrayList<String>();
+			for(String classname:Main.muck.links.hashmap.keySet()) {
+				AutoKeyListener.apiclasses.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
+			}
+		}
+		// Add Java API classes
+		Pattern pattern6=Pattern.compile("^[A-Z]");
+		Matcher capitolpattern=pattern6.matcher(variablename);
+		if(capitolpattern.find()) {
+			return apiclasses;
+		}
+		else {
+			return new ArrayList<String>();
+		}
 	}
 }
