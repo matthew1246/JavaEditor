@@ -2826,29 +2826,6 @@ class AutoKeyListener {
 		setListeners();
 		data=getData(variablename);
 		fillData();
-		
-		
-		/*
-					labels = variablesuggestionboxselected.Reordered(labels,search_textfield.getText());
-					
-					for(int i = 0; i < labels.length; i++) {
-						panelgridlayout.add(labels[i]);
-					}
-
-					int red = 94;
-					int green = 167;
-					int blue = 236;
-					labels[0].setOpaque(true);
-					labels[0].setBackground(new Color(red,green,blue));
-					//KeyListener keylistener = new AutoKeyListener(labels,panelgridlayout,main,suggestionbox,search_textfield,variablename,caretposition,gridlayout,variablenames);
-				}
-			} catch(BadLocationException ex) {
-				ex.printStackTrace();
-				JOptionPane.showMessageDialog(null,ex.getMessage());
-			}
-		}
-		*/
-		
 	}
 	public void setLayout() {
 		suggestionbox = new JFrame();			
@@ -3046,13 +3023,15 @@ class AutoKeyListener {
 		return labels;
 	}
 	public static List<String> apiclasses;
-	public List<String> getAPI(String variablename) {
+	{
 		if(apiclasses == null) {	
 			apiclasses=new ArrayList<String>();
 			for(String classname:Main.muck.links.hashmap.keySet()) {
 				AutoKeyListener.apiclasses.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
 			}
 		}
+	}
+	public List<String> getAPI(String variablename) {
 		// Add Java API classes
 		Pattern pattern6=Pattern.compile("^[A-Z]");
 		Matcher capitolpattern=pattern6.matcher(variablename);
