@@ -3,6 +3,7 @@
     "textarea"
   ],
   "S": [
+    "Sslsessionbindinglistener",
     "System"
   ],
   "Array": [
@@ -21,7 +22,8 @@
     "selected_label"
   ],
   "s": [
-    "selected_label"
+    "selected_label",
+    "selected_index"
   ],
   "sel": [
     "selected_label"
@@ -36,6 +38,9 @@
     "selected_index"
   ],
   "selected": [
+    "selected_index"
+  ],
+  "se": [
     "selected_index"
   ]
 }

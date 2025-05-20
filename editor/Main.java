@@ -2897,9 +2897,15 @@ class AutoKeyListener {
 						}
 					}
 					selected_index++;
-					selected_label=labels.get(selected_index);
-					selected_label.setOpaque(true);
-					selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					if(selected_index < labels.size()) {
+						// Turn off highlighted
+						selected_label.setOpaque(false);
+						selected_label.setBackground(new JLabel().getBackground());
+						selected_label=labels.get(selected_index);
+						// Make highlighted
+						selected_label.setOpaque(true);
+						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					}
 				}
 				else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
 					List<JLabel> labels=getLabels();
@@ -2912,9 +2918,15 @@ class AutoKeyListener {
 						}
 					}
 					selected_index--;
-					selected_label=labels.get(selected_index);
-					selected_label.setOpaque(true);
-					selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					if(selected_index > -1) {
+						// Turn off highlighted
+						selected_label.setOpaque(false);
+						selected_label.setBackground(new JLabel().getBackground());
+						selected_label=labels.get(selected_index);
+						// Make highlighted
+						selected_label.setOpaque(true);
+						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					}
 				}
 			}
 			@Override

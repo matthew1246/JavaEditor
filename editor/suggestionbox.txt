@@ -24,8 +24,8 @@
     "remove",
     "set",
     "add",
-    "size",
-    "get"
+    "get",
+    "size"
   ],
   "String": [
     "startsWith",
