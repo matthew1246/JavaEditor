@@ -2842,6 +2842,7 @@ class AutoKeyListener {
 		setLayout();
 		setListeners();
 		fillComboBox();
+		suggestionbox.setVisible(true);
 	}
 	public void setLayout() {
 		suggestionbox = new JFrame();			
@@ -2865,7 +2866,7 @@ class AutoKeyListener {
 			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
 			suggestionbox.setLocation(screencoordinates);
 			//suggestionbox.pack();
-			suggestionbox.setVisible(true);
+			//suggestionbox.setVisible(true);
 		} catch(BadLocationException ex) {
 			ex.printStackTrace();
 		}
