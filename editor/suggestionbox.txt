@@ -37,9 +37,9 @@
   ],
   "JFrame": [
     "disable",
-    "dispose",
     "addWindowListener",
-    "setVisible"
+    "setVisible",
+    "dispose"
   ],
   "KeyEvent": [
     "getKeyText",

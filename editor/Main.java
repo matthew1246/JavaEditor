@@ -2938,12 +2938,22 @@ class AutoKeyListener {
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-					fillComboBox();
+					fillData();
+					String input = getInput();
+					if(search(input).size() > 0) {
+						fillComboBox();
+					}
+					else {
+						EnterText();
+					}
 				}
 			}
 			@Override
 			public void keyTyped(KeyEvent ke) {}
 		});
+	}
+	public String getInput() {
+		return search_textfield.getText().trim();
 	}
 	public void fillData() {
 		fillData(search_textfield.getText().trim());
