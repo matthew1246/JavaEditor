@@ -31,9 +31,9 @@
     "startsWith",
     "trim",
     "length",
-    "equals",
     "replaceFirst",
-    "substring"
+    "substring",
+    "equals"
   ],
   "JFrame": [
     "disable",
@@ -102,5 +102,10 @@
   "TreeSet": [
     "iterator",
     "add"
+  ],
+  "AutoKeyListener": [
+    "search",
+    "fillData",
+    "run"
   ]
 }

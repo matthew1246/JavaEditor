@@ -2049,7 +2049,8 @@ public class Main {
 		if(apiclasses == null) {	
 			apiclasses=new ArrayList<String>();
 			for(String classname:Main.muck.links.hashmap.keySet()) {
-				apiclasses.add(classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length()));
+				classname = classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length());
+				apiclasses.add(classname);
 			}
 		}
 	}
@@ -2225,6 +2226,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		tracker = new Tracker(textarea);
 		renamevariable=new RenameVariable(textarea);
 		positiontracker= new PositionTracker(textarea);
+		autokeylistener = new AutoKeyListener(main);
 	}
 	public boolean isEndOfFile() {
 		return textarea.getCaretPosition() == textarea.getText().length();
@@ -2234,7 +2236,8 @@ class CurlyBraceKeyListener implements KeyListener {
 	private boolean isTab = false;
 	private SelectedLines selectedlines;
 	public PositionTracker positiontracker;
-	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();		
+	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
+	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev) {
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
@@ -2340,7 +2343,11 @@ class CurlyBraceKeyListener implements KeyListener {
 		Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
 		Matcher matcher=pattern.matcher(line);
 		if(matcher.find()) {
-			AutoKeyListener autokeylistener = new AutoKeyListener(main,matcher.group(1),caretposition);
+			String variablename = matcher.group(1);
+			autokeylistener.fillData(variablename);
+			if(autokeylistener.search(variablename).size() > 0) { // if Variable name exists
+				autokeylistener.run(variablename,caretposition);
+			}
 		}
 		if(ev.isControlDown()) {
 			isControlDown = true;
@@ -2818,24 +2825,23 @@ class CurlyBraceKeyListener implements KeyListener {
 	}	
 }
 class AutoKeyListener {
+	public List<String> data = new ArrayList<String>();
 	private JPanel panelgridlayout;
 	private Main main;
 	private JFrame suggestionbox;
 	private JTextField search_textfield;
-	private String variablename;
 	private GridLayout gridlayout;
-	
-	public List<String> data = new ArrayList<String>();
-	public int caretposition;
-	public AutoKeyListener(Main main,String variablename,int caretposition) {
+	public AutoKeyListener(Main main) {
 		this.main = main;
-		this.variablename=variablename;
+	}
+	private String variablename;
+	public int caretposition;
+	public void run(String variablename,int caretposition) {
+		this.variablename = variablename;
 		this.caretposition = caretposition;
-		
 		setLayout();
 		setListeners();
-		data=getData(variablename);
-		fillData();
+		fillComboBox();
 	}
 	public void setLayout() {
 		suggestionbox = new JFrame();			
@@ -2846,7 +2852,7 @@ class AutoKeyListener {
 		//GridLayout gridlayout=new GridLayout(variablenames2.size()+1,1);
 		gridlayout=new GridLayout(1,1);
 		panelgridlayout.setLayout(gridlayout);
-		search_textfield=new JTextField();search_textfield=new JTextField();
+		search_textfield=new JTextField();
 		search_textfield.setText(variablename.trim());
 		panelgridlayout.add(search_textfield);
 		JScrollPane scrollpane = new JScrollPane(panelgridlayout);
@@ -2931,14 +2937,17 @@ class AutoKeyListener {
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-					fillData();
+					fillComboBox();
 				}
 			}
 			@Override
 			public void keyTyped(KeyEvent ke) {}
 		});
 	}
-	public List<String> getData(String variablename) {
+	public void fillData() {
+		fillData(search_textfield.getText().trim());
+	}
+	public void fillData(String variablename) {
 		List<String> variablenames = new ArrayList<String>();
 		String text = main.textarea.getText();
 		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
@@ -2951,43 +2960,13 @@ class AutoKeyListener {
 			variablenames.add(matcher3.group(4));
 		}
 		
-		return variablenames;
+		data=variablenames;
 	}
-	public void fillData() {
+	public void fillComboBox() {
 		List<String> variablenames2;
 		String input=search_textfield.getText().trim();
 		if(data.size() > 0) {
-			TreeSet<String> treeset = new TreeSet<String>(new Comparator<String>() {
-				@Override
-				public int compare(String one,String two) {
-					if(one.length() < two.length()) {
-						return -1;
-					}
-					else if(one.length() > two.length()) {
-						return 1;
-					}
-					else { // if(one.length==two.length())
-						return 0;
-					}
-				}
-			});
-			if(!input.equals("")) {
-				for(String variablename2:data) {
-					if(variablename2.startsWith(input))
-						treeset.add(variablename2);
-				}
-				for(String apiclass:getAPI(input)) {
-					if(apiclass.startsWith(input))
-						treeset.add(apiclass);
-				}
-				variablenames2=new ArrayList<String>(treeset);
-			}
-			else {
-				for(String variablename2:data) {
-					treeset.add(variablename2);
-				}
-				variablenames2=new ArrayList<String>(treeset);
-			}
+			variablenames2=search(input);
 			
 			removeData();
 			if(variablenames2.size() > 0) {
@@ -3062,5 +3041,46 @@ class AutoKeyListener {
 		else {
 			return new ArrayList<String>();
 		}
+	}
+	public List<String> search(String input) {
+		List<String> variablenames2 = new ArrayList<String>();
+		TreeSet<String> treeset = new TreeSet<String>(new Comparator<String>() {
+			@Override
+			public int compare(String one,String two) {
+				if(one.length() < two.length()) {
+					return -1;
+				}
+				else if(one.length() > two.length()) {
+					return 1;
+				}
+				else { // if(one.length==two.length())
+					if(one.equals(two)) {
+						return 0;
+					}
+					return one.compareTo(two);
+				}
+			}
+		});
+		if(!input.equals("")) {
+			for(String variablename2:data) {
+				if(variablename2.startsWith(input))
+					treeset.add(variablename2);
+			}
+			//System.out.println("start");
+			for(String apiclass:getAPI(input)) {
+				//System.out.println(apiclass);
+				if(apiclass.startsWith(input))
+					treeset.add(apiclass);
+			}
+			//System.out.println("end");
+			variablenames2=new ArrayList<String>(treeset);
+		}
+		else {
+			for(String variablename2:data) {
+				treeset.add(variablename2);
+			}
+			variablenames2=new ArrayList<String>(treeset);
+		}
+		return variablenames2;
 	}
 }

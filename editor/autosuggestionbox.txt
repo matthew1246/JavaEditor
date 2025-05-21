@@ -6,7 +6,8 @@
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "System"
+    "System",
+    "String"
   ],
   "Array": [
     "Arraylist"
@@ -81,6 +82,7 @@
   ],
   "var": [
     "variablenames",
+    "variablenames2",
     "variablename"
   ],
   "te": [
@@ -124,6 +126,7 @@
     "treeset"
   ],
   "v": [
+    "variablename",
     "variablenames"
   ],
   "variab": [
@@ -139,6 +142,48 @@
     "treeset"
   ],
   "data": [
+    "data"
+  ],
+  "Sys": [
+    "System"
+  ],
+  "Sy": [
+    "System"
+  ],
+  "st": [
+    "string"
+  ],
+  "Jop": [
+    "Joptionpane"
+  ],
+  "nu": [
+    "null"
+  ],
+  "class": [
+    "classname"
+  ],
+  "Arr": [
+    "Arraylist"
+  ],
+  "L": [
+    "List"
+  ],
+  "vari": [
+    "variablename"
+  ],
+  "aut": [
+    "autokeylistener"
+  ],
+  "mat": [
+    "matcher"
+  ],
+  "au": [
+    "autokeylistener"
+  ],
+  "sea": [
+    "search_textfield"
+  ],
+  "d": [
     "data"
   ]
 }
