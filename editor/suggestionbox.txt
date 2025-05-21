@@ -98,5 +98,9 @@
   ],
   "JComponent": [
     "isOpaque"
+  ],
+  "TreeSet": [
+    "iterator",
+    "add"
   ]
 }

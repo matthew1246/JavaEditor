@@ -2954,21 +2954,39 @@ class AutoKeyListener {
 		return variablenames;
 	}
 	public void fillData() {
+		List<String> variablenames2;
 		String input=search_textfield.getText().trim();
 		if(data.size() > 0) {
-			List<String> variablenames2 = new ArrayList<String>();
+			TreeSet<String> treeset = new TreeSet<String>(new Comparator<String>() {
+				@Override
+				public int compare(String one,String two) {
+					if(one.length() < two.length()) {
+						return -1;
+					}
+					else if(one.length() > two.length()) {
+						return 1;
+					}
+					else { // if(one.length==two.length())
+						return 0;
+					}
+				}
+			});
 			if(!input.equals("")) {
 				for(String variablename2:data) {
 					if(variablename2.startsWith(input))
-						variablenames2.add(variablename2);
+						treeset.add(variablename2);
 				}
 				for(String apiclass:getAPI(input)) {
 					if(apiclass.startsWith(input))
-						variablenames2.add(apiclass);
+						treeset.add(apiclass);
 				}
+				variablenames2=new ArrayList<String>(treeset);
 			}
 			else {
-				variablenames2=data;
+				for(String variablename2:data) {
+					treeset.add(variablename2);
+				}
+				variablenames2=new ArrayList<String>(treeset);
 			}
 			
 			removeData();

@@ -80,6 +80,7 @@
     "input"
   ],
   "var": [
+    "variablenames",
     "variablename"
   ],
   "te": [
@@ -97,5 +98,47 @@
   ],
   "textare": [
     "textarea"
+  ],
+  "su": [
+    "suggestionbox"
+  ],
+  "List": [
+    "List"
+  ],
+  "lis": [
+    "list"
+  ],
+  "Tree": [
+    "Treeset"
+  ],
+  "Compa": [
+    "Comparator"
+  ],
+  "Str": [
+    "String"
+  ],
+  "tr": [
+    "treeset"
+  ],
+  "tree": [
+    "treeset"
+  ],
+  "v": [
+    "variablenames"
+  ],
+  "variab": [
+    "variablenames2"
+  ],
+  "variablenames2": [
+    "variablenames2"
+  ],
+  "Stri": [
+    "Stringbufferinputstream"
+  ],
+  "tre": [
+    "treeset"
+  ],
+  "data": [
+    "data"
   ]
 }
