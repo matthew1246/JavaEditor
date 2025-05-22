@@ -29,13 +29,13 @@
     "add"
   ],
   "String": [
-    "trim",
     "startsWith",
     "equals",
     "replaceFirst",
+    "trim",
     "substring",
-    "length",
-    "split"
+    "split",
+    "length"
   ],
   "JFrame": [
     "disable",

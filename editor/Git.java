@@ -95,8 +95,12 @@ public class Git {
 				DisplayOutput displayoutput = new DisplayOutput();
 				substring = displayoutput.Multiline(process);
 				substring=substring.split("\\r?\\n|\\r")[0];
-				/*substring=substring.replaceFirst("ref:","");
+				substring=substring.replaceFirst("ref:","");
+				substring=substring.trim();
 				substring=substring.substring(0,substring.length()-4);
+				String[] substrings=substring.split("/");
+				substring=substrings[substrings.length-1];
+				/*substring=substring.substring(0,substring.length()-4);
 				*/
 				JOptionPane.showMessageDialog(null,substring);
 				
