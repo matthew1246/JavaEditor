@@ -6,8 +6,8 @@
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "String",
-    "System"
+    "System",
+    "String"
   ],
   "Array": [
     "Arraylist"
@@ -137,7 +137,8 @@
     "variablenames2"
   ],
   "Stri": [
-    "Stringbufferinputstream"
+    "Stringbufferinputstream",
+    "String"
   ],
   "tre": [
     "treeset"
@@ -219,5 +220,44 @@
   ],
   "Syste": [
     "System"
+  ],
+  "Source": [
+    "Sourceversion"
+  ],
+  "Sou": [
+    "Source"
+  ],
+  "sou": [
+    "sourceversion"
+  ],
+  "compile": [
+    "compile"
+  ],
+  "pat": [
+    "pattern"
+  ],
+  "text": [
+    "textarea"
+  ],
+  "Mat": [
+    "Matcher"
+  ],
+  "matc": [
+    "matcher"
+  ],
+  "ke": [
+    "keywords"
+  ],
+  "a": [
+    "add"
+  ],
+  "keywor": [
+    "keywords"
+  ],
+  "key": [
+    "keywords"
+  ],
+  "mai": [
+    "main"
   ]
 }

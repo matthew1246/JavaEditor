@@ -81,6 +81,7 @@ import javax.swing.JDialog;
 import javax.swing.UIManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.lang.model.SourceVersion;
 public class Main {
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JMenuItem generatejar;
@@ -851,6 +852,7 @@ public class Main {
 	String deselected = "";
 	public void setListeners() {
 		setApiClasses();
+		setKeywords();
 		generatejar.addActionListener((ev) -> {
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -2054,6 +2056,20 @@ public class Main {
 			}
 		}
 	}
+	public List<String> keywords;
+	public void setKeywords() {
+		if(keywords ==null) {
+			keywords=new ArrayList<String>();
+			SourceVersion sourceversion=SourceVersion.latest();
+			Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)");
+			Matcher matcher=pattern.matcher(textarea.getText());
+			while(matcher.find()) {
+				if(sourceversion.isKeyword(matcher.group(1))) {
+					keywords.add(matcher.group(1));
+				}
+			}
+		}		
+	}
 }
 class Expandable {
 	public Main main;
@@ -3097,6 +3113,11 @@ class AutoKeyListener {
 				//System.out.println(apiclass);
 				if(apiclass.startsWith(input))
 					treeset.add(apiclass);
+			}
+			for(String keyword:main.keywords) {
+				if(keyword.startsWith(input)) {
+					treeset.add(keyword);
+				}
 			}
 			//System.out.println("end");
 			variablenames2=new ArrayList<String>(treeset);

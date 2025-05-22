@@ -12,7 +12,8 @@
   ],
   "Main": [
     "frame",
-    "textarea"
+    "textarea",
+    "keywords"
   ],
   "JDialog": [
     "show"
@@ -24,16 +25,16 @@
     "remove",
     "set",
     "get",
-    "add",
-    "size"
+    "size",
+    "add"
   ],
   "String": [
-    "startsWith",
     "trim",
     "replaceFirst",
     "equals",
     "substring",
-    "length"
+    "length",
+    "startsWith"
   ],
   "JFrame": [
     "disable",
@@ -69,9 +70,9 @@
     "getText"
   ],
   "JTextArea": [
-    "getText",
     "setText",
-    "setCaretPosition"
+    "setCaretPosition",
+    "getText"
   ],
   "Muck": [
     "links"
