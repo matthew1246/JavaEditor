@@ -2338,7 +2338,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		*/
 		int caretposition = textarea.getCaretPosition();
 		//JOptionPane.showMessageDialog(null,caretposition+"");
-
+		
 		Middle middle = new Middle(textarea);
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
@@ -2348,7 +2348,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		if(matcher.find()) {
 			String variablename = matcher.group(1);
 			if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-				autokeylistener.open(caretposition);
+				autokeylistener.open(variablename,caretposition);
 			}
 		}
 		if(ev.isControlDown()) {
@@ -2841,10 +2841,11 @@ class AutoKeyListener {
 	}
 	private String variablename;
 	public int caretposition;
-	public void open(int caretposition) {
-		run(caretposition);
+	public void open(String variablename,int caretposition) {
+		run(variablename,caretposition);
 	}
-	public void run(int caretposition) {
+	public void run(String variablename,int caretposition) {
+		this.variablename = variablename;
 		this.caretposition = caretposition;
 		setLayout();
 		setListeners();
@@ -2962,9 +2963,6 @@ class AutoKeyListener {
 		return search_textfield.getText().trim();
 	}
 	public void fillData() {
-		fillData(search_textfield.getText().trim());
-	}
-	public void fillData(String variablename) {
 		List<String> variablenames = new ArrayList<String>();
 		String text = main.textarea.getText();
 		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
@@ -3024,8 +3022,8 @@ class AutoKeyListener {
 		//JOptionPane.showMessageDialog(null,caretposition+"");
 
 		String first=text.substring(0,caretposition);
-		variablename=variablename.substring(variablename.length()-1,variablename.length());
-		first=first.substring(0,first.length()-variablename.length());
+		//variablename=variablename.substring(variablename.length()-1,variablename.length());
+		first=first.substring(0,first.length()-variablename.length()+1);
 		String second = text.substring(caretposition+1,text.length());
 		/*System.out.println("Start");
 		System.out.println(second);
@@ -3070,8 +3068,7 @@ class AutoKeyListener {
 		}
 	}
 	public boolean search(String input) {
-		variablename=input;
-		fillData(input);
+		fillData();
 		List<String> variablenames2 = new ArrayList<String>();
 		TreeSet<String> treeset = new TreeSet<String>(new Comparator<String>() {
 			@Override
