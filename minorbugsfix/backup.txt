@@ -1,16 +1,16 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java": {
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "Main",
     "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "caretposition": 105290
+    "caretposition": 105380
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -333,5 +333,13 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
     ],
     "caretposition": 4321
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 3136
   }
 }

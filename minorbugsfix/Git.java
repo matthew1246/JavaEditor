@@ -89,11 +89,7 @@ public class Git {
 		switch2_branch.addActionListener( (ev) -> {
 			String mainbranch = getMainBranch();
 			String whichbranch = whichBranchOpened();
-			JOptionPane.showMessageDialog(null,mainbranch.length()+" "+whichbranch.length());
 			if(!(whichbranch.equals(mainbranch))) {
-				JOptionPane.showMessageDialog(null,"*"+whichbranch+"*");
-				JOptionPane.showMessageDialog(null,"*"+mainbranch+"*");
-				
 				//substring = "master";
 				git("git switch "+mainbranch,root_directory);
 				frame.setTitle(mainbranch);
