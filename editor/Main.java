@@ -3030,7 +3030,7 @@ class AutoKeyListener {
 		System.out.println("End");
 		*/
 		main.textarea.setText(first+input+second);
-		main.textarea.setCaretPosition(caretposition+input.length());
+		main.textarea.setCaretPosition(first.length()+input.length());
 		suggestionbox.dispose();
 		}
 		catch(IllegalArgumentException ex) {
