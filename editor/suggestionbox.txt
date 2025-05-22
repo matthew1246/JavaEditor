@@ -32,10 +32,12 @@
     "startsWith",
     "equals",
     "replaceFirst",
-    "trim",
     "substring",
     "split",
-    "length"
+    "replace",
+    "replaceAll",
+    "length",
+    "trim"
   ],
   "JFrame": [
     "disable",

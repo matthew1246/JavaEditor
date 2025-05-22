@@ -26,8 +26,7 @@
   ],
   "s": [
     "selected_label",
-    "selected_index",
-    "substring"
+    "selected_index"
   ],
   "sel": [
     "selected_label"
@@ -358,7 +357,10 @@
   "sub": [
     "substring"
   ],
-  "substr": [
-    "substring"
+  "ma": [
+    "mainbranch"
+  ],
+  "wh": [
+    "whichbranch"
   ]
 }

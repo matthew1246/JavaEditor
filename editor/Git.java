@@ -20,7 +20,7 @@ public class Git {
 			DisplayOutput displayoutput = new DisplayOutput();
 			root_directory = displayoutput.OneLine(process);
 		      	//JOptionPane.showMessageDialog(null,root_directory);
-		      	frame.setTitle(whichBranchOpened());		      	
+		      	frame.setTitle(whichBranchOpened());		      			      	
 	      	}
       	}
       	public JButton addtoall;
@@ -28,7 +28,7 @@ public class Git {
 	public JTextField input = new JTextField();
 	public JButton run;
 	public JButton clear;
-	public JButton switch2_branch;
+	public JButton switch2_branch;	
 	public JButton reset;
 	public void setLayout() {
 		frame.setSize(500,100);
@@ -88,7 +88,12 @@ public class Git {
 		});
 		switch2_branch.addActionListener( (ev) -> {
 			String mainbranch = getMainBranch();
-			if(!whichBranchOpened().equals(mainbranch)) {
+			String whichbranch = whichBranchOpened();
+			JOptionPane.showMessageDialog(null,mainbranch.length()+" "+whichbranch.length());
+			if(!(whichbranch.equals(mainbranch))) {
+				JOptionPane.showMessageDialog(null,"*"+whichbranch+"*");
+				JOptionPane.showMessageDialog(null,"*"+mainbranch+"*");
+				
 				//substring = "master";
 				git("git switch "+mainbranch,root_directory);
 				frame.setTitle(mainbranch);
@@ -111,7 +116,7 @@ public class Git {
 		substring=substring.substring(0,substring.length()-4);
 		String[] substrings=substring.split("/");
 		substring=substrings[substrings.length-1];
-		
+		substring=substring.trim();
 		return substring;
 	}
 	public void git(String command) {
@@ -146,7 +151,7 @@ public void gitwithoutthread(String command) {
 		}
 	}
 	public String whichBranchOpened() {
-		try {
+		/*try {
 			File file = new File(root_directory+"\\.git/HEAD");
 			BufferedReader input = new BufferedReader(new FileReader(file));
 			String line=input.readLine();
@@ -160,6 +165,13 @@ public void gitwithoutthread(String command) {
 		} catch(IOException ex) {
 			ex.printStackTrace();
 			return "IOException";
-		}
+		}*/
+		CommandLine commandline = new CommandLine();
+		Process process=commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		String substring = displayoutput.OneLine(process);
+		substring=substring.replaceAll("\\r?\\n|\\r","");
+		substring=substring.trim();
+		return substring;
 	}
 }
