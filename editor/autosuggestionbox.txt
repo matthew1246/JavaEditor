@@ -103,7 +103,8 @@
     "textarea"
   ],
   "su": [
-    "suggestionbox"
+    "suggestionbox",
+    "substring"
   ],
   "List": [
     "List"
@@ -349,5 +350,11 @@
   ],
   "ret": [
     "return"
+  ],
+  "r": [
+    "root_directory"
+  ],
+  "sub": [
+    "substring"
   ]
 }

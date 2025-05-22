@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Git.java",
     "jars": [],
     "caretposition": 0
   },
@@ -325,5 +325,13 @@
     "starterclass": "",
     "jars": [],
     "caretposition": 103978
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Git.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\editor\\Muck.jar"
+    ],
+    "caretposition": 3413
   }
 }

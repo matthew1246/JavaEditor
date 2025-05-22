@@ -30,11 +30,12 @@
   ],
   "String": [
     "trim",
+    "startsWith",
+    "equals",
     "replaceFirst",
     "substring",
     "length",
-    "startsWith",
-    "equals"
+    "split"
   ],
   "JFrame": [
     "disable",
@@ -112,5 +113,8 @@
   ],
   "IOException": [
     "printStackTrace"
+  ],
+  "DisplayOutput": [
+    "Multiline"
   ]
 }

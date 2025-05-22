@@ -20,7 +20,7 @@ public class Git {
 			DisplayOutput displayoutput = new DisplayOutput();
 			root_directory = displayoutput.OneLine(process);
 		      	//JOptionPane.showMessageDialog(null,root_directory);
-		      	frame.setTitle(whichBranchOpened());
+		      	frame.setTitle(whichBranchOpened());		      	
 	      	}
       	}
       	public JButton addtoall;
@@ -89,11 +89,21 @@ public class Git {
 		switch2_branch.addActionListener( (ev) -> {
 			String substring=directory.replace(root_directory.replace("/","\\"),"");
 			substring=substring.replace("\\","");
-			if(frame.getTitle().equals(substring)) {
-				substring = "master";
-			}
+
+				CommandLine commandline = new CommandLine();
+				Process process=commandline.run("git ls-remote --symref origin HEAD",root_directory);
+				DisplayOutput displayoutput = new DisplayOutput();
+				substring = displayoutput.Multiline(process);
+				substring=substring.split("\\r?\\n|\\r")[0];
+				/*substring=substring.replaceFirst("ref:","");
+				substring=substring.substring(0,substring.length()-4);
+				*/
+				JOptionPane.showMessageDialog(null,substring);
+				
+				//substring = "master";
 			git("git switch "+substring,root_directory);
 			frame.setTitle(substring);
+			
 		});
 	}
 	public void git(String command) {
