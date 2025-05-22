@@ -24,8 +24,8 @@
     "remove",
     "set",
     "get",
-    "size",
-    "add"
+    "add",
+    "size"
   ],
   "String": [
     "startsWith",
@@ -105,8 +105,8 @@
     "add"
   ],
   "AutoKeyListener": [
-    "search",
     "fillData",
-    "run"
+    "run",
+    "search"
   ]
 }

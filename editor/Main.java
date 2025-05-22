@@ -2344,9 +2344,8 @@ class CurlyBraceKeyListener implements KeyListener {
 		Matcher matcher=pattern.matcher(line);
 		if(matcher.find()) {
 			String variablename = matcher.group(1);
-			autokeylistener.fillData(variablename);
-			if(autokeylistener.search(variablename).size() > 0) { // if Variable name exists
-				autokeylistener.run(variablename,caretposition);
+			if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
+				autokeylistener.run(caretposition);
 			}
 		}
 		if(ev.isControlDown()) {
@@ -2824,6 +2823,9 @@ class CurlyBraceKeyListener implements KeyListener {
 		}*/
 	}	
 }
+/*
+** This is a Variable Automatic Suggestion Box.
+*/
 class AutoKeyListener {
 	public List<String> data = new ArrayList<String>();
 	private JPanel panelgridlayout;
@@ -2836,8 +2838,7 @@ class AutoKeyListener {
 	}
 	private String variablename;
 	public int caretposition;
-	public void run(String variablename,int caretposition) {
-		this.variablename = variablename;
+	public void run(int caretposition) {
 		this.caretposition = caretposition;
 		setLayout();
 		setListeners();
@@ -2938,9 +2939,8 @@ class AutoKeyListener {
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-					fillData();
 					String input = getInput();
-					if(search(input).size() > 0) {
+					if(search(input)) {
 						fillComboBox();
 					}
 					else {
@@ -2977,7 +2977,7 @@ class AutoKeyListener {
 		List<String> variablenames2;
 		String input=search_textfield.getText().trim();
 		if(data.size() > 0) {
-			variablenames2=search(input);
+			variablenames2=data;
 			
 			removeData();
 			if(variablenames2.size() > 0) {
@@ -3053,7 +3053,9 @@ class AutoKeyListener {
 			return new ArrayList<String>();
 		}
 	}
-	public List<String> search(String input) {
+	public boolean search(String input) {
+		variablename=input;
+		fillData(input);
 		List<String> variablenames2 = new ArrayList<String>();
 		TreeSet<String> treeset = new TreeSet<String>(new Comparator<String>() {
 			@Override
@@ -3092,6 +3094,7 @@ class AutoKeyListener {
 			}
 			variablenames2=new ArrayList<String>(treeset);
 		}
-		return variablenames2;
+		data = variablenames2;
+		return variablenames2.size() > 0;
 	}
 }

@@ -68,8 +68,8 @@
     "String"
   ],
   "va": [
-    "variablenames2",
-    "variablename"
+    "variablename",
+    "variablenames2"
   ],
   "in": [
     "input"
@@ -191,5 +191,14 @@
   ],
   "sear": [
     "search_textfield"
+  ],
+  "auto": [
+    "autokeylistener"
+  ],
+  "input": [
+    "input"
+  ],
+  "da": [
+    "data"
   ]
 }
