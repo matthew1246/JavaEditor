@@ -31,10 +31,10 @@
   "String": [
     "trim",
     "replaceFirst",
-    "equals",
     "substring",
     "length",
-    "startsWith"
+    "startsWith",
+    "equals"
   ],
   "JFrame": [
     "disable",

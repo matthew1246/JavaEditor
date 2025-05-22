@@ -2059,7 +2059,7 @@ public class Main {
 	public List<String> keywords;
 	public void setKeywords() {
 		if(keywords ==null) {
-			keywords=new ArrayList<String>();
+			/*keywords=new ArrayList<String>();
 			SourceVersion sourceversion=SourceVersion.latest();
 			Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)");
 			Matcher matcher=pattern.matcher(textarea.getText());
@@ -2068,7 +2068,16 @@ public class Main {
 					keywords.add(matcher.group(1));
 				}
 			}
-		}		
+			*/
+			keywords=new ArrayList<>(Arrays.asList("enum","_","public","protected","private","abstract","static",
+			"final","transient","volatile","synchronized","native","class",
+			"interface","extends","package","throws","implements",
+			"boolean","byte","char","short","int","long","float","double",
+			"void","if","else","try","catch","finally","do","while","for","continue",
+			"switch","case","default","break","throw","return",
+			"this","instanceof","goto","const",
+			"null","super","new","import","true","false"));
+		}
 	}
 }
 class Expandable {
@@ -3079,11 +3088,15 @@ class AutoKeyListener {
 		if(capitolpattern.find()) {
 			return main.apiclasses;
 		}
+		else if(variablename.equals("")) {
+			return main.apiclasses;
+		}
 		else {
 			return new ArrayList<String>();
 		}
 	}
 	public boolean search(String input) {
+		
 		fillData();
 		List<String> variablenames2 = new ArrayList<String>();
 		TreeSet<String> treeset = new TreeSet<String>(new Comparator<String>() {
@@ -3122,9 +3135,15 @@ class AutoKeyListener {
 			//System.out.println("end");
 			variablenames2=new ArrayList<String>(treeset);
 		}
-		else {
+		else { // if(input.equals(""))
 			for(String variablename2:data) {
 				treeset.add(variablename2);
+			}
+			for(String apiclass:getAPI(input)) {
+				treeset.add(apiclass);
+			}
+			for(String keyword:main.keywords) {
+				treeset.add(keyword);
 			}
 			variablenames2=new ArrayList<String>(treeset);
 		}

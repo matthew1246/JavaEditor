@@ -121,7 +121,8 @@
     "String"
   ],
   "tr": [
-    "treeset"
+    "treeset",
+    "true"
   ],
   "tree": [
     "treeset"
@@ -259,5 +260,94 @@
   ],
   "mai": [
     "main"
+  ],
+  "k": [
+    "keywords"
+  ],
+  "pub": [
+    "public"
+  ],
+  "pr": [
+    "private",
+    "protected"
+  ],
+  "sta": [
+    "static"
+  ],
+  "final": [
+    "final"
+  ],
+  "clas": [
+    "class"
+  ],
+  "imp": [
+    "implements",
+    "import"
+  ],
+  "boo": [
+    "boolean"
+  ],
+  "if": [
+    "if"
+  ],
+  "cat": [
+    "catch"
+  ],
+  "w": [
+    "while"
+  ],
+  "sw": [
+    "switch"
+  ],
+  "def": [
+    "default"
+  ],
+  "br": [
+    "break"
+  ],
+  "retu": [
+    "return"
+  ],
+  "th": [
+    "this"
+  ],
+  "new": [
+    "new"
+  ],
+  "import": [
+    "import"
+  ],
+  "ins": [
+    "instanceof"
+  ],
+  "ad": [
+    "add"
+  ],
+  "im": [
+    "import"
+  ],
+  "public": [
+    "public"
+  ],
+  "pri": [
+    "private"
+  ],
+  "stat": [
+    "static"
+  ],
+  "fin": [
+    "final"
+  ],
+  "cl": [
+    "class"
+  ],
+  "fa": [
+    "false"
+  ],
+  "el": [
+    "else"
+  ],
+  "ret": [
+    "return"
   ]
 }
