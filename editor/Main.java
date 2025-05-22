@@ -2337,9 +2337,12 @@ class CurlyBraceKeyListener implements KeyListener {
 		** suggestionbox.
 		*/
 		int caretposition = textarea.getCaretPosition();
+		//JOptionPane.showMessageDialog(null,caretposition+"");
+
 		Middle middle = new Middle(textarea);
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
+		
 		Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
 		Matcher matcher=pattern.matcher(line);
 		if(matcher.find()) {
@@ -3011,20 +3014,30 @@ class AutoKeyListener {
 		}
 		gridlayout.setRows(1);
 	}
-	
-	public void EnterText(String input) {
-		String text = main.textarea.getText();
-		String first=text.substring(0,caretposition);
-		String second = text.substring(caretposition+1,text.length());
-		input=input.replaceFirst(variablename,"");
-		input=text.substring(caretposition,caretposition+1)+input;
-		main.textarea.setText(first+input+second);
-		main.textarea.setCaretPosition(caretposition+input.length());
-		suggestionbox.dispose();
-	}
 	public void EnterText() {
 		String input=search_textfield.getText().trim();
 		EnterText(input);
+	}
+	public void EnterText(String input) {
+		try {
+		String text = main.textarea.getText();
+		//JOptionPane.showMessageDialog(null,caretposition+"");
+
+		String first=text.substring(0,caretposition);
+		variablename=variablename.substring(variablename.length()-1,variablename.length());
+		first=first.substring(0,first.length()-variablename.length());
+		String second = text.substring(caretposition+1,text.length());
+		/*System.out.println("Start");
+		System.out.println(second);
+		System.out.println("End");
+		*/
+		main.textarea.setText(first+input+second);
+		main.textarea.setCaretPosition(caretposition+input.length());
+		suggestionbox.dispose();
+		}
+		catch(IllegalArgumentException ex) {
+			ex.printStackTrace();
+		}
 	}
 	public JLabel getSelected() {
 		for(Component component:panelgridlayout.getComponents()) {

@@ -6,8 +6,8 @@
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "System",
-    "String"
+    "String",
+    "System"
   ],
   "Array": [
     "Arraylist"
@@ -44,7 +44,8 @@
     "selected_index"
   ],
   "se": [
-    "selected_index"
+    "selected_index",
+    "second"
   ],
   "String": [
     "String"
@@ -68,8 +69,8 @@
     "String"
   ],
   "va": [
-    "variablename",
-    "variablenames2"
+    "variablenames2",
+    "variablename"
   ],
   "in": [
     "input"
@@ -126,8 +127,8 @@
     "treeset"
   ],
   "v": [
-    "variablename",
-    "variablenames"
+    "variablenames",
+    "variablename"
   ],
   "variab": [
     "variablenames2"
@@ -203,5 +204,14 @@
   ],
   "run": [
     "run"
+  ],
+  "fir": [
+    "first"
+  ],
+  "firs": [
+    "first"
+  ],
+  "nul": [
+    "null"
   ]
 }
