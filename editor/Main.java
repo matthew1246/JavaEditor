@@ -2345,7 +2345,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		if(matcher.find()) {
 			String variablename = matcher.group(1);
 			if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-				autokeylistener.run(caretposition);
+				autokeylistener.open(caretposition);
 			}
 		}
 		if(ev.isControlDown()) {
@@ -2838,6 +2838,9 @@ class AutoKeyListener {
 	}
 	private String variablename;
 	public int caretposition;
+	public void open(int caretposition) {
+		run(caretposition);
+	}
 	public void run(int caretposition) {
 		this.caretposition = caretposition;
 		setLayout();
