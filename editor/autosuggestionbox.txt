@@ -26,7 +26,8 @@
   ],
   "s": [
     "selected_label",
-    "selected_index"
+    "selected_index",
+    "substring"
   ],
   "sel": [
     "selected_label"
@@ -355,6 +356,9 @@
     "root_directory"
   ],
   "sub": [
+    "substring"
+  ],
+  "substr": [
     "substring"
   ]
 }

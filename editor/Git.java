@@ -87,28 +87,32 @@ public class Git {
 			git(input.getText(),root_directory);
 		});
 		switch2_branch.addActionListener( (ev) -> {
-			String substring=directory.replace(root_directory.replace("/","\\"),"");
-			substring=substring.replace("\\","");
-
-				CommandLine commandline = new CommandLine();
-				Process process=commandline.run("git ls-remote --symref origin HEAD",root_directory);
-				DisplayOutput displayoutput = new DisplayOutput();
-				substring = displayoutput.Multiline(process);
-				substring=substring.split("\\r?\\n|\\r")[0];
-				substring=substring.replaceFirst("ref:","");
-				substring=substring.trim();
-				substring=substring.substring(0,substring.length()-4);
-				String[] substrings=substring.split("/");
-				substring=substrings[substrings.length-1];
-				/*substring=substring.substring(0,substring.length()-4);
-				*/
-				JOptionPane.showMessageDialog(null,substring);
-				
+			String mainbranch = getMainBranch();
+			if(!whichBranchOpened().equals(mainbranch)) {
 				//substring = "master";
-			git("git switch "+substring,root_directory);
-			frame.setTitle(substring);
-			
+				git("git switch "+mainbranch,root_directory);
+				frame.setTitle(mainbranch);
+			}
+			else {
+				String substring=directory.replace(root_directory.replace("/","\\"),"");
+				substring=substring.replace("\\","");
+				git("git switch "+substring,root_directory);
+			}
 		});
+	}
+	public String getMainBranch() {
+		CommandLine commandline = new CommandLine();
+		Process process=commandline.run("git ls-remote --symref origin HEAD",root_directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		String substring = displayoutput.Multiline(process);
+		substring=substring.split("\\r?\\n|\\r")[0];
+		substring=substring.replaceFirst("ref:","");
+		substring=substring.trim();
+		substring=substring.substring(0,substring.length()-4);
+		String[] substrings=substring.split("/");
+		substring=substrings[substrings.length-1];
+		
+		return substring;
 	}
 	public void git(String command) {
 		git(command,root_directory);
@@ -158,4 +162,4 @@ public void gitwithoutthread(String command) {
 			return "IOException";
 		}
 	}
-}
+}
