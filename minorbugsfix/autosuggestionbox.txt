@@ -73,7 +73,8 @@
     "variablename"
   ],
   "in": [
-    "input"
+    "input",
+    "int"
   ],
   "main": [
     "main"
@@ -91,7 +92,8 @@
     "textarea"
   ],
   "i": [
-    "input"
+    "input",
+    "int"
   ],
   "ca": [
     "caretposition"
@@ -362,5 +364,18 @@
   ],
   "wh": [
     "whichbranch"
+  ],
+  "f": [
+    "for"
+  ],
+  "": [
+    "System",
+    "String"
+  ],
+  "Syst": [
+    "System"
+  ],
+  "St": [
+    "String"
   ]
 }

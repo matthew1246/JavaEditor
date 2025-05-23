@@ -89,17 +89,20 @@ public class VariableSuggestionBoxSelected {
 		return linkedhashmap.get(textfieldinput);
 	}
 	public void Save(String textfieldinput,String variablename) {
-		ArrayList<String> list=linkedhashmap.get(textfieldinput);
-		if(list == null) {
-			list = new ArrayList<String>();
-		}
-		else {
-			if(list.contains(variablename)) {
-				list.remove(variablename);
+		for(int i = 0; i < variablename.length(); i++) {
+			String substring=variablename.substring(0,i);
+			ArrayList<String> list=linkedhashmap.get(substring);
+			if(list == null) {
+				list = new ArrayList<String>();
 			}
+			else {
+				if(list.contains(variablename)) {
+					list.remove(variablename);
+				}
+			}
+			list.add(variablename);		
+			linkedhashmap.put(substring,list);
 		}
-		list.add(variablename);		
-		linkedhashmap.put(textfieldinput,list);
 		setBackup();
 	}
 	public void setBackup() {

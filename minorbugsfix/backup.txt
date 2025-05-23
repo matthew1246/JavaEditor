@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\VariableSuggestionBoxSelected.java",
     "jars": [],
     "caretposition": 0
   },
@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "caretposition": 105380
+    "caretposition": 80195
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -341,5 +341,21 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "caretposition": 3136
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 4066
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\VariableSuggestionBoxSelected.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 3518
   }
 }
