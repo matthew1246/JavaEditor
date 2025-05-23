@@ -2993,7 +2993,7 @@ class AutoKeyListener {
 		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
 		Matcher matcher2=pattern2.matcher(text.substring(0,caretposition));
 		while(matcher2.find()) {
-			variablenames.addFirst(matcher2.group(4));
+			variablenames.add(0,matcher2.group(4));			
 		}
 		Matcher matcher3=pattern2.matcher(text.substring(caretposition,text.length()));
 		while(matcher3.find()) {

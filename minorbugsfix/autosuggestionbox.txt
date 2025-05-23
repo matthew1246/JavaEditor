@@ -397,7 +397,9 @@
     "new",
     "Arraylist",
     "String",
-    "JOptionPane"
+    "JOptionPane",
+    "HashMap",
+    "InputStreamReader"
   ],
   "Syst": [
     "System"
@@ -406,16 +408,20 @@
     "String"
   ],
   "H": [
-    "Hashmap"
+    "Hashmap",
+    "HashMap"
   ],
   "Ha": [
-    "Hashmap"
+    "Hashmap",
+    "HashMap"
   ],
   "Has": [
-    "Hashmap"
+    "Hashmap",
+    "HashMap"
   ],
   "Hash": [
-    "Hashmap"
+    "Hashmap",
+    "HashMap"
   ],
   "Hashm": [
     "Hashmap"
@@ -494,7 +500,8 @@
     "classes"
   ],
   "I": [
-    "Iterator"
+    "Iterator",
+    "InputStreamReader"
   ],
   "It": [
     "Iterator"
@@ -612,5 +619,56 @@
   ],
   "JOptionPan": [
     "JOptionPane"
+  ],
+  "HashM": [
+    "HashMap"
+  ],
+  "HashMa": [
+    "HashMap"
+  ],
+  "In": [
+    "InputStreamReader"
+  ],
+  "Inp": [
+    "InputStreamReader"
+  ],
+  "Inpu": [
+    "InputStreamReader"
+  ],
+  "Input": [
+    "InputStreamReader"
+  ],
+  "InputS": [
+    "InputStreamReader"
+  ],
+  "InputSt": [
+    "InputStreamReader"
+  ],
+  "InputStr": [
+    "InputStreamReader"
+  ],
+  "InputStre": [
+    "InputStreamReader"
+  ],
+  "InputStrea": [
+    "InputStreamReader"
+  ],
+  "InputStream": [
+    "InputStreamReader"
+  ],
+  "InputStreamR": [
+    "InputStreamReader"
+  ],
+  "InputStreamRe": [
+    "InputStreamReader"
+  ],
+  "InputStreamRea": [
+    "InputStreamReader"
+  ],
+  "InputStreamRead": [
+    "InputStreamReader"
+  ],
+  "InputStreamReade": [
+    "InputStreamReader"
   ]
 }
