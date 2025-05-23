@@ -396,10 +396,10 @@
     "classes",
     "new",
     "Arraylist",
-    "String",
     "JOptionPane",
     "HashMap",
-    "InputStreamReader"
+    "InputStreamReader",
+    "String"
   ],
   "Syst": [
     "System"

@@ -89,7 +89,7 @@ public class VariableSuggestionBoxSelected {
 		return linkedhashmap.get(textfieldinput);
 	}
 	public void Save(String textfieldinput,String variablename) {
-		for(int i = 0; i < variablename.length(); i++) {
+		for(int i = 0; i <= variablename.length(); i++) {
 			String substring=variablename.substring(0,i);
 			ArrayList<String> list=linkedhashmap.get(substring);
 			if(list == null) {
