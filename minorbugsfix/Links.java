@@ -9,8 +9,8 @@ public class Links {
 			System.out.println(importname);
 		}
 	}
-	public HashMap<String,List<String>> hashmap = new HashMap<String,List<String>>();
-	private List<String> sublinks = new ArrayList<String>();
+	public HashMap<String,HashMap<String,String>> hashmap = new HashMap<String,HashMap<String,String>>();
+	//private List<String> sublinks = new ArrayList<String>();
 	public Links() {
 		try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream("links.html")));
@@ -19,17 +19,23 @@ public class Links {
 				if(line == null) break;
 				if(isSublink(line)) {
 					String sublink = getSublink(line);
-					sublinks.add(sublink);
+					//sublinks.add(sublink);
+					String with_capitols = getClassWithCapitols(sublink);
 					String class_one = getClass(sublink);
-					hashmap.put(class_one,new ArrayList<String>());
+					HashMap<String,String> hashmapwithcapitols =hashmap.get(class_one);
+					if(hashmapwithcapitols == null) {
+						hashmapwithcapitols = new HashMap<String,String>();
+					}
+					hashmapwithcapitols.put(with_capitols,sublink);
+					hashmap.put(class_one,hashmapwithcapitols);
 				}
 			}
-			for(int i = 0; i < sublinks.size(); i++) {
+			/*for(int i = 0; i < sublinks.size(); i++) {
 				String sublink = sublinks.get(i);
 				String class_one=getClass(sublink);
-				List<String> list=hashmap.get(class_one);
 				list.add(sublink);
 			}
+			*/
 		} 
 		catch(FileNotFoundException ex) {
 			ex.printStackTrace();
@@ -69,13 +75,23 @@ public class Links {
 			return "Could not find class name in sublink.";
 		}
 	}
+	public String getClassWithCapitols(String sublink) {
+		Pattern pattern = Pattern.compile(".+/(.+)\\.html");
+		Matcher matcher=pattern.matcher(sublink);
+		if(matcher.find()) {
+			return matcher.group(1);
+		}
+		else {
+			return "Could not find class name in sublink.";
+		}
+	}
+
 	
 	public void openLink(String one_class) {
 		try {
 			one_class=one_class.toLowerCase();
-			List<String> classes=hashmap.get(one_class);
-			for(int i = 0; i < classes.size(); i++) {
-				String sublink = classes.get(i);
+			HashMap<String,String> classes=hashmap.get(one_class);
+			for(String sublink:classes.values()) {
 				String link = getLink(sublink);
 				// Runtime.getRuntime().exec("cmd /c start chrome "+link);
 				java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
@@ -86,15 +102,15 @@ public class Links {
 	}
 	
 	public List<String> getImport(String one_class) {
+		List<String> classes2 = new ArrayList<String>();
 		one_class=one_class.toLowerCase();
-		List<String> classes=hashmap.get(one_class);
-		for(int i = 0; i < classes.size(); i++) {
-			String oneclass=classes.get(i);
-			classes.remove(oneclass);
-			classes.add(i,oneclass.replace(".html","").replaceAll("/","\\."));
+		HashMap<String,String> classes=hashmap.get(one_class);
+		for(String oneclass:classes.values()) {
+			classes2.add(oneclass.replace(".html","").replaceAll("/","\\."));
 		}
-		return classes;
+		return classes2;
 	}
+
 }
 		
 		

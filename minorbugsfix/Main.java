@@ -2050,9 +2050,10 @@ public class Main {
 	public void setApiClasses() {
 		if(apiclasses == null) {	
 			apiclasses=new ArrayList<String>();
-			for(String classname:Main.muck.links.hashmap.keySet()) {
-				classname = classname.substring(0,1).toUpperCase()+classname.substring(1,classname.length());
-				apiclasses.add(classname);
+			for(HashMap<String,String> innerhashmap:Main.muck.links.hashmap.values()) {
+				for(String classname:innerhashmap.keySet()) {
+					apiclasses.add(classname);
+				}
 			}
 		}
 	}
@@ -2356,7 +2357,6 @@ class CurlyBraceKeyListener implements KeyListener {
 				Popup(property,caretposition);
 			}
 		}
-		
 		/**
 		** This is a variable suggestion box not a method
 		** suggestionbox.

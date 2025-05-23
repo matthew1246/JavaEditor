@@ -85,7 +85,10 @@
   ],
   "HashMap": [
     "KeyIterator",
-    "keySet"
+    "get",
+    "put",
+    "keySet",
+    "values"
   ],
   "Matcher": [
     "find",
@@ -118,5 +121,9 @@
   ],
   "DisplayOutput": [
     "Multiline"
+  ],
+  "Iterator": [
+    "hasNext",
+    "next"
   ]
 }

@@ -26,7 +26,8 @@
   ],
   "s": [
     "selected_label",
-    "selected_index"
+    "selected_index",
+    "sublink"
   ],
   "sel": [
     "selected_label"
@@ -93,7 +94,8 @@
   ],
   "i": [
     "input",
-    "int"
+    "int",
+    "iterator"
   ],
   "ca": [
     "caretposition"
@@ -106,7 +108,8 @@
   ],
   "su": [
     "suggestionbox",
-    "substring"
+    "substring",
+    "sublink"
   ],
   "List": [
     "List"
@@ -166,7 +169,9 @@
     "null"
   ],
   "class": [
-    "classname"
+    "classname",
+    "class_one",
+    "classes"
   ],
   "Arr": [
     "Arraylist"
@@ -281,7 +286,9 @@
     "final"
   ],
   "clas": [
-    "class"
+    "class_one",
+    "class",
+    "classes"
   ],
   "imp": [
     "implements",
@@ -297,6 +304,7 @@
     "catch"
   ],
   "w": [
+    "with_capitols",
     "while"
   ],
   "sw": [
@@ -342,7 +350,9 @@
     "final"
   ],
   "cl": [
-    "class"
+    "class_one",
+    "class",
+    "classes"
   ],
   "fa": [
     "false"
@@ -357,25 +367,250 @@
     "root_directory"
   ],
   "sub": [
-    "substring"
+    "substring",
+    "sublink"
   ],
   "ma": [
     "mainbranch"
   ],
   "wh": [
-    "whichbranch"
+    "whichbranch",
+    "while"
   ],
   "f": [
     "for"
   ],
   "": [
     "System",
-    "String"
+    "class_one",
+    "with_capitols",
+    "Iterator",
+    "while",
+    "iterator",
+    "sublink",
+    "Hashmap",
+    "for",
+    "class",
+    "oneclass",
+    "List",
+    "classes",
+    "new",
+    "Arraylist",
+    "String",
+    "JOptionPane"
   ],
   "Syst": [
     "System"
   ],
   "St": [
     "String"
+  ],
+  "H": [
+    "Hashmap"
+  ],
+  "Ha": [
+    "Hashmap"
+  ],
+  "Has": [
+    "Hashmap"
+  ],
+  "Hash": [
+    "Hashmap"
+  ],
+  "Hashm": [
+    "Hashmap"
+  ],
+  "Hashma": [
+    "Hashmap"
+  ],
+  "subl": [
+    "sublink"
+  ],
+  "subli": [
+    "sublink"
+  ],
+  "sublin": [
+    "sublink"
+  ],
+  "n": [
+    "new"
+  ],
+  "ne": [
+    "new"
+  ],
+  "wi": [
+    "with_capitols"
+  ],
+  "wit": [
+    "with_capitols"
+  ],
+  "with": [
+    "with_capitols"
+  ],
+  "with_": [
+    "with_capitols"
+  ],
+  "with_c": [
+    "with_capitols"
+  ],
+  "with_ca": [
+    "with_capitols"
+  ],
+  "with_cap": [
+    "with_capitols"
+  ],
+  "with_capi": [
+    "with_capitols"
+  ],
+  "with_capit": [
+    "with_capitols"
+  ],
+  "with_capito": [
+    "with_capitols"
+  ],
+  "with_capitol": [
+    "with_capitols"
+  ],
+  "c": [
+    "class_one",
+    "class",
+    "classes"
+  ],
+  "cla": [
+    "class_one",
+    "class",
+    "classes"
+  ],
+  "class_": [
+    "class_one"
+  ],
+  "class_o": [
+    "class_one"
+  ],
+  "class_on": [
+    "class_one"
+  ],
+  "classe": [
+    "classes"
+  ],
+  "I": [
+    "Iterator"
+  ],
+  "It": [
+    "Iterator"
+  ],
+  "Ite": [
+    "Iterator"
+  ],
+  "Iter": [
+    "Iterator"
+  ],
+  "Itera": [
+    "Iterator"
+  ],
+  "Iterat": [
+    "Iterator"
+  ],
+  "Iterato": [
+    "Iterator"
+  ],
+  "it": [
+    "iterator"
+  ],
+  "ite": [
+    "iterator"
+  ],
+  "iter": [
+    "iterator"
+  ],
+  "itera": [
+    "iterator"
+  ],
+  "iterat": [
+    "iterator"
+  ],
+  "iterato": [
+    "iterator"
+  ],
+  "whi": [
+    "while"
+  ],
+  "whil": [
+    "while"
+  ],
+  "fo": [
+    "for"
+  ],
+  "o": [
+    "oneclass"
+  ],
+  "on": [
+    "oneclass"
+  ],
+  "one": [
+    "oneclass"
+  ],
+  "onec": [
+    "oneclass"
+  ],
+  "onecl": [
+    "oneclass"
+  ],
+  "onecla": [
+    "oneclass"
+  ],
+  "oneclas": [
+    "oneclass"
+  ],
+  "Li": [
+    "List"
+  ],
+  "Lis": [
+    "List"
+  ],
+  "A": [
+    "Arraylist"
+  ],
+  "Ar": [
+    "Arraylist"
+  ],
+  "Arrayl": [
+    "Arraylist"
+  ],
+  "Arrayli": [
+    "Arraylist"
+  ],
+  "Arraylis": [
+    "Arraylist"
+  ],
+  "J": [
+    "JOptionPane"
+  ],
+  "JO": [
+    "JOptionPane"
+  ],
+  "JOp": [
+    "JOptionPane"
+  ],
+  "JOpt": [
+    "JOptionPane"
+  ],
+  "JOpti": [
+    "JOptionPane"
+  ],
+  "JOptio": [
+    "JOptionPane"
+  ],
+  "JOption": [
+    "JOptionPane"
+  ],
+  "JOptionP": [
+    "JOptionPane"
+  ],
+  "JOptionPa": [
+    "JOptionPane"
+  ],
+  "JOptionPan": [
+    "JOptionPane"
   ]
 }

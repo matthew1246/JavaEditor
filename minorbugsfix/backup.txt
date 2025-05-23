@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "caretposition": 80195
+    "caretposition": 69929
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -215,9 +215,9 @@
     "caretposition": 226
   },
   "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java": {
-    "starterclass": "Muck",
+    "starterclass": "Links",
     "jars": [],
-    "caretposition": 2167
+    "caretposition": 184
   },
   "C:\\Users\\Owner\\Documents\\git\\muck\\Main.java": {
     "starterclass": "",
