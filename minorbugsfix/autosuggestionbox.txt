@@ -31,7 +31,8 @@
     "selected_index",
     "sublink",
     "substring",
-    "suggestionbox"
+    "suggestionbox",
+    "search_textfield"
   ],
   "sel": [
     "selected_label"
@@ -50,7 +51,8 @@
   ],
   "se": [
     "selected_index",
-    "second"
+    "second",
+    "search_textfield"
   ],
   "String": [
     "String"
@@ -104,7 +106,8 @@
     "int",
     "iterator",
     "index",
-    "instanceof"
+    "instanceof",
+    "import"
   ],
   "ca": [
     "caretposition"
@@ -419,20 +422,26 @@
     "new",
     "ComponentListener",
     "MouseAdapter",
-    "Override",
-    "public",
-    "void",
     "MouseEvent",
     "Object",
     "instanceof",
-    "suggestionbox",
     "object",
     "JOptionPane",
     "null",
     "panelgridlayout",
     "Component",
     "label",
-    "JLabel"
+    "JLabel",
+    "public",
+    "WindowAdapter",
+    "Override",
+    "void",
+    "suggestionbox",
+    "import",
+    "KeyAdapter",
+    "search_textfield",
+    "KeyEvent",
+    "else"
   ],
   "Syst": [
     "System"
@@ -722,8 +731,8 @@
   ],
   "p": [
     "pluspanel",
-    "public",
-    "panelgridlayout"
+    "panelgridlayout",
+    "public"
   ],
   "pl": [
     "pluspanel"
@@ -905,8 +914,8 @@
     "MouseAdapter"
   ],
   "O": [
-    "Override",
-    "Object"
+    "Object",
+    "Override"
   ],
   "Ov": [
     "Override"
@@ -1108,5 +1117,143 @@
   ],
   "label": [
     "label"
+  ],
+  "W": [
+    "WindowAdapter"
+  ],
+  "Wi": [
+    "WindowAdapter"
+  ],
+  "Win": [
+    "WindowAdapter"
+  ],
+  "Wind": [
+    "WindowAdapter"
+  ],
+  "Windo": [
+    "WindowAdapter"
+  ],
+  "Window": [
+    "WindowAdapter"
+  ],
+  "WindowA": [
+    "WindowAdapter"
+  ],
+  "WindowAd": [
+    "WindowAdapter"
+  ],
+  "WindowAda": [
+    "WindowAdapter"
+  ],
+  "WindowAdap": [
+    "WindowAdapter"
+  ],
+  "WindowAdapt": [
+    "WindowAdapter"
+  ],
+  "WindowAdapte": [
+    "WindowAdapter"
+  ],
+  "WindowAdapter": [
+    "WindowAdapter"
+  ],
+  "K": [
+    "KeyAdapter",
+    "KeyEvent"
+  ],
+  "Ke": [
+    "KeyAdapter",
+    "KeyEvent"
+  ],
+  "Key": [
+    "KeyAdapter",
+    "KeyEvent"
+  ],
+  "KeyA": [
+    "KeyAdapter"
+  ],
+  "KeyAd": [
+    "KeyAdapter"
+  ],
+  "KeyAda": [
+    "KeyAdapter"
+  ],
+  "KeyAdap": [
+    "KeyAdapter"
+  ],
+  "KeyAdapt": [
+    "KeyAdapter"
+  ],
+  "KeyAdapte": [
+    "KeyAdapter"
+  ],
+  "KeyAdapter": [
+    "KeyAdapter"
+  ],
+  "impo": [
+    "import"
+  ],
+  "impor": [
+    "import"
+  ],
+  "KeyE": [
+    "KeyEvent"
+  ],
+  "KeyEv": [
+    "KeyEvent"
+  ],
+  "KeyEve": [
+    "KeyEvent"
+  ],
+  "KeyEven": [
+    "KeyEvent"
+  ],
+  "KeyEvent": [
+    "KeyEvent"
+  ],
+  "searc": [
+    "search_textfield"
+  ],
+  "search": [
+    "search_textfield"
+  ],
+  "search_": [
+    "search_textfield"
+  ],
+  "search_t": [
+    "search_textfield"
+  ],
+  "search_te": [
+    "search_textfield"
+  ],
+  "search_tex": [
+    "search_textfield"
+  ],
+  "search_text": [
+    "search_textfield"
+  ],
+  "search_textf": [
+    "search_textfield"
+  ],
+  "search_textfi": [
+    "search_textfield"
+  ],
+  "search_textfie": [
+    "search_textfield"
+  ],
+  "search_textfiel": [
+    "search_textfield"
+  ],
+  "search_textfield": [
+    "search_textfield"
+  ],
+  "e": [
+    "else"
+  ],
+  "els": [
+    "else"
+  ],
+  "else": [
+    "else"
   ]
 }

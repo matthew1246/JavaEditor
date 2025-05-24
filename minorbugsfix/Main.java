@@ -82,6 +82,8 @@ import javax.swing.UIManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 public class Main {
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JMenuItem generatejar;
@@ -2954,6 +2956,10 @@ class AutoKeyListener {
 						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 					}
 				}
+				else if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					EnterText();
+					suggestionbox.dispose();
+				}
 			}
 			@Override
 			public void keyReleased(KeyEvent keyevent) {
@@ -2980,7 +2986,9 @@ class AutoKeyListener {
 				}
 			}
 			@Override
-			public void keyTyped(KeyEvent ke) {}
+			public void keyTyped(KeyEvent ke) {
+				
+			}
 		});
 		panelgridlayout.addMouseListener(new MouseAdapter() {
 			@Override

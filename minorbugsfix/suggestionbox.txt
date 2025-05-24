@@ -43,14 +43,18 @@
     "disable",
     "addWindowListener",
     "setVisible",
-    "dispose",
     "setTitle",
     "addComponentListener",
-    "addMouseListener"
+    "addMouseListener",
+    "addKeyListener",
+    "dispose"
   ],
   "KeyEvent": [
     "getKeyText",
-    "getKeyChar"
+    "getKeyChar",
+    "getKeyCode",
+    "VK_ESCAPE",
+    "getExtendedKeyCode"
   ],
   "JLabel": [
     "getText",
@@ -133,5 +137,8 @@
   "MouseEvent": [
     "getSource",
     "getPoint"
+  ],
+  "KeyAdapter": [
+    "keyTyped"
   ]
 }
