@@ -220,6 +220,7 @@ public class Main {
 		scrollpane = new JScrollPane(textarea);
 		tabbedpane.add(getFileName(fileName),scrollpane);
 		JPanel pluspanel = new JPanel();
+		tabbedpane.addTab("+",pluspanel);
 		fileNames.add(fileName);
 		tabbedpane.addChangeListener(new ChangeListener() {
 			@Override
@@ -229,9 +230,7 @@ public class Main {
 					int index=tabbedpane.getSelectedIndex();
 					String title=tabbedpane.getTitleAt(index);
 					if(title.equals("+")) {
-						Component plustab = tabbedpane.getComponentAt(index);
-						tabbedpane.remove(plustab);
-						
+						//Component plustab = tabbedpane.getComponentAt(index);
 						String dir = Main.this.fileName;
 						if(!dir.equals("")) {
 							dir = dir.replaceAll("[^\\\\]+\\.java","");
@@ -245,6 +244,7 @@ public class Main {
 						int result = filechooser.showOpenDialog(Main.this.frame);
 						if(result == JFileChooser.APPROVE_OPTION) {
 							File selectedFile = filechooser.getSelectedFile();
+							tabbedpane.remove(pluspanel);
 							JTextArea textarea2 = new JTextArea();
 							Font originalFont = textarea.getFont();
 							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
@@ -260,7 +260,7 @@ public class Main {
 							textarea2.setText(lines);
 							
 							tabbedpane.addTab(filename,scrollpane2);
-							tabbedpane.addTab("+",plustab);
+							tabbedpane.addTab("+",pluspanel);
 							tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						}
 					}
@@ -272,8 +272,6 @@ public class Main {
 				}
 			}
 		});	
-		tabbedpane.addTab("+",pluspanel);
-		
 		frame.getContentPane().add(tabbedpane);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -2051,7 +2049,7 @@ public class Main {
 		if(apiclasses == null) {	
 			apiclasses=new ArrayList<String>();
 			for(HashMap<String,String> innerhashmap:Main.muck.links.hashmap.values()) {
-				for(String classname:innerhashmap.keySet()) {
+				for(String classname:innerhashmap.keySet()) { // Only one value
 					apiclasses.add(classname);
 				}
 			}

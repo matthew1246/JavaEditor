@@ -71,11 +71,13 @@
   ],
   "va": [
     "variablenames2",
-    "variablename"
+    "variablename",
+    "value"
   ],
   "in": [
     "input",
-    "int"
+    "int",
+    "index"
   ],
   "main": [
     "main"
@@ -95,7 +97,8 @@
   "i": [
     "input",
     "int",
-    "iterator"
+    "iterator",
+    "index"
   ],
   "ca": [
     "caretposition"
@@ -135,7 +138,8 @@
   ],
   "v": [
     "variablenames",
-    "variablename"
+    "variablename",
+    "value"
   ],
   "variab": [
     "variablenames2"
@@ -396,10 +400,14 @@
     "classes",
     "new",
     "Arraylist",
-    "JOptionPane",
-    "HashMap",
     "InputStreamReader",
-    "String"
+    "String",
+    "value",
+    "HashMap",
+    "pluspanel",
+    "JOptionPane",
+    "null",
+    "index"
   ],
   "Syst": [
     "System"
@@ -439,7 +447,8 @@
     "sublink"
   ],
   "n": [
-    "new"
+    "new",
+    "null"
   ],
   "ne": [
     "new"
@@ -670,5 +679,53 @@
   ],
   "InputStreamReade": [
     "InputStreamReader"
+  ],
+  "val": [
+    "value"
+  ],
+  "valu": [
+    "value"
+  ],
+  "value": [
+    "value"
+  ],
+  "HashMap": [
+    "HashMap"
+  ],
+  "p": [
+    "pluspanel"
+  ],
+  "pl": [
+    "pluspanel"
+  ],
+  "plu": [
+    "pluspanel"
+  ],
+  "plus": [
+    "pluspanel"
+  ],
+  "plusp": [
+    "pluspanel"
+  ],
+  "pluspa": [
+    "pluspanel"
+  ],
+  "pluspan": [
+    "pluspanel"
+  ],
+  "pluspane": [
+    "pluspanel"
+  ],
+  "pluspanel": [
+    "pluspanel"
+  ],
+  "JOptionPane": [
+    "JOptionPane"
+  ],
+  "inde": [
+    "index"
+  ],
+  "index": [
+    "index"
   ]
 }
