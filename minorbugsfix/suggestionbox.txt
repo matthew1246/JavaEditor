@@ -140,5 +140,12 @@
   ],
   "KeyAdapter": [
     "keyTyped"
+  ],
+  "JMenuItem": [
+    "addActionListener",
+    "hashCode"
+  ],
+  "EventObject": [
+    "getSource"
   ]
 }

@@ -2,7 +2,8 @@
   "t": [
     "text",
     "tab_keystroke",
-    "textarea"
+    "textarea",
+    "title"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -419,29 +420,34 @@
     "substring",
     "JFrame",
     "frame",
-    "new",
     "ComponentListener",
     "MouseAdapter",
     "MouseEvent",
     "Object",
     "instanceof",
     "object",
-    "JOptionPane",
-    "null",
     "panelgridlayout",
     "Component",
     "label",
     "JLabel",
-    "public",
     "WindowAdapter",
     "Override",
-    "void",
     "suggestionbox",
     "import",
     "KeyAdapter",
     "search_textfield",
     "KeyEvent",
-    "else"
+    "else",
+    "add",
+    "JMenuItem",
+    "new",
+    "public",
+    "void",
+    "JOptionPane",
+    "null",
+    "EventObject",
+    "opennewtab",
+    "title"
   ],
   "Syst": [
     "System"
@@ -593,7 +599,8 @@
   ],
   "o": [
     "oneclass",
-    "object"
+    "object",
+    "opennewtab"
   ],
   "on": [
     "oneclass"
@@ -636,8 +643,9 @@
   ],
   "J": [
     "JFrame",
-    "JOptionPane",
-    "JLabel"
+    "JLabel",
+    "JMenuItem",
+    "JOptionPane"
   ],
   "JO": [
     "JOptionPane"
@@ -1255,5 +1263,104 @@
   ],
   "else": [
     "else"
+  ],
+  "add": [
+    "add"
+  ],
+  "JM": [
+    "JMenuItem"
+  ],
+  "JMe": [
+    "JMenuItem"
+  ],
+  "JMen": [
+    "JMenuItem"
+  ],
+  "JMenu": [
+    "JMenuItem"
+  ],
+  "JMenuI": [
+    "JMenuItem"
+  ],
+  "JMenuIt": [
+    "JMenuItem"
+  ],
+  "JMenuIte": [
+    "JMenuItem"
+  ],
+  "JMenuItem": [
+    "JMenuItem"
+  ],
+  "op": [
+    "opennewtab"
+  ],
+  "ope": [
+    "opennewtab"
+  ],
+  "open": [
+    "opennewtab"
+  ],
+  "openn": [
+    "opennewtab"
+  ],
+  "openne": [
+    "opennewtab"
+  ],
+  "opennew": [
+    "opennewtab"
+  ],
+  "opennewt": [
+    "opennewtab"
+  ],
+  "opennewta": [
+    "opennewtab"
+  ],
+  "opennewtab": [
+    "opennewtab"
+  ],
+  "E": [
+    "EventObject"
+  ],
+  "Ev": [
+    "EventObject"
+  ],
+  "Eve": [
+    "EventObject"
+  ],
+  "Even": [
+    "EventObject"
+  ],
+  "Event": [
+    "EventObject"
+  ],
+  "EventO": [
+    "EventObject"
+  ],
+  "EventOb": [
+    "EventObject"
+  ],
+  "EventObj": [
+    "EventObject"
+  ],
+  "EventObje": [
+    "EventObject"
+  ],
+  "EventObjec": [
+    "EventObject"
+  ],
+  "EventObject": [
+    "EventObject"
+  ],
+  "ti": [
+    "title"
+  ],
+  "tit": [
+    "title"
+  ],
+  "titl": [
+    "title"
+  ],
+  "title": [
+    "title"
   ]
 }

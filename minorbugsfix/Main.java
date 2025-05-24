@@ -85,7 +85,9 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
+	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
 	public JButton deprecated;	
 	public static Muck muck = new Muck();
@@ -221,60 +223,10 @@ public class Main {
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 		scrollpane = new JScrollPane(textarea);
 		tabbedpane.add(getFileName(fileName),scrollpane);
-		JPanel pluspanel = new JPanel();
+
 		tabbedpane.addTab("+",pluspanel);
 		fileNames.add(fileName);
 				
-		tabbedpane.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent changeevent) {
-				try {
-					JTabbedPane tabbedpane=(JTabbedPane)changeevent.getSource();
-					int index=tabbedpane.getSelectedIndex();
-					String title=tabbedpane.getTitleAt(index);
-					if(title.equals("+")) {
-						//Component plustab = tabbedpane.getComponentAt(index);
-						String dir = Main.this.fileName;
-						if(!dir.equals("")) {
-							dir = dir.replaceAll("[^\\\\]+\\.java","");
-						}
-						else {
-							dir = System.getProperty("user.home");
-						}
-						JFileChooser filechooser = new JFileChooser(new File(dir));
-						FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
-						filechooser.setFileFilter(filenameextensionfilter);
-						int result = filechooser.showOpenDialog(Main.this.frame);
-						if(result == JFileChooser.APPROVE_OPTION) {
-							File selectedFile = filechooser.getSelectedFile();
-							tabbedpane.remove(pluspanel);
-							JTextArea textarea2 = new JTextArea();
-							Font originalFont = textarea.getFont();
-							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-
-							JScrollPane scrollpane2 = new JScrollPane(textarea2);
-							String directoryandfilename = selectedFile.getPath();
-							fileNames.add(directoryandfilename);
-							String filename = Main.this.getFileName(directoryandfilename);
-							
-							Path path = Paths.get(directoryandfilename);
-							String lines = Files.readString(path,StandardCharsets.UTF_8);
-							textarea2.setTabSize(4);
-							textarea2.setText(lines);
-							
-							tabbedpane.addTab(filename,scrollpane2);
-							tabbedpane.addTab("+",pluspanel);
-							tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
-						}
-					}
-					Main.this.fileName=fileNames.get(tabbedpane.getSelectedIndex());
-					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
-					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
-				} catch(IOException ex) {
-					ex.printStackTrace();
-				}
-			}
-		});	
 		frame.getContentPane().add(tabbedpane);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -320,6 +272,7 @@ public class Main {
 		menu.add(newopenwindow);
 		menu.add(menuitem);
 		menu.add(opennewwindow);
+		menu.add(opennewtab);
 		menu.add(saveItem);
 		menu.add(saveasitem);
 		menu.add(generatejar);
@@ -852,6 +805,15 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		opennewtab.addActionListener((ev) -> {
+			addOrUpdateTab(ev);
+		});
+		tabbedpane.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent changeevent) {
+				Main.this.addOrUpdateTab(changeevent);	
+			}
+		});	
 		setApiClasses();
 		setKeywords();
 		generatejar.addActionListener((ev) -> {
@@ -1878,6 +1840,55 @@ public class Main {
 			}
 		});		
 		frame.getRootPane().setDefaultButton(go_to_line_number);		
+	}
+	public void addOrUpdateTab(EventObject eventobject) {
+		try {
+			int index=tabbedpane.getSelectedIndex();
+			String title=tabbedpane.getTitleAt(index);
+			if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {
+				title="+";
+			}
+			if(title.equals("+")) {
+				//Component plustab = tabbedpane.getComponentAt(index);
+				String dir = Main.this.fileName;
+				if(!dir.equals("")) {
+					dir = dir.replaceAll("[^\\\\]+\\.java","");
+				}
+				else {
+					dir = System.getProperty("user.home");
+				}
+				JFileChooser filechooser = new JFileChooser(new File(dir));
+				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
+				filechooser.setFileFilter(filenameextensionfilter);
+				int result = filechooser.showOpenDialog(Main.this.frame);
+				if(result == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = filechooser.getSelectedFile();
+					tabbedpane.remove(pluspanel);
+					JTextArea textarea2 = new JTextArea();
+					Font originalFont = textarea.getFont();
+					textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+					JScrollPane scrollpane2 = new JScrollPane(textarea2);
+					String directoryandfilename = selectedFile.getPath();
+					fileNames.add(directoryandfilename);
+					String filename = Main.this.getFileName(directoryandfilename);
+					
+					Path path = Paths.get(directoryandfilename);
+					String lines = Files.readString(path,StandardCharsets.UTF_8);
+					textarea2.setTabSize(4);
+					textarea2.setText(lines);
+					
+					tabbedpane.addTab(filename,scrollpane2);
+					tabbedpane.addTab("+",pluspanel);
+					tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+				}
+			}
+			Main.this.fileName=fileNames.get(tabbedpane.getSelectedIndex());
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+		} catch(IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 	public int getLineNumber(String stringuptocaretposition) {
 		int linenumber2=0;
