@@ -222,6 +222,7 @@ public class Main {
 		JPanel pluspanel = new JPanel();
 		tabbedpane.addTab("+",pluspanel);
 		fileNames.add(fileName);
+				
 		tabbedpane.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent changeevent) {
@@ -2980,6 +2981,15 @@ class AutoKeyListener {
 			}
 			@Override
 			public void keyTyped(KeyEvent ke) {}
+		});
+		panelgridlayout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent me) {
+				Component label=panelgridlayout.getComponentAt(me.getPoint());
+				if(label instanceof JLabel) {
+					JOptionPane.showMessageDialog(null,((JLabel)label).getText());
+				}
+			}
 		});
 	}
 	public String getInput() {

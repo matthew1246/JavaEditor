@@ -44,7 +44,9 @@
     "addWindowListener",
     "setVisible",
     "dispose",
-    "setTitle"
+    "setTitle",
+    "addComponentListener",
+    "addMouseListener"
   ],
   "KeyEvent": [
     "getKeyText",
@@ -99,7 +101,8 @@
     "getComponentPopupMenu",
     "add",
     "remove",
-    "getComponents"
+    "getComponents",
+    "getComponentAt"
   ],
   "GridLayout": [
     "getRows",
@@ -126,5 +129,9 @@
   "Iterator": [
     "hasNext",
     "next"
+  ],
+  "MouseEvent": [
+    "getSource",
+    "getPoint"
   ]
 }

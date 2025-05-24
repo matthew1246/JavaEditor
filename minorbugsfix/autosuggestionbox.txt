@@ -13,10 +13,12 @@
     "Arraylist"
   ],
   "l": [
-    "labels"
+    "labels",
+    "label"
   ],
   "la": [
-    "labels"
+    "labels",
+    "label"
   ],
   "labels": [
     "labels"
@@ -28,7 +30,8 @@
     "selected_label",
     "selected_index",
     "sublink",
-    "substring"
+    "substring",
+    "suggestionbox"
   ],
   "sel": [
     "selected_label"
@@ -78,7 +81,8 @@
   "in": [
     "input",
     "int",
-    "index"
+    "index",
+    "instanceof"
   ],
   "main": [
     "main"
@@ -99,7 +103,8 @@
     "input",
     "int",
     "iterator",
-    "index"
+    "index",
+    "instanceof"
   ],
   "ca": [
     "caretposition"
@@ -111,9 +116,9 @@
     "textarea"
   ],
   "su": [
-    "suggestionbox",
     "sublink",
-    "substring"
+    "substring",
+    "suggestionbox"
   ],
   "List": [
     "List"
@@ -140,7 +145,8 @@
   "v": [
     "variablenames",
     "variablename",
-    "value"
+    "value",
+    "void"
   ],
   "variab": [
     "variablenames2"
@@ -400,18 +406,33 @@
     "oneclass",
     "List",
     "classes",
-    "new",
     "Arraylist",
     "InputStreamReader",
     "String",
     "value",
     "HashMap",
     "pluspanel",
+    "index",
+    "substring",
+    "JFrame",
+    "frame",
+    "new",
+    "ComponentListener",
+    "MouseAdapter",
+    "Override",
+    "public",
+    "void",
+    "MouseEvent",
+    "Object",
+    "instanceof",
+    "suggestionbox",
+    "object",
     "JOptionPane",
     "null",
-    "index",
-    "frame",
-    "substring"
+    "panelgridlayout",
+    "Component",
+    "label",
+    "JLabel"
   ],
   "Syst": [
     "System"
@@ -562,7 +583,8 @@
     "for"
   ],
   "o": [
-    "oneclass"
+    "oneclass",
+    "object"
   ],
   "on": [
     "oneclass"
@@ -604,7 +626,9 @@
     "Arraylist"
   ],
   "J": [
-    "JOptionPane"
+    "JFrame",
+    "JOptionPane",
+    "JLabel"
   ],
   "JO": [
     "JOptionPane"
@@ -697,7 +721,9 @@
     "HashMap"
   ],
   "p": [
-    "pluspanel"
+    "pluspanel",
+    "public",
+    "panelgridlayout"
   ],
   "pl": [
     "pluspanel"
@@ -761,5 +787,326 @@
   ],
   "substring": [
     "substring"
+  ],
+  "JF": [
+    "JFrame"
+  ],
+  "JFr": [
+    "JFrame"
+  ],
+  "JFra": [
+    "JFrame"
+  ],
+  "JFram": [
+    "JFrame"
+  ],
+  "JFrame": [
+    "JFrame"
+  ],
+  "C": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Co": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Com": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Comp": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Compo": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Compon": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Compone": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Componen": [
+    "ComponentListener",
+    "Component"
+  ],
+  "Component": [
+    "ComponentListener",
+    "Component"
+  ],
+  "ComponentL": [
+    "ComponentListener"
+  ],
+  "ComponentLi": [
+    "ComponentListener"
+  ],
+  "ComponentLis": [
+    "ComponentListener"
+  ],
+  "ComponentList": [
+    "ComponentListener"
+  ],
+  "ComponentListe": [
+    "ComponentListener"
+  ],
+  "ComponentListen": [
+    "ComponentListener"
+  ],
+  "ComponentListene": [
+    "ComponentListener"
+  ],
+  "ComponentListener": [
+    "ComponentListener"
+  ],
+  "M": [
+    "MouseAdapter",
+    "MouseEvent"
+  ],
+  "Mo": [
+    "MouseAdapter",
+    "MouseEvent"
+  ],
+  "Mou": [
+    "MouseAdapter",
+    "MouseEvent"
+  ],
+  "Mous": [
+    "MouseAdapter",
+    "MouseEvent"
+  ],
+  "Mouse": [
+    "MouseAdapter",
+    "MouseEvent"
+  ],
+  "MouseA": [
+    "MouseAdapter"
+  ],
+  "MouseAd": [
+    "MouseAdapter"
+  ],
+  "MouseAda": [
+    "MouseAdapter"
+  ],
+  "MouseAdap": [
+    "MouseAdapter"
+  ],
+  "MouseAdapt": [
+    "MouseAdapter"
+  ],
+  "MouseAdapte": [
+    "MouseAdapter"
+  ],
+  "MouseAdapter": [
+    "MouseAdapter"
+  ],
+  "O": [
+    "Override",
+    "Object"
+  ],
+  "Ov": [
+    "Override"
+  ],
+  "Ove": [
+    "Override"
+  ],
+  "Over": [
+    "Override"
+  ],
+  "Overr": [
+    "Override"
+  ],
+  "Overri": [
+    "Override"
+  ],
+  "Overrid": [
+    "Override"
+  ],
+  "Override": [
+    "Override"
+  ],
+  "pu": [
+    "public"
+  ],
+  "publ": [
+    "public"
+  ],
+  "publi": [
+    "public"
+  ],
+  "vo": [
+    "void"
+  ],
+  "voi": [
+    "void"
+  ],
+  "void": [
+    "void"
+  ],
+  "MouseE": [
+    "MouseEvent"
+  ],
+  "MouseEv": [
+    "MouseEvent"
+  ],
+  "MouseEve": [
+    "MouseEvent"
+  ],
+  "MouseEven": [
+    "MouseEvent"
+  ],
+  "MouseEvent": [
+    "MouseEvent"
+  ],
+  "Ob": [
+    "Object"
+  ],
+  "Obj": [
+    "Object"
+  ],
+  "Obje": [
+    "Object"
+  ],
+  "Objec": [
+    "Object"
+  ],
+  "Object": [
+    "Object"
+  ],
+  "ob": [
+    "object"
+  ],
+  "obj": [
+    "object"
+  ],
+  "obje": [
+    "object"
+  ],
+  "objec": [
+    "object"
+  ],
+  "object": [
+    "object"
+  ],
+  "inst": [
+    "instanceof"
+  ],
+  "insta": [
+    "instanceof"
+  ],
+  "instan": [
+    "instanceof"
+  ],
+  "instanc": [
+    "instanceof"
+  ],
+  "instance": [
+    "instanceof"
+  ],
+  "instanceo": [
+    "instanceof"
+  ],
+  "instanceof": [
+    "instanceof"
+  ],
+  "JL": [
+    "JLabel"
+  ],
+  "JLa": [
+    "JLabel"
+  ],
+  "JLab": [
+    "JLabel"
+  ],
+  "JLabe": [
+    "JLabel"
+  ],
+  "JLabel": [
+    "JLabel"
+  ],
+  "sug": [
+    "suggestionbox"
+  ],
+  "sugge": [
+    "suggestionbox"
+  ],
+  "sugges": [
+    "suggestionbox"
+  ],
+  "suggest": [
+    "suggestionbox"
+  ],
+  "suggesti": [
+    "suggestionbox"
+  ],
+  "suggestio": [
+    "suggestionbox"
+  ],
+  "suggestion": [
+    "suggestionbox"
+  ],
+  "suggestionb": [
+    "suggestionbox"
+  ],
+  "suggestionbo": [
+    "suggestionbox"
+  ],
+  "suggestionbox": [
+    "suggestionbox"
+  ],
+  "pa": [
+    "panelgridlayout"
+  ],
+  "pan": [
+    "panelgridlayout"
+  ],
+  "pane": [
+    "panelgridlayout"
+  ],
+  "panel": [
+    "panelgridlayout"
+  ],
+  "panelg": [
+    "panelgridlayout"
+  ],
+  "panelgr": [
+    "panelgridlayout"
+  ],
+  "panelgri": [
+    "panelgridlayout"
+  ],
+  "panelgrid": [
+    "panelgridlayout"
+  ],
+  "panelgridl": [
+    "panelgridlayout"
+  ],
+  "panelgridla": [
+    "panelgridlayout"
+  ],
+  "panelgridlay": [
+    "panelgridlayout"
+  ],
+  "panelgridlayo": [
+    "panelgridlayout"
+  ],
+  "panelgridlayou": [
+    "panelgridlayout"
+  ],
+  "panelgridlayout": [
+    "panelgridlayout"
+  ],
+  "lab": [
+    "label"
+  ],
+  "labe": [
+    "label"
+  ],
+  "label": [
+    "label"
   ]
 }
