@@ -446,8 +446,10 @@
     "JOptionPane",
     "null",
     "EventObject",
+    "title",
+    "KeyStroke",
     "opennewtab",
-    "title"
+    "control_t"
   ],
   "Syst": [
     "System"
@@ -529,7 +531,8 @@
   "c": [
     "class_one",
     "class",
-    "classes"
+    "classes",
+    "control_t"
   ],
   "cla": [
     "class_one",
@@ -1167,15 +1170,18 @@
   ],
   "K": [
     "KeyAdapter",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyStroke"
   ],
   "Ke": [
     "KeyAdapter",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyStroke"
   ],
   "Key": [
     "KeyAdapter",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyStroke"
   ],
   "KeyA": [
     "KeyAdapter"
@@ -1362,5 +1368,47 @@
   ],
   "title": [
     "title"
+  ],
+  "KeyS": [
+    "KeyStroke"
+  ],
+  "KeySt": [
+    "KeyStroke"
+  ],
+  "KeyStr": [
+    "KeyStroke"
+  ],
+  "KeyStro": [
+    "KeyStroke"
+  ],
+  "KeyStrok": [
+    "KeyStroke"
+  ],
+  "KeyStroke": [
+    "KeyStroke"
+  ],
+  "co": [
+    "control_t"
+  ],
+  "con": [
+    "control_t"
+  ],
+  "cont": [
+    "control_t"
+  ],
+  "contr": [
+    "control_t"
+  ],
+  "contro": [
+    "control_t"
+  ],
+  "control": [
+    "control_t"
+  ],
+  "control_": [
+    "control_t"
+  ],
+  "control_t": [
+    "control_t"
   ]
 }

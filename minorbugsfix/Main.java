@@ -267,6 +267,9 @@ public class Main {
 		KeyStroke save_Key_Stroke = KeyStroke.getKeyStroke("control S");
 		saveItem.setAccelerator(save_Key_Stroke);
 		
+		KeyStroke control_t=KeyStroke.getKeyStroke("control T");
+		opennewtab.setAccelerator(control_t);
+		
 		menuitem.addActionListener(oal);
 		menu.add(newitem);
 		menu.add(newopenwindow);

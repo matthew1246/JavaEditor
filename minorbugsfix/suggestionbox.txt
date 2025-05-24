@@ -143,9 +143,13 @@
   ],
   "JMenuItem": [
     "addActionListener",
-    "hashCode"
+    "hashCode",
+    "setAccelerator"
   ],
   "EventObject": [
     "getSource"
+  ],
+  "KeyStroke": [
+    "getKeyStroke"
   ]
 }
