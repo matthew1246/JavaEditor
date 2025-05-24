@@ -98,6 +98,7 @@ public class Git {
 				String substring=directory.replace(root_directory.replace("/","\\"),"");
 				substring=substring.replace("\\","");
 				git("git switch "+substring,root_directory);
+				frame.setTitle(substring);
 			}
 		});
 	}

@@ -27,7 +27,8 @@
   "s": [
     "selected_label",
     "selected_index",
-    "sublink"
+    "sublink",
+    "substring"
   ],
   "sel": [
     "selected_label"
@@ -111,8 +112,8 @@
   ],
   "su": [
     "suggestionbox",
-    "substring",
-    "sublink"
+    "sublink",
+    "substring"
   ],
   "List": [
     "List"
@@ -371,8 +372,8 @@
     "root_directory"
   ],
   "sub": [
-    "substring",
-    "sublink"
+    "sublink",
+    "substring"
   ],
   "ma": [
     "mainbranch"
@@ -382,7 +383,8 @@
     "while"
   ],
   "f": [
-    "for"
+    "for",
+    "frame"
   ],
   "": [
     "System",
@@ -407,7 +409,9 @@
     "pluspanel",
     "JOptionPane",
     "null",
-    "index"
+    "index",
+    "frame",
+    "substring"
   ],
   "Syst": [
     "System"
@@ -727,5 +731,35 @@
   ],
   "index": [
     "index"
+  ],
+  "fr": [
+    "frame"
+  ],
+  "fra": [
+    "frame"
+  ],
+  "fram": [
+    "frame"
+  ],
+  "frame": [
+    "frame"
+  ],
+  "subs": [
+    "substring"
+  ],
+  "subst": [
+    "substring"
+  ],
+  "substr": [
+    "substring"
+  ],
+  "substri": [
+    "substring"
+  ],
+  "substrin": [
+    "substring"
+  ],
+  "substring": [
+    "substring"
   ]
 }

@@ -43,7 +43,8 @@
     "disable",
     "addWindowListener",
     "setVisible",
-    "dispose"
+    "dispose",
+    "setTitle"
   ],
   "KeyEvent": [
     "getKeyText",
