@@ -2987,7 +2987,7 @@ class AutoKeyListener {
 			public void mouseClicked(MouseEvent me) {
 				Component label=panelgridlayout.getComponentAt(me.getPoint());
 				if(label instanceof JLabel) {
-					JOptionPane.showMessageDialog(null,((JLabel)label).getText());
+					AutoKeyListener.this.EnterText(((JLabel)label).getText());
 				}
 			}
 		});
