@@ -2,13 +2,13 @@ import javax.swing.JTextArea;
 public class Tracker {
 	public boolean isDeleted = false;
 	public boolean isSelected = false;
-	public JTextArea textarea;
+	public Main main;
 	public String previous;
 	public boolean hasFinished;
 	public boolean wasHighlighted = false;
 	public int start = -1;
-	public Tracker(JTextArea textarea) {
-		this.textarea = textarea;
+	public Tracker(Main main) {
+		this.main = main;
 	}
 	
 	public void setIsDeleted(boolean isDeleted) {
@@ -28,8 +28,8 @@ public class Tracker {
 	}
 	
 	public void isHighlighted() {
-		this.start = textarea.getSelectionStart();
-		previous = textarea.getText().substring(start,textarea.getSelectionEnd());
+		this.start = main.textarea.getSelectionStart();
+		previous = main.textarea.getText().substring(start,main.textarea.getSelectionEnd());
 		hasFinished = false;
 		wasHighlighted = true;
 	}
@@ -43,9 +43,9 @@ public class Tracker {
 		if(hasFinished || start == -1) {
 			return false;
 		}
-		int cursor = textarea.getCaretPosition();
+		int cursor = main.textarea.getCaretPosition();
 		if(cursor > start) {
-			String wholetext = textarea.getText();
+			String wholetext = main.textarea.getText();
 			String line = wholetext.substring(start,wholetext.length());
 			int index = start+line.indexOf("=");
 			if(cursor < index) {
@@ -63,6 +63,6 @@ public class Tracker {
 	}
 	
 	public String getVariable() {
-		return textarea.getText().substring(start,textarea.getCaretPosition());
+		return main.textarea.getText().substring(start,main.textarea.getCaretPosition());
 	}
 }

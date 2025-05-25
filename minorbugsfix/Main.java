@@ -1233,8 +1233,9 @@ public class Main {
 		combobox.addItemListener((ev) -> {
 			selectCode(ev);
 		});
-		curlybracekeylistener = new CurlyBraceKeyListener(textarea,this);
- 		textarea.addKeyListener(curlybracekeylistener);
+		curlybracekeylistener = new CurlyBraceKeyListener(this);				
+		positiontrackers.add(curlybracekeylistener.positiontracker);
+ 		textarea.addKeyListener(curlybracekeylistener); 		
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
@@ -1844,6 +1845,7 @@ public class Main {
 		});		
 		frame.getRootPane().setDefaultButton(go_to_line_number);		
 	}
+	public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
 		try {
 			int index=tabbedpane.getSelectedIndex();
@@ -1881,12 +1883,16 @@ public class Main {
 					textarea2.setTabSize(4);
 					textarea2.setText(lines);
 					
+					textarea2.addKeyListener(curlybracekeylistener);
+					positiontrackers.add(new PositionTracker(textarea2));
+					
 					tabbedpane.addTab(filename,scrollpane2);
 					tabbedpane.addTab("+",pluspanel);
 					tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 				}
 			}
-			Main.this.fileName=fileNames.get(tabbedpane.getSelectedIndex());
+			fileName=fileNames.get(tabbedpane.getSelectedIndex());
+			curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 			Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 		} catch(IOException ex) {
@@ -2196,7 +2202,7 @@ class SaveActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		try {
 			String text = main.textarea.getText();
-			if(!main.fileName.equals("")) {
+			if(!main.fileName.equals("")) {			
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
 				output.close();
@@ -2255,22 +2261,19 @@ class OpenActionListener implements ActionListener {
 }
 
 class CurlyBraceKeyListener implements KeyListener {
-	public Main main;
-	private JTextArea textarea;
-	
+	public Main main;
 	protected Tracker tracker;
 	public RenameVariable renamevariable;
-	public CurlyBraceKeyListener(JTextArea textarea,Main main) {
-		this.textarea = textarea;
+	public CurlyBraceKeyListener(Main main) {
 		this.main = main;
-		selectedlines = new SelectedLines(textarea);
-		tracker = new Tracker(textarea);
-		renamevariable=new RenameVariable(textarea);
-		positiontracker= new PositionTracker(textarea);
+		selectedlines = new SelectedLines(main);
+		tracker = new Tracker(main);
+		renamevariable=new RenameVariable(main);
+		positiontracker= new PositionTracker(main.textarea);
 		autokeylistener = new AutoKeyListener(main);
 	}
 	public boolean isEndOfFile() {
-		return textarea.getCaretPosition() == textarea.getText().length();
+		return main.textarea.getCaretPosition() == main.textarea.getText().length();
 	}
 	private boolean isShift = false;
 	private boolean isControlDown = false;
@@ -2299,9 +2302,9 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;	
 		}		
 		if(ev.getKeyChar() =='.') {
-			String text = textarea.getText();
-			Middle middle = new Middle(textarea);
-			int caretposition = textarea.getCaretPosition();
+			String text = main.textarea.getText();
+			Middle middle = new Middle(main.textarea);
+			int caretposition = main.textarea.getCaretPosition();
 			//String currentline=middle.getWholeLine2(caretposition);
 			String currentline = middle.getCurrentLine();
 			Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
@@ -2376,10 +2379,10 @@ class CurlyBraceKeyListener implements KeyListener {
 		** This is a variable suggestion box not a method
 		** suggestionbox.
 		*/
-		int caretposition = textarea.getCaretPosition();
+		int caretposition = main.textarea.getCaretPosition();
 		//JOptionPane.showMessageDialog(null,caretposition+"");
 		
-		Middle middle = new Middle(textarea);
+		Middle middle = new Middle(main.textarea);
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
@@ -2405,15 +2408,15 @@ class CurlyBraceKeyListener implements KeyListener {
 			case KeyEvent.VK_Z:
 				if(ev.isControlDown()) {
 					Selection selection=positiontracker.previous();
-					textarea.setText(selection.wholetext);
-					textarea.setCaretPosition(selection.cursor);
+					main.textarea.setText(selection.wholetext);
+					main.textarea.setCaretPosition(selection.cursor);
 				}
 				break;
 			case KeyEvent.VK_Y:
 				if(ev.isControlDown()) {
 					Selection selection=positiontracker.next();
-					textarea.setText(selection.wholetext);
-					textarea.setCaretPosition(selection.cursor);
+					main.textarea.setText(selection.wholetext);
+					main.textarea.setCaretPosition(selection.cursor);
 				}
 			break;
 			case KeyEvent.VK_SHIFT:
@@ -2432,7 +2435,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		
 		if(!main.go_to_line_is_executed) {
 			is_content_update = true;
-			Content content = new Content(textarea);
+			Content content = new Content(main.textarea);
 			char character = ev.getKeyChar();
 			if(character == '\n') {
 				content.NewLineCharacter();
@@ -2453,8 +2456,8 @@ class CurlyBraceKeyListener implements KeyListener {
 			main.go_to_line_is_executed = false;
 		}
 		if(isControlDown && ev.getKeyCode() == KeyEvent.VK_D) {
-			int oldcaretposition = textarea.getCaretPosition();
-			Middle middle = new Middle(textarea);
+			int oldcaretposition = main.textarea.getCaretPosition();
+			Middle middle = new Middle(main.textarea);
 			
 			String[] first_half_lines = middle.first_half_lines;
 			String[] first_half = new String[first_half_lines.length-1];
@@ -2471,15 +2474,15 @@ class CurlyBraceKeyListener implements KeyListener {
 			}
 			String secondhalfstring = String.join("\n",array);
 			
-			textarea.setText(first_half_string+"\n"+secondhalfstring);
-			textarea.setCaretPosition(oldcaretposition);
+			main.textarea.setText(first_half_string+"\n"+secondhalfstring);
+			main.textarea.setCaretPosition(oldcaretposition);
 		}
 		else if(isControlDown && ev.getKeyCode() == KeyEvent.VK_R) {
 			try {
 				String lines = Files.readString(Paths.get(main.fileName),StandardCharsets.UTF_8);
-				int caretposition = textarea.getCaretPosition();
-				textarea.setText(lines);
-				textarea.setCaretPosition(caretposition);
+				int caretposition = main.textarea.getCaretPosition();
+				main.textarea.setText(lines);
+				main.textarea.setCaretPosition(caretposition);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -2673,7 +2676,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				public void keyReleased(KeyEvent keyevent) {
 					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 						suggestionbox.dispose();
-						String text = textarea.getText();
+						String text = main.textarea.getText();
 						// String selected = search_textfield.getText().trim();
 						JLabel selected_label2 =labels[selected_index];
 						String selected = selected_label2.getText();
@@ -2704,8 +2707,8 @@ class CurlyBraceKeyListener implements KeyListener {
 						}
 						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
 						String second =text.substring(caretposition+1,text.length());
-						textarea.setText(firsthalf+second);
-						textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
+						main.textarea.setText(firsthalf+second);
+						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
 					}
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 						liveiterator.reset();
@@ -2755,9 +2758,9 @@ class CurlyBraceKeyListener implements KeyListener {
 			search_textfield.addKeyListener(keylistener);
 			//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
 			suggestionbox.add(scrollpane);
-			Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+			Rectangle2D rectanglecoords=main.textarea.modelToView2D(caretposition);
 			Point screencoordinates= new Point((int)rectanglecoords.getX(),(int)rectanglecoords.getY());
-			SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
 			suggestionbox.setLocation(screencoordinates);
 			//suggestionbox.pack();
 			suggestionbox.setVisible(true);
@@ -3180,4 +3183,4 @@ class AutoKeyListener {
 		data = variablenames2;
 		return variablenames2.size() > 0;
 	}
-}
+	}

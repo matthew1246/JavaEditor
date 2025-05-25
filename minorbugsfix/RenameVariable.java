@@ -3,9 +3,9 @@ import java.util.regex.*;
 import javax.swing.JOptionPane;
 import java.io.*;
 public class RenameVariable {
-	public JTextArea textarea;
-	public RenameVariable(JTextArea textarea) {
-		this.textarea = textarea;
+	public Main main;
+	public RenameVariable(Main main) {
+		this.main = main;
 	}
 	public String firstSelected;
 	public int firstSelectedIndex;
@@ -15,13 +15,13 @@ public class RenameVariable {
 	public int matcherend2;
 	public int endSelectedIndex;
 	public void track() {
-		int caretposition = textarea.getCaretPosition();
+		int caretposition = main.textarea.getCaretPosition();
 		if(startTracking) {
-			if(linenumber != getLineNumber(textarea.getText().substring(0,caretposition))) {
+			if(linenumber != getLineNumber(main.textarea.getText().substring(0,caretposition))) {
 				startTracking = false;
 			}
 		}
-		Middle middle = new Middle(textarea);
+		Middle middle = new Middle(main.textarea);
 		Pattern pattern = Pattern.compile("^((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))");
 		String line = middle.getCurrentWholeLine();
 		Matcher matcher = pattern.matcher(line);
@@ -37,8 +37,8 @@ public class RenameVariable {
 					
 					endSelectedIndex = caretposition+matcherend1-index;
 					
-					wholetext=textarea.getText();
-					linenumber = getLineNumber(textarea.getText().substring(0,caretposition));
+					wholetext=main.textarea.getText();
+					linenumber = getLineNumber(main.textarea.getText().substring(0,caretposition));
 				}
 			}
 		} else {
@@ -58,9 +58,9 @@ public class RenameVariable {
 		return linenumber2;
 	}
 	public void replace() {
-		int caretposition = textarea.getCaretPosition();
-		if(linenumber == getLineNumber(textarea.getText().substring(0,caretposition))) {
-			Middle middle = new Middle(textarea);
+		int caretposition = main.textarea.getCaretPosition();
+		if(linenumber == getLineNumber(main.textarea.getText().substring(0,caretposition))) {
+			Middle middle = new Middle(main.textarea);
 			Pattern pattern = Pattern.compile("^((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))");
 			String line = middle.getCurrentWholeLine();
 			Matcher matcher = pattern.matcher(line);
@@ -80,10 +80,10 @@ public class RenameVariable {
 						difference=difference+index-matcherend;
 						
 						String replacement=wholetext.replace(firstSelected,selected);
-						textarea.setText(replacement);
-						textarea.setCaretPosition(endSelectedIndex+difference);
-						/*textarea.setSelectionStart(caretposition+(caretposition+difference);
-						textarea.setSelectionEnd(caretposition+difference);*/
+						main.textarea.setText(replacement);
+						main.textarea.setCaretPosition(endSelectedIndex+difference);
+						/*main.textarea.setSelectionStart(caretposition+(caretposition+difference);
+						main.textarea.setSelectionEnd(caretposition+difference);*/
 					}
 				}
 			}

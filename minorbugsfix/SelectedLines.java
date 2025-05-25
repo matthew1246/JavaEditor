@@ -1,17 +1,17 @@
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
 public class SelectedLines {
-    private JTextArea textarea;
-    public SelectedLines(JTextArea textarea)
+    private Main main;
+    public SelectedLines(Main main)
     {
-	  this.textarea = textarea;
+	  this.main = main;
     }
 
     public void ShiftTab() {
-	  	start=textarea.getSelectionStart();
-		end= textarea.getSelectionEnd();
+	  	start=main.textarea.getSelectionStart();
+		end= main.textarea.getSelectionEnd();
 	  	// javax.swing.JOptionPane.showMessageDialog(selected,"shifttab");
-		  String wholetext = textarea.getText();		  
+		  String wholetext = main.textarea.getText();		  
 	  
 	  
 		  
@@ -25,30 +25,30 @@ public class SelectedLines {
 	  selected = String.join("\n",lines);
 	  String first = wholetext.substring(0,start-1);
 	  String second =wholetext.substring(end,wholetext.length());
-	  textarea.setText(first+selected+second);
+	  main.textarea.setText(first+selected+second);
 	  lines_length = lines.length;
 	  	  
 	  MoveOneLineLeft(start);	  
 	  	  
-	  textarea.requestFocus();
-	  textarea.setSelectionStart(start);
-	textarea.setSelectionEnd(start);  
+	  main.textarea.requestFocus();
+	  main.textarea.setSelectionStart(start);
+	main.textarea.setSelectionEnd(start);  
     }
 
     public void ShiftTabOutput() {
     	//javax.swing.JOptionPane.showMessageDialog(selected,"ShiftTab");
 	if(start != end) {
-		textarea.setSelectionStart(start-1);
-		textarea.setSelectionEnd(end-lines_length);  
+		main.textarea.setSelectionStart(start-1);
+		main.textarea.setSelectionEnd(end-lines_length);  
 	}
 	else {
-		textarea.setSelectionStart(start-1);
-		textarea.setSelectionEnd(end-1);
+		main.textarea.setSelectionStart(start-1);
+		main.textarea.setSelectionEnd(end-1);
 	}
     }
     public void MoveOneLineLeft( int start) {
-	  textarea.setCaretPosition(start);
-	  Middle middle = new Middle(textarea);
+	  main.textarea.setCaretPosition(start);
+	  Middle middle = new Middle(main.textarea);
 	  String line=middle.getCurrentLine();
 	  line=line.replaceFirst("\t","");
 	  middle.setCurrentLine(line);
@@ -58,15 +58,15 @@ public class SelectedLines {
     private int end;
     private String wholetext2;
     public void TabMultipleLines() {
-    	  start=textarea.getSelectionStart();
-	  end= textarea.getSelectionEnd();
+    	  start=main.textarea.getSelectionStart();
+	  end= main.textarea.getSelectionEnd();
 	  if(start == end) {
-		  Middle middle2 = new Middle(textarea);
+		  Middle middle2 = new Middle(main.textarea);
 		  middle2.addMiddle("\t");
 		  return;
 	  }	  
 	  
-	  String wholetext = textarea.getText();
+	  String wholetext = main.textarea.getText();
 	  String first = wholetext.substring(0,start);
 	  String middle6=wholetext.substring(start,end);
 	  String last = wholetext.substring(end,wholetext.length());
@@ -85,28 +85,28 @@ public class SelectedLines {
 	  	
 	wholetext2=first+middle+last;
 	
-	textarea.setText(wholetext2);
+	main.textarea.setText(wholetext2);
 	
-	textarea.setCaretPosition(start);
-	Middle middle2 = new Middle(textarea);
+	main.textarea.setCaretPosition(start);
+	Middle middle2 = new Middle(main.textarea);
 	String line=middle2.getCurrentLineFromWholeIndex(start);
 	line="\t"+line;
 	middle2.setWholeCurrentLine(line);
 	
-	textarea.requestFocus();
-	textarea.setSelectionStart(start);
-	textarea.setSelectionEnd(start);
+	main.textarea.requestFocus();
+	main.textarea.setSelectionStart(start);
+	main.textarea.setSelectionEnd(start);
     }
     
     public void TabMultipleLinesOutput() {
    	  //javax.swing.JOptionPane.showMessageDialog(selected,"Tab");
    	  if(start != end) { 
-		  textarea.setSelectionStart(start+1);
-		  textarea.setSelectionEnd(end+lines_length);
+		  main.textarea.setSelectionStart(start+1);
+		  main.textarea.setSelectionEnd(end+lines_length);
 	  }
 	  else {
-	  	textarea.setSelectionStart(start+1);
-	  	textarea.setSelectionEnd(start+1);
+	  	main.textarea.setSelectionStart(start+1);
+	  	main.textarea.setSelectionEnd(start+1);
   	}
   }
 }

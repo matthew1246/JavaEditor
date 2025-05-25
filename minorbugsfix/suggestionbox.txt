@@ -13,7 +13,8 @@
   "Main": [
     "frame",
     "textarea",
-    "keywords"
+    "keywords",
+    "positiontrackers"
   ],
   "JDialog": [
     "show"
@@ -151,5 +152,11 @@
   ],
   "KeyStroke": [
     "getKeyStroke"
+  ],
+  "CurlyBraceKeyListener": [
+    "positiontracker"
+  ],
+  "JTabbedPane": [
+    "getSelectedIndex"
   ]
 }

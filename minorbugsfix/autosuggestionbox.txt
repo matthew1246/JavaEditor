@@ -3,7 +3,10 @@
     "text",
     "tab_keystroke",
     "textarea",
-    "title"
+    "tabbedpane",
+    "title",
+    "true",
+    "textarea2"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -11,7 +14,8 @@
     "String"
   ],
   "Array": [
-    "Arraylist"
+    "Arraylist",
+    "ArrayList"
   ],
   "l": [
     "labels",
@@ -71,7 +75,8 @@
     "apiclasses"
   ],
   "Arra": [
-    "Arraylist"
+    "Arraylist",
+    "ArrayList"
   ],
   "Strin": [
     "String"
@@ -100,7 +105,8 @@
   ],
   "te": [
     "text",
-    "textarea"
+    "textarea",
+    "textarea2"
   ],
   "i": [
     "input",
@@ -114,10 +120,12 @@
     "caretposition"
   ],
   "textarea": [
-    "textarea"
+    "textarea",
+    "textarea2"
   ],
   "textare": [
-    "textarea"
+    "textarea",
+    "textarea2"
   ],
   "su": [
     "sublink",
@@ -189,7 +197,8 @@
     "classes"
   ],
   "Arr": [
-    "Arraylist"
+    "Arraylist",
+    "ArrayList"
   ],
   "L": [
     "List"
@@ -261,7 +270,8 @@
     "pattern"
   ],
   "text": [
-    "textarea"
+    "textarea",
+    "textarea2"
   ],
   "Mat": [
     "Matcher"
@@ -386,7 +396,8 @@
     "substring"
   ],
   "ma": [
-    "mainbranch"
+    "mainbranch",
+    "main"
   ],
   "wh": [
     "whichbranch",
@@ -438,18 +449,29 @@
     "search_textfield",
     "KeyEvent",
     "else",
-    "add",
     "JMenuItem",
     "new",
-    "public",
     "void",
-    "JOptionPane",
-    "null",
     "EventObject",
-    "title",
     "KeyStroke",
     "opennewtab",
-    "control_t"
+    "control_t",
+    "add",
+    "textarea",
+    "public",
+    "Position",
+    "positiontracker",
+    "ArrayList",
+    "main",
+    "JTextArea",
+    "tabbedpane",
+    "title",
+    "JOptionPane",
+    "null",
+    "true",
+    "positiontrackers",
+    "curlybracekeylistener",
+    "textarea2"
   ],
   "Syst": [
     "System"
@@ -532,7 +554,8 @@
     "class_one",
     "class",
     "classes",
-    "control_t"
+    "control_t",
+    "curlybracekeylistener"
   ],
   "cla": [
     "class_one",
@@ -630,10 +653,12 @@
     "List"
   ],
   "A": [
-    "Arraylist"
+    "Arraylist",
+    "ArrayList"
   ],
   "Ar": [
-    "Arraylist"
+    "Arraylist",
+    "ArrayList"
   ],
   "Arrayl": [
     "Arraylist"
@@ -648,6 +673,7 @@
     "JFrame",
     "JLabel",
     "JMenuItem",
+    "JTextArea",
     "JOptionPane"
   ],
   "JO": [
@@ -743,7 +769,9 @@
   "p": [
     "pluspanel",
     "panelgridlayout",
-    "public"
+    "public",
+    "positiontracker",
+    "positiontrackers"
   ],
   "pl": [
     "pluspanel"
@@ -1410,5 +1438,235 @@
   ],
   "control_t": [
     "control_t"
+  ],
+  "m": [
+    "main"
+  ],
+  "tex": [
+    "textarea",
+    "textarea2"
+  ],
+  "texta": [
+    "textarea",
+    "textarea2"
+  ],
+  "textar": [
+    "textarea",
+    "textarea2"
+  ],
+  "cu": [
+    "curlybracekeylistener"
+  ],
+  "cur": [
+    "curlybracekeylistener"
+  ],
+  "curl": [
+    "curlybracekeylistener"
+  ],
+  "curly": [
+    "curlybracekeylistener"
+  ],
+  "curlyb": [
+    "curlybracekeylistener"
+  ],
+  "curlybr": [
+    "curlybracekeylistener"
+  ],
+  "curlybra": [
+    "curlybracekeylistener"
+  ],
+  "curlybrac": [
+    "curlybracekeylistener"
+  ],
+  "curlybrace": [
+    "curlybracekeylistener"
+  ],
+  "curlybracek": [
+    "curlybracekeylistener"
+  ],
+  "curlybraceke": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekey": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeyl": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeyli": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeylis": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeylist": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeyliste": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeylisten": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeylistene": [
+    "curlybracekeylistener"
+  ],
+  "curlybracekeylistener": [
+    "curlybracekeylistener"
+  ],
+  "po": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "pos": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "posi": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "posit": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positi": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positio": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "position": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positiont": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positiontr": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positiontra": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positiontrac": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positiontrack": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positiontracke": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "positiontracker": [
+    "positiontracker",
+    "positiontrackers"
+  ],
+  "ta": [
+    "tabbedpane"
+  ],
+  "tab": [
+    "tabbedpane"
+  ],
+  "tabb": [
+    "tabbedpane"
+  ],
+  "tabbe": [
+    "tabbedpane"
+  ],
+  "tabbed": [
+    "tabbedpane"
+  ],
+  "tabbedp": [
+    "tabbedpane"
+  ],
+  "tabbedpa": [
+    "tabbedpane"
+  ],
+  "tabbedpan": [
+    "tabbedpane"
+  ],
+  "tabbedpane": [
+    "tabbedpane"
+  ],
+  "P": [
+    "Position"
+  ],
+  "Po": [
+    "Position"
+  ],
+  "Pos": [
+    "Position"
+  ],
+  "Posi": [
+    "Position"
+  ],
+  "Posit": [
+    "Position"
+  ],
+  "Positi": [
+    "Position"
+  ],
+  "Positio": [
+    "Position"
+  ],
+  "Position": [
+    "Position"
+  ],
+  "ArrayL": [
+    "ArrayList"
+  ],
+  "ArrayLi": [
+    "ArrayList"
+  ],
+  "ArrayLis": [
+    "ArrayList"
+  ],
+  "ArrayList": [
+    "ArrayList"
+  ],
+  "JT": [
+    "JTextArea"
+  ],
+  "JTe": [
+    "JTextArea"
+  ],
+  "JTex": [
+    "JTextArea"
+  ],
+  "JText": [
+    "JTextArea"
+  ],
+  "JTextA": [
+    "JTextArea"
+  ],
+  "JTextAr": [
+    "JTextArea"
+  ],
+  "JTextAre": [
+    "JTextArea"
+  ],
+  "JTextArea": [
+    "JTextArea"
+  ],
+  "tru": [
+    "true"
+  ],
+  "true": [
+    "true"
+  ],
+  "positiontrackers": [
+    "positiontrackers"
+  ],
+  "textarea2": [
+    "textarea2"
   ]
 }
