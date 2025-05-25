@@ -36,8 +36,8 @@
     "selected_index",
     "sublink",
     "substring",
-    "suggestionbox",
-    "search_textfield"
+    "search_textfield",
+    "suggestionbox"
   ],
   "sel": [
     "selected_label"
@@ -443,11 +443,9 @@
     "JLabel",
     "WindowAdapter",
     "Override",
-    "suggestionbox",
     "import",
     "KeyAdapter",
     "search_textfield",
-    "KeyEvent",
     "else",
     "JMenuItem",
     "new",
@@ -471,7 +469,9 @@
     "true",
     "positiontrackers",
     "curlybracekeylistener",
-    "textarea2"
+    "textarea2",
+    "KeyEvent",
+    "suggestionbox"
   ],
   "Syst": [
     "System"
@@ -1198,18 +1198,18 @@
   ],
   "K": [
     "KeyAdapter",
-    "KeyEvent",
-    "KeyStroke"
+    "KeyStroke",
+    "KeyEvent"
   ],
   "Ke": [
     "KeyAdapter",
-    "KeyEvent",
-    "KeyStroke"
+    "KeyStroke",
+    "KeyEvent"
   ],
   "Key": [
     "KeyAdapter",
-    "KeyEvent",
-    "KeyStroke"
+    "KeyStroke",
+    "KeyEvent"
   ],
   "KeyA": [
     "KeyAdapter"

@@ -53,9 +53,9 @@
   "KeyEvent": [
     "getKeyText",
     "getKeyChar",
+    "getExtendedKeyCode",
     "getKeyCode",
-    "VK_ESCAPE",
-    "getExtendedKeyCode"
+    "VK_ESCAPE"
   ],
   "JLabel": [
     "getText",

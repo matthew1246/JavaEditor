@@ -2627,7 +2627,10 @@ class CurlyBraceKeyListener implements KeyListener {
 				int selected_index = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
-					if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
+					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+						suggestionbox.dispose();
+					}
+					else if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 						labels[selected_index].setOpaque(false);
 						labels[selected_index].setBackground(new JLabel().getBackground());
 						panelgridlayout.validate();
