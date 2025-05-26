@@ -13,9 +13,9 @@
   "Main": [
     "frame",
     "keywords",
-    "positiontrackers",
     "curlybracekeylistener",
     "setKeywords",
+    "positiontrackers",
     "textarea"
   ],
   "JDialog": [

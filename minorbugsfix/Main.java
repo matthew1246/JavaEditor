@@ -3001,15 +3001,12 @@ class AutoKeyListener {
 						fillComboBox();
 					}
 					else {
+						EnterText(input);
 						if(keyevent.getKeyChar()=='.') {
-							EnterText(input.substring(0,input.length()));
 							main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
 							//main.curlybracekeylistener.keyPressed(keyevent);
 							KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
 							main.textarea.dispatchEvent(keyevent2);
-						}
-						else {
-							EnterText(input);
 						}
 					}
 				}
