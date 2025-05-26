@@ -2307,6 +2307,7 @@ class CurlyBraceKeyListener implements KeyListener {
 			int caretposition = main.textarea.getCaretPosition();
 			//String currentline=middle.getWholeLine2(caretposition);
 			String currentline = middle.getCurrentLine();
+			JOptionPane.showMessageDialog(null,caretposition);
 			Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
 			Matcher matcher=pattern3.matcher(currentline);
 			if(matcher.find()) {
@@ -3002,10 +3003,11 @@ class AutoKeyListener {
 					}
 					else {
 						if(keyevent.getKeyChar()=='.') {
-							EnterText(input.substring(0,input.length()-1));
-							int caretposition=main.textarea.getCaretPosition();
-							main.textarea.setCaretPosition(caretposition+1);
-							main.curlybracekeylistener.keyPressed(keyevent);
+							EnterText(input.substring(0,input.length()));
+							main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+							//main.curlybracekeylistener.keyPressed(keyevent);
+							KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
+							main.textarea.dispatchEvent(keyevent2);
 						}
 						else {
 							EnterText(input);

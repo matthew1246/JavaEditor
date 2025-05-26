@@ -38,8 +38,9 @@
     "split",
     "replace",
     "replaceAll",
-    "trim",
     "substring",
+    "trim",
+    "contains",
     "length"
   ],
   "JFrame": [
@@ -55,10 +56,11 @@
   "KeyEvent": [
     "getKeyText",
     "getExtendedKeyCode",
-    "getKeyCode",
     "VK_ESCAPE",
     "setKeyChar",
-    "getKeyChar"
+    "getKeyChar",
+    "KEY_PRESSED",
+    "getKeyCode"
   ],
   "JLabel": [
     "getText",
@@ -75,7 +77,8 @@
     "next"
   ],
   "System": [
-    "out"
+    "out",
+    "currentTimeMillis"
   ],
   "PrintStream": [
     "println"
@@ -86,6 +89,9 @@
   "JTextArea": [
     "getText",
     "setText",
+    "dispatchEventToSelf",
+    "dispatchEventImpl",
+    "dispatchEvent",
     "getCaretPosition",
     "setCaretPosition"
   ],

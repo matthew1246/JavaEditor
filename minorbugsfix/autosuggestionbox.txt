@@ -3,15 +3,15 @@
     "tab_keystroke",
     "tabbedpane",
     "title",
-    "true",
     "textarea2",
-    "textarea",
-    "text"
+    "text",
+    "true",
+    "textarea"
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "System",
-    "String"
+    "String",
+    "System"
   ],
   "Array": [
     "Arraylist",
@@ -106,8 +106,8 @@
   ],
   "te": [
     "textarea2",
-    "textarea",
-    "text"
+    "text",
+    "textarea"
   ],
   "i": [
     "int",
@@ -275,8 +275,8 @@
   ],
   "text": [
     "textarea2",
-    "textarea",
-    "text"
+    "text",
+    "textarea"
   ],
   "Mat": [
     "Matcher"
@@ -285,7 +285,8 @@
     "matcher"
   ],
   "ke": [
-    "keywords"
+    "keywords",
+    "keyevent2"
   ],
   "a": [
     "add"
@@ -294,13 +295,15 @@
     "keywords"
   ],
   "key": [
-    "keywords"
+    "keywords",
+    "keyevent2"
   ],
   "mai": [
     "main"
   ],
   "k": [
-    "keywords"
+    "keywords",
+    "keyevent2"
   ],
   "pub": [
     "public"
@@ -413,7 +416,6 @@
     "frame"
   ],
   "": [
-    "System",
     "class_one",
     "with_capitols",
     "Iterator",
@@ -458,7 +460,6 @@
     "JTextArea",
     "tabbedpane",
     "title",
-    "true",
     "positiontrackers",
     "textarea2",
     "suggestionbox",
@@ -470,21 +471,25 @@
     "JFrame",
     "frame",
     "goto",
-    "KeyEvent",
     "HashMap",
-    "null",
     "else",
-    "input",
     "substring",
     "curlybracekeylistener",
-    "main",
     "KeyListener",
-    "textarea",
     "1",
     "text",
     "dotcaretposition",
+    "System",
+    "KeyEvent",
+    "keyevent2",
+    "true",
+    "input",
+    "currentline",
     "JOptionPane",
-    "caretposition"
+    "caretposition",
+    "null",
+    "textarea",
+    "main"
   ],
   "Syst": [
     "System"
@@ -569,6 +574,7 @@
     "control_t",
     "class",
     "curlybracekeylistener",
+    "currentline",
     "caretposition"
   ],
   "cla": [
@@ -1213,20 +1219,20 @@
   "K": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyEvent",
-    "KeyListener"
+    "KeyListener",
+    "KeyEvent"
   ],
   "Ke": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyEvent",
-    "KeyListener"
+    "KeyListener",
+    "KeyEvent"
   ],
   "Key": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyEvent",
-    "KeyListener"
+    "KeyListener",
+    "KeyEvent"
   ],
   "KeyA": [
     "KeyAdapter"
@@ -1461,8 +1467,8 @@
   ],
   "tex": [
     "textarea2",
-    "textarea",
-    "text"
+    "text",
+    "textarea"
   ],
   "texta": [
     "textarea2",
@@ -1473,10 +1479,12 @@
     "textarea"
   ],
   "cu": [
-    "curlybracekeylistener"
+    "curlybracekeylistener",
+    "currentline"
   ],
   "cur": [
-    "curlybracekeylistener"
+    "curlybracekeylistener",
+    "currentline"
   ],
   "curl": [
     "curlybracekeylistener"
@@ -1809,5 +1817,50 @@
   ],
   "caretposition": [
     "caretposition"
+  ],
+  "System": [
+    "System"
+  ],
+  "keye": [
+    "keyevent2"
+  ],
+  "keyev": [
+    "keyevent2"
+  ],
+  "keyeve": [
+    "keyevent2"
+  ],
+  "keyeven": [
+    "keyevent2"
+  ],
+  "keyevent": [
+    "keyevent2"
+  ],
+  "keyevent2": [
+    "keyevent2"
+  ],
+  "curr": [
+    "currentline"
+  ],
+  "curre": [
+    "currentline"
+  ],
+  "curren": [
+    "currentline"
+  ],
+  "current": [
+    "currentline"
+  ],
+  "currentl": [
+    "currentline"
+  ],
+  "currentli": [
+    "currentline"
+  ],
+  "currentlin": [
+    "currentline"
+  ],
+  "currentline": [
+    "currentline"
   ]
 }
