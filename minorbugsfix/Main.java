@@ -2996,12 +2996,20 @@ class AutoKeyListener {
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-					String input = getInput();
+					String input = search_textfield.getText();
 					if(search(input)) {
 						fillComboBox();
 					}
 					else {
-						EnterText();
+						if(keyevent.getKeyChar()=='.') {
+							EnterText(input.substring(0,input.length()-1));
+							int caretposition=main.textarea.getCaretPosition();
+							main.textarea.setCaretPosition(caretposition+1);
+							main.curlybracekeylistener.keyPressed(keyevent);
+						}
+						else {
+							EnterText(input);
+						}
 					}
 				}
 			}
@@ -3078,25 +3086,20 @@ class AutoKeyListener {
 		EnterText(input);
 	}
 	public void EnterText(String input) {
-		try {
-		String text = main.textarea.getText();
-		//JOptionPane.showMessageDialog(null,caretposition+"");
-
-		String first=text.substring(0,caretposition);
-		//variablename=variablename.substring(variablename.length()-1,variablename.length());
-		first=first.substring(0,first.length()-variablename.length()+1);
-		String second = text.substring(caretposition+1,text.length());
-		/*System.out.println("Start");
-		System.out.println(second);
-		System.out.println("End");
-		*/
-		main.textarea.setText(first+input+second);
-		main.textarea.setCaretPosition(first.length()+input.length());
-		suggestionbox.dispose();
-		}
-		catch(IllegalArgumentException ex) {
-			ex.printStackTrace();
-		}
+			String text = main.textarea.getText();
+			//JOptionPane.showMessageDialog(null,caretposition+"");
+	
+			String first=text.substring(0,caretposition);
+			//variablename=variablename.substring(variablename.length()-1,variablename.length());
+			first=first.substring(0,first.length()-variablename.length()+1);
+			String second = text.substring(caretposition+1,text.length());
+			/*System.out.println("Start");
+			System.out.println(second);
+			System.out.println("End");
+			*/
+			main.textarea.setText(first+input+second);
+			main.textarea.setCaretPosition(first.length()+input.length());
+			suggestionbox.dispose();
 	}
 	public JLabel getSelected() {
 		for(Component component:panelgridlayout.getComponents()) {

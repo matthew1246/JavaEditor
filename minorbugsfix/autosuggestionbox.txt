@@ -1,12 +1,12 @@
 {
   "t": [
-    "text",
     "tab_keystroke",
-    "textarea",
     "tabbedpane",
     "title",
     "true",
-    "textarea2"
+    "textarea2",
+    "textarea",
+    "text"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -35,9 +35,10 @@
     "selected_label",
     "selected_index",
     "sublink",
-    "substring",
+    "suggestionbox",
     "search_textfield",
-    "suggestionbox"
+    "static",
+    "substring"
   ],
   "sel": [
     "selected_label"
@@ -87,10 +88,10 @@
     "value"
   ],
   "in": [
-    "input",
     "int",
     "index",
-    "instanceof"
+    "instanceof",
+    "input"
   ],
   "main": [
     "main"
@@ -104,33 +105,33 @@
     "variablename"
   ],
   "te": [
-    "text",
+    "textarea2",
     "textarea",
-    "textarea2"
+    "text"
   ],
   "i": [
-    "input",
     "int",
     "iterator",
     "index",
     "instanceof",
-    "import"
+    "import",
+    "input"
   ],
   "ca": [
     "caretposition"
   ],
   "textarea": [
-    "textarea",
-    "textarea2"
+    "textarea2",
+    "textarea"
   ],
   "textare": [
-    "textarea",
-    "textarea2"
+    "textarea2",
+    "textarea"
   ],
   "su": [
     "sublink",
-    "substring",
-    "suggestionbox"
+    "suggestionbox",
+    "substring"
   ],
   "List": [
     "List"
@@ -183,7 +184,8 @@
     "System"
   ],
   "st": [
-    "string"
+    "string",
+    "static"
   ],
   "Jop": [
     "Joptionpane"
@@ -194,7 +196,8 @@
   "class": [
     "classname",
     "class_one",
-    "classes"
+    "classes",
+    "class"
   ],
   "Arr": [
     "Arraylist",
@@ -219,7 +222,8 @@
     "search_textfield"
   ],
   "d": [
-    "data"
+    "data",
+    "dotcaretposition"
   ],
   "sugg": [
     "suggestionbox"
@@ -270,8 +274,9 @@
     "pattern"
   ],
   "text": [
+    "textarea2",
     "textarea",
-    "textarea2"
+    "text"
   ],
   "Mat": [
     "Matcher"
@@ -312,8 +317,8 @@
   ],
   "clas": [
     "class_one",
-    "class",
-    "classes"
+    "classes",
+    "class"
   ],
   "imp": [
     "implements",
@@ -376,8 +381,8 @@
   ],
   "cl": [
     "class_one",
-    "class",
-    "classes"
+    "classes",
+    "class"
   ],
   "fa": [
     "false"
@@ -417,7 +422,6 @@
     "sublink",
     "Hashmap",
     "for",
-    "class",
     "oneclass",
     "List",
     "classes",
@@ -425,12 +429,8 @@
     "InputStreamReader",
     "String",
     "value",
-    "HashMap",
     "pluspanel",
     "index",
-    "substring",
-    "JFrame",
-    "frame",
     "ComponentListener",
     "MouseAdapter",
     "MouseEvent",
@@ -445,33 +445,46 @@
     "Override",
     "import",
     "KeyAdapter",
-    "search_textfield",
-    "else",
     "JMenuItem",
     "new",
-    "void",
     "EventObject",
     "KeyStroke",
     "opennewtab",
     "control_t",
     "add",
-    "textarea",
-    "public",
     "Position",
     "positiontracker",
     "ArrayList",
-    "main",
     "JTextArea",
     "tabbedpane",
     "title",
-    "JOptionPane",
-    "null",
     "true",
     "positiontrackers",
-    "curlybracekeylistener",
     "textarea2",
+    "suggestionbox",
+    "search_textfield",
+    "class",
+    "public",
+    "static",
+    "void",
+    "JFrame",
+    "frame",
+    "goto",
     "KeyEvent",
-    "suggestionbox"
+    "HashMap",
+    "null",
+    "else",
+    "input",
+    "substring",
+    "curlybracekeylistener",
+    "main",
+    "KeyListener",
+    "textarea",
+    "1",
+    "text",
+    "dotcaretposition",
+    "JOptionPane",
+    "caretposition"
   ],
   "Syst": [
     "System"
@@ -552,15 +565,16 @@
   ],
   "c": [
     "class_one",
-    "class",
     "classes",
     "control_t",
-    "curlybracekeylistener"
+    "class",
+    "curlybracekeylistener",
+    "caretposition"
   ],
   "cla": [
     "class_one",
-    "class",
-    "classes"
+    "classes",
+    "class"
   ],
   "class_": [
     "class_one"
@@ -670,10 +684,10 @@
     "Arraylist"
   ],
   "J": [
-    "JFrame",
     "JLabel",
     "JMenuItem",
     "JTextArea",
+    "JFrame",
     "JOptionPane"
   ],
   "JO": [
@@ -769,9 +783,9 @@
   "p": [
     "pluspanel",
     "panelgridlayout",
-    "public",
     "positiontracker",
-    "positiontrackers"
+    "positiontrackers",
+    "public"
   ],
   "pl": [
     "pluspanel"
@@ -1199,17 +1213,20 @@
   "K": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyListener"
   ],
   "Ke": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyListener"
   ],
   "Key": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyListener"
   ],
   "KeyA": [
     "KeyAdapter"
@@ -1443,16 +1460,17 @@
     "main"
   ],
   "tex": [
+    "textarea2",
     "textarea",
-    "textarea2"
+    "text"
   ],
   "texta": [
-    "textarea",
-    "textarea2"
+    "textarea2",
+    "textarea"
   ],
   "textar": [
-    "textarea",
-    "textarea2"
+    "textarea2",
+    "textarea"
   ],
   "cu": [
     "curlybracekeylistener"
@@ -1668,5 +1686,128 @@
   ],
   "textarea2": [
     "textarea2"
+  ],
+  "stati": [
+    "static"
+  ],
+  "static": [
+    "static"
+  ],
+  "g": [
+    "goto"
+  ],
+  "go": [
+    "goto"
+  ],
+  "got": [
+    "goto"
+  ],
+  "goto": [
+    "goto"
+  ],
+  "1": [
+    "1"
+  ],
+  "KeyL": [
+    "KeyListener"
+  ],
+  "KeyLi": [
+    "KeyListener"
+  ],
+  "KeyLis": [
+    "KeyListener"
+  ],
+  "KeyList": [
+    "KeyListener"
+  ],
+  "KeyListe": [
+    "KeyListener"
+  ],
+  "KeyListen": [
+    "KeyListener"
+  ],
+  "KeyListene": [
+    "KeyListener"
+  ],
+  "KeyListener": [
+    "KeyListener"
+  ],
+  "do": [
+    "dotcaretposition"
+  ],
+  "dot": [
+    "dotcaretposition"
+  ],
+  "dotc": [
+    "dotcaretposition"
+  ],
+  "dotca": [
+    "dotcaretposition"
+  ],
+  "dotcar": [
+    "dotcaretposition"
+  ],
+  "dotcare": [
+    "dotcaretposition"
+  ],
+  "dotcaret": [
+    "dotcaretposition"
+  ],
+  "dotcaretp": [
+    "dotcaretposition"
+  ],
+  "dotcaretpo": [
+    "dotcaretposition"
+  ],
+  "dotcaretpos": [
+    "dotcaretposition"
+  ],
+  "dotcaretposi": [
+    "dotcaretposition"
+  ],
+  "dotcaretposit": [
+    "dotcaretposition"
+  ],
+  "dotcaretpositi": [
+    "dotcaretposition"
+  ],
+  "dotcaretpositio": [
+    "dotcaretposition"
+  ],
+  "dotcaretposition": [
+    "dotcaretposition"
+  ],
+  "car": [
+    "caretposition"
+  ],
+  "care": [
+    "caretposition"
+  ],
+  "caret": [
+    "caretposition"
+  ],
+  "caretp": [
+    "caretposition"
+  ],
+  "caretpo": [
+    "caretposition"
+  ],
+  "caretpos": [
+    "caretposition"
+  ],
+  "caretposi": [
+    "caretposition"
+  ],
+  "caretposit": [
+    "caretposition"
+  ],
+  "caretpositi": [
+    "caretposition"
+  ],
+  "caretpositio": [
+    "caretposition"
+  ],
+  "caretposition": [
+    "caretposition"
   ]
 }

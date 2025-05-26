@@ -12,9 +12,11 @@
   ],
   "Main": [
     "frame",
-    "textarea",
     "keywords",
-    "positiontrackers"
+    "positiontrackers",
+    "curlybracekeylistener",
+    "setKeywords",
+    "textarea"
   ],
   "JDialog": [
     "show"
@@ -37,25 +39,26 @@
     "replace",
     "replaceAll",
     "trim",
-    "length",
-    "substring"
+    "substring",
+    "length"
   ],
   "JFrame": [
     "disable",
     "addWindowListener",
     "setVisible",
-    "setTitle",
     "addComponentListener",
     "addMouseListener",
     "addKeyListener",
-    "dispose"
+    "dispose",
+    "setTitle"
   ],
   "KeyEvent": [
     "getKeyText",
-    "getKeyChar",
     "getExtendedKeyCode",
     "getKeyCode",
-    "VK_ESCAPE"
+    "VK_ESCAPE",
+    "setKeyChar",
+    "getKeyChar"
   ],
   "JLabel": [
     "getText",
@@ -81,9 +84,10 @@
     "getText"
   ],
   "JTextArea": [
+    "getText",
     "setText",
-    "setCaretPosition",
-    "getText"
+    "getCaretPosition",
+    "setCaretPosition"
   ],
   "Muck": [
     "links"
@@ -154,7 +158,8 @@
     "getKeyStroke"
   ],
   "CurlyBraceKeyListener": [
-    "positiontracker"
+    "positiontracker",
+    "keyPressed"
   ],
   "JTabbedPane": [
     "getSelectedIndex"
