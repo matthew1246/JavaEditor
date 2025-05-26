@@ -2307,7 +2307,6 @@ class CurlyBraceKeyListener implements KeyListener {
 			int caretposition = main.textarea.getCaretPosition();
 			//String currentline=middle.getWholeLine2(caretposition);
 			String currentline = middle.getCurrentLine();
-			JOptionPane.showMessageDialog(null,caretposition);
 			Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
 			Matcher matcher=pattern3.matcher(currentline);
 			if(matcher.find()) {
