@@ -46,12 +46,16 @@
   "JFrame": [
     "disable",
     "addWindowListener",
-    "setVisible",
     "addComponentListener",
     "addMouseListener",
     "addKeyListener",
     "dispose",
-    "setTitle"
+    "setTitle",
+    "setSize",
+    "getContentPane",
+    "setDefaultCloseOperation",
+    "setVisible",
+    "EXIT_ON_CLOSE"
   ],
   "KeyEvent": [
     "getKeyText",
@@ -114,10 +118,12 @@
   ],
   "JPanel": [
     "getComponentPopupMenu",
-    "add",
     "remove",
     "getComponents",
-    "getComponentAt"
+    "addMouseListener",
+    "getComponentAt",
+    "setLayout",
+    "add"
   ],
   "GridLayout": [
     "getRows",
@@ -147,7 +153,9 @@
   ],
   "MouseEvent": [
     "getSource",
-    "getPoint"
+    "getPoint",
+    "getX",
+    "getY"
   ],
   "KeyAdapter": [
     "keyTyped"
@@ -169,5 +177,32 @@
   ],
   "JTabbedPane": [
     "getSelectedIndex"
+  ],
+  "Class": [
+    "getName"
+  ],
+  "Component": [
+    "getLocationOnScreen",
+    "getBounds",
+    "getClass",
+    "getX",
+    "getY",
+    "setLocation"
+  ],
+  "Rectangle": [
+    "getX",
+    "getY"
+  ],
+  "JButton": [
+    "setText",
+    "setBounds",
+    "getWidth",
+    "getHeight",
+    "getBounds",
+    "addMouseListener",
+    "addMouseMotionListener"
+  ],
+  "MouseAdapter": [
+    "mouseDragged"
   ]
 }

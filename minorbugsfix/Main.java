@@ -2780,7 +2780,9 @@ class CurlyBraceKeyListener implements KeyListener {
 		List<Class<?>> ancestors=getAncestorsForClassQuestionMark(classquestionmark);
 		methods4=addAncestorsToMethods(methods4,ancestors);
 		Member[] properties = classquestionmark.getDeclaredFields();
-		return addMembersToMembers(methods4,properties);
+		Member[] properties2= classquestionmark.getFields();
+		Member[] members= addMembersToMembers(methods4,properties);
+		return addMembersToMembers(members,properties2);
 	}
 	public Object[] getAllPropertyAndMethodsAndEnums(Class<?> classquestionmark) {
 		if(classquestionmark.isEnum()) {

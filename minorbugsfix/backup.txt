@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\NullBuilder.java",
     "jars": [],
     "caretposition": 0
   },
@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "caretposition": 103011
+    "caretposition": 95506
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -421,5 +421,23 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "caretposition": 26
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Test.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 15
+  },
+  "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\NullBuilder.java": {
+    "starterclass": "NullBuilder",
+    "jars": [],
+    "caretposition": 1580
+  },
+  "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
   }
 }
