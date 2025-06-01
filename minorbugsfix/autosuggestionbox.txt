@@ -5,13 +5,13 @@
     "title",
     "textarea2",
     "text",
-    "textarea",
     "transferable",
     "treeset",
     "top",
     "true",
     "thirdpanel",
-    "textfield1"
+    "textfield1",
+    "textarea"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -126,8 +126,8 @@
   "te": [
     "textarea2",
     "text",
-    "textarea",
-    "textfield1"
+    "textfield1",
+    "textarea"
   ],
   "i": [
     "index",
@@ -308,8 +308,8 @@
   "text": [
     "textarea2",
     "text",
-    "textarea",
-    "textfield1"
+    "textfield1",
+    "textarea"
   ],
   "Mat": [
     "Matcher",
@@ -372,7 +372,8 @@
   ],
   "w": [
     "with_capitols",
-    "while"
+    "while",
+    "wholedocumentindex"
   ],
   "sw": [
     "switch"
@@ -452,7 +453,8 @@
   ],
   "wh": [
     "whichbranch",
-    "while"
+    "while",
+    "wholedocumentindex"
   ],
   "f": [
     "for",
@@ -510,7 +512,6 @@
     "input",
     "currentline",
     "caretposition",
-    "textarea",
     "main",
     "class",
     "static",
@@ -629,7 +630,9 @@
     "filelistmodifier",
     "String",
     "fileName",
-    "JOptionPane"
+    "JOptionPane",
+    "wholedocumentindex",
+    "textarea"
   ],
   "Syst": [
     "System"
@@ -1690,8 +1693,8 @@
   "tex": [
     "textarea2",
     "text",
-    "textarea",
-    "textfield1"
+    "textfield1",
+    "textarea"
   ],
   "texta": [
     "textarea2",
@@ -3957,5 +3960,53 @@
   ],
   "fileName": [
     "fileName"
+  ],
+  "who": [
+    "wholedocumentindex"
+  ],
+  "whol": [
+    "wholedocumentindex"
+  ],
+  "whole": [
+    "wholedocumentindex"
+  ],
+  "wholed": [
+    "wholedocumentindex"
+  ],
+  "wholedo": [
+    "wholedocumentindex"
+  ],
+  "wholedoc": [
+    "wholedocumentindex"
+  ],
+  "wholedocu": [
+    "wholedocumentindex"
+  ],
+  "wholedocum": [
+    "wholedocumentindex"
+  ],
+  "wholedocume": [
+    "wholedocumentindex"
+  ],
+  "wholedocumen": [
+    "wholedocumentindex"
+  ],
+  "wholedocument": [
+    "wholedocumentindex"
+  ],
+  "wholedocumenti": [
+    "wholedocumentindex"
+  ],
+  "wholedocumentin": [
+    "wholedocumentindex"
+  ],
+  "wholedocumentind": [
+    "wholedocumentindex"
+  ],
+  "wholedocumentinde": [
+    "wholedocumentindex"
+  ],
+  "wholedocumentindex": [
+    "wholedocumentindex"
   ]
 }

@@ -99,13 +99,13 @@
     "setText"
   ],
   "JTextArea": [
-    "getText",
     "setText",
     "dispatchEventToSelf",
     "dispatchEventImpl",
     "dispatchEvent",
     "getCaretPosition",
-    "setCaretPosition"
+    "setCaretPosition",
+    "getText"
   ],
   "Muck": [
     "links"

@@ -636,12 +636,14 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
 		            try {
-				Rectangle2D viewposition=textarea.modelToView2D(wholedocumentindex);
-				Point caretposition=new Point(0,(int)viewposition.getY());
-				scrollpane.getViewport().setViewPosition(caretposition);
-				textarea.grabFocus();
-				textarea.setCaretPosition(wholedocumentindex);
-				line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumentindex))+" ");
+		            	if(wholedocumentindex <= (textarea.getText().length()) ) {
+					Rectangle2D viewposition=textarea.modelToView2D(wholedocumentindex);
+					Point caretposition=new Point(0,(int)viewposition.getY());
+					scrollpane.getViewport().setViewPosition(caretposition);
+					textarea.grabFocus();
+					textarea.setCaretPosition(wholedocumentindex);
+					line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumentindex))+" ");
+				}
 		            }
 			catch (BadLocationException exception) {
 				exception.printStackTrace();
