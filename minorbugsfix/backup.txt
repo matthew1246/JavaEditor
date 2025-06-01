@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "caretposition": 18002
+    "caretposition": 62177
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -495,6 +495,47 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\BackupFileOpenFilesList.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NullBuilder.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 70
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\null": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\ChatGPT.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 3641
+  },
+  "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\null": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Lines.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 26
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ComponentGridBagConstraints.java": {
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
