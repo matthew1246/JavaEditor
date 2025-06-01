@@ -1923,10 +1923,11 @@ public class Main {
 			String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
 			if(!dir.equals(dir2)) {
 				filelistmodifier.fillList(fileName);
+				
 			}
 			
 			this.fileName=fileName;
-			//loadComboboxes(filelistmodifier);
+			loadComboboxes(filelistmodifier);
 			filenamescombobox.setSelectedItem(getFileName(fileName));
 			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			int caretposition=storeselectedfile3.getCaretPosition(fileName);
