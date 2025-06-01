@@ -1928,11 +1928,10 @@ public class Main {
 			this.fileName=fileName;
 			//loadComboboxes(filelistmodifier);
 			filenamescombobox.setSelectedItem(getFileName(fileName));
-			/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			int caretposition=storeselectedfile3.getCaretPosition(fileName);
 			if(caretposition != 0)
 			scrollToCaretPosition(caretposition);
-			*/
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
@@ -2036,7 +2035,6 @@ public class Main {
 				// JOptionPane.showMessageDialog(iterator,classname);
 				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
 				if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
-				JOptionPane.showMessageDialog(null,mainclass);
 				
 				LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
 				if(linkedhashmap2 == null) {
