@@ -683,7 +683,7 @@ public class Main {
 		if(ev.getStateChange() == ItemEvent.SELECTED) {
 			String classname = (String)classnamescombobox.getSelectedItem();
 			String methodname = (String)combobox.getSelectedItem();
-			LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+			LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();			
 			LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 			int wholedocumentindex = classandmethods.get(methodname);
 			
@@ -1925,12 +1925,14 @@ public class Main {
 				filelistmodifier.fillList(fileName);
 			}
 			
-			loadComboboxes(filelistmodifier);
+			this.fileName=fileName;
+			//loadComboboxes(filelistmodifier);
 			filenamescombobox.setSelectedItem(getFileName(fileName));
-			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			int caretposition=storeselectedfile3.getCaretPosition(fileName);
 			if(caretposition != 0)
 			scrollToCaretPosition(caretposition);
+			*/
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
@@ -2034,6 +2036,8 @@ public class Main {
 				// JOptionPane.showMessageDialog(iterator,classname);
 				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
 				if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
+				JOptionPane.showMessageDialog(null,mainclass);
+				
 				LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
 				if(linkedhashmap2 == null) {
 					JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");

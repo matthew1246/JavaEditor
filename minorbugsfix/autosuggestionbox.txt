@@ -581,7 +581,6 @@
     "jcomponents",
     "iterator",
     "treeset",
-    "JOptionPane",
     "List",
     "protected",
     "top",
@@ -629,7 +628,8 @@
     "clickEvent",
     "filelistmodifier",
     "String",
-    "fileName"
+    "fileName",
+    "JOptionPane"
   ],
   "Syst": [
     "System"
@@ -857,11 +857,11 @@
     "JComboBox",
     "JButton",
     "JTextField",
-    "JOptionPane",
     "JComponent",
     "JLabel",
     "JPanel",
-    "JCheckBox"
+    "JCheckBox",
+    "JOptionPane"
   ],
   "JO": [
     "JOptionPane"
