@@ -1895,6 +1895,42 @@ public class Main {
 			curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 			Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+			
+			if(filelistmodifier.isEmpty()) {
+				filelistmodifier.fillList(fileName);
+			}			
+			else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
+				filelistmodifier = new FileListModifier();
+				filelistmodifier.fillList(fileName);
+			}
+			git.Change(fileName);
+			expandable.open();
+			
+			getclassmethods = new GetClassMethods(textarea);		
+			getclassname = new GetClassName(textarea);
+			
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			storeselectedfile.set(fileName);
+			setStarterClassBoxes();
+			if(fileName != null && !fileName.equals("")) {
+				frame.setTitle(fileName.replaceAll(".+\\\\",""));
+			}
+			//filelistmodifier.setSelected(selected2);
+			/*if(!deselected.equals("")) {
+				filelistmodifier.setToMostRecentAfterSelected(deselected);	
+			}*/
+			String dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
+			String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
+			if(!dir.equals(dir2)) {
+				filelistmodifier.fillList(fileName);
+			}
+			
+			loadComboboxes(filelistmodifier);
+			filenamescombobox.setSelectedItem(getFileName(fileName));
+			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			int caretposition=storeselectedfile3.getCaretPosition(fileName);
+			if(caretposition != 0)
+			scrollToCaretPosition(caretposition);
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}

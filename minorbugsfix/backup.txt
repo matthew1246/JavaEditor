@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\NullBuilder.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java",
     "jars": [],
     "caretposition": 0
   },
@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "caretposition": 95506
+    "caretposition": 65297
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -433,11 +433,57 @@
   "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\NullBuilder.java": {
     "starterclass": "NullBuilder",
     "jars": [],
-    "caretposition": 1580
+    "caretposition": 3641
   },
   "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\Main.java": {
     "starterclass": "",
     "jars": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\Line.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 101
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\LiveIterator.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\LiveIterator.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 176
+  },
+  "C:\\Users\\Owner\\Documents\\git\\nullbuilder\\Lines.java": {
+    "starterclass": "NullBuilder",
+    "jars": [],
+    "caretposition": 3400
+  },
+  "C:\\Users\\Owner\\Documents\\git\\guibuilder\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\guibuilder\\MatthewBuilder.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 1625
   }
 }

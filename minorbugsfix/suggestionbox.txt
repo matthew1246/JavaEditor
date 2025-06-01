@@ -16,7 +16,8 @@
     "curlybracekeylistener",
     "setKeywords",
     "positiontrackers",
-    "textarea"
+    "textarea",
+    "getFileName"
   ],
   "JDialog": [
     "show"
@@ -28,8 +29,9 @@
     "remove",
     "set",
     "get",
-    "size",
-    "add"
+    "add",
+    "addAll",
+    "size"
   ],
   "String": [
     "startsWith",
@@ -51,11 +53,13 @@
     "addKeyListener",
     "dispose",
     "setTitle",
-    "setSize",
     "getContentPane",
     "setDefaultCloseOperation",
     "setVisible",
-    "EXIT_ON_CLOSE"
+    "EXIT_ON_CLOSE",
+    "setLocation",
+    "setSize",
+    "pack"
   ],
   "KeyEvent": [
     "getKeyText",
@@ -67,28 +71,32 @@
     "getKeyCode"
   ],
   "JLabel": [
-    "getText",
     "equals",
-    "hashCode"
+    "hashCode",
+    "getText",
+    "setText"
   ],
   "VariableSuggestionBoxSelected": [
     "Reordered"
   ],
   "LiveIterator": [
     "Add",
+    "next",
+    "remove",
     "list",
     "hasNext",
-    "next"
+    "reset"
   ],
   "System": [
-    "out",
-    "currentTimeMillis"
+    "currentTimeMillis",
+    "out"
   ],
   "PrintStream": [
     "println"
   ],
   "JTextField": [
-    "getText"
+    "getText",
+    "setText"
   ],
   "JTextArea": [
     "getText",
@@ -122,7 +130,13 @@
     "getComponents",
     "addMouseListener",
     "getComponentAt",
+    "addMouseMotionListener",
+    "revalidate",
+    "grabFocus",
+    "getGraphics",
+    "repaint",
     "setLayout",
+    "setBorder",
     "add"
   ],
   "GridLayout": [
@@ -130,11 +144,19 @@
     "setRows"
   ],
   "JComponent": [
-    "isOpaque"
+    "isOpaque",
+    "getBounds",
+    "setBounds",
+    "getX",
+    "getY",
+    "getLocation",
+    "getHeight",
+    "getWidth"
   ],
   "TreeSet": [
+    "add",
     "iterator",
-    "add"
+    "size"
   ],
   "AutoKeyListener": [
     "fillData",
@@ -152,10 +174,11 @@
     "next"
   ],
   "MouseEvent": [
+    "getX",
+    "getY",
     "getSource",
     "getPoint",
-    "getX",
-    "getY"
+    "MOUSE_RELEASED"
   ],
   "KeyAdapter": [
     "keyTyped"
@@ -184,25 +207,97 @@
   "Component": [
     "getLocationOnScreen",
     "getBounds",
-    "getClass",
     "getX",
     "getY",
-    "setLocation"
+    "setLocation",
+    "getClass",
+    "getName",
+    "CENTER_ALIGNMENT"
   ],
   "Rectangle": [
     "getX",
     "getY"
   ],
   "JButton": [
+    "getBounds",
+    "addMouseListener",
+    "addMouseMotionListener",
+    "setTransferHandler",
     "setText",
+    "getText",
     "setBounds",
     "getWidth",
     "getHeight",
-    "getBounds",
-    "addMouseListener",
-    "addMouseMotionListener"
+    "addActionListener",
+    "setSelected",
+    "setAlignmentX",
+    "doClick",
+    "dispatchEvent"
   ],
   "MouseAdapter": [
-    "mouseDragged"
+    "mouseDragged",
+    "mouseEntered"
+  ],
+  "TransferHandler": [
+    "getDropTargetListener",
+    "createTransferable"
+  ],
+  "DataFlavor": [
+    "plainTextFlavor",
+    "stringFlavor"
+  ],
+  "DropTargetDropEvent": [
+    "getLocation",
+    "getSource"
+  ],
+  "Point": [
+    "y",
+    "getY",
+    "getX"
+  ],
+  "Transferable": [
+    "getTransferData"
+  ],
+  "Math": [
+    "round"
+  ],
+  "Graphics": [
+    "drawLine"
+  ],
+  "Line": [
+    "jcomponent1",
+    "jcomponent2",
+    "x",
+    "y",
+    "x2",
+    "y2"
+  ],
+  "BorderFactory": [
+    "createEmptyBorder"
+  ],
+  "BorderLayout": [
+    "CENTER"
+  ],
+  "BoxLayout": [
+    "Y_AXIS"
+  ],
+  "Box": [
+    "createHorizontalGlue"
+  ],
+  "GridBagConstraints": [
+    "VERTICAL",
+    "weightx",
+    "gridx",
+    "anchor",
+    "CENTER",
+    "fill",
+    "BOTH",
+    "weighty",
+    "gridwidth",
+    "gridheight",
+    "gridy"
+  ],
+  "FileListModifier": [
+    "fillList"
   ]
 }
