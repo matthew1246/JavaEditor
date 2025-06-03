@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\ChatGPT.java",
     "jars": [],
     "caretposition": 0
   },
@@ -574,6 +574,6 @@
       "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.controls.jar",
       "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.media.jar"
     ],
-    "caretposition": 102
+    "caretposition": 61
   }
 }

@@ -85,7 +85,6 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
-	public static ChatGPT chatgpt;
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
@@ -131,9 +130,6 @@ public class Main {
 	//public String value="load_program.ser";
 	public static void main(String[] args) 	{ 
 		Main main = new Main(new OpenDefaultContent());
-		if(Main.chatgpt == null) {
-			Main.chatgpt = new ChatGPT();
-		}
 	}
 	/*
 	** If have no default content for window
