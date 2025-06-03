@@ -3,4 +3,5 @@ public class Auto {
 	private enum Hello {
 		Test, Test2, Test3
 	}
+
 }
