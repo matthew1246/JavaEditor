@@ -632,7 +632,8 @@
     "fileName",
     "JOptionPane",
     "wholedocumentindex",
-    "textarea"
+    "textarea",
+    "output"
   ],
   "Syst": [
     "System"
@@ -807,7 +808,8 @@
     "order_y",
     "originallabel",
     "outsidepanel",
-    "originalcheckbox"
+    "originalcheckbox",
+    "output"
   ],
   "on": [
     "oneclass"
@@ -3649,10 +3651,12 @@
     "minipanel3"
   ],
   "ou": [
-    "outsidepanel"
+    "outsidepanel",
+    "output"
   ],
   "out": [
-    "outsidepanel"
+    "outsidepanel",
+    "output"
   ],
   "outs": [
     "outsidepanel"
@@ -4008,5 +4012,14 @@
   ],
   "wholedocumentindex": [
     "wholedocumentindex"
+  ],
+  "outp": [
+    "output"
+  ],
+  "outpu": [
+    "output"
+  ],
+  "output": [
+    "output"
   ]
 }

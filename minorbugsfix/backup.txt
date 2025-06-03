@@ -542,5 +542,27 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\Main.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.graphics.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.base.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.web.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.controls.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.media.jar"
+    ],
+    "caretposition": 118
+  },
+  "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\SimpleBrowser.java": {
+    "starterclass": "SimpleBrowser",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.controls.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.web.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.base.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.graphics.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.media.jar"
+    ],
+    "caretposition": 497
   }
 }

@@ -981,7 +981,9 @@ public class Main {
 						output.write("Main-Class: ");
 						output.write(main);
 						output.write("\n");
-						//output.write("Class-Path:");
+						//output.write("Class-Path: ");
+						//output.write("javafx/lib/");
+						
 						//output.write(" *");
 						//output.write("\n");
 						output.close();
