@@ -17,8 +17,7 @@
     "setKeywords",
     "positiontrackers",
     "textarea",
-    "getFileName",
-    "chatgpt"
+    "getFileName"
   ],
   "JDialog": [
     "show"
