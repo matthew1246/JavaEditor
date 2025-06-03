@@ -48,10 +48,10 @@
     "suggestionbox",
     "search_textfield",
     "substring",
-    "static",
     "selected_index",
     "selectedcomponet",
-    "secondvalue"
+    "secondvalue",
+    "static"
   ],
   "sel": [
     "selected_label",
@@ -514,7 +514,6 @@
     "caretposition",
     "main",
     "class",
-    "static",
     "add",
     "Member",
     "selected_index",
@@ -523,7 +522,6 @@
     "WindowEvent",
     "Rectangle",
     "selectedcomponet",
-    "void",
     "WindowListener",
     "y",
     "mousedragger",
@@ -621,19 +619,22 @@
     "import",
     "GridBagLayout",
     "GridBagConstraints",
-    "public",
     "checkbox1",
     "JCheckBox",
     "originalcheckbox",
     "clonebutton",
     "clickEvent",
     "filelistmodifier",
-    "String",
     "fileName",
     "JOptionPane",
     "wholedocumentindex",
     "textarea",
-    "output"
+    "output",
+    "static",
+    "void",
+    "String",
+    "public",
+    "chatgpt"
   ],
   "Syst": [
     "System"
@@ -730,7 +731,8 @@
     "component",
     "checkbox1",
     "clonebutton",
-    "clickEvent"
+    "clickEvent",
+    "chatgpt"
   ],
   "cla": [
     "class_one",
@@ -3754,7 +3756,8 @@
     "panel3"
   ],
   "ch": [
-    "checkbox1"
+    "checkbox1",
+    "chatgpt"
   ],
   "che": [
     "checkbox1"
@@ -4021,5 +4024,20 @@
   ],
   "output": [
     "output"
+  ],
+  "cha": [
+    "chatgpt"
+  ],
+  "chat": [
+    "chatgpt"
+  ],
+  "chatg": [
+    "chatgpt"
+  ],
+  "chatgp": [
+    "chatgpt"
+  ],
+  "chatgpt": [
+    "chatgpt"
   ]
 }
