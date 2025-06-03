@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: Muck
-Created-By: 23.0.1 (Oracle Corporation)
-

@@ -1,6 +1,0 @@
-To make open blank document occur:
-1. Open Main.jar
-2. Click File then Open
-3. Click "CommandLine.java" in file browser
-3. CommandLine opens to bottom right hand corner of file.
-4. The program makes user think file is empty when it is not.

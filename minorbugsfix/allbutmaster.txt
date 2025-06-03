@@ -1,6 +1,0 @@
-eval $(git for-each-ref 'origin/master' --no-contains=master --shell --format='echo %(refname);' refs/remotes)
-eval $(git for-each-ref 'origin/master' --no-contains=master --shell --format='echo %(refname);' refs/remotes refs/heads)
-
-eval $(git for-each-ref 'origin/master' --no-contains=master --shell --format='echo %(refname);' refs/remotes refs/heads)
-
-eval $(git for-each-ref 'origin/master' --no-contains=master --shell --format='echo %(refname); git switch %(refname);' refs/remotes refs/heads)
