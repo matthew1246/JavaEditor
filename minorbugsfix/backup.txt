@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\ChatGPT.java",
     "jars": [],
     "caretposition": 0
   },
@@ -564,5 +564,16 @@
       "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.media.jar"
     ],
     "caretposition": 497
+  },
+  "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\ChatGPT.java": {
+    "starterclass": "ChatGPT",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.graphics.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.base.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.web.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.controls.jar",
+      "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.media.jar"
+    ],
+    "caretposition": 61
   }
 }
