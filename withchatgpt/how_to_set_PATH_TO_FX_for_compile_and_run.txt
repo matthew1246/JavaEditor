@@ -1,0 +1,2 @@
+JAVA_HOME has to be already set before doing these command:
+set PATH_TO_FX="C:\Program Files\Java\javafx-sdk-24.0.1\lib"
