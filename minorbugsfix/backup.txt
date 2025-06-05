@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\ChatGPT.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "caretposition": 0
   },
@@ -10,7 +10,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "caretposition": 62177
+    "caretposition": 47064
   },
   "C:\\Users\\Owner\\Documents\\git\\notepad\\Main.java": {
     "starterclass": "Main",
@@ -575,5 +575,31 @@
       "C:\\Users\\Owner\\Documents\\git\\webbrowser2\\javafx.media.jar"
     ],
     "caretposition": 61
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Tryyy": {
+    "starterclass": "Tryyy",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 47122
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\HelloWorld.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 4995
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\WhateverRocketRocket.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 4995
   }
 }

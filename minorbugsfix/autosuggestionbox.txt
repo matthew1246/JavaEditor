@@ -628,12 +628,12 @@
     "clonebutton",
     "clickEvent",
     "filelistmodifier",
-    "String",
-    "fileName",
-    "JOptionPane",
     "wholedocumentindex",
     "textarea",
-    "output"
+    "output",
+    "JOptionPane",
+    "String",
+    "fileName"
   ],
   "Syst": [
     "System"

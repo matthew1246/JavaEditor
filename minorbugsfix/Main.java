@@ -1442,7 +1442,11 @@ public class Main {
 					int status =fileChooser.showSaveDialog(frame);
 					if(status == JFileChooser.APPROVE_OPTION) {
 						File file = fileChooser.getSelectedFile();
+						
 						fileName = file.getPath();
+						if(!(file.getName().endsWith(".java"))) {
+							fileName+=".java";
+						}
 						PrintWriter output = new PrintWriter(fileName);
 						output.print(text);
 						output.close();

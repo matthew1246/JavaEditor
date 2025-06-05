@@ -43,7 +43,8 @@
     "substring",
     "trim",
     "contains",
-    "length"
+    "length",
+    "endsWith"
   ],
   "JFrame": [
     "disable",
