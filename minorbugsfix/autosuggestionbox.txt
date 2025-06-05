@@ -463,7 +463,8 @@
     "firstvalue",
     "frame",
     "filelistmodifier",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "": [
     "class_one",
@@ -594,7 +595,6 @@
     "JComponent",
     "point1",
     "point2",
-    "return",
     "jcomponent1",
     "jcomponent2",
     "liveiterator",
@@ -632,8 +632,10 @@
     "textarea",
     "output",
     "JOptionPane",
+    "return",
+    "fileName",
     "String",
-    "fileName"
+    "filename"
   ],
   "Syst": [
     "System"
@@ -3435,7 +3437,8 @@
   "fi": [
     "firstvalue",
     "filelistmodifier",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "firstv": [
     "firstvalue"
@@ -3911,11 +3914,13 @@
   ],
   "fil": [
     "filelistmodifier",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "file": [
     "filelistmodifier",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "filel": [
     "filelistmodifier"
@@ -4021,5 +4026,17 @@
   ],
   "output": [
     "output"
+  ],
+  "filen": [
+    "filename"
+  ],
+  "filena": [
+    "filename"
+  ],
+  "filenam": [
+    "filename"
+  ],
+  "filename": [
+    "filename"
   ]
 }

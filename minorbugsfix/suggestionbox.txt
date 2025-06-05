@@ -17,7 +17,8 @@
     "setKeywords",
     "positiontrackers",
     "textarea",
-    "getFileName"
+    "getFileName",
+    "fileName"
   ],
   "JDialog": [
     "show"
@@ -44,7 +45,8 @@
     "trim",
     "contains",
     "length",
-    "endsWith"
+    "endsWith",
+    "getChars"
   ],
   "JFrame": [
     "disable",

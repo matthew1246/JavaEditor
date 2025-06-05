@@ -601,5 +601,10 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "caretposition": 4995
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Testy": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
   }
 }

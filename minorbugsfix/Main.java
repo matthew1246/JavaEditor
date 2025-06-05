@@ -1444,9 +1444,7 @@ public class Main {
 						File file = fileChooser.getSelectedFile();
 						
 						fileName = file.getPath();
-						if(!(file.getName().endsWith(".java"))) {
-							fileName+=".java";
-						}
+						fileName=addDotJava(fileName);
 						PrintWriter output = new PrintWriter(fileName);
 						output.print(text);
 						output.close();
@@ -1853,6 +1851,12 @@ public class Main {
 		});		
 		frame.getRootPane().setDefaultButton(go_to_line_number);		
 	}
+	public String addDotJava(String filename) {	
+		if(!(filename.endsWith(".java"))) {
+			filename+=".java";
+		}
+		return filename;
+	}
 	public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
 		try {
@@ -2249,7 +2253,7 @@ class SaveActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		try {
 			String text = main.textarea.getText();
-			if(!main.fileName.equals("")) {			
+			if(!main.fileName.equals("")) {						
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
 				output.close();
@@ -2264,7 +2268,8 @@ class SaveActionListener implements ActionListener {
 				if(status == JFileChooser.APPROVE_OPTION) {
 					File file = fileChooser.getSelectedFile();
 					main.fileName = file.getPath();
-					JOptionPane.showMessageDialog(null,main.fileName);
+					main.fileName=main.addDotJava(main.fileName);
+					//JOptionPane.showMessageDialog(null,main.fileName);
 					PrintWriter output = new PrintWriter(main.fileName);
 					output.print(text);
 					output.close();
