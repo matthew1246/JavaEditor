@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\VariableSuggestionBoxSelected.java",
     "jars": [],
     "caretposition": 0
   },
@@ -654,6 +654,30 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar"
     ],
-    "caretposition": 4998
+    "caretposition": 71539
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\XYWidthHeight.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar"
+    ],
+    "caretposition": 395
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Tracker.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar"
+    ],
+    "caretposition": 293
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\VariableSuggestionBoxSelected.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar"
+    ],
+    "caretposition": 0
   }
 }

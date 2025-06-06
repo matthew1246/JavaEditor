@@ -85,6 +85,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JCheckBox javafxcheckbox;
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
@@ -477,10 +478,11 @@ public class Main {
 		menubar.validate();
 		menubar.repaint();
 		
+		javafxcheckbox = new JCheckBox();
 		gbc.gridx=28;
 		gbc.weightx=1.0;
 		gbc.gridwidth=1;
-		menubar.add(new JCheckBox(),gbc);
+		menubar.add(javafxcheckbox,gbc);
 		
 		menubar.validate();
 		menubar.repaint();
@@ -2085,37 +2087,7 @@ public class Main {
 					if(integer2 != null) {
 						JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 						
-						/*
-						verticalscrollbar.setValue(textarea.getText().length()-1);
-						textarea.setCaretPosition(textarea.getText().length()-1);
-						verticalscrollbar.setValue(0);
-						textarea.setCaretPosition(0);
-						textarea.requestFocus();
-						
-						verticalscrollbar.setValue(integer2);
-						*/
-						//DefaultCaret defaultcaret = (DefaultCaret)textarea.getCaret();
-						//defaultcaret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);										
-						/*textarea.setCaretPosition(textarea.getText().length());
-						textarea.setCaretPosition(integer2);
-						*/
-						
-						/*textarea.setCaretPosition(textarea.getText().length());
-						scrollToCaretPosition(textarea.getText().length());*/
-						//textarea.setCaretPosition(integer2);
-						// JOptionPane.showMessageDialog(null,integer2+"");
-						scrollToCaretPosition(integer2);
-						
-						/*
-						JOptionPane.showMessageDialog(null,"Opened new file.");
-						
-						verticalscrollbar.setValue(integer2);
-						
-						
-						scrollToCaretPosition(integer2);
-											
-						JOptionPane.showMessageDialog(null,verticalscrollbar.getValue()+" "+integer2);
-						*/
+						//scrollToCaretPosition(integer2);
 					}
 				}
 	
@@ -2130,14 +2102,12 @@ public class Main {
 					}
 				};		
 				iterator.iterate();
-				/*if(filenamescombobox.getItemCount() > 0) {
-					openfileslist.
-				}
-				*/
-				if(classnamescombobox.getItemCount() > 0)
+				
+				/*if(classnamescombobox.getItemCount() > 0)
 				classnamescombobox.setSelectedItem(mainclass);
 				if(combobox.getItemCount() > 0)
 				combobox.setSelectedItem(0);
+				*/
 			}
 			catch(NullPointerException ex) {
 				ex.printStackTrace();

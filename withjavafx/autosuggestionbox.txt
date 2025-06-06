@@ -635,7 +635,6 @@
     "import",
     "GridBagLayout",
     "GridBagConstraints",
-    "public",
     "checkbox1",
     "originalcheckbox",
     "clonebutton",
@@ -672,14 +671,15 @@
     "this",
     "String",
     "selectbranch",
-    "JCheckBox",
     "menubar",
     "add",
     "JButton",
     "deprecated",
     "javafxLabel",
     "JLabel",
-    "SwingConstants"
+    "SwingConstants",
+    "public",
+    "JCheckBox"
   ],
   "Syst": [
     "System"
@@ -915,9 +915,9 @@
     "JPanel",
     "JComboBox",
     "JFrame",
-    "JCheckBox",
     "JButton",
-    "JLabel"
+    "JLabel",
+    "JCheckBox"
   ],
   "JO": [
     "JOptionPane"
@@ -1021,8 +1021,8 @@
     "point2",
     "panel3",
     "panel",
-    "public",
-    "process"
+    "process",
+    "public"
   ],
   "pl": [
     "pluspanel"
