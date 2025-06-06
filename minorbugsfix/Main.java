@@ -467,10 +467,12 @@ public class Main {
 		menubar.validate();
 		menubar.repaint();
 
+		JLabel javafxLabel = new JLabel("javafx: ");
+		javafxLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		gbc.gridx = 26;
 		gbc.weightx=2.0;
 		gbc.gridwidth=2;
-		menubar.add(new JLabel("javafx"),gbc);
+		menubar.add(javafxLabel,gbc);
 		
 		menubar.validate();
 		menubar.repaint();

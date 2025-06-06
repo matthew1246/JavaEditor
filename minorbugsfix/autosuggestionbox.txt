@@ -17,7 +17,8 @@
   "S": [
     "Sslsessionbindinglistener",
     "System",
-    "String"
+    "String",
+    "SwingConstants"
   ],
   "Array": [
     "Arraylist",
@@ -671,12 +672,14 @@
     "this",
     "String",
     "selectbranch",
-    "JLabel",
     "JCheckBox",
     "menubar",
     "add",
     "JButton",
-    "deprecated"
+    "deprecated",
+    "javafxLabel",
+    "JLabel",
+    "SwingConstants"
   ],
   "Syst": [
     "System"
@@ -912,9 +915,9 @@
     "JPanel",
     "JComboBox",
     "JFrame",
-    "JLabel",
     "JCheckBox",
-    "JButton"
+    "JButton",
+    "JLabel"
   ],
   "JO": [
     "JOptionPane"
@@ -3124,7 +3127,8 @@
     "jcomponent",
     "jcomponents",
     "jcomponent1",
-    "jcomponent2"
+    "jcomponent2",
+    "javafxLabel"
   ],
   "jc": [
     "jcomponent",
@@ -4430,5 +4434,74 @@
   ],
   "deprecated": [
     "deprecated"
+  ],
+  "ja": [
+    "javafxLabel"
+  ],
+  "jav": [
+    "javafxLabel"
+  ],
+  "java": [
+    "javafxLabel"
+  ],
+  "javaf": [
+    "javafxLabel"
+  ],
+  "javafx": [
+    "javafxLabel"
+  ],
+  "javafxL": [
+    "javafxLabel"
+  ],
+  "javafxLa": [
+    "javafxLabel"
+  ],
+  "javafxLab": [
+    "javafxLabel"
+  ],
+  "javafxLabe": [
+    "javafxLabel"
+  ],
+  "javafxLabel": [
+    "javafxLabel"
+  ],
+  "Sw": [
+    "SwingConstants"
+  ],
+  "Swi": [
+    "SwingConstants"
+  ],
+  "Swin": [
+    "SwingConstants"
+  ],
+  "Swing": [
+    "SwingConstants"
+  ],
+  "SwingC": [
+    "SwingConstants"
+  ],
+  "SwingCo": [
+    "SwingConstants"
+  ],
+  "SwingCon": [
+    "SwingConstants"
+  ],
+  "SwingCons": [
+    "SwingConstants"
+  ],
+  "SwingConst": [
+    "SwingConstants"
+  ],
+  "SwingConsta": [
+    "SwingConstants"
+  ],
+  "SwingConstan": [
+    "SwingConstants"
+  ],
+  "SwingConstant": [
+    "SwingConstants"
+  ],
+  "SwingConstants": [
+    "SwingConstants"
   ]
 }

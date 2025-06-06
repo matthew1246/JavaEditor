@@ -78,7 +78,9 @@
     "equals",
     "hashCode",
     "getText",
-    "setText"
+    "setText",
+    "setHorizontalAlignment",
+    "RIGHT_ALIGNMENT"
   ],
   "VariableSuggestionBoxSelected": [
     "Reordered"
@@ -319,5 +321,9 @@
     "add",
     "validate",
     "repaint"
+  ],
+  "SwingConstants": [
+    "CENTER",
+    "RIGHT"
   ]
 }
