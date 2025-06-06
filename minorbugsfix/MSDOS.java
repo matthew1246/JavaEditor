@@ -20,7 +20,7 @@ public class MSDOS {
 		frame.setTitle("Run MSDOS");
 		
 		JPanel panel = new JPanel();
-		input =		 new JTextField(17);
+		input =	new JTextField(17);
 		panel.add(input);
 		run = new JButton("run");
 		panel.add(run);

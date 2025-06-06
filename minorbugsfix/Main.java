@@ -749,7 +749,7 @@ public class Main {
 			if(msdos == null)
 				msdos = new MSDOS(dir);
 			else
-				msdos.setFileName(dir);
+				msdos.setFileName(dir+selected2);
 			
 			dir=dir+selected2;
 				
