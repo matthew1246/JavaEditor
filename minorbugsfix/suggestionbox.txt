@@ -37,16 +37,16 @@
   "String": [
     "startsWith",
     "equals",
-    "replaceFirst",
     "split",
-    "replace",
     "replaceAll",
     "substring",
     "trim",
     "contains",
     "length",
     "endsWith",
-    "getChars"
+    "getChars",
+    "replace",
+    "replaceFirst"
   ],
   "JFrame": [
     "disable",

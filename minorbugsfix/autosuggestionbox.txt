@@ -251,7 +251,8 @@
     "data",
     "dotcaretposition",
     "dropPoint",
-    "double"
+    "double",
+    "directory"
   ],
   "sugg": [
     "suggestionbox"
@@ -373,7 +374,8 @@
   "w": [
     "with_capitols",
     "while",
-    "wholedocumentindex"
+    "wholedocumentindex",
+    "whichfolderopened"
   ],
   "sw": [
     "switch"
@@ -439,8 +441,8 @@
     "return"
   ],
   "r": [
-    "root_directory",
     "rectangle",
+    "root_directory",
     "return"
   ],
   "sub": [
@@ -454,7 +456,8 @@
   "wh": [
     "whichbranch",
     "while",
-    "wholedocumentindex"
+    "wholedocumentindex",
+    "whichfolderopened"
   ],
   "f": [
     "for",
@@ -463,8 +466,8 @@
     "firstvalue",
     "frame",
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "fileName"
   ],
   "": [
     "class_one",
@@ -579,7 +582,6 @@
     "lines",
     "Line",
     "Integer",
-    "null",
     "jcomponents",
     "iterator",
     "treeset",
@@ -588,7 +590,6 @@
     "top",
     "x",
     "System",
-    "boolean",
     "if",
     "true",
     "Point",
@@ -632,10 +633,15 @@
     "textarea",
     "output",
     "JOptionPane",
-    "return",
+    "filename",
     "fileName",
+    "directory",
+    "root_directory",
     "String",
-    "filename"
+    "boolean",
+    "whichfolderopened",
+    "return",
+    "null"
   ],
   "Syst": [
     "System"
@@ -793,7 +799,8 @@
     "iterator"
   ],
   "whi": [
-    "while"
+    "while",
+    "whichfolderopened"
   ],
   "whil": [
     "while"
@@ -2273,8 +2280,8 @@
   ],
   "b": [
     "button",
-    "boolean",
-    "button1"
+    "button1",
+    "boolean"
   ],
   "bu": [
     "button",
@@ -3437,8 +3444,8 @@
   "fi": [
     "firstvalue",
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "fileName"
   ],
   "firstv": [
     "firstvalue"
@@ -3914,13 +3921,13 @@
   ],
   "fil": [
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "fileName"
   ],
   "file": [
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "fileName"
   ],
   "filel": [
     "filelistmodifier"
@@ -4038,5 +4045,110 @@
   ],
   "filename": [
     "filename"
+  ],
+  "ro": [
+    "root_directory"
+  ],
+  "roo": [
+    "root_directory"
+  ],
+  "root": [
+    "root_directory"
+  ],
+  "root_": [
+    "root_directory"
+  ],
+  "root_d": [
+    "root_directory"
+  ],
+  "root_di": [
+    "root_directory"
+  ],
+  "root_dir": [
+    "root_directory"
+  ],
+  "root_dire": [
+    "root_directory"
+  ],
+  "root_direc": [
+    "root_directory"
+  ],
+  "root_direct": [
+    "root_directory"
+  ],
+  "root_directo": [
+    "root_directory"
+  ],
+  "root_director": [
+    "root_directory"
+  ],
+  "root_directory": [
+    "root_directory"
+  ],
+  "di": [
+    "directory"
+  ],
+  "dir": [
+    "directory"
+  ],
+  "dire": [
+    "directory"
+  ],
+  "direc": [
+    "directory"
+  ],
+  "direct": [
+    "directory"
+  ],
+  "directo": [
+    "directory"
+  ],
+  "director": [
+    "directory"
+  ],
+  "directory": [
+    "directory"
+  ],
+  "whic": [
+    "whichfolderopened"
+  ],
+  "which": [
+    "whichfolderopened"
+  ],
+  "whichf": [
+    "whichfolderopened"
+  ],
+  "whichfo": [
+    "whichfolderopened"
+  ],
+  "whichfol": [
+    "whichfolderopened"
+  ],
+  "whichfold": [
+    "whichfolderopened"
+  ],
+  "whichfolde": [
+    "whichfolderopened"
+  ],
+  "whichfolder": [
+    "whichfolderopened"
+  ],
+  "whichfoldero": [
+    "whichfolderopened"
+  ],
+  "whichfolderop": [
+    "whichfolderopened"
+  ],
+  "whichfolderope": [
+    "whichfolderopened"
+  ],
+  "whichfolderopen": [
+    "whichfolderopened"
+  ],
+  "whichfolderopene": [
+    "whichfolderopened"
+  ],
+  "whichfolderopened": [
+    "whichfolderopened"
   ]
 }

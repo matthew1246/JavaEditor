@@ -19,7 +19,7 @@ public class Git {
 			Process process=commandline.run("git rev-parse --show-toplevel",directory);
 			DisplayOutput displayoutput = new DisplayOutput();
 			root_directory = displayoutput.OneLine(process);
-		      	//JOptionPane.showMessageDialog(null,root_directory);
+		      	//JOptionPane.showMessageDialog(n,root_directory);
 		      	frame.setTitle(whichBranchOpened());		      			      	
 	      	}
       	}
@@ -89,18 +89,24 @@ public class Git {
 		switch2_branch.addActionListener( (ev) -> {
 			String mainbranch = getMainBranch();
 			String whichbranch = whichBranchOpened();
-			if(!(whichbranch.equals(mainbranch))) {
+			String whichfolderopened=whichFolderOpened();
+			if(whichbranch.equals(whichfolderopened)) {
 				//substring = "master";
-				git("git switch "+mainbranch,root_directory);
-				frame.setTitle(mainbranch);
+				git("git switch "+mainbranch,root_directory);
+				frame.setTitle(mainbranch);			
 			}
 			else {
-				String substring=directory.replace(root_directory.replace("/","\\"),"");
-				substring=substring.replace("\\","");
-				git("git switch "+substring,root_directory);
-				frame.setTitle(substring);
+				git("git switch "+whichfolderopened,root_directory);
+				frame.setTitle(whichfolderopened);
 			}
 		});
+	}
+	public String whichFolderOpened() {
+		String substring=directory.replace(root_directory.replace("/","\\"),"");
+		return substring.replace("\\","");
+	}
+	public boolean isBranch(String folder) {
+		return false;
 	}
 	public String getMainBranch() {
 		CommandLine commandline = new CommandLine();

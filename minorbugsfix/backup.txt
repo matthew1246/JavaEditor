@@ -614,5 +614,10 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "caretposition": 225
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
   }
 }
