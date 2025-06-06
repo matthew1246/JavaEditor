@@ -55,13 +55,13 @@
     "addMouseListener",
     "addKeyListener",
     "dispose",
-    "setTitle",
     "getContentPane",
-    "setDefaultCloseOperation",
-    "setVisible",
-    "EXIT_ON_CLOSE",
     "setLocation",
+    "setTitle",
     "setSize",
+    "setDefaultCloseOperation",
+    "EXIT_ON_CLOSE",
+    "setVisible",
     "pack"
   ],
   "KeyEvent": [
@@ -308,5 +308,10 @@
   ],
   "CommandLine": [
     "run"
+  ],
+  "JComboBox": [
+    "addItem",
+    "addActionListener",
+    "getSelectedItem"
   ]
 }

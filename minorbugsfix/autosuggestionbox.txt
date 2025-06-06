@@ -15,8 +15,8 @@
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "String",
-    "System"
+    "System",
+    "String"
   ],
   "Array": [
     "Arraylist",
@@ -40,7 +40,11 @@
   "sele": [
     "selected_label",
     "selected_index",
-    "selectedcomponet"
+    "selectedcomponet",
+    "selectlabel",
+    "selectedbranch",
+    "selectpanel",
+    "selectbranch"
   ],
   "s": [
     "selected_label",
@@ -51,12 +55,20 @@
     "static",
     "selected_index",
     "selectedcomponet",
-    "secondvalue"
+    "secondvalue",
+    "selectlabel",
+    "selectedbranch",
+    "selectpanel",
+    "selectbranch"
   ],
   "sel": [
     "selected_label",
     "selected_index",
-    "selectedcomponet"
+    "selectedcomponet",
+    "selectlabel",
+    "selectedbranch",
+    "selectpanel",
+    "selectbranch"
   ],
   "ind": [
     "index"
@@ -69,14 +81,19 @@
   ],
   "selected": [
     "selected_index",
-    "selectedcomponet"
+    "selectedcomponet",
+    "selectedbranch"
   ],
   "se": [
     "second",
     "search_textfield",
     "selected_index",
     "selectedcomponet",
-    "secondvalue"
+    "secondvalue",
+    "selectlabel",
+    "selectedbranch",
+    "selectpanel",
+    "selectbranch"
   ],
   "String": [
     "String"
@@ -396,9 +413,9 @@
     "thirdpanel"
   ],
   "new": [
-    "new",
     "newxlocation",
-    "newylocation"
+    "newylocation",
+    "new"
   ],
   "import": [
     "import"
@@ -490,7 +507,6 @@
     "panelgridlayout",
     "KeyAdapter",
     "JMenuItem",
-    "new",
     "EventObject",
     "KeyStroke",
     "opennewtab",
@@ -538,7 +554,6 @@
     "MouseMotionListener",
     "MouseListener",
     "MouseEvent",
-    "JFrame",
     "TransferHandler",
     "DropTarget",
     "MouseAdapter",
@@ -550,7 +565,6 @@
     "MouseMotionAdapter",
     "ActionEvent",
     "label",
-    "JComboBox",
     "button",
     "fromdraganddrop",
     "instanceof",
@@ -561,7 +575,6 @@
     "JTextField",
     "graphics",
     "newxlocation",
-    "newylocation",
     "Override",
     "point",
     "count",
@@ -601,7 +614,6 @@
     "jcomponent2",
     "liveiterator",
     "originallabel",
-    "JLabel",
     "middlepanel",
     "thirdpanel",
     "GridLayout",
@@ -612,7 +624,6 @@
     "BorderLayout",
     "panel3",
     "BorderFactory",
-    "JPanel",
     "BoxLayout",
     "panel",
     "frame",
@@ -645,10 +656,22 @@
     "process",
     "JOptionPane",
     "whichfolderopened",
-    "String",
     "System",
+    "return",
+    "JPanel",
+    "JLabel",
+    "selectlabel",
+    "JComboBox",
+    "combobox",
+    "newylocation",
+    "new",
     "branch",
-    "return"
+    "selectedbranch",
+    "selectpanel",
+    "openbranch",
+    "JFrame",
+    "String",
+    "selectbranch"
   ],
   "Syst": [
     "System"
@@ -688,16 +711,16 @@
     "sublink"
   ],
   "n": [
-    "new",
     "nullbuilder",
     "newxlocation",
+    "null",
     "newylocation",
-    "null"
+    "new"
   ],
   "ne": [
-    "new",
     "newxlocation",
-    "newylocation"
+    "newylocation",
+    "new"
   ],
   "wi": [
     "with_capitols"
@@ -747,7 +770,8 @@
     "clonebutton",
     "clickEvent",
     "command",
-    "commandline"
+    "commandline",
+    "combobox"
   ],
   "cla": [
     "class_one",
@@ -827,7 +851,8 @@
     "originallabel",
     "outsidepanel",
     "originalcheckbox",
-    "output"
+    "output",
+    "openbranch"
   ],
   "on": [
     "oneclass"
@@ -876,15 +901,15 @@
   "J": [
     "JMenuItem",
     "JTextArea",
-    "JFrame",
-    "JComboBox",
     "JButton",
     "JTextField",
     "JComponent",
-    "JLabel",
-    "JPanel",
     "JCheckBox",
-    "JOptionPane"
+    "JOptionPane",
+    "JPanel",
+    "JLabel",
+    "JComboBox",
+    "JFrame"
   ],
   "JO": [
     "JOptionPane"
@@ -1588,13 +1613,16 @@
     "JMenuItem"
   ],
   "op": [
-    "opennewtab"
+    "opennewtab",
+    "openbranch"
   ],
   "ope": [
-    "opennewtab"
+    "opennewtab",
+    "openbranch"
   ],
   "open": [
-    "opennewtab"
+    "opennewtab",
+    "openbranch"
   ],
   "openn": [
     "opennewtab"
@@ -1682,7 +1710,8 @@
     "count",
     "component",
     "command",
-    "commandline"
+    "commandline",
+    "combobox"
   ],
   "con": [
     "control_t"
@@ -2156,15 +2185,24 @@
   ],
   "selec": [
     "selected_index",
-    "selectedcomponet"
+    "selectedcomponet",
+    "selectlabel",
+    "selectedbranch",
+    "selectpanel",
+    "selectbranch"
   ],
   "select": [
     "selected_index",
-    "selectedcomponet"
+    "selectedcomponet",
+    "selectlabel",
+    "selectedbranch",
+    "selectpanel",
+    "selectbranch"
   ],
   "selecte": [
     "selected_index",
-    "selectedcomponet"
+    "selectedcomponet",
+    "selectedbranch"
   ],
   "selected_i": [
     "selected_index"
@@ -2410,7 +2448,8 @@
   "com": [
     "component",
     "command",
-    "commandline"
+    "commandline",
+    "combobox"
   ],
   "comp": [
     "component"
@@ -2629,17 +2668,17 @@
     "TransferHandler"
   ],
   "JC": [
-    "JComboBox",
     "JComponent",
-    "JCheckBox"
+    "JCheckBox",
+    "JComboBox"
   ],
   "JCo": [
-    "JComboBox",
-    "JComponent"
+    "JComponent",
+    "JComboBox"
   ],
   "JCom": [
-    "JComboBox",
-    "JComponent"
+    "JComponent",
+    "JComboBox"
   ],
   "JComp": [
     "JComponent"
@@ -4237,5 +4276,104 @@
   ],
   "branch": [
     "branch"
+  ],
+  "selectb": [
+    "selectbranch"
+  ],
+  "selectbr": [
+    "selectbranch"
+  ],
+  "selectbra": [
+    "selectbranch"
+  ],
+  "selectbran": [
+    "selectbranch"
+  ],
+  "selectbranc": [
+    "selectbranch"
+  ],
+  "selectbranch": [
+    "selectbranch"
+  ],
+  "selectp": [
+    "selectpanel"
+  ],
+  "selectpa": [
+    "selectpanel"
+  ],
+  "selectpan": [
+    "selectpanel"
+  ],
+  "selectpane": [
+    "selectpanel"
+  ],
+  "selectpanel": [
+    "selectpanel"
+  ],
+  "selectl": [
+    "selectlabel"
+  ],
+  "selectla": [
+    "selectlabel"
+  ],
+  "selectlab": [
+    "selectlabel"
+  ],
+  "selectlabe": [
+    "selectlabel"
+  ],
+  "selectlabel": [
+    "selectlabel"
+  ],
+  "comb": [
+    "combobox"
+  ],
+  "combo": [
+    "combobox"
+  ],
+  "combob": [
+    "combobox"
+  ],
+  "combobo": [
+    "combobox"
+  ],
+  "combobox": [
+    "combobox"
+  ],
+  "openb": [
+    "openbranch"
+  ],
+  "openbr": [
+    "openbranch"
+  ],
+  "openbra": [
+    "openbranch"
+  ],
+  "openbran": [
+    "openbranch"
+  ],
+  "openbranc": [
+    "openbranch"
+  ],
+  "openbranch": [
+    "openbranch"
+  ],
+  "selectedb": [
+    "selectedbranch"
+  ],
+  "selectedbr": [
+    "selectedbranch"
+  ],
+  "selectedbra": [
+    "selectedbranch"
+  ],
+  "selectedbran": [
+    "selectedbranch"
+  ],
+  "selectedbranc": [
+    "selectedbranch"
+  ],
+  "selectedbranch": [
+    "selectedbranch"
   ]
 }

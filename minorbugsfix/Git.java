@@ -100,6 +100,35 @@ public class Git {
 					git("git switch "+whichfolderopened,root_directory);
 					frame.setTitle(whichfolderopened);
 				}
+				else
+				{
+					JFrame selectbranch = new JFrame();
+					selectbranch.setSize(400,200);
+					
+					selectbranch.setTitle("Select Which Branch");
+					JPanel selectpanel = new JPanel();
+					JLabel selectlabel = new JLabel("Select branch:");
+					selectpanel.add(selectlabel);
+					JComboBox<String> combobox = new JComboBox<String>();
+					for(String branch:getAllBranches()) {
+						combobox.addItem(branch);
+					}
+					selectpanel.add(combobox);
+					JButton openbranch = new JButton("open branch");
+					openbranch.addActionListener( (ev2) -> {
+						String selectedbranch = (String)combobox.getSelectedItem();
+						
+						git("git switch "+selectedbranch,root_directory);
+						frame.setTitle(selectedbranch);
+					});
+					selectpanel.add(openbranch);
+
+					selectbranch.add(selectpanel);
+					selectbranch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					selectbranch.pack();
+					
+					selectbranch.setVisible(true);
+				}
 			}
 		});
 	}
