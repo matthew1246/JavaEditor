@@ -108,7 +108,7 @@ public class Main {
 	public JMenuItem exitItem = new JMenuItem("Exit");
 	public JMenuItem fontmenuitem = new JMenuItem("Font");
 	public JMenuItem saveItem = new JMenuItem("Save");
-	public JMenuItem saveasitem = new JMenuItem("Save As");
+	public JMenuItem saveasitem = new JMenuItem("Save As");		
 	public JMenuItem newitem = new JMenuItem("New");
 	public JMenuItem tabSizeMenuItem = new JMenuItem("Tab");
 	
@@ -1434,7 +1434,6 @@ public class Main {
 					else {
 						dir = System.getProperty("user.home");
 					}
-					System.out.println("dir is: "+dir);
 					
 					JFileChooser fileChooser = new JFileChooser(new File(dir));
 					FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
@@ -1443,12 +1442,15 @@ public class Main {
 					if(status == JFileChooser.APPROVE_OPTION) {
 						File file = fileChooser.getSelectedFile();
 						
-						fileName = file.getPath();
-						fileName=addDotJava(fileName);
+						Main.this.fileName = file.getPath();
+						Main.this.fileName=addDotJava(fileName);
 						PrintWriter output = new PrintWriter(fileName);
 						output.print(text);
 						output.close();
 						frame.setTitle(fileName.replaceAll(".+\\\\",""));
+						String selected=Main.this.getFileName(fileName);
+						
+						Main.this.open(selected);
 					}
 				}catch (FileNotFoundException ex) {
 					System.out.println(ex);
@@ -3241,4 +3243,4 @@ class AutoKeyListener {
 		data = variablenames2;
 		return variablenames2.size() > 0;
 	}
-	}
+		}

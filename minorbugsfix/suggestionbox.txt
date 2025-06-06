@@ -18,7 +18,8 @@
     "positiontrackers",
     "textarea",
     "getFileName",
-    "fileName"
+    "fileName",
+    "open"
   ],
   "JDialog": [
     "show"
@@ -54,7 +55,6 @@
     "addComponentListener",
     "addMouseListener",
     "addKeyListener",
-    "dispose",
     "getContentPane",
     "setLocation",
     "setTitle",
@@ -62,7 +62,8 @@
     "setDefaultCloseOperation",
     "EXIT_ON_CLOSE",
     "setVisible",
-    "pack"
+    "pack",
+    "dispose"
   ],
   "KeyEvent": [
     "getKeyText",

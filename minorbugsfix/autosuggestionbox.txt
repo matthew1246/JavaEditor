@@ -11,7 +11,8 @@
     "true",
     "thirdpanel",
     "textfield1",
-    "textarea"
+    "textarea",
+    "this"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -409,8 +410,8 @@
     "return"
   ],
   "th": [
-    "this",
-    "thirdpanel"
+    "thirdpanel",
+    "this"
   ],
   "new": [
     "newxlocation",
@@ -645,7 +646,6 @@
     "textarea",
     "output",
     "filename",
-    "fileName",
     "directory",
     "boolean",
     "null",
@@ -670,6 +670,8 @@
     "selectpanel",
     "openbranch",
     "JFrame",
+    "fileName",
+    "this",
     "String",
     "selectbranch"
   ],
@@ -3621,7 +3623,8 @@
     "middlepanel"
   ],
   "thi": [
-    "thirdpanel"
+    "thirdpanel",
+    "this"
   ],
   "thir": [
     "thirdpanel"
@@ -4375,5 +4378,8 @@
   ],
   "selectedbranch": [
     "selectedbranch"
+  ],
+  "this": [
+    "this"
   ]
 }

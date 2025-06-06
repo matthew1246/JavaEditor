@@ -120,6 +120,7 @@ public class Git {
 						
 						git("git switch "+selectedbranch,root_directory);
 						frame.setTitle(selectedbranch);
+						selectbranch.dispose();
 					});
 					selectpanel.add(openbranch);
 
