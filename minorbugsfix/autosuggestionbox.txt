@@ -270,7 +270,8 @@
     "dotcaretposition",
     "dropPoint",
     "double",
-    "directory"
+    "directory",
+    "deprecated"
   ],
   "sugg": [
     "suggestionbox"
@@ -538,7 +539,6 @@
     "main",
     "class",
     "static",
-    "add",
     "Member",
     "selected_index",
     "rectangle",
@@ -572,7 +572,6 @@
     "original",
     "clone",
     "originaltextfield",
-    "JButton",
     "JTextField",
     "graphics",
     "newxlocation",
@@ -637,7 +636,6 @@
     "GridBagConstraints",
     "public",
     "checkbox1",
-    "JCheckBox",
     "originalcheckbox",
     "clonebutton",
     "clickEvent",
@@ -659,7 +657,6 @@
     "System",
     "return",
     "JPanel",
-    "JLabel",
     "selectlabel",
     "JComboBox",
     "combobox",
@@ -673,7 +670,13 @@
     "fileName",
     "this",
     "String",
-    "selectbranch"
+    "selectbranch",
+    "JLabel",
+    "JCheckBox",
+    "menubar",
+    "add",
+    "JButton",
+    "deprecated"
   ],
   "Syst": [
     "System"
@@ -903,15 +906,15 @@
   "J": [
     "JMenuItem",
     "JTextArea",
-    "JButton",
     "JTextField",
     "JComponent",
-    "JCheckBox",
     "JOptionPane",
     "JPanel",
-    "JLabel",
     "JComboBox",
-    "JFrame"
+    "JFrame",
+    "JLabel",
+    "JCheckBox",
+    "JButton"
   ],
   "JO": [
     "JOptionPane"
@@ -1742,7 +1745,8 @@
     "middlepanel",
     "minipanel1",
     "minipanel2",
-    "minipanel3"
+    "minipanel3",
+    "menubar"
   ],
   "tex": [
     "textarea2",
@@ -2671,8 +2675,8 @@
   ],
   "JC": [
     "JComponent",
-    "JCheckBox",
-    "JComboBox"
+    "JComboBox",
+    "JCheckBox"
   ],
   "JCo": [
     "JComponent",
@@ -4381,5 +4385,50 @@
   ],
   "this": [
     "this"
+  ],
+  "me": [
+    "menubar"
+  ],
+  "men": [
+    "menubar"
+  ],
+  "menu": [
+    "menubar"
+  ],
+  "menub": [
+    "menubar"
+  ],
+  "menuba": [
+    "menubar"
+  ],
+  "menubar": [
+    "menubar"
+  ],
+  "de": [
+    "deprecated"
+  ],
+  "dep": [
+    "deprecated"
+  ],
+  "depr": [
+    "deprecated"
+  ],
+  "depre": [
+    "deprecated"
+  ],
+  "deprec": [
+    "deprecated"
+  ],
+  "depreca": [
+    "deprecated"
+  ],
+  "deprecat": [
+    "deprecated"
+  ],
+  "deprecate": [
+    "deprecated"
+  ],
+  "deprecated": [
+    "deprecated"
   ]
 }

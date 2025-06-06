@@ -290,16 +290,16 @@
   ],
   "GridBagConstraints": [
     "VERTICAL",
-    "weightx",
-    "gridx",
     "anchor",
     "CENTER",
     "fill",
     "BOTH",
+    "gridy",
     "weighty",
-    "gridwidth",
     "gridheight",
-    "gridy"
+    "gridx",
+    "weightx",
+    "gridwidth"
   ],
   "FileListModifier": [
     "fillList"
@@ -314,5 +314,10 @@
     "addItem",
     "addActionListener",
     "getSelectedItem"
+  ],
+  "JMenuBar": [
+    "add",
+    "validate",
+    "repaint"
   ]
 }
