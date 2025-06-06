@@ -36,7 +36,6 @@
   ],
   "String": [
     "startsWith",
-    "equals",
     "split",
     "replaceAll",
     "substring",
@@ -46,7 +45,8 @@
     "endsWith",
     "getChars",
     "replace",
-    "replaceFirst"
+    "replaceFirst",
+    "equals"
   ],
   "JFrame": [
     "disable",
@@ -305,5 +305,8 @@
   ],
   "BufferedWriter": [
     "write"
+  ],
+  "CommandLine": [
+    "run"
   ]
 }

@@ -96,8 +96,10 @@ public class Git {
 				frame.setTitle(mainbranch);			
 			}
 			else {
-				git("git switch "+whichfolderopened,root_directory);
-				frame.setTitle(whichfolderopened);
+				if(isBranch(whichfolderopened)) {
+					git("git switch "+whichfolderopened,root_directory);
+					frame.setTitle(whichfolderopened);
+				}
 			}
 		});
 	}
@@ -106,7 +108,21 @@ public class Git {
 		return substring.replace("\\","");
 	}
 	public boolean isBranch(String folder) {
+		String[] branches=getAllBranches();
+		for(int i = 0; i < branches.length; i++) {
+			String branch = branches[i];
+			if(folder.equals(branch)) {
+				return true;
+			}
+		}
 		return false;
+	}
+	public String[] getAllBranches() {
+		CommandLine commandline = new CommandLine();
+		Process process=commandline.run("git for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/",root_directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		String substring = displayoutput.Multiline(process);
+		return substring.split("\\r?\\n|\\r");
 	}
 	public String getMainBranch() {
 		CommandLine commandline = new CommandLine();
@@ -143,7 +159,7 @@ public class Git {
 		displayoutput.From(process);
 	}
 	
-public void gitwithoutthread(String command) {
+	public void gitwithoutthread(String command) {
 		try {
 			CommandLine commandline = new CommandLine();
 			// commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'git status; exec bash\'",root_directory);
