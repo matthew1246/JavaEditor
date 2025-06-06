@@ -78,9 +78,7 @@
     "equals",
     "hashCode",
     "getText",
-    "setText",
-    "setHorizontalAlignment",
-    "RIGHT_ALIGNMENT"
+    "setText"
   ],
   "VariableSuggestionBoxSelected": [
     "Reordered"
@@ -292,16 +290,16 @@
   ],
   "GridBagConstraints": [
     "VERTICAL",
+    "weightx",
+    "gridx",
     "anchor",
     "CENTER",
     "fill",
     "BOTH",
-    "gridy",
     "weighty",
+    "gridwidth",
     "gridheight",
-    "gridx",
-    "weightx",
-    "gridwidth"
+    "gridy"
   ],
   "FileListModifier": [
     "fillList"
@@ -316,14 +314,5 @@
     "addItem",
     "addActionListener",
     "getSelectedItem"
-  ],
-  "JMenuBar": [
-    "add",
-    "validate",
-    "repaint"
-  ],
-  "SwingConstants": [
-    "CENTER",
-    "RIGHT"
   ]
 }

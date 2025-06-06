@@ -214,7 +214,7 @@ public class Main {
 		else {
 			frame.setTitle("");
 		}
-		frame.setSize(870,600);
+		frame.setSize(800,600);
 		
 		textarea = new JTextArea();
 		combobox = new JComboBox<String>();
@@ -467,23 +467,7 @@ public class Main {
 		menubar.validate();
 		menubar.repaint();
 
-		JLabel javafxLabel = new JLabel("javafx: ");
-		javafxLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		gbc.gridx = 26;
-		gbc.weightx=2.0;
-		gbc.gridwidth=2;
-		menubar.add(javafxLabel,gbc);
-		
-		menubar.validate();
-		menubar.repaint();
-		
-		gbc.gridx=28;
-		gbc.weightx=1.0;
-		gbc.gridwidth=1;
-		menubar.add(new JCheckBox(),gbc);
-		
-		menubar.validate();
-		menubar.repaint();
+		// gbc = new GridBagConstraints(); // reset insets object to default value
 		
 		gbc.gridx=0;
 		gbc.gridy=1;
@@ -596,14 +580,6 @@ public class Main {
 		gbc.gridheight=1;
 		menubar.add(reload,gbc);
 
-		menubar.validate();
-		menubar.repaint();
-		
-		gbc.gridx=26;
-		gbc.weightx=3.0;
-		gbc.gridwidth=3;
-		menubar.add(new JButton("deprecated"),gbc);
-		
 		menubar.validate();
 		menubar.repaint();
 		

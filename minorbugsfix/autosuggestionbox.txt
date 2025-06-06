@@ -17,8 +17,7 @@
   "S": [
     "Sslsessionbindinglistener",
     "System",
-    "String",
-    "SwingConstants"
+    "String"
   ],
   "Array": [
     "Arraylist",
@@ -271,8 +270,7 @@
     "dotcaretposition",
     "dropPoint",
     "double",
-    "directory",
-    "deprecated"
+    "directory"
   ],
   "sugg": [
     "suggestionbox"
@@ -540,6 +538,7 @@
     "main",
     "class",
     "static",
+    "add",
     "Member",
     "selected_index",
     "rectangle",
@@ -573,6 +572,7 @@
     "original",
     "clone",
     "originaltextfield",
+    "JButton",
     "JTextField",
     "graphics",
     "newxlocation",
@@ -637,6 +637,7 @@
     "GridBagConstraints",
     "public",
     "checkbox1",
+    "JCheckBox",
     "originalcheckbox",
     "clonebutton",
     "clickEvent",
@@ -658,6 +659,7 @@
     "System",
     "return",
     "JPanel",
+    "JLabel",
     "selectlabel",
     "JComboBox",
     "combobox",
@@ -671,15 +673,7 @@
     "fileName",
     "this",
     "String",
-    "selectbranch",
-    "JCheckBox",
-    "menubar",
-    "add",
-    "JButton",
-    "deprecated",
-    "javafxLabel",
-    "JLabel",
-    "SwingConstants"
+    "selectbranch"
   ],
   "Syst": [
     "System"
@@ -909,15 +903,15 @@
   "J": [
     "JMenuItem",
     "JTextArea",
+    "JButton",
     "JTextField",
     "JComponent",
+    "JCheckBox",
     "JOptionPane",
     "JPanel",
+    "JLabel",
     "JComboBox",
-    "JFrame",
-    "JCheckBox",
-    "JButton",
-    "JLabel"
+    "JFrame"
   ],
   "JO": [
     "JOptionPane"
@@ -1748,8 +1742,7 @@
     "middlepanel",
     "minipanel1",
     "minipanel2",
-    "minipanel3",
-    "menubar"
+    "minipanel3"
   ],
   "tex": [
     "textarea2",
@@ -2678,8 +2671,8 @@
   ],
   "JC": [
     "JComponent",
-    "JComboBox",
-    "JCheckBox"
+    "JCheckBox",
+    "JComboBox"
   ],
   "JCo": [
     "JComponent",
@@ -3127,8 +3120,7 @@
     "jcomponent",
     "jcomponents",
     "jcomponent1",
-    "jcomponent2",
-    "javafxLabel"
+    "jcomponent2"
   ],
   "jc": [
     "jcomponent",
@@ -4389,119 +4381,5 @@
   ],
   "this": [
     "this"
-  ],
-  "me": [
-    "menubar"
-  ],
-  "men": [
-    "menubar"
-  ],
-  "menu": [
-    "menubar"
-  ],
-  "menub": [
-    "menubar"
-  ],
-  "menuba": [
-    "menubar"
-  ],
-  "menubar": [
-    "menubar"
-  ],
-  "de": [
-    "deprecated"
-  ],
-  "dep": [
-    "deprecated"
-  ],
-  "depr": [
-    "deprecated"
-  ],
-  "depre": [
-    "deprecated"
-  ],
-  "deprec": [
-    "deprecated"
-  ],
-  "depreca": [
-    "deprecated"
-  ],
-  "deprecat": [
-    "deprecated"
-  ],
-  "deprecate": [
-    "deprecated"
-  ],
-  "deprecated": [
-    "deprecated"
-  ],
-  "ja": [
-    "javafxLabel"
-  ],
-  "jav": [
-    "javafxLabel"
-  ],
-  "java": [
-    "javafxLabel"
-  ],
-  "javaf": [
-    "javafxLabel"
-  ],
-  "javafx": [
-    "javafxLabel"
-  ],
-  "javafxL": [
-    "javafxLabel"
-  ],
-  "javafxLa": [
-    "javafxLabel"
-  ],
-  "javafxLab": [
-    "javafxLabel"
-  ],
-  "javafxLabe": [
-    "javafxLabel"
-  ],
-  "javafxLabel": [
-    "javafxLabel"
-  ],
-  "Sw": [
-    "SwingConstants"
-  ],
-  "Swi": [
-    "SwingConstants"
-  ],
-  "Swin": [
-    "SwingConstants"
-  ],
-  "Swing": [
-    "SwingConstants"
-  ],
-  "SwingC": [
-    "SwingConstants"
-  ],
-  "SwingCo": [
-    "SwingConstants"
-  ],
-  "SwingCon": [
-    "SwingConstants"
-  ],
-  "SwingCons": [
-    "SwingConstants"
-  ],
-  "SwingConst": [
-    "SwingConstants"
-  ],
-  "SwingConsta": [
-    "SwingConstants"
-  ],
-  "SwingConstan": [
-    "SwingConstants"
-  ],
-  "SwingConstant": [
-    "SwingConstants"
-  ],
-  "SwingConstants": [
-    "SwingConstants"
   ]
 }
