@@ -746,12 +746,12 @@ public class Main {
 	
 			if(selected2 == null) JOptionPane.showMessageDialog(null,"filename combox value is null");
 			
+			dir=dir+selected2;
+			
 			if(msdos == null)
 				msdos = new MSDOS(dir);
 			else
-				msdos.setFileName(dir+selected2);
-			
-			dir=dir+selected2;
+				msdos.setFileName(dir);
 				
 			fileName = dir; // Might need uncomment to make Main.java work again.
 			//fileName = dir+".java";
