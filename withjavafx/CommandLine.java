@@ -16,6 +16,26 @@ public class CommandLine {
 		isearlierversion = true;
 		this.javaversion = javaversion;
 	}
+	public void addJavaFX() {
+		jars.addAll(getJavaFX());
+	}
+	public List<String> getJavaFX() {
+		List<String> javafx = new ArrayList<String>();
+			
+		javafx.add("javafx.base.jar");
+		javafx.add("javafx.controls.jar");
+		javafx.add("javafx.fxml.jar");
+		javafx.add("javafx.graphics.jar");
+		javafx.add("javafx.media.jar");
+		javafx.add("javafx.swing.jar");
+		javafx.add("javafx.web.jar");
+		javafx.add("javafx-swt.jar");
+		javafx.add("jdk.jsobject.jar");
+		javafx.add("jfx.incubator.input.jar");
+		javafx.add("jfx.incubator.richtext.jar");
+		
+		return javafx;
+	}
 	public void deprecated() {
 		isdeprecated = true;
 	}

@@ -465,7 +465,8 @@
   "r": [
     "rectangle",
     "root_directory",
-    "return"
+    "return",
+    "replaceAll"
   ],
   "sub": [
     "sublink",
@@ -488,8 +489,8 @@
     "firstvalue",
     "frame",
     "filelistmodifier",
-    "filename",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "": [
     "class_one",
@@ -643,19 +644,16 @@
     "wholedocumentindex",
     "textarea",
     "output",
-    "filename",
     "directory",
     "boolean",
     "null",
     "root_directory",
     "command",
-    "commandline",
     "Process",
     "process",
     "JOptionPane",
     "whichfolderopened",
     "System",
-    "return",
     "JPanel",
     "selectlabel",
     "JComboBox",
@@ -678,8 +676,13 @@
     "javafxLabel",
     "JLabel",
     "SwingConstants",
+    "JCheckBox",
+    "javafxcheckbox",
+    "commandline",
     "public",
-    "JCheckBox"
+    "return",
+    "replaceAll",
+    "filename"
   ],
   "Syst": [
     "System"
@@ -778,8 +781,8 @@
     "clonebutton",
     "clickEvent",
     "command",
-    "commandline",
-    "combobox"
+    "combobox",
+    "commandline"
   ],
   "cla": [
     "class_one",
@@ -1718,8 +1721,8 @@
     "count",
     "component",
     "command",
-    "commandline",
-    "combobox"
+    "combobox",
+    "commandline"
   ],
   "con": [
     "control_t"
@@ -2254,7 +2257,8 @@
   ],
   "re": [
     "rectangle",
-    "return"
+    "return",
+    "replaceAll"
   ],
   "rec": [
     "rectangle"
@@ -2457,8 +2461,8 @@
   "com": [
     "component",
     "command",
-    "commandline",
-    "combobox"
+    "combobox",
+    "commandline"
   ],
   "comp": [
     "component"
@@ -3128,7 +3132,8 @@
     "jcomponents",
     "jcomponent1",
     "jcomponent2",
-    "javafxLabel"
+    "javafxLabel",
+    "javafxcheckbox"
   ],
   "jc": [
     "jcomponent",
@@ -3510,8 +3515,8 @@
   "fi": [
     "firstvalue",
     "filelistmodifier",
-    "filename",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "firstv": [
     "firstvalue"
@@ -3988,13 +3993,13 @@
   ],
   "fil": [
     "filelistmodifier",
-    "filename",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "file": [
     "filelistmodifier",
-    "filename",
-    "fileName"
+    "fileName",
+    "filename"
   ],
   "filel": [
     "filelistmodifier"
@@ -4436,19 +4441,24 @@
     "deprecated"
   ],
   "ja": [
-    "javafxLabel"
+    "javafxLabel",
+    "javafxcheckbox"
   ],
   "jav": [
-    "javafxLabel"
+    "javafxLabel",
+    "javafxcheckbox"
   ],
   "java": [
-    "javafxLabel"
+    "javafxLabel",
+    "javafxcheckbox"
   ],
   "javaf": [
-    "javafxLabel"
+    "javafxLabel",
+    "javafxcheckbox"
   ],
   "javafx": [
-    "javafxLabel"
+    "javafxLabel",
+    "javafxcheckbox"
   ],
   "javafxL": [
     "javafxLabel"
@@ -4503,5 +4513,53 @@
   ],
   "SwingConstants": [
     "SwingConstants"
+  ],
+  "javafxc": [
+    "javafxcheckbox"
+  ],
+  "javafxch": [
+    "javafxcheckbox"
+  ],
+  "javafxche": [
+    "javafxcheckbox"
+  ],
+  "javafxchec": [
+    "javafxcheckbox"
+  ],
+  "javafxcheck": [
+    "javafxcheckbox"
+  ],
+  "javafxcheckb": [
+    "javafxcheckbox"
+  ],
+  "javafxcheckbo": [
+    "javafxcheckbox"
+  ],
+  "javafxcheckbox": [
+    "javafxcheckbox"
+  ],
+  "rep": [
+    "replaceAll"
+  ],
+  "repl": [
+    "replaceAll"
+  ],
+  "repla": [
+    "replaceAll"
+  ],
+  "replac": [
+    "replaceAll"
+  ],
+  "replace": [
+    "replaceAll"
+  ],
+  "replaceA": [
+    "replaceAll"
+  ],
+  "replaceAl": [
+    "replaceAll"
+  ],
+  "replaceAll": [
+    "replaceAll"
   ]
 }

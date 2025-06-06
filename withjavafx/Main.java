@@ -759,6 +759,15 @@ public class Main {
 			}
 		}
 	}
+	public String getDirectory(String filename) {
+		if(filename.endsWith(".java")) {
+			return filename.replaceAll("[^\\\\]+\\.java","");
+		}
+		else if(filename.endsWith(".jar")) {
+			return filename.replaceAll("[^\\\\]+\\.jar","");
+		}
+		return filename;
+	}
 	public MSDOS msdos;
 	public void open(String selected2) {
 		try {
@@ -1609,6 +1618,10 @@ public class Main {
 						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 	
 						CommandLine commandline = new CommandLine();
+						if(javafxcheckbox.isSelected()) {
+							ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+							commandline.addJavaFX();
+						}
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
 						for(String jar:preferences.jars) {

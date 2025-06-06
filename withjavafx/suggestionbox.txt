@@ -18,8 +18,8 @@
     "positiontrackers",
     "textarea",
     "getFileName",
-    "fileName",
-    "open"
+    "open",
+    "fileName"
   ],
   "JDialog": [
     "show"
@@ -31,9 +31,9 @@
     "remove",
     "set",
     "get",
+    "size",
     "add",
-    "addAll",
-    "size"
+    "addAll"
   ],
   "String": [
     "startsWith",
@@ -43,11 +43,11 @@
     "trim",
     "contains",
     "length",
-    "endsWith",
     "getChars",
     "replace",
     "replaceFirst",
-    "equals"
+    "equals",
+    "endsWith"
   ],
   "JFrame": [
     "disable",
@@ -310,7 +310,8 @@
     "write"
   ],
   "CommandLine": [
-    "run"
+    "run",
+    "getJars"
   ],
   "JComboBox": [
     "addItem",
@@ -325,5 +326,8 @@
   "SwingConstants": [
     "CENTER",
     "RIGHT"
+  ],
+  "JCheckBox": [
+    "isSelected"
   ]
 }
