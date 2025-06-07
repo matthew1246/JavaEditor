@@ -2106,7 +2106,7 @@ public class Main {
 	
 				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
 					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(mainclass.equals(key)) {
+							if(mainclass.equals(key)) {
 							Set<String> method_names=value.keySet();
 							for(String method_name:method_names) {
 								combobox.addItem(method_name);

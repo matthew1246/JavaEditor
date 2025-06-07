@@ -32,8 +32,8 @@
     "set",
     "get",
     "size",
-    "add",
-    "addAll"
+    "addAll",
+    "add"
   ],
   "String": [
     "startsWith",

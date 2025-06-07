@@ -17,9 +17,9 @@
   "S": [
     "Sslsessionbindinglistener",
     "System",
-    "String",
     "SwingConstants",
-    "StandardCopyOption"
+    "StandardCopyOption",
+    "String"
   ],
   "Array": [
     "Arraylist",
@@ -277,7 +277,8 @@
     "dropPoint",
     "double",
     "directory",
-    "deprecated"
+    "deprecated",
+    "dlls"
   ],
   "sugg": [
     "suggestionbox"
@@ -594,7 +595,6 @@
     "jcomponent",
     "Double",
     "order_y",
-    "ArrayList",
     "while",
     "int",
     "secondvalue",
@@ -607,7 +607,6 @@
     "jcomponents",
     "iterator",
     "treeset",
-    "List",
     "protected",
     "top",
     "x",
@@ -670,7 +669,6 @@
     "JFrame",
     "fileName",
     "this",
-    "String",
     "selectbranch",
     "menubar",
     "add",
@@ -682,7 +680,6 @@
     "JCheckBox",
     "javafxcheckbox",
     "commandline",
-    "public",
     "replaceAll",
     "filename",
     "class",
@@ -690,18 +687,23 @@
     "outputpath",
     "InputStream",
     "StandardCopyOption",
-    "import",
     "File",
     "IOException",
-    "boolean",
-    "return"
+    "List",
+    "String",
+    "return",
+    "dlls",
+    "import",
+    "ArrayList",
+    "public",
+    "boolean"
   ],
   "Syst": [
     "System"
   ],
   "St": [
-    "String",
-    "StandardCopyOption"
+    "StandardCopyOption",
+    "String"
   ],
   "H": [
     "Hashmap",
@@ -4712,5 +4714,14 @@
   ],
   "File": [
     "File"
+  ],
+  "dl": [
+    "dlls"
+  ],
+  "dll": [
+    "dlls"
+  ],
+  "dlls": [
+    "dlls"
   ]
 }
