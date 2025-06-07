@@ -2107,7 +2107,7 @@ public class Main {
 					JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
 				}
 				else {
-					LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
+					LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface					<String,Integer>(linkedhashmap2);
 					Integer integer2 =iterator4.getFirstValue();
 					if(integer2 != null) {
 						JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();

@@ -17,7 +17,9 @@ public class CommandLine {
 		this.javaversion = javaversion;
 	}
 	public void addJavaFX() {
-		jars.addAll(getJavaFX());
+		for(String jar:getJavaFX()) {
+			addExternalJar(jar);
+		}
 	}
 	public List<String> getJavaFX() {
 		List<String> javafx = new ArrayList<String>();
