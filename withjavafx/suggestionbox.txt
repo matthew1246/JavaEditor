@@ -349,5 +349,15 @@
   ],
   "Process": [
     "exitValue"
+  ],
+  "PrintWriter": [
+    "println",
+    "close"
+  ],
+  "FileNotFoundException": [
+    "printStackTrace"
+  ],
+  "ExtractJavaFXJars": [
+    "starter"
   ]
 }

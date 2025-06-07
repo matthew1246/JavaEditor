@@ -1618,10 +1618,6 @@ public class Main {
 						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 	
 						CommandLine commandline = new CommandLine();
-						if(javafxcheckbox.isSelected()) {
-							ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-							//commandline.addJavaFX();
-						}
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
 						for(String jar:preferences.jars) {
@@ -1632,6 +1628,11 @@ public class Main {
 						}
 						String main_class = fileName.replaceAll(".+\\\\","");						
 						main_class =main_class.replaceAll("\\.java","");
+						if(javafxcheckbox.isSelected()) {
+							ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+							commandline.addJavaFX();
+							main_class=extractjavafxjars.starter;
+						}
 						commandline.setMainClass(main_class);
 						if(checkbox.isSelected()) {
 							commandline.addClasspathCheckboxFeature();
@@ -2107,7 +2108,7 @@ public class Main {
 					JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
 				}
 				else {
-					LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface					<String,Integer>(linkedhashmap2);
+					LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
 					Integer integer2 =iterator4.getFirstValue();
 					if(integer2 != null) {
 						JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();

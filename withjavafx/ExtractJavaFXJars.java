@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 public class ExtractJavaFXJars {
 	public Main main;
 	public ExtractJavaFXJars(Main main) {	
@@ -29,7 +31,28 @@ public class ExtractJavaFXJars {
 		if(!dllFilesExtracted()) {
 			extractDLLFiles();
 		}
+		createStarter();
 	}
+	public String starter;
+	public void createStarter() {
+		try {
+			String dir = main.getDirectory(main.fileName);	
+			String normalmain=main.getFileName(main.fileName);
+			this.starter = normalmain+"two";
+			PrintWriter printwriter = new PrintWriter(dir+this.starter);
+			printwriter.println("public class "+starter+" {");
+			printwriter.println("\tpublic static void main(String[] args) {");
+			printwriter.println("\t\t"+normalmain+".launch("+normalmain+".class,args);");
+			printwriter.println("\t}");
+			printwriter.println("}");
+			printwriter.println();
+			printwriter.close();
+		}
+		catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	public void unzipJars() {
 		try {
 			CommandLine commandline = new CommandLine();	

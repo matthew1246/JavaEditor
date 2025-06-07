@@ -685,7 +685,6 @@
     "ArrayList",
     "public",
     "boolean",
-    "commandline",
     "String",
     "JPanel",
     "jscrollpane",
@@ -702,7 +701,9 @@
     "JOptionPane",
     "extractframe",
     "process",
-    "exitCode"
+    "exitCode",
+    "commandline",
+    "extractjavafxjars"
   ],
   "Syst": [
     "System"
@@ -1627,7 +1628,8 @@
   "e": [
     "else",
     "extractframe",
-    "exitCode"
+    "exitCode",
+    "extractjavafxjars"
   ],
   "els": [
     "else"
@@ -4741,22 +4743,28 @@
   ],
   "ex": [
     "extractframe",
-    "exitCode"
+    "exitCode",
+    "extractjavafxjars"
   ],
   "ext": [
-    "extractframe"
+    "extractframe",
+    "extractjavafxjars"
   ],
   "extr": [
-    "extractframe"
+    "extractframe",
+    "extractjavafxjars"
   ],
   "extra": [
-    "extractframe"
+    "extractframe",
+    "extractjavafxjars"
   ],
   "extrac": [
-    "extractframe"
+    "extractframe",
+    "extractjavafxjars"
   ],
   "extract": [
-    "extractframe"
+    "extractframe",
+    "extractjavafxjars"
   ],
   "extractf": [
     "extractframe"
@@ -4940,5 +4948,35 @@
   ],
   "exitCode": [
     "exitCode"
+  ],
+  "extractj": [
+    "extractjavafxjars"
+  ],
+  "extractja": [
+    "extractjavafxjars"
+  ],
+  "extractjav": [
+    "extractjavafxjars"
+  ],
+  "extractjava": [
+    "extractjavafxjars"
+  ],
+  "extractjavaf": [
+    "extractjavafxjars"
+  ],
+  "extractjavafx": [
+    "extractjavafxjars"
+  ],
+  "extractjavafxj": [
+    "extractjavafxjars"
+  ],
+  "extractjavafxja": [
+    "extractjavafxjars"
+  ],
+  "extractjavafxjar": [
+    "extractjavafxjars"
+  ],
+  "extractjavafxjars": [
+    "extractjavafxjars"
   ]
 }
