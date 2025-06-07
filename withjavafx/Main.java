@@ -1620,7 +1620,7 @@ public class Main {
 						CommandLine commandline = new CommandLine();
 						if(javafxcheckbox.isSelected()) {
 							ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-							commandline.addJavaFX();
+							//commandline.addJavaFX();
 						}
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
@@ -1722,7 +1722,7 @@ public class Main {
 								CommandLine commandline = new CommandLine();
 								if(javafxcheckbox.isSelected()) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									commandline.addJavaFX();
+									//commandline.addJavaFX();
 								}
 								if(jarcheckbox.isSelected()) {
 									commandline.addJunit();
@@ -1769,7 +1769,7 @@ public class Main {
 								CommandLine commandline = new CommandLine();
 								if(javafxcheckbox.isSelected()) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									commandline.addJavaFX();
+									//commandline.addJavaFX();
 								}
 								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								Preferences preferences=storeselectedfile.get(fileName);
@@ -1807,7 +1807,7 @@ public class Main {
 									commandline = new CommandLine();
 									if(javafxcheckbox.isSelected()) {
 										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-										commandline.addJavaFX();
+										//commandline.addJavaFX();
 									}
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
