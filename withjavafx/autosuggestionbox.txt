@@ -648,8 +648,6 @@
     "null",
     "root_directory",
     "command",
-    "Process",
-    "process",
     "whichfolderopened",
     "System",
     "selectlabel",
@@ -692,7 +690,6 @@
     "JPanel",
     "jscrollpane",
     "textarea",
-    "JOptionPane",
     "JTextArea",
     "JScrollPane",
     "BufferedReader",
@@ -701,7 +698,11 @@
     "InterruptedException",
     "IOException",
     "JFrame",
-    "extractframe"
+    "Process",
+    "JOptionPane",
+    "extractframe",
+    "process",
+    "exitCode"
   ],
   "Syst": [
     "System"
@@ -942,10 +943,10 @@
     "JLabel",
     "JCheckBox",
     "JPanel",
-    "JOptionPane",
     "JTextArea",
     "JScrollPane",
-    "JFrame"
+    "JFrame",
+    "JOptionPane"
   ],
   "JO": [
     "JOptionPane"
@@ -1060,8 +1061,8 @@
     "point2",
     "panel3",
     "panel",
-    "process",
-    "public"
+    "public",
+    "process"
   ],
   "pl": [
     "pluspanel"
@@ -1625,7 +1626,8 @@
   ],
   "e": [
     "else",
-    "extractframe"
+    "extractframe",
+    "exitCode"
   ],
   "els": [
     "else"
@@ -4738,7 +4740,8 @@
     "dlls"
   ],
   "ex": [
-    "extractframe"
+    "extractframe",
+    "exitCode"
   ],
   "ext": [
     "extractframe"
@@ -4919,5 +4922,23 @@
   ],
   "InterruptedException": [
     "InterruptedException"
+  ],
+  "exi": [
+    "exitCode"
+  ],
+  "exit": [
+    "exitCode"
+  ],
+  "exitC": [
+    "exitCode"
+  ],
+  "exitCo": [
+    "exitCode"
+  ],
+  "exitCod": [
+    "exitCode"
+  ],
+  "exitCode": [
+    "exitCode"
   ]
 }

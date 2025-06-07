@@ -60,11 +60,11 @@
     "setTitle",
     "EXIT_ON_CLOSE",
     "pack",
-    "dispose",
     "setSize",
     "setDefaultCloseOperation",
     "DISPOSE_ON_CLOSE",
-    "setVisible"
+    "setVisible",
+    "dispose"
   ],
   "KeyEvent": [
     "getKeyText",
@@ -346,5 +346,8 @@
   ],
   "InterruptedException": [
     "printStackTrace"
+  ],
+  "Process": [
+    "exitValue"
   ]
 }

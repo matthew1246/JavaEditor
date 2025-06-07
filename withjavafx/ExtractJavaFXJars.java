@@ -71,7 +71,13 @@ public class ExtractJavaFXJars {
 			
 			            // Wait for the process to complete
 			            int exitCode = process.waitFor();
-			            JOptionPane.showMessageDialog(null,"Process exited with code: " + exitCode);
+
+  				if(exitCode == 0) {
+  				            JOptionPane.showMessageDialog(null,"Extraction of "+jar+" was a success.");
+  			            	extractframe.dispose();
+  			            }
+		            	else
+		            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
 		            }
 	            } catch (InterruptedException ex) {
 	            	ex.printStackTrace();
