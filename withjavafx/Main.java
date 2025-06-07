@@ -1721,10 +1721,6 @@ public class Main {
 								System.out.println("Is equal.");
 								
 								CommandLine commandline = new CommandLine();
-								if(javafxcheckbox.isSelected()) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									//commandline.addJavaFX();
-								}
 								if(jarcheckbox.isSelected()) {
 									commandline.addJunit();
 								}
@@ -1733,16 +1729,28 @@ public class Main {
 									StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									storeselectedfile.set(fileName);
 									storeselectedfile.setStarterClass(save);
-									commandline.setMainClass(save);
 									
+									if(javafxcheckbox.isSelected()) {
+										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+										commandline.addJavaFX();
+										save=extractjavafxjars.starter;
+									}
+									commandline.setMainClass(save);
+
 									Preferences preferences=storeselectedfile.get(classpath1+selected+".java");
 									for(String jar:preferences.jars) {
 										commandline.addExternalJar(jar);
 									}
 								}
 								else {
-									commandline.setMainClass(fileNameWithoutDotJava);
-									
+									if(javafxcheckbox.isSelected()) {
+										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+										commandline.addJavaFX();
+										commandline.setMainClass(extractjavafxjars.starter);
+									}
+									else {
+										commandline.setMainClass(fileNameWithoutDotJava);
+									}
 									StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									Preferences preferences=storeselectedfile.get(fileName);
 									for(String jar:preferences.jars) {																		
@@ -1768,10 +1776,6 @@ public class Main {
 								
 										
 								CommandLine commandline = new CommandLine();
-								if(javafxcheckbox.isSelected()) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									//commandline.addJavaFX();
-								}
 								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								Preferences preferences=storeselectedfile.get(fileName);
 								for(String jar:preferences.jars) {
@@ -1781,7 +1785,14 @@ public class Main {
 									commandline.addJunit();
 								String main_class = fileName.replaceAll(".+\\\\","");									
 								main_class =main_class.replaceAll("\\.java","");
-								commandline.setMainClass(main_class);
+								if(javafxcheckbox.isSelected()) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									commandline.addJavaFX();
+									commandline.setMainClass(extractjavafxjars.starter);
+								}
+								else {
+									commandline.setMainClass(main_class);
+								}
 								if(checkbox.isSelected()) {
 									commandline.addClasspathCheckboxFeature();
 								}	
@@ -1806,10 +1817,6 @@ public class Main {
 	 								String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 
 									commandline = new CommandLine();
-									if(javafxcheckbox.isSelected()) {
-										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-										//commandline.addJavaFX();
-									}
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
 										storeselectedfile = new StoreSelectedFile();
@@ -1821,12 +1828,25 @@ public class Main {
 										for(String jar:preferences.jars) {
 											commandline.addExternalJar(jar);
 										}
-										commandline.setMainClass(save);
+										if(javafxcheckbox.isSelected()) {
+											ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+											commandline.addJavaFX();
+											commandline.setMainClass(extractjavafxjars.starter);
+										}
+										else {
+											commandline.setMainClass(save);
+										}
 									}
 									else {
 										fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
-										commandline.setMainClass(fileNameWithoutDotJava);
-										
+										if(javafxcheckbox.isSelected()) {
+											ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+											commandline.addJavaFX();
+											commandline.setMainClass(extractjavafxjars.starter);
+										}
+										else {
+											commandline.setMainClass(fileNameWithoutDotJava);
+										}
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName);
 										for(String jar:preferences.jars) {										
@@ -3263,4 +3283,4 @@ class AutoKeyListener {
 		data = variablenames2;
 		return variablenames2.size() > 0;
 	}
-		}
+}
