@@ -44,10 +44,10 @@
     "contains",
     "length",
     "getChars",
-    "replace",
     "replaceFirst",
     "equals",
-    "endsWith"
+    "endsWith",
+    "replace"
   ],
   "JFrame": [
     "disable",

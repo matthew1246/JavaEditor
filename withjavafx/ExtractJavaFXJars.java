@@ -38,8 +38,8 @@ public class ExtractJavaFXJars {
 		try {
 			String dir = main.getDirectory(main.fileName);	
 			String normalmain=main.getFileName(main.fileName);
-			this.starter = normalmain+"two";
-			PrintWriter printwriter = new PrintWriter(dir+this.starter);
+			this.starter = normalmain.replace(".java","")+"two";
+			PrintWriter printwriter = new PrintWriter(dir+this.starter+".java");
 			printwriter.println("public class "+starter+" {");
 			printwriter.println("\tpublic static void main(String[] args) {");
 			printwriter.println("\t\t"+normalmain+".launch("+normalmain+".class,args);");
