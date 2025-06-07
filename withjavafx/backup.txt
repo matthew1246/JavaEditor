@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\nocrashplease\\Main.java",
     "jars": [],
     "caretposition": 0
   },
@@ -703,6 +703,11 @@
   },
   "C:\\Users\\Owner\\Documents\\twelve\\Main.java": {
     "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\nocrashplease\\Main.java": {
+    "starterclass": "Main",
     "jars": [],
     "caretposition": 0
   }
