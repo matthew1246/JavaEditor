@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 public class ExtractJavaFXJars {
 	public Main main;
 	public ExtractJavaFXJars(Main main) {	
@@ -15,6 +21,7 @@ public class ExtractJavaFXJars {
 		
 		if(!isAlreadyExtracted()) {
 			extractJars();
+			unzipJars();
 		}
 		if(!strangeFilesExtracted()) {
 			extractStrangeFiles();
@@ -23,6 +30,53 @@ public class ExtractJavaFXJars {
 			extractDLLFiles();
 		}
 	}
+	public void unzipJars() {
+		try {
+			CommandLine commandline = new CommandLine();	
+			String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
+			String dir = main.getDirectory(main.fileName);
+			
+			for(String jar:commandline.getJavaFX()) {
+				JFrame extractframe = new JFrame();
+				extractframe.setSize(800,600);
+				JTextArea textarea = new JTextArea();
+				JScrollPane jscrollpane = new JScrollPane(textarea);
+				
+				extractframe.add(jscrollpane);
+					
+			        	// Command: jar -xvf myfile.jar
+			            ProcessBuilder pb = new ProcessBuilder(
+			                jarExe, "-xvf", jar
+			            );
+			
+			            // Set working directory (where files will be extracted)
+			            pb.directory(new File(dir));
+			
+			            // Merge error stream with output
+			            pb.redirectErrorStream(true);
+			
+			            // Start the process
+			            Process process = pb.start();
+			
+			            // Read output
+			            BufferedReader reader = new BufferedReader(
+			                new InputStreamReader(process.getInputStream())
+			            );
+			            String line;
+			            while ((line = reader.readLine()) != null) {
+			                textarea.append(line);
+			            }
+			
+			            // Wait for the process to complete
+			            int exitCode = process.waitFor();
+			            JOptionPane.showMessageDialog(null,"Process exited with code: " + exitCode);
+		            }
+	            } catch (InterruptedException ex) {
+	            	ex.printStackTrace();
+            	} catch(IOException ex) {
+            		ex.printStackTrace();
+            	}
+            }
 	public void extractDLLFiles() {
 		try {
 			String dir=main.getDirectory(main.fileName);	

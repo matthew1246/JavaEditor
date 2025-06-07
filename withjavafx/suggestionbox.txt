@@ -58,12 +58,12 @@
     "getContentPane",
     "setLocation",
     "setTitle",
-    "setSize",
     "setDefaultCloseOperation",
     "EXIT_ON_CLOSE",
     "setVisible",
     "pack",
-    "dispose"
+    "dispose",
+    "setSize"
   ],
   "KeyEvent": [
     "getKeyText",
@@ -111,7 +111,8 @@
     "dispatchEvent",
     "getCaretPosition",
     "setCaretPosition",
-    "getText"
+    "getText",
+    "append"
   ],
   "Muck": [
     "links"
@@ -341,5 +342,8 @@
   ],
   "StandardCopyOption": [
     "REPLACE_EXISTING"
+  ],
+  "InterruptedException": [
+    "printStackTrace"
   ]
 }

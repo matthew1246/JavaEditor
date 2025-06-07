@@ -11,8 +11,8 @@
     "true",
     "thirdpanel",
     "textfield1",
-    "textarea",
-    "this"
+    "this",
+    "textarea"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -508,7 +508,6 @@
     "oneclass",
     "classes",
     "Arraylist",
-    "InputStreamReader",
     "value",
     "pluspanel",
     "index",
@@ -524,7 +523,6 @@
     "control_t",
     "Position",
     "positiontracker",
-    "JTextArea",
     "tabbedpane",
     "title",
     "positiontrackers",
@@ -645,7 +643,6 @@
     "clickEvent",
     "filelistmodifier",
     "wholedocumentindex",
-    "textarea",
     "output",
     "directory",
     "null",
@@ -653,10 +650,8 @@
     "command",
     "Process",
     "process",
-    "JOptionPane",
     "whichfolderopened",
     "System",
-    "JPanel",
     "selectlabel",
     "JComboBox",
     "combobox",
@@ -666,7 +661,6 @@
     "selectedbranch",
     "selectpanel",
     "openbranch",
-    "JFrame",
     "fileName",
     "this",
     "selectbranch",
@@ -679,7 +673,6 @@
     "SwingConstants",
     "JCheckBox",
     "javafxcheckbox",
-    "commandline",
     "replaceAll",
     "filename",
     "class",
@@ -688,15 +681,27 @@
     "InputStream",
     "StandardCopyOption",
     "File",
-    "IOException",
     "List",
-    "String",
     "return",
     "dlls",
-    "import",
     "ArrayList",
     "public",
-    "boolean"
+    "boolean",
+    "commandline",
+    "String",
+    "JPanel",
+    "jscrollpane",
+    "extractframe",
+    "textarea",
+    "JOptionPane",
+    "JTextArea",
+    "JFrame",
+    "JScrollPane",
+    "BufferedReader",
+    "import",
+    "InputStreamReader",
+    "InterruptedException",
+    "IOException"
   ],
   "Syst": [
     "System"
@@ -796,8 +801,8 @@
     "clickEvent",
     "command",
     "combobox",
-    "commandline",
-    "class"
+    "class",
+    "commandline"
   ],
   "cla": [
     "class_one",
@@ -817,10 +822,11 @@
     "classes"
   ],
   "I": [
-    "InputStreamReader",
     "Iterator",
     "Integer",
     "InputStream",
+    "InputStreamReader",
+    "InterruptedException",
     "IOException"
   ],
   "It": [
@@ -929,16 +935,17 @@
   ],
   "J": [
     "JMenuItem",
-    "JTextArea",
     "JTextField",
     "JComponent",
-    "JOptionPane",
-    "JPanel",
     "JComboBox",
-    "JFrame",
     "JButton",
     "JLabel",
-    "JCheckBox"
+    "JCheckBox",
+    "JPanel",
+    "JOptionPane",
+    "JTextArea",
+    "JFrame",
+    "JScrollPane"
   ],
   "JO": [
     "JOptionPane"
@@ -974,45 +981,46 @@
     "HashMap"
   ],
   "In": [
-    "InputStreamReader",
     "Integer",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader",
+    "InterruptedException"
   ],
   "Inp": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "Inpu": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "Input": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "InputS": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "InputSt": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "InputStr": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "InputStre": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "InputStrea": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "InputStream": [
-    "InputStreamReader",
-    "InputStream"
+    "InputStream",
+    "InputStreamReader"
   ],
   "InputStreamR": [
     "InputStreamReader"
@@ -1616,7 +1624,8 @@
     "search_textfield"
   ],
   "e": [
-    "else"
+    "else",
+    "extractframe"
   ],
   "els": [
     "else"
@@ -1984,20 +1993,20 @@
     "ArrayList"
   ],
   "JT": [
-    "JTextArea",
-    "JTextField"
+    "JTextField",
+    "JTextArea"
   ],
   "JTe": [
-    "JTextArea",
-    "JTextField"
+    "JTextField",
+    "JTextArea"
   ],
   "JTex": [
-    "JTextArea",
-    "JTextField"
+    "JTextField",
+    "JTextArea"
   ],
   "JText": [
-    "JTextArea",
-    "JTextField"
+    "JTextField",
+    "JTextArea"
   ],
   "JTextA": [
     "JTextArea"
@@ -3161,7 +3170,8 @@
     "jcomponent1",
     "jcomponent2",
     "javafxLabel",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "jscrollpane"
   ],
   "jc": [
     "jcomponent",
@@ -3481,10 +3491,12 @@
     "TreeSet"
   ],
   "Int": [
-    "Integer"
+    "Integer",
+    "InterruptedException"
   ],
   "Inte": [
-    "Integer"
+    "Integer",
+    "InterruptedException"
   ],
   "Integ": [
     "Integer"
@@ -3800,7 +3812,8 @@
   "B": [
     "BorderLayout",
     "BorderFactory",
-    "BoxLayout"
+    "BoxLayout",
+    "BufferedReader"
   ],
   "Bo": [
     "BorderLayout",
@@ -4723,5 +4736,188 @@
   ],
   "dlls": [
     "dlls"
+  ],
+  "ex": [
+    "extractframe"
+  ],
+  "ext": [
+    "extractframe"
+  ],
+  "extr": [
+    "extractframe"
+  ],
+  "extra": [
+    "extractframe"
+  ],
+  "extrac": [
+    "extractframe"
+  ],
+  "extract": [
+    "extractframe"
+  ],
+  "extractf": [
+    "extractframe"
+  ],
+  "extractfr": [
+    "extractframe"
+  ],
+  "extractfra": [
+    "extractframe"
+  ],
+  "extractfram": [
+    "extractframe"
+  ],
+  "extractframe": [
+    "extractframe"
+  ],
+  "JS": [
+    "JScrollPane"
+  ],
+  "JSc": [
+    "JScrollPane"
+  ],
+  "JScr": [
+    "JScrollPane"
+  ],
+  "JScro": [
+    "JScrollPane"
+  ],
+  "JScrol": [
+    "JScrollPane"
+  ],
+  "JScroll": [
+    "JScrollPane"
+  ],
+  "JScrollP": [
+    "JScrollPane"
+  ],
+  "JScrollPa": [
+    "JScrollPane"
+  ],
+  "JScrollPan": [
+    "JScrollPane"
+  ],
+  "JScrollPane": [
+    "JScrollPane"
+  ],
+  "js": [
+    "jscrollpane"
+  ],
+  "jsc": [
+    "jscrollpane"
+  ],
+  "jscr": [
+    "jscrollpane"
+  ],
+  "jscro": [
+    "jscrollpane"
+  ],
+  "jscrol": [
+    "jscrollpane"
+  ],
+  "jscroll": [
+    "jscrollpane"
+  ],
+  "jscrollp": [
+    "jscrollpane"
+  ],
+  "jscrollpa": [
+    "jscrollpane"
+  ],
+  "jscrollpan": [
+    "jscrollpane"
+  ],
+  "jscrollpane": [
+    "jscrollpane"
+  ],
+  "Bu": [
+    "BufferedReader"
+  ],
+  "Buf": [
+    "BufferedReader"
+  ],
+  "Buff": [
+    "BufferedReader"
+  ],
+  "Buffe": [
+    "BufferedReader"
+  ],
+  "Buffer": [
+    "BufferedReader"
+  ],
+  "Buffere": [
+    "BufferedReader"
+  ],
+  "Buffered": [
+    "BufferedReader"
+  ],
+  "BufferedR": [
+    "BufferedReader"
+  ],
+  "BufferedRe": [
+    "BufferedReader"
+  ],
+  "BufferedRea": [
+    "BufferedReader"
+  ],
+  "BufferedRead": [
+    "BufferedReader"
+  ],
+  "BufferedReade": [
+    "BufferedReader"
+  ],
+  "BufferedReader": [
+    "BufferedReader"
+  ],
+  "InputStreamReader": [
+    "InputStreamReader"
+  ],
+  "Inter": [
+    "InterruptedException"
+  ],
+  "Interr": [
+    "InterruptedException"
+  ],
+  "Interru": [
+    "InterruptedException"
+  ],
+  "Interrup": [
+    "InterruptedException"
+  ],
+  "Interrupt": [
+    "InterruptedException"
+  ],
+  "Interrupte": [
+    "InterruptedException"
+  ],
+  "Interrupted": [
+    "InterruptedException"
+  ],
+  "InterruptedE": [
+    "InterruptedException"
+  ],
+  "InterruptedEx": [
+    "InterruptedException"
+  ],
+  "InterruptedExc": [
+    "InterruptedException"
+  ],
+  "InterruptedExce": [
+    "InterruptedException"
+  ],
+  "InterruptedExcep": [
+    "InterruptedException"
+  ],
+  "InterruptedExcept": [
+    "InterruptedException"
+  ],
+  "InterruptedExcepti": [
+    "InterruptedException"
+  ],
+  "InterruptedExceptio": [
+    "InterruptedException"
+  ],
+  "InterruptedException": [
+    "InterruptedException"
   ]
 }
