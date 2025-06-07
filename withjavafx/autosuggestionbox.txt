@@ -669,7 +669,6 @@
     "JLabel",
     "SwingConstants",
     "JCheckBox",
-    "javafxcheckbox",
     "replaceAll",
     "filename",
     "class",
@@ -706,7 +705,8 @@
     "isJavaFX",
     "true",
     "output",
-    "extractjavafxjars"
+    "extractjavafxjars",
+    "javafxcheckbox"
   ],
   "Syst": [
     "System"
@@ -3179,8 +3179,8 @@
     "jcomponent1",
     "jcomponent2",
     "javafxLabel",
-    "javafxcheckbox",
-    "jscrollpane"
+    "jscrollpane",
+    "javafxcheckbox"
   ],
   "jc": [
     "jcomponent",

@@ -330,7 +330,8 @@
     "RIGHT"
   ],
   "JCheckBox": [
-    "isSelected"
+    "isSelected",
+    "setSelected"
   ],
   "URL": [
     "openStream"

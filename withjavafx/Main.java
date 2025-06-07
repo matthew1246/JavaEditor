@@ -479,6 +479,8 @@ public class Main {
 		menubar.repaint();
 		
 		javafxcheckbox = new JCheckBox();
+		javafxcheckbox.setSelected(true);
+		
 		gbc.gridx=28;
 		gbc.weightx=1.0;
 		gbc.gridwidth=1;
