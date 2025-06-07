@@ -329,5 +329,17 @@
   ],
   "JCheckBox": [
     "isSelected"
+  ],
+  "URL": [
+    "openStream"
+  ],
+  "Paths": [
+    "get"
+  ],
+  "Files": [
+    "copy"
+  ],
+  "StandardCopyOption": [
+    "REPLACE_EXISTING"
   ]
 }

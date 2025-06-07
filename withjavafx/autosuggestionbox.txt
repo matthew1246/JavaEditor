@@ -18,7 +18,8 @@
     "Sslsessionbindinglistener",
     "System",
     "String",
-    "SwingConstants"
+    "SwingConstants",
+    "StandardCopyOption"
   ],
   "Array": [
     "Arraylist",
@@ -108,7 +109,8 @@
     "null"
   ],
   "inpu": [
-    "input"
+    "input",
+    "inputstream"
   ],
   "ap": [
     "apiclasses"
@@ -129,13 +131,15 @@
     "index",
     "input",
     "instanceof",
-    "int"
+    "int",
+    "inputstream"
   ],
   "main": [
     "main"
   ],
   "inp": [
-    "input"
+    "input",
+    "inputstream"
   ],
   "var": [
     "variablenames",
@@ -156,6 +160,7 @@
     "int",
     "iterator",
     "if",
+    "inputstream",
     "import"
   ],
   "ca": [
@@ -284,7 +289,8 @@
     "autokeylistener"
   ],
   "input": [
-    "input"
+    "input",
+    "inputstream"
   ],
   "da": [
     "data"
@@ -448,10 +454,10 @@
   "cl": [
     "class_one",
     "classes",
-    "class",
     "clone",
     "clonebutton",
-    "clickEvent"
+    "clickEvent",
+    "class"
   ],
   "fa": [
     "false"
@@ -465,8 +471,8 @@
   "r": [
     "rectangle",
     "root_directory",
-    "return",
-    "replaceAll"
+    "replaceAll",
+    "return"
   ],
   "sub": [
     "sublink",
@@ -539,7 +545,6 @@
     "currentline",
     "caretposition",
     "main",
-    "class",
     "static",
     "Member",
     "selected_index",
@@ -633,7 +638,6 @@
     "label1",
     "button1",
     "textfield1",
-    "import",
     "GridBagLayout",
     "GridBagConstraints",
     "checkbox1",
@@ -645,7 +649,6 @@
     "textarea",
     "output",
     "directory",
-    "boolean",
     "null",
     "root_directory",
     "command",
@@ -680,15 +683,25 @@
     "javafxcheckbox",
     "commandline",
     "public",
-    "return",
     "replaceAll",
-    "filename"
+    "filename",
+    "class",
+    "inputstream",
+    "outputpath",
+    "InputStream",
+    "StandardCopyOption",
+    "import",
+    "File",
+    "IOException",
+    "boolean",
+    "return"
   ],
   "Syst": [
     "System"
   ],
   "St": [
-    "String"
+    "String",
+    "StandardCopyOption"
   ],
   "H": [
     "Hashmap",
@@ -773,7 +786,6 @@
     "curlybracekeylistener",
     "currentline",
     "caretposition",
-    "class",
     "clone",
     "count",
     "component",
@@ -782,7 +794,8 @@
     "clickEvent",
     "command",
     "combobox",
-    "commandline"
+    "commandline",
+    "class"
   ],
   "cla": [
     "class_one",
@@ -804,7 +817,9 @@
   "I": [
     "InputStreamReader",
     "Iterator",
-    "Integer"
+    "Integer",
+    "InputStream",
+    "IOException"
   ],
   "It": [
     "Iterator"
@@ -863,7 +878,8 @@
     "outsidepanel",
     "originalcheckbox",
     "output",
-    "openbranch"
+    "openbranch",
+    "outputpath"
   ],
   "on": [
     "oneclass"
@@ -957,34 +973,44 @@
   ],
   "In": [
     "InputStreamReader",
-    "Integer"
+    "Integer",
+    "InputStream"
   ],
   "Inp": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "Inpu": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "Input": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "InputS": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "InputSt": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "InputStr": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "InputStre": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "InputStrea": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "InputStream": [
-    "InputStreamReader"
+    "InputStreamReader",
+    "InputStream"
   ],
   "InputStreamR": [
     "InputStreamReader"
@@ -2257,8 +2283,8 @@
   ],
   "re": [
     "rectangle",
-    "return",
-    "replaceAll"
+    "replaceAll",
+    "return"
   ],
   "rec": [
     "rectangle"
@@ -2345,8 +2371,8 @@
   "b": [
     "button",
     "button1",
-    "boolean",
-    "branch"
+    "branch",
+    "boolean"
   ],
   "bu": [
     "button",
@@ -3734,11 +3760,13 @@
   ],
   "ou": [
     "outsidepanel",
-    "output"
+    "output",
+    "outputpath"
   ],
   "out": [
     "outsidepanel",
-    "output"
+    "output",
+    "outputpath"
   ],
   "outs": [
     "outsidepanel"
@@ -4098,13 +4126,16 @@
     "wholedocumentindex"
   ],
   "outp": [
-    "output"
+    "output",
+    "outputpath"
   ],
   "outpu": [
-    "output"
+    "output",
+    "outputpath"
   ],
   "output": [
-    "output"
+    "output",
+    "outputpath"
   ],
   "filen": [
     "filename"
@@ -4561,5 +4592,125 @@
   ],
   "replaceAll": [
     "replaceAll"
+  ],
+  "inputs": [
+    "inputstream"
+  ],
+  "inputst": [
+    "inputstream"
+  ],
+  "inputstr": [
+    "inputstream"
+  ],
+  "inputstre": [
+    "inputstream"
+  ],
+  "inputstrea": [
+    "inputstream"
+  ],
+  "inputstream": [
+    "inputstream"
+  ],
+  "outputp": [
+    "outputpath"
+  ],
+  "outputpa": [
+    "outputpath"
+  ],
+  "outputpat": [
+    "outputpath"
+  ],
+  "outputpath": [
+    "outputpath"
+  ],
+  "Sta": [
+    "StandardCopyOption"
+  ],
+  "Stan": [
+    "StandardCopyOption"
+  ],
+  "Stand": [
+    "StandardCopyOption"
+  ],
+  "Standa": [
+    "StandardCopyOption"
+  ],
+  "Standar": [
+    "StandardCopyOption"
+  ],
+  "Standard": [
+    "StandardCopyOption"
+  ],
+  "StandardC": [
+    "StandardCopyOption"
+  ],
+  "StandardCo": [
+    "StandardCopyOption"
+  ],
+  "StandardCop": [
+    "StandardCopyOption"
+  ],
+  "StandardCopy": [
+    "StandardCopyOption"
+  ],
+  "StandardCopyO": [
+    "StandardCopyOption"
+  ],
+  "StandardCopyOp": [
+    "StandardCopyOption"
+  ],
+  "StandardCopyOpt": [
+    "StandardCopyOption"
+  ],
+  "StandardCopyOpti": [
+    "StandardCopyOption"
+  ],
+  "StandardCopyOptio": [
+    "StandardCopyOption"
+  ],
+  "StandardCopyOption": [
+    "StandardCopyOption"
+  ],
+  "IO": [
+    "IOException"
+  ],
+  "IOE": [
+    "IOException"
+  ],
+  "IOEx": [
+    "IOException"
+  ],
+  "IOExc": [
+    "IOException"
+  ],
+  "IOExce": [
+    "IOException"
+  ],
+  "IOExcep": [
+    "IOException"
+  ],
+  "IOExcept": [
+    "IOException"
+  ],
+  "IOExcepti": [
+    "IOException"
+  ],
+  "IOExceptio": [
+    "IOException"
+  ],
+  "IOException": [
+    "IOException"
+  ],
+  "F": [
+    "File"
+  ],
+  "Fi": [
+    "File"
+  ],
+  "Fil": [
+    "File"
+  ],
+  "File": [
+    "File"
   ]
 }
