@@ -1720,6 +1720,10 @@ public class Main {
 								System.out.println("Is equal.");
 								
 								CommandLine commandline = new CommandLine();
+								if(javafxcheckbox.isSelected()) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									commandline.addJavaFX();
+								}
 								if(jarcheckbox.isSelected()) {
 									commandline.addJunit();
 								}
@@ -1763,6 +1767,10 @@ public class Main {
 								
 										
 								CommandLine commandline = new CommandLine();
+								if(javafxcheckbox.isSelected()) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									commandline.addJavaFX();
+								}
 								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								Preferences preferences=storeselectedfile.get(fileName);
 								for(String jar:preferences.jars) {
@@ -1797,6 +1805,10 @@ public class Main {
 	 								String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 
 									commandline = new CommandLine();
+									if(javafxcheckbox.isSelected()) {
+										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+										commandline.addJavaFX();
+									}
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
 										storeselectedfile = new StoreSelectedFile();
