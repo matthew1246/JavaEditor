@@ -603,10 +603,11 @@ public class Main {
 		menubar.validate();
 		menubar.repaint();
 		
+		deprecated = new JButton("deprecated");
 		gbc.gridx=26;
 		gbc.weightx=3.0;
 		gbc.gridwidth=3;
-		menubar.add(new JButton("deprecated"),gbc);
+		menubar.add(deprecated,gbc);
 		
 		menubar.validate();
 		menubar.repaint();
@@ -1120,7 +1121,7 @@ public class Main {
 				break;
 			}
 		});
-		/*deprecated.addActionListener((ev) -> {
+		deprecated.addActionListener((ev) -> {
 			try {
 				if(fileName.equals("")) {
 					NoFileOpen nofileopen=new NoFileOpen(textarea);
@@ -1177,7 +1178,6 @@ public class Main {
 				ex.printStackTrace();
 			}
 		});
-		*/
 		reload.addActionListener( (ev) -> {
 			try {
 				String lines = Files.readString(Paths.get(fileName),StandardCharsets.UTF_8);

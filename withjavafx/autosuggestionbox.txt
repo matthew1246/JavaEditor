@@ -162,10 +162,12 @@
     "if",
     "inputstream",
     "import",
-    "isJavaFX"
+    "isJavaFX",
+    "isGitInstalled"
   ],
   "ca": [
-    "caretposition"
+    "caretposition",
+    "catch"
   ],
   "textarea": [
     "textarea2",
@@ -278,8 +280,8 @@
     "dropPoint",
     "double",
     "directory",
-    "deprecated",
-    "dlls"
+    "dlls",
+    "deprecated"
   ],
   "sugg": [
     "suggestionbox"
@@ -493,12 +495,12 @@
   "f": [
     "for",
     "fromdraganddrop",
-    "false",
     "firstvalue",
     "frame",
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "false",
+    "fileName"
   ],
   "": [
     "class_one",
@@ -589,7 +591,6 @@
     "RoundingMode",
     "double",
     "component",
-    "false",
     "Graphics",
     "jcomponent",
     "Double",
@@ -658,13 +659,11 @@
     "selectedbranch",
     "selectpanel",
     "openbranch",
-    "fileName",
     "this",
     "selectbranch",
     "menubar",
     "add",
     "JButton",
-    "deprecated",
     "javafxLabel",
     "JLabel",
     "SwingConstants",
@@ -678,11 +677,8 @@
     "StandardCopyOption",
     "File",
     "List",
-    "return",
     "dlls",
     "ArrayList",
-    "public",
-    "String",
     "JPanel",
     "jscrollpane",
     "textarea",
@@ -692,21 +688,29 @@
     "import",
     "InputStreamReader",
     "InterruptedException",
-    "IOException",
     "JFrame",
     "Process",
     "extractframe",
     "process",
     "exitCode",
     "commandline",
-    "boolean",
     "option2",
     "JOptionPane",
     "isJavaFX",
-    "true",
     "output",
     "extractjavafxjars",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "public",
+    "boolean",
+    "isGitInstalled",
+    "true",
+    "deprecated",
+    "catch",
+    "IOException",
+    "return",
+    "false",
+    "fileName",
+    "String"
   ],
   "Syst": [
     "System"
@@ -807,7 +811,8 @@
     "command",
     "combobox",
     "class",
-    "commandline"
+    "commandline",
+    "catch"
   ],
   "cla": [
     "class_one",
@@ -1066,8 +1071,8 @@
     "point2",
     "panel3",
     "panel",
-    "public",
-    "process"
+    "process",
+    "public"
   ],
   "pl": [
     "pluspanel"
@@ -3564,8 +3569,8 @@
   "fi": [
     "firstvalue",
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "fileName"
   ],
   "firstv": [
     "firstvalue"
@@ -4045,13 +4050,13 @@
   ],
   "fil": [
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "fileName"
   ],
   "file": [
     "filelistmodifier",
-    "fileName",
-    "filename"
+    "filename",
+    "fileName"
   ],
   "filel": [
     "filelistmodifier"
@@ -5000,7 +5005,8 @@
     "option2"
   ],
   "is": [
-    "isJavaFX"
+    "isJavaFX",
+    "isGitInstalled"
   ],
   "isJ": [
     "isJavaFX"
@@ -5019,5 +5025,47 @@
   ],
   "isJavaFX": [
     "isJavaFX"
+  ],
+  "isG": [
+    "isGitInstalled"
+  ],
+  "isGi": [
+    "isGitInstalled"
+  ],
+  "isGit": [
+    "isGitInstalled"
+  ],
+  "isGitI": [
+    "isGitInstalled"
+  ],
+  "isGitIn": [
+    "isGitInstalled"
+  ],
+  "isGitIns": [
+    "isGitInstalled"
+  ],
+  "isGitInst": [
+    "isGitInstalled"
+  ],
+  "isGitInsta": [
+    "isGitInstalled"
+  ],
+  "isGitInstal": [
+    "isGitInstalled"
+  ],
+  "isGitInstall": [
+    "isGitInstalled"
+  ],
+  "isGitInstalle": [
+    "isGitInstalled"
+  ],
+  "isGitInstalled": [
+    "isGitInstalled"
+  ],
+  "catc": [
+    "catch"
+  ],
+  "catch": [
+    "catch"
   ]
 }

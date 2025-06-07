@@ -4,25 +4,53 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
+	public boolean isGitInstalled = false;
 	public String root_directory;
 	public String directory;
 	public JFrame frame=new JFrame();
 	public Git(String fileName) {
-		Change(fileName);
-		setLayout();
-	      	setListeners();
+		if(isGitInstalled(fileName)) {
+			isGitInstalled = true;
+			Change(fileName);
+			setLayout();
+		      	setListeners();
+	      	}
 	}
+	public boolean isGitInstalled(String fileName) {
+		try {
+			String[] command2 =new String[3];
+			command2[0] = "cmd.exe";
+			command2[1] = "/c";
+			command2[2] = "git --version";
+			Process process = Runtime.getRuntime().exec(command2,null);
+		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		
+		            String output;
+		            if ((output = reader.readLine()) != null) {
+		            	return true;
+		            } else {
+		            	return false;
+		            }
+	            } catch(IOException ex) {
+	            	ex.printStackTrace();
+	            	return false;
+            	}
+            }
+
 	public void Change(String fileName) {
-		if( new File(fileName).exists() ) {
-			directory=fileName.replaceAll("[^\\\\]+\\.java","");
-			CommandLine commandline = new CommandLine();
-			Process process=commandline.run("git rev-parse --show-toplevel",directory);
-			DisplayOutput displayoutput = new DisplayOutput();
-			root_directory = displayoutput.OneLine(process);
-		      	//JOptionPane.showMessageDialog(n,root_directory);
-		      	frame.setTitle(whichBranchOpened());		      			      	
+		if(isGitInstalled) {
+			if( new File(fileName).exists() ) {
+				directory=fileName.replaceAll("[^\\\\]+\\.java","");
+				CommandLine commandline = new CommandLine();
+				Process process=commandline.run("git rev-parse --show-toplevel",directory);
+				DisplayOutput displayoutput = new DisplayOutput();
+				root_directory = displayoutput.OneLine(process);
+			      	//JOptionPane.showMessageDialog(n,root_directory);
+			      	frame.setTitle(whichBranchOpened());		      			      	
+		      	}
 	      	}
       	}
+      	
       	public JButton addtoall;
       	public JButton upload;
 	public JTextField input = new JTextField();
