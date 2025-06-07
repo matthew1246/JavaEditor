@@ -43,6 +43,8 @@ public class ExtractJavaFXJars {
 				JScrollPane jscrollpane = new JScrollPane(textarea);
 				
 				extractframe.add(jscrollpane);
+				extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				extractframe.setVisible(true);
 					
 			        	// Command: jar -xvf myfile.jar
 			            ProcessBuilder pb = new ProcessBuilder(

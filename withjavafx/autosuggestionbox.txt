@@ -691,17 +691,17 @@
     "String",
     "JPanel",
     "jscrollpane",
-    "extractframe",
     "textarea",
     "JOptionPane",
     "JTextArea",
-    "JFrame",
     "JScrollPane",
     "BufferedReader",
     "import",
     "InputStreamReader",
     "InterruptedException",
-    "IOException"
+    "IOException",
+    "JFrame",
+    "extractframe"
   ],
   "Syst": [
     "System"
@@ -944,8 +944,8 @@
     "JPanel",
     "JOptionPane",
     "JTextArea",
-    "JFrame",
-    "JScrollPane"
+    "JScrollPane",
+    "JFrame"
   ],
   "JO": [
     "JOptionPane"
