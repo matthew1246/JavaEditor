@@ -66,7 +66,7 @@ public class ExtractJavaFXJars {
 			            );
 			            String line;
 			            while ((line = reader.readLine()) != null) {
-			                textarea.append(line);
+			                textarea.append(line+"\n");
 			            }
 			
 			            // Wait for the process to complete
