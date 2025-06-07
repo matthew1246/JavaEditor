@@ -5,10 +5,10 @@
     "getValue",
     "createDialog",
     "showOptionDialog",
-    "YES_OPTION",
-    "NO_OPTION",
     "QUESTION_MESSAGE",
-    "showMessageDialog"
+    "showMessageDialog",
+    "YES_OPTION",
+    "NO_OPTION"
   ],
   "Main": [
     "frame",

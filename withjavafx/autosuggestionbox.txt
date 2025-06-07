@@ -8,11 +8,11 @@
     "transferable",
     "treeset",
     "top",
-    "true",
     "thirdpanel",
     "textfield1",
     "this",
-    "textarea"
+    "textarea",
+    "true"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -161,7 +161,8 @@
     "iterator",
     "if",
     "inputstream",
-    "import"
+    "import",
+    "isJavaFX"
   ],
   "ca": [
     "caretposition"
@@ -609,7 +610,6 @@
     "top",
     "x",
     "if",
-    "true",
     "Point",
     "JComponent",
     "point1",
@@ -643,7 +643,6 @@
     "clickEvent",
     "filelistmodifier",
     "wholedocumentindex",
-    "output",
     "directory",
     "null",
     "root_directory",
@@ -684,7 +683,6 @@
     "dlls",
     "ArrayList",
     "public",
-    "boolean",
     "String",
     "JPanel",
     "jscrollpane",
@@ -698,11 +696,16 @@
     "IOException",
     "JFrame",
     "Process",
-    "JOptionPane",
     "extractframe",
     "process",
     "exitCode",
     "commandline",
+    "boolean",
+    "option2",
+    "JOptionPane",
+    "isJavaFX",
+    "true",
+    "output",
     "extractjavafxjars"
   ],
   "Syst": [
@@ -887,9 +890,10 @@
     "originallabel",
     "outsidepanel",
     "originalcheckbox",
-    "output",
     "openbranch",
-    "outputpath"
+    "outputpath",
+    "option2",
+    "output"
   ],
   "on": [
     "oneclass"
@@ -1666,7 +1670,8 @@
   ],
   "op": [
     "opennewtab",
-    "openbranch"
+    "openbranch",
+    "option2"
   ],
   "ope": [
     "opennewtab",
@@ -3778,13 +3783,13 @@
   ],
   "ou": [
     "outsidepanel",
-    "output",
-    "outputpath"
+    "outputpath",
+    "output"
   ],
   "out": [
     "outsidepanel",
-    "output",
-    "outputpath"
+    "outputpath",
+    "output"
   ],
   "outs": [
     "outsidepanel"
@@ -4145,16 +4150,16 @@
     "wholedocumentindex"
   ],
   "outp": [
-    "output",
-    "outputpath"
+    "outputpath",
+    "output"
   ],
   "outpu": [
-    "output",
-    "outputpath"
+    "outputpath",
+    "output"
   ],
   "output": [
-    "output",
-    "outputpath"
+    "outputpath",
+    "output"
   ],
   "filen": [
     "filename"
@@ -4978,5 +4983,41 @@
   ],
   "extractjavafxjars": [
     "extractjavafxjars"
+  ],
+  "opt": [
+    "option2"
+  ],
+  "opti": [
+    "option2"
+  ],
+  "optio": [
+    "option2"
+  ],
+  "option": [
+    "option2"
+  ],
+  "option2": [
+    "option2"
+  ],
+  "is": [
+    "isJavaFX"
+  ],
+  "isJ": [
+    "isJavaFX"
+  ],
+  "isJa": [
+    "isJavaFX"
+  ],
+  "isJav": [
+    "isJavaFX"
+  ],
+  "isJava": [
+    "isJavaFX"
+  ],
+  "isJavaF": [
+    "isJavaFX"
+  ],
+  "isJavaFX": [
+    "isJavaFX"
   ]
 }

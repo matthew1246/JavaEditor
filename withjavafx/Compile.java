@@ -2,11 +2,14 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.ActionEvent;
 public class Compile {
-	public void compileall(String fileName,SaveActionListener sal,ActionEvent ev) {
+	public void compileall(String fileName,SaveActionListener sal,ActionEvent ev,boolean withJavaFX,Main main) {
 		try {
 			sal.actionPerformed(ev);
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
+			if(withJavaFX) {
+				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main);						
+			}
 			commandline.compileAll();
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Preferences preferences=storeselectedfile.get(fileName);
@@ -44,11 +47,14 @@ public class Compile {
 			ex.printStackTrace();
 		}		
 	}
-	public void compileall(String fileName,int javaversionnumber,SaveActionListener sal,ActionEvent ev) {
+	public void compileall(String fileName,int javaversionnumber,SaveActionListener sal,ActionEvent ev,boolean withJavaFX,Main main) {
 		try {
 			sal.actionPerformed(ev);
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
+			if(withJavaFX) {
+				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main);						
+			}
 			commandline.compileAll();
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Preferences preferences=storeselectedfile.get(fileName);

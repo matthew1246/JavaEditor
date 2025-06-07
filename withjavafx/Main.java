@@ -882,7 +882,17 @@ public class Main {
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
 							getjavaversion.dispose();
 							Compile compile = new Compile();
-							compile.compileall(fileName,javaversionnumber,sal,ev4);
+							
+							boolean isJavaFX = false;
+							int option2=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+							if(option2 ==JOptionPane.YES_OPTION) {
+								isJavaFX = true;
+							}
+							else if(option2 == JOptionPane.NO_OPTION) {
+								isJavaFX = false;
+							}
+							compile.compileall(fileName,javaversionnumber,sal,ev4,isJavaFX,this);
+							
 							CommandLine commandline = new CommandLine();
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=storeselectedfile.get(fileName);
@@ -912,7 +922,13 @@ public class Main {
 							output.write("Manifest-Version: 1.0");
 							output.write("\n");
 							output.write("Main-Class: ");
-							output.write(main);
+							if(!isJavaFX) {
+								output.write(main);
+							}
+							else { // isJavaFX == true
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
+								output.write(extractjavafxjars.starter);
+							}
 							output.write("\n");
 							//output.write("Class-Path:");
 							//output.write(" *");
@@ -983,7 +999,16 @@ public class Main {
 				case JOptionPane.NO_OPTION:
 					try {
 						Compile compile = new Compile();
-						compile.compileall(fileName,sal,ev);
+						boolean isJavaFX = false;
+						int option2=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+						if(option2 ==JOptionPane.YES_OPTION) {
+							isJavaFX = true;
+						}
+						else if(option2 == JOptionPane.NO_OPTION) {
+							isJavaFX = false;
+						}
+						compile.compileall(fileName,sal,ev,isJavaFX,this);
+						
 						CommandLine commandline = new CommandLine();
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
@@ -1014,7 +1039,15 @@ public class Main {
 						output.write("Manifest-Version: 1.0");
 						output.write("\n");
 						output.write("Main-Class: ");
-						output.write(main);
+						
+						if(!isJavaFX) {
+							output.write(main);
+						}
+						else { // isJavaFX == true
+							ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
+							output.write(extractjavafxjars.starter);
+						}
+						
 						output.write("\n");
 						//output.write("Class-Path: ");
 						//output.write("javafx/lib/");
