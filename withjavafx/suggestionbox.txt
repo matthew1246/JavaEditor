@@ -45,9 +45,9 @@
     "length",
     "getChars",
     "replaceFirst",
-    "equals",
     "endsWith",
-    "replace"
+    "replace",
+    "equals"
   ],
   "JFrame": [
     "disable",
