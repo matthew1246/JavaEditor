@@ -709,11 +709,11 @@
     "JOptionPane",
     "oneline",
     "fileName",
-    "return",
     "true",
     "public",
     "boolean",
-    "isVisible"
+    "isVisible",
+    "return"
   ],
   "Syst": [
     "System"

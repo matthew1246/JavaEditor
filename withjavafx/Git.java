@@ -26,8 +26,7 @@ public class Git {
 		Process process=commandline.run("git rev-parse --show-toplevel",directory);
 		DisplayOutput displayoutput = new DisplayOutput();
 		String on = displayoutput.OneLine(process);
-		JOptionPane.showMessageDialog(null,on);
-		return false;
+		return on != null;
 	}
 	public boolean isGitInstalled() {
 		try {
