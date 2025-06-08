@@ -4,36 +4,83 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
+	public boolean isVisible = false;
+	public boolean isGitInstalled = false;
 	public String root_directory;
 	public String directory;
 	public JFrame frame=new JFrame();
 	public Git(String fileName) {
-		Change(fileName);
-		setLayout();
-	      	setListeners();
+		if(isGitInstalled()) {
+			isGitInstalled = true;
+			if(isFileInsideGitRepository(fileName)) {
+				isVisible = true;
+				Change(fileName);
+				setLayout();
+			      	setListeners();
+		      	}
+	      	}
 	}
+	public boolean isFileInsideGitRepository(String fileName) {
+		directory=fileName.replaceAll("[^\\\\]+\\.java","");
+		CommandLine commandline = new CommandLine();
+		Process process=commandline.run("git rev-parse --show-toplevel",directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		String oneline=displayoutput.OneLine(process);
+		return !(oneline.equals("line is null"));
+	}
+	public boolean isGitInstalled() {
+		try {
+			String[] command2 =new String[3];
+			command2[0] = "cmd.exe";
+			command2[1] = "/c";
+			command2[2] = "git --version";
+			Process process = Runtime.getRuntime().exec(command2,null);
+		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		
+		            String output;
+		            if ((output = reader.readLine()) != null) {
+		            	return true;
+		            } else {
+		            	return false;
+		            }
+	            } catch(IOException ex) {
+	            	ex.printStackTrace();
+	            	return false;
+            	}
+            }
+
 	public void Change(String fileName) {
-		if( new File(fileName).exists() ) {
-			directory=fileName.replaceAll("[^\\\\]+\\.java","");
-			CommandLine commandline = new CommandLine();
-			Process process=commandline.run("git rev-parse --show-toplevel",directory);
-			DisplayOutput displayoutput = new DisplayOutput();
-			root_directory = displayoutput.OneLine(process);
-		      	//JOptionPane.showMessageDialog(n,root_directory);
-		      	frame.setTitle(whichBranchOpened());		      			      	
+		if(isGitInstalled) {
+			if( new File(fileName).exists() ) {
+				if(isFileInsideGitRepository(fileName)) {
+					directory=fileName.replaceAll("[^\\\\]+\\.java","");
+					CommandLine commandline = new CommandLine();
+					Process process=commandline.run("git rev-parse --show-toplevel",directory);
+					DisplayOutput displayoutput = new DisplayOutput();
+					root_directory = displayoutput.OneLine(process);
+				      	//JOptionPane.showMessageDialog(n,root_directory);
+				      	if(!isVisible) {
+						setLayout();
+						setListeners();
+			      		}
+			      		frame.setTitle(whichBranchOpened());
+			      	}	      			      		      			      	
+		      	}
 	      	}
       	}
+      	
       	public JButton addtoall;
       	public JButton upload;
 	public JTextField input = new JTextField();
 	public JButton run;
 	public JButton clear;
-	public JButton switch2_branch;	
+	public JButton switch2_branch;
+	
 	public JButton reset;
 	public void setLayout() {
 		frame.setSize(500,100);
  // previously 400,100
-		frame.setLocation(980,0);
+		frame.setLocation(1050,0);
 		frame.getContentPane().add(input,BorderLayout.CENTER);
 		run = new JButton("run");
 		frame.getContentPane().add(run,BorderLayout.SOUTH);
@@ -214,7 +261,8 @@ public class Git {
 		} catch(IOException ex) {
 			ex.printStackTrace();
 			return "IOException";
-		}*/
+		}
+*/
 		CommandLine commandline = new CommandLine();
 		Process process=commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
 		DisplayOutput displayoutput = new DisplayOutput();
@@ -223,4 +271,4 @@ public class Git {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
