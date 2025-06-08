@@ -7,7 +7,7 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
     "starterclass": "Main",
     "jars": [],
-    "caretposition": 979
+    "caretposition": 919
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "starterclass": "Main",
