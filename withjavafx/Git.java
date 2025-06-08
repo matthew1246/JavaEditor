@@ -4,19 +4,32 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
+	public boolean isVisible = false;
 	public boolean isGitInstalled = false;
 	public String root_directory;
 	public String directory;
 	public JFrame frame=new JFrame();
 	public Git(String fileName) {
-		if(isGitInstalled(fileName)) {
+		if(isGitInstalled()) {
 			isGitInstalled = true;
-			Change(fileName);
-			setLayout();
-		      	setListeners();
+			if(isFileInsideGitRepository(fileName)) {
+				isVisible = true;
+				Change(fileName);
+				setLayout();
+			      	setListeners();
+		      	}
 	      	}
 	}
-	public boolean isGitInstalled(String fileName) {
+	public boolean isFileInsideGitRepository(String fileName) {
+		directory=fileName.replaceAll("[^\\\\]+\\.java","");
+		CommandLine commandline = new CommandLine();
+		Process process=commandline.run("git rev-parse --show-toplevel",directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		String on = displayoutput.OneLine(process);
+		JOptionPane.showMessageDialog(null,on);
+		return false;
+	}
+	public boolean isGitInstalled() {
 		try {
 			String[] command2 =new String[3];
 			command2[0] = "cmd.exe";
@@ -40,13 +53,19 @@ public class Git {
 	public void Change(String fileName) {
 		if(isGitInstalled) {
 			if( new File(fileName).exists() ) {
-				directory=fileName.replaceAll("[^\\\\]+\\.java","");
-				CommandLine commandline = new CommandLine();
-				Process process=commandline.run("git rev-parse --show-toplevel",directory);
-				DisplayOutput displayoutput = new DisplayOutput();
-				root_directory = displayoutput.OneLine(process);
-			      	//JOptionPane.showMessageDialog(n,root_directory);
-			      	frame.setTitle(whichBranchOpened());		      			      	
+				if(isFileInsideGitRepository(fileName)) {
+					directory=fileName.replaceAll("[^\\\\]+\\.java","");
+					CommandLine commandline = new CommandLine();
+					Process process=commandline.run("git rev-parse --show-toplevel",directory);
+					DisplayOutput displayoutput = new DisplayOutput();
+					root_directory = displayoutput.OneLine(process);
+				      	//JOptionPane.showMessageDialog(n,root_directory);
+				      	if(!isVisible) {
+						setLayout();
+						setListeners();
+			      		}
+			      		frame.setTitle(whichBranchOpened());
+			      	}	      			      		      			      	
 		      	}
 	      	}
       	}

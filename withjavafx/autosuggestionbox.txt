@@ -163,7 +163,8 @@
     "inputstream",
     "import",
     "isJavaFX",
-    "isGitInstalled"
+    "isGitInstalled",
+    "isVisible"
   ],
   "ca": [
     "caretposition",
@@ -695,22 +696,24 @@
     "exitCode",
     "commandline",
     "option2",
-    "JOptionPane",
     "isJavaFX",
     "output",
     "extractjavafxjars",
     "javafxcheckbox",
-    "public",
-    "boolean",
     "isGitInstalled",
-    "true",
     "deprecated",
     "catch",
     "IOException",
-    "return",
     "false",
+    "String",
+    "JOptionPane",
+    "oneline",
     "fileName",
-    "String"
+    "return",
+    "true",
+    "public",
+    "boolean",
+    "isVisible"
   ],
   "Syst": [
     "System"
@@ -898,13 +901,16 @@
     "openbranch",
     "outputpath",
     "option2",
-    "output"
+    "output",
+    "oneline"
   ],
   "on": [
-    "oneclass"
+    "oneclass",
+    "oneline"
   ],
   "one": [
-    "oneclass"
+    "oneclass",
+    "oneline"
   ],
   "onec": [
     "oneclass"
@@ -5006,7 +5012,8 @@
   ],
   "is": [
     "isJavaFX",
-    "isGitInstalled"
+    "isGitInstalled",
+    "isVisible"
   ],
   "isJ": [
     "isJavaFX"
@@ -5067,5 +5074,38 @@
   ],
   "catch": [
     "catch"
+  ],
+  "onel": [
+    "oneline"
+  ],
+  "oneli": [
+    "oneline"
+  ],
+  "onelin": [
+    "oneline"
+  ],
+  "oneline": [
+    "oneline"
+  ],
+  "isV": [
+    "isVisible"
+  ],
+  "isVi": [
+    "isVisible"
+  ],
+  "isVis": [
+    "isVisible"
+  ],
+  "isVisi": [
+    "isVisible"
+  ],
+  "isVisib": [
+    "isVisible"
+  ],
+  "isVisibl": [
+    "isVisible"
+  ],
+  "isVisible": [
+    "isVisible"
   ]
 }

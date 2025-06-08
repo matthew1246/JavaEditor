@@ -1,18 +1,21 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
     "jars": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
-    "starterclass": "",
+    "starterclass": "Git",
     "jars": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "starterclass": "Main",
-    "jars": [],
-    "caretposition": 112594
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+    ],
+    "caretposition": 2498
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\": {
     "starterclass": "",

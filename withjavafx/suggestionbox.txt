@@ -6,9 +6,9 @@
     "createDialog",
     "showOptionDialog",
     "QUESTION_MESSAGE",
-    "showMessageDialog",
     "YES_OPTION",
-    "NO_OPTION"
+    "NO_OPTION",
+    "showMessageDialog"
   ],
   "Main": [
     "frame",
