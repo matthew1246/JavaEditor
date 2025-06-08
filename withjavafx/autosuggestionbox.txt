@@ -55,14 +55,15 @@
     "suggestionbox",
     "search_textfield",
     "substring",
-    "static",
     "selected_index",
     "selectedcomponet",
     "secondvalue",
     "selectlabel",
     "selectedbranch",
     "selectpanel",
-    "selectbranch"
+    "selectbranch",
+    "static",
+    "scene"
   ],
   "sel": [
     "selected_label",
@@ -161,9 +162,9 @@
     "iterator",
     "if",
     "inputstream",
-    "import",
     "isJavaFX",
     "isGitInstalled",
+    "import",
     "isVisible"
   ],
   "ca": [
@@ -258,7 +259,8 @@
   ],
   "L": [
     "Line",
-    "List"
+    "List",
+    "Label"
   ],
   "vari": [
     "variablename"
@@ -355,7 +357,8 @@
     "keyevent2"
   ],
   "a": [
-    "add"
+    "add",
+    "actiontarget"
   ],
   "keywor": [
     "keywords"
@@ -548,7 +551,6 @@
     "currentline",
     "caretposition",
     "main",
-    "static",
     "Member",
     "selected_index",
     "rectangle",
@@ -556,7 +558,6 @@
     "WindowEvent",
     "Rectangle",
     "selectedcomponet",
-    "void",
     "WindowListener",
     "y",
     "mousedragger",
@@ -574,7 +575,6 @@
     "dropPoint",
     "ActionListener",
     "MouseMotionAdapter",
-    "ActionEvent",
     "label",
     "button",
     "fromdraganddrop",
@@ -585,7 +585,6 @@
     "JTextField",
     "graphics",
     "newxlocation",
-    "Override",
     "point",
     "count",
     "Math",
@@ -671,7 +670,6 @@
     "JCheckBox",
     "replaceAll",
     "filename",
-    "class",
     "inputstream",
     "outputpath",
     "InputStream",
@@ -686,7 +684,6 @@
     "JTextArea",
     "JScrollPane",
     "BufferedReader",
-    "import",
     "InputStreamReader",
     "InterruptedException",
     "JFrame",
@@ -703,17 +700,33 @@
     "isGitInstalled",
     "deprecated",
     "catch",
-    "IOException",
     "false",
     "String",
     "fileName",
     "true",
-    "public",
     "boolean",
-    "isVisible",
     "return",
     "JOptionPane",
-    "oneline"
+    "oneline",
+    "public",
+    "static",
+    "void",
+    "class",
+    "Insets",
+    "Label",
+    "username",
+    "TextField",
+    "horizontalbox",
+    "EventHandler",
+    "Override",
+    "ActionEvent",
+    "Color",
+    "import",
+    "gridpane",
+    "scene",
+    "IOException",
+    "actiontarget",
+    "isVisible"
   ],
   "Syst": [
     "System"
@@ -813,9 +826,9 @@
     "clickEvent",
     "command",
     "combobox",
-    "class",
     "commandline",
-    "catch"
+    "catch",
+    "class"
   ],
   "cla": [
     "class_one",
@@ -840,6 +853,7 @@
     "InputStream",
     "InputStreamReader",
     "InterruptedException",
+    "Insets",
     "IOException"
   ],
   "It": [
@@ -934,8 +948,8 @@
   "A": [
     "Arraylist",
     "ActionListener",
-    "ActionEvent",
-    "ArrayList"
+    "ArrayList",
+    "ActionEvent"
   ],
   "Ar": [
     "Arraylist",
@@ -1001,7 +1015,8 @@
     "Integer",
     "InputStream",
     "InputStreamReader",
-    "InterruptedException"
+    "InterruptedException",
+    "Insets"
   ],
   "Inp": [
     "InputStream",
@@ -1161,11 +1176,13 @@
   ],
   "C": [
     "ComponentListener",
-    "Component"
+    "Component",
+    "Color"
   ],
   "Co": [
     "ComponentListener",
-    "Component"
+    "Component",
+    "Color"
   ],
   "Com": [
     "ComponentListener",
@@ -1711,19 +1728,24 @@
     "opennewtab"
   ],
   "E": [
-    "EventObject"
+    "EventObject",
+    "EventHandler"
   ],
   "Ev": [
-    "EventObject"
+    "EventObject",
+    "EventHandler"
   ],
   "Eve": [
-    "EventObject"
+    "EventObject",
+    "EventHandler"
   ],
   "Even": [
-    "EventObject"
+    "EventObject",
+    "EventHandler"
   ],
   "Event": [
-    "EventObject"
+    "EventObject",
+    "EventHandler"
   ],
   "EventO": [
     "EventObject"
@@ -2060,7 +2082,8 @@
   ],
   "g": [
     "goto",
-    "graphics"
+    "graphics",
+    "gridpane"
   ],
   "go": [
     "goto"
@@ -2692,7 +2715,8 @@
   ],
   "T": [
     "TransferHandler",
-    "TreeSet"
+    "TreeSet",
+    "TextField"
   ],
   "Tr": [
     "TransferHandler",
@@ -3338,7 +3362,8 @@
     "Graphics"
   ],
   "gr": [
-    "graphics"
+    "graphics",
+    "gridpane"
   ],
   "gra": [
     "graphics"
@@ -5107,5 +5132,209 @@
   ],
   "isVisible": [
     "isVisible"
+  ],
+  "gri": [
+    "gridpane"
+  ],
+  "grid": [
+    "gridpane"
+  ],
+  "gridp": [
+    "gridpane"
+  ],
+  "gridpa": [
+    "gridpane"
+  ],
+  "gridpan": [
+    "gridpane"
+  ],
+  "gridpane": [
+    "gridpane"
+  ],
+  "Ins": [
+    "Insets"
+  ],
+  "Inse": [
+    "Insets"
+  ],
+  "Inset": [
+    "Insets"
+  ],
+  "Insets": [
+    "Insets"
+  ],
+  "La": [
+    "Label"
+  ],
+  "Lab": [
+    "Label"
+  ],
+  "Labe": [
+    "Label"
+  ],
+  "Label": [
+    "Label"
+  ],
+  "Te": [
+    "TextField"
+  ],
+  "Tex": [
+    "TextField"
+  ],
+  "Text": [
+    "TextField"
+  ],
+  "TextF": [
+    "TextField"
+  ],
+  "TextFi": [
+    "TextField"
+  ],
+  "TextFie": [
+    "TextField"
+  ],
+  "TextFiel": [
+    "TextField"
+  ],
+  "TextField": [
+    "TextField"
+  ],
+  "u": [
+    "username"
+  ],
+  "us": [
+    "username"
+  ],
+  "use": [
+    "username"
+  ],
+  "user": [
+    "username"
+  ],
+  "usern": [
+    "username"
+  ],
+  "userna": [
+    "username"
+  ],
+  "usernam": [
+    "username"
+  ],
+  "username": [
+    "username"
+  ],
+  "sc": [
+    "scene"
+  ],
+  "sce": [
+    "scene"
+  ],
+  "scen": [
+    "scene"
+  ],
+  "scene": [
+    "scene"
+  ],
+  "h": [
+    "horizontalbox"
+  ],
+  "ho": [
+    "horizontalbox"
+  ],
+  "hor": [
+    "horizontalbox"
+  ],
+  "hori": [
+    "horizontalbox"
+  ],
+  "horiz": [
+    "horizontalbox"
+  ],
+  "horizo": [
+    "horizontalbox"
+  ],
+  "horizon": [
+    "horizontalbox"
+  ],
+  "horizont": [
+    "horizontalbox"
+  ],
+  "horizonta": [
+    "horizontalbox"
+  ],
+  "horizontal": [
+    "horizontalbox"
+  ],
+  "horizontalb": [
+    "horizontalbox"
+  ],
+  "horizontalbo": [
+    "horizontalbox"
+  ],
+  "horizontalbox": [
+    "horizontalbox"
+  ],
+  "EventH": [
+    "EventHandler"
+  ],
+  "EventHa": [
+    "EventHandler"
+  ],
+  "EventHan": [
+    "EventHandler"
+  ],
+  "EventHand": [
+    "EventHandler"
+  ],
+  "EventHandl": [
+    "EventHandler"
+  ],
+  "EventHandle": [
+    "EventHandler"
+  ],
+  "EventHandler": [
+    "EventHandler"
+  ],
+  "Col": [
+    "Color"
+  ],
+  "Colo": [
+    "Color"
+  ],
+  "Color": [
+    "Color"
+  ],
+  "ac": [
+    "actiontarget"
+  ],
+  "act": [
+    "actiontarget"
+  ],
+  "acti": [
+    "actiontarget"
+  ],
+  "actio": [
+    "actiontarget"
+  ],
+  "action": [
+    "actiontarget"
+  ],
+  "actiont": [
+    "actiontarget"
+  ],
+  "actionta": [
+    "actiontarget"
+  ],
+  "actiontar": [
+    "actiontarget"
+  ],
+  "actiontarg": [
+    "actiontarget"
+  ],
+  "actiontarge": [
+    "actiontarget"
+  ],
+  "actiontarget": [
+    "actiontarget"
   ]
 }

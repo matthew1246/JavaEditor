@@ -360,5 +360,8 @@
   ],
   "ExtractJavaFXJars": [
     "starter"
+  ],
+  "Object": [
+    "notify"
   ]
 }

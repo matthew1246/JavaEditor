@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\learn_javafx\\Third.java",
     "jars": [],
     "caretposition": 0
   },
@@ -18,6 +18,41 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\learn_javafx\\Main.java": {
+    "starterclass": "Main",
+    "jars": [],
+    "caretposition": 207
+  },
+  "": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 522
+  },
+  "C:\\Users\\Owner\\Documents\\learn_javafx\\Second.java": {
+    "starterclass": "Maintwo",
+    "jars": [],
+    "caretposition": 1684
+  },
+  "C:\\Users\\Owner\\Documents\\learn_javafx\\Maintwo.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\learn_javafx\\Secondtwo.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\learn_javafx\\Third.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 558
+  },
+  "C:\\Users\\Owner\\Documents\\learn_javafx\\FXMLExampleController.java": {
     "starterclass": "",
     "jars": [],
     "caretposition": 0
