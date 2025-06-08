@@ -706,14 +706,14 @@
     "IOException",
     "false",
     "String",
-    "JOptionPane",
     "oneline",
     "fileName",
     "true",
     "public",
     "boolean",
     "isVisible",
-    "return"
+    "return",
+    "JOptionPane"
   ],
   "Syst": [
     "System"
