@@ -4,25 +4,12 @@
     "jars": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
-    "starterclass": "Main",
-    "jars": [],
-    "caretposition": 919
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
-    ],
-    "caretposition": 2498
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\": {
+  "C:\\Users\\Owner\\Documents\\finaltest\\Main.java": {
     "starterclass": "",
     "jars": [],
-    "caretposition": 112594
+    "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java": {
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "starterclass": "",
     "jars": [],
     "caretposition": 0
