@@ -11,8 +11,8 @@
     "thirdpanel",
     "textfield1",
     "textarea",
-    "this",
-    "true"
+    "true",
+    "this"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -30,8 +30,7 @@
     "label",
     "lines",
     "liveiterator",
-    "label1",
-    "liney"
+    "label1"
   ],
   "la": [
     "labels",
@@ -285,8 +284,7 @@
     "double",
     "directory",
     "dlls",
-    "deprecated",
-    "dir"
+    "deprecated"
   ],
   "sugg": [
     "suggestionbox"
@@ -702,7 +700,9 @@
     "deprecated",
     "catch",
     "false",
+    "String",
     "fileName",
+    "true",
     "boolean",
     "return",
     "JOptionPane",
@@ -727,12 +727,7 @@
     "actiontarget",
     "isVisible",
     "this",
-    "javafxlauncher",
-    "true",
-    "String",
-    "output2",
-    "liney",
-    "dir"
+    "javafxlauncher"
   ],
   "Syst": [
     "System"
@@ -922,8 +917,7 @@
     "outputpath",
     "option2",
     "output",
-    "oneline",
-    "output2"
+    "oneline"
   ],
   "on": [
     "oneclass",
@@ -3499,8 +3493,7 @@
   ],
   "li": [
     "lines",
-    "liveiterator",
-    "liney"
+    "liveiterator"
   ],
   "liv": [
     "liveiterator"
@@ -3655,12 +3648,10 @@
     "secondvalue"
   ],
   "lin": [
-    "lines",
-    "liney"
+    "lines"
   ],
   "line": [
-    "lines",
-    "liney"
+    "lines"
   ],
   "lines": [
     "lines"
@@ -3831,14 +3822,12 @@
   "ou": [
     "outsidepanel",
     "outputpath",
-    "output",
-    "output2"
+    "output"
   ],
   "out": [
     "outsidepanel",
     "outputpath",
-    "output",
-    "output2"
+    "output"
   ],
   "outs": [
     "outsidepanel"
@@ -4200,18 +4189,15 @@
   ],
   "outp": [
     "outputpath",
-    "output",
-    "output2"
+    "output"
   ],
   "outpu": [
     "outputpath",
-    "output",
-    "output2"
+    "output"
   ],
   "output": [
     "outputpath",
-    "output",
-    "output2"
+    "output"
   ],
   "filen": [
     "filename"
@@ -4265,12 +4251,10 @@
     "root_directory"
   ],
   "di": [
-    "directory",
-    "dir"
+    "directory"
   ],
   "dir": [
-    "directory",
-    "dir"
+    "directory"
   ],
   "dire": [
     "directory"
@@ -5383,11 +5367,5 @@
   ],
   "javafxlauncher": [
     "javafxlauncher"
-  ],
-  "output2": [
-    "output2"
-  ],
-  "liney": [
-    "liney"
   ]
 }

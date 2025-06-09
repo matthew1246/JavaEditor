@@ -1073,14 +1073,11 @@ public class Main {
 						
 						//File file = new File(dir+main+".jar");
 						AllFiles allfiles = new AllFiles(main,dir);
-						//if(allfiles.exists() && !allfiles.delete()) {
-						if(true) {
+						if(allfiles.exists() && !allfiles.delete()) {
 							commandline = new CommandLine();
 							JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
 							FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 							BufferedWriter output2 = new BufferedWriter(filewriter2);
-							output2.write("cd "+dir);
-							output2.write("\n");
 							output2.write("START /B /WAIT taskkill /F /im java.exe");
 							output2.write("\n");
 							output2.write("START /B /WAIT taskkill /F /im javaw.exe");
@@ -1101,10 +1098,7 @@ public class Main {
 							output2.write("\n");
 							output2.write("\n");
 							output2.close();
-							String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
-							// liney="runas /profile /user:Administrator \"cmd.exe /c closeandcreatejar.bat\"";
-							liney="runas /profile /user:matth \"cmd.exe /c closeandcreatejar.bat\"";
-							commandline.runWithMSDOS(liney,dir);
+							commandline.runWithMSDOS("closeandcreatejar.bat",dir);
 						}
 						else { 
 							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
