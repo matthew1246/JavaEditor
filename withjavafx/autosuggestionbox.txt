@@ -10,9 +10,9 @@
     "top",
     "thirdpanel",
     "textfield1",
-    "this",
     "textarea",
-    "true"
+    "true",
+    "this"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -659,7 +659,6 @@
     "selectedbranch",
     "selectpanel",
     "openbranch",
-    "this",
     "selectbranch",
     "menubar",
     "add",
@@ -726,7 +725,9 @@
     "scene",
     "IOException",
     "actiontarget",
-    "isVisible"
+    "isVisible",
+    "this",
+    "javafxlauncher"
   ],
   "Syst": [
     "System"
@@ -3215,7 +3216,8 @@
     "jcomponent2",
     "javafxLabel",
     "jscrollpane",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "javafxlauncher"
   ],
   "jc": [
     "jcomponent",
@@ -4533,23 +4535,28 @@
   ],
   "ja": [
     "javafxLabel",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "javafxlauncher"
   ],
   "jav": [
     "javafxLabel",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "javafxlauncher"
   ],
   "java": [
     "javafxLabel",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "javafxlauncher"
   ],
   "javaf": [
     "javafxLabel",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "javafxlauncher"
   ],
   "javafx": [
     "javafxLabel",
-    "javafxcheckbox"
+    "javafxcheckbox",
+    "javafxlauncher"
   ],
   "javafxL": [
     "javafxLabel"
@@ -5336,5 +5343,29 @@
   ],
   "actiontarget": [
     "actiontarget"
+  ],
+  "javafxl": [
+    "javafxlauncher"
+  ],
+  "javafxla": [
+    "javafxlauncher"
+  ],
+  "javafxlau": [
+    "javafxlauncher"
+  ],
+  "javafxlaun": [
+    "javafxlauncher"
+  ],
+  "javafxlaunc": [
+    "javafxlauncher"
+  ],
+  "javafxlaunch": [
+    "javafxlauncher"
+  ],
+  "javafxlaunche": [
+    "javafxlauncher"
+  ],
+  "javafxlauncher": [
+    "javafxlauncher"
   ]
 }

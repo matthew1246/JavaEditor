@@ -17,8 +17,8 @@
     "setKeywords",
     "positiontrackers",
     "textarea",
-    "getFileName",
     "open",
+    "getFileName",
     "fileName"
   ],
   "JDialog": [

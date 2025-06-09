@@ -892,6 +892,12 @@ public class Main {
 								isJavaFX = true;
 							}
 							else if(option2 == JOptionPane.NO_OPTION) {
+								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+								File javafxlauncher=new File(maintwo);
+								if(javafxlauncher.exists()) {
+									javafxlauncher.delete();
+								}
+								
 								isJavaFX = false;
 							}
 							compile.compileall(fileName,javaversionnumber,sal,ev4,isJavaFX,this);
@@ -1008,6 +1014,12 @@ public class Main {
 							isJavaFX = true;
 						}
 						else if(option2 == JOptionPane.NO_OPTION) {
+							String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+							File javafxlauncher=new File(maintwo);
+							if(javafxlauncher.exists()) {
+								javafxlauncher.delete();
+							}
+						
 							isJavaFX = false;
 						}
 						compile.compileall(fileName,sal,ev,isJavaFX,this);
