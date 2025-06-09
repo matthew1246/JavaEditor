@@ -1102,7 +1102,8 @@ public class Main {
 							output2.write("\n");
 							output2.close();
 							String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
-							
+							// liney="runas /profile /user:Administrator \"cmd.exe /c closeandcreatejar.bat\"";
+							liney="runas /profile /user:matth \"cmd.exe /c closeandcreatejar.bat\"";
 							commandline.runWithMSDOS(liney,dir);
 						}
 						else { 

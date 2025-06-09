@@ -730,9 +730,9 @@
     "javafxlauncher",
     "true",
     "String",
-    "dir",
     "output2",
-    "liney"
+    "liney",
+    "dir"
   ],
   "Syst": [
     "System"
