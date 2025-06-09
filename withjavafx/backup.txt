@@ -15,7 +15,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar"
     ],
-    "caretposition": 31804
+    "caretposition": 35447
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
     "starterclass": "",
