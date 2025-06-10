@@ -1,3 +1,4 @@
+cd C:\Users\Owner\Documents\javaeditor\withchatgpt\
 START /B /WAIT taskkill /F /im java.exe
 START /B /WAIT taskkill /F /im javaw.exe
 del C:\Users\Owner\Documents\javaeditor\withchatgpt\Main.jar

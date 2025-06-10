@@ -626,7 +626,6 @@
     "clickEvent",
     "filelistmodifier",
     "fileName",
-    "JOptionPane",
     "wholedocumentindex",
     "textarea",
     "output",
@@ -634,7 +633,8 @@
     "void",
     "String",
     "public",
-    "chatgpt"
+    "chatgpt",
+    "JOptionPane"
   ],
   "Syst": [
     "System"
