@@ -894,6 +894,8 @@ public class Main {
 								JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
 								FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 								BufferedWriter output2 = new BufferedWriter(filewriter2);
+								output2.write("cd "+dir);
+								output2.write("\n");
 								output2.write("START /B /WAIT taskkill /F /im java.exe");
 								output2.write("\n");
 								output2.write("START /B /WAIT taskkill /F /im javaw.exe");
@@ -915,7 +917,9 @@ public class Main {
 								output2.write("\n");
 								output2.close();
 								commandline = new CommandLine();
-								commandline.runWithMSDOS("closeandcreatejar.bat",dir);
+								String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
+							
+								commandline.runWithMSDOS(liney,dir);
 							}
 							else {
 								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
@@ -999,6 +1003,8 @@ public class Main {
 							JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
 							FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 							BufferedWriter output2 = new BufferedWriter(filewriter2);
+							output2.write("cd "+dir);
+							output2.write("\n");
 							output2.write("START /B /WAIT taskkill /F /im java.exe");
 							output2.write("\n");
 							output2.write("START /B /WAIT taskkill /F /im javaw.exe");
@@ -1019,7 +1025,9 @@ public class Main {
 							output2.write("\n");
 							output2.write("\n");
 							output2.close();
-							commandline.runWithMSDOS("closeandcreatejar.bat",dir);
+							String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
+							
+							commandline.runWithMSDOS(liney,dir);
 						}
 						else { 
 							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";

@@ -1,0 +1,31 @@
+{
+  "lastopened": {
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\Main.java",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\Main.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx.base.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx.controls.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx.fxml.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx.graphics.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx.media.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx.swing.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx.web.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\javafx-swt.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\jdk.jsobject.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\jfx.incubator.input.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withchatgpt\\jfx.incubator.richtext.jar"
+    ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  }
+}
