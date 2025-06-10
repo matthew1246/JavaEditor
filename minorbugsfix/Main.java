@@ -1242,9 +1242,9 @@ public class Main {
 				selectCode(ev);
 			}
 		});
-		combobox.addItemListener((ev) -> {
+		/*combobox.addItemListener((ev) -> {
 			selectCode(ev);
-		});
+		});*/
 		curlybracekeylistener = new CurlyBraceKeyListener(this);				
 		positiontrackers.add(curlybracekeylistener.positiontracker);
  		textarea.addKeyListener(curlybracekeylistener); 		
@@ -1949,7 +1949,7 @@ public class Main {
 			}
 			
 			this.fileName=fileName;
-			//loadComboboxes(filelistmodifier);
+			loadComboboxes(filelistmodifier);
 			
 			//filenamescombobox.setSelectedItem(getFileName(fileName));
 			/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
