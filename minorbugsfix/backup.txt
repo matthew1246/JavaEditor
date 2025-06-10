@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java",
     "jars": [],
     "caretposition": 0
   },
@@ -647,5 +647,12 @@
     "starterclass": "",
     "jars": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\git\\quantum\\strange-0.0.5.jar"
+    ],
+    "caretposition": 106
   }
 }

@@ -1073,8 +1073,7 @@ public class Main {
 						
 						//File file = new File(dir+main+".jar");
 						AllFiles allfiles = new AllFiles(main,dir);
-						//if(allfiles.exists() && !allfiles.delete()) {
-						if(true) {
+						if(allfiles.exists() && !allfiles.delete()) {
 							commandline = new CommandLine();
 							JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
 							FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
