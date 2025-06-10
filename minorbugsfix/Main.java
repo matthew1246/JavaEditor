@@ -1949,12 +1949,14 @@ public class Main {
 			}
 			
 			this.fileName=fileName;
-			loadComboboxes(filelistmodifier);
-			filenamescombobox.setSelectedItem(getFileName(fileName));
-			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			//loadComboboxes(filelistmodifier);
+			
+			//filenamescombobox.setSelectedItem(getFileName(fileName));
+			/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			int caretposition=storeselectedfile3.getCaretPosition(fileName);
 			if(caretposition != 0)
 			scrollToCaretPosition(caretposition);
+			*/
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}

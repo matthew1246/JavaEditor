@@ -60,7 +60,8 @@
     "selectlabel",
     "selectedbranch",
     "selectpanel",
-    "selectbranch"
+    "selectbranch",
+    "simulator"
   ],
   "sel": [
     "selected_label",
@@ -364,7 +365,8 @@
   "pr": [
     "private",
     "protected",
-    "process"
+    "process",
+    "program"
   ],
   "sta": [
     "static"
@@ -588,7 +590,6 @@
     "jcomponent",
     "Double",
     "order_y",
-    "ArrayList",
     "while",
     "int",
     "secondvalue",
@@ -635,7 +636,6 @@
     "import",
     "GridBagLayout",
     "GridBagConstraints",
-    "public",
     "checkbox1",
     "JCheckBox",
     "originalcheckbox",
@@ -664,7 +664,6 @@
     "JComboBox",
     "combobox",
     "newylocation",
-    "new",
     "branch",
     "selectedbranch",
     "selectpanel",
@@ -672,8 +671,13 @@
     "JFrame",
     "fileName",
     "this",
-    "String",
-    "selectbranch"
+    "selectbranch",
+    "simulator",
+    "program",
+    "public",
+    "new",
+    "ArrayList",
+    "String"
   ],
   "Syst": [
     "System"
@@ -1015,8 +1019,9 @@
     "point2",
     "panel3",
     "panel",
-    "public",
-    "process"
+    "process",
+    "program",
+    "public"
   ],
   "pl": [
     "pluspanel"
@@ -3289,7 +3294,8 @@
   ],
   "pro": [
     "protected",
-    "process"
+    "process",
+    "program"
   ],
   "prot": [
     "protected"
@@ -4381,5 +4387,41 @@
   ],
   "this": [
     "this"
+  ],
+  "si": [
+    "simulator"
+  ],
+  "sim": [
+    "simulator"
+  ],
+  "simu": [
+    "simulator"
+  ],
+  "simul": [
+    "simulator"
+  ],
+  "simula": [
+    "simulator"
+  ],
+  "simulat": [
+    "simulator"
+  ],
+  "simulato": [
+    "simulator"
+  ],
+  "simulator": [
+    "simulator"
+  ],
+  "prog": [
+    "program"
+  ],
+  "progr": [
+    "program"
+  ],
+  "progra": [
+    "program"
+  ],
+  "program": [
+    "program"
   ]
 }
