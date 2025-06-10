@@ -1,6 +1,9 @@
 [
   {
-    "name":"com.sun.media.jfxmediaimpl.platform.gstreamer.GSTPlatform",
-    "methods":[{"name":"getPlatformInstance","parameterTypes":[] }]
+    "name":"javafx.scene.web.WebView"
+  }, 
+  {
+    "name":"com.sun.javafx.webkit.theme.ScrollBarWidget"
   }
 ]
+

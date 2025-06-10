@@ -1,11 +1,11 @@
 [
   {
-    "name" : "javafx.scene.control.skin.TextFieldSkinIos",
-    "methods":[{"name":"<init>","parameterTypes":["javafx.scene.control.TextField"] }]
+    "name":"javafx.scene.web.WebView"
   }
 ,
   {
-    "name" : "javafx.scene.control.skin.TextAreaSkinIos",
-    "methods":[{"name":"<init>","parameterTypes":["javafx.scene.control.TextArea"] }]
+    "name":"javafx.scene.web.JS2JavaBridge$JSEventHandler",
+    "methods":[{"name":"onAlertNotify","parameterTypes":["java.lang.String"] }]
   }
 ]
+
