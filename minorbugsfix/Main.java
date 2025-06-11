@@ -2012,10 +2012,10 @@ public class Main {
 			}*/
 			String dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
 			String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-			if(!dir.equals(dir2)) {
+			/*if(!dir.equals(dir2)) {
 				filelistmodifier.fillList(fileName);
 				
-			}
+			}*/
 			
 			this.fileName=fileName;
 			loadComboboxes(filelistmodifier);

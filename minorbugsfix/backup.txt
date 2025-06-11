@@ -2,10 +2,19 @@
   "lastopened": {
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
-    "fileNames": [],
+    "fileNames": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java"
+    ],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
