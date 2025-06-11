@@ -152,13 +152,47 @@ public class Main {
 		}
 		setLayout();
 		expandable = new Expandable(this);	
-		if(!fileName.equals("")) {
+		if(fileName.equals("")) {
+			JTextArea textarea2 = new JTextArea();
+			Font originalFont = textarea.getFont();
+			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+			JScrollPane scrollpane2 = new JScrollPane(textarea2);
+			textarea2.setTabSize(4);
+			
+			textarea2.addKeyListener(curlybracekeylistener);
+			positiontrackers.add(new PositionTracker(textarea2));
+			
+			this.textarea=textarea2;
+			
+			tabbedpane.addTab(fileName,scrollpane2);
+			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+			fileNames.add("");
+		}
+		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();	
 			List<String> tabs=storeselectedfile.getTabs();
 			if(tabs.size() <= 1) {
 				fileNames.add(fileName);
+				
+				JTextArea textarea2 = new JTextArea();
+				Font originalFont = textarea.getFont();
+				textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+	
+				JScrollPane scrollpane2 = new JScrollPane(textarea2);
+				textarea2.setTabSize(4);
+				
+				textarea2.addKeyListener(curlybracekeylistener);
+				positiontrackers.add(new PositionTracker(textarea2));
+				
+				this.textarea=textarea2;
+				
+				tabbedpane.addTab(fileName,scrollpane2);
+				tabbedpane.addTab("+",pluspanel);
+				tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 				open(getFileName(fileName));		
 			}
 			else {
