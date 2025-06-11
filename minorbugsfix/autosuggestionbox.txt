@@ -494,7 +494,8 @@
     "filelistmodifier",
     "filename",
     "fileNames",
-    "fileName"
+    "fileName",
+    "filenamestr"
   ],
   "": [
     "class_one",
@@ -681,14 +682,15 @@
     "storeselectedfile",
     "lines2",
     "IOException",
-    "JOptionPane",
     "List",
     "String",
     "tabs",
     "fileNames",
-    "fileName",
     "containsfileName",
-    "public"
+    "public",
+    "fileName",
+    "filenamestr",
+    "JOptionPane"
   ],
   "Syst": [
     "System"
@@ -3529,7 +3531,8 @@
     "filelistmodifier",
     "filename",
     "fileNames",
-    "fileName"
+    "fileName",
+    "filenamestr"
   ],
   "firstv": [
     "firstvalue"
@@ -4011,13 +4014,15 @@
     "filelistmodifier",
     "filename",
     "fileNames",
-    "fileName"
+    "fileName",
+    "filenamestr"
   ],
   "file": [
     "filelistmodifier",
     "filename",
     "fileNames",
-    "fileName"
+    "fileName",
+    "filenamestr"
   ],
   "filel": [
     "filelistmodifier"
@@ -4129,16 +4134,20 @@
     "output"
   ],
   "filen": [
-    "filename"
+    "filename",
+    "filenamestr"
   ],
   "filena": [
-    "filename"
+    "filename",
+    "filenamestr"
   ],
   "filenam": [
-    "filename"
+    "filename",
+    "filenamestr"
   ],
   "filename": [
-    "filename"
+    "filename",
+    "filenamestr"
   ],
   "ro": [
     "root_directory"
@@ -4572,5 +4581,14 @@
   ],
   "containsfileName": [
     "containsfileName"
+  ],
+  "filenames": [
+    "filenamestr"
+  ],
+  "filenamest": [
+    "filenamestr"
+  ],
+  "filenamestr": [
+    "filenamestr"
   ]
 }

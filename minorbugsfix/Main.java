@@ -195,7 +195,7 @@ public class Main {
 				tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 				open(getFileName(fileName));		
 			}
-			else {
+			else { // if(tabs.size() > 1) {
 				for(String directoryandfilename:tabs) {
 					try {
 						JTextArea textarea2 = new JTextArea();
@@ -214,7 +214,6 @@ public class Main {
 						positiontrackers.add(new PositionTracker(textarea2));
 						
 						tabbedpane.addTab(filename,scrollpane2);
-						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 					}
 					catch (IOException ex) {
 						ex.printStackTrace();
@@ -222,9 +221,17 @@ public class Main {
 				}
 				fileNames = tabs;
 				tabbedpane.addTab("+",pluspanel);
+				
+				filelistmodifier = new FileListModifier();
+				filelistmodifier.fillList(fileName);
+				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+				textarea=(JTextArea)jscrollpane5.getViewport().getView();
+				getclassmethods = new GetClassMethods(textarea);		
+				getclassname = new GetClassName(textarea);
+				loadComboboxes(filelistmodifier);
 			}
-		}		
-		setListeners();	
+		}
+		setListeners();			
 	}
 	public String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
@@ -1283,7 +1290,9 @@ public class Main {
 				int caretposition = textarea.getCaretPosition();
 				String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
 				storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
-				open((String)filenamescombobox.getSelectedItem());
+				String liney = (String)filenamescombobox.getSelectedItem();
+				if(liney != null && !liney.equals(""))
+					open(liney);
 			}
 		});
 
@@ -2091,6 +2100,7 @@ public class Main {
 			try {
 				mainclass = "";
 				if(filenamescombobox.getItemCount() > 0) {
+					filenamescombobox.setSelectedItem(0);
 					filenamescombobox.removeAllItems();
 				}
 				if(classnamescombobox.getItemCount() > 0) {
