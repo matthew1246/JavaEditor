@@ -314,5 +314,12 @@
     "addItem",
     "addActionListener",
     "getSelectedItem"
+  ],
+  "StoreSelectedFile": [
+    "getTabs",
+    "set"
+  ],
+  "Preferences": [
+    "fileNames"
   ]
 }

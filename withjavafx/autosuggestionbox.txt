@@ -506,7 +506,8 @@
     "filelistmodifier",
     "filename",
     "false",
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "": [
     "class_one",
@@ -702,7 +703,6 @@
     "deprecated",
     "catch",
     "false",
-    "fileName",
     "boolean",
     "return",
     "JOptionPane",
@@ -732,7 +732,9 @@
     "String",
     "dir",
     "output2",
-    "liney"
+    "liney",
+    "fileName",
+    "fileNames"
   ],
   "Syst": [
     "System"
@@ -3610,7 +3612,8 @@
     "firstvalue",
     "filelistmodifier",
     "filename",
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "firstv": [
     "firstvalue"
@@ -4095,12 +4098,14 @@
   "fil": [
     "filelistmodifier",
     "filename",
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "file": [
     "filelistmodifier",
     "filename",
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "filel": [
     "filelistmodifier"
@@ -4139,16 +4144,20 @@
     "filelistmodifier"
   ],
   "fileN": [
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "fileNa": [
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "fileNam": [
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "fileName": [
-    "fileName"
+    "fileName",
+    "fileNames"
   ],
   "who": [
     "wholedocumentindex"
@@ -5389,5 +5398,8 @@
   ],
   "liney": [
     "liney"
+  ],
+  "fileNames": [
+    "fileNames"
   ]
 }

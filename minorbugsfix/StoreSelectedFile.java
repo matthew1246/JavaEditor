@@ -206,6 +206,24 @@ public class StoreSelectedFile {
 		}
 	}
 	*/
+	public void setTabs(List<String> tabs) {
+		LinkedHashMap<String,Preferences> hashmap= getBackup();
+		Preferences lastopened=hashmap.get("lastopened");
+		if(lastopened != null) {
+			lastopened.fileNames = tabs;
+			setBackup(hashmap);
+		}
+	}
+	public List<String> getTabs() {
+		LinkedHashMap<String,Preferences> hashmap= getBackup();
+		Preferences lastopened=hashmap.get("lastopened");
+		if(lastopened != null) {
+			return lastopened.fileNames;
+		}
+		else {
+			return new ArrayList<String>();
+		}
+	}
 	public String get() {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");

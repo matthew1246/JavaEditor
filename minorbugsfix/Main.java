@@ -154,7 +154,41 @@ public class Main {
 		expandable = new Expandable(this);	
 		if(!fileName.equals("")) {
 			String lines = odc.getString();
-			open(getFileName(fileName));
+			
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();	
+			List<String> tabs=storeselectedfile.getTabs();
+			if(tabs.size() <= 1) {
+				fileNames.add(fileName);
+				open(getFileName(fileName));		
+			}
+			else {
+				for(String directoryandfilename:tabs) {
+					try {
+						JTextArea textarea2 = new JTextArea();
+						Font originalFont = textarea.getFont();
+						textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+	
+						JScrollPane scrollpane2 = new JScrollPane(textarea2);
+						String filename = Main.this.getFileName(directoryandfilename);
+						
+						Path path = Paths.get(directoryandfilename);
+						String lines2= Files.readString(path,StandardCharsets.UTF_8);
+						textarea2.setTabSize(4);
+						textarea2.setText(lines2);
+						
+						textarea2.addKeyListener(curlybracekeylistener);
+						positiontrackers.add(new PositionTracker(textarea2));
+						
+						tabbedpane.addTab(filename,scrollpane2);
+						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+					}
+					catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				}
+				fileNames = tabs;
+				tabbedpane.addTab("+",pluspanel);
+			}
 		}		
 		setListeners();	
 	}
@@ -222,10 +256,9 @@ public class Main {
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 		scrollpane = new JScrollPane(textarea);
-		tabbedpane.add(getFileName(fileName),scrollpane);
+		//tabbedpane.add(getFileName(fileName),scrollpane);
 
-		tabbedpane.addTab("+",pluspanel);
-		fileNames.add(fileName);
+		//tabbedpane.addTab("+",pluspanel);
 				
 		frame.getContentPane().add(tabbedpane);
 		
@@ -1898,6 +1931,8 @@ public class Main {
 					JScrollPane scrollpane2 = new JScrollPane(textarea2);
 					String directoryandfilename = selectedFile.getPath();
 					fileNames.add(directoryandfilename);
+					StoreSelectedFile storeselectedfile=  new StoreSelectedFile();
+					storeselectedfile.setTabs(fileNames);
 					String filename = Main.this.getFileName(directoryandfilename);
 					
 					Path path = Paths.get(directoryandfilename);
@@ -2280,6 +2315,9 @@ class OpenActionListener implements ActionListener {
 			File selectedFile = filechooser.getSelectedFile();
 			String original = main.fileName;
 			main.fileName = selectedFile.getPath();
+			if(main.fileNames.size() == 0) {
+				main.fileNames.add(main.fileName);
+			}
 			int selectedtab = main.tabbedpane.getSelectedIndex();
 			main.fileNames.set(selectedtab,main.fileName);
 			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));

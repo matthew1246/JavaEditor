@@ -12,7 +12,8 @@
     "thirdpanel",
     "textfield1",
     "textarea",
-    "this"
+    "this",
+    "tabs"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -28,7 +29,8 @@
     "label",
     "lines",
     "liveiterator",
-    "label1"
+    "label1",
+    "lines2"
   ],
   "la": [
     "labels",
@@ -61,7 +63,8 @@
     "selectedbranch",
     "selectpanel",
     "selectbranch",
-    "simulator"
+    "simulator",
+    "storeselectedfile"
   ],
   "sel": [
     "selected_label",
@@ -228,7 +231,8 @@
   ],
   "st": [
     "string",
-    "static"
+    "static",
+    "storeselectedfile"
   ],
   "Jop": [
     "Joptionpane"
@@ -489,6 +493,7 @@
     "frame",
     "filelistmodifier",
     "filename",
+    "fileNames",
     "fileName"
   ],
   "": [
@@ -602,7 +607,6 @@
     "jcomponents",
     "iterator",
     "treeset",
-    "List",
     "protected",
     "top",
     "x",
@@ -654,7 +658,6 @@
     "commandline",
     "Process",
     "process",
-    "JOptionPane",
     "whichfolderopened",
     "System",
     "return",
@@ -669,7 +672,6 @@
     "selectpanel",
     "openbranch",
     "JFrame",
-    "fileName",
     "this",
     "selectbranch",
     "simulator",
@@ -677,7 +679,16 @@
     "public",
     "new",
     "ArrayList",
-    "String"
+    "storeselectedfile",
+    "lines2",
+    "IOException",
+    "JOptionPane",
+    "List",
+    "String",
+    "tabs",
+    "fileNames",
+    "fileName",
+    "containsfileName"
   ],
   "Syst": [
     "System"
@@ -777,7 +788,8 @@
     "clickEvent",
     "command",
     "commandline",
-    "combobox"
+    "combobox",
+    "containsfileName"
   ],
   "cla": [
     "class_one",
@@ -799,7 +811,8 @@
   "I": [
     "InputStreamReader",
     "Iterator",
-    "Integer"
+    "Integer",
+    "IOException"
   ],
   "It": [
     "Iterator"
@@ -911,11 +924,11 @@
     "JTextField",
     "JComponent",
     "JCheckBox",
-    "JOptionPane",
     "JPanel",
     "JLabel",
     "JComboBox",
-    "JFrame"
+    "JFrame",
+    "JOptionPane"
   ],
   "JO": [
     "JOptionPane"
@@ -1718,13 +1731,16 @@
     "component",
     "command",
     "commandline",
-    "combobox"
+    "combobox",
+    "containsfileName"
   ],
   "con": [
-    "control_t"
+    "control_t",
+    "containsfileName"
   ],
   "cont": [
-    "control_t"
+    "control_t",
+    "containsfileName"
   ],
   "contr": [
     "control_t"
@@ -1885,10 +1901,12 @@
     "positiontrackers"
   ],
   "ta": [
-    "tabbedpane"
+    "tabbedpane",
+    "tabs"
   ],
   "tab": [
-    "tabbedpane"
+    "tabbedpane",
+    "tabs"
   ],
   "tabb": [
     "tabbedpane"
@@ -3401,7 +3419,8 @@
   ],
   "li": [
     "lines",
-    "liveiterator"
+    "liveiterator",
+    "lines2"
   ],
   "liv": [
     "liveiterator"
@@ -3509,6 +3528,7 @@
     "firstvalue",
     "filelistmodifier",
     "filename",
+    "fileNames",
     "fileName"
   ],
   "firstv": [
@@ -3554,13 +3574,16 @@
     "secondvalue"
   ],
   "lin": [
-    "lines"
+    "lines",
+    "lines2"
   ],
   "line": [
-    "lines"
+    "lines",
+    "lines2"
   ],
   "lines": [
-    "lines"
+    "lines",
+    "lines2"
   ],
   "Lin": [
     "Line"
@@ -3987,11 +4010,13 @@
   "fil": [
     "filelistmodifier",
     "filename",
+    "fileNames",
     "fileName"
   ],
   "file": [
     "filelistmodifier",
     "filename",
+    "fileNames",
     "fileName"
   ],
   "filel": [
@@ -4031,15 +4056,19 @@
     "filelistmodifier"
   ],
   "fileN": [
+    "fileNames",
     "fileName"
   ],
   "fileNa": [
+    "fileNames",
     "fileName"
   ],
   "fileNam": [
+    "fileNames",
     "fileName"
   ],
   "fileName": [
+    "fileNames",
     "fileName"
   ],
   "who": [
@@ -4423,5 +4452,125 @@
   ],
   "program": [
     "program"
+  ],
+  "sto": [
+    "storeselectedfile"
+  ],
+  "stor": [
+    "storeselectedfile"
+  ],
+  "store": [
+    "storeselectedfile"
+  ],
+  "stores": [
+    "storeselectedfile"
+  ],
+  "storese": [
+    "storeselectedfile"
+  ],
+  "storesel": [
+    "storeselectedfile"
+  ],
+  "storesele": [
+    "storeselectedfile"
+  ],
+  "storeselec": [
+    "storeselectedfile"
+  ],
+  "storeselect": [
+    "storeselectedfile"
+  ],
+  "storeselecte": [
+    "storeselectedfile"
+  ],
+  "storeselected": [
+    "storeselectedfile"
+  ],
+  "storeselectedf": [
+    "storeselectedfile"
+  ],
+  "storeselectedfi": [
+    "storeselectedfile"
+  ],
+  "storeselectedfil": [
+    "storeselectedfile"
+  ],
+  "storeselectedfile": [
+    "storeselectedfile"
+  ],
+  "fileNames": [
+    "fileNames"
+  ],
+  "lines2": [
+    "lines2"
+  ],
+  "IO": [
+    "IOException"
+  ],
+  "IOE": [
+    "IOException"
+  ],
+  "IOEx": [
+    "IOException"
+  ],
+  "IOExc": [
+    "IOException"
+  ],
+  "IOExce": [
+    "IOException"
+  ],
+  "IOExcep": [
+    "IOException"
+  ],
+  "IOExcept": [
+    "IOException"
+  ],
+  "IOExcepti": [
+    "IOException"
+  ],
+  "IOExceptio": [
+    "IOException"
+  ],
+  "IOException": [
+    "IOException"
+  ],
+  "tabs": [
+    "tabs"
+  ],
+  "conta": [
+    "containsfileName"
+  ],
+  "contai": [
+    "containsfileName"
+  ],
+  "contain": [
+    "containsfileName"
+  ],
+  "contains": [
+    "containsfileName"
+  ],
+  "containsf": [
+    "containsfileName"
+  ],
+  "containsfi": [
+    "containsfileName"
+  ],
+  "containsfil": [
+    "containsfileName"
+  ],
+  "containsfile": [
+    "containsfileName"
+  ],
+  "containsfileN": [
+    "containsfileName"
+  ],
+  "containsfileNa": [
+    "containsfileName"
+  ],
+  "containsfileNam": [
+    "containsfileName"
+  ],
+  "containsfileName": [
+    "containsfileName"
   ]
 }
