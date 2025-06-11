@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java",
     "jars": [],
     "caretposition": 0
   },
@@ -78,6 +78,13 @@
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\git\\quantum\\strange-0.0.5.jar"
     ],
     "caretposition": 0
   }
