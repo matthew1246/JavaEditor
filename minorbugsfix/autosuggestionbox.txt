@@ -676,7 +676,6 @@
     "selectbranch",
     "simulator",
     "program",
-    "public",
     "new",
     "ArrayList",
     "storeselectedfile",
@@ -688,7 +687,8 @@
     "tabs",
     "fileNames",
     "fileName",
-    "containsfileName"
+    "containsfileName",
+    "public"
   ],
   "Syst": [
     "System"
