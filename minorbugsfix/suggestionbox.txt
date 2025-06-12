@@ -315,7 +315,8 @@
     "addItem",
     "addActionListener",
     "getSelectedItem",
-    "setSelectedItem"
+    "setSelectedItem",
+    "setSelectedIndex"
   ],
   "StoreSelectedFile": [
     "getTabs",

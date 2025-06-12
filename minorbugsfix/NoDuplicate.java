@@ -9,7 +9,8 @@ import java.io.IOException;
 public class NoDuplicate {
 	IsEqual isequal = new IsEqual();
 	public boolean IsDuplicate(LinkedHashMap<String,Preferences> linkedhashmap) {
-		GsonBuilder gsonbuilder=new GsonBuilder();
+		return false;
+		/*GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
 		File backup = new File("original.txt");
@@ -27,6 +28,7 @@ public class NoDuplicate {
 			ex.printStackTrace();
 			return false;
 		}
+		*/
 	}
 	/*
 	** This is to stop git recognising backup.txt as

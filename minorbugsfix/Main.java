@@ -1290,14 +1290,11 @@ public class Main {
 				String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
 				storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 				String liney = (String)filenamescombobox.getSelectedItem();
-				if(liney != null && !liney.equals(""))
+				if(liney != null && !liney.equals("")) {
+					
+						
+					JOptionPane.showMessageDialog(null,"Clicked!");
 					open(liney);
-				else {
-					if(deselected != null) {
-						filenamescombobox.setSelectedItem(deselected);
-					}		
-					MouseEvent event = new MouseEvent(filenamescombobox, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(),0, 10, 10, 1, false);
-            				filenamescombobox.dispatchEvent(event);
 				}  
 			}
 		});
@@ -1963,9 +1960,8 @@ public class Main {
 	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
 		try {
-			MouseEvent event = new MouseEvent(filenamescombobox, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(),0, 10, 10, 1, false);
-            		filenamescombobox.dispatchEvent(event);		
-            			
+			filenamescombobox.setSelectedIndex(-1);
+		
 			int index=tabbedpane.getSelectedIndex();
 			String title=tabbedpane.getTitleAt(index);
 			if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {

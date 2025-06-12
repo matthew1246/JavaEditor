@@ -662,7 +662,6 @@
     "process",
     "whichfolderopened",
     "System",
-    "return",
     "JPanel",
     "JLabel",
     "selectlabel",
@@ -696,9 +695,10 @@
     "keylistener",
     "curlybracekeylistener",
     "fileName",
+    "deselected",
     "JOptionPane",
     "filenamescombobox",
-    "deselected"
+    "return"
   ],
   "Syst": [
     "System"
