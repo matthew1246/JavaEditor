@@ -2042,6 +2042,7 @@ public class Main {
 			
 			this.fileName=fileName;
 			loadComboboxes(filelistmodifier);
+			filenamescombobox.setSelectedItem(getFileName(fileName));
 			
 			//filenamescombobox.setSelectedItem(getFileName(fileName));
 			/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();

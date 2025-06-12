@@ -314,7 +314,8 @@
   "JComboBox": [
     "addItem",
     "addActionListener",
-    "getSelectedItem"
+    "getSelectedItem",
+    "setSelectedItem"
   ],
   "StoreSelectedFile": [
     "getTabs",
