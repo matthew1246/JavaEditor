@@ -1293,6 +1293,9 @@ public class Main {
 				if(liney != null && !liney.equals(""))
 					open(liney);
 				else {
+					if(deselected != null) {
+						filenamescombobox.setSelectedItem(deselected);
+					}		
 					MouseEvent event = new MouseEvent(filenamescombobox, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(),0, 10, 10, 1, false);
             				filenamescombobox.dispatchEvent(event);
 				}  

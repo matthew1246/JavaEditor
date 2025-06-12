@@ -697,8 +697,8 @@
     "curlybracekeylistener",
     "fileName",
     "JOptionPane",
-    "deselected",
-    "filenamescombobox"
+    "filenamescombobox",
+    "deselected"
   ],
   "Syst": [
     "System"
