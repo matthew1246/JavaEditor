@@ -1292,9 +1292,6 @@ public class Main {
 				storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 				String liney = (String)filenamescombobox.getSelectedItem();
 				if(liney != null && !liney.equals("")) {
-					
-						
-					JOptionPane.showMessageDialog(null,"Clicked!");
 					open(liney);
 				}  
 			}
@@ -2029,7 +2026,6 @@ public class Main {
 			getclassname = new GetClassName(textarea);
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			JOptionPane.showMessageDialog(null,"addOrUpdateTab: fileName is: "+fileName);
 			storeselectedfile.set(fileName);
 			setStarterClassBoxes();
 			if(fileName != null && !fileName.equals("")) {
