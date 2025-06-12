@@ -2013,6 +2013,10 @@ public class Main {
 				filelistmodifier = new FileListModifier();
 				filelistmodifier.fillList(fileName);
 			}
+			else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
+				filelistmodifier = new FileListModifier();
+				filelistmodifier.fillList(fileName);
+			}
 			git.Change(fileName);
 			expandable.open();
 			
