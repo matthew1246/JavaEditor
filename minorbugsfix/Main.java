@@ -228,6 +228,7 @@ public class Main {
 				getclassmethods = new GetClassMethods(textarea);		
 				getclassname = new GetClassName(textarea);
 				loadComboboxes(filelistmodifier);
+				filenamescombobox.setSelectedItem(getFileName(fileName));
 			}
 		}
 		setListeners();			
@@ -1960,8 +1961,6 @@ public class Main {
 	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
 		try {
-			filenamescombobox.setSelectedIndex(-1);
-		
 			int index=tabbedpane.getSelectedIndex();
 			String title=tabbedpane.getTitleAt(index);
 			if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {
@@ -2030,12 +2029,13 @@ public class Main {
 			getclassname = new GetClassName(textarea);
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			JOptionPane.showMessageDialog(null,"addOrUpdateTab: fileName is: "+fileName);
 			storeselectedfile.set(fileName);
 			setStarterClassBoxes();
 			if(fileName != null && !fileName.equals("")) {
 				frame.setTitle(fileName.replaceAll(".+\\\\",""));
 			}
-			//filelistmodifier.setSelected(selected2);
+			filelistmodifier.setSelected(getFileName(fileName));
 			/*if(!deselected.equals("")) {
 				filelistmodifier.setToMostRecentAfterSelected(deselected);	
 			}*/
@@ -2122,7 +2122,6 @@ public class Main {
 			try {
 				mainclass = "";
 				if(filenamescombobox.getItemCount() > 0) {
-					filenamescombobox.setSelectedItem(0);
 					filenamescombobox.removeAllItems();
 				}
 				if(classnamescombobox.getItemCount() > 0) {

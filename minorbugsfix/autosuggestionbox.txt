@@ -30,12 +30,14 @@
     "lines",
     "liveiterator",
     "label1",
-    "lines2"
+    "lines2",
+    "lastopened"
   ],
   "la": [
     "labels",
     "label",
-    "label1"
+    "label1",
+    "lastopened"
   ],
   "labels": [
     "labels"
@@ -495,10 +497,10 @@
     "false",
     "firstvalue",
     "frame",
-    "filelistmodifier",
     "filename",
     "fileNames",
     "filenamestr",
+    "filelistmodifier",
     "fileName",
     "filenamescombobox"
   ],
@@ -648,7 +650,6 @@
     "originalcheckbox",
     "clonebutton",
     "clickEvent",
-    "filelistmodifier",
     "wholedocumentindex",
     "output",
     "filename",
@@ -694,11 +695,13 @@
     "instanceof",
     "keylistener",
     "curlybracekeylistener",
-    "fileName",
     "deselected",
+    "lastopened",
+    "return",
+    "filelistmodifier",
     "JOptionPane",
-    "filenamescombobox",
-    "return"
+    "fileName",
+    "filenamescombobox"
   ],
   "Syst": [
     "System"
@@ -3536,10 +3539,10 @@
   ],
   "fi": [
     "firstvalue",
-    "filelistmodifier",
     "filename",
     "fileNames",
     "filenamestr",
+    "filelistmodifier",
     "fileName",
     "filenamescombobox"
   ],
@@ -4020,18 +4023,18 @@
     "clickEvent"
   ],
   "fil": [
-    "filelistmodifier",
     "filename",
     "fileNames",
     "filenamestr",
+    "filelistmodifier",
     "fileName",
     "filenamescombobox"
   ],
   "file": [
-    "filelistmodifier",
     "filename",
     "fileNames",
     "filenamestr",
+    "filelistmodifier",
     "fileName",
     "filenamescombobox"
   ],
@@ -4681,5 +4684,29 @@
   ],
   "deselected": [
     "deselected"
+  ],
+  "las": [
+    "lastopened"
+  ],
+  "last": [
+    "lastopened"
+  ],
+  "lasto": [
+    "lastopened"
+  ],
+  "lastop": [
+    "lastopened"
+  ],
+  "lastope": [
+    "lastopened"
+  ],
+  "lastopen": [
+    "lastopened"
+  ],
+  "lastopene": [
+    "lastopened"
+  ],
+  "lastopened": [
+    "lastopened"
   ]
 }

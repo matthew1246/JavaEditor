@@ -228,7 +228,12 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			return lastopened.starterclass;
+			if(lastopened.fileNames.size() == 0) {
+				return lastopened.starterclass;
+			}
+			else {
+				return lastopened.fileNames.get(0);
+			}
 		}
 		else {
 			return "";

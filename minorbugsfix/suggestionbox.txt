@@ -30,10 +30,10 @@
   "List": [
     "remove",
     "set",
-    "get",
     "add",
     "addAll",
-    "size"
+    "size",
+    "get"
   ],
   "String": [
     "startsWith",
@@ -303,7 +303,8 @@
     "gridy"
   ],
   "FileListModifier": [
-    "fillList"
+    "fillList",
+    "filelist"
   ],
   "BufferedWriter": [
     "write"
@@ -315,8 +316,8 @@
     "addItem",
     "addActionListener",
     "getSelectedItem",
-    "setSelectedItem",
-    "setSelectedIndex"
+    "setSelectedIndex",
+    "setSelectedItem"
   ],
   "StoreSelectedFile": [
     "getTabs",
