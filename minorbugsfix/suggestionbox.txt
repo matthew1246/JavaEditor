@@ -109,7 +109,8 @@
     "dispatchEvent",
     "getCaretPosition",
     "setCaretPosition",
-    "getText"
+    "getText",
+    "getKeyListeners"
   ],
   "Muck": [
     "links"

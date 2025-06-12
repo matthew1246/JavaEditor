@@ -160,8 +160,7 @@ public class Main {
 			JScrollPane scrollpane2 = new JScrollPane(textarea2);
 			textarea2.setTabSize(4);
 			
-			textarea2.addKeyListener(curlybracekeylistener);
-			positiontrackers.add(new PositionTracker(textarea2));
+			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
 			
 			this.textarea=textarea2;
 			
@@ -185,8 +184,8 @@ public class Main {
 				JScrollPane scrollpane2 = new JScrollPane(textarea2);
 				textarea2.setTabSize(4);
 				
-				textarea2.addKeyListener(curlybracekeylistener);
-				positiontrackers.add(new PositionTracker(textarea2));
+				textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+				//positiontrackers.add(new PositionTracker(textarea2));
 				
 				this.textarea=textarea2;
 				
@@ -210,8 +209,8 @@ public class Main {
 						textarea2.setTabSize(4);
 						textarea2.setText(lines2);
 						
-						textarea2.addKeyListener(curlybracekeylistener);
-						positiontrackers.add(new PositionTracker(textarea2));
+						textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+						//positiontrackers.add(new PositionTracker(textarea2));
 						
 						tabbedpane.addTab(filename,scrollpane2);
 					}
@@ -880,7 +879,7 @@ public class Main {
 			ex.printStackTrace();
 		}
 	}
-	public CurlyBraceKeyListener curlybracekeylistener;
+	//public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
@@ -1321,9 +1320,9 @@ public class Main {
 		/*combobox.addItemListener((ev) -> {
 			selectCode(ev);
 		});*/
-		curlybracekeylistener = new CurlyBraceKeyListener(this);				
-		positiontrackers.add(curlybracekeylistener.positiontracker);
- 		textarea.addKeyListener(curlybracekeylistener); 		
+		//curlybracekeylistener = new CurlyBraceKeyListener(this);				
+		//positiontrackers.add(curlybracekeylistener.positiontracker);
+ 		//textarea.addKeyListener(curlybracekeylistener); 		
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
@@ -1455,6 +1454,17 @@ public class Main {
 		});		
 		textarea.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
+				CurlyBraceKeyListener curlybracekeylistener = null;
+				KeyListener[] keylisteners=textarea.getKeyListeners();
+				for(KeyListener keylistener:keylisteners) {
+					if(keylistener instanceof CurlyBraceKeyListener) {
+						if(curlybracekeylistener != null) {
+							JOptionPane.showMessageDialog(null,"Found more than one CurlyBraceKeyListener!");				
+							break;
+						}	
+						curlybracekeylistener = (CurlyBraceKeyListener)keylistener;
+					}
+				}				
 				if(!curlybracekeylistener.is_content_update) {
 					String text = textarea.getText();
 					int position = textarea.getCaretPosition();
@@ -1943,7 +1953,7 @@ public class Main {
 		}
 		return filename;
 	}
-	public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
+	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
 		try {
 			int index=tabbedpane.getSelectedIndex();
@@ -1983,8 +1993,8 @@ public class Main {
 					textarea2.setTabSize(4);
 					textarea2.setText(lines);
 					
-					textarea2.addKeyListener(curlybracekeylistener);
-					positiontrackers.add(new PositionTracker(textarea2));
+					textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+					//positiontrackers.add(new PositionTracker(textarea2));
 					
 					tabbedpane.addTab(filename,scrollpane2);
 					tabbedpane.addTab("+",pluspanel);
@@ -1992,7 +2002,7 @@ public class Main {
 				}
 			}
 			fileName=fileNames.get(tabbedpane.getSelectedIndex());
-			curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+			//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 			Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 			

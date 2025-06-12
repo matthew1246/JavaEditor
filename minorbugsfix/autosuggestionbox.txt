@@ -11,9 +11,9 @@
     "true",
     "thirdpanel",
     "textfield1",
-    "textarea",
     "this",
-    "tabs"
+    "tabs",
+    "textarea"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -131,8 +131,8 @@
   "in": [
     "index",
     "input",
-    "instanceof",
-    "int"
+    "int",
+    "instanceof"
   ],
   "main": [
     "main"
@@ -155,11 +155,11 @@
     "index",
     "input",
     "implements",
-    "instanceof",
     "int",
     "iterator",
     "if",
-    "import"
+    "import",
+    "instanceof"
   ],
   "ca": [
     "caretposition"
@@ -344,7 +344,8 @@
   ],
   "ke": [
     "keywords",
-    "keyevent2"
+    "keyevent2",
+    "keylistener"
   ],
   "a": [
     "add"
@@ -354,14 +355,16 @@
   ],
   "key": [
     "keywords",
-    "keyevent2"
+    "keyevent2",
+    "keylistener"
   ],
   "mai": [
     "main"
   ],
   "k": [
     "keywords",
-    "keyevent2"
+    "keyevent2",
+    "keylistener"
   ],
   "pub": [
     "public"
@@ -533,8 +536,6 @@
     "HashMap",
     "else",
     "substring",
-    "curlybracekeylistener",
-    "KeyListener",
     "1",
     "text",
     "dotcaretposition",
@@ -576,7 +577,6 @@
     "label",
     "button",
     "fromdraganddrop",
-    "instanceof",
     "original",
     "clone",
     "originaltextfield",
@@ -648,7 +648,6 @@
     "clickEvent",
     "filelistmodifier",
     "wholedocumentindex",
-    "textarea",
     "output",
     "filename",
     "directory",
@@ -690,6 +689,11 @@
     "public",
     "fileName",
     "filenamestr",
+    "textarea",
+    "KeyListener",
+    "instanceof",
+    "keylistener",
+    "curlybracekeylistener",
     "JOptionPane"
   ],
   "Syst": [
@@ -778,7 +782,6 @@
     "class_one",
     "classes",
     "control_t",
-    "curlybracekeylistener",
     "currentline",
     "caretposition",
     "class",
@@ -791,7 +794,8 @@
     "command",
     "commandline",
     "combobox",
-    "containsfileName"
+    "containsfileName",
+    "curlybracekeylistener"
   ],
   "cla": [
     "class_one",
@@ -1505,20 +1509,20 @@
   "K": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyListener",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyListener"
   ],
   "Ke": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyListener",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyListener"
   ],
   "Key": [
     "KeyAdapter",
     "KeyStroke",
-    "KeyListener",
-    "KeyEvent"
+    "KeyEvent",
+    "KeyListener"
   ],
   "KeyA": [
     "KeyAdapter"
@@ -1782,12 +1786,12 @@
     "textarea"
   ],
   "cu": [
-    "curlybracekeylistener",
-    "currentline"
+    "currentline",
+    "curlybracekeylistener"
   ],
   "cur": [
-    "curlybracekeylistener",
-    "currentline"
+    "currentline",
+    "curlybracekeylistener"
   ],
   "curl": [
     "curlybracekeylistener"
@@ -4590,5 +4594,29 @@
   ],
   "filenamestr": [
     "filenamestr"
+  ],
+  "keyl": [
+    "keylistener"
+  ],
+  "keyli": [
+    "keylistener"
+  ],
+  "keylis": [
+    "keylistener"
+  ],
+  "keylist": [
+    "keylistener"
+  ],
+  "keyliste": [
+    "keylistener"
+  ],
+  "keylisten": [
+    "keylistener"
+  ],
+  "keylistene": [
+    "keylistener"
+  ],
+  "keylistener": [
+    "keylistener"
   ]
 }
