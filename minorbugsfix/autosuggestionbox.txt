@@ -275,7 +275,8 @@
     "dotcaretposition",
     "dropPoint",
     "double",
-    "directory"
+    "directory",
+    "deselected"
   ],
   "sugg": [
     "suggestionbox"
@@ -498,8 +499,8 @@
     "filename",
     "fileNames",
     "filenamestr",
-    "filenamescombobox",
-    "fileName"
+    "fileName",
+    "filenamescombobox"
   ],
   "": [
     "class_one",
@@ -694,9 +695,10 @@
     "instanceof",
     "keylistener",
     "curlybracekeylistener",
+    "fileName",
     "JOptionPane",
-    "filenamescombobox",
-    "fileName"
+    "deselected",
+    "filenamescombobox"
   ],
   "Syst": [
     "System"
@@ -3538,8 +3540,8 @@
     "filename",
     "fileNames",
     "filenamestr",
-    "filenamescombobox",
-    "fileName"
+    "fileName",
+    "filenamescombobox"
   ],
   "firstv": [
     "firstvalue"
@@ -4022,16 +4024,16 @@
     "filename",
     "fileNames",
     "filenamestr",
-    "filenamescombobox",
-    "fileName"
+    "fileName",
+    "filenamescombobox"
   ],
   "file": [
     "filelistmodifier",
     "filename",
     "fileNames",
     "filenamestr",
-    "filenamescombobox",
-    "fileName"
+    "fileName",
+    "filenamescombobox"
   ],
   "filel": [
     "filelistmodifier"
@@ -4652,5 +4654,32 @@
   ],
   "filenamescombobox": [
     "filenamescombobox"
+  ],
+  "de": [
+    "deselected"
+  ],
+  "des": [
+    "deselected"
+  ],
+  "dese": [
+    "deselected"
+  ],
+  "desel": [
+    "deselected"
+  ],
+  "desele": [
+    "deselected"
+  ],
+  "deselec": [
+    "deselected"
+  ],
+  "deselect": [
+    "deselected"
+  ],
+  "deselecte": [
+    "deselected"
+  ],
+  "deselected": [
+    "deselected"
   ]
 }

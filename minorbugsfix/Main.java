@@ -1292,6 +1292,10 @@ public class Main {
 				String liney = (String)filenamescombobox.getSelectedItem();
 				if(liney != null && !liney.equals(""))
 					open(liney);
+				else {
+					MouseEvent event = new MouseEvent(filenamescombobox, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(),0, 10, 10, 1, false);
+            				filenamescombobox.dispatchEvent(event);
+				}  
 			}
 		});
 
