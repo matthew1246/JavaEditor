@@ -1960,6 +1960,9 @@ public class Main {
 	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
 		try {
+			MouseEvent event = new MouseEvent(filenamescombobox, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(),0, 10, 10, 1, false);
+            		filenamescombobox.dispatchEvent(event);		
+            			
 			int index=tabbedpane.getSelectedIndex();
 			String title=tabbedpane.getTitleAt(index);
 			if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {
@@ -2045,6 +2048,7 @@ public class Main {
 			}*/
 			
 			this.fileName=fileName;
+				
 			loadComboboxes(filelistmodifier);
 			filenamescombobox.setSelectedItem(getFileName(fileName));
 			
