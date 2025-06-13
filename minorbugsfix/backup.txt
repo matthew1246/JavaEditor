@@ -1,20 +1,21 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java",
       "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java",
+      "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java"
     ],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 113135
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java": {
     "starterclass": "",
@@ -32,6 +33,12 @@
     "starterclass": "Links",
     "jars": [],
     "fileNames": [],
-    "caretposition": 212
+    "caretposition": 261
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java": {
+    "starterclass": "Muck",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }

@@ -5,7 +5,7 @@ import java.util.*;
 public class Links {
 	public static void main(String[] args) {
 		Links links = new Links();
-		for(String package0:links.packagesandclasses.keySet()) {
+		for(String package0:links.getPackages()) {
 			System.out.println(package0);
 		}
 	}
@@ -121,7 +121,25 @@ public class Links {
 		}
 		return classes2;
 	}
-
+	public List<String> getAPIClasses() {
+		List<String> apiclasses=new ArrayList<String>();
+		for(HashMap<String,String> innerhashmap:hashmap.values()) {
+			for(String classname:innerhashmap.keySet()) { // Only one value
+				apiclasses.add(classname);
+			}
+		}
+		return apiclasses;
+	}
+	public List<String> getPackages() {
+		List<String> packages = new ArrayList<String>();	
+		for(String package0:packagesandclasses.keySet()) {
+			packages.add(package0);
+		}
+		return packages;
+	}
+	public List<String> getClassFrom(String package0) {
+		return packagesandclasses.get(package0);
+	}
 }
 		
 		

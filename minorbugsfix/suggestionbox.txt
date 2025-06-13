@@ -19,7 +19,8 @@
     "textarea",
     "getFileName",
     "fileName",
-    "open"
+    "open",
+    "packages"
   ],
   "JDialog": [
     "show"
@@ -37,7 +38,6 @@
     "add"
   ],
   "String": [
-    "startsWith",
     "split",
     "replaceAll",
     "trim",
@@ -48,7 +48,8 @@
     "replace",
     "endsWith",
     "substring",
-    "length"
+    "length",
+    "startsWith"
   ],
   "JFrame": [
     "disable",
@@ -118,7 +119,10 @@
     "links"
   ],
   "Links": [
-    "hashmap"
+    "hashmap",
+    "packagesandclasses",
+    "getPackages",
+    "getAPIClasses"
   ],
   "HashMap": [
     "KeyIterator",
@@ -161,9 +165,9 @@
     "getWidth"
   ],
   "TreeSet": [
-    "add",
     "iterator",
-    "size"
+    "size",
+    "add"
   ],
   "AutoKeyListener": [
     "fillData",

@@ -6,14 +6,14 @@
     "textarea2",
     "text",
     "transferable",
-    "treeset",
     "top",
     "true",
     "thirdpanel",
     "textfield1",
     "this",
     "tabs",
-    "textarea"
+    "textarea",
+    "treeset"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -198,8 +198,8 @@
   ],
   "tr": [
     "transferable",
-    "treeset",
-    "true"
+    "true",
+    "treeset"
   ],
   "tree": [
     "treeset"
@@ -352,7 +352,8 @@
     "keylistener"
   ],
   "a": [
-    "add"
+    "add",
+    "apiclasses"
   ],
   "keywor": [
     "keywords"
@@ -459,10 +460,10 @@
   "cl": [
     "class_one",
     "classes",
-    "class",
     "clone",
     "clonebutton",
-    "clickEvent"
+    "clickEvent",
+    "class"
   ],
   "fa": [
     "false"
@@ -493,7 +494,6 @@
     "whichfolderopened"
   ],
   "f": [
-    "for",
     "fromdraganddrop",
     "false",
     "firstvalue",
@@ -503,12 +503,12 @@
     "filenamestr",
     "filelistmodifier",
     "fileName",
-    "filenamescombobox"
+    "filenamescombobox",
+    "for"
   ],
   "": [
     "class_one",
     "Hashmap",
-    "for",
     "oneclass",
     "classes",
     "Arraylist",
@@ -546,7 +546,6 @@
     "currentline",
     "caretposition",
     "main",
-    "class",
     "add",
     "Member",
     "selected_index",
@@ -607,7 +606,6 @@
     "Integer",
     "jcomponents",
     "iterator",
-    "treeset",
     "protected",
     "top",
     "x",
@@ -689,7 +687,6 @@
     "curlybracekeylistener",
     "deselected",
     "lastopened",
-    "return",
     "filelistmodifier",
     "fileName",
     "filenamescombobox",
@@ -699,14 +696,21 @@
     "HashMap",
     "substring",
     "List",
-    "ArrayList",
-    "String",
     "package",
     "with_capitols",
     "package1",
-    "package0",
     "static",
-    "links"
+    "links",
+    "for",
+    "class",
+    "ArrayList",
+    "packages",
+    "String",
+    "return",
+    "apiclasses",
+    "treeset",
+    "package0",
+    "javax.swing"
   ],
   "Syst": [
     "System"
@@ -796,7 +800,6 @@
     "control_t",
     "currentline",
     "caretposition",
-    "class",
     "clone",
     "count",
     "component",
@@ -807,7 +810,8 @@
     "commandline",
     "combobox",
     "containsfileName",
-    "curlybracekeylistener"
+    "curlybracekeylistener",
+    "class"
   ],
   "cla": [
     "class_one",
@@ -1055,6 +1059,7 @@
     "public",
     "package",
     "package1",
+    "packages",
     "package0"
   ],
   "pl": [
@@ -1414,6 +1419,7 @@
     "panel",
     "package",
     "package1",
+    "packages",
     "package0"
   ],
   "pan": [
@@ -3167,7 +3173,8 @@
     "jcomponent",
     "jcomponents",
     "jcomponent1",
-    "jcomponent2"
+    "jcomponent2",
+    "javax.swing"
   ],
   "jc": [
     "jcomponent",
@@ -4728,26 +4735,31 @@
   "pac": [
     "package",
     "package1",
+    "packages",
     "package0"
   ],
   "pack": [
     "package",
     "package1",
+    "packages",
     "package0"
   ],
   "packa": [
     "package",
     "package1",
+    "packages",
     "package0"
   ],
   "packag": [
     "package",
     "package1",
+    "packages",
     "package0"
   ],
   "package": [
     "package",
     "package1",
+    "packages",
     "package0"
   ],
   "package1": [
@@ -4764,5 +4776,62 @@
   ],
   "links": [
     "links"
+  ],
+  "for": [
+    "for"
+  ],
+  "packages": [
+    "packages"
+  ],
+  "apic": [
+    "apiclasses"
+  ],
+  "apicl": [
+    "apiclasses"
+  ],
+  "apicla": [
+    "apiclasses"
+  ],
+  "apiclas": [
+    "apiclasses"
+  ],
+  "apiclass": [
+    "apiclasses"
+  ],
+  "apiclasse": [
+    "apiclasses"
+  ],
+  "apiclasses": [
+    "apiclasses"
+  ],
+  "ja": [
+    "javax.swing"
+  ],
+  "jav": [
+    "javax.swing"
+  ],
+  "java": [
+    "javax.swing"
+  ],
+  "javax": [
+    "javax.swing"
+  ],
+  "javax.": [
+    "javax.swing"
+  ],
+  "javax.s": [
+    "javax.swing"
+  ],
+  "javax.sw": [
+    "javax.swing"
+  ],
+  "javax.swi": [
+    "javax.swing"
+  ],
+  "javax.swin": [
+    "javax.swing"
+  ],
+  "javax.swing": [
+    "javax.swing"
   ]
 }

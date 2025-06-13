@@ -883,7 +883,8 @@ public class Main {
 	//public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() {
+public void setListeners() {	
+		setPackages();
 		opennewtab.addActionListener((ev) -> {
 			addOrUpdateTab(ev);
 		});
@@ -2195,12 +2196,7 @@ public class Main {
 	public List<String> apiclasses;
 	public void setApiClasses() {
 		if(apiclasses == null) {	
-			apiclasses=new ArrayList<String>();
-			for(HashMap<String,String> innerhashmap:Main.muck.links.hashmap.values()) {
-				for(String classname:innerhashmap.keySet()) { // Only one value
-					apiclasses.add(classname);
-				}
-			}
+			apiclasses=muck.links.getAPIClasses();
 		}
 	}
 	public List<String> keywords;
@@ -2224,6 +2220,12 @@ public class Main {
 			"switch","case","default","break","throw","return",
 			"this","instanceof","goto","const",
 			"null","super","new","import","true","false"));
+		}
+	}
+	public List<String> packages;
+	public void setPackages() {
+		if(packages == null) {
+			packages = muck.links.getPackages();
 		}
 	}
 }
@@ -3300,6 +3302,11 @@ class AutoKeyListener {
 					treeset.add(keyword);
 				}
 			}
+			for(String package0:main.packages) {
+				if(package0.startsWith(input)) {
+					treeset.add(package0);
+				}
+			}
 			//System.out.println("end");
 			variablenames2=new ArrayList<String>(treeset);
 		}
@@ -3312,6 +3319,9 @@ class AutoKeyListener {
 			}
 			for(String keyword:main.keywords) {
 				treeset.add(keyword);
+			}
+			for(String package0:main.packages) {
+				treeset.add(package0);
 			}
 			variablenames2=new ArrayList<String>(treeset);
 		}
