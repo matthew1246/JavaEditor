@@ -2438,72 +2438,78 @@ class CurlyBraceKeyListener implements KeyListener {
 			int caretposition = main.textarea.getCaretPosition();
 			//String currentline=middle.getWholeLine2(caretposition);
 			String currentline = middle.getCurrentLine();
-			Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
-			Matcher matcher=pattern3.matcher(currentline);
-			if(matcher.find()) {
-				String editedline = matcher.group(1);
-				String[] properties = editedline.split("\\.");
-				String first = properties[0];
-				String classname=getClassName(first,text);
-				Class<?> property = getClassQuestionMark(classname,text);
-				for(int i = 1; i < properties.length; i++) {
-					//Member[] methodsandproperties=getAllPropertyAndMethods(property);
-					Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
-					String last=properties[i];
-					escapey:for(Object member:methodsandproperties) {
-						if(member instanceof Method) {
-							String name = ((Method)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
+			List<String> classesfrompackage=muck.links.getClassFrom(currentline);
+			if(currentline != null) {
+					
+			}
+			else {	
+				Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
+				Matcher matcher=pattern3.matcher(currentline);
+				if(matcher.find()) {
+					String editedline = matcher.group(1);
+					String[] properties = editedline.split("\\.");
+					String first = properties[0];
+					String classname=getClassName(first,text);
+					Class<?> property = getClassQuestionMark(classname,text);
+					for(int i = 1; i < properties.length; i++) {
+						//Member[] methodsandproperties=getAllPropertyAndMethods(property);
+						Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
+						String last=properties[i];
+						escapey:for(Object member:methodsandproperties) {
+							if(member instanceof Method) {
+								String name = ((Method)member).getName();
+								if(name.contains("$")) {
+									name=name.replaceAll(".+\\$","");
+								}
+								if(last.equals(name)) {
+									property=(Class<?>)member;
+									break escapey;
+								}
 							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
+							else if(member instanceof Field) {						
+								String name=((Member)member).getName();
+								if(name.contains("$")) {
+									name=name.replaceAll(".+\\$","");
+								}
+								if(last.equals(name)) {
+									property=((Field)member).getType();
+									break escapey;
+								}
 							}
-						}
-						else if(member instanceof Field) {						
-							String name=((Member)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
+							else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
+								String name=((Class<?>)member).getName();
+								if(name.contains("$")) {
+									name=name.replaceAll(".+\\$","");
+								}
+								if(last.equals(name)) {
+									property=(Class<?>)member;
+									break escapey;
+								}
 							}
-							if(last.equals(name)) {
-								property=((Field)member).getType();
-								break escapey;
+							else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
+								String name=((Class<?>)member).getName();
+								if(name.contains("$")) {
+									name=name.replaceAll(".+\\$","");
+								}
+								if(last.equals(name)) {
+									property=(Class<?>)member;
+									break escapey;
+								}
 							}
-						}
-						else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
-						else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
-						else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
+							else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
+								String name=((Class<?>)member).getName();
+								if(name.contains("$")) {
+									name=name.replaceAll(".+\\$","");
+								}
+								if(last.equals(name)) {
+									property=(Class<?>)member;
+									break escapey;
+								}
 							}
 						}
 					}
+					Popup(property,caretposition);
 				}
-				Popup(property,caretposition);
 			}
 		}
 		/**

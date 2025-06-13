@@ -543,7 +543,6 @@
     "KeyEvent",
     "keyevent2",
     "input",
-    "currentline",
     "caretposition",
     "main",
     "add",
@@ -695,7 +694,6 @@
     "sublink",
     "HashMap",
     "substring",
-    "List",
     "package",
     "with_capitols",
     "package1",
@@ -705,12 +703,14 @@
     "class",
     "ArrayList",
     "packages",
-    "String",
     "return",
     "apiclasses",
     "treeset",
     "package0",
-    "javax.swing"
+    "javax.swing",
+    "currentline",
+    "String",
+    "List"
   ],
   "Syst": [
     "System"
@@ -798,7 +798,6 @@
     "class_one",
     "classes",
     "control_t",
-    "currentline",
     "caretposition",
     "clone",
     "count",
@@ -811,7 +810,8 @@
     "combobox",
     "containsfileName",
     "curlybracekeylistener",
-    "class"
+    "class",
+    "currentline"
   ],
   "cla": [
     "class_one",
@@ -1810,12 +1810,12 @@
     "textarea"
   ],
   "cu": [
-    "currentline",
-    "curlybracekeylistener"
+    "curlybracekeylistener",
+    "currentline"
   ],
   "cur": [
-    "currentline",
-    "curlybracekeylistener"
+    "curlybracekeylistener",
+    "currentline"
   ],
   "curl": [
     "curlybracekeylistener"

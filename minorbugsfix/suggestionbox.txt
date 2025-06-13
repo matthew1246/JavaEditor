@@ -122,7 +122,8 @@
     "hashmap",
     "packagesandclasses",
     "getPackages",
-    "getAPIClasses"
+    "getAPIClasses",
+    "getClassFrom"
   ],
   "HashMap": [
     "KeyIterator",
