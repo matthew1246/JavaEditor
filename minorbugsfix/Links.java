@@ -5,8 +5,8 @@ import java.util.*;
 public class Links {
 	public static void main(String[] args) {
 		Links links = new Links();
-		for(String importname:links.getImport("JButton")) {
-			System.out.println(importname);
+		for(String package0:links.packagesandclasses.keySet()) {
+			System.out.println(package0);
 		}
 	}
 	public HashMap<String,List<String>> packagesandclasses = new HashMap<String,List<String>>();
@@ -23,11 +23,15 @@ public class Links {
 					String package0= sublink.replaceAll("[^/]+\\.html","").replace("/",".");
 					if(package0.endsWith("."))
 						package0 = package0.substring(0,(package0.length()-1));
-					JOptionPane.showMessageDialog(null,package0);
-					System.exit(0);
+					List<String> package1=packagesandclasses.get(package0);
+					if(package1 == null) {
+						package1 = new ArrayList<String>();
+					}		
 					
 					//sublinks.add(sublink);
 					String with_capitols = getClassWithCapitols(sublink);
+					package1.add(with_capitols);
+					packagesandclasses.put(package0,package1);
 					String class_one = getClass(sublink);
 					HashMap<String,String> hashmapwithcapitols =hashmap.get(class_one);
 					if(hashmapwithcapitols == null) {

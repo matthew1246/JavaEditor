@@ -29,9 +29,9 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java": {
-    "starterclass": "Main",
+    "starterclass": "Links",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1023
+    "caretposition": 212
   }
 }

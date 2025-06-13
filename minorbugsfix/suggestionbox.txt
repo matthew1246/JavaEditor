@@ -30,10 +30,11 @@
   "List": [
     "remove",
     "set",
-    "add",
     "addAll",
     "size",
-    "get"
+    "get",
+    "contains",
+    "add"
   ],
   "String": [
     "startsWith",
@@ -121,10 +122,10 @@
   ],
   "HashMap": [
     "KeyIterator",
+    "values",
     "get",
     "put",
-    "keySet",
-    "values"
+    "keySet"
   ],
   "Matcher": [
     "find",
