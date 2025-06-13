@@ -53,10 +53,8 @@
   ],
   "s": [
     "selected_label",
-    "sublink",
     "suggestionbox",
     "search_textfield",
-    "substring",
     "static",
     "selected_index",
     "selectedcomponet",
@@ -66,7 +64,9 @@
     "selectpanel",
     "selectbranch",
     "simulator",
-    "storeselectedfile"
+    "storeselectedfile",
+    "sublink",
+    "substring"
   ],
   "sel": [
     "selected_label",
@@ -175,8 +175,8 @@
     "textarea"
   ],
   "su": [
-    "sublink",
     "suggestionbox",
+    "sublink",
     "substring"
   ],
   "List": [
@@ -507,7 +507,6 @@
   "": [
     "class_one",
     "with_capitols",
-    "sublink",
     "Hashmap",
     "for",
     "oneclass",
@@ -537,9 +536,7 @@
     "suggestionbox",
     "search_textfield",
     "goto",
-    "HashMap",
     "else",
-    "substring",
     "1",
     "text",
     "dotcaretposition",
@@ -662,7 +659,6 @@
     "Process",
     "process",
     "whichfolderopened",
-    "System",
     "JPanel",
     "JLabel",
     "selectlabel",
@@ -683,8 +679,6 @@
     "storeselectedfile",
     "lines2",
     "IOException",
-    "List",
-    "String",
     "tabs",
     "fileNames",
     "containsfileName",
@@ -699,9 +693,16 @@
     "lastopened",
     "return",
     "filelistmodifier",
-    "JOptionPane",
     "fileName",
-    "filenamescombobox"
+    "filenamescombobox",
+    "JOptionPane",
+    "System",
+    "sublink",
+    "HashMap",
+    "List",
+    "String",
+    "substring",
+    "package"
   ],
   "Syst": [
     "System"
@@ -1047,7 +1048,8 @@
     "panel",
     "process",
     "program",
-    "public"
+    "public",
+    "package"
   ],
   "pl": [
     "pluspanel"
@@ -1403,7 +1405,8 @@
   "pa": [
     "panelgridlayout",
     "panel3",
-    "panel"
+    "panel",
+    "package"
   ],
   "pan": [
     "panelgridlayout",
@@ -4708,5 +4711,23 @@
   ],
   "lastopened": [
     "lastopened"
+  ],
+  "sublink": [
+    "sublink"
+  ],
+  "pac": [
+    "package"
+  ],
+  "pack": [
+    "package"
+  ],
+  "packa": [
+    "package"
+  ],
+  "packag": [
+    "package"
+  ],
+  "package": [
+    "package"
   ]
 }

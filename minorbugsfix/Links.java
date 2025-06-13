@@ -9,6 +9,7 @@ public class Links {
 			System.out.println(importname);
 		}
 	}
+	public HashMap<String,List<String>> packagesandclasses = new HashMap<String,List<String>>();
 	public HashMap<String,HashMap<String,String>> hashmap = new HashMap<String,HashMap<String,String>>();
 	//private List<String> sublinks = new ArrayList<String>();
 	public Links() {
@@ -19,6 +20,12 @@ public class Links {
 				if(line == null) break;
 				if(isSublink(line)) {
 					String sublink = getSublink(line);
+					String package0= sublink.replaceAll("[^/]+\\.html","").replace("/",".");
+					if(package0.endsWith("."))
+						package0 = package0.substring(0,(package0.length()-1));
+					JOptionPane.showMessageDialog(null,package0);
+					System.exit(0);
+					
 					//sublinks.add(sublink);
 					String with_capitols = getClassWithCapitols(sublink);
 					String class_one = getClass(sublink);

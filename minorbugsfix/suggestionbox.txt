@@ -39,15 +39,15 @@
     "startsWith",
     "split",
     "replaceAll",
-    "substring",
     "trim",
     "contains",
-    "length",
-    "endsWith",
     "getChars",
-    "replace",
     "replaceFirst",
-    "equals"
+    "equals",
+    "replace",
+    "endsWith",
+    "substring",
+    "length"
   ],
   "JFrame": [
     "disable",
@@ -93,7 +93,8 @@
   ],
   "System": [
     "currentTimeMillis",
-    "out"
+    "out",
+    "exit"
   ],
   "PrintStream": [
     "println"
