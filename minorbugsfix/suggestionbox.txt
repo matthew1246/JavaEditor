@@ -344,5 +344,8 @@
   ],
   "\t\t}catch(java.lang": [
     "ArrayIndexOutOfBoundsException"
+  ],
+  "\t\t} catch(java.lang": [
+    "InterruptedException"
   ]
 }

@@ -135,7 +135,7 @@ public class Main {
 	** If have no default content for window
 	
 	*/
-	public Main() {
+	public Main() {	
 		setLayout();
 		setListeners();
 		expandable = new Expandable(this);
@@ -196,29 +196,33 @@ public class Main {
 				open(getFileName(fileName));		
 			}
 			else { // if(tabs.size() > 1) {
-				for(String directoryandfilename:tabs) {
-					try {
-						JTextArea textarea2 = new JTextArea();
-						Font originalFont = textarea.getFont();
-						textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-	
-						JScrollPane scrollpane2 = new JScrollPane(textarea2);
-						String filename = Main.this.getFileName(directoryandfilename);
-						
-						Path path = Paths.get(directoryandfilename);
-						String lines2= Files.readString(path,StandardCharsets.UTF_8);
-						textarea2.setTabSize(4);
-						textarea2.setText(lines2);
-						
-						textarea2.addKeyListener(new CurlyBraceKeyListener(this));
-						//positiontrackers.add(new PositionTracker(textarea2));
-						
-						tabbedpane.addTab(filename,scrollpane2);
+				SwingUtilities.invokeAndWait(new Runnable() {
+					public void run() {	
+						for(String directoryandfilename:tabs) {
+						try {
+							JTextArea textarea2 = new JTextArea();
+							Font originalFont = textarea.getFont();
+							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+		
+							JScrollPane scrollpane2 = new JScrollPane(textarea2);
+							String filename = Main.this.getFileName(directoryandfilename);
+							
+							Path path = Paths.get(directoryandfilename);
+							String lines2= Files.readString(path,StandardCharsets.UTF_8);
+							textarea2.setTabSize(4);
+							textarea2.setText(lines2);
+							
+							textarea2.addKeyListener(new CurlyBraceKeyListener(Main.this));
+							//positiontrackers.add(new PositionTracker(textarea2));
+							
+							tabbedpane.addTab(filename,scrollpane2);
+						}
+						catch (IOException ex) {
+							ex.printStackTrace();
+						}
+						}
 					}
-					catch (IOException ex) {
-						ex.printStackTrace();
-					}
-				}
+				});
 				fileNames = tabs;
 				tabbedpane.addTab("+",pluspanel);
 				
@@ -232,8 +236,12 @@ public class Main {
 				filenamescombobox.setSelectedItem(getFileName(fileName));
 			}
 		}
-		setListeners();			
-		}catch(java.lang.ArrayIndexOutOfBoundsException ex) {
+		setListeners();	
+		} catch(InvocationTargetException ex) {
+			ex.printStackTrace();
+		} catch(InterruptedException ex) {
+			ex.printStackTrace();								
+		}catch(ArrayIndexOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}
 	}

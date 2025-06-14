@@ -734,7 +734,8 @@
     "matcher",
     "javax.swing",
     "import",
-    "java.lang"
+    "java.lang",
+    "InvocationTargetException"
   ],
   "Syst": [
     "System"
@@ -867,7 +868,8 @@
     "InputStreamReader",
     "Iterator",
     "Integer",
-    "IOException"
+    "IOException",
+    "InvocationTargetException"
   ],
   "It": [
     "Iterator"
@@ -1020,7 +1022,8 @@
   ],
   "In": [
     "InputStreamReader",
-    "Integer"
+    "Integer",
+    "InvocationTargetException"
   ],
   "Inp": [
     "InputStreamReader"
@@ -5098,5 +5101,74 @@
   ],
   "java.lang": [
     "java.lang"
+  ],
+  "Inv": [
+    "InvocationTargetException"
+  ],
+  "Invo": [
+    "InvocationTargetException"
+  ],
+  "Invoc": [
+    "InvocationTargetException"
+  ],
+  "Invoca": [
+    "InvocationTargetException"
+  ],
+  "Invocat": [
+    "InvocationTargetException"
+  ],
+  "Invocati": [
+    "InvocationTargetException"
+  ],
+  "Invocatio": [
+    "InvocationTargetException"
+  ],
+  "Invocation": [
+    "InvocationTargetException"
+  ],
+  "InvocationT": [
+    "InvocationTargetException"
+  ],
+  "InvocationTa": [
+    "InvocationTargetException"
+  ],
+  "InvocationTar": [
+    "InvocationTargetException"
+  ],
+  "InvocationTarg": [
+    "InvocationTargetException"
+  ],
+  "InvocationTarge": [
+    "InvocationTargetException"
+  ],
+  "InvocationTarget": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetE": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetEx": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetExc": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetExce": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetExcep": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetExcept": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetExcepti": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetExceptio": [
+    "InvocationTargetException"
+  ],
+  "InvocationTargetException": [
+    "InvocationTargetException"
   ]
 }
