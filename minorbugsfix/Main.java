@@ -2897,8 +2897,15 @@ class MethodSuggestionBox {
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline = middle.getCurrentLine();
-		
-		List<String> classesfrompackage=main.muck.links.getClassFrom(currentline);
+		Pattern pattern = Pattern.compile("import\s*([a-zA-Z\\.]+)");
+		Matcher matcher0=pattern.matcher(currentline);
+		List<String> classesfrompackage=null;
+		if(matcher0.find()) { // if import javax.swing.
+			classesfrompackage=main.muck.links.getClassFrom(matcher0.group(1));
+		}
+		else {
+			classesfrompackage=main.muck.links.getClassFrom(currentline);
+		}
 		if(classesfrompackage != null) {	
 			Object[] methodboxvalues=new Object[classesfrompackage.size()];	
 			for(int i = 0; i < methodboxvalues.length; i++) {

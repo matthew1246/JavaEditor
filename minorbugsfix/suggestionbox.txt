@@ -134,8 +134,8 @@
     "keySet"
   ],
   "Matcher": [
-    "find",
-    "group"
+    "group",
+    "find"
   ],
   "JPanel": [
     "getComponentPopupMenu",
@@ -336,6 +336,7 @@
     "fileNames"
   ],
   "javax.swing": [
-    "JButton"
+    "JButton",
+    "JPanel"
   ]
 }
