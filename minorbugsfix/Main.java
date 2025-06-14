@@ -146,6 +146,7 @@ public class Main {
 	** If have default content for window
 	*/
 	public Main(OpenDefaultContent odc) {
+		try {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git = new Git(fileName);
@@ -232,6 +233,9 @@ public class Main {
 			}
 		}
 		setListeners();			
+		}catch(java.lang.ArrayIndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		}
 	}
 	public String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
@@ -2897,11 +2901,11 @@ class MethodSuggestionBox {
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline = middle.getCurrentLine();
-		Pattern pattern = Pattern.compile("import\s*([a-zA-Z\\.]+)");
+		Pattern pattern = Pattern.compile("(import)?\s*([a-zA-Z\\.]+)\\z");
 		Matcher matcher0=pattern.matcher(currentline);
 		List<String> classesfrompackage=null;
 		if(matcher0.find()) { // if import javax.swing.
-			classesfrompackage=main.muck.links.getClassFrom(matcher0.group(1));
+			classesfrompackage=main.muck.links.getClassFrom(matcher0.group(2));
 		}
 		else {
 			classesfrompackage=main.muck.links.getClassFrom(currentline);

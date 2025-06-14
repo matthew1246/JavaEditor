@@ -338,5 +338,11 @@
   "javax.swing": [
     "JButton",
     "JPanel"
+  ],
+  "java.lang": [
+    "ArrayIndexOutOfBoundsException"
+  ],
+  "\t\t}catch(java.lang": [
+    "ArrayIndexOutOfBoundsException"
   ]
 }

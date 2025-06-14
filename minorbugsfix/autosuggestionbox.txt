@@ -723,7 +723,6 @@
     "return",
     "classquestionmark",
     "JOptionPane",
-    "import",
     "List",
     "String",
     "classesfrompackage",
@@ -733,7 +732,9 @@
     "currentline",
     "Matcher",
     "matcher",
-    "javax.swing"
+    "javax.swing",
+    "import",
+    "java.lang"
   ],
   "Syst": [
     "System"
@@ -3217,7 +3218,8 @@
     "jcomponents",
     "jcomponent1",
     "jcomponent2",
-    "javax.swing"
+    "javax.swing",
+    "java.lang"
   ],
   "jc": [
     "jcomponent",
@@ -4848,13 +4850,16 @@
     "apiclasses"
   ],
   "ja": [
-    "javax.swing"
+    "javax.swing",
+    "java.lang"
   ],
   "jav": [
-    "javax.swing"
+    "javax.swing",
+    "java.lang"
   ],
   "java": [
-    "javax.swing"
+    "javax.swing",
+    "java.lang"
   ],
   "javax": [
     "javax.swing"
@@ -5078,5 +5083,20 @@
   ],
   "Matcher": [
     "Matcher"
+  ],
+  "java.": [
+    "java.lang"
+  ],
+  "java.l": [
+    "java.lang"
+  ],
+  "java.la": [
+    "java.lang"
+  ],
+  "java.lan": [
+    "java.lang"
+  ],
+  "java.lang": [
+    "java.lang"
   ]
 }
