@@ -29,13 +29,14 @@
     "getIcon"
   ],
   "List": [
-    "remove",
     "set",
     "addAll",
-    "size",
     "get",
     "contains",
-    "add"
+    "remove",
+    "add",
+    "toArray",
+    "size"
   ],
   "String": [
     "split",
@@ -214,7 +215,8 @@
     "getSelectedIndex"
   ],
   "Class": [
-    "getName"
+    "getName",
+    "getSimpleName"
   ],
   "Component": [
     "getLocationOnScreen",
@@ -332,5 +334,8 @@
   ],
   "Preferences": [
     "fileNames"
+  ],
+  "javax.swing": [
+    "JButton"
   ]
 }

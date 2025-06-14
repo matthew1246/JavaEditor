@@ -13,7 +13,8 @@
     "this",
     "tabs",
     "textarea",
-    "treeset"
+    "treeset",
+    "try"
   ],
   "S": [
     "Sslsessionbindinglistener",
@@ -55,7 +56,6 @@
   "s": [
     "selected_label",
     "suggestionbox",
-    "search_textfield",
     "selected_index",
     "selectedcomponet",
     "secondvalue",
@@ -67,7 +67,8 @@
     "storeselectedfile",
     "sublink",
     "substring",
-    "static"
+    "static",
+    "search_textfield"
   ],
   "sel": [
     "selected_label",
@@ -94,14 +95,14 @@
   ],
   "se": [
     "second",
-    "search_textfield",
     "selected_index",
     "selectedcomponet",
     "secondvalue",
     "selectlabel",
     "selectedbranch",
     "selectpanel",
-    "selectbranch"
+    "selectbranch",
+    "search_textfield"
   ],
   "String": [
     "String"
@@ -161,8 +162,8 @@
     "int",
     "iterator",
     "if",
-    "import",
-    "instanceof"
+    "instanceof",
+    "import"
   ],
   "ca": [
     "caretposition"
@@ -199,7 +200,8 @@
   "tr": [
     "transferable",
     "true",
-    "treeset"
+    "treeset",
+    "try"
   ],
   "tree": [
     "treeset"
@@ -245,10 +247,12 @@
     "null"
   ],
   "class": [
-    "classname",
     "class_one",
     "classes",
-    "class"
+    "class",
+    "classesfrompackage",
+    "classname",
+    "classquestionmark"
   ],
   "Arr": [
     "Arraylist",
@@ -389,7 +393,10 @@
   "clas": [
     "class_one",
     "classes",
-    "class"
+    "class",
+    "classesfrompackage",
+    "classname",
+    "classquestionmark"
   ],
   "imp": [
     "implements",
@@ -463,7 +470,10 @@
     "clone",
     "clonebutton",
     "clickEvent",
-    "class"
+    "class",
+    "classesfrompackage",
+    "classname",
+    "classquestionmark"
   ],
   "fa": [
     "false"
@@ -517,9 +527,7 @@
     "pluspanel",
     "index",
     "ComponentListener",
-    "Object",
     "object",
-    "panelgridlayout",
     "KeyAdapter",
     "JMenuItem",
     "EventObject",
@@ -534,7 +542,6 @@
     "positiontrackers",
     "textarea2",
     "suggestionbox",
-    "search_textfield",
     "goto",
     "else",
     "1",
@@ -543,7 +550,6 @@
     "KeyEvent",
     "keyevent2",
     "input",
-    "caretposition",
     "main",
     "add",
     "Member",
@@ -635,7 +641,6 @@
     "label1",
     "button1",
     "textfield1",
-    "import",
     "GridBagLayout",
     "GridBagConstraints",
     "checkbox1",
@@ -656,7 +661,6 @@
     "process",
     "whichfolderopened",
     "JPanel",
-    "JLabel",
     "selectlabel",
     "JComboBox",
     "combobox",
@@ -681,7 +685,6 @@
     "filenamestr",
     "textarea",
     "KeyListener",
-    "instanceof",
     "keylistener",
     "curlybracekeylistener",
     "deselected",
@@ -689,7 +692,6 @@
     "filelistmodifier",
     "fileName",
     "filenamescombobox",
-    "JOptionPane",
     "System",
     "sublink",
     "HashMap",
@@ -703,14 +705,29 @@
     "class",
     "ArrayList",
     "packages",
-    "return",
     "apiclasses",
     "treeset",
     "package0",
-    "javax.swing",
-    "currentline",
+    "List",
+    "instanceof",
+    "member",
+    "nameslist",
+    "try",
+    "Object",
+    "classesfrompackage",
+    "JLabel",
+    "methods3",
+    "panelgridlayout",
+    "caretposition",
+    "classname",
+    "search_textfield",
+    "return",
+    "classquestionmark",
     "String",
-    "List"
+    "JOptionPane",
+    "currentline",
+    "import",
+    "javax.swing"
   ],
   "Syst": [
     "System"
@@ -754,7 +771,8 @@
     "newxlocation",
     "null",
     "newylocation",
-    "new"
+    "new",
+    "nameslist"
   ],
   "ne": [
     "newxlocation",
@@ -798,7 +816,6 @@
     "class_one",
     "classes",
     "control_t",
-    "caretposition",
     "clone",
     "count",
     "component",
@@ -811,12 +828,19 @@
     "containsfileName",
     "curlybracekeylistener",
     "class",
+    "classesfrompackage",
+    "caretposition",
+    "classname",
+    "classquestionmark",
     "currentline"
   ],
   "cla": [
     "class_one",
     "classes",
-    "class"
+    "class",
+    "classesfrompackage",
+    "classname",
+    "classquestionmark"
   ],
   "class_": [
     "class_one"
@@ -828,7 +852,8 @@
     "class_one"
   ],
   "classe": [
-    "classes"
+    "classes",
+    "classesfrompackage"
   ],
   "I": [
     "InputStreamReader",
@@ -947,9 +972,9 @@
     "JComponent",
     "JCheckBox",
     "JPanel",
-    "JLabel",
     "JComboBox",
     "JFrame",
+    "JLabel",
     "JOptionPane"
   ],
   "JO": [
@@ -1045,7 +1070,6 @@
   ],
   "p": [
     "pluspanel",
-    "panelgridlayout",
     "positiontracker",
     "positiontrackers",
     "point",
@@ -1060,7 +1084,8 @@
     "package",
     "package1",
     "packages",
-    "package0"
+    "package0",
+    "panelgridlayout"
   ],
   "pl": [
     "pluspanel"
@@ -1260,8 +1285,8 @@
     "MouseAdapter"
   ],
   "O": [
-    "Object",
-    "Override"
+    "Override",
+    "Object"
   ],
   "Ov": [
     "Override"
@@ -1414,28 +1439,28 @@
     "suggestionbox"
   ],
   "pa": [
-    "panelgridlayout",
     "panel3",
     "panel",
     "package",
     "package1",
     "packages",
-    "package0"
+    "package0",
+    "panelgridlayout"
   ],
   "pan": [
-    "panelgridlayout",
     "panel3",
-    "panel"
+    "panel",
+    "panelgridlayout"
   ],
   "pane": [
-    "panelgridlayout",
     "panel3",
-    "panel"
+    "panel",
+    "panelgridlayout"
   ],
   "panel": [
-    "panelgridlayout",
     "panel3",
-    "panel"
+    "panel",
+    "panelgridlayout"
   ],
   "panelg": [
     "panelgridlayout"
@@ -1793,7 +1818,9 @@
     "middlepanel",
     "minipanel1",
     "minipanel2",
-    "minipanel3"
+    "minipanel3",
+    "member",
+    "methods3"
   ],
   "tex": [
     "textarea2",
@@ -4833,5 +4860,150 @@
   ],
   "javax.swing": [
     "javax.swing"
+  ],
+  "me": [
+    "member",
+    "methods3"
+  ],
+  "mem": [
+    "member"
+  ],
+  "memb": [
+    "member"
+  ],
+  "membe": [
+    "member"
+  ],
+  "member": [
+    "member"
+  ],
+  "na": [
+    "nameslist"
+  ],
+  "nam": [
+    "nameslist"
+  ],
+  "name": [
+    "nameslist"
+  ],
+  "names": [
+    "nameslist"
+  ],
+  "namesl": [
+    "nameslist"
+  ],
+  "namesli": [
+    "nameslist"
+  ],
+  "nameslis": [
+    "nameslist"
+  ],
+  "nameslist": [
+    "nameslist"
+  ],
+  "classq": [
+    "classquestionmark"
+  ],
+  "classqu": [
+    "classquestionmark"
+  ],
+  "classque": [
+    "classquestionmark"
+  ],
+  "classques": [
+    "classquestionmark"
+  ],
+  "classquest": [
+    "classquestionmark"
+  ],
+  "classquesti": [
+    "classquestionmark"
+  ],
+  "classquestio": [
+    "classquestionmark"
+  ],
+  "classquestion": [
+    "classquestionmark"
+  ],
+  "classquestionm": [
+    "classquestionmark"
+  ],
+  "classquestionma": [
+    "classquestionmark"
+  ],
+  "classquestionmar": [
+    "classquestionmark"
+  ],
+  "classquestionmark": [
+    "classquestionmark"
+  ],
+  "classes": [
+    "classesfrompackage"
+  ],
+  "classesf": [
+    "classesfrompackage"
+  ],
+  "classesfr": [
+    "classesfrompackage"
+  ],
+  "classesfro": [
+    "classesfrompackage"
+  ],
+  "classesfrom": [
+    "classesfrompackage"
+  ],
+  "classesfromp": [
+    "classesfrompackage"
+  ],
+  "classesfrompa": [
+    "classesfrompackage"
+  ],
+  "classesfrompac": [
+    "classesfrompackage"
+  ],
+  "classesfrompack": [
+    "classesfrompackage"
+  ],
+  "classesfrompacka": [
+    "classesfrompackage"
+  ],
+  "classesfrompackag": [
+    "classesfrompackage"
+  ],
+  "classesfrompackage": [
+    "classesfrompackage"
+  ],
+  "try": [
+    "try"
+  ],
+  "met": [
+    "methods3"
+  ],
+  "meth": [
+    "methods3"
+  ],
+  "metho": [
+    "methods3"
+  ],
+  "method": [
+    "methods3"
+  ],
+  "methods": [
+    "methods3"
+  ],
+  "methods3": [
+    "methods3"
+  ],
+  "classn": [
+    "classname"
+  ],
+  "classna": [
+    "classname"
+  ],
+  "classnam": [
+    "classname"
+  ],
+  "classname": [
+    "classname"
   ]
 }

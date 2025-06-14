@@ -7,15 +7,20 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java",
       "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java",
-      "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java"
+      "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java",
+      "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java"
     ],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "Main",
-    "jars": [],
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
     "fileNames": [],
-    "caretposition": 113135
+    "caretposition": 97443
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java": {
     "starterclass": "",
@@ -37,6 +42,18 @@
   },
   "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java": {
     "starterclass": "Muck",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
+    "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
