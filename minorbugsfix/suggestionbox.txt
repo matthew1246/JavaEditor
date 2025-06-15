@@ -34,12 +34,11 @@
     "get",
     "contains",
     "remove",
-    "add",
     "toArray",
-    "size"
+    "size",
+    "add"
   ],
   "String": [
-    "split",
     "replaceAll",
     "trim",
     "contains",
@@ -50,7 +49,8 @@
     "endsWith",
     "substring",
     "length",
-    "startsWith"
+    "startsWith",
+    "split"
   ],
   "JFrame": [
     "disable",
@@ -131,7 +131,8 @@
     "values",
     "get",
     "put",
-    "keySet"
+    "keySet",
+    "size"
   ],
   "Matcher": [
     "find",
@@ -354,5 +355,8 @@
   ],
   "import javax.swing": [
     "JButton"
+  ],
+  "HashSet": [
+    "add"
   ]
 }

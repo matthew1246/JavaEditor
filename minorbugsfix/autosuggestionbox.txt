@@ -18,8 +18,8 @@
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "System",
-    "String"
+    "String",
+    "System"
   ],
   "Array": [
     "Arraylist",
@@ -68,7 +68,9 @@
     "sublink",
     "substring",
     "static",
-    "search_textfield"
+    "search_textfield",
+    "subpackage",
+    "subpackages"
   ],
   "sel": [
     "selected_label",
@@ -180,7 +182,9 @@
   "su": [
     "suggestionbox",
     "sublink",
-    "substring"
+    "substring",
+    "subpackage",
+    "subpackages"
   ],
   "List": [
     "List"
@@ -495,7 +499,9 @@
   ],
   "sub": [
     "sublink",
-    "substring"
+    "substring",
+    "subpackage",
+    "subpackages"
   ],
   "ma": [
     "mainbranch",
@@ -685,7 +691,6 @@
     "tabs",
     "fileNames",
     "containsfileName",
-    "public",
     "filenamestr",
     "textarea",
     "KeyListener",
@@ -696,7 +701,6 @@
     "filelistmodifier",
     "fileName",
     "filenamescombobox",
-    "System",
     "sublink",
     "HashMap",
     "substring",
@@ -707,11 +711,9 @@
     "links",
     "for",
     "class",
-    "ArrayList",
     "packages",
     "apiclasses",
     "treeset",
-    "package0",
     "instanceof",
     "member",
     "nameslist",
@@ -732,18 +734,27 @@
     "import",
     "imports",
     "boolean",
-    "JOptionPane",
     "Pattern",
     "pattern",
     "matcher",
-    "String",
     "classname",
     "ClassNotFoundException",
     "return",
     "currentline",
     "Class",
     "editedline",
-    "javax.swing"
+    "javax.swing",
+    "public",
+    "HashSet",
+    "hashset",
+    "packagewithdot",
+    "ArrayList",
+    "String",
+    "subpackage",
+    "subpackages",
+    "JOptionPane",
+    "package0",
+    "System"
   ],
   "Syst": [
     "System"
@@ -753,19 +764,23 @@
   ],
   "H": [
     "Hashmap",
-    "HashMap"
+    "HashMap",
+    "HashSet"
   ],
   "Ha": [
     "Hashmap",
-    "HashMap"
+    "HashMap",
+    "HashSet"
   ],
   "Has": [
     "Hashmap",
-    "HashMap"
+    "HashMap",
+    "HashSet"
   ],
   "Hash": [
     "Hashmap",
-    "HashMap"
+    "HashMap",
+    "HashSet"
   ],
   "Hashm": [
     "Hashmap"
@@ -1099,13 +1114,14 @@
     "panel",
     "process",
     "program",
-    "public",
     "package",
     "package1",
     "packages",
-    "package0",
     "panelgridlayout",
-    "pattern"
+    "pattern",
+    "public",
+    "packagewithdot",
+    "package0"
   ],
   "pl": [
     "pluspanel"
@@ -1467,9 +1483,10 @@
     "package",
     "package1",
     "packages",
-    "package0",
     "panelgridlayout",
-    "pattern"
+    "pattern",
+    "packagewithdot",
+    "package0"
   ],
   "pan": [
     "panel3",
@@ -4797,30 +4814,35 @@
     "package",
     "package1",
     "packages",
+    "packagewithdot",
     "package0"
   ],
   "pack": [
     "package",
     "package1",
     "packages",
+    "packagewithdot",
     "package0"
   ],
   "packa": [
     "package",
     "package1",
     "packages",
+    "packagewithdot",
     "package0"
   ],
   "packag": [
     "package",
     "package1",
     "packages",
+    "packagewithdot",
     "package0"
   ],
   "package": [
     "package",
     "package1",
     "packages",
+    "packagewithdot",
     "package0"
   ],
   "package1": [
@@ -5280,5 +5302,87 @@
   ],
   "editedline": [
     "editedline"
+  ],
+  "HashS": [
+    "HashSet"
+  ],
+  "HashSe": [
+    "HashSet"
+  ],
+  "HashSet": [
+    "HashSet"
+  ],
+  "h": [
+    "hashset"
+  ],
+  "ha": [
+    "hashset"
+  ],
+  "has": [
+    "hashset"
+  ],
+  "hash": [
+    "hashset"
+  ],
+  "hashs": [
+    "hashset"
+  ],
+  "hashse": [
+    "hashset"
+  ],
+  "hashset": [
+    "hashset"
+  ],
+  "subp": [
+    "subpackage",
+    "subpackages"
+  ],
+  "subpa": [
+    "subpackage",
+    "subpackages"
+  ],
+  "subpac": [
+    "subpackage",
+    "subpackages"
+  ],
+  "subpack": [
+    "subpackage",
+    "subpackages"
+  ],
+  "subpacka": [
+    "subpackage",
+    "subpackages"
+  ],
+  "subpackag": [
+    "subpackage",
+    "subpackages"
+  ],
+  "subpackage": [
+    "subpackage",
+    "subpackages"
+  ],
+  "packagew": [
+    "packagewithdot"
+  ],
+  "packagewi": [
+    "packagewithdot"
+  ],
+  "packagewit": [
+    "packagewithdot"
+  ],
+  "packagewith": [
+    "packagewithdot"
+  ],
+  "packagewithd": [
+    "packagewithdot"
+  ],
+  "packagewithdo": [
+    "packagewithdot"
+  ],
+  "packagewithdot": [
+    "packagewithdot"
+  ],
+  "subpackages": [
+    "subpackages"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -38,7 +38,7 @@
     "starterclass": "Links",
     "jars": [],
     "fileNames": [],
-    "caretposition": 261
+    "caretposition": 1088
   },
   "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java": {
     "starterclass": "Muck",

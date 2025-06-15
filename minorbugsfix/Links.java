@@ -5,10 +5,11 @@ import java.util.*;
 public class Links {
 	public static void main(String[] args) {
 		Links links = new Links();
-		for(String package0:links.getPackages()) {
+		for(String package0:links.getSubpackages()) {
 			System.out.println(package0);
 		}
 	}
+	public HashSet<String> subpackage=  new HashSet<String>();
 	public HashMap<String,List<String>> packagesandclasses = new HashMap<String,List<String>>();
 	public HashMap<String,HashMap<String,String>> hashmap = new HashMap<String,HashMap<String,String>>();
 	//private List<String> sublinks = new ArrayList<String>();
@@ -23,6 +24,14 @@ public class Links {
 					String package0= sublink.replaceAll("[^/]+\\.html","").replace("/",".");
 					if(package0.endsWith("."))
 						package0 = package0.substring(0,(package0.length()-1));
+					String[] subpackages = package0.split("\\.");
+					String packagewithdot = "";	
+					for(int i = 0; i < (subpackages.length-1); i++) {
+						packagewithdot+=subpackages[i];	
+						subpackage.add(packagewithdot);
+						packagewithdot+=".";
+					}
+							
 					List<String> package1=packagesandclasses.get(package0);
 					if(package1 == null) {
 						package1 = new ArrayList<String>();
@@ -139,6 +148,13 @@ public class Links {
 	}
 	public List<String> getClassFrom(String package0) {
 		return packagesandclasses.get(package0);
+	}
+	public List<String> getSubpackages() {
+		List<String> subpackages=new ArrayList<String>();
+		for(String package0:subpackage) {
+			subpackages.add(package0);
+		}
+		return subpackages;
 	}
 }
 		
