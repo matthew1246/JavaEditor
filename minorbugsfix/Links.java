@@ -5,10 +5,11 @@ import java.util.*;
 public class Links {
 	public static void main(String[] args) {
 		Links links = new Links();
-		for(String package0:links.getSubpackages()) {
+		for(String package0:links.getFullPackageNames()) {
 			System.out.println(package0);
 		}
 	}
+	public HashSet<String> fullpackagenames = new HashSet<String>();
 	public HashSet<String> subpackage=  new HashSet<String>();
 	public HashMap<String,List<String>> packagesandclasses = new HashMap<String,List<String>>();
 	public HashMap<String,HashMap<String,String>> hashmap = new HashMap<String,HashMap<String,String>>();
@@ -21,6 +22,8 @@ public class Links {
 				if(line == null) break;
 				if(isSublink(line)) {
 					String sublink = getSublink(line);
+					String fullpackagename=sublink.replace(".html","").replace("/",".");
+					fullpackagenames.add(fullpackagename);
 					String package0= sublink.replaceAll("[^/]+\\.html","").replace("/",".");
 					if(package0.endsWith("."))
 						package0 = package0.substring(0,(package0.length()-1));
@@ -155,6 +158,13 @@ public class Links {
 			subpackages.add(package0);
 		}
 		return subpackages;
+	}
+	public List<String> getFullPackageNames() {
+		List<String> packages=new ArrayList<String>();
+		for(String package0:fullpackagenames) {
+			packages.add(package0);
+		}
+		return packages;
 	}
 }
 		

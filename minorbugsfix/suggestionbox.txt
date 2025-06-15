@@ -21,7 +21,8 @@
     "fileName",
     "open",
     "packages",
-    "subpackages"
+    "subpackages",
+    "fullpackagenames"
   ],
   "JDialog": [
     "show"
@@ -46,11 +47,11 @@
     "getChars",
     "replaceFirst",
     "equals",
-    "replace",
     "endsWith",
     "substring",
     "length",
     "split",
+    "replace",
     "startsWith"
   ],
   "JFrame": [

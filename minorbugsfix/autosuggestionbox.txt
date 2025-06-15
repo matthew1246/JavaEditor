@@ -65,12 +65,12 @@
     "selectbranch",
     "simulator",
     "storeselectedfile",
-    "sublink",
     "substring",
     "static",
     "search_textfield",
     "subpackages",
-    "subpackage"
+    "subpackage",
+    "sublink"
   ],
   "sel": [
     "selected_label",
@@ -181,10 +181,10 @@
   ],
   "su": [
     "suggestionbox",
-    "sublink",
     "substring",
     "subpackages",
-    "subpackage"
+    "subpackage",
+    "sublink"
   ],
   "List": [
     "List"
@@ -498,10 +498,10 @@
     "return"
   ],
   "sub": [
-    "sublink",
     "substring",
     "subpackages",
-    "subpackage"
+    "subpackage",
+    "sublink"
   ],
   "ma": [
     "mainbranch",
@@ -525,7 +525,9 @@
     "filelistmodifier",
     "fileName",
     "filenamescombobox",
-    "for"
+    "for",
+    "fullpackagenames",
+    "fullpackagename"
   ],
   "": [
     "class_one",
@@ -663,7 +665,6 @@
     "output",
     "filename",
     "directory",
-    "null",
     "root_directory",
     "command",
     "commandline",
@@ -684,7 +685,6 @@
     "selectbranch",
     "simulator",
     "program",
-    "new",
     "storeselectedfile",
     "lines2",
     "IOException",
@@ -701,7 +701,6 @@
     "filelistmodifier",
     "fileName",
     "filenamescombobox",
-    "sublink",
     "HashMap",
     "substring",
     "package",
@@ -742,19 +741,26 @@
     "currentline",
     "Class",
     "editedline",
-    "public",
-    "HashSet",
     "hashset",
     "packagewithdot",
     "ArrayList",
-    "JOptionPane",
     "package0",
-    "System",
-    "String",
     "subpackages",
-    "treeset",
     "subpackage",
-    "javax.swing"
+    "javax.swing",
+    "new",
+    "public",
+    "HashSet",
+    "sublink",
+    "JOptionPane",
+    "null",
+    "System",
+    "fullpackagenames",
+    "String",
+    "treeset",
+    "fullpackagename",
+    "javax.swing.JButton",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "Syst": [
     "System"
@@ -800,10 +806,10 @@
   "n": [
     "nullbuilder",
     "newxlocation",
-    "null",
     "newylocation",
+    "nameslist",
     "new",
-    "nameslist"
+    "null"
   ],
   "ne": [
     "newxlocation",
@@ -1119,9 +1125,9 @@
     "packages",
     "panelgridlayout",
     "pattern",
-    "public",
     "packagewithdot",
-    "package0"
+    "package0",
+    "public"
   ],
   "pl": [
     "pluspanel"
@@ -3252,7 +3258,9 @@
     "jcomponent1",
     "jcomponent2",
     "java.lang",
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "jc": [
     "jcomponent",
@@ -4889,36 +4897,49 @@
   ],
   "ja": [
     "java.lang",
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "jav": [
     "java.lang",
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "java": [
     "java.lang",
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "javax": [
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton"
   ],
   "javax.": [
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton"
   ],
   "javax.s": [
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton"
   ],
   "javax.sw": [
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton"
   ],
   "javax.swi": [
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton"
   ],
   "javax.swin": [
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton"
   ],
   "javax.swing": [
-    "javax.swing"
+    "javax.swing",
+    "javax.swing.JButton"
   ],
   "me": [
     "member",
@@ -5123,19 +5144,24 @@
     "Matcher"
   ],
   "java.": [
-    "java.lang"
+    "java.lang",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "java.l": [
-    "java.lang"
+    "java.lang",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "java.la": [
-    "java.lang"
+    "java.lang",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "java.lan": [
-    "java.lang"
+    "java.lang",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "java.lang": [
-    "java.lang"
+    "java.lang",
+    "java.lang.ArrayIndexOutOfBoundsException"
   ],
   "Inv": [
     "InvocationTargetException"
@@ -5384,5 +5410,181 @@
   ],
   "subpackages": [
     "subpackages"
+  ],
+  "fu": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "ful": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "full": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullp": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpa": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpac": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpack": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpacka": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpackag": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpackage": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpackagen": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpackagena": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpackagenam": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpackagename": [
+    "fullpackagenames",
+    "fullpackagename"
+  ],
+  "fullpackagenames": [
+    "fullpackagenames"
+  ],
+  "javax.swing.": [
+    "javax.swing.JButton"
+  ],
+  "javax.swing.J": [
+    "javax.swing.JButton"
+  ],
+  "javax.swing.JB": [
+    "javax.swing.JButton"
+  ],
+  "javax.swing.JBu": [
+    "javax.swing.JButton"
+  ],
+  "javax.swing.JBut": [
+    "javax.swing.JButton"
+  ],
+  "javax.swing.JButt": [
+    "javax.swing.JButton"
+  ],
+  "javax.swing.JButto": [
+    "javax.swing.JButton"
+  ],
+  "javax.swing.JButton": [
+    "javax.swing.JButton"
+  ],
+  "java.lang.": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.A": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.Ar": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.Arr": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.Arra": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.Array": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayI": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIn": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayInd": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayInde": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndex": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexO": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOu": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOut": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutO": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOf": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfB": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBo": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBou": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoun": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBound": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBounds": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsE": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsEx": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsExc": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsExce": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsExcep": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsExcept": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsExcepti": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsExceptio": [
+    "java.lang.ArrayIndexOutOfBoundsException"
+  ],
+  "java.lang.ArrayIndexOutOfBoundsException": [
+    "java.lang.ArrayIndexOutOfBoundsException"
   ]
 }

@@ -896,6 +896,7 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 public void setListeners() {	
+		setFullPackageNames();		
 		setSubpackages();
 		setPackages();
 		opennewtab.addActionListener((ev) -> {
@@ -2247,6 +2248,12 @@ public void setListeners() {
 			subpackages = muck.links.getSubpackages();
 		}
 	}
+	public List<String> fullpackagenames;
+	public void setFullPackageNames() {
+		if(fullpackagenames == null) {
+			fullpackagenames = muck.links.getFullPackageNames();
+		}
+	}
 }
 class Expandable {
 	public Main main;
@@ -2890,6 +2897,11 @@ class AutoKeyListener {
 					treeset.add(subpackage);
 				}
 			}
+			for(String fullpackagename:main.fullpackagenames) {
+				if(fullpackagename.startsWith(input)) {
+					treeset.add(fullpackagename);
+				}
+			}
 			//System.out.println("end");
 			variablenames2=new ArrayList<String>(treeset);
 		}
@@ -2908,6 +2920,9 @@ class AutoKeyListener {
 			}
 			for(String subpackage:main.subpackages) {
 				treeset.add(subpackage);
+			}
+			for(String fullpackagename:main.fullpackagenames) {
+				treeset.add(fullpackagename);
 			}
 			variablenames2=new ArrayList<String>(treeset);
 		}
