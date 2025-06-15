@@ -163,7 +163,8 @@
     "iterator",
     "if",
     "instanceof",
-    "import"
+    "import",
+    "imports"
   ],
   "ca": [
     "caretposition"
@@ -250,9 +251,9 @@
     "class_one",
     "classes",
     "class",
-    "classname",
     "classquestionmark",
-    "classesfrompackage"
+    "classesfrompackage",
+    "classname"
   ],
   "Arr": [
     "Arraylist",
@@ -394,13 +395,14 @@
     "class_one",
     "classes",
     "class",
-    "classname",
     "classquestionmark",
-    "classesfrompackage"
+    "classesfrompackage",
+    "classname"
   ],
   "imp": [
     "implements",
-    "import"
+    "import",
+    "imports"
   ],
   "boo": [
     "boolean"
@@ -440,7 +442,8 @@
     "new"
   ],
   "import": [
-    "import"
+    "import",
+    "imports"
   ],
   "ins": [
     "instanceof"
@@ -450,7 +453,8 @@
   ],
   "im": [
     "implements",
-    "import"
+    "import",
+    "imports"
   ],
   "public": [
     "public"
@@ -471,9 +475,9 @@
     "clonebutton",
     "clickEvent",
     "class",
-    "classname",
     "classquestionmark",
-    "classesfrompackage"
+    "classesfrompackage",
+    "classname"
   ],
   "fa": [
     "false"
@@ -653,7 +657,6 @@
     "output",
     "filename",
     "directory",
-    "boolean",
     "null",
     "root_directory",
     "command",
@@ -718,24 +721,29 @@
     "methods3",
     "panelgridlayout",
     "caretposition",
-    "classname",
     "search_textfield",
-    "return",
     "classquestionmark",
-    "JOptionPane",
     "List",
-    "String",
     "classesfrompackage",
-    "Pattern",
     "compile",
-    "pattern",
-    "currentline",
     "Matcher",
-    "matcher",
-    "javax.swing",
-    "import",
     "java.lang",
-    "InvocationTargetException"
+    "InvocationTargetException",
+    "import",
+    "imports",
+    "boolean",
+    "JOptionPane",
+    "Pattern",
+    "pattern",
+    "matcher",
+    "String",
+    "classname",
+    "ClassNotFoundException",
+    "return",
+    "currentline",
+    "Class",
+    "editedline",
+    "javax.swing"
   ],
   "Syst": [
     "System"
@@ -837,19 +845,19 @@
     "curlybracekeylistener",
     "class",
     "caretposition",
-    "classname",
     "classquestionmark",
     "classesfrompackage",
     "compile",
+    "classname",
     "currentline"
   ],
   "cla": [
     "class_one",
     "classes",
     "class",
-    "classname",
     "classquestionmark",
-    "classesfrompackage"
+    "classesfrompackage",
+    "classname"
   ],
   "class_": [
     "class_one"
@@ -1180,7 +1188,9 @@
   ],
   "C": [
     "ComponentListener",
-    "Component"
+    "Component",
+    "ClassNotFoundException",
+    "Class"
   ],
   "Co": [
     "ComponentListener",
@@ -1609,10 +1619,12 @@
     "KeyAdapter"
   ],
   "impo": [
-    "import"
+    "import",
+    "imports"
   ],
   "impor": [
-    "import"
+    "import",
+    "imports"
   ],
   "KeyE": [
     "KeyEvent"
@@ -1666,7 +1678,8 @@
     "search_textfield"
   ],
   "e": [
-    "else"
+    "else",
+    "editedline"
   ],
   "els": [
     "else"
@@ -2431,8 +2444,8 @@
   "b": [
     "button",
     "button1",
-    "boolean",
-    "branch"
+    "branch",
+    "boolean"
   ],
   "bu": [
     "button",
@@ -3221,8 +3234,8 @@
     "jcomponents",
     "jcomponent1",
     "jcomponent2",
-    "javax.swing",
-    "java.lang"
+    "java.lang",
+    "javax.swing"
   ],
   "jc": [
     "jcomponent",
@@ -4853,16 +4866,16 @@
     "apiclasses"
   ],
   "ja": [
-    "javax.swing",
-    "java.lang"
+    "java.lang",
+    "javax.swing"
   ],
   "jav": [
-    "javax.swing",
-    "java.lang"
+    "java.lang",
+    "javax.swing"
   ],
   "java": [
-    "javax.swing",
-    "java.lang"
+    "java.lang",
+    "javax.swing"
   ],
   "javax": [
     "javax.swing"
@@ -5170,5 +5183,102 @@
   ],
   "InvocationTargetException": [
     "InvocationTargetException"
+  ],
+  "imports": [
+    "imports"
+  ],
+  "Cl": [
+    "ClassNotFoundException",
+    "Class"
+  ],
+  "Cla": [
+    "ClassNotFoundException",
+    "Class"
+  ],
+  "Clas": [
+    "ClassNotFoundException",
+    "Class"
+  ],
+  "Class": [
+    "ClassNotFoundException",
+    "Class"
+  ],
+  "ClassN": [
+    "ClassNotFoundException"
+  ],
+  "ClassNo": [
+    "ClassNotFoundException"
+  ],
+  "ClassNot": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotF": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFo": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFou": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoun": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFound": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundE": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundEx": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundExc": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundExce": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundExcep": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundExcept": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundExcepti": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundExceptio": [
+    "ClassNotFoundException"
+  ],
+  "ClassNotFoundException": [
+    "ClassNotFoundException"
+  ],
+  "ed": [
+    "editedline"
+  ],
+  "edi": [
+    "editedline"
+  ],
+  "edit": [
+    "editedline"
+  ],
+  "edite": [
+    "editedline"
+  ],
+  "edited": [
+    "editedline"
+  ],
+  "editedl": [
+    "editedline"
+  ],
+  "editedli": [
+    "editedline"
+  ],
+  "editedlin": [
+    "editedline"
+  ],
+  "editedline": [
+    "editedline"
   ]
 }

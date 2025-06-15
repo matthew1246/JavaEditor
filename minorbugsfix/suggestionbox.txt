@@ -134,8 +134,8 @@
     "keySet"
   ],
   "Matcher": [
-    "group",
-    "find"
+    "find",
+    "group"
   ],
   "JPanel": [
     "getComponentPopupMenu",
@@ -216,7 +216,8 @@
   ],
   "Class": [
     "getName",
-    "getSimpleName"
+    "getSimpleName",
+    "forName"
   ],
   "Component": [
     "getLocationOnScreen",
@@ -347,5 +348,11 @@
   ],
   "\t\t} catch(java.lang": [
     "InterruptedException"
+  ],
+  "\t\t\tjavax.swing": [
+    "JButton"
+  ],
+  "import javax.swing": [
+    "JButton"
   ]
 }
