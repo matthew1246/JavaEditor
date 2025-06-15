@@ -13,13 +13,13 @@
     "this",
     "tabs",
     "textarea",
-    "treeset",
-    "try"
+    "try",
+    "treeset"
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "String",
-    "System"
+    "System",
+    "String"
   ],
   "Array": [
     "Arraylist",
@@ -69,8 +69,8 @@
     "substring",
     "static",
     "search_textfield",
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "sel": [
     "selected_label",
@@ -183,8 +183,8 @@
     "suggestionbox",
     "sublink",
     "substring",
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "List": [
     "List"
@@ -205,8 +205,8 @@
   "tr": [
     "transferable",
     "true",
-    "treeset",
-    "try"
+    "try",
+    "treeset"
   ],
   "tree": [
     "treeset"
@@ -500,8 +500,8 @@
   "sub": [
     "sublink",
     "substring",
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "ma": [
     "mainbranch",
@@ -713,7 +713,6 @@
     "class",
     "packages",
     "apiclasses",
-    "treeset",
     "instanceof",
     "member",
     "nameslist",
@@ -743,18 +742,19 @@
     "currentline",
     "Class",
     "editedline",
-    "javax.swing",
     "public",
     "HashSet",
     "hashset",
     "packagewithdot",
     "ArrayList",
-    "String",
-    "subpackage",
-    "subpackages",
     "JOptionPane",
     "package0",
-    "System"
+    "System",
+    "String",
+    "subpackages",
+    "treeset",
+    "subpackage",
+    "javax.swing"
   ],
   "Syst": [
     "System"
@@ -5334,32 +5334,32 @@
     "hashset"
   ],
   "subp": [
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "subpa": [
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "subpac": [
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "subpack": [
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "subpacka": [
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "subpackag": [
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "subpackage": [
-    "subpackage",
-    "subpackages"
+    "subpackages",
+    "subpackage"
   ],
   "packagew": [
     "packagewithdot"

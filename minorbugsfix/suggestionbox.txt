@@ -20,7 +20,8 @@
     "getFileName",
     "fileName",
     "open",
-    "packages"
+    "packages",
+    "subpackages"
   ],
   "JDialog": [
     "show"
@@ -49,8 +50,8 @@
     "endsWith",
     "substring",
     "length",
-    "startsWith",
-    "split"
+    "split",
+    "startsWith"
   ],
   "JFrame": [
     "disable",
@@ -124,7 +125,8 @@
     "packagesandclasses",
     "getPackages",
     "getAPIClasses",
-    "getClassFrom"
+    "getClassFrom",
+    "getSubpackages"
   ],
   "HashMap": [
     "KeyIterator",
