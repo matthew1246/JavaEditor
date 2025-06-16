@@ -29,7 +29,7 @@ public class Links {
 						package0 = package0.substring(0,(package0.length()-1));
 					String[] subpackages = package0.split("\\.");
 					String packagewithdot = "";	
-					for(int i = 0; i < (subpackages.length-1); i++) {
+					for(int i = 0; i < subpackages.length; i++) {
 						packagewithdot+=subpackages[i];	
 						subpackage.add(packagewithdot);
 						packagewithdot+=".";
