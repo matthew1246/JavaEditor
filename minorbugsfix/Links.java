@@ -9,6 +9,7 @@ public class Links {
 			System.out.println(package0);
 		}
 	}
+	public HashMap<String,List<String>> innerpackages = new HashMap<String,List<String>>();
 	public HashSet<String> fullpackagenames = new HashSet<String>();
 	public HashSet<String> subpackage=  new HashSet<String>();
 	public HashMap<String,List<String>> packagesandclasses = new HashMap<String,List<String>>();
@@ -51,6 +52,8 @@ public class Links {
 					}
 					hashmapwithcapitols.put(with_capitols,sublink);
 					hashmap.put(class_one,hashmapwithcapitols);
+					
+					createInnerPackages();
 				}
 			}
 			/*for(int i = 0; i < sublinks.size(); i++) {
@@ -165,6 +168,45 @@ public class Links {
 			packages.add(package0);
 		}
 		return packages;
+	}
+	public void createInnerPackages() {
+		for(String package0:subpackage) {
+			String[] packages=package0.split("\\.");
+			createInnerPackages(packages);
+		}
+	}
+	public void createInnerPackages(String[] packages) {
+		if(packages.length == 1) {
+			List<String> firstpackage=innerpackages.get(packages[0]);
+			if(firstpackage == null) {
+				firstpackage = new ArrayList<String>();
+				innerpackages.put(packages[0],firstpackage);
+			}
+		}
+		else if(packages.length == 2) {
+			List<String> firstpackage=innerpackages.get(packages[0]);
+			if(firstpackage == null)
+				firstpackage = new ArrayList<String>();
+			
+			firstpackage.add(packages[1]);
+			innerpackages.put(packages[0],firstpackage);
+		}
+		else if(packages.length > 2) {
+			String[] packages2 = new String[packages.length-1];
+			for(int i = 0; i < packages2.length; i++) {
+				packages2[i] = packages[i];
+			}
+			createInnerPackages(packages2);
+			
+			String packages3=String.join(".",Arrays.copyOfRange(packages,0,(packages.length-1)));
+			String[] twopackages = new String[2];
+			twopackages[0] = packages3;
+			twopackages[1] = packages[packages.length-1];
+			createInnerPackages(twopackages);
+		}
+	}
+	public List<String> getInnerPackages(String package0) {
+		return innerpackages.get(package0);
 	}
 }
 		

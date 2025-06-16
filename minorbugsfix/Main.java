@@ -2939,23 +2939,21 @@ class MethodSuggestionBox {
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline = middle.getCurrentLine();
-		JOptionPane.showMessageDialog(null,currentline);
-		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
+		Pattern pattern = Pattern.compile("(import)?\\s([a-zA-Z]+)\\z");
 		Matcher matcher0=pattern.matcher(currentline);	
 		List<String> classesfrompackage=null;	
-		JOptionPane.showMessageDialog(null,"Iscompiled");
-		JOptionPane.showMessageDialog(null,matcher0.group(2));	
-		List<String> subpackages=main.muck.links.getInnerPackages(matcher0.group(2));
-		if(subpackages != null && subpackages.size() > 0) {
-			Object[] methodboxvalues2 = new Object[subpackages.size()];
-			for(int i = 0; i < methodboxvalues2.length; i++) {
-				methodboxvalues2[i] = subpackages.get(i);
-			}
-			show(methodboxvalues2,caretposition,currentline);	
-			return;		
-		}
-		else if(matcher0.find()) { // if import javax.swing.
-			classesfrompackage=main.muck.links.getClassFrom(matcher0.group(2));
+		if(matcher0.find()) {
+			List<String> subpackages=main.muck.links.getInnerPackages(matcher0.group(2));	
+			if(subpackages != null && subpackages.size() > 0) {
+				Object[] methodboxvalues2 = new Object[subpackages.size()];
+					for(int i = 0; i < methodboxvalues2.length; i++) {
+					methodboxvalues2[i] = subpackages.get(i);
+				}
+				show(methodboxvalues2,caretposition,currentline);	
+			}	
+			else {
+				classesfrompackage=main.muck.links.getClassFrom(matcher0.group(1));
+			}										
 		}
 		else {
 			classesfrompackage=main.muck.links.getClassFrom(currentline);
