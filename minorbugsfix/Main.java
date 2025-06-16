@@ -3048,7 +3048,7 @@ class MethodSuggestionBox {
 				}
 				List<String> imports =Main.muck.links.getImport(classname);
 				if(imports == null)
-					throw new ClassNotFoundException("Class "+classname+" not exist!");
+					return Class.forName("java.lang.Object");
 				for(String importy:imports) {
 					String select="import "+importy.replaceAll(classname+"$","")+"*;";
 					if(text.contains(select))
@@ -3132,7 +3132,6 @@ class MethodSuggestionBox {
 		if(subpackages != null && subpackages.size() > 0) {
 			Object[] methodboxvalues2 = new Object[subpackages.size()];
 			for(int i = 0; i < methodboxvalues2.length; i++) {
-				System.out.println(subpackages.get(i));
 				methodboxvalues2[i] = subpackages.get(i);
 			}
 			
