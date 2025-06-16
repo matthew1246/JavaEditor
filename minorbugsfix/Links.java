@@ -5,8 +5,12 @@ import java.util.*;
 public class Links {
 	public static void main(String[] args) {
 		Links links = new Links();
-		for(String package0:links.getFullPackageNames()) {
-			System.out.println(package0);
+		for(String package0:links.innerpackages.keySet()) {
+			System.out.println(package0+":");
+			for(String innerpackage:links.innerpackages.get(package0)) {
+				System.out.println(innerpackage);
+			}
+			System.out.println();
 		}
 	}
 	public HashMap<String,HashSet<String>> innerpackages = new HashMap<String,HashSet<String>>();
@@ -131,6 +135,8 @@ public class Links {
 		List<String> classes2 = new ArrayList<String>();
 		one_class=one_class.toLowerCase();
 		HashMap<String,String> classes=hashmap.get(one_class);
+		if(classes == null)
+			return null;		
 		for(String oneclass:classes.values()) {
 			classes2.add(oneclass.replace(".html","").replaceAll("/","\\."));
 		}
@@ -208,10 +214,16 @@ public class Links {
 	public List<String> getInnerPackages(String package0) {
 		List<String> packages3=new ArrayList<String>();	
 		HashSet<String> hashset = 	innerpackages.get(package0);
-		for(String package2:hashset) {
-			packages3.add(package2);
+		//if(hashset != null) {
+			for(String package2:hashset) {
+				packages3.add(package2);
+			}
+			return packages3;
+		/*}
+		else {
+			return null;
 		}
-		return packages3;
+		*/
 	}
 }
 		

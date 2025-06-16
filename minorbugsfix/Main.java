@@ -2948,16 +2948,12 @@ class MethodSuggestionBox {
 			Object[] allobjects=addMembersToMembers(innerpackages,classes);
 			classes=getClassesFromPackage(currentline);
 			allobjects=addMembersToMembers(allobjects,classes);
-			Class<?> property=getClassQuestionMark(matcher0.group(2));
-			Object[] classforname=getAllPropertyAndMethodsAndEnums(property);	
+			Object[] classforname=getFromPackageAndClass(matcher0.group(2));
 			allobjects=addMembersToMembers(allobjects,classforname);
 			Object[] not_api_normal_classes=getNotJavaAPIPackages(text,matcher0.group(2));
 			allobjects=addMembersToMembers(allobjects,not_api_normal_classes);
 
 			show(allobjects,caretposition,matcher0.group(2));	
-		}
-		else {					
-			
 		}
 	}
 	public String getClassName(String variablenameorclassname,String text) {
@@ -3051,6 +3047,8 @@ class MethodSuggestionBox {
 					}	
 				}
 				List<String> imports =Main.muck.links.getImport(classname);
+				if(imports == null)
+					throw new ClassNotFoundException("Class "+classname+" not exist!");
 				for(String importy:imports) {
 					String select="import "+importy.replaceAll(classname+"$","")+"*;";
 					if(text.contains(select))
@@ -3153,6 +3151,8 @@ class MethodSuggestionBox {
 			String first = properties[0];
 			String classname=getClassName(first,text);
 			property = getClassQuestionMark(classname,text);
+			if(property == null)
+				return new Object[0];	
 			for(int i = 1; i < properties.length; i++) {
 				//Member[] methodsandproperties=getAllPropertyAndMethods(property);
 				Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
@@ -3217,12 +3217,20 @@ class MethodSuggestionBox {
 	}
 	public Object[] getClassesFromPackage(String substring) {
 		List<String> classesfrompackage=main.muck.links.getClassFrom(substring);
+		if(classesfrompackage == null)
+			return new Object[0];	
 		Object[] listings = new Object[classesfrompackage.size()];
 		for(int i = 0; i < listings.length; i++) {
 			listings[i] = classesfrompackage.get(i);
 		}
 		return listings;
-	}																				
+	}
+	public Object[] getFromPackageAndClass(String substring) {
+		Class<?> property=getClassQuestionMark(substring);
+		if(property == null)
+			return new Object[0];
+		return getAllPropertyAndMethodsAndEnums(property);
+	}																																						
 	/*
 	** Old method signature for show() was:
 	** public void Popup(Class<?> classquestionmark,int caretposition) {
