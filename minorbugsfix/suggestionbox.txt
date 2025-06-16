@@ -368,5 +368,14 @@
   ],
   "java": [
     "lang"
+  ],
+  "\t\t\tjava": [
+    "lang"
+  ],
+  "import java": [
+    "lang"
+  ],
+  "import java.lang": [
+    "ref"
   ]
 }

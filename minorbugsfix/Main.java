@@ -2939,12 +2939,11 @@ class MethodSuggestionBox {
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline = middle.getCurrentLine();
-		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z]+)\\z");
+		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
 		Matcher matcher0=pattern.matcher(currentline);	
 		List<String> classesfrompackage=null;	
 		if(matcher0.find()) {
 			List<String> subpackages=main.muck.links.getInnerPackages(matcher0.group(2));	
-			JOptionPane.showMessageDialog(null,subpackages.size());	
 			if(subpackages != null && subpackages.size() > 0) {
 				Object[] methodboxvalues2 = new Object[subpackages.size()];
 				for(int i = 0; i < methodboxvalues2.length; i++) {

@@ -20,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 98308
+    "caretposition": 98591
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java": {
     "starterclass": "",
@@ -50,7 +50,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 232
+    "caretposition": 383
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
     "starterclass": "",
