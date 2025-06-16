@@ -2941,104 +2941,23 @@ class MethodSuggestionBox {
 		String currentline = middle.getCurrentLine();
 		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
 		Matcher matcher0=pattern.matcher(currentline);	
-		List<String> classesfrompackage=null;	
+		//List<String> classesfrompackage=null;	
 		if(matcher0.find()) {
-			List<String> subpackages=main.muck.links.getInnerPackages(matcher0.group(2));	
-			if(subpackages != null && subpackages.size() > 0) {
-				Object[] methodboxvalues2 = new Object[subpackages.size()];
-				for(int i = 0; i < methodboxvalues2.length; i++) {
-					System.out.println(subpackages.get(i));
-					methodboxvalues2[i] = subpackages.get(i);
-				}
-				show(methodboxvalues2,caretposition,currentline);	
-				return;
-			}	
-			else {
-				classesfrompackage=main.muck.links.getClassFrom(matcher0.group(2));
-			}										
-		}
-		else {
-			classesfrompackage=main.muck.links.getClassFrom(currentline);
-		}
-		if(classesfrompackage != null) {	
-			Object[] methodboxvalues=new Object[classesfrompackage.size()];	
-			for(int i = 0; i < methodboxvalues.length; i++) {
-				methodboxvalues[i] = classesfrompackage.get(i);
-			}
-			show(methodboxvalues,caretposition,currentline);
+			Object[] innerpackages=getInnerPackages(matcher0.group(2));
+			Object[] classes = getClassesFromPackage(matcher0.group(2));
+			Object[] allobjects=addMembersToMembers(innerpackages,classes);
+			classes=getClassesFromPackage(currentline);
+			allobjects=addMembersToMembers(allobjects,classes);
+			Class<?> property=getClassQuestionMark(matcher0.group(2));
+			Object[] classforname=getAllPropertyAndMethodsAndEnums(property);	
+			allobjects=addMembersToMembers(allobjects,classforname);
+			Object[] not_api_normal_classes=getNotJavaAPIPackages(text,matcher0.group(2));
+			allobjects=addMembersToMembers(allobjects,not_api_normal_classes);
+
+			show(allobjects,caretposition,matcher0.group(2));	
 		}
 		else {					
-			Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
-			Matcher matcher=pattern3.matcher(currentline);
-			if(matcher.find()) {
-				String editedline = matcher.group(1);	
-				Class<?> property=getClassQuestionMark(editedline);	
-				if(property == null) {	
-					String[] properties = editedline.split("\\.");
-					String first = properties[0];
-					String classname=getClassName(first,text);
-					property = getClassQuestionMark(classname,text);
-					for(int i = 1; i < properties.length; i++) {
-						//Member[] methodsandproperties=getAllPropertyAndMethods(property);
-						Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
-						String last=properties[i];
-						escapey:for(Object member:methodsandproperties) {
-							if(member instanceof Method) {
-								String name = ((Method)member).getName();
-								if(name.contains("$")) {
-									name=name.replaceAll(".+\\$","");
-								}
-								if(last.equals(name)) {
-									property=(Class<?>)member;
-									break escapey;
-								}
-							}
-							else if(member instanceof Field) {						
-								String name=((Member)member).getName();
-								if(name.contains("$")) {
-									name=name.replaceAll(".+\\$","");
-								}
-								if(last.equals(name)) {
-									property=((Field)member).getType();
-									break escapey;
-								}
-							}
-							else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
-								String name=((Class<?>)member).getName();
-								if(name.contains("$")) {
-									name=name.replaceAll(".+\\$","");
-								}
-								if(last.equals(name)) {
-									property=(Class<?>)member;
-									break escapey;
-								}
-							}
-							else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
-								String name=((Class<?>)member).getName();
-								if(name.contains("$")) {
-									name=name.replaceAll(".+\\$","");
-								}
-								if(last.equals(name)) {
-									property=(Class<?>)member;
-									break escapey;
-								}
-							}
-							else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
-								String name=((Class<?>)member).getName();
-								if(name.contains("$")) {
-									name=name.replaceAll(".+\\$","");
-								}
-								if(last.equals(name)) {
-									property=(Class<?>)member;
-									break escapey;
-								}
-							}
-						}
-					}
-				}
-				Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(property);
-				show(unorderedmethods,caretposition,property.getSimpleName());
-			}
+			
 		}
 	}
 	public String getClassName(String variablenameorclassname,String text) {
@@ -3195,7 +3114,115 @@ class MethodSuggestionBox {
 		}
 		return methods3;
 	}
+	public Object[] addMembersToMembers(Object[] members,Object[] methods2) {
+		List<Object> methodsandproperties=  new ArrayList<Object>();
+		for(Object method:members) {
+			methodsandproperties.add(method);
+		}
+		for(Object method2:methods2) {
+			methodsandproperties.add(method2);
+		}
+		Object[] methods3 = new Object[methodsandproperties.size()];
+		for(int i = 0; i < methods3.length; i++) {
+			methods3[i] = methodsandproperties.get(i);
+		}
+		return methods3;
+	}
 	
+	public Object[] getInnerPackages(String substring) {
+		List<String> subpackages=main.muck.links.getInnerPackages(substring);	
+		if(subpackages != null && subpackages.size() > 0) {
+			Object[] methodboxvalues2 = new Object[subpackages.size()];
+			for(int i = 0; i < methodboxvalues2.length; i++) {
+				System.out.println(subpackages.get(i));
+				methodboxvalues2[i] = subpackages.get(i);
+			}
+			
+			return methodboxvalues2;
+		}	
+		return new Member[0];
+	}
+	
+	public Object[] getNotJavaAPIPackages(String text,String currentline) {
+		Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
+		Matcher matcher=pattern3.matcher(currentline);
+		if(matcher.find()) {
+			String editedline = matcher.group(1);	
+			Class<?> property = null;	
+			String[] properties = editedline.split("\\.");
+			String first = properties[0];
+			String classname=getClassName(first,text);
+			property = getClassQuestionMark(classname,text);
+			for(int i = 1; i < properties.length; i++) {
+				//Member[] methodsandproperties=getAllPropertyAndMethods(property);
+				Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
+				String last=properties[i];
+				escapey:for(Object member:methodsandproperties) {
+					if(member instanceof Method) {
+						String name = ((Method)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+					else if(member instanceof Field) {						
+						String name=((Member)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=((Field)member).getType();
+							break escapey;
+						}
+					}
+					else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
+						String name=((Class<?>)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+					else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
+						String name=((Class<?>)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+					else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
+						String name=((Class<?>)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+				}
+			}
+			Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(property);
+			return unorderedmethods;
+		}
+		return new Object[0];
+	}
+	public Object[] getClassesFromPackage(String substring) {
+		List<String> classesfrompackage=main.muck.links.getClassFrom(substring);
+		Object[] listings = new Object[classesfrompackage.size()];
+		for(int i = 0; i < listings.length; i++) {
+			listings[i] = classesfrompackage.get(i);
+		}
+		return listings;
+	}																				
 	/*
 	** Old method signature for show() was:
 	** public void Popup(Class<?> classquestionmark,int caretposition) {
