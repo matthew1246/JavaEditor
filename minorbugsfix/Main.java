@@ -2939,20 +2939,22 @@ class MethodSuggestionBox {
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline = middle.getCurrentLine();
-		Pattern pattern = Pattern.compile("(import)?\\s([a-zA-Z]+)\\z");
+		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z]+)\\z");
 		Matcher matcher0=pattern.matcher(currentline);	
 		List<String> classesfrompackage=null;	
 		if(matcher0.find()) {
 			List<String> subpackages=main.muck.links.getInnerPackages(matcher0.group(2));	
+			JOptionPane.showMessageDialog(null,subpackages.size());	
 			if(subpackages != null && subpackages.size() > 0) {
 				Object[] methodboxvalues2 = new Object[subpackages.size()];
-					for(int i = 0; i < methodboxvalues2.length; i++) {
+				for(int i = 0; i < methodboxvalues2.length; i++) {
+					System.out.println(subpackages.get(i));
 					methodboxvalues2[i] = subpackages.get(i);
 				}
 				show(methodboxvalues2,caretposition,currentline);	
 			}	
 			else {
-				classesfrompackage=main.muck.links.getClassFrom(matcher0.group(1));
+				classesfrompackage=main.muck.links.getClassFrom(matcher0.group(2));
 			}										
 		}
 		else {
@@ -2970,7 +2972,6 @@ class MethodSuggestionBox {
 			Matcher matcher=pattern3.matcher(currentline);
 			if(matcher.find()) {
 				String editedline = matcher.group(1);	
-				JOptionPane.showMessageDialog(null,editedline);
 				Class<?> property=getClassQuestionMark(editedline);	
 				if(property == null) {	
 					String[] properties = editedline.split("\\.");
