@@ -36,9 +36,9 @@
     "get",
     "contains",
     "remove",
+    "add",
     "toArray",
-    "size",
-    "add"
+    "size"
   ],
   "String": [
     "replaceAll",
@@ -50,9 +50,10 @@
     "endsWith",
     "substring",
     "length",
-    "split",
     "replace",
-    "startsWith"
+    "startsWith",
+    "split",
+    "join"
   ],
   "JFrame": [
     "disable",
@@ -133,9 +134,9 @@
     "KeyIterator",
     "values",
     "get",
-    "put",
     "keySet",
-    "size"
+    "size",
+    "put"
   ],
   "Matcher": [
     "find",
@@ -361,5 +362,8 @@
   ],
   "HashSet": [
     "add"
+  ],
+  "Arrays": [
+    "copyOfRange"
   ]
 }

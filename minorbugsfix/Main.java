@@ -2940,9 +2940,20 @@ class MethodSuggestionBox {
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline = middle.getCurrentLine();
 		Pattern pattern = Pattern.compile("(import)?\s*([a-zA-Z\\.]+)\\z");
-		Matcher matcher0=pattern.matcher(currentline);
-		List<String> classesfrompackage=null;
-		if(matcher0.find()) { // if import javax.swing.
+		Matcher matcher0=pattern.matcher(currentline);	
+		List<String> classesfrompackage=null;	
+		JOptionPane.showMessageDialog(null,"Iscompiled");
+		JOptionPane.showMessageDialog(null,matcher0.group(2));	
+		List<String> subpackages=main.muck.links.getInnerPackages(matcher0.group(2));
+		if(subpackages != null && subpackages.size() > 0) {
+			Object[] methodboxvalues2 = new Object[subpackages.size()];
+			for(int i = 0; i < methodboxvalues2.length; i++) {
+				methodboxvalues2[i] = subpackages.get(i);
+			}
+			show(methodboxvalues2,caretposition,currentline);	
+			return;		
+		}
+		else if(matcher0.find()) { // if import javax.swing.
 			classesfrompackage=main.muck.links.getClassFrom(matcher0.group(2));
 		}
 		else {
@@ -2960,6 +2971,7 @@ class MethodSuggestionBox {
 			Matcher matcher=pattern3.matcher(currentline);
 			if(matcher.find()) {
 				String editedline = matcher.group(1);	
+				JOptionPane.showMessageDialog(null,editedline);
 				Class<?> property=getClassQuestionMark(editedline);	
 				if(property == null) {	
 					String[] properties = editedline.split("\\.");
