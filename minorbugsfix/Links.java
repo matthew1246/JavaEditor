@@ -214,16 +214,12 @@ public class Links {
 	public List<String> getInnerPackages(String package0) {
 		List<String> packages3=new ArrayList<String>();	
 		HashSet<String> hashset = 	innerpackages.get(package0);
-		//if(hashset != null) {
-			for(String package2:hashset) {
-				packages3.add(package2);
-			}
-			return packages3;
-		/*}
-		else {
-			return null;
+		if(hashset == null)
+			return null;	
+		for(String package2:hashset) {
+			packages3.add(package2);
 		}
-		*/
+		return packages3;
 	}
 }
 		
