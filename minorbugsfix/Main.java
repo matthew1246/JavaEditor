@@ -2952,6 +2952,7 @@ class MethodSuggestionBox {
 					methodboxvalues2[i] = subpackages.get(i);
 				}
 				show(methodboxvalues2,caretposition,currentline);	
+				return;
 			}	
 			else {
 				classesfrompackage=main.muck.links.getClassFrom(matcher0.group(2));

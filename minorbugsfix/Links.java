@@ -9,7 +9,7 @@ public class Links {
 			System.out.println(package0);
 		}
 	}
-	public HashMap<String,List<String>> innerpackages = new HashMap<String,List<String>>();
+	public HashMap<String,HashSet<String>> innerpackages = new HashMap<String,HashSet<String>>();
 	public HashSet<String> fullpackagenames = new HashSet<String>();
 	public HashSet<String> subpackage=  new HashSet<String>();
 	public HashMap<String,List<String>> packagesandclasses = new HashMap<String,List<String>>();
@@ -177,16 +177,16 @@ public class Links {
 	}
 	public void createInnerPackages(String[] packages) {
 		if(packages.length == 1) {
-			List<String> firstpackage=innerpackages.get(packages[0]);
+			HashSet<String> firstpackage=innerpackages.get(packages[0]);
 			if(firstpackage == null) {
-				firstpackage = new ArrayList<String>();
+				firstpackage = new HashSet<String>();
 				innerpackages.put(packages[0],firstpackage);
 			}
 		}
 		else if(packages.length == 2) {
-			List<String> firstpackage=innerpackages.get(packages[0]);
+			HashSet<String> firstpackage=innerpackages.get(packages[0]);
 			if(firstpackage == null)
-				firstpackage = new ArrayList<String>();
+				firstpackage = new HashSet<String>();
 			
 			firstpackage.add(packages[1]);
 			innerpackages.put(packages[0],firstpackage);
@@ -206,7 +206,12 @@ public class Links {
 		}
 	}
 	public List<String> getInnerPackages(String package0) {
-		return innerpackages.get(package0);
+		List<String> packages3=new ArrayList<String>();	
+		HashSet<String> hashset = 	innerpackages.get(package0);
+		for(String package2:hashset) {
+			packages3.add(package2);
+		}
+		return packages3;
 	}
 }
 		

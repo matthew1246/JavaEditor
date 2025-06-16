@@ -365,5 +365,8 @@
   ],
   "Arrays": [
     "copyOfRange"
+  ],
+  "java": [
+    "lang"
   ]
 }
