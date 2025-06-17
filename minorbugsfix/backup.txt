@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -9,7 +9,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java",
       "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java",
       "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java",
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java",
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java"
     ],
     "caretposition": 0
   },
@@ -57,5 +59,17 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java": {
+    "starterclass": "MuckFX",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 261
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java": {
+    "starterclass": "MuckFX",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 2882
   }
 }

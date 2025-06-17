@@ -31,8 +31,12 @@ public class SuggestionBoxSelected {
 			}
 		}
 	}
-	public Object[] Reordered(Object[] members,Class<?> classquestionmark) {
-		String classname=classquestionmark.getSimpleName();
+	
+	public Object[] Reordered(Object[] members,Class<?> classquestionmark) {
+		return Reordered(members,classquestionmark.getSimpleName());
+	}		
+	
+public Object[] Reordered(Object[] members,String classname) {
 		if(linkedhashmap.get(classname) != null) {
 			List<Object> nameslist = new LinkedList<Object>();
 			for(int i = 0; i < members.length; i++) {
@@ -51,7 +55,11 @@ public class SuggestionBoxSelected {
 			for(String methodname:linkedhashmap.get(classname)) {
 				for(int j = 0; j < nameslist.size(); j++) {
 					Object member = nameslist.get(j);
-					if(member instanceof Method) {
+					if(member instanceof String) {
+						nameslist.remove(member);
+						nameslist.add(0,member);
+					}
+					else if(member instanceof Method) {
 						if(methodname.equals(((Method)member).getName())) {
 							nameslist.remove(member);
 							nameslist.add(0,member);
@@ -95,7 +103,9 @@ public class SuggestionBoxSelected {
 		}
 	}
 	public Member[] Reordered(Member[] members,Class<?> classquestionmark) {
-		String classname=classquestionmark.getSimpleName();
+		return Reordered(members,classquestionmark.getSimpleName());
+	}				
+	public Member[] Reordered(Member[] members,String classname) {
 		if(linkedhashmap.get(classname) != null) {
 			List<Member> nameslist = new LinkedList<Member>();
 			for(int i = 0; i < members.length; i++) {
@@ -108,7 +118,8 @@ public class SuggestionBoxSelected {
 					Member member = nameslist.get(j);
 					if(methodname.equals(member.getName())) {
 						nameslist.remove(member);
-						nameslist.add(0,member);						
+						nameslist.add(0,member);
+						
 						break;
 					}
 				}
@@ -155,4 +166,4 @@ public class SuggestionBoxSelected {
 			JOptionPane.showMessageDialog(null,ex.getStackTrace());
 		}
 	}
-}							
+}							

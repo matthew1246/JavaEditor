@@ -91,7 +91,7 @@ public class Main {
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
 	public JButton deprecated;	
-	public static Muck muck = new Muck();
+	public static MuckFX muck = new MuckFX();
 	public Expandable expandable;
 	public JComboBox<String> filenamescombobox = new JComboBox<String>();	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
@@ -2451,78 +2451,7 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;	
 		}		
 		if(ev.getKeyChar() =='.') {
-			String text = main.textarea.getText();
-			Middle middle = new Middle(main.textarea);
-			int caretposition = main.textarea.getCaretPosition();
-			//String currentline=middle.getWholeLine2(caretposition);
-			String currentline = middle.getCurrentLine();
-			Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
-			Matcher matcher=pattern3.matcher(currentline);
-			if(matcher.find()) {
-				String editedline = matcher.group(1);
-				String[] properties = editedline.split("\\.");
-				String first = properties[0];
-				String classname=getClassName(first,text);
-				Class<?> property = getClassQuestionMark(classname,text);
-				for(int i = 1; i < properties.length; i++) {
-					//Member[] methodsandproperties=getAllPropertyAndMethods(property);
-					Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
-					String last=properties[i];
-					escapey:for(Object member:methodsandproperties) {
-						if(member instanceof Method) {
-							String name = ((Method)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
-						else if(member instanceof Field) {						
-							String name=((Member)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=((Field)member).getType();
-								break escapey;
-							}
-						}
-						else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
-						else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
-						else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
-							String name=((Class<?>)member).getName();
-							if(name.contains("$")) {
-								name=name.replaceAll(".+\\$","");
-							}
-							if(last.equals(name)) {
-								property=(Class<?>)member;
-								break escapey;
-							}
-						}
-					}
-				}
-				Popup(property,caretposition);
-			}
+			MethodSuggestionBox methodsuggestionbox = new MethodSuggestionBox(main);
 		}
 		/**
 		** This is a variable suggestion box not a method
@@ -3337,5 +3266,539 @@ class AutoKeyListener {
 		}
 		data = variablenames2;
 		return variablenames2.size() > 0;
+	}
+}
+class MethodSuggestionBox {
+	public Main main;	
+	public MethodSuggestionBox(Main main) {
+		this.main = main;	
+		String text = main.textarea.getText();
+		Middle middle = new Middle(main.textarea);
+		int caretposition = main.textarea.getCaretPosition();
+		//String currentline=middle.getWholeLine2(caretposition);
+		String currentline = middle.getCurrentLine();
+		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
+		Matcher matcher0=pattern.matcher(currentline);	
+		//List<String> classesfrompackage=null;	
+		if(matcher0.find()) {
+			Object[] innerpackages=getInnerPackages(matcher0.group(2));
+			Object[] classes = getClassesFromPackage(matcher0.group(2));
+			Object[] allobjects=addMembersToMembers(innerpackages,classes);
+			classes=getClassesFromPackage(currentline);
+			allobjects=addMembersToMembers(allobjects,classes);
+			Object[] classforname=getFromPackageAndClass(matcher0.group(2));
+			allobjects=addMembersToMembers(allobjects,classforname);
+			Object[] not_api_normal_classes=getNotJavaAPIPackages(text,matcher0.group(2));
+			allobjects=addMembersToMembers(allobjects,not_api_normal_classes);
+
+			show(allobjects,caretposition,matcher0.group(2));	
+		}
+	}
+	public String getClassName(String variablenameorclassname,String text) {
+		// Below if variable name
+		Pattern pattern4= Pattern.compile("(\\s*(\\b(public|protected|private)\\b)?\\s*(\\b(static)\\b)?\\s*([a-zA-Z<>0-9,?]+)\\s+("+variablenameorclassname+")(?=\\s*=|;|:|\\)))");	
+		Matcher matcher2=pattern4.matcher(text);
+		if(matcher2.find()) {
+			String classname=matcher2.group(6);
+			return classname;
+		}
+		else { // If static class name
+			return variablenameorclassname;
+		}
+	}
+	public Member[] getAllPropertyAndMethods(Class<?> classquestionmark) {
+		Member[] methods4=classquestionmark.getDeclaredMethods();
+		List<Class<?>> ancestors=getAncestorsForClassQuestionMark(classquestionmark);
+		methods4=addAncestorsToMethods(methods4,ancestors);
+		Member[] properties = classquestionmark.getDeclaredFields();
+		Member[] properties2= classquestionmark.getFields();
+		Member[] members= addMembersToMembers(methods4,properties);
+		return addMembersToMembers(members,properties2);
+	}
+	public Object[] getAllPropertyAndMethodsAndEnums(Class<?> classquestionmark) {
+		if(classquestionmark.isEnum()) {
+			List<Object> list = new ArrayList<Object>();
+			Field[] fields= classquestionmark.getDeclaredFields();
+			for(Field field : fields) {
+				if(field.isEnumConstant()) {
+					field.setAccessible(true);
+					list.add(field);
+				}
+			}
+			return list.toArray(new Object[list.size()]);
+		}
+		else {		
+			Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
+			Class<?>[] enums=classquestionmark.getDeclaredClasses();
+			for(Class<?> enum1:enums) {
+				if(enum1.isEnum()) {
+					Field[] fields= enum1.getDeclaredFields();
+					for(Field field : fields) {
+						if(field.isEnumConstant()) {
+							field.setAccessible(true);
+						}
+					}
+				}
+			}
+			//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
+			int amount_of_enums = 0;
+			if(enums != null) {
+				amount_of_enums = enums.length;
+			}
+			Object[] propertiesandmethodsandenums=new Object[propertiesandmethods.length+amount_of_enums];
+			for(int i = 0; i < propertiesandmethods.length; i++) {
+				propertiesandmethodsandenums[i] = propertiesandmethods[i];
+			}
+			for(int i = 0; i < amount_of_enums; i++) {
+				propertiesandmethodsandenums[propertiesandmethods.length+i]=enums[i];
+			}
+			return propertiesandmethodsandenums;
+		}
+	}
+	public Class<?> getClassQuestionMark(String classname) {
+		try {	
+			return Class.forName(classname);
+		} catch (ClassNotFoundException ex) {
+			return null;
+		}
+	}
+	public Class<?> getClassQuestionMark(String classname,String text) {
+		try {
+			if(classname.contains("<") && classname.contains(">")) {
+				classname = classname.replaceAll("<.+>","");
+			}
+			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
+			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);			
+			Class<?> classquestionmark=classloader.loadClass(dir+classname);
+			// Class<?> classquestionmark=Class.forName();
+			return classquestionmark;
+		} catch(ClassNotFoundException ex3) {
+			String[] lines = text.split("\n");
+			try {
+				for(int i = 0; i < lines.length; i++) {
+					String line = lines[i];
+					String output = "import (.+)\\."+classname+";";
+					Pattern findimport=Pattern.compile(output);
+					Matcher matcher12=findimport.matcher(line);
+					if(matcher12.find()) {
+						return Class.forName(matcher12.group(1)+"."+classname);
+					}	
+				}
+				List<String> imports =Main.muck.links.getImport(classname);
+				if(imports == null)
+					return Class.forName("java.lang.Object");
+				for(String importy:imports) {
+					String select="import "+importy.replaceAll(classname+"$","")+"*;";
+					if(text.contains(select))
+						return Class.forName(importy);
+				}
+				return Class.forName(imports.get(0));
+			}
+			catch(ClassNotFoundException ex4) {
+				ex4.printStackTrace();
+				try {
+					return Class.forName("java.lang.Object");
+				}
+				catch(ClassNotFoundException ex5) {
+					ex5.printStackTrace();
+					return null;
+				}
+			}
+		}
+	}
+	public Member[] getAllPropertyAndMethods(String classname,String text) {
+		return getAllPropertyAndMethods(getClassQuestionMark(classname,text));
+	}
+	public List<Class<?>> getAncestorsForClassQuestionMark(Class<?> classquestionmark) {
+		List<Class<?>> list = new ArrayList<Class<?>>();
+		Class<?> superclass=classquestionmark.getSuperclass();
+		while(superclass != null) {
+			list.add(superclass);
+			superclass = superclass.getSuperclass();
+		}
+		return list;
+	}
+	public Member[] addAncestorsToMethods(Member[] methods,List<Class<?>> ancestors)
+	{
+		List<Member> extendmethods = new ArrayList<Member>();
+		for(Member method:methods) {
+			extendmethods.add(method);
+		}
+		for(Class<?> classquestionmark:ancestors) {
+			Member[] methods2=classquestionmark.getDeclaredMethods();
+			for(Member method:methods2) {
+				extendmethods.add(method);
+			}
+		}
+		Member[] methods3 = new Member[extendmethods.size()];
+		for(int i = 0; i < methods3.length; i++) {
+			methods3[i] = extendmethods.get(i);
+		}
+		return methods3;
+	}
+	public Member[] addMembersToMembers(Member[] members,Member[] methods2) {
+		List<Member> methodsandproperties=  new ArrayList<Member>();
+		for(Member method:members) {
+			methodsandproperties.add(method);
+		}
+		for(Member method2:methods2) {
+			methodsandproperties.add(method2);
+		}
+		Member[] methods3 = new Member[methodsandproperties.size()];
+		for(int i = 0; i < methods3.length; i++) {
+			methods3[i] = methodsandproperties.get(i);
+		}
+		return methods3;
+	}
+	public Object[] addMembersToMembers(Object[] members,Object[] methods2) {
+		List<Object> methodsandproperties=  new ArrayList<Object>();
+		for(Object method:members) {
+			methodsandproperties.add(method);
+		}
+		for(Object method2:methods2) {
+			methodsandproperties.add(method2);
+		}
+		Object[] methods3 = new Object[methodsandproperties.size()];
+		for(int i = 0; i < methods3.length; i++) {
+			methods3[i] = methodsandproperties.get(i);
+		}
+		return methods3;
+	}
+	
+	public Object[] getInnerPackages(String substring) {
+		List<String> subpackages=main.muck.links.getInnerPackages(substring);	
+		if(subpackages != null && subpackages.size() > 0) {
+			Object[] methodboxvalues2 = new Object[subpackages.size()];
+			for(int i = 0; i < methodboxvalues2.length; i++) {
+				methodboxvalues2[i] = subpackages.get(i);
+			}
+			
+			return methodboxvalues2;
+		}	
+		return new Member[0];
+	}
+	
+	public Object[] getNotJavaAPIPackages(String text,String currentline) {
+		Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
+		Matcher matcher=pattern3.matcher(currentline);
+		if(matcher.find()) {
+			String editedline = matcher.group(1);	
+			Class<?> property = null;	
+			String[] properties = editedline.split("\\.");
+			String first = properties[0];
+			String classname=getClassName(first,text);
+			property = getClassQuestionMark(classname,text);
+			if(property == null)
+				return new Object[0];	
+			for(int i = 1; i < properties.length; i++) {
+				//Member[] methodsandproperties=getAllPropertyAndMethods(property);
+				Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
+				String last=properties[i];
+				escapey:for(Object member:methodsandproperties) {
+					if(member instanceof Method) {
+						String name = ((Method)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+					else if(member instanceof Field) {						
+						String name=((Member)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=((Field)member).getType();
+							break escapey;
+						}
+					}
+					else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
+						String name=((Class<?>)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+					else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum						
+						String name=((Class<?>)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+					else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
+						String name=((Class<?>)member).getName();
+						if(name.contains("$")) {
+							name=name.replaceAll(".+\\$","");
+						}
+						if(last.equals(name)) {
+							property=(Class<?>)member;
+							break escapey;
+						}
+					}
+				}
+			}
+			Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(property);
+			return unorderedmethods;
+		}
+		return new Object[0];
+	}
+	public Object[] getClassesFromPackage(String substring) {
+		List<String> classesfrompackage=main.muck.links.getClassFrom(substring);
+		if(classesfrompackage == null)
+			return new Object[0];	
+		Object[] listings = new Object[classesfrompackage.size()];
+		for(int i = 0; i < listings.length; i++) {
+			listings[i] = classesfrompackage.get(i);
+		}
+		return listings;
+	}
+	public Object[] getFromPackageAndClass(String substring) {
+		Class<?> property=getClassQuestionMark(substring);
+		if(property == null)
+			return new Object[0];
+		return getAllPropertyAndMethodsAndEnums(property);
+	}																																						
+	/*
+	** Old method signature for show() was:
+	** public void Popup(Class<?> classquestionmark,int caretposition) {
+	*/
+	public void show(Object[] unorderedmethods,int caretposition,String search) {
+		try {	
+			JFrame suggestionbox = new JFrame();			
+			suggestionbox.setTitle(search);
+			suggestionbox.setSize(100,500);
+			JPanel panelgridlayout = new JPanel();
+			//Member[] unorderedmethods=getAllPropertyAndMethods(classquestionmark);
+			//Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(classquestionmark);
+			/*for(Object object:unorderedmethods) {
+				if(object instanceof Enum) {
+					System.out.println(((Enum)object).name());
+				}
+			}
+			System.out.println();
+			System.out.println();
+			*/
+			final Object[] methods = CurlyBraceKeyListener.suggestionboxselected.Reordered(unorderedmethods,search);
+			/*for(Object object:methods) {
+				if(object instanceof Enum) {
+					System.out.println(((Enum)object).name());
+				}
+			}
+			*/
+			GridLayout gridlayout=new GridLayout(methods.length+1,1);
+			panelgridlayout.setLayout(gridlayout);
+			JTextField search_textfield=new JTextField();
+			panelgridlayout.add(search_textfield);
+			JLabel[] labels = new JLabel[methods.length];
+			for(int i = 0; i < methods.length; i++) {
+				if(methods[i] instanceof String) {
+					labels[i] = new JLabel((String)methods[i]);
+					panelgridlayout.add(labels[i]);
+				}		
+				else if(methods[i] instanceof Method) {
+					String name=((Method)methods[i]).getName();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
+					panelgridlayout.add(labels[i]);
+				}
+				else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
+					String name=((Class<?>)methods[i]).getName();
+					//String name=((Enum)methods[i]).name();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
+					panelgridlayout.add(labels[i]);
+				}
+				else if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
+					String name=((Class<?>)methods[i]).getName();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
+					panelgridlayout.add(labels[i]);
+				}
+				else if(methods[i] instanceof Member) {
+					String name=((Member)methods[i]).getName();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
+					panelgridlayout.add(labels[i]);
+				}
+				else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
+					String name= methods[i].toString();
+					if(name.contains("$")) {
+						name=name.replaceAll(".+\\$","");
+					}
+					labels[i] = new JLabel(name);
+					panelgridlayout.add(labels[i]);
+				}
+			}
+			JScrollPane scrollpane = new JScrollPane(panelgridlayout);
+			
+			labels[0].setOpaque(true);
+			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+			KeyListener keylistener = new KeyListener() {
+				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels);
+				int selected_index = 0;
+				@Override
+				public void keyPressed(KeyEvent keyevent) {
+					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+						suggestionbox.dispose();
+					}
+					else if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
+						labels[selected_index].setOpaque(false);
+						labels[selected_index].setBackground(new JLabel().getBackground());
+						panelgridlayout.validate();
+						panelgridlayout.repaint();
+						int live_index = liveiterator.indexOf(labels[selected_index]);						
+						if( live_index < (liveiterator.list.size()-1) ) {
+							live_index++;
+							JLabel selected_label=liveiterator.list.get(live_index);
+							selected_label.setOpaque(true);
+							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+							panelgridlayout.validate();
+							panelgridlayout.repaint();
+							
+							label3:for(int i = 0; i < labels.length; i++) {
+								if(selected_label.equals(labels[i])) {
+									selected_index = i;
+									break label3;
+								}
+							}
+						}
+					}
+					else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
+						labels[selected_index].setOpaque(false);
+						labels[selected_index].setBackground(new JLabel().getBackground());
+						panelgridlayout.validate();
+						panelgridlayout.repaint();
+						int live_index = liveiterator.indexOf(labels[selected_index]);
+						if(live_index > 0) {
+							live_index--;
+							JLabel selected_label=liveiterator.list.get(live_index);
+							selected_label.setOpaque(true);
+							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+							panelgridlayout.validate();
+							panelgridlayout.repaint();
+							
+							label4:for(int i = 0; i < labels.length; i++) {
+								if(selected_label.equals(labels[i])) {
+									selected_index = i;
+									break label4;
+								}
+							}
+						}
+					}
+				}
+				@Override
+				public void keyReleased(KeyEvent keyevent) {
+					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
+						suggestionbox.dispose();
+						String text = main.textarea.getText();
+						// String selected = search_textfield.getText().trim();
+						JLabel selected_label2 =labels[selected_index];
+						String selected = selected_label2.getText();
+						CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
+						String methodorproperty = "";
+						breaky:for(int i = 0; i < labels.length; i++) {
+							if(labels[i] == null) {
+								JOptionPane.showMessageDialog(null,"labels[i] is null");
+							}
+							if(selected_label2 == null) {
+								JOptionPane.showMessageDialog(null,"selected_label2 is null");
+							}
+							if(labels[i].equals(selected_label2)) {
+								if(methods[i] instanceof Method) {
+									methodorproperty = "(";
+									if(((Method)methods[i]).getParameterCount() > 0) {
+										Parameter[] parametertypes=((Method)methods[i]).getParameters();
+										String[] variabletypes= new String[parametertypes.length];
+										for(int j = 0; j < parametertypes.length; j++) {
+											variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
+										}
+										methodorproperty+=String.join(",",variabletypes);
+									}
+									methodorproperty+=")";
+									break breaky;
+								}
+							}
+						}
+						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
+						String second =text.substring(caretposition+1,text.length());
+						main.textarea.setText(firsthalf+second);
+						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
+					}
+					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+						liveiterator.reset();
+						while(liveiterator.hasNext()) {
+							JLabel label = liveiterator.next();
+							panelgridlayout.remove(label);
+						}
+						liveiterator = new LiveIterator<JLabel>(labels);	
+						String methodname=search_textfield.getText();	
+						for(JLabel label:labels) {
+							if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
+								liveiterator.remove(label);
+							}
+						}
+						
+						gridlayout.setRows(liveiterator.list.size()+1);
+						liveiterator.reset();
+						while(liveiterator.hasNext()) {
+							JLabel label = liveiterator.next();
+							panelgridlayout.add(label);
+						}
+						panelgridlayout.validate();
+						panelgridlayout.repaint();
+						suggestionbox.pack();	
+						JLabel selected_label = labels[selected_index];
+						if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
+							selected_label.setOpaque(false);
+							selected_label.setBackground(new JLabel().getBackground());
+							
+							if(liveiterator.list.size() != 0) {
+								JLabel label=liveiterator.list.get(0);
+								labelly2:for(int i = 0; i < labels.length; i++) {
+									if(label.equals(labels[i])) {
+										selected_index=i;
+										break labelly2;
+									}
+								}
+								label.setOpaque(true);
+								label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+							}
+						}
+					}
+				}
+				@Override
+				public void keyTyped(KeyEvent ev) { }
+			};
+			search_textfield.addKeyListener(keylistener);
+			//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
+			suggestionbox.add(scrollpane);
+			Rectangle2D rectanglecoords=main.textarea.modelToView2D(caretposition);
+			Point screencoordinates= new Point((int)rectanglecoords.getX(),(int)rectanglecoords.getY());
+			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
+			suggestionbox.setLocation(screencoordinates);
+			//suggestionbox.pack();
+			suggestionbox.setVisible(true);
+		}
+		catch(BadLocationException ex) {
+			ex.printStackTrace();
+		}
 	}
 }
