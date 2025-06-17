@@ -66,7 +66,7 @@ public class LinksFX extends Links {
 					HashSet<String> innerwhichurl=whichurl.get(class_one);
 					if(innerwhichurl == null)
 						innerwhichurl = new HashSet<String>();
-					innerwhichurl.add("https://download.java.net/java/GA/javafx24/docs/api/");
+					innerwhichurl.add("https://download.java.net/java/GA/javafx24/docs/api/"+sublink);
 					whichurl.put(class_one,innerwhichurl);
 				}
 			}
@@ -132,12 +132,9 @@ public class LinksFX extends Links {
 		try {
 			one_class=one_class.toLowerCase();
 			HashMap<String,String> classes=hashmap.get(one_class);
-			for(String sublink:classes.values()) {
-				for(String url:whichurl.get(one_class)) {
-					String link = url+sublink;
-					// Runtime.getRuntime().exec("cmd /c start chrome "+link);
-					java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
-				}
+			for(String link:whichurl.get(one_class)) {
+				// Runtime.getRuntime().exec("cmd /c start chrome "+link);
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

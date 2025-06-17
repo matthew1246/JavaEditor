@@ -735,7 +735,8 @@
     "fileName",
     "fileNames",
     "javafxlauncher",
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "Syst": [
     "System"
@@ -3227,7 +3228,8 @@
     "jscrollpane",
     "javafxcheckbox",
     "javafxlauncher",
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "jc": [
     "jcomponent",
@@ -4564,31 +4566,36 @@
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "jav": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "java": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javaf": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafxL": [
     "javafxLabel"
@@ -5410,39 +5417,87 @@
     "fileNames"
   ],
   "javafx.": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.a": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.ap": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.app": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.appl": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.appli": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.applic": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.applica": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.applicat": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.applicati": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.applicatio": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
   ],
   "javafx.application": [
-    "javafx.application"
+    "javafx.application",
+    "javafx.application.Application"
+  ],
+  "javafx.application.": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.A": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Ap": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.App": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Appl": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Appli": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Applic": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Applica": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Applicat": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Applicati": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Applicatio": [
+    "javafx.application.Application"
+  ],
+  "javafx.application.Application": [
+    "javafx.application.Application"
   ]
 }
