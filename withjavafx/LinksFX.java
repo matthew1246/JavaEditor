@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.regex.*;
 import javax.swing.*;
 import java.util.*;
-public class LinksFX {
+public class LinksFX extends Links {
 	public static void main(String[] args) {
 		LinksFX links = new LinksFX();
 		for(String package0:links.innerpackages.keySet()) {
@@ -13,13 +13,18 @@ public class LinksFX {
 			System.out.println();
 		}
 	}
-	public HashMap<String,HashSet<String>> innerpackages = new HashMap<String,HashSet<String>>();
+	/*public HashMap<String,HashSet<String>> innerpackages = new HashMap<String,HashSet<String>>();
 	public HashSet<String> fullpackagenames = new HashSet<String>();
 	public HashSet<String> subpackage=  new HashSet<String>();
 	public HashMap<String,List<String>> packagesandclasses = new HashMap<String,List<String>>();
-	public HashMap<String,HashMap<String,String>> hashmap = new HashMap<String,HashMap<String,String>>();
+	public HashMap<String,HashMap<String,String>> hashmap = new HashMap<String,HashMap<String,String>>();	
+	*/
 	//private List<String> sublinks = new ArrayList<String>();
 	public LinksFX() {
+		super();
+		run();
+	}
+	private void run() {
 		try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream("javafx.html")));
 			while(true) {
@@ -58,9 +63,15 @@ public class LinksFX {
 					hashmapwithcapitols.put(with_capitols,sublink);
 					hashmap.put(class_one,hashmapwithcapitols);
 					
-					createInnerPackages();
+					HashSet<String> innerwhichurl=whichurl.get(class_one);
+					if(innerwhichurl == null)
+						innerwhichurl = new HashSet<String>();
+					innerwhichurl.add("https://download.java.net/java/GA/javafx24/docs/api/");
+					whichurl.put(class_one,innerwhichurl);
 				}
 			}
+			createInnerPackages();
+			
 			/*for(int i = 0; i < sublinks.size(); i++) {
 				String sublink = sublinks.get(i);
 				String class_one=getClass(sublink);
@@ -75,17 +86,17 @@ public class LinksFX {
 		}
 	}
 	
-	public String getLink(String sublink) {
+	private String getLink(String sublink) {
 		 return "https://download.java.net/java/GA/javafx24/docs/api/"+sublink;
 	}
 	
-	public boolean isSublink(String line) {
+	private boolean isSublink(String line) {
 		Pattern pattern = Pattern.compile("<a href=\".+\"");
 		Matcher matcher=pattern.matcher(line);
 		return matcher.find();
 	}
 	
-	public String getSublink(String line) {
+	private String getSublink(String line) {
 		Pattern pattern = Pattern.compile("<a href=\"(.+?)\"");
 		Matcher matcher=pattern.matcher(line);
 		if(matcher.find()) {
@@ -96,7 +107,7 @@ public class LinksFX {
 		}
 	}
 	
-	public String getClass(String sublink) {
+	private String getClass(String sublink) {
 		Pattern pattern = Pattern.compile("[a-zA-Z]+\\.[a-zA-Z]+/.+/(.+)\\.html");
 		Matcher matcher=pattern.matcher(sublink);
 		if(matcher.find()) {
@@ -106,7 +117,7 @@ public class LinksFX {
 			return "Could not find class name in sublink.";
 		}
 	}
-	public String getClassWithCapitols(String sublink) {
+	private String getClassWithCapitols(String sublink) {
 		Pattern pattern = Pattern.compile("[a-zA-Z]+\\.[a-zA-Z]+/.+/(.+)\\.html");
 		Matcher matcher=pattern.matcher(sublink);
 		if(matcher.find()) {
@@ -116,16 +127,17 @@ public class LinksFX {
 			return "Could not find class name in sublink.";
 		}
 	}
-
 	
 	public void openLink(String one_class) {
 		try {
 			one_class=one_class.toLowerCase();
 			HashMap<String,String> classes=hashmap.get(one_class);
 			for(String sublink:classes.values()) {
-				String link = getLink(sublink);
-				// Runtime.getRuntime().exec("cmd /c start chrome "+link);
-				java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
+				for(String url:whichurl.get(one_class)) {
+					String link = url+sublink;
+					// Runtime.getRuntime().exec("cmd /c start chrome "+link);
+					java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

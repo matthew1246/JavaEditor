@@ -366,8 +366,8 @@
   ],
   "javafx": [
     "graphics",
-    "application",
-    "scene"
+    "scene",
+    "application"
   ],
   "javafx.graphics": [
     "javafx"
@@ -380,5 +380,11 @@
   ],
   "System.out": [
     "finalize"
+  ],
+  "java": [
+    "lang"
+  ],
+  "javafx.application": [
+    "Preloader"
   ]
 }
