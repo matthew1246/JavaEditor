@@ -365,7 +365,9 @@
     "notify"
   ],
   "javafx": [
-    "graphics"
+    "graphics",
+    "application",
+    "scene"
   ],
   "javafx.graphics": [
     "javafx"

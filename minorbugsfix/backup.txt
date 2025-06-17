@@ -71,7 +71,7 @@
     "starterclass": "MuckFX",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1376
+    "caretposition": 2298
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "starterclass": "Main",

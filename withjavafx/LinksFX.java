@@ -50,8 +50,6 @@ public class LinksFX {
 					package1.add(with_capitols);
 					packagesandclasses.put(package0,package1);
 					String class_one = getClass(sublink);
-					System.out.println(with_capitols);
-					System.out.println(class_one);
 					
 					HashMap<String,String> hashmapwithcapitols =hashmap.get(class_one);
 					if(hashmapwithcapitols == null) {
