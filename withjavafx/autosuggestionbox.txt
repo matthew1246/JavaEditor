@@ -727,14 +727,15 @@
     "actiontarget",
     "isVisible",
     "this",
-    "javafxlauncher",
     "true",
     "String",
     "dir",
     "output2",
     "liney",
     "fileName",
-    "fileNames"
+    "fileNames",
+    "javafxlauncher",
+    "javafx.application"
   ],
   "Syst": [
     "System"
@@ -3225,7 +3226,8 @@
     "javafxLabel",
     "jscrollpane",
     "javafxcheckbox",
-    "javafxlauncher"
+    "javafxlauncher",
+    "javafx.application"
   ],
   "jc": [
     "jcomponent",
@@ -4561,27 +4563,32 @@
   "ja": [
     "javafxLabel",
     "javafxcheckbox",
-    "javafxlauncher"
+    "javafxlauncher",
+    "javafx.application"
   ],
   "jav": [
     "javafxLabel",
     "javafxcheckbox",
-    "javafxlauncher"
+    "javafxlauncher",
+    "javafx.application"
   ],
   "java": [
     "javafxLabel",
     "javafxcheckbox",
-    "javafxlauncher"
+    "javafxlauncher",
+    "javafx.application"
   ],
   "javaf": [
     "javafxLabel",
     "javafxcheckbox",
-    "javafxlauncher"
+    "javafxlauncher",
+    "javafx.application"
   ],
   "javafx": [
     "javafxLabel",
     "javafxcheckbox",
-    "javafxlauncher"
+    "javafxlauncher",
+    "javafx.application"
   ],
   "javafxL": [
     "javafxLabel"
@@ -5401,5 +5408,41 @@
   ],
   "fileNames": [
     "fileNames"
+  ],
+  "javafx.": [
+    "javafx.application"
+  ],
+  "javafx.a": [
+    "javafx.application"
+  ],
+  "javafx.ap": [
+    "javafx.application"
+  ],
+  "javafx.app": [
+    "javafx.application"
+  ],
+  "javafx.appl": [
+    "javafx.application"
+  ],
+  "javafx.appli": [
+    "javafx.application"
+  ],
+  "javafx.applic": [
+    "javafx.application"
+  ],
+  "javafx.applica": [
+    "javafx.application"
+  ],
+  "javafx.applicat": [
+    "javafx.application"
+  ],
+  "javafx.applicati": [
+    "javafx.application"
+  ],
+  "javafx.applicatio": [
+    "javafx.application"
+  ],
+  "javafx.application": [
+    "javafx.application"
   ]
 }

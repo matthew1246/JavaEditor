@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -11,7 +11,8 @@
       "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java",
       "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java",
-      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java"
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -70,6 +71,26 @@
     "starterclass": "MuckFX",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2882
+    "caretposition": 2038
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.base.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.controls.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.fxml.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.graphics.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.media.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.swing.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.web.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx-swt.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\jdk.jsobject.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\jfx.incubator.input.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\jfx.incubator.richtext.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 131608
   }
 }

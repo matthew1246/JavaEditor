@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java",
     "jars": [],
     "caretposition": 0
   },
@@ -15,7 +15,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
-    "caretposition": 83291
+    "caretposition": 83297
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
     "starterclass": "",
@@ -96,5 +96,20 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Muck.jar"
     ],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java": {
+    "starterclass": "MuckFX",
+    "jars": [],
+    "caretposition": 1596
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java": {
+    "starterclass": "MuckFX",
+    "jars": [],
+    "caretposition": 287
   }
 }
