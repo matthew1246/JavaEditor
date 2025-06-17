@@ -27,9 +27,9 @@ public class LinksFX {
 				if(line == null) break;
 				if(isSublink(line)) {
 					String sublink = getSublink(line);
-					String fullpackagename=sublink.replace(".html","").replace("/",".");
+					String fullpackagename=sublink.replaceFirst("[A-Za-z]+\\.[A-Za-z]+/","").replace(".html","").replace("/",".");
 					fullpackagenames.add(fullpackagename);
-					String package0= sublink.replaceAll("[^/]+\\.html","").replace("/",".");
+					String package0= sublink.replaceFirst("[A-Za-z]+\\.[A-Za-z]+/","").replaceAll("[^/]+\\.html","").replace("/",".");
 					if(package0.endsWith("."))
 						package0 = package0.substring(0,(package0.length()-1));
 					String[] subpackages = package0.split("\\.");
@@ -50,6 +50,9 @@ public class LinksFX {
 					package1.add(with_capitols);
 					packagesandclasses.put(package0,package1);
 					String class_one = getClass(sublink);
+					System.out.println(with_capitols);
+					System.out.println(class_one);
+					
 					HashMap<String,String> hashmapwithcapitols =hashmap.get(class_one);
 					if(hashmapwithcapitols == null) {
 						hashmapwithcapitols = new HashMap<String,String>();
@@ -96,7 +99,7 @@ public class LinksFX {
 	}
 	
 	public String getClass(String sublink) {
-		Pattern pattern = Pattern.compile(".+/(.+)\\.html");
+		Pattern pattern = Pattern.compile("[a-zA-Z]+\\.[a-zA-Z]+/.+/(.+)\\.html");
 		Matcher matcher=pattern.matcher(sublink);
 		if(matcher.find()) {
 			return matcher.group(1).toLowerCase();
@@ -106,7 +109,7 @@ public class LinksFX {
 		}
 	}
 	public String getClassWithCapitols(String sublink) {
-		Pattern pattern = Pattern.compile(".+/(.+)\\.html");
+		Pattern pattern = Pattern.compile("[a-zA-Z]+\\.[a-zA-Z]+/.+/(.+)\\.html");
 		Matcher matcher=pattern.matcher(sublink);
 		if(matcher.find()) {
 			return matcher.group(1);
