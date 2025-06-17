@@ -363,5 +363,17 @@
   ],
   "Object": [
     "notify"
+  ],
+  "javafx": [
+    "graphics"
+  ],
+  "javafx.graphics": [
+    "javafx"
+  ],
+  "javafx.graphics.javafx": [
+    "application"
+  ],
+  "javafx.graphics.javafx.application": [
+    "Application"
   ]
 }
