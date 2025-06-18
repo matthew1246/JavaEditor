@@ -2931,30 +2931,36 @@ class AutoKeyListener {
 	}
 }
 class MethodSuggestionBox {
+	public String text;
+	public String currentline;	
 	public Main main;	
 	public MethodSuggestionBox(Main main) {
 		this.main = main;	
-		String text = main.textarea.getText();
+		text = main.textarea.getText();
 		Middle middle = new Middle(main.textarea);
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
-		String currentline = middle.getCurrentLine();
+		String currentline2= middle.getCurrentLine();
 		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
-		Matcher matcher0=pattern.matcher(currentline);	
+		Matcher matcher0=pattern.matcher(currentline2);	
 		//List<String> classesfrompackage=null;	
 		if(matcher0.find()) {
-			Object[] innerpackages=getInnerPackages(matcher0.group(2));
-			Object[] classes = getClassesFromPackage(matcher0.group(2));
-			Object[] allobjects=addMembersToMembers(innerpackages,classes);
-			classes=getClassesFromPackage(currentline);
-			allobjects=addMembersToMembers(allobjects,classes);
-			Object[] classforname=getFromPackageAndClass(matcher0.group(2));
-			allobjects=addMembersToMembers(allobjects,classforname);
-			Object[] not_api_normal_classes=getNotJavaAPIPackages(text,matcher0.group(2));
-			allobjects=addMembersToMembers(allobjects,not_api_normal_classes);
-
-			show(allobjects,caretposition,matcher0.group(2));	
+			currentline = matcher0.group(2);					
+			Object[] allobjects=search(currentline);
+			show(allobjects,caretposition,currentline);	
 		}
+	}
+	public Object[] search(String input) {
+		Object[] innerpackages=getInnerPackages(input);
+		Object[] classes = getClassesFromPackage(input);
+		Object[] allobjects=addMembersToMembers(innerpackages,classes);
+		classes=getClassesFromPackage(input);
+		allobjects=addMembersToMembers(allobjects,classes);
+		Object[] classforname=getFromPackageAndClass(input);
+		allobjects=addMembersToMembers(allobjects,classforname);
+		Object[] not_api_normal_classes=getNotJavaAPIPackages(text,input);
+		allobjects=addMembersToMembers(allobjects,not_api_normal_classes);
+		return allobjects;
 	}
 	public String getClassName(String variablenameorclassname,String text) {
 		// Below if variable name
