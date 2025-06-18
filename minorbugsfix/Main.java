@@ -3411,15 +3411,19 @@ class MethodSuggestionBox {
 						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
 					}
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-						if(keyevent.getKeyCode() == KeyEvent.VK_PERIOD)
-							JOptionPane.showMessageDialog(null,". pressed!");
 						liveiterator.reset();
 						while(liveiterator.hasNext()) {
 							JLabel label = liveiterator.next();
 							panelgridlayout.remove(label);
 						}
+						
+						String methodname=search_textfield.getText();
+						if(keyevent.getKeyCode() == KeyEvent.VK_PERIOD) {
+							String output=currentline+methodname;	
+							JOptionPane.showMessageDialog(null,output);		
+						}
+						
 						liveiterator = new LiveIterator<JLabel>(labels);	
-						String methodname=search_textfield.getText();	
 						for(JLabel label:labels) {
 							if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
 								liveiterator.remove(label);
