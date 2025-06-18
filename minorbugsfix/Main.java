@@ -3320,7 +3320,8 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
-				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels);
+				JLabel[] labels2=labels;	
+				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels2);
 				int selected_index = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
@@ -3328,11 +3329,11 @@ class MethodSuggestionBox {
 						suggestionbox.dispose();
 					}
 					else if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-						labels[selected_index].setOpaque(false);
-						labels[selected_index].setBackground(new JLabel().getBackground());
+						labels2[selected_index].setOpaque(false);
+						labels2[selected_index].setBackground(new JLabel().getBackground());
 						panelgridlayout.validate();
 						panelgridlayout.repaint();
-						int live_index = liveiterator.indexOf(labels[selected_index]);						
+						int live_index = liveiterator.indexOf(labels2[selected_index]);						
 						if( live_index < (liveiterator.list.size()-1) ) {
 							live_index++;
 							JLabel selected_label=liveiterator.list.get(live_index);
@@ -3341,8 +3342,8 @@ class MethodSuggestionBox {
 							panelgridlayout.validate();
 							panelgridlayout.repaint();
 							
-							label3:for(int i = 0; i < labels.length; i++) {
-								if(selected_label.equals(labels[i])) {
+							label3:for(int i = 0; i < labels2.length; i++) {
+								if(selected_label.equals(labels2[i])) {
 									selected_index = i;
 									break label3;
 								}
@@ -3350,11 +3351,11 @@ class MethodSuggestionBox {
 						}
 					}
 					else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-						labels[selected_index].setOpaque(false);
-						labels[selected_index].setBackground(new JLabel().getBackground());
+						labels2[selected_index].setOpaque(false);
+						labels2[selected_index].setBackground(new JLabel().getBackground());
 						panelgridlayout.validate();
 						panelgridlayout.repaint();
-						int live_index = liveiterator.indexOf(labels[selected_index]);
+						int live_index = liveiterator.indexOf(labels2[selected_index]);
 						if(live_index > 0) {
 							live_index--;
 							JLabel selected_label=liveiterator.list.get(live_index);
@@ -3363,8 +3364,8 @@ class MethodSuggestionBox {
 							panelgridlayout.validate();
 							panelgridlayout.repaint();
 							
-							label4:for(int i = 0; i < labels.length; i++) {
-								if(selected_label.equals(labels[i])) {
+							label4:for(int i = 0; i < labels2.length; i++) {
+								if(selected_label.equals(labels2[i])) {
 									selected_index = i;
 									break label4;
 								}
@@ -3378,18 +3379,18 @@ class MethodSuggestionBox {
 						suggestionbox.dispose();
 						String text = main.textarea.getText();
 						// String selected = search_textfield.getText().trim();
-						JLabel selected_label2 =labels[selected_index];
+						JLabel selected_label2 =labels2[selected_index];
 						String selected = selected_label2.getText();
 						CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
 						String methodorproperty = "";
-						breaky:for(int i = 0; i < labels.length; i++) {
-							if(labels[i] == null) {
-								JOptionPane.showMessageDialog(null,"labels[i] is null");
+						breaky:for(int i = 0; i < labels2.length; i++) {
+							if(labels2[i] == null) {
+								JOptionPane.showMessageDialog(null,"labels2[i] is null");
 							}
 							if(selected_label2 == null) {
 								JOptionPane.showMessageDialog(null,"selected_label2 is null");
 							}
-							if(labels[i].equals(selected_label2)) {
+							if(labels2[i].equals(selected_label2)) {
 								if(methods[i] instanceof Method) {
 									methodorproperty = "(";
 									if(((Method)methods[i]).getParameterCount() > 0) {
@@ -3423,17 +3424,24 @@ class MethodSuggestionBox {
 							String output2=methodname;
 							if(methodname.endsWith("."))
 								output2=methodname.substring(0,(methodname.length()-1));	
-							output=output+output2;
+							output=output+output2;	
 							Object[] allobjects2=MethodSuggestionBox.this.search(output);
-							JLabel[] newlabels=getLabels(allobjects2);
-							liveiterator=new LiveIterator<JLabel>(newlabels);
+							JOptionPane.showMessageDialog(null,allobjects2[0]);
+							labels2=getLabels(allobjects2);
 						}
-						else {
-							liveiterator = new LiveIterator<JLabel>(labels);
-						}		
-						for(JLabel label:labels) {
-							if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
-								liveiterator.remove(label);
+				
+						liveiterator = new LiveIterator<JLabel>(labels2);	
+						
+						if(keyevent.getKeyCode() != KeyEvent.VK_PERIOD) {
+							String searchy = methodname.toLowerCase();
+							if(methodname.contains(".")) {
+								String[] properties=searchy.split("\\.");
+								searchy = properties[(properties.length-1)];
+							}
+							for(JLabel label:labels2) {	
+								if( ! (label.getText().toLowerCase().startsWith(searchy)) ) {
+									liveiterator.remove(label);
+								}
 							}
 						}
 						
@@ -3446,15 +3454,15 @@ class MethodSuggestionBox {
 						panelgridlayout.validate();
 						panelgridlayout.repaint();
 						suggestionbox.pack();	
-						JLabel selected_label = labels[selected_index];
+						JLabel selected_label = labels2[selected_index];
 						if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
 							selected_label.setOpaque(false);
 							selected_label.setBackground(new JLabel().getBackground());
 							
 							if(liveiterator.list.size() != 0) {
 								JLabel label=liveiterator.list.get(0);
-								labelly2:for(int i = 0; i < labels.length; i++) {
-									if(label.equals(labels[i])) {
+								labelly2:for(int i = 0; i < labels2.length; i++) {
+									if(label.equals(labels2[i])) {
 										selected_index=i;
 										break labelly2;
 									}
