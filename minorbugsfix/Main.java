@@ -3419,7 +3419,11 @@ class MethodSuggestionBox {
 						
 						String methodname=search_textfield.getText();
 						if(keyevent.getKeyCode() == KeyEvent.VK_PERIOD) {
-							String output=currentline+methodname;	
+							String output=currentline+".";
+							String output2=methodname;
+							if(methodname.endsWith("."))
+								output2=methodname.substring(0,(methodname.length()-1));	
+							output=output+output2;
 							JOptionPane.showMessageDialog(null,output);		
 						}
 						
