@@ -3424,10 +3424,13 @@ class MethodSuggestionBox {
 							if(methodname.endsWith("."))
 								output2=methodname.substring(0,(methodname.length()-1));	
 							output=output+output2;
-							JOptionPane.showMessageDialog(null,output);		
+							Object[] allobjects2=MethodSuggestionBox.this.search(output);
+							JLabel[] newlabels=getLabels(allobjects2);
+							liveiterator=new LiveIterator<JLabel>(newlabels);
 						}
-						
-						liveiterator = new LiveIterator<JLabel>(labels);	
+						else {
+							liveiterator = new LiveIterator<JLabel>(labels);
+						}		
 						for(JLabel label:labels) {
 							if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
 								liveiterator.remove(label);
@@ -3478,5 +3481,50 @@ class MethodSuggestionBox {
 		catch(BadLocationException ex) {
 			ex.printStackTrace();
 		}
+	}
+	public JLabel[] getLabels(Object[] methods) {
+		JLabel[] labels = new JLabel[methods.length];
+		for(int i = 0; i < methods.length; i++) {
+			if(methods[i] instanceof String) {
+				labels[i] = new JLabel((String)methods[i]);
+			}		
+			else if(methods[i] instanceof Method) {
+				String name=((Method)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				labels[i] = new JLabel(name);
+			}
+			else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
+				String name=((Class<?>)methods[i]).getName();
+				//String name=((Enum)methods[i]).name();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				labels[i] = new JLabel(name);
+			}
+			else if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
+				String name=((Class<?>)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				labels[i] = new JLabel(name);
+			}
+			else if(methods[i] instanceof Member) {
+				String name=((Member)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				labels[i] = new JLabel(name);
+			}
+			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
+				String name= methods[i].toString();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				labels[i] = new JLabel(name);
+			}
+		}
+		return labels;
 	}
 }
