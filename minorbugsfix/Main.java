@@ -3426,7 +3426,6 @@ class MethodSuggestionBox {
 								output2=methodname.substring(0,(methodname.length()-1));	
 							output=output+output2;	
 							Object[] allobjects2=MethodSuggestionBox.this.search(output);
-							JOptionPane.showMessageDialog(null,allobjects2[0]);
 							labels2=getLabels(allobjects2);
 						}
 				
