@@ -367,7 +367,8 @@
   "javafx": [
     "graphics",
     "scene",
-    "application"
+    "application",
+    "Application"
   ],
   "javafx.graphics": [
     "javafx"
