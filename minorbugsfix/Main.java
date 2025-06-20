@@ -3431,7 +3431,7 @@ class MethodSuggestionBox {
 							ifdotbefore=output2;
 							
 							output=output+output2;	
-							currentline=output;
+							//currentline=output;
 							Object[] allobjects2=MethodSuggestionBox.this.search(output);
 							labels2=getLabels(allobjects2);
 							selected_index = 0;
