@@ -3320,6 +3320,7 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
+				String ifdotbefore = "";
 				JLabel[] labels2=labels;	
 				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels2);
 				int selected_index = 0;
@@ -3406,11 +3407,10 @@ class MethodSuggestionBox {
 								}
 							}
 						}
-						String ifdotbefore = "";
-						if(currentline.contains(".")) {
-							ifdotbefore=currentline;
-						}
-						String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected+methodorproperty;
+						if(!ifdotbefore.equals(""))
+							selected=ifdotbefore+"."+selected;
+						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
+						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected+methodorproperty;
 						String second =text.substring(caretposition+1,text.length());
 						main.textarea.setText(firsthalf+second);
 						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
@@ -3428,6 +3428,8 @@ class MethodSuggestionBox {
 							String output2=methodname;
 							if(methodname.endsWith("."))
 								output2=methodname.substring(0,(methodname.length()-1));	
+							ifdotbefore=output2;
+							
 							output=output+output2;	
 							currentline=output;
 							Object[] allobjects2=MethodSuggestionBox.this.search(output);
@@ -3458,7 +3460,6 @@ class MethodSuggestionBox {
 							JLabel label = liveiterator.next();
 							panelgridlayout.add(label);
 						}
-						JOptionPane.showMessageDialog(null,isSelected()+"");
 						if(!isSelected()) {
 							selected_index = 0;
 							JLabel label5 = labels2[selected_index];	
