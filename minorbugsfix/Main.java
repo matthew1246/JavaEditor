@@ -3320,6 +3320,7 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
+				Object[] methods2=methods;	
 				String ifdotbefore = "";
 				JLabel[] labels2=labels;	
 				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels2);
@@ -3392,10 +3393,10 @@ class MethodSuggestionBox {
 								JOptionPane.showMessageDialog(null,"selected_label2 is null");
 							}
 							if(labels2[i].equals(selected_label2)) {
-								if(methods[i] instanceof Method) {
+								if(methods2[i] instanceof Method) {
 									methodorproperty = "(";
-									if(((Method)methods[i]).getParameterCount() > 0) {
-										Parameter[] parametertypes=((Method)methods[i]).getParameters();
+									if(((Method)methods2[i]).getParameterCount() > 0) {
+										Parameter[] parametertypes=((Method)methods2[i]).getParameters();
 										String[] variabletypes= new String[parametertypes.length];
 										for(int j = 0; j < parametertypes.length; j++) {
 											variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
@@ -3433,6 +3434,7 @@ class MethodSuggestionBox {
 							output=output+output2;	
 							//currentline=output;
 							Object[] allobjects2=MethodSuggestionBox.this.search(output);
+							methods2=allobjects2;
 							labels2=getLabels(allobjects2);
 							selected_index = 0;
 						}
