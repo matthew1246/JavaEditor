@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -78,17 +78,6 @@
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.base.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.controls.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.fxml.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.graphics.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.media.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.swing.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx.web.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\javafx-swt.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\jdk.jsobject.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\jfx.incubator.input.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\jfx.incubator.richtext.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],

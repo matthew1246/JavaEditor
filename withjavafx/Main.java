@@ -3698,6 +3698,8 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
+				Object[] methods2=methods;	
+				String ifdotbefore = "";
 				JLabel[] labels2=labels;	
 				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels2);
 				int selected_index = 0;
@@ -3769,10 +3771,10 @@ class MethodSuggestionBox {
 								JOptionPane.showMessageDialog(null,"selected_label2 is null");
 							}
 							if(labels2[i].equals(selected_label2)) {
-								if(methods[i] instanceof Method) {
+								if(methods2[i] instanceof Method) {
 									methodorproperty = "(";
-									if(((Method)methods[i]).getParameterCount() > 0) {
-										Parameter[] parametertypes=((Method)methods[i]).getParameters();
+									if(((Method)methods2[i]).getParameterCount() > 0) {
+										Parameter[] parametertypes=((Method)methods2[i]).getParameters();
 										String[] variabletypes= new String[parametertypes.length];
 										for(int j = 0; j < parametertypes.length; j++) {
 											variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
@@ -3784,7 +3786,10 @@ class MethodSuggestionBox {
 								}
 							}
 						}
+						if(!ifdotbefore.equals(""))
+							selected=ifdotbefore+"."+selected;
 						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
+						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected+methodorproperty;
 						String second =text.substring(caretposition+1,text.length());
 						main.textarea.setText(firsthalf+second);
 						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
@@ -3802,9 +3807,14 @@ class MethodSuggestionBox {
 							String output2=methodname;
 							if(methodname.endsWith("."))
 								output2=methodname.substring(0,(methodname.length()-1));	
+							ifdotbefore=output2;
+							
 							output=output+output2;	
+							//currentline=output;
 							Object[] allobjects2=MethodSuggestionBox.this.search(output);
+							methods2=allobjects2;
 							labels2=getLabels(allobjects2);
+							selected_index = 0;
 						}
 				
 						liveiterator = new LiveIterator<JLabel>(labels2);	
@@ -3820,6 +3830,8 @@ class MethodSuggestionBox {
 									liveiterator.remove(label);
 								}
 							}
+							labels2=liveiterator.list.toArray(new JLabel[liveiterator.list.size()]);
+							selected_index = 0;
 						}
 						
 						gridlayout.setRows(liveiterator.list.size()+1);
@@ -3828,10 +3840,13 @@ class MethodSuggestionBox {
 							JLabel label = liveiterator.next();
 							panelgridlayout.add(label);
 						}
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						suggestionbox.pack();	
-						JLabel selected_label = labels2[selected_index];
+						if(!isSelected()) {
+							selected_index = 0;
+							JLabel label5 = labels2[selected_index];	
+							label5.setOpaque(true);
+							label5.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+						}
+						/*JLabel selected_label = labels2[selected_index];
 						if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
 							selected_label.setOpaque(false);
 							selected_label.setBackground(new JLabel().getBackground());
@@ -3848,8 +3863,19 @@ class MethodSuggestionBox {
 								label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 							}
 						}
+						*/
+						panelgridlayout.validate();
+						panelgridlayout.repaint();
+						suggestionbox.pack();	
 					}
 				}
+				public boolean isSelected() {
+					if(selected_index > labels2.length) {
+						return false;
+					}
+					JLabel selected_label=labels2[selected_index];	
+					return !selected_label.getBackground().equals(new JLabel().getBackground());
+				}	
 				@Override
 				public void keyTyped(KeyEvent ev) { }
 			};
@@ -3911,5 +3937,5 @@ class MethodSuggestionBox {
 			}
 		}
 		return labels;
-	}
+	}	
 }
