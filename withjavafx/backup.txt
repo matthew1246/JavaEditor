@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java",
     "jars": [],
     "caretposition": 0
   },
@@ -82,11 +82,12 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\git\\quantum\\Main.java": {
-    "starterclass": "",
+    "starterclass": "Maintwo",
     "jars": [
-      "C:\\Users\\Owner\\Documents\\git\\quantum\\strange-0.0.5.jar"
+      "C:\\Users\\Owner\\Documents\\git\\quantum\\strange-0.0.5.jar",
+      "C:\\Users\\Owner\\Documents\\git\\quantum\\strangefx-0.0.5.jar"
     ],
-    "caretposition": 0
+    "caretposition": 198
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SuggestionBoxSelected.java": {
     "starterclass": "",
@@ -111,5 +112,13 @@
     "starterclass": "MuckFX",
     "jars": [],
     "caretposition": 287
+  },
+  "C:\\Users\\Owner\\Documents\\git\\quantum\\Maintwo.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\git\\quantum\\strange-0.0.5.jar",
+      "C:\\Users\\Owner\\Documents\\git\\quantum\\strangefx-0.0.5.jar"
+    ],
+    "caretposition": 0
   }
 }

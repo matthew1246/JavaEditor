@@ -16,9 +16,9 @@
   ],
   "S": [
     "Sslsessionbindinglistener",
-    "System",
     "SwingConstants",
     "StandardCopyOption",
+    "System",
     "String"
   ],
   "Array": [
@@ -63,8 +63,8 @@
     "selectedbranch",
     "selectpanel",
     "selectbranch",
-    "static",
-    "scene"
+    "scene",
+    "static"
   ],
   "sel": [
     "selected_label",
@@ -165,8 +165,8 @@
     "inputstream",
     "isJavaFX",
     "isGitInstalled",
-    "import",
-    "isVisible"
+    "isVisible",
+    "import"
   ],
   "ca": [
     "caretposition",
@@ -382,7 +382,8 @@
   "pr": [
     "private",
     "protected",
-    "process"
+    "process",
+    "program"
   ],
   "sta": [
     "static"
@@ -652,7 +653,6 @@
     "root_directory",
     "command",
     "whichfolderopened",
-    "System",
     "selectlabel",
     "JComboBox",
     "combobox",
@@ -707,9 +707,6 @@
     "return",
     "JOptionPane",
     "oneline",
-    "public",
-    "static",
-    "void",
     "class",
     "Insets",
     "Label",
@@ -720,7 +717,6 @@
     "Override",
     "ActionEvent",
     "Color",
-    "import",
     "gridpane",
     "scene",
     "IOException",
@@ -728,7 +724,6 @@
     "isVisible",
     "this",
     "true",
-    "String",
     "dir",
     "output2",
     "liney",
@@ -736,7 +731,22 @@
     "fileNames",
     "javafxlauncher",
     "javafx.application",
-    "javafx.application.Application"
+    "QName",
+    "Query",
+    "Result",
+    "System",
+    "javax.swing.Renderer",
+    "Renderer",
+    "program",
+    "Application",
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage",
+    "import",
+    "public",
+    "static",
+    "void",
+    "String"
   ],
   "Syst": [
     "System"
@@ -960,7 +970,8 @@
     "Arraylist",
     "ActionListener",
     "ArrayList",
-    "ActionEvent"
+    "ActionEvent",
+    "Application"
   ],
   "Ar": [
     "Arraylist",
@@ -1104,6 +1115,7 @@
     "panel3",
     "panel",
     "process",
+    "program",
     "public"
   ],
   "pl": [
@@ -2407,10 +2419,14 @@
   ],
   "R": [
     "Rectangle",
-    "RoundingMode"
+    "RoundingMode",
+    "Result",
+    "Renderer"
   ],
   "Re": [
-    "Rectangle"
+    "Rectangle",
+    "Result",
+    "Renderer"
   ],
   "Rec": [
     "Rectangle"
@@ -3229,7 +3245,10 @@
     "javafxcheckbox",
     "javafxlauncher",
     "javafx.application",
-    "javafx.application.Application"
+    "javax.swing.Renderer",
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage"
   ],
   "jc": [
     "jcomponent",
@@ -3399,7 +3418,8 @@
   ],
   "pro": [
     "protected",
-    "process"
+    "process",
+    "program"
   ],
   "prot": [
     "protected"
@@ -4567,35 +4587,48 @@
     "javafxcheckbox",
     "javafxlauncher",
     "javafx.application",
-    "javafx.application.Application"
+    "javax.swing.Renderer",
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage"
   ],
   "jav": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
     "javafx.application",
-    "javafx.application.Application"
+    "javax.swing.Renderer",
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage"
   ],
   "java": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
     "javafx.application",
-    "javafx.application.Application"
+    "javax.swing.Renderer",
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage"
   ],
   "javaf": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
     "javafx.application",
-    "javafx.application.Application"
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage"
   ],
   "javafx": [
     "javafxLabel",
     "javafxcheckbox",
     "javafxlauncher",
     "javafx.application",
-    "javafx.application.Application"
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage"
   ],
   "javafxL": [
     "javafxLabel"
@@ -5418,7 +5451,9 @@
   ],
   "javafx.": [
     "javafx.application",
-    "javafx.application.Application"
+    "javafx.application.Application",
+    "javafx.scene",
+    "javafx.stage.Stage"
   ],
   "javafx.a": [
     "javafx.application",
@@ -5499,5 +5534,199 @@
   ],
   "javafx.application.Application": [
     "javafx.application.Application"
+  ],
+  "Q": [
+    "QName",
+    "Query"
+  ],
+  "QN": [
+    "QName"
+  ],
+  "QNa": [
+    "QName"
+  ],
+  "QNam": [
+    "QName"
+  ],
+  "QName": [
+    "QName"
+  ],
+  "Qu": [
+    "Query"
+  ],
+  "Que": [
+    "Query"
+  ],
+  "Quer": [
+    "Query"
+  ],
+  "Query": [
+    "Query"
+  ],
+  "prog": [
+    "program"
+  ],
+  "progr": [
+    "program"
+  ],
+  "progra": [
+    "program"
+  ],
+  "program": [
+    "program"
+  ],
+  "Res": [
+    "Result"
+  ],
+  "Resu": [
+    "Result"
+  ],
+  "Resul": [
+    "Result"
+  ],
+  "Result": [
+    "Result"
+  ],
+  "javax": [
+    "javax.swing.Renderer"
+  ],
+  "javax.": [
+    "javax.swing.Renderer"
+  ],
+  "javax.s": [
+    "javax.swing.Renderer"
+  ],
+  "javax.sw": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swi": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swin": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.R": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.Re": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.Ren": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.Rend": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.Rende": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.Render": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.Rendere": [
+    "javax.swing.Renderer"
+  ],
+  "javax.swing.Renderer": [
+    "javax.swing.Renderer"
+  ],
+  "Ren": [
+    "Renderer"
+  ],
+  "Rend": [
+    "Renderer"
+  ],
+  "Rende": [
+    "Renderer"
+  ],
+  "Render": [
+    "Renderer"
+  ],
+  "Rendere": [
+    "Renderer"
+  ],
+  "Renderer": [
+    "Renderer"
+  ],
+  "Ap": [
+    "Application"
+  ],
+  "App": [
+    "Application"
+  ],
+  "Appl": [
+    "Application"
+  ],
+  "Appli": [
+    "Application"
+  ],
+  "Applic": [
+    "Application"
+  ],
+  "Applica": [
+    "Application"
+  ],
+  "Applicat": [
+    "Application"
+  ],
+  "Applicati": [
+    "Application"
+  ],
+  "Applicatio": [
+    "Application"
+  ],
+  "Application": [
+    "Application"
+  ],
+  "javafx.s": [
+    "javafx.scene",
+    "javafx.stage.Stage"
+  ],
+  "javafx.sc": [
+    "javafx.scene"
+  ],
+  "javafx.sce": [
+    "javafx.scene"
+  ],
+  "javafx.scen": [
+    "javafx.scene"
+  ],
+  "javafx.scene": [
+    "javafx.scene"
+  ],
+  "javafx.st": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.sta": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stag": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stage": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stage.": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stage.S": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stage.St": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stage.Sta": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stage.Stag": [
+    "javafx.stage.Stage"
+  ],
+  "javafx.stage.Stage": [
+    "javafx.stage.Stage"
   ]
 }

@@ -3406,7 +3406,11 @@ class MethodSuggestionBox {
 								}
 							}
 						}
-						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
+						String ifdotbefore = "";
+						if(currentline.contains(".")) {
+							ifdotbefore=currentline;
+						}
+						String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected+methodorproperty;
 						String second =text.substring(caretposition+1,text.length());
 						main.textarea.setText(firsthalf+second);
 						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
@@ -3425,8 +3429,10 @@ class MethodSuggestionBox {
 							if(methodname.endsWith("."))
 								output2=methodname.substring(0,(methodname.length()-1));	
 							output=output+output2;	
+							currentline=output;
 							Object[] allobjects2=MethodSuggestionBox.this.search(output);
 							labels2=getLabels(allobjects2);
+							selected_index = 0;
 						}
 				
 						liveiterator = new LiveIterator<JLabel>(labels2);	
@@ -3442,6 +3448,8 @@ class MethodSuggestionBox {
 									liveiterator.remove(label);
 								}
 							}
+							labels2=liveiterator.list.toArray(new JLabel[liveiterator.list.size()]);
+							selected_index = 0;
 						}
 						
 						gridlayout.setRows(liveiterator.list.size()+1);
@@ -3450,10 +3458,14 @@ class MethodSuggestionBox {
 							JLabel label = liveiterator.next();
 							panelgridlayout.add(label);
 						}
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						suggestionbox.pack();	
-						JLabel selected_label = labels2[selected_index];
+						JOptionPane.showMessageDialog(null,isSelected()+"");
+						if(!isSelected()) {
+							selected_index = 0;
+							JLabel label5 = labels2[selected_index];	
+							label5.setOpaque(true);
+							label5.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+						}
+						/*JLabel selected_label = labels2[selected_index];
 						if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
 							selected_label.setOpaque(false);
 							selected_label.setBackground(new JLabel().getBackground());
@@ -3470,8 +3482,19 @@ class MethodSuggestionBox {
 								label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 							}
 						}
+						*/
+						panelgridlayout.validate();
+						panelgridlayout.repaint();
+						suggestionbox.pack();	
 					}
 				}
+				public boolean isSelected() {
+					if(selected_index > labels2.length) {
+						return false;
+					}
+					JLabel selected_label=labels2[selected_index];	
+					return !selected_label.getBackground().equals(new JLabel().getBackground());
+				}	
 				@Override
 				public void keyTyped(KeyEvent ev) { }
 			};
@@ -3533,5 +3556,5 @@ class MethodSuggestionBox {
 			}
 		}
 		return labels;
-	}
+	}	
 }
