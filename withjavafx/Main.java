@@ -948,7 +948,7 @@ public class Main {
 							output.close();
 							
 							AllFiles allfiles = new AllFiles(main,dir);
-							if(allfiles.exists() && !allfiles.delete()) {
+							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
 								commandline = new CommandLine();
 								JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
 								FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
@@ -959,10 +959,10 @@ public class Main {
 								output2.write("\n");
 								output2.write("START /B /WAIT taskkill /F /im javaw.exe");
 								output2.write("\n");
-								for(int i = 0; i < allfiles.files.length; i++) {
-									File file2 = new File(allfiles.files[i]);
+								for(int i = 0; i < allfiles.files.size(); i++) {
+									File file2 = new File(allfiles.files.get(i));
 									if(file2.exists()) {
-										output2.write("del "+allfiles.files[i]);
+										output2.write("del "+allfiles.files.get(i));
 										output2.write("\n");
 									}
 								}
@@ -1080,7 +1080,7 @@ public class Main {
 						
 						//File file = new File(dir+main+".jar");
 						AllFiles allfiles = new AllFiles(main,dir);
-						if(allfiles.exists() && !allfiles.delete()) {
+						if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
 							commandline = new CommandLine();
 							JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
 							FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
@@ -1091,10 +1091,10 @@ public class Main {
 							output2.write("\n");
 							output2.write("START /B /WAIT taskkill /F /im javaw.exe");
 							output2.write("\n");
-							for(int i = 0; i < allfiles.files.length; i++) {
-								File file2 = new File(allfiles.files[i]);
+							for(int i = 0; i < allfiles.files.size(); i++) {
+								File file2 = new File(allfiles.files.get(i));
 								if(file2.exists()) {
-									output2.write("del "+allfiles.files[i]);
+									output2.write("del "+allfiles.files.get(i));
 									output2.write("\n");
 								}
 							}

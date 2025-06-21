@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -14,7 +14,8 @@
       "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\Links.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllFiles.java"
     ],
     "caretposition": 0
   },
@@ -98,5 +99,14 @@
     ],
     "fileNames": [],
     "caretposition": 743
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllFiles.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
