@@ -89,7 +89,14 @@ class Middle {
 		else { // Normal execution.
 			first_half4 = first_half_lines[first_half_lines.length-1];
 		}
-		return first_half4+second_half_lines[0];
+		String second_half4 = "";
+		if(second_half_lines.length == 0) {
+			second_half4=first_half4;
+		}
+		else { // Normal execution
+			second_half4=second_half_lines[0];
+		}
+		return first_half4+second_half4;
 	}
 	
 	public int getCurrentLineCaretIndex() {
