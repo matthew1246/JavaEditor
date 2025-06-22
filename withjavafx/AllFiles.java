@@ -29,7 +29,8 @@ public class AllFiles {
 			filename=filename.replaceAll(".+/","");
 			if(dir.equals(dir2)) {
 				filename=dir+filename;	
-				files.add(filename);
+				if(filename.endsWith(".jar") && !files.contains(filename))
+					files.add(filename);
 			}
 			return dir.equals(dir2);
 		} catch (URISyntaxException ex) {
