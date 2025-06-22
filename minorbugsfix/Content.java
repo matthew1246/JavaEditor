@@ -30,6 +30,7 @@ class Content {
 	public void NewLineCharacter() {
 		Middle middle = new Middle(textArea);
 		String line =middle.getWholePreviousLine();	
+		//JOptionPane.showMessageDialog(null,"*"+line+"*");
 		String pretabs = PreTabs(line);		
 		middle.addMiddle(pretabs);		
 	}
