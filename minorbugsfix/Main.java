@@ -2472,16 +2472,18 @@ class CurlyBraceKeyListener implements KeyListener {
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
-		Matcher matcher=pattern.matcher(line);
-		if(matcher.find()) {
-			String variablename = matcher.group(1);
-			if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-				autokeylistener.open(variablename,caretposition);
+		if(line.length() > 1) {
+			Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
+			Matcher matcher=pattern.matcher(line);
+			if(matcher.find()) {
+				String variablename = matcher.group(1);
+				if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
+					autokeylistener.open(variablename,caretposition);
+				}
 			}
-		}
-		if(ev.isControlDown()) {
-			isControlDown = true;
+			if(ev.isControlDown()) {
+				isControlDown = true;
+			}
 		}
 	}
 	public boolean is_content_update = false;
@@ -2941,13 +2943,15 @@ class MethodSuggestionBox {
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
-		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
-		Matcher matcher0=pattern.matcher(currentline2);	
-		//List<String> classesfrompackage=null;	
-		if(matcher0.find()) {
-			currentline = matcher0.group(2);					
-			Object[] allobjects=search(currentline);
-			show(allobjects,caretposition,currentline);	
+		if(currentline2.length() > 0) {
+			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
+			Matcher matcher0=pattern.matcher(currentline2);	
+			//List<String> classesfrompackage=null;	
+			if(matcher0.find()) {
+				currentline = matcher0.group(2);					
+				Object[] allobjects=search(currentline);
+				show(allobjects,caretposition,currentline);	
+			}
 		}
 	}
 	public Object[] search(String input) {
