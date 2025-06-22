@@ -3320,6 +3320,7 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
+				boolean justStarted = true;	
 				Object[] methods2=methods;	
 				String ifdotbefore = "";
 				JLabel[] labels2=labels;	
@@ -3425,18 +3426,23 @@ class MethodSuggestionBox {
 						
 						String methodname=search_textfield.getText();
 						if(keyevent.getKeyCode() == KeyEvent.VK_PERIOD) {
-							String output=currentline+".";
-							String output2=methodname;
-							if(methodname.endsWith("."))
-								output2=methodname.substring(0,(methodname.length()-1));	
-							ifdotbefore=output2;
-							
-							output=output+output2;	
-							//currentline=output;
-							Object[] allobjects2=MethodSuggestionBox.this.search(output);
-							methods2=allobjects2;
-							labels2=getLabels(allobjects2);
-							selected_index = 0;
+							if(!justStarted) {	
+								String output=currentline+".";
+								String output2=methodname;
+								if(methodname.endsWith("."))
+									output2=methodname.substring(0,(methodname.length()-1));	
+								ifdotbefore=output2;
+								
+								output=output+output2;	
+								//currentline=output;
+								Object[] allobjects2=MethodSuggestionBox.this.search(output);
+								methods2=allobjects2;
+								labels2=getLabels(allobjects2);
+								selected_index = 0;
+							}
+							else {
+								justStarted = false;
+							}
 						}
 				
 						liveiterator = new LiveIterator<JLabel>(labels2);	
