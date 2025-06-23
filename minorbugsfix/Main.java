@@ -901,7 +901,7 @@ public class Main {
 		closetab.addActionListener((ev) -> {	
 			int tabindex=tabbedpane.getSelectedIndex();
 			fileNames.remove(tabindex);
-			if(fileNames.size() != 0)
+			if(fileNames.size() != 0 && tabindex != 0)
 				tabbedpane.setSelectedIndex((tabindex-1));
 			tabbedpane.remove(tabindex);
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
