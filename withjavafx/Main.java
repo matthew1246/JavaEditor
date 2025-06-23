@@ -313,10 +313,10 @@ public class Main {
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 		scrollpane = new JScrollPane(textarea);
-		tabbedpane.add(getFileName(fileName),scrollpane);
+		//tabbedpane.add(getFileName(fileName),scrollpane);
 
-		tabbedpane.addTab("+",pluspanel);
-		fileNames.add(fileName);
+		//tabbedpane.addTab("+",pluspanel);
+		//fileNames.add(fileName);
 				
 		frame.getContentPane().add(tabbedpane);
 		
@@ -2302,15 +2302,13 @@ public class Main {
 					LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
 					Integer integer2 =iterator4.getFirstValue();
 					if(integer2 != null) {
-						JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
-						
 						//scrollToCaretPosition(integer2);
 					}
 				}
 	
 				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
 					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-							if(mainclass.equals(key)) {
+						if(mainclass.equals(key)) {
 							Set<String> method_names=value.keySet();
 							for(String method_name:method_names) {
 								combobox.addItem(method_name);
