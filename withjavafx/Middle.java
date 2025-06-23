@@ -14,7 +14,12 @@ class Middle {
 		String text = textarea.getText();
 	 	first = text.substring(0,index);
 	 	first_half_lines = first.split("\n");
-	 	current_line = first_half_lines[first_half_lines.length-1];
+	 	if(first_half_lines.length == 0) {
+	 		current_line=first;	
+ 		}
+ 		else {
+	 		current_line = first_half_lines[first_half_lines.length-1];
+ 		}
 		second = text.substring(index,text.length());
 	}
 	
@@ -67,12 +72,31 @@ class Middle {
 	}
 	
 	public String getWholePreviousLine() {
-		return first_half_lines[first_half_lines.length-1];
+		if(first_half_lines.length == 0) {
+			return first;		
+		}
+		else { // Normal execution
+			return first_half_lines[first_half_lines.length-1];
+		}
 	}
 	
 	public String getCurrentWholeLine() {
 		String[] second_half_lines = second.split("\n");
-		return first_half_lines[first_half_lines.length-1]+second_half_lines[0];
+		String first_half4 = "";
+		if(first_half_lines.length == 0) {
+			first_half4 = first;
+		}
+		else { // Normal execution.
+			first_half4 = first_half_lines[first_half_lines.length-1];
+		}
+		String second_half4 = "";
+		if(second_half_lines.length == 0) {
+			second_half4=first_half4;
+		}
+		else { // Normal execution
+			second_half4=second_half_lines[0];
+		}
+		return first_half4+second_half4;
 	}
 	
 	public int getCurrentLineCaretIndex() {
@@ -89,7 +113,8 @@ class Middle {
 		String prelines=String.join("\n",lines);
 		return prelines.length()+currentlineindex;
 	}
-	/*
+	
+/*
 	** This is opposite of getWholeDocumentIndexFromCurrentLineIndex()
 	*/
 	public int getLineIndexFromWholeDocumentIndex(int wholedocumentindex) {

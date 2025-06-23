@@ -8,7 +8,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Preferences.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Preferences.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Middle.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Middle.java"
     ],
     "caretposition": 0
   },
@@ -178,6 +180,15 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Preferences.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Middle.java": {
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
