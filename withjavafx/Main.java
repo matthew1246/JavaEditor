@@ -1567,6 +1567,17 @@ public class Main {
 		});		
 		textarea.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
+				CurlyBraceKeyListener curlybracekeylistener = null;
+				KeyListener[] keylisteners=textarea.getKeyListeners();
+				for(KeyListener keylistener:keylisteners) {
+					if(keylistener instanceof CurlyBraceKeyListener) {
+						if(curlybracekeylistener != null) {
+							JOptionPane.showMessageDialog(null,"Found more than one CurlyBraceKeyListener!");				
+							break;
+						}	
+						curlybracekeylistener = (CurlyBraceKeyListener)keylistener;
+					}
+				}				
 				if(!curlybracekeylistener.is_content_update) {
 					String text = textarea.getText();
 					int position = textarea.getCaretPosition();
