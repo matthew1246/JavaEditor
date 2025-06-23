@@ -85,6 +85,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JMenuItem closetab = new JMenuItem("Close Tab");	
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
@@ -362,6 +363,7 @@ public class Main {
 		menu.add(menuitem);
 		menu.add(opennewwindow);
 		menu.add(opennewtab);
+		menu.add(closetab);
 		menu.add(saveItem);
 		menu.add(saveasitem);
 		menu.add(generatejar);
@@ -896,6 +898,14 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
+		closetab.addActionListener((ev) -> {
+			int tabindex=tabbedpane.getSelectedIndex();
+			fileNames.remove(tabindex);
+			tabbedpane.remove(tabindex);
+			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+			storeselectedfile.setTabs(fileNames);
+		});
+				
 		setFullPackageNames();		
 		setSubpackages();
 		setPackages();
