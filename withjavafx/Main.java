@@ -85,6 +85,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JMenuItem closetab = new JMenuItem("Close Tab");		
 	public JCheckBox javafxcheckbox;
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
@@ -147,17 +148,106 @@ public class Main {
 	** If have default content for window
 	*/
 	public Main(OpenDefaultContent odc) {
+		try {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git = new Git(fileName);
 		}
 		setLayout();
 		expandable = new Expandable(this);	
-		if(!fileName.equals("")) {
+		if(fileName.equals("")) {
+			JTextArea textarea2 = new JTextArea();
+			Font originalFont = textarea.getFont();
+			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+			JScrollPane scrollpane2 = new JScrollPane(textarea2);
+			textarea2.setTabSize(4);
+			
+			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+			
+			this.textarea=textarea2;
+			
+			tabbedpane.addTab(fileName,scrollpane2);
+			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+			fileNames.add("");
+		}
+
+		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
-			open(getFileName(fileName));
-		}		
+			
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();	
+			List<String> tabs=storeselectedfile.getTabs();
+			if(tabs.size() <= 1) {
+				fileNames.add(fileName);
+				
+				JTextArea textarea2 = new JTextArea();
+				Font originalFont = textarea.getFont();
+				textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+	
+				JScrollPane scrollpane2 = new JScrollPane(textarea2);
+				textarea2.setTabSize(4);
+				
+				textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+				//positiontrackers.add(new PositionTracker(textarea2));
+				
+				this.textarea=textarea2;
+				
+				tabbedpane.addTab(fileName,scrollpane2);
+				tabbedpane.addTab("+",pluspanel);
+				tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+				open(getFileName(fileName));
+		
+			}
+			else { // if(tabs.size() > 1) {
+				SwingUtilities.invokeAndWait(new Runnable() {
+					public void run() {	
+						for(String directoryandfilename:tabs) {
+						try {
+							JTextArea textarea2 = new JTextArea();
+							Font originalFont = textarea.getFont();
+							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+		
+							JScrollPane scrollpane2 = new JScrollPane(textarea2);
+							String filename = Main.this.getFileName(directoryandfilename);
+							
+							Path path = Paths.get(directoryandfilename);
+							String lines2= Files.readString(path,StandardCharsets.UTF_8);
+							textarea2.setTabSize(4);
+							textarea2.setText(lines2);
+							
+							textarea2.addKeyListener(new CurlyBraceKeyListener(Main.this));
+							//positiontrackers.add(new PositionTracker(textarea2));
+							
+							tabbedpane.addTab(filename,scrollpane2);
+						}
+						catch (IOException ex) {
+							ex.printStackTrace();
+						}
+						}
+					}
+				});
+				fileNames = tabs;
+				tabbedpane.addTab("+",pluspanel);
+				
+				filelistmodifier = new FileListModifier();
+				filelistmodifier.fillList(fileName);
+				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+				textarea=(JTextArea)jscrollpane5.getViewport().getView();
+				getclassmethods = new GetClassMethods(textarea);		
+				getclassname = new GetClassName(textarea);
+				loadComboboxes(filelistmodifier);
+				filenamescombobox.setSelectedItem(getFileName(fileName));
+			}
+		}
 		setListeners();	
+		} catch(InvocationTargetException ex) {
+			ex.printStackTrace();
+		} catch(InterruptedException ex) {
+			ex.printStackTrace();								
+		}catch(ArrayIndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		}
 	}
 	public String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
@@ -277,6 +367,7 @@ public class Main {
 		menu.add(menuitem);
 		menu.add(opennewwindow);
 		menu.add(opennewtab);
+		menu.add(closetab);
 		menu.add(saveItem);
 		menu.add(saveasitem);
 		menu.add(generatejar);
@@ -848,6 +939,17 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		closetab.addActionListener((ev) -> {	
+			int tabindex=tabbedpane.getSelectedIndex();
+			fileNames.remove(tabindex);
+			if(fileNames.size() != 0 && tabindex != 0)
+				tabbedpane.setSelectedIndex((tabindex-1));
+			tabbedpane.remove(tabindex);
+			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+			storeselectedfile.setTabs(fileNames);
+			
+		});	
+	
 		setFullPackageNames();		
 		setSubpackages();
 		setPackages();
@@ -1330,9 +1432,10 @@ public class Main {
 		combobox.addItemListener((ev) -> {
 			selectCode(ev);
 		});
-		curlybracekeylistener = new CurlyBraceKeyListener(this);				
+		/*curlybracekeylistener = new CurlyBraceKeyListener(this);				
 		positiontrackers.add(curlybracekeylistener.positiontracker);
  		textarea.addKeyListener(curlybracekeylistener); 		
+ 		*/
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
@@ -1989,7 +2092,7 @@ public class Main {
 		}
 		return filename;
 	}
-	public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
+	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
 		try {
 			int index=tabbedpane.getSelectedIndex();
@@ -2020,6 +2123,8 @@ public class Main {
 					JScrollPane scrollpane2 = new JScrollPane(textarea2);
 					String directoryandfilename = selectedFile.getPath();
 					fileNames.add(directoryandfilename);
+					StoreSelectedFile storeselectedfile=  new StoreSelectedFile();
+					storeselectedfile.setTabs(fileNames);
 					String filename = Main.this.getFileName(directoryandfilename);
 					
 					Path path = Paths.get(directoryandfilename);
@@ -2027,8 +2132,8 @@ public class Main {
 					textarea2.setTabSize(4);
 					textarea2.setText(lines);
 					
-					textarea2.addKeyListener(curlybracekeylistener);
-					positiontrackers.add(new PositionTracker(textarea2));
+					textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+					//positiontrackers.add(new PositionTracker(textarea2));
 					
 					tabbedpane.addTab(filename,scrollpane2);
 					tabbedpane.addTab("+",pluspanel);
@@ -2036,7 +2141,7 @@ public class Main {
 				}
 			}
 			fileName=fileNames.get(tabbedpane.getSelectedIndex());
-			curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+			//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 			Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 			
@@ -2044,6 +2149,10 @@ public class Main {
 				filelistmodifier.fillList(fileName);
 			}			
 			else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
+				filelistmodifier = new FileListModifier();
+				filelistmodifier.fillList(fileName);
+			}
+			else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
 				filelistmodifier = new FileListModifier();
 				filelistmodifier.fillList(fileName);
 			}
@@ -2059,24 +2168,28 @@ public class Main {
 			if(fileName != null && !fileName.equals("")) {
 				frame.setTitle(fileName.replaceAll(".+\\\\",""));
 			}
-			//filelistmodifier.setSelected(selected2);
+			filelistmodifier.setSelected(getFileName(fileName));
 			/*if(!deselected.equals("")) {
 				filelistmodifier.setToMostRecentAfterSelected(deselected);	
 			}*/
 			String dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
 			String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-			if(!dir.equals(dir2)) {
+			/*if(!dir.equals(dir2)) {
 				filelistmodifier.fillList(fileName);
 				
-			}
+			}*/
 			
 			this.fileName=fileName;
+				
 			loadComboboxes(filelistmodifier);
 			filenamescombobox.setSelectedItem(getFileName(fileName));
-			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			
+			//filenamescombobox.setSelectedItem(getFileName(fileName));
+			/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			int caretposition=storeselectedfile3.getCaretPosition(fileName);
 			if(caretposition != 0)
 			scrollToCaretPosition(caretposition);
+			*/
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
@@ -2426,7 +2539,8 @@ class OpenActionListener implements ActionListener {
 }
 
 class CurlyBraceKeyListener implements KeyListener {
-	public Main main;
+	public Main main;
+
 	protected Tracker tracker;
 	public RenameVariable renamevariable;
 	public CurlyBraceKeyListener(Main main) {
@@ -2441,7 +2555,8 @@ class CurlyBraceKeyListener implements KeyListener {
 		return main.textarea.getCaretPosition() == main.textarea.getText().length();
 	}
 	private boolean isShift = false;
-	private boolean isControlDown = false;
+	
+private boolean isControlDown = false;
 	private boolean isTab = false;
 	private SelectedLines selectedlines;
 	public PositionTracker positiontracker;
@@ -2467,7 +2582,7 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;	
 		}		
 		if(ev.getKeyChar() =='.') {
-			MethodSuggestionBox methodsuggestionbox = new MethodSuggestionBox(main);
+			MethodSuggestionBox methodsuggestionbox= new MethodSuggestionBox(main);
 		}
 		/**
 		** This is a variable suggestion box not a method
@@ -2480,16 +2595,18 @@ class CurlyBraceKeyListener implements KeyListener {
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
-		Matcher matcher=pattern.matcher(line);
-		if(matcher.find()) {
-			String variablename = matcher.group(1);
-			if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-				autokeylistener.open(variablename,caretposition);
+		if(line.length() > 1) {
+			Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
+			Matcher matcher=pattern.matcher(line);
+			if(matcher.find()) {
+				String variablename = matcher.group(1);
+				if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
+					autokeylistener.open(variablename,caretposition);
+				}
 			}
-		}
-		if(ev.isControlDown()) {
-			isControlDown = true;
+			if(ev.isControlDown()) {
+				isControlDown = true;
+			}
 		}
 	}
 	public boolean is_content_update = false;
@@ -2585,380 +2702,10 @@ class CurlyBraceKeyListener implements KeyListener {
 			isControlDown = false;
 		}
 	}
-	public String getClassName(String variablenameorclassname,String text) {
-		// Below if variable name
-		Pattern pattern4= Pattern.compile("(\\s*(\\b(public|protected|private)\\b)?\\s*(\\b(static)\\b)?\\s*([a-zA-Z<>0-9,?]+)\\s+("+variablenameorclassname+")(?=\\s*=|;|:|\\)))");	
-		Matcher matcher2=pattern4.matcher(text);
-		if(matcher2.find()) {
-			String classname=matcher2.group(6);
-			return classname;
-		}
-		else { // If static class name
-			return variablenameorclassname;
-		}
-	}
-	public Class<?> getClassQuestionMark(String classname,String text) {
-		try {
-			if(classname.contains("<") && classname.contains(">")) {
-				classname = classname.replaceAll("<.+>","");
-			}
-			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
-			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);			
-			Class<?> classquestionmark=classloader.loadClass(dir+classname);
-			// Class<?> classquestionmark=Class.forName();
-			return classquestionmark;
-		} catch(ClassNotFoundException ex3) {
-			String[] lines = text.split("\n");
-			try {
-				for(int i = 0; i < lines.length; i++) {
-					String line = lines[i];
-					String output = "import (.+)\\."+classname+";";
-					Pattern findimport=Pattern.compile(output);
-					Matcher matcher12=findimport.matcher(line);
-					if(matcher12.find()) {
-						return Class.forName(matcher12.group(1)+"."+classname);
-					}	
-				}
-				List<String> imports =Main.muck.links.getImport(classname);
-				for(String importy:imports) {
-					String select="import "+importy.replaceAll(classname+"$","")+"*;";
-					if(text.contains(select))
-						return Class.forName(importy);
-				}
-				return Class.forName(imports.get(0));
-			}
-			catch(ClassNotFoundException ex4) {
-				ex4.printStackTrace();
-				try {
-					return Class.forName("java.lang.Object");
-				}
-				catch(ClassNotFoundException ex5) {
-					ex5.printStackTrace();
-					return null;
-				}
-			}
-		}
-	}
 	public static SuggestionBoxSelected suggestionboxselected = new SuggestionBoxSelected();
 	public static int red = 94;
 	public static int green = 167;
 	public static int blue = 236;		
-	public void Popup(Class<?> classquestionmark,int caretposition) {
-		try {
-			JFrame suggestionbox = new JFrame();			
-			suggestionbox.setTitle(classquestionmark.getName());
-			suggestionbox.setSize(100,500);
-			JPanel panelgridlayout = new JPanel();
-			//Member[] unorderedmethods=getAllPropertyAndMethods(classquestionmark);
-			Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(classquestionmark);
-			for(Object object:unorderedmethods) {
-				if(object instanceof Enum) {
-					System.out.println(((Enum)object).name());
-				}
-			}
-			System.out.println();
-			System.out.println();
-			final Object[] methods = suggestionboxselected.Reordered(unorderedmethods,classquestionmark);
-			for(Object object:methods) {
-				if(object instanceof Enum) {
-					System.out.println(((Enum)object).name());
-				}
-			}
-			GridLayout gridlayout=new GridLayout(methods.length+1,1);
-			panelgridlayout.setLayout(gridlayout);
-			JTextField search_textfield=new JTextField();
-			panelgridlayout.add(search_textfield);
-			JLabel[] labels = new JLabel[methods.length];
-			for(int i = 0; i < methods.length; i++) {
-				if(methods[i] instanceof Method) {
-					String name=((Method)methods[i]).getName();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
-					String name=((Class<?>)methods[i]).getName();
-					//String name=((Enum)methods[i]).name();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
-					String name=((Class<?>)methods[i]).getName();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else if(methods[i] instanceof Member) {
-					String name=((Member)methods[i]).getName();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
-					String name= methods[i].toString();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-			}
-			JScrollPane scrollpane = new JScrollPane(panelgridlayout);
-			
-			labels[0].setOpaque(true);
-			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
-			KeyListener keylistener = new KeyListener() {
-				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels);
-				int selected_index = 0;
-				@Override
-				public void keyPressed(KeyEvent keyevent) {
-					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
-						suggestionbox.dispose();
-					}
-					else if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-						labels[selected_index].setOpaque(false);
-						labels[selected_index].setBackground(new JLabel().getBackground());
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						int live_index = liveiterator.indexOf(labels[selected_index]);						
-						if( live_index < (liveiterator.list.size()-1) ) {
-							live_index++;
-							JLabel selected_label=liveiterator.list.get(live_index);
-							selected_label.setOpaque(true);
-							selected_label.setBackground(new Color(red,green,blue));
-							panelgridlayout.validate();
-							panelgridlayout.repaint();
-							
-							label3:for(int i = 0; i < labels.length; i++) {
-								if(selected_label.equals(labels[i])) {
-									selected_index = i;
-									break label3;
-								}
-							}
-						}
-					}
-					else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-						labels[selected_index].setOpaque(false);
-						labels[selected_index].setBackground(new JLabel().getBackground());
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						int live_index = liveiterator.indexOf(labels[selected_index]);
-						if(live_index > 0) {
-							live_index--;
-							JLabel selected_label=liveiterator.list.get(live_index);
-							selected_label.setOpaque(true);
-							selected_label.setBackground(new Color(red,green,blue));
-							panelgridlayout.validate();
-							panelgridlayout.repaint();
-							
-							label4:for(int i = 0; i < labels.length; i++) {
-								if(selected_label.equals(labels[i])) {
-									selected_index = i;
-									break label4;
-								}
-							}
-						}
-					}
-				}
-				@Override
-				public void keyReleased(KeyEvent keyevent) {
-					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-						suggestionbox.dispose();
-						String text = main.textarea.getText();
-						// String selected = search_textfield.getText().trim();
-						JLabel selected_label2 =labels[selected_index];
-						String selected = selected_label2.getText();
-						suggestionboxselected.Save(classquestionmark.getSimpleName(),selected);
-						String methodorproperty = "";
-						breaky:for(int i = 0; i < labels.length; i++) {
-							if(labels[i] == null) {
-								JOptionPane.showMessageDialog(null,"labels[i] is null");
-							}
-							if(selected_label2 == null) {
-								JOptionPane.showMessageDialog(null,"selected_label2 is null");
-							}
-							if(labels[i].equals(selected_label2)) {
-								if(methods[i] instanceof Method) {
-									methodorproperty = "(";
-									if(((Method)methods[i]).getParameterCount() > 0) {
-										Parameter[] parametertypes=((Method)methods[i]).getParameters();
-										String[] variabletypes= new String[parametertypes.length];
-										for(int j = 0; j < parametertypes.length; j++) {
-											variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
-										}
-										methodorproperty+=String.join(",",variabletypes);
-									}
-									methodorproperty+=")";
-									break breaky;
-								}
-							}
-						}
-						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
-						String second =text.substring(caretposition+1,text.length());
-						main.textarea.setText(firsthalf+second);
-						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
-					}
-					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-						liveiterator.reset();
-						while(liveiterator.hasNext()) {
-							JLabel label = liveiterator.next();
-							panelgridlayout.remove(label);
-						}
-						liveiterator = new LiveIterator<JLabel>(labels);	
-						String methodname=search_textfield.getText();	
-						for(JLabel label:labels) {
-							if( ! (label.getText().toLowerCase().startsWith(methodname.toLowerCase())) ) {
-								liveiterator.remove(label);
-							}
-						}
-						
-						gridlayout.setRows(liveiterator.list.size()+1);
-						liveiterator.reset();
-						while(liveiterator.hasNext()) {
-							JLabel label = liveiterator.next();
-							panelgridlayout.add(label);
-						}
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						suggestionbox.pack();	
-						JLabel selected_label = labels[selected_index];
-						if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
-							selected_label.setOpaque(false);
-							selected_label.setBackground(new JLabel().getBackground());
-							
-							if(liveiterator.list.size() != 0) {
-								JLabel label=liveiterator.list.get(0);
-								labelly2:for(int i = 0; i < labels.length; i++) {
-									if(label.equals(labels[i])) {
-										selected_index=i;
-										break labelly2;
-									}
-								}
-								label.setOpaque(true);
-								label.setBackground(new Color(red,green,blue));
-							}
-						}
-					}
-				}
-				@Override
-				public void keyTyped(KeyEvent ev) { }
-			};
-			search_textfield.addKeyListener(keylistener);
-			//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
-			suggestionbox.add(scrollpane);
-			Rectangle2D rectanglecoords=main.textarea.modelToView2D(caretposition);
-			Point screencoordinates= new Point((int)rectanglecoords.getX(),(int)rectanglecoords.getY());
-			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
-			suggestionbox.setLocation(screencoordinates);
-			//suggestionbox.pack();
-			suggestionbox.setVisible(true);
-		}
-		catch(BadLocationException ex) {
-			ex.printStackTrace();
-		}
-	}
-	public Member[] getAllPropertyAndMethods(String classname,String text) {
-		return getAllPropertyAndMethods(getClassQuestionMark(classname,text));
-	}
-	public Member[] getAllPropertyAndMethods(Class<?> classquestionmark) {
-		Member[] methods4=classquestionmark.getDeclaredMethods();
-		List<Class<?>> ancestors=getAncestorsForClassQuestionMark(classquestionmark);
-		methods4=addAncestorsToMethods(methods4,ancestors);
-		Member[] properties = classquestionmark.getDeclaredFields();
-		Member[] properties2= classquestionmark.getFields();
-		Member[] members= addMembersToMembers(methods4,properties);
-		return addMembersToMembers(members,properties2);
-	}
-	public Object[] getAllPropertyAndMethodsAndEnums(Class<?> classquestionmark) {
-		if(classquestionmark.isEnum()) {
-			List<Object> list = new ArrayList<Object>();
-			Field[] fields= classquestionmark.getDeclaredFields();
-			for(Field field : fields) {
-				if(field.isEnumConstant()) {
-					field.setAccessible(true);
-					list.add(field);
-				}
-			}
-			return list.toArray(new Object[list.size()]);
-		}
-		else {		
-			Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
-			Class<?>[] enums=classquestionmark.getDeclaredClasses();
-			for(Class<?> enum1:enums) {
-				if(enum1.isEnum()) {
-					Field[] fields= enum1.getDeclaredFields();
-					for(Field field : fields) {
-						if(field.isEnumConstant()) {
-							field.setAccessible(true);
-						}
-					}
-				}
-			}
-			//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
-			int amount_of_enums = 0;
-			if(enums != null) {
-				amount_of_enums = enums.length;
-			}
-			Object[] propertiesandmethodsandenums=new Object[propertiesandmethods.length+amount_of_enums];
-			for(int i = 0; i < propertiesandmethods.length; i++) {
-				propertiesandmethodsandenums[i] = propertiesandmethods[i];
-			}
-			for(int i = 0; i < amount_of_enums; i++) {
-				propertiesandmethodsandenums[propertiesandmethods.length+i]=enums[i];
-			}
-			return propertiesandmethodsandenums;
-		}
-	}
-	public List<Class<?>> getAncestorsForClassQuestionMark(Class<?> classquestionmark) {
-		List<Class<?>> list = new ArrayList<Class<?>>();
-		Class<?> superclass=classquestionmark.getSuperclass();
-		while(superclass != null) {
-			list.add(superclass);
-			superclass = superclass.getSuperclass();
-		}
-		return list;
-	}
-	public Member[] addAncestorsToMethods(Member[] methods,List<Class<?>> ancestors)
-	{
-		List<Member> extendmethods = new ArrayList<Member>();
-		for(Member method:methods) {
-			extendmethods.add(method);
-		}
-		for(Class<?> classquestionmark:ancestors) {
-			Member[] methods2=classquestionmark.getDeclaredMethods();
-			for(Member method:methods2) {
-				extendmethods.add(method);
-			}
-		}
-		Member[] methods3 = new Member[extendmethods.size()];
-		for(int i = 0; i < methods3.length; i++) {
-			methods3[i] = extendmethods.get(i);
-		}
-		return methods3;
-	}
-	public Member[] addMembersToMembers(Member[] members,Member[] methods2) {
-		List<Member> methodsandproperties=  new ArrayList<Member>();
-		for(Member method:members) {
-			methodsandproperties.add(method);
-		}
-		for(Member method2:methods2) {
-			methodsandproperties.add(method2);
-		}
-		Member[] methods3 = new Member[methodsandproperties.size()];
-		for(int i = 0; i < methods3.length; i++) {
-			methods3[i] = methodsandproperties.get(i);
-		}
-		return methods3;
-	}
 	public void keyTyped(KeyEvent ev) {
 		/*switch(evetKeyCode()) {
 			case KeyEvent.VK_TAB:
@@ -2967,7 +2714,9 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;
 		}*/
 	}	
-}
+
+}
+
 /*
 ** This is a Variable Automatic Suggestion Box.
 */
@@ -3319,13 +3068,15 @@ class MethodSuggestionBox {
 		int caretposition = main.textarea.getCaretPosition();
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
-		Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
-		Matcher matcher0=pattern.matcher(currentline2);	
-		//List<String> classesfrompackage=null;	
-		if(matcher0.find()) {
-			currentline = matcher0.group(2);					
-			Object[] allobjects=search(currentline);
-			show(allobjects,caretposition,currentline);	
+		if(currentline2.length() > 0) {
+			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
+			Matcher matcher0=pattern.matcher(currentline2);	
+			//List<String> classesfrompackage=null;	
+			if(matcher0.find()) {
+				currentline = matcher0.group(2);					
+				Object[] allobjects=search(currentline);
+				show(allobjects,caretposition,currentline);	
+			}
 		}
 	}
 	public Object[] search(String input) {
@@ -3698,6 +3449,7 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
+				boolean justStarted = true;	
 				Object[] methods2=methods;	
 				String ifdotbefore = "";
 				JLabel[] labels2=labels;	
@@ -3803,18 +3555,23 @@ class MethodSuggestionBox {
 						
 						String methodname=search_textfield.getText();
 						if(keyevent.getKeyCode() == KeyEvent.VK_PERIOD) {
-							String output=currentline+".";
-							String output2=methodname;
-							if(methodname.endsWith("."))
-								output2=methodname.substring(0,(methodname.length()-1));	
-							ifdotbefore=output2;
-							
-							output=output+output2;	
-							//currentline=output;
-							Object[] allobjects2=MethodSuggestionBox.this.search(output);
-							methods2=allobjects2;
-							labels2=getLabels(allobjects2);
-							selected_index = 0;
+							if(!justStarted) {	
+								String output=currentline+".";
+								String output2=methodname;
+								if(methodname.endsWith("."))
+									output2=methodname.substring(0,(methodname.length()-1));	
+								ifdotbefore=output2;
+								
+								output=output+output2;	
+								//currentline=output;
+								Object[] allobjects2=MethodSuggestionBox.this.search(output);
+								methods2=allobjects2;
+								labels2=getLabels(allobjects2);
+								selected_index = 0;
+							}
+							else {
+								justStarted = false;
+							}
 						}
 				
 						liveiterator = new LiveIterator<JLabel>(labels2);	

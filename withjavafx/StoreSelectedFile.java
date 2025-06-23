@@ -99,7 +99,8 @@ public class StoreSelectedFile {
 	}
 	/*public void set(String filenameandpath) {
 		LinkedHashMap<String,String> hashmap = getBackup();
-		hashmap.put("lastopened",filenameandpath);
+		
+hashmap.put("lastopened",filenameandpath);
 		setBackup(hashmap);
 	}*/
 	/*public void set(String filenameandpath) {
@@ -206,11 +207,34 @@ public class StoreSelectedFile {
 		}
 	}
 	*/
+	public void setTabs(List<String> tabs) {
+		LinkedHashMap<String,Preferences> hashmap= getBackup();
+		Preferences lastopened=hashmap.get("lastopened");
+		if(lastopened != null) {
+			lastopened.fileNames = tabs;
+			setBackup(hashmap);
+		}
+	}
+	public List<String> getTabs() {
+		LinkedHashMap<String,Preferences> hashmap= getBackup();
+		Preferences lastopened=hashmap.get("lastopened");
+		if(lastopened != null) {
+			return lastopened.fileNames;
+		}
+		else {
+			return new ArrayList<String>();
+		}
+	}
 	public String get() {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			return lastopened.starterclass;
+			if(lastopened.fileNames.size() == 0) {
+				return lastopened.starterclass;
+			}
+			else {
+				return lastopened.fileNames.get(0);
+			}
 		}
 		else {
 			return "";
@@ -241,7 +265,8 @@ public class StoreSelectedFile {
 			return "";
 		}
 	}
-	*/
+	
+*/
 	public void setStarterClass(String mainclass) {
 		LinkedHashMap<String,Preferences> hashmap=getBackup();
 		Preferences filenameanddirectory=hashmap.get("lastopened");
@@ -269,7 +294,8 @@ public class StoreSelectedFile {
 			ex.printStackTrace();
 		}
 	}
-	*/
+	
+*/
 	public String getStarterClass() {
 		LinkedHashMap<String,Preferences> hashmap=getBackup();
 		Preferences filenameanddirectory=hashmap.get("lastopened");
@@ -313,7 +339,8 @@ public class StoreSelectedFile {
 			ex.printStackTrace();
 			return "";
 		}
-	}*/
+	}
+*/
 	public void addJar(String directory,String jarpath) {
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
 		Preferences preferences=linkedhashmap.get(directory);
@@ -337,7 +364,8 @@ public class StoreSelectedFile {
 			if(!key.equals("lastopened")) {
 				Preferences preferences=linkedhashmap.get(key);
 				String directory2=key.replaceAll("[^\\\\]+\\.java","");
-				if(directory.equals(directory2)) {
+
+				if(directory.equals(directory2)) {
 					boolean haveJarAlready=false;
 					for(String jar:preferences.jars) {
 						if(jar.equals(jarpath)) {
