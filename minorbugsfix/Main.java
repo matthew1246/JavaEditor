@@ -898,12 +898,15 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
-		closetab.addActionListener((ev) -> {
+		closetab.addActionListener((ev) -> {	
 			int tabindex=tabbedpane.getSelectedIndex();
 			fileNames.remove(tabindex);
+			if(fileNames.size() != 0)
+				tabbedpane.setSelectedIndex((tabindex-1));
 			tabbedpane.remove(tabindex);
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
+			
 		});
 				
 		setFullPackageNames();		
