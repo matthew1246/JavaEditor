@@ -138,6 +138,17 @@ public class Main {
 	*/
 	public Main() {			
 		setLayout();
+		this.textarea = new JTextArea();
+		Font originalFont = textarea.getFont();
+		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+		JScrollPane scrollpane2 = new JScrollPane(textarea);
+		textarea.setTabSize(4);
+		
+		textarea.addKeyListener(new CurlyBraceKeyListener(this));
+		tabbedpane.addTab("",scrollpane2);
+		tabbedpane.addTab("+",pluspanel);
+		
 		setListeners();
 		expandable = new Expandable(this);
 	}
