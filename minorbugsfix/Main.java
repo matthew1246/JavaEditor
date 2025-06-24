@@ -113,7 +113,7 @@ public class Main {
 	public JMenuItem newitem = new JMenuItem("New");
 	public JMenuItem tabSizeMenuItem = new JMenuItem("Tab");
 	
-	public JMenuItem opennewwindow = new JMenuItem("Open New Window");
+	public JMenuItem opennewwindow = new JMenuItem("Open New Window");		
 	public SaveActionListener sal = new SaveActionListener(this);
 	public JButton compile = new JButton("compile");
 	public JButton compile_all = new JButton("compile all");		
@@ -899,7 +899,6 @@ public class Main {
 			scrollToCaretPosition(caretposition);
 			//deselected="";
 			int selectedtab = tabbedpane.getSelectedIndex();
-			JOptionPane.showMessageDialog(null,selectedtab+"");
 
 			fileNames.set(selectedtab,fileName);
 			tabbedpane.setTitleAt(selectedtab,getFileName(fileName));
