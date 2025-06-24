@@ -1634,8 +1634,11 @@ public class Main {
 						if(result == JFileChooser.APPROVE_OPTION) {
 							File selectedFile = filechooser.getSelectedFile();
 							String fileName3= selectedFile.getPath();
+							fileName3=addDotJava(fileName3);
 
-							Main main2 = new Main(new OpenDefaultContent(fileName3));
+							Main main2 = new Main();
+							main2.fileName = fileName3;
+							main2.open(getFileName(fileName3));
 						}
 					}
 				};
