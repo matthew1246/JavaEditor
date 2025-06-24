@@ -136,7 +136,7 @@ public class Main {
 	** If have no default content for window
 	
 	*/
-	public Main() {	
+	public Main() {			
 		setLayout();
 		setListeners();
 		expandable = new Expandable(this);
@@ -858,7 +858,8 @@ public class Main {
 				filelistmodifier = new FileListModifier();
 				filelistmodifier.fillList(fileName);
 			}
-			git.Change(fileName);
+			if(git !=null)
+				git.Change(fileName);
 			expandable.open();
 			
 			getclassmethods = new GetClassMethods(textarea);		
@@ -887,6 +888,8 @@ public class Main {
 			scrollToCaretPosition(caretposition);
 			//deselected="";
 			int selectedtab = tabbedpane.getSelectedIndex();
+			JOptionPane.showMessageDialog(null,selectedtab+"");
+
 			fileNames.set(selectedtab,fileName);
 			tabbedpane.setTitleAt(selectedtab,getFileName(fileName));
 		}
@@ -2324,6 +2327,9 @@ class Expandable {
 class OpenDefaultContent {
 	private String fileName = "";
 	private String lines = "";
+	/*
+	** First time open program.
+	*/
 	OpenDefaultContent() {
 		try {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2346,6 +2352,9 @@ class OpenDefaultContent {
 			ex.printStackTrace();
 		}
 	}
+	/*
+	** Second time open Window
+	*/
 	OpenDefaultContent(String fileName3) {
 		try {
 		File file2 = new File(fileName3);
