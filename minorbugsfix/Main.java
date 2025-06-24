@@ -1278,15 +1278,19 @@ public class Main {
 					int result = filechooser.showOpenDialog(frame);
 					if(result == JFileChooser.APPROVE_OPTION) {
 						File selectedFile = filechooser.getSelectedFile();
-						storeselectedfile.addJar(fileName,selectedFile.getAbsolutePath());
+						if(!selectedFile.getName().endsWith(".jar"))
+							selectedFile=new File(selectedFile.getAbsolutePath()+".jar");
+						String absolutepath = selectedFile.getAbsolutePath();
+			
+						storeselectedfile.addJar(Main.this.fileName,absolutepath);
 						gridlayout.setRows(gridlayout.getRows()+1);
 						JPanel row = new JPanel();
-						row.add(new JLabel(selectedFile.getAbsolutePath()));
+						row.add(new JLabel(absolutepath));
 						
 						JButton removejar = new JButton("remove");
 						removejar.addActionListener( (ev2) -> {
 							StoreSelectedFile storeselectedfile2=new StoreSelectedFile();
-							storeselectedfile2.removeJar(fileName,selectedFile.getAbsolutePath());
+							storeselectedfile2.removeJar(Main.this.fileName,absolutepath);
 							gridlayout.setRows(gridlayout.getRows()-1);
 							jarpanel.remove(row);
 							jarpanel.validate();
