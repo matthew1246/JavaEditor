@@ -2453,6 +2453,8 @@ class OpenActionListener implements ActionListener {
 			File selectedFile = filechooser.getSelectedFile();
 			String original = main.fileName;
 			main.fileName = selectedFile.getPath();
+			main.fileName = main.addDotJava(main.fileName);
+			
 			if(main.fileNames.size() == 0) {
 				main.fileNames.add(main.fileName);
 			}
