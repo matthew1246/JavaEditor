@@ -1260,6 +1260,8 @@ public class Main {
 				int result = filechooser.showOpenDialog(frame);
 				if(result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = filechooser.getSelectedFile();
+					if(!selectedFile.getName().endsWith(".jar"))
+						selectedFile = new File(selectedFile.getAbsolutePath()+".jar");
 					storeselectedfile.addJar(fileName,selectedFile.getAbsolutePath());
 				}
 			}
