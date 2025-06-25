@@ -2033,6 +2033,9 @@ public class Main {
 				int result = filechooser.showOpenDialog(Main.this.frame);
 				if(result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = filechooser.getSelectedFile();
+					if(!selectedFile.getName().endsWith(".java")) {
+						selectedFile=new File(addDotJava(selectedFile.getAbsolutePath()));
+					}						
 					tabbedpane.remove(pluspanel);
 					JTextArea textarea2 = new JTextArea();
 					Font originalFont = textarea.getFont();
