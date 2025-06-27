@@ -26,7 +26,7 @@ public class MSDOS {
 		panel.add(run);
 		frame.getContentPane().add(panel);
 		frame.pack();
-		frame.setLocation(1210,100);
+		frame.setLocation(1275,100);
 		frame.setVisible(true);
 	}
 	public void setListeners() {

@@ -28,5 +28,35 @@
     ],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java": {
+    "starterclass": "Muck",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java": {
+    "starterclass": "MuckFX",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MSDOS.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
