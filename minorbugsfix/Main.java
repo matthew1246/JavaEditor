@@ -3,6 +3,7 @@ import java.lang.reflect.Method;
 import java.awt.Rectangle;
 import javax.swing.event.ChangeEvent;
 import java.awt.Point;
+import java.lang.reflect.InaccessibleObjectException;
 import javax.swing.text.BadLocationException;
 import javax.swing.tree.TreePath;
 import java.awt.event.MouseListener;
@@ -3045,9 +3046,13 @@ class MethodSuggestionBox {
 			List<Object> list = new ArrayList<Object>();
 			Field[] fields= classquestionmark.getDeclaredFields();
 			for(Field field : fields) {
-				if(field.isEnumConstant()) {
-					field.setAccessible(true);
-					list.add(field);
+				try {	
+					if(field.isEnumConstant()) {
+						field.setAccessible(true);
+						list.add(field);
+					}
+				} catch (InaccessibleObjectException ex) {
+					ex.printStackTrace();
 				}
 			}
 			return list.toArray(new Object[list.size()]);
@@ -3055,16 +3060,25 @@ class MethodSuggestionBox {
 		else {		
 			Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
 			Class<?>[] enums=classquestionmark.getDeclaredClasses();
-			for(Class<?> enum1:enums) {
-				if(enum1.isEnum()) {
-					Field[] fields= enum1.getDeclaredFields();
-					for(Field field : fields) {
-						if(field.isEnumConstant()) {
-							field.setAccessible(true);
+			List<Class<?>> enums2 = Arrays.asList(enums);
+			LiveIterator<Class<?>> liveiterator=new LiveIterator<Class<?>>(enums2,true);
+			while(liveiterator.hasNext()) {
+				Class<?> enum1 = liveiterator.next();				
+				try {
+					if(enum1.isEnum()) {
+						Field[] fields= enum1.getDeclaredFields();
+						for(Field field : fields) {
+							if(field.isEnumConstant()) {
+								field.setAccessible(true);
+							}
 						}
 					}
-				}
+				} catch (InaccessibleObjectException ex) {
+					ex.printStackTrace();
+					liveiterator.remove(enum1);		
+				}	
 			}
+			enums=liveiterator.list.toArray(new Class<?>[liveiterator.list.size()]);
 			//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
 			int amount_of_enums = 0;
 			if(enums != null) {
