@@ -15,6 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.BorderLayout;
 import java.awt.Insets;
+import java.lang.reflect.InaccessibleObjectException;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
 import java.awt.event.ComponentAdapter;
@@ -139,6 +140,17 @@ public class Main {
 	*/
 	public Main() {
 		setLayout();
+		this.textarea = new JTextArea();
+		Font originalFont = textarea.getFont();
+		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+		JScrollPane scrollpane2 = new JScrollPane(textarea);
+		textarea.setTabSize(4);
+		
+		textarea.addKeyListener(new CurlyBraceKeyListener(this));
+		tabbedpane.addTab("",scrollpane2);
+		tabbedpane.addTab("+",pluspanel);
+		
 		setListeners();
 		expandable = new Expandable(this);
 	}
@@ -1325,6 +1337,8 @@ public class Main {
 				int result = filechooser.showOpenDialog(frame);
 				if(result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = filechooser.getSelectedFile();
+					if(!selectedFile.getName().endsWith(".jar"))
+						selectedFile = new File(selectedFile.getAbsolutePath()+".jar");
 					storeselectedfile.addJar(fileName,selectedFile.getAbsolutePath());
 				}
 			}
@@ -1363,15 +1377,18 @@ public class Main {
 					int result = filechooser.showOpenDialog(frame);
 					if(result == JFileChooser.APPROVE_OPTION) {
 						File selectedFile = filechooser.getSelectedFile();
+						if(!selectedFile.getName().endsWith(".jar"))
+							selectedFile=new File(selectedFile.getAbsolutePath()+".jar");
 						storeselectedfile.addJar(fileName,selectedFile.getAbsolutePath());
+						String absolutepath = selectedFile.getAbsolutePath();
 						gridlayout.setRows(gridlayout.getRows()+1);
 						JPanel row = new JPanel();
-						row.add(new JLabel(selectedFile.getAbsolutePath()));
+						row.add(new JLabel(absolutepath));
 						
 						JButton removejar = new JButton("remove");
 						removejar.addActionListener( (ev2) -> {
 							StoreSelectedFile storeselectedfile2=new StoreSelectedFile();
-							storeselectedfile2.removeJar(fileName,selectedFile.getAbsolutePath());
+							storeselectedfile2.removeJar(fileName,absolutepath);
 							gridlayout.setRows(gridlayout.getRows()-1);
 							jarpanel.remove(row);
 							jarpanel.validate();
@@ -3126,9 +3143,13 @@ class MethodSuggestionBox {
 			List<Object> list = new ArrayList<Object>();
 			Field[] fields= classquestionmark.getDeclaredFields();
 			for(Field field : fields) {
-				if(field.isEnumConstant()) {
-					field.setAccessible(true);
-					list.add(field);
+				try {	
+					if(field.isEnumConstant()) {
+						field.setAccessible(true);
+						list.add(field);
+					}
+				} catch (InaccessibleObjectException ex) {
+					ex.printStackTrace();
 				}
 			}
 			return list.toArray(new Object[list.size()]);
@@ -3136,16 +3157,25 @@ class MethodSuggestionBox {
 		else {		
 			Member[] propertiesandmethods=getAllPropertyAndMethods(classquestionmark);
 			Class<?>[] enums=classquestionmark.getDeclaredClasses();
-			for(Class<?> enum1:enums) {
-				if(enum1.isEnum()) {
-					Field[] fields= enum1.getDeclaredFields();
-					for(Field field : fields) {
-						if(field.isEnumConstant()) {
-							field.setAccessible(true);
+			List<Class<?>> enums2 = Arrays.asList(enums);
+			LiveIterator<Class<?>> liveiterator=new LiveIterator<Class<?>>(enums2,true);
+			while(liveiterator.hasNext()) {
+				Class<?> enum1 = liveiterator.next();				
+				try {
+					if(enum1.isEnum()) {
+						Field[] fields= enum1.getDeclaredFields();
+						for(Field field : fields) {
+							if(field.isEnumConstant()) {
+								field.setAccessible(true);
+							}
 						}
 					}
-				}
+				} catch (InaccessibleObjectException ex) {
+					ex.printStackTrace();
+					liveiterator.remove(enum1);		
+				}	
 			}
+			enums=liveiterator.list.toArray(new Class<?>[liveiterator.list.size()]);
 			//JOptionPane.showMessageDialog(null,(enums==null)+" is length");
 			int amount_of_enums = 0;
 			if(enums != null) {
