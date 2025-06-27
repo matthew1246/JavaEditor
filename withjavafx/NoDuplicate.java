@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 public class NoDuplicate {
 	IsEqual isequal = new IsEqual();
-	public boolean IsDuplicate(LinkedHashMap<String,Preferences> linkedhashmap) {
+	public boolean IsDuplicate(LinkedHashMap<String,Preferences> linkedhashmap) 	{
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();

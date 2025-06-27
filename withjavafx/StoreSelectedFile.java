@@ -170,7 +170,7 @@ hashmap.put("lastopened",filenameandpath);
 	private IsEqual isequal = new IsEqual();
 	public void setBackup(LinkedHashMap<String,Preferences> hashmap) {
 		try {
-			if( ((new File("original.txt")).exists() ) && noduplicate.IsDuplicate(hashmap)) {
+			/*if( ((new File("original.txt")).exists() ) && noduplicate.IsDuplicate(hashmap)) {
 				JOptionPane.showMessageDialog(null,"Replace backup.txt with original.txt");
 				noduplicate.ReplaceWithOriginal();
 				return;
@@ -178,6 +178,7 @@ hashmap.put("lastopened",filenameandpath);
 			if(isequal.isEqual(hashmap,getBackup())) {
 				return;
 			}
+			*/
 			GsonBuilder gsonbuilder = new GsonBuilder();
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();

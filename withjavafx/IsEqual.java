@@ -1,6 +1,6 @@
 import java.util.LinkedHashMap;
 public class IsEqual {
-	public boolean isEqual(LinkedHashMap<String,Preferences> linkedhashmap,LinkedHashMap<String,Preferences> linkedhashmap2) {
+	public boolean isEqual(LinkedHashMap<String,Preferences> linkedhashmap,LinkedHashMap<String,Preferences> linkedhashmap2) 	{
 		boolean isresult = Compare(linkedhashmap,linkedhashmap2);
 		if(isresult) {
 			return Compare(linkedhashmap2,linkedhashmap);
@@ -24,6 +24,16 @@ public class IsEqual {
 				if(!containsjar)
 					return false;
 			}
+			for(String fileName:preferences2.fileNames) {
+				boolean containsfileName=  false;
+				for(String fileName0:preferences.fileNames) {
+					if(fileName.equals(fileName0)) 
+						containsfileName = true;
+				}
+				if(!containsfileName)
+					return false;
+			}
+
 			if(preferences2.caretposition != preferences.caretposition)
 				return false;
 		}

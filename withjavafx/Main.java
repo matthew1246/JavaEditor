@@ -911,7 +911,8 @@ public class Main {
 				filelistmodifier = new FileListModifier();
 				filelistmodifier.fillList(fileName);
 			}
-			git.Change(fileName);
+			if(git !=null)
+				git.Change(fileName);
 			expandable.open();
 			
 			getclassmethods = new GetClassMethods(textarea);		
@@ -940,8 +941,16 @@ public class Main {
 			scrollToCaretPosition(caretposition);
 			//deselected="";
 			int selectedtab = tabbedpane.getSelectedIndex();
-			fileNames.set(selectedtab,fileName);
+			
+			if(selectedtab >= 0 && selectedtab < fileNames.size()) {
+				fileNames.set(selectedtab,fileName);
+			}
+			else if(selectedtab == fileNames.size()) {
+				fileNames.add(fileName);
+			}
+				
 			tabbedpane.setTitleAt(selectedtab,getFileName(fileName));
+			tabbedpane.repaint();
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
@@ -2143,6 +2152,9 @@ public class Main {
 				int result = filechooser.showOpenDialog(Main.this.frame);
 				if(result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = filechooser.getSelectedFile();
+					if(!selectedFile.getName().endsWith(".java")) {
+						selectedFile=new File(addDotJava(selectedFile.getAbsolutePath()));
+					}						
 					tabbedpane.remove(pluspanel);
 					JTextArea textarea2 = new JTextArea();
 					Font originalFont = textarea.getFont();
@@ -2454,6 +2466,9 @@ class Expandable {
 class OpenDefaultContent {
 	private String fileName = "";
 	private String lines = "";
+	/*
+	** First time open program.
+	*/
 	OpenDefaultContent() {
 		try {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2476,6 +2491,9 @@ class OpenDefaultContent {
 			ex.printStackTrace();
 		}
 	}
+	/*
+	** Second time open Window
+	*/
 	OpenDefaultContent(String fileName3) {
 		try {
 		File file2 = new File(fileName3);
@@ -2496,6 +2514,7 @@ class OpenDefaultContent {
 		return lines;
 	}
 }
+
 class SaveActionListener implements ActionListener {
 	private Main main;
 	public SaveActionListener(Main main) {
@@ -2554,6 +2573,11 @@ class OpenActionListener implements ActionListener {
 			File selectedFile = filechooser.getSelectedFile();
 			String original = main.fileName;
 			main.fileName = selectedFile.getPath();
+			main.fileName = main.addDotJava(main.fileName);
+			
+			if(main.fileNames.size() == 0) {
+				main.fileNames.add(main.fileName);
+			}
 			int selectedtab = main.tabbedpane.getSelectedIndex();
 			main.fileNames.set(selectedtab,main.fileName);
 			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));
@@ -2563,6 +2587,7 @@ class OpenActionListener implements ActionListener {
 		}
 	}
 }
+
 
 class CurlyBraceKeyListener implements KeyListener {
 	public Main main;
