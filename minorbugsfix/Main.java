@@ -163,6 +163,11 @@ public class Main {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git = new Git(fileName);
+			String dir = getDirectory(fileName);
+			if(msdos == null)
+				msdos = new MSDOS(dir);
+			else
+				msdos.setFileName(dir);
 		}
 		setLayout();
 		expandable = new Expandable(this);	
@@ -257,6 +262,15 @@ public class Main {
 		}catch(ArrayIndexOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}
+	}
+	public String getDirectory(String filename) {
+		if(filename.endsWith(".java")) {
+			return filename.replaceAll("[^\\\\]+\\.java","");
+		}
+		else if(filename.endsWith(".jar")) {
+			return filename.replaceAll("[^\\\\]+\\.jar","");
+		}
+		return filename;
 	}
 	public String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
