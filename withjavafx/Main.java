@@ -1434,7 +1434,10 @@ public class Main {
 				int caretposition = textarea.getCaretPosition();
 				String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
 				storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
-				open((String)filenamescombobox.getSelectedItem());
+				String liney = (String)filenamescombobox.getSelectedItem();
+				if(liney != null && !liney.equals("")) {
+					open(liney);
+				}  
 			}
 		});
 
@@ -1460,9 +1463,10 @@ public class Main {
 				selectCode(ev);
 			}
 		});
-		combobox.addItemListener((ev) -> {
+		/*combobox.addItemListener((ev) -> {
 			selectCode(ev);
 		});
+		*/
 		/*curlybracekeylistener = new CurlyBraceKeyListener(this);				
 		positiontrackers.add(curlybracekeylistener.positiontracker);
  		textarea.addKeyListener(curlybracekeylistener); 		
