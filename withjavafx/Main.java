@@ -164,6 +164,11 @@ public class Main {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git = new Git(fileName);
+			String dir = getDirectory(fileName);
+			if(msdos == null)
+				msdos = new MSDOS(dir);
+			else
+				msdos.setFileName(dir);
 		}
 		setLayout();
 		expandable = new Expandable(this);	
