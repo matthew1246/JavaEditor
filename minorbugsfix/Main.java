@@ -711,21 +711,23 @@ public class Main {
 		textarea.setTabSize(4);		
 	}
 	public void updateMethodComboBox(ActionEvent ie) {
-		if(classnamescombobox.hasFocus()) {
-		final String classname = (String)classnamescombobox.getSelectedItem();
-		combobox.removeAllItems();
-		LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-		LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
-		
-			public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-				if(classname.equals(key)) {			
-					for(String method_name:value.keySet()) {					
-						combobox.addItem(method_name);
+		if(classnamescombobox.hasFocus()) {	
+			final String classname = (String)classnamescombobox.getSelectedItem();
+			if(classname != null && !classname.equals("")) {
+				combobox.removeAllItems();
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
+				
+					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
+						if(classname.equals(key)) {			
+							for(String method_name:value.keySet()) {					
+								combobox.addItem(method_name);
+							}
+						}	
 					}
-				}	
+				};
+				Lhmi.iterate();
 			}
-		};
-		Lhmi.iterate();
 		}
 	}
 			
@@ -772,28 +774,32 @@ public class Main {
 	public void selectCode(ActionEvent ev) {
 		if(combobox.hasFocus() ) {
 			String classname = (String)classnamescombobox.getSelectedItem();
-			String methodname = (String)combobox.getSelectedItem();
-			LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-			LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
-			int wholedocumentindex = classandmethods.get(methodname);
-			
-			
-			JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
-			
-			/*verticalscrollbar.setValue(textarea.getText().length()-1);
-			textarea.setCaretPosition(textarea.getText().length()-1);*/
-			verticalscrollbar.setValue(0);
-			textarea.setCaretPosition(0);
-			textarea.requestFocus();
-			
-			verticalscrollbar.setValue(wholedocumentindex);
-			textarea.setCaretPosition(wholedocumentindex);
-			//JOptionPane.showMessageDialog(null,"Opened new file.");
-			
-			verticalscrollbar.setValue(wholedocumentindex);
-			
-			
-			scrollToCaretPosition(wholedocumentindex);
+			if(classname != null && !classname.equals("")) {
+				String methodname = (String)combobox.getSelectedItem();
+				if(methodname != null && !methodname.equals("")) {
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+					int wholedocumentindex = classandmethods.get(methodname);
+					
+					
+					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
+					
+					/*verticalscrollbar.setValue(textarea.getText().length()-1);
+					textarea.setCaretPosition(textarea.getText().length()-1);*/
+					verticalscrollbar.setValue(0);
+					textarea.setCaretPosition(0);
+					textarea.requestFocus();
+					
+					verticalscrollbar.setValue(wholedocumentindex);
+					textarea.setCaretPosition(wholedocumentindex);
+					//JOptionPane.showMessageDialog(null,"Opened new file.");
+					
+					verticalscrollbar.setValue(wholedocumentindex);
+					
+					
+					scrollToCaretPosition(wholedocumentindex);
+				}
+			}
 		}
 																
 	}
