@@ -3536,6 +3536,7 @@ class MethodSuggestionBox {
 								Object[] allobjects2=MethodSuggestionBox.this.search(output);
 								if(allobjects2.length == 0) {
 									suggestionbox.dispose();
+									main.textarea.setCaretPosition((caretposition+1));
 									return;
 								}
 									
@@ -3566,6 +3567,7 @@ class MethodSuggestionBox {
 						}
 						if(labels2.length == 0) {
 							suggestionbox.dispose();
+							main.textarea.setCaretPosition((caretposition+1));		
 							return;
 						}
 						
