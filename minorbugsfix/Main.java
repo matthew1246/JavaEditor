@@ -3524,7 +3524,7 @@ class MethodSuggestionBox {
 						
 						String methodname=search_textfield.getText();
 						if(keyevent.getKeyCode() == KeyEvent.VK_PERIOD) {
-							if(!justStarted) {	
+							//if(!justStarted) {	
 								String output=currentline+".";
 								String output2=methodname;
 								if(methodname.endsWith("."))
@@ -3543,10 +3543,10 @@ class MethodSuggestionBox {
 								methods2=allobjects2;
 								labels2=getLabels(allobjects2);
 								selected_index = 0;
-							}
+							/*}
 							else {
 								justStarted = false;
-							}
+							}*/
 						}
 				
 						liveiterator = new LiveIterator<JLabel>(labels2);	
