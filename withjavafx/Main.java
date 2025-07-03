@@ -3150,7 +3150,8 @@ class MethodSuggestionBox {
 			if(matcher0.find()) {
 				currentline = matcher0.group(2);					
 				Object[] allobjects=search(currentline);
-				show(allobjects,caretposition,currentline);	
+				if(allobjects.length > 0)
+					show(allobjects,caretposition,currentline);	
 			}
 		}
 	}
@@ -3653,6 +3654,12 @@ class MethodSuggestionBox {
 								output=output+output2;	
 								//currentline=output;
 								Object[] allobjects2=MethodSuggestionBox.this.search(output);
+								if(allobjects2.length == 0) {
+									suggestionbox.dispose();
+									main.textarea.setCaretPosition((caretposition+1));
+									return;
+								}
+									
 								methods2=allobjects2;
 								labels2=getLabels(allobjects2);
 								selected_index = 0;
@@ -3678,6 +3685,11 @@ class MethodSuggestionBox {
 							labels2=liveiterator.list.toArray(new JLabel[liveiterator.list.size()]);
 							selected_index = 0;
 						}
+						if(labels2.length == 0) {
+							suggestionbox.dispose();
+							main.textarea.setCaretPosition((caretposition+1));		
+							return;
+						}
 						
 						gridlayout.setRows(liveiterator.list.size()+1);
 						liveiterator.reset();
@@ -3691,24 +3703,7 @@ class MethodSuggestionBox {
 							label5.setOpaque(true);
 							label5.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 						}
-						/*JLabel selected_label = labels2[selected_index];
-						if(!liveiterator.contains(selected_label)) { // Selected JLabel no longer in list.
-							selected_label.setOpaque(false);
-							selected_label.setBackground(new JLabel().getBackground());
-							
-							if(liveiterator.list.size() != 0) {
-								JLabel label=liveiterator.list.get(0);
-								labelly2:for(int i = 0; i < labels2.length; i++) {
-									if(label.equals(labels2[i])) {
-										selected_index=i;
-										break labelly2;
-									}
-								}
-								label.setOpaque(true);
-								label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
-							}
-						}
-						*/
+						
 						panelgridlayout.validate();
 						panelgridlayout.repaint();
 						suggestionbox.pack();	
