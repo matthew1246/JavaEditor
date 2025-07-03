@@ -95,6 +95,7 @@ public class ExtractJavaFXJars {
 						            String line;
 						            while ((line = reader.readLine()) != null) {
 						                textarea.append(line+"\n");
+						                textarea.setCaretPosition(textarea.getDocument().getLength());
 						            }
 					            } catch(IOException ex) {
 					            	ex.printStackTrace();
