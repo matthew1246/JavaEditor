@@ -36,5 +36,11 @@
     ],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 23873
   }
 }
