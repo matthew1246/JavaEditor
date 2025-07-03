@@ -71,6 +71,7 @@ public class ExtractJavaFXJars {
 					
 			        	// Command: jar -xvf myfile.jar
 			            ProcessBuilder pb = new ProcessBuilder(
+			            "cmd.exe", "/c",
 			                jarExe, "-xvf", jar
 			            );
 			
