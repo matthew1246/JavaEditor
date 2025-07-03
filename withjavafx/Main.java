@@ -736,7 +736,7 @@ public class Main {
 	public void updateMethodComboBox(ActionEvent ie) {
 		if(classnamescombobox.hasFocus()) {
 			final String classname = (String)classnamescombobox.getSelectedItem();
-			if(classname != null && !classname.equals(classname)) {
+			if(classname != null && !classname.equals("")) {
 				combobox.removeAllItems();
 				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
 				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
