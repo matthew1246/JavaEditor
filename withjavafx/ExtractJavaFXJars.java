@@ -78,7 +78,6 @@ public class ExtractJavaFXJars {
 	   /*        }
                });
                thread.start();
-               thread.join();
                */
 
                 int exitCode = process.waitFor();
@@ -100,7 +99,7 @@ public class ExtractJavaFXJars {
             }
         };
         worker.execute();
-       /* try {
+         try {
           worker.get();
         }
         catch(java.util.concurrent.ExecutionException ex){
@@ -109,7 +108,6 @@ public class ExtractJavaFXJars {
         catch(InterruptedException ex) {
         	ex.printStackTrace();
         }
-        */
     }
 	
 	public void unzipJars() {
@@ -118,71 +116,60 @@ public class ExtractJavaFXJars {
 		String dir = main.getDirectory(main.fileName);
 		
 		for(String jar:commandline.getJavaFX()) {	
-			/*javax.swing.SwingUtilities.invokeLater(new Runnable() {
-				@Override	
-				public void run() {
-			*/
-					//try {		
-						JFrame extractframe = new JFrame();
-						extractframe.setSize(800,600);
-						final JTextArea textarea = new JTextArea();
-						JScrollPane jscrollpane = new JScrollPane(textarea);
-						
-						extractframe.add(jscrollpane);
-						extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						extractframe.setVisible(true);
-						runProcessAndStreamOutput(new File(dir),extractframe,textarea,
-						                jarExe, "xvf", jar);
-					
-					         
-				
-					       	 // Read output
-					            /*BufferedReader reader = new BufferedReader(
-					                new InputStreamReader(process.getInputStream())
-					            );
-					            Thread thread2 = new Thread(new Runnable() {
-					            	@Override
-					            	public void run() {
-					            		try {
-								        		String line;
-								            while ((line = reader.readLine()) != null) {
-								            	final String line2 = line;	
-								            	javax.swing.SwingUtilities.invokeLater(() -> {
-										          	    	textarea.append(line2+"\n");
-										                	textarea.setCaretPosition(textarea.getDocument().getLength());
-								                	});
-								            }
-							            } catch (IOException ex) {
-							            	ex.printStackTrace();
-						            	}
-						            }
-					            });
-					            thread2.start();
-					            //thread2.join();
-					        
-					            // Wait for the process to complete
-					         process.onExit().thenAccept(proc -> {
-					            	
-						        	int exitCode = proc.exitValue();
-							//int exitCode = process.waitFor();
-			  				if(exitCode == 0) {
-			  				            JOptionPane.showMessageDialog(null,"Extraction of "+jar+" was a success.");
-			  			            	extractframe.dispose();
-			  			            }
-					            	else
-					            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
-				            	});
-				            	*/
-		            	       	/*} catch(InterruptedException ex) {
-				            	ex.printStackTrace();
-			            	*/
-			            	/*}
-			            	catch(IOException ex) {
-			            		ex.printStackTrace();
-		            		}*/
-	            	/*	}
-            		});
-            		*/
+			JFrame extractframe = new JFrame();
+			extractframe.setSize(800,600);
+			final JTextArea textarea = new JTextArea();
+			JScrollPane jscrollpane = new JScrollPane(textarea);
+			
+			extractframe.add(jscrollpane);
+			extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			extractframe.setVisible(true);
+			//runProcessAndStreamOutput(new File(dir),extractframe,textarea,
+					/*"cmd.exe", "/c",
+            				"START", "/B", "/WAIT",
+            				"cmd.exe", "/c", jarExe+" -xvf "+jar);
+         					*/					
+			      		// jarExe, "-xvf", jar);
+			
+			Thread thread = new Thread( () -> {
+				try {
+			        	ProcessBuilder builder= new ProcessBuilder(
+	            			System.getProperty("java.home") + "\\bin\\jar.exe",
+	            			"-xvf", jar
+	        			);
+	        			 builder.directory(new File(dir));
+	               		 builder.redirectErrorStream(true);
+	               		 Process process = builder.start();
+	
+	
+			       	 // Read output
+			            BufferedReader reader = new BufferedReader(
+			                new InputStreamReader(process.getInputStream()));
+			        
+			        	String line;
+			            while ((line = reader.readLine()) != null) {
+			            		final String line2 = line;	
+	
+						textarea.append(line2+"\n");
+					           textarea.setCaretPosition(textarea.getDocument().getLength());
+				  }                	                	
+			        
+			            // Wait for the process to complete
+			            //process.onExit().thenAccept(proc -> {
+			            	
+				//int exitCode = proc.exitValue();
+				int exitCode = process.waitFor();
+	  			if(exitCode == 0) {
+	  			            JOptionPane.showMessageDialog(null,"Extraction of "+jar+" was a success.");
+	  			           	extractframe.dispose();
+	  		            }
+			           	else
+		            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
+	            		} catch(InterruptedException | IOException ex) {
+	            			ex.printStackTrace();
+            			}
+	            	});
+	            	thread.start();
 	            }
 	}
 	public void extractDLLFiles() {
