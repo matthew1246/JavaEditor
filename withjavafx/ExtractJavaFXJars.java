@@ -1,3 +1,4 @@
+import javax.swing.SwingWorker;
 import java.util.List;
 import java.io.File;
 import java.net.URL;
@@ -52,7 +53,36 @@ public class ExtractJavaFXJars {
 			ex.printStackTrace();
 		}
 	}
+	private static void runProcessAndStreamOutput(JTextArea textArea, String... command) {
+        SwingWorker<Void, String> worker = new SwingWorker<>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                ProcessBuilder builder = new ProcessBuilder(command);
+                builder.redirectErrorStream(true);
+                Process process = builder.start();
 
+                try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(process.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        publish(line);
+                    }
+                }
+
+                process.waitFor();
+                return null;
+            }
+
+            @Override
+            protected void process(List<String> chunks) {
+                for (String line : chunks) {
+                    textArea.append(line + "\n");
+                }
+            }
+        };
+        worker.execute();
+    }
+	
 	public void unzipJars() {
 		CommandLine commandline = new CommandLine();	
 		String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
@@ -62,8 +92,8 @@ public class ExtractJavaFXJars {
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
 				@Override	
 				public void run() {
-					try {		
-							JFrame extractframe = new JFrame();
+					//try {		
+						JFrame extractframe = new JFrame();
 						extractframe.setSize(800,600);
 						final JTextArea textarea = new JTextArea();
 						JScrollPane jscrollpane = new JScrollPane(textarea);
@@ -71,24 +101,13 @@ public class ExtractJavaFXJars {
 						extractframe.add(jscrollpane);
 						extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						extractframe.setVisible(true);
-					        	// Command: jar -xvf myfile.jar
-					            ProcessBuilder pb = new ProcessBuilder(
-					            	"cmd.exe","/c",	
-						                jarExe, "-xvf", jar
-						 );
+						runProcessAndStreamOutput(textarea,"cmd.exe","/c",	
+						                jarExe, "-xvf", jar);
 					
-					            // Set working directory (where files will be extracted)
-					            pb.directory(new File(dir));
-					
-					            // Merge error stream with output
-					            pb.redirectErrorStream(true);
-					
-					            // Start the process
-					            Process process = pb.start();
-						
+					         
 				
 					       	 // Read output
-					            BufferedReader reader = new BufferedReader(
+					            /*BufferedReader reader = new BufferedReader(
 					                new InputStreamReader(process.getInputStream())
 					            );
 					            Thread thread2 = new Thread(new Runnable() {
@@ -123,13 +142,14 @@ public class ExtractJavaFXJars {
 					            	else
 					            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
 				            	});
+				            	*/
 		            	       	/*} catch(InterruptedException ex) {
 				            	ex.printStackTrace();
 			            	*/
-			            	}
+			            	/*}
 			            	catch(IOException ex) {
 			            		ex.printStackTrace();
-		            		}
+		            		}*/
 	            		}
             		});
 	            }
