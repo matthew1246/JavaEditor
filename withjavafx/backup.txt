@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\jkdfkjdf\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\akakkja\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
@@ -252,6 +252,30 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\jkdfkjdf\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\djkddkjdjk\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\uuuuu\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\akjjkajka\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\akakkja\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],

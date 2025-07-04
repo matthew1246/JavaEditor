@@ -53,21 +53,33 @@ public class ExtractJavaFXJars {
 			ex.printStackTrace();
 		}
 	}
-	private static void runProcessAndStreamOutput(JFrame extractframe,JTextArea textArea, String... command) {
+	private static void runProcessAndStreamOutput(File dir,JFrame extractframe,JTextArea textArea, String... command) {
         SwingWorker<Void, String> worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() throws Exception {
                 ProcessBuilder builder = new ProcessBuilder(command);
+                builder.directory(dir);
                 builder.redirectErrorStream(true);
                 Process process = builder.start();
 
-                try (BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(process.getInputStream()))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        publish(line);
-                    }
-                }
+                /*Thread thread=new Thread(new Runnable() {
+                	public void run() {
+                */
+                		try {
+		           		BufferedReader reader = new BufferedReader(
+		                        new InputStreamReader(process.getInputStream()));
+		                    String line;
+		                    while ((line = reader.readLine()) != null) {
+		                        publish(line);
+		                    }
+	                    } catch(IOException ex) {
+	                    	ex.printStackTrace();
+                    	         }
+	   /*        }
+               });
+               thread.start();
+               thread.join();
+               */
 
                 int exitCode = process.waitFor();
   	    if(exitCode == 0) {
@@ -88,8 +100,8 @@ public class ExtractJavaFXJars {
             }
         };
         worker.execute();
-        try {
-        worker.get();
+       /* try {
+          worker.get();
         }
         catch(java.util.concurrent.ExecutionException ex){
         	ex.printStackTrace();
@@ -97,6 +109,7 @@ public class ExtractJavaFXJars {
         catch(InterruptedException ex) {
         	ex.printStackTrace();
         }
+        */
     }
 	
 	public void unzipJars() {
@@ -118,8 +131,8 @@ public class ExtractJavaFXJars {
 						extractframe.add(jscrollpane);
 						extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						extractframe.setVisible(true);
-						runProcessAndStreamOutput(extractframe,textarea,
-						                jarExe, "-xvf", jar);
+						runProcessAndStreamOutput(new File(dir),extractframe,textarea,
+						                jarExe, "xvf", jar);
 					
 					         
 				
