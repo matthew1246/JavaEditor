@@ -1,10 +1,10 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\fourty\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java"
     ],
     "caretposition": 0
   },
@@ -75,7 +75,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 2248
+    "caretposition": 1572
   },
   "C:\\Users\\Owner\\Documents\\two\\Two.java": {
     "starterclass": "Twotwo",
@@ -100,5 +100,71 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 321
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder (2)\\Six.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 288
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder (3)\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 320
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder (4)\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 285
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder (5)\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder (6)\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder (7)\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 127
+  },
+  "C:\\Users\\Owner\\Documents\\twentyone\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 165
+  },
+  "C:\\Users\\Owner\\Documents\\twentytwo\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\twentythousand\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 127
+  },
+  "C:\\Users\\Owner\\Documents\\fourty\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
