@@ -88,14 +88,24 @@ public class ExtractJavaFXJars {
 			            BufferedReader reader = new BufferedReader(
 			                new InputStreamReader(process.getInputStream())
 			            );
-			            String line;
-			            while ((line = reader.readLine()) != null) {
-			            	final String line2 = line;	
-			            	javax.swing.SwingUtilities.invokeLater(() -> {
-					          	    	textarea.append(line2+"\n");
-					                	textarea.setCaretPosition(textarea.getDocument().getLength());
-			                	});
-			            }
+			            Thread thread2 = new Thread(new Runnable() {
+			            	@Override
+			            	public void run() {
+			            		try {
+						        		String line;
+						            while ((line = reader.readLine()) != null) {
+						            	final String line2 = line;	
+						            	javax.swing.SwingUtilities.invokeLater(() -> {
+								          	    	textarea.append(line2+"\n");
+								                	textarea.setCaretPosition(textarea.getDocument().getLength());
+						                	});
+						            }
+					            } catch (IOException ex) {
+					            	ex.printStackTrace();
+				            	}
+				            }
+			            });
+			            thread2.start();
 			            // Wait for the process to complete
 			         //process.onExit().thenAccept(proc -> {
 			            	
