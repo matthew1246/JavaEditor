@@ -151,8 +151,10 @@ public class ExtractJavaFXJars {
 		                }
 		
 		                process.waitFor();
-		                SwingUtilities.invokeLater(() ->
-		                    textarea.append("Extraction complete.\n")
+		                SwingUtilities.invokeLater(() -> {
+		                    textarea.append("Extraction complete.\n");
+		                    extractframe.dispose();
+	                    	     }
 		                );
 		
 		            } catch (IOException | InterruptedException ex) {
