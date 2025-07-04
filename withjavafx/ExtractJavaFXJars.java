@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.io.IOException;
+import javax.swing.SwingUtilities;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -124,52 +125,43 @@ public class ExtractJavaFXJars {
 			extractframe.add(jscrollpane);
 			extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			extractframe.setVisible(true);
-			//runProcessAndStreamOutput(new File(dir),extractframe,textarea,
-					/*"cmd.exe", "/c",
-            				"START", "/B", "/WAIT",
-            				"cmd.exe", "/c", jarExe+" -xvf "+jar);
-         					*/					
-			      		// jarExe, "-xvf", jar);
 			
-			Thread thread = new Thread( () -> {
-				try {
-			        	ProcessBuilder builder= new ProcessBuilder(
-	            			System.getProperty("java.home") + "\\bin\\jar.exe",
-	            			"-xvf", jar
-	        			);
-	        			 builder.directory(new File(dir));
-	               		 builder.redirectErrorStream(true);
-	               		 Process process = builder.start();
-	
-	
-			       	 // Read output
-			            BufferedReader reader = new BufferedReader(
-			                new InputStreamReader(process.getInputStream()));
-			        
-			        	String line;
-			            while ((line = reader.readLine()) != null) {
-			            		final String line2 = line;	
-	
-						textarea.append(line2+"\n");
-					           textarea.setCaretPosition(textarea.getDocument().getLength());
-				  }                	                	
-			        
-			            // Wait for the process to complete
-			            //process.onExit().thenAccept(proc -> {
-			            	
-				//int exitCode = proc.exitValue();
-				int exitCode = process.waitFor();
-	  			if(exitCode == 0) {
-	  			            JOptionPane.showMessageDialog(null,"Extraction of "+jar+" was a success.");
-	  			           	extractframe.dispose();
-	  		            }
-			           	else
-		            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
-	            		} catch(InterruptedException | IOException ex) {
-	            			ex.printStackTrace();
-            			}
-	            	});
-	            	thread.start();
+	               	
+	               	new Thread(() -> {
+		          		try {
+		                ProcessBuilder pb = new ProcessBuilder(
+		                    "cmd.exe", "/c",
+		                    System.getProperty("java.home") + "\\bin\\jar.exe",
+		                    "-xvf", jar
+		                );
+                        	     pb.directory(new File(dir));
+		                pb.redirectErrorStream(true);
+		                Process process = pb.start();
+		
+		                try (BufferedReader reader = new BufferedReader(
+		                        new InputStreamReader(process.getInputStream()))) {
+		                    String line;
+		                    while ((line = reader.readLine()) != null) {
+		                        String finalLine = line;
+		                        SwingUtilities.invokeLater(() -> {
+		                            textarea.append(finalLine + "\n");
+		                            textarea.setCaretPosition(textarea.getDocument().getLength());
+		                        });
+		                    }
+		                }
+		
+		                process.waitFor();
+		                SwingUtilities.invokeLater(() ->
+		                    textarea.append("Extraction complete.\n")
+		                );
+		
+		            } catch (IOException | InterruptedException ex) {
+		                SwingUtilities.invokeLater(() ->
+		                    textarea.append("Error: " + ex.getMessage() + "\n")
+		                );
+		            }
+		        }).start();
+
 	            }
 	}
 	public void extractDLLFiles() {
