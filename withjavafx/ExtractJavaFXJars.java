@@ -54,83 +54,68 @@ public class ExtractJavaFXJars {
 	}
 
 	public void unzipJars() {
-		try {
-			CommandLine commandline = new CommandLine();	
-			String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
-			String dir = main.getDirectory(main.fileName);
-			
-			for(String jar:commandline.getJavaFX()) {
-				Thread thread = new Thread() {	
-					public void run() {	
-						try {	
-								JFrame extractframe = new JFrame();
-							extractframe.setSize(800,600);
-							final JTextArea textarea = new JTextArea();
-							JScrollPane jscrollpane = new JScrollPane(textarea);
-							
-							extractframe.add(jscrollpane);
-							extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-							extractframe.setVisible(true);
-								
-						        	// Command: jar -xvf myfile.jar
-						            ProcessBuilder pb = new ProcessBuilder(
-						                jarExe, "-xvf", jar
-						            );
-						
-						            // Set working directory (where files will be extracted)
-						            pb.directory(new File(dir));
-						
-						            // Merge error stream with output
-						            pb.redirectErrorStream(true);
-						
-						            // Start the process
-						            Process process = pb.start();
-						
-							//Thread thread = new Thread(() -> {
-	
-							       	 // Read output
-							            BufferedReader reader = new BufferedReader(
-							                new InputStreamReader(process.getInputStream())
-							            );
-							            String line;
-							            while ((line = reader.readLine()) != null) {
-							            	final String line2 = line;	
-							            	javax.swing.SwingUtilities.invokeLater(() -> {
-									          	    	textarea.append(line2+"\n");
-									                	textarea.setCaretPosition(textarea.getDocument().getLength());
-							                	});
-							            }
-						         //   });
-						         //   thread.start();
-						
-						            // Wait for the process to complete
-						         process.onExit().thenAccept(proc -> {
-						            	
-							        	    int exitCode = proc.exitValue();
+		CommandLine commandline = new CommandLine();	
+		String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
+		String dir = main.getDirectory(main.fileName);
+		
+		for(String jar:commandline.getJavaFX()) {	
+			try {	
+				JFrame extractframe = new JFrame();
+				extractframe.setSize(800,600);
+				final JTextArea textarea = new JTextArea();
+				JScrollPane jscrollpane = new JScrollPane(textarea);
 				
-				  				if(exitCode == 0) {
-				  				            JOptionPane.showMessageDialog(null,"Extraction of "+jar+" was a success.");
-				  			            	extractframe.dispose();
-				  			            }
-						            	else
-						            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
-					            	});
-					              /*} catch(InterruptedException ex) {
-					            	ex.printStackTrace();
-					            */
-				            	}
-				            	catch(IOException ex) {
-				            		ex.printStackTrace();
-			            		}
-			            	}
-		            	};
-		            	thread.start();
-		            	thread.join();
-		            }
-            	} catch(InterruptedException ex) {
-            		ex.printStackTrace();
-            	}
-            }
+				extractframe.add(jscrollpane);
+				extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				extractframe.setVisible(true);
+			        	// Command: jar -xvf myfile.jar
+			            ProcessBuilder pb = new ProcessBuilder(
+			            	"cmd.exe","/c",	
+				                jarExe, "-xvf", jar
+				 );
+			
+			            // Set working directory (where files will be extracted)
+			            pb.directory(new File(dir));
+			
+			            // Merge error stream with output
+			            pb.redirectErrorStream(true);
+			
+			            // Start the process
+			            Process process = pb.start();
+				
+		
+			       	 // Read output
+			            BufferedReader reader = new BufferedReader(
+			                new InputStreamReader(process.getInputStream())
+			            );
+			            String line;
+			            while ((line = reader.readLine()) != null) {
+			            	final String line2 = line;	
+			            	javax.swing.SwingUtilities.invokeLater(() -> {
+					          	    	textarea.append(line2+"\n");
+					                	textarea.setCaretPosition(textarea.getDocument().getLength());
+			                	});
+			            }
+			            // Wait for the process to complete
+			         //process.onExit().thenAccept(proc -> {
+			            	
+				        	    //int exitCode = proc.exitValue();
+					int exitCode = process.waitFor();
+	  				if(exitCode == 0) {
+	  				            JOptionPane.showMessageDialog(null,"Extraction of "+jar+" was a success.");
+	  			            	extractframe.dispose();
+	  			            }
+			            	else
+			            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
+		            	//});
+            	              } catch(InterruptedException ex) {
+		            	ex.printStackTrace();
+	            	}
+	            	catch(IOException ex) {
+	            		ex.printStackTrace();
+            		}
+	            }
+	}
 	public void extractDLLFiles() {
 		try {
 			String dir=main.getDirectory(main.fileName);	

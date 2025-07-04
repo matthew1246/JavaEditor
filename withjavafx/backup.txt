@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\fourty\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
@@ -69,13 +69,13 @@
     "caretposition": 194
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java": {
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 1572
+    "caretposition": 4140
   },
   "C:\\Users\\Owner\\Documents\\two\\Two.java": {
     "starterclass": "Twotwo",
@@ -162,6 +162,18 @@
     "caretposition": 127
   },
   "C:\\Users\\Owner\\Documents\\fourty\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\ksdjfjkdsfj\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\kjsdfjkdsjkfsdjkfkjdf\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
