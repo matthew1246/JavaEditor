@@ -53,7 +53,7 @@ public class ExtractJavaFXJars {
 			ex.printStackTrace();
 		}
 	}
-	private static void runProcessAndStreamOutput(JTextArea textArea, String... command) {
+	private static void runProcessAndStreamOutput(JFrame extractframe,JTextArea textArea, String... command) {
         SwingWorker<Void, String> worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() throws Exception {
@@ -69,7 +69,14 @@ public class ExtractJavaFXJars {
                     }
                 }
 
-                process.waitFor();
+                int exitCode = process.waitFor();
+  	    if(exitCode == 0) {
+  	            JOptionPane.showMessageDialog(null,"Extraction of "+command+" was a success.");
+              	extractframe.dispose();
+                }
+	     else
+	            JOptionPane.showMessageDialog(null,"Could not extract "+command+"!");
+				            	
                 return null;
             }
 
@@ -101,7 +108,7 @@ public class ExtractJavaFXJars {
 						extractframe.add(jscrollpane);
 						extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						extractframe.setVisible(true);
-						runProcessAndStreamOutput(textarea,"cmd.exe","/c",	
+						runProcessAndStreamOutput(extractframe,textarea,
 						                jarExe, "-xvf", jar);
 					
 					         
