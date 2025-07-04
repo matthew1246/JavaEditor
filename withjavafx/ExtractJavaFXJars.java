@@ -106,20 +106,23 @@ public class ExtractJavaFXJars {
 				            }
 			            });
 			            thread2.start();
+			            //thread2.join();
+			        
 			            // Wait for the process to complete
-			         //process.onExit().thenAccept(proc -> {
+			         process.onExit().thenAccept(proc -> {
 			            	
-				        	    //int exitCode = proc.exitValue();
-					int exitCode = process.waitFor();
+				        	int exitCode = proc.exitValue();
+					//int exitCode = process.waitFor();
 	  				if(exitCode == 0) {
 	  				            JOptionPane.showMessageDialog(null,"Extraction of "+jar+" was a success.");
 	  			            	extractframe.dispose();
 	  			            }
 			            	else
 			            		JOptionPane.showMessageDialog(null,"Could not extract "+jar+"!");
-		            	//});
-            	              } catch(InterruptedException ex) {
+		            	});
+            	           /*   } catch(InterruptedException ex) {
 		            	ex.printStackTrace();
+		            */
 	            	}
 	            	catch(IOException ex) {
 	            		ex.printStackTrace();
