@@ -139,7 +139,7 @@ public class ExtractJavaFXJars {
 			                pb.redirectErrorStream(true);
 			                Process process = pb.start();
 			
-				    new Thread( () -> {
+				    Thread thread=new Thread( () -> {
 				    	try {
 				              	  try (BufferedReader reader = new BufferedReader(
 				                        new InputStreamReader(process.getInputStream()))) {
@@ -155,7 +155,9 @@ public class ExtractJavaFXJars {
 			                	} catch (IOException ex) {
 			                		ex.printStackTrace();
 		                		}
-			                }).start();
+			                });
+			                thread.start();
+			                thread.join();
 			
 			                process.waitFor();
 			                SwingUtilities.invokeLater(() -> {
