@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\jkdfkjdf\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
@@ -240,6 +240,18 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\zzjkkj\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\skjdfkjsdf\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\jkdfkjdf\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],

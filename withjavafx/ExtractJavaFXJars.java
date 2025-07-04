@@ -88,6 +88,15 @@ public class ExtractJavaFXJars {
             }
         };
         worker.execute();
+        try {
+        worker.get();
+        }
+        catch(java.util.concurrent.ExecutionException ex){
+        	ex.printStackTrace();
+        }
+        catch(InterruptedException ex) {
+        	ex.printStackTrace();
+        }
     }
 	
 	public void unzipJars() {
@@ -96,9 +105,10 @@ public class ExtractJavaFXJars {
 		String dir = main.getDirectory(main.fileName);
 		
 		for(String jar:commandline.getJavaFX()) {	
-			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			/*javax.swing.SwingUtilities.invokeLater(new Runnable() {
 				@Override	
 				public void run() {
+			*/
 					//try {		
 						JFrame extractframe = new JFrame();
 						extractframe.setSize(800,600);
@@ -157,8 +167,9 @@ public class ExtractJavaFXJars {
 			            	catch(IOException ex) {
 			            		ex.printStackTrace();
 		            		}*/
-	            		}
+	            	/*	}
             		});
+            		*/
 	            }
 	}
 	public void extractDLLFiles() {
