@@ -140,6 +140,7 @@ public class ExtractJavaFXJars {
 						    protected Void doInBackground() throws Exception {
 						    	
 						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar);
+						        pb.directory(new File(dir));
 						        pb.redirectErrorStream(true); // Merge stderr with stdout
 						        Process process = pb.start();
 						
