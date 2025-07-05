@@ -127,13 +127,14 @@ public class ExtractJavaFXJars {
 			                    	"-xvf", jar
 			                    	*/
 			                    	JFrame extractframe = new JFrame();
-					extractframe.setSize(800,600);
 					final JTextArea textarea = new JTextArea();
 					JScrollPane jscrollpane = new JScrollPane(textarea);
 					
 					extractframe.add(jscrollpane);
+					extractframe.setSize(800,600);
 					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					extractframe.setVisible(true);		
+			                    	
 			                    	SwingWorker<Void, String> worker = new SwingWorker<>() {
 						   @Override
 						    protected Void doInBackground() throws Exception {
@@ -146,8 +147,15 @@ public class ExtractJavaFXJars {
 						                new InputStreamReader(process.getInputStream()))) {
 						            String line;
 						            while ((line = reader.readLine()) != null) {
-                					        	    System.out.println(line);
-						                publish(line); //Send line to process() on EDT
+						                final String line2 = line;
+                					        	    SwingUtilities.invokeLater( new Runnable() {
+                					        	    	@Override
+                					        	    	public void run() {
+                					        	    		textarea.append(line2+"\n");
+                				        	    		}		
+                				        	    	   });
+                					        	    
+						                //publish(line); //Send line to process() on EDT
 						            }
 						        }
 						
@@ -171,7 +179,6 @@ public class ExtractJavaFXJars {
 			 		JOptionPane.showMessageDialog(null,"InterruptedException");
 			 		ex.printStackTrace();
 		 		}
-		                    
 	        	        	  // break;
 	            }
 	}
