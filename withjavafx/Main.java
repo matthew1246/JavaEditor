@@ -118,7 +118,7 @@ public class Main {
 	public JMenuItem opennewwindow = new JMenuItem("Open New Window");
 	public SaveActionListener sal = new SaveActionListener(this);
 	public JButton compile = new JButton("compile");
-	public JButton compile_all = new JButton("compile all");		
+	public JButton compile_all = new JButton("compile all");			
 	public JButton run = new JButton("run");
 	public JCheckBox checkbox = new JCheckBox();
 	public JLabel jarlabel = new JLabel("JUnit");
@@ -1777,61 +1777,68 @@ public class Main {
 				t.start();
 			}
 		});
-		compile_all.addActionListener((ev) -> {		
-			try {
-				if(fileName.equals("")) {
-					NoFileOpen nofileopen=new NoFileOpen(textarea);
-					fileName=nofileopen.getFileName();
-				}
-				sal.actionPerformed(ev);
-				if(!fileName.equals("")) {
-					String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
-					CommandLine commandline = new CommandLine();
-					commandline.compileAll();
-					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-					Preferences preferences=storeselectedfile.get(fileName);
-					
-					for(String jar:preferences.jars) {
-						commandline.addExternalJar(jar);
+		compile_all.addActionListener((ev) -> {
+			Thread thread4=new Thread(() -> {
+					try {
+					if(fileName.equals("")) {
+						NoFileOpen nofileopen=new NoFileOpen(textarea);
+						fileName=nofileopen.getFileName();
 					}
-					if(checkbox.isSelected()) {
-						commandline.addClasspathCheckboxFeature();
-					}
-					if(jarcheckbox.isSelected()) {
-						commandline.addJunit();
-					}
-					//Process process = compileFromMSDOS("*.java",classpath);
-					String[] command = new String[3];
-					command[0] = "cmd.exe";
-					command[1] = "/c";
-					command[2] = commandline.javac();
-					Runtime runtime = Runtime.getRuntime();
-					Process process = runtime.exec(command,null,new File(classpath));
-					
-					InputStream inputstream = process.getErrorStream();
-					InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-					BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-					String line = bufferedreader.readLine();
-					if(line == null) {
-						JOptionPane.showMessageDialog(null,"compiled");
+					sal.actionPerformed(ev);
+					if(!fileName.equals("")) {
+						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+						CommandLine commandline = new CommandLine();
+						commandline.compileAll();
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						Preferences preferences=storeselectedfile.get(fileName);
+						
+						if(javafxcheckbox.isSelected()) {
+							ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+							commandline.addJavaFX();
+						}
+						for(String jar:preferences.jars) {
+							commandline.addExternalJar(jar);
+						}
+						if(checkbox.isSelected()) {
+							commandline.addClasspathCheckboxFeature();
+						}
+						if(jarcheckbox.isSelected()) {
+							commandline.addJunit();
+						}
+						//Process process = compileFromMSDOS("*.java",classpath);
+						String[] command = new String[3];
+						command[0] = "cmd.exe";
+						command[1] = "/c";
+						command[2] = commandline.javac();
+						Runtime runtime = Runtime.getRuntime();
+						Process process = runtime.exec(command,null,new File(classpath));
+						
+						InputStream inputstream = process.getErrorStream();
+						InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
+						BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
+						String line = bufferedreader.readLine();
+						if(line == null) {
+							JOptionPane.showMessageDialog(null,"compiled");
+						}
+						else {
+							String lines = line;
+							while(true) {
+								line = bufferedreader.readLine();
+								if(line == null)
+									break;
+								lines = lines+"\n"+line;
+							}
+							JOptionPane.showMessageDialog(null,lines);
+						}
 					}
 					else {
-						String lines = line;
-						while(true) {
-							line = bufferedreader.readLine();
-							if(line == null)
-								break;
-							lines = lines+"\n"+line;
-						}
-						JOptionPane.showMessageDialog(null,lines);
+						JOptionPane.showMessageDialog(null,"No file name given to save file.");
 					}
+				} catch (IOException ex) {
+					ex.printStackTrace();
 				}
-				else {
-					JOptionPane.showMessageDialog(null,"No file name given to save file.");
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}		
+			});
+			thread4.start();
 		});
 			
 		compile.addActionListener(new ActionListener() {								

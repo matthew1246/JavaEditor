@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\last_time\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\azzhole\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
@@ -544,5 +544,11 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 202
+  },
+  "C:\\Users\\Owner\\Documents\\azzhole\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
