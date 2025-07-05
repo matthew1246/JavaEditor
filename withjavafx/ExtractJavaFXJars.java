@@ -117,15 +117,6 @@ public class ExtractJavaFXJars {
 		String dir = main.getDirectory(main.fileName);
 		
 		for(String jar:commandline.getJavaFX()) {
-					JFrame extractframe = new JFrame();
-					extractframe.setSize(800,600);
-					final JTextArea textarea = new JTextArea();
-					JScrollPane jscrollpane = new JScrollPane(textarea);
-					
-					extractframe.add(jscrollpane);
-					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					extractframe.setVisible(true);
-			               	
 			           		/*ProcessBuilder pb = new ProcessBuilder(
 			                    	System.getProperty("java.home") + "\\bin\\jar.exe",
 			                    	"-xvf", jar
@@ -135,10 +126,19 @@ public class ExtractJavaFXJars {
 			                    	System.getProperty("java.home") + "\\bin\\jar.exe",
 			                    	"-xvf", jar
 			                    	*/
+			                    	JFrame extractframe = new JFrame();
+					extractframe.setSize(800,600);
+					final JTextArea textarea = new JTextArea();
+					JScrollPane jscrollpane = new JScrollPane(textarea);
+					
+					extractframe.add(jscrollpane);
+					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					extractframe.setVisible(true);		
 			                    	SwingWorker<Void, String> worker = new SwingWorker<>() {
 						   @Override
 						    protected Void doInBackground() throws Exception {
-						        ProcessBuilder pb = new ProcessBuilder(System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar);
+						    	
+						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar);
 						        pb.redirectErrorStream(true); // Merge stderr with stdout
 						        Process process = pb.start();
 						
@@ -164,9 +164,14 @@ public class ExtractJavaFXJars {
 						};
 						
 				 worker.execute();
-
+				 try {
+				 	worker.get();
+			 	} catch (InterruptedException | java.util.concurrent.ExecutionException ex) {
+			 		JOptionPane.showMessageDialog(null,"InterruptedException");
+			 		ex.printStackTrace();
+		 		}
 		                    
-	        	        	  break;
+	        	        	  // break;
 	            }
 	}
 	public void extractDLLFiles() {
