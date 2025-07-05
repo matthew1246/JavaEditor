@@ -146,7 +146,8 @@ public class ExtractJavaFXJars {
 						                new InputStreamReader(process.getInputStream()))) {
 						            String line;
 						            while ((line = reader.readLine()) != null) {
-						                publish(line); // Send line to process() on EDT
+                					        	    System.out.println(line);
+						                publish(line); //Send line to process() on EDT
 						            }
 						        }
 						
