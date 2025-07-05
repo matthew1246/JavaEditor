@@ -117,65 +117,67 @@ public class ExtractJavaFXJars {
 		String dir = main.getDirectory(main.fileName);
 		
 		for(String jar:commandline.getJavaFX()) {
-			SwingUtilities.invokeLater(() -> {
+			Thread thread=new Thread(() -> {
+				try {
 					JFrame extractframe = new JFrame();
-				extractframe.setSize(800,600);
-				final JTextArea textarea = new JTextArea();
-				JScrollPane jscrollpane = new JScrollPane(textarea);
+					extractframe.setSize(800,600);
+					final JTextArea textarea = new JTextArea();
+					JScrollPane jscrollpane = new JScrollPane(textarea);
+					
+					extractframe.add(jscrollpane);
+					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					extractframe.setVisible(true);
+			               	
+			           		ProcessBuilder pb = new ProcessBuilder(
+			                    	System.getProperty("java.home") + "\\bin\\jar.exe",
+			                    	"-xvf", jar
+			                	);
+			                	/*
+			                	"cmd.exe", "/c",
+			                    	System.getProperty("java.home") + "\\bin\\jar.exe",
+			                    	"-xvf", jar
+			                    	*/
+	                        	     	pb.directory(new File(dir));
+			                	pb.redirectErrorStream(true);
+			                	Process process = pb.start();
+			
+				    	//Thread thread2=new Thread( () -> {
+					    	try {
+					              	  try (BufferedReader reader = new BufferedReader(
+					                        new InputStreamReader(process.getInputStream()))) {
+					                    String line;
+					                    while ((line = reader.readLine()) != null) {
+					                        String finalLine = line;
+					                            textarea.append(finalLine + "\n");
+					                            textarea.setCaretPosition(textarea.getDocument().getLength());
+					                    }
+					                }
+				                	} catch (IOException ex) {
+				                		JOptionPane.showMessageDialog(null,"IOException");
+				                		ex.printStackTrace();
+			                		}
+			                	//});
+					//thread2.start();
 				
-				extractframe.add(jscrollpane);
-				extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				extractframe.setVisible(true);
-				
-		               	
-		               	new Thread(() -> {
-			          		try {
-			                ProcessBuilder pb = new ProcessBuilder(
-			                    "cmd.exe", "/c",
-			                    System.getProperty("java.home") + "\\bin\\jar.exe",
-			                    "-xvf", jar
-			                );
-	                        	     pb.directory(new File(dir));
-			                pb.redirectErrorStream(true);
-			                Process process = pb.start();
-			
-				    Thread thread=new Thread( () -> {
-				    	try {
-				              	  try (BufferedReader reader = new BufferedReader(
-				                        new InputStreamReader(process.getInputStream()))) {
-				                    String line;
-				                    while ((line = reader.readLine()) != null) {
-				                        String finalLine = line;
-				                        SwingUtilities.invokeLater(() -> {
-				                            textarea.append(finalLine + "\n");
-				                            textarea.setCaretPosition(textarea.getDocument().getLength());
-				                        });
-				                    }
-				                }
-			                	} catch (IOException ex) {
-			                		ex.printStackTrace();
-		                		}
-			                });
-			                thread.start();
-			                thread.join();
-			
-			                process.waitFor();
-			                SwingUtilities.invokeLater(() -> {
-			                    textarea.append("Extraction complete.\n");
-			                    extractframe.dispose();
-		                    	     }
-			                );
-			
-			            } catch (IOException | InterruptedException ex) {
-			                SwingUtilities.invokeLater(() -> {
-			                	
-			                    textarea.append("Error: " + ex.getMessage() + "\n");
-			                    JOptionPane.showMessageDialog(null,ex.getMessage());
-		                    	     }
-			                );
-			            }
-			        }).start();
-		        });
+				            //process.waitFor();
+				            process.onExit().thenAccept( p -> {
+				             	textarea.append("Extraction complete.\n");
+					            extractframe.dispose();
+			            	});
+			               }
+			               catch(IOException ex) {
+			               	JOptionPane.showMessageDialog(null,"IOException");
+			               	ex.printStackTrace();
+		               	    }												
+			        });
+			        thread.start();
+			        try {
+			        	thread.join();
+		        	        } catch (InterruptedException ex) {
+		        	        	JOptionPane.showMessageDialog(null,"InterruptedException");
+		        	        	ex.printStackTrace();
+	        	        	        }
+	        	        	  break;
 	            }
 	}
 	public void extractDLLFiles() {
