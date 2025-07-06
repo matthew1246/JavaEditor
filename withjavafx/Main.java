@@ -3660,29 +3660,26 @@ class MethodSuggestionBox {
 						
 						String methodname=search_textfield.getText();
 						if(keyevent.getKeyCode() == KeyEvent.VK_PERIOD) {
-							//if(!justStarted) {	
-								String output=currentline+".";
-								String output2=methodname;
-								if(methodname.endsWith("."))
-									output2=methodname.substring(0,(methodname.length()-1));	
-								ifdotbefore=output2;
+							/*
+							String output=currentline+".";
+							String output2=methodname;
+							if(methodname.endsWith("."))
+								output2=methodname.substring(0,(methodname.length()-1));	
+							ifdotbefore=output2;
+							
+							output=output+output2;	
+							//currentline=output;
+							Object[] allobjects2=MethodSuggestionBox.this.search(output);
+							if(allobjects2.length == 0) {
+								suggestionbox.dispose();
+								main.textarea.setCaretPosition((caretposition+1));
+								return;
+							}
 								
-								output=output+output2;	
-								//currentline=output;
-								Object[] allobjects2=MethodSuggestionBox.this.search(output);
-								if(allobjects2.length == 0) {
-									suggestionbox.dispose();
-									main.textarea.setCaretPosition((caretposition+1));
-									return;
-								}
-									
-								methods2=allobjects2;
-								labels2=getLabels(allobjects2);
-								selected_index = 0;
-							/*}
-							else {
-								justStarted = false;
-							}*/
+							methods2=allobjects2;
+							labels2=getLabels(allobjects2);
+							selected_index = 0;
+							*/
 						}
 				
 						liveiterator = new LiveIterator<JLabel>(labels2);	
