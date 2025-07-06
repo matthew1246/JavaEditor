@@ -3185,14 +3185,14 @@ class MethodSuggestionBox {
 	}
 	public String getClassName(String variablenameorclassname,String text) {
 		// Below if variable name
-		Pattern pattern4= Pattern.compile("(\\s*(\\b(public|protected|private)\\b)?\\s*(\\b(static)\\b)?\\s*([a-zA-Z<>0-9,?]+)\\s+("+variablenameorclassname+")(?=\\s*=|;|:|\\)))");	
+		Pattern pattern4= Pattern.compile("(\\s*(\\b(public|protected|private)\\b)?\\s*(\\b(static)\\b)?\\s*([a-zA-Z<>0-9,?]+)\\s+("+variablenameorclassname+")(?=\\s*=|;|:))");	
 		Matcher matcher2=pattern4.matcher(text);
-		if(matcher2.find()) {
+		if(matcher2.find()) {		
 			String classname=matcher2.group(6);
 			return classname;
 		}
 		else { 
-			Pattern pattern5=Pattern.compile("\\.*([a-zA-Z0-9]+)\\s+("+variablenameorclassname+")\\s*.+\\)");
+			Pattern pattern5=Pattern.compile("\\(.*?([a-zA-Z0-9]+)\\s*("+variablenameorclassname+")\\s*.*?\\)");
 			Matcher matcher3=pattern5.matcher(text);
 			if(!matcher3.find()) { // If static class name
 				return variablenameorclassname;
@@ -3804,3 +3804,4 @@ class MethodSuggestionBox {
 		return labels;
 	}	
 }
+
