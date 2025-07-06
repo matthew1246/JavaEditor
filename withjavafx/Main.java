@@ -3160,7 +3160,7 @@ class MethodSuggestionBox {
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
 		if(currentline2.length() > 0) {
-			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
+			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z0-9\\.]+)\\z");
 			Matcher matcher0=pattern.matcher(currentline2);	
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
@@ -3191,8 +3191,15 @@ class MethodSuggestionBox {
 			String classname=matcher2.group(6);
 			return classname;
 		}
-		else { // If static class name
-			return variablenameorclassname;
+		else { 
+			Pattern pattern5=Pattern.compile("\\.*([a-zA-Z0-9]+)\\s+("+variablenameorclassname+")\\s*.+\\)");
+			Matcher matcher3=pattern5.matcher(text);
+			if(!matcher3.find()) { // If static class name
+				return variablenameorclassname;
+			}
+			else {
+				return matcher3.group(1);
+			}
 		}
 	}
 	public Member[] getAllPropertyAndMethods(Class<?> classquestionmark) {
@@ -3389,6 +3396,7 @@ class MethodSuggestionBox {
 			String[] properties = editedline.split("\\.");
 			String first = properties[0];
 			String classname=getClassName(first,text);
+			
 			property = getClassQuestionMark(classname,text);
 			if(property == null)
 				return new Object[0];	
@@ -3465,10 +3473,16 @@ class MethodSuggestionBox {
 		return listings;
 	}
 	public Object[] getFromPackageAndClass(String substring) {
-		Class<?> property=getClassQuestionMark(substring);
-		if(property == null)
+		try {
+			Class<?> property=getClassQuestionMark(substring);
+			if(property == null)
+				return new Object[0];
+			return getAllPropertyAndMethodsAndEnums(property);
+		} 
+		catch(NoClassDefFoundError ex) {
+			//ex.printStackTrace();
 			return new Object[0];
-		return getAllPropertyAndMethodsAndEnums(property);
+		}
 	}																																						
 	/*
 	** Old method signature for show() was:
