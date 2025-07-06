@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.ActionEvent;
 public class Compile {
-	public void compileall(String fileName,SaveActionListener sal,ActionEvent ev) {
+	public void compileall(Main main,String fileName,SaveActionListener sal,ActionEvent ev) {
 		try {
 			sal.actionPerformed(ev);
+			if(fileName.equals(""))
+				fileName = main.fileName;
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
 			commandline.compileAll();
@@ -44,9 +46,11 @@ public class Compile {
 			ex.printStackTrace();
 		}		
 	}
-	public void compileall(String fileName,int javaversionnumber,SaveActionListener sal,ActionEvent ev) {
+	public void compileall(Main main,String fileName,int javaversionnumber,SaveActionListener sal,ActionEvent ev) {
 		try {
 			sal.actionPerformed(ev);
+			if(fileName.equals(""))
+				fileName = main.fileName;
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
 			commandline.compileAll();

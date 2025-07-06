@@ -996,7 +996,7 @@ public class Main {
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
 							getjavaversion.dispose();
 							Compile compile = new Compile();
-							compile.compileall(fileName,javaversionnumber,sal,ev4);
+							compile.compileall(this,fileName,javaversionnumber,sal,ev4);
 							CommandLine commandline = new CommandLine();
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=storeselectedfile.get(fileName);
@@ -1101,7 +1101,7 @@ public class Main {
 				case JOptionPane.NO_OPTION:
 					try {
 						Compile compile = new Compile();
-						compile.compileall(fileName,sal,ev);
+						compile.compileall(this,fileName,sal,ev);
 						CommandLine commandline = new CommandLine();
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
