@@ -3260,7 +3260,6 @@ class MethodSuggestionBox {
 			String[] properties = editedline.split("\\.");
 			String first = properties[0];
 			String classname=getClassName(first,text);
-			JOptionPane.showMessageDialog(null,classname);
 			
 			property = getClassQuestionMark(classname,text);
 			if(property == null)
