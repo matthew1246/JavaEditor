@@ -3024,7 +3024,7 @@ class MethodSuggestionBox {
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
 		if(currentline2.length() > 0) {
-			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z\\.]+)\\z");
+			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z0-9\\.]+)\\z");
 			Matcher matcher0=pattern.matcher(currentline2);	
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
