@@ -5,6 +5,8 @@ public class Compile {
 	public void compileall(String fileName,SaveActionListener sal,ActionEvent ev,boolean withJavaFX,Main main) {
 		try {
 			sal.actionPerformed(ev);
+			if(fileName.equals(""))
+				fileName = main.fileName;
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
 			if(withJavaFX) {
@@ -50,6 +52,8 @@ public class Compile {
 	public void compileall(String fileName,int javaversionnumber,SaveActionListener sal,ActionEvent ev,boolean withJavaFX,Main main) {
 		try {
 			sal.actionPerformed(ev);
+			if(fileName.equals(""))
+				fileName = main.fileName;
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
 			if(withJavaFX) {
