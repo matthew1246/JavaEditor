@@ -1,12 +1,13 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java",
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java"
     ],
     "caretposition": 0
   },
@@ -59,7 +60,7 @@
     "starterclass": "MuckFX",
     "jars": [],
     "fileNames": [],
-    "caretposition": 261
+    "caretposition": 71
   },
   "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java": {
     "starterclass": "MuckFX",
