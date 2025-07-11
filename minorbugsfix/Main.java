@@ -2843,6 +2843,18 @@ class AutoKeyListener {
 			variablenames.add(matcher3.group(4));
 		}
 		
+		Pattern pattern = Pattern.compile("\\((.*?)\\)");
+		Matcher matcher = pattern.matcher(text);
+		while (matcher.find()) {
+		    String params = matcher.group(1); // everything inside ()
+		    String[] paramList = params.split(",");
+		    for (String param : paramList) {
+		        param = param.trim();
+		        String type = param.replaceAll("\\s+\\w+$", ""); // remove variable name
+		        variablenames.add(type);
+		    }
+		}
+		
 		data=variablenames;
 	}
 	public void fillComboBox() {
