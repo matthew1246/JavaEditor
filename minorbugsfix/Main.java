@@ -3064,9 +3064,7 @@ class MethodSuggestionBox {
 				return variablenameorclassname;
 			}
 			else {
-				String output = matcher3.group(1);
-				JOptionPane.showMessageDialog(null,output);
-				return output;
+				return matcher3.group(1);
 			}
 		}
 	}
