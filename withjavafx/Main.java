@@ -982,11 +982,13 @@ public class Main {
 			fileNames.remove(tabindex);
 			if(fileNames.size() != 0 && tabindex != 0)
 				tabbedpane.setSelectedIndex((tabindex-1));
+			else if(fileNames.size() == 1 && tabindex == 0)
+				tabbedpane.setSelectedIndex(0);
 			tabbedpane.remove(tabindex);
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
 			
-		});	
+		});
 	
 		setFullPackageNames();		
 		setSubpackages();
@@ -2171,107 +2173,109 @@ public class Main {
 	}
 	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
-		try {
-			int index=tabbedpane.getSelectedIndex();
-			String title=tabbedpane.getTitleAt(index);
-			if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {
-				title="+";
-			}
-			if(title.equals("+")) {
-				//Component plustab = tabbedpane.getComponentAt(index);
-				String dir = Main.this.fileName;
-				if(!dir.equals("")) {
-					dir = dir.replaceAll("[^\\\\]+\\.java","");
+		int index=tabbedpane.getSelectedIndex();
+		if(index != -1) {
+			try {
+				String title=tabbedpane.getTitleAt(index);
+				if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {
+					title="+";
 				}
-				else {
-					dir = System.getProperty("user.home");
+				if(title.equals("+")) {
+					//Component plustab = tabbedpane.getComponentAt(index);
+					String dir = Main.this.fileName;
+					if(!dir.equals("")) {
+						dir = dir.replaceAll("[^\\\\]+\\.java","");
+					}
+					else {
+						dir = System.getProperty("user.home");
+					}
+					JFileChooser filechooser = new JFileChooser(new File(dir));
+					FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
+					filechooser.setFileFilter(filenameextensionfilter);
+					int result = filechooser.showOpenDialog(Main.this.frame);
+					if(result == JFileChooser.APPROVE_OPTION) {
+						File selectedFile = filechooser.getSelectedFile();
+						if(!selectedFile.getName().endsWith(".java")) {
+							selectedFile=new File(addDotJava(selectedFile.getAbsolutePath()));
+						}						
+						tabbedpane.remove(pluspanel);
+						JTextArea textarea2 = new JTextArea();
+						Font originalFont = textarea.getFont();
+						textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+	
+						JScrollPane scrollpane2 = new JScrollPane(textarea2);
+						String directoryandfilename = selectedFile.getPath();
+						fileNames.add(directoryandfilename);
+						StoreSelectedFile storeselectedfile=  new StoreSelectedFile();
+						storeselectedfile.setTabs(fileNames);
+						String filename = Main.this.getFileName(directoryandfilename);
+						
+						Path path = Paths.get(directoryandfilename);
+						String lines = Files.readString(path,StandardCharsets.UTF_8);
+						textarea2.setTabSize(4);
+						textarea2.setText(lines);
+						
+						textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+						//positiontrackers.add(new PositionTracker(textarea2));
+						
+						tabbedpane.addTab(filename,scrollpane2);
+						tabbedpane.addTab("+",pluspanel);
+						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+					}
 				}
-				JFileChooser filechooser = new JFileChooser(new File(dir));
-				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
-				filechooser.setFileFilter(filenameextensionfilter);
-				int result = filechooser.showOpenDialog(Main.this.frame);
-				if(result == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = filechooser.getSelectedFile();
-					if(!selectedFile.getName().endsWith(".java")) {
-						selectedFile=new File(addDotJava(selectedFile.getAbsolutePath()));
-					}						
-					tabbedpane.remove(pluspanel);
-					JTextArea textarea2 = new JTextArea();
-					Font originalFont = textarea.getFont();
-					textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-
-					JScrollPane scrollpane2 = new JScrollPane(textarea2);
-					String directoryandfilename = selectedFile.getPath();
-					fileNames.add(directoryandfilename);
-					StoreSelectedFile storeselectedfile=  new StoreSelectedFile();
-					storeselectedfile.setTabs(fileNames);
-					String filename = Main.this.getFileName(directoryandfilename);
-					
-					Path path = Paths.get(directoryandfilename);
-					String lines = Files.readString(path,StandardCharsets.UTF_8);
-					textarea2.setTabSize(4);
-					textarea2.setText(lines);
-					
-					textarea2.addKeyListener(new CurlyBraceKeyListener(this));
-					//positiontrackers.add(new PositionTracker(textarea2));
-					
-					tabbedpane.addTab(filename,scrollpane2);
-					tabbedpane.addTab("+",pluspanel);
-					tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
-				}
-			}
-			fileName=fileNames.get(tabbedpane.getSelectedIndex());
-			//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
-			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
-			Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
-			
-			if(filelistmodifier.isEmpty()) {
-				filelistmodifier.fillList(fileName);
-			}			
-			else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
-				filelistmodifier = new FileListModifier();
-				filelistmodifier.fillList(fileName);
-			}
-			else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
-				filelistmodifier = new FileListModifier();
-				filelistmodifier.fillList(fileName);
-			}
-			git.Change(fileName);
-			expandable.open();
-			
-			getclassmethods = new GetClassMethods(textarea);		
-			getclassname = new GetClassName(textarea);
-			
-			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			storeselectedfile.set(fileName);
-			setStarterClassBoxes();
-			if(fileName != null && !fileName.equals("")) {
-				frame.setTitle(fileName.replaceAll(".+\\\\",""));
-			}
-			filelistmodifier.setSelected(getFileName(fileName));
-			/*if(!deselected.equals("")) {
-				filelistmodifier.setToMostRecentAfterSelected(deselected);	
-			}*/
-			String dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
-			String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-			/*if(!dir.equals(dir2)) {
-				filelistmodifier.fillList(fileName);
+				fileName=fileNames.get(tabbedpane.getSelectedIndex());
+				//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-			}*/
-			
-			this.fileName=fileName;
+				if(filelistmodifier.isEmpty()) {
+					filelistmodifier.fillList(fileName);
+				}			
+				else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
+					filelistmodifier = new FileListModifier();
+					filelistmodifier.fillList(fileName);
+				}
+				else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
+					filelistmodifier = new FileListModifier();
+					filelistmodifier.fillList(fileName);
+				}
+				git.Change(fileName);
+				expandable.open();
 				
-			loadComboboxes(filelistmodifier);
-			filenamescombobox.setSelectedItem(getFileName(fileName));
-			
-			//filenamescombobox.setSelectedItem(getFileName(fileName));
-			/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
-			int caretposition=storeselectedfile3.getCaretPosition(fileName);
-			if(caretposition != 0)
-			scrollToCaretPosition(caretposition);
-			*/
-		} catch(IOException ex) {
-			ex.printStackTrace();
+				getclassmethods = new GetClassMethods(textarea);		
+				getclassname = new GetClassName(textarea);
+				
+				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+				storeselectedfile.set(fileName);
+				setStarterClassBoxes();
+				if(fileName != null && !fileName.equals("")) {
+					frame.setTitle(fileName.replaceAll(".+\\\\",""));
+				}
+				filelistmodifier.setSelected(getFileName(fileName));
+				/*if(!deselected.equals("")) {
+					filelistmodifier.setToMostRecentAfterSelected(deselected);	
+				}*/
+				String dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
+				String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
+				/*if(!dir.equals(dir2)) {
+					filelistmodifier.fillList(fileName);
+					
+				}*/
+				
+				this.fileName=fileName;
+					
+				loadComboboxes(filelistmodifier);
+				filenamescombobox.setSelectedItem(getFileName(fileName));
+				
+				//filenamescombobox.setSelectedItem(getFileName(fileName));
+				/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+				int caretposition=storeselectedfile3.getCaretPosition(fileName);
+				if(caretposition != 0)
+				scrollToCaretPosition(caretposition);
+				*/
+			} catch(IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 	public int getLineNumber(String stringuptocaretposition) {
