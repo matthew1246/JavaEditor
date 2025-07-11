@@ -966,6 +966,7 @@ public class Main {
 			@Override
 			public void stateChanged(ChangeEvent changeevent) {
 				Main.this.addOrUpdateTab(changeevent);	
+				
 			}
 		});	
 		setApiClasses();
@@ -3056,13 +3057,16 @@ class MethodSuggestionBox {
 			return classname;
 		}
 		else { 
-			Pattern pattern5=Pattern.compile("\\(.*?([a-zA-Z0-9]+)\\s*("+variablenameorclassname+")\\s*.*?\\)");
+			// Get parameter variable type from method	
+			Pattern pattern5=Pattern.compile("(?<!\\w)(\\w+)\\s+"+variablenameorclassname+"(?!\\w)");
 			Matcher matcher3=pattern5.matcher(text);
 			if(!matcher3.find()) { // If static class name
 				return variablenameorclassname;
 			}
 			else {
-				return matcher3.group(1);
+				String output = matcher3.group(1);
+				JOptionPane.showMessageDialog(null,output);
+				return output;
 			}
 		}
 	}
