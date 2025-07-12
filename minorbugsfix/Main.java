@@ -3045,7 +3045,9 @@ class MethodSuggestionBox {
 			Matcher matcher0=pattern.matcher(currentline2);	
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
-				currentline = matcher0.group(2);					
+				currentline = matcher0.group(2);
+				//JOptionPane.showMessageDialog(null,currentline);
+									
 				Object[] allobjects=search(currentline);
 				if(allobjects.length > 0)
 					show(allobjects,caretposition,currentline);	
@@ -3175,7 +3177,10 @@ class MethodSuggestionBox {
 						return Class.forName(matcher12.group(1)+"."+classname);
 					}	
 				}
+				//JOptionPane.showMessageDialog(null,classname);
+				
 				List<String> imports =Main.muck.links.getImport(classname);
+				//JOptionPane.showMessageDialog(null,imports.size()+"");
 				if(imports == null)
 					return Class.forName("java.lang.Object");
 				for(String importy:imports) {
@@ -3277,7 +3282,15 @@ class MethodSuggestionBox {
 			Class<?> property = null;	
 			String[] properties = editedline.split("\\.");
 			String first = properties[0];
-			String classname=getClassName(first,text);
+			
+			String classname = null;
+			// Is Capitol
+			if(Character.isUpperCase(editedline.charAt(0))) {
+				classname=editedline;
+			}
+			else { // Is first character not a capitol
+				classname=getClassName(first,text);
+			}
 			
 			property = getClassQuestionMark(classname,text);
 			if(property == null)
