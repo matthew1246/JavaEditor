@@ -147,7 +147,36 @@ public class Main {
 		JScrollPane scrollpane2 = new JScrollPane(textarea);
 		textarea.setTabSize(4);
 		
-		textarea.addKeyListener(new CurlyBraceKeyListener(this));
+		CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
+		textarea.addKeyListener(curlybracekeylistener);
+		
+		scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+			try {
+				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+					int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+					curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+				}
+			} catch (BadLocationException ex) {
+				ex.printStackTrace();
+			}
+		});
+		scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+			try {
+				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+					int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+					curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+				}
+			} catch (BadLocationException ex) {
+				ex.printStackTrace();
+			}
+		});
+		
 		tabbedpane.addTab("",scrollpane2);
 		tabbedpane.addTab("+",pluspanel);
 		
@@ -180,9 +209,37 @@ public class Main {
 			JScrollPane scrollpane2 = new JScrollPane(textarea2);
 			textarea2.setTabSize(4);
 			
-			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
+			textarea2.addKeyListener(curlybracekeylistener);
 			
 			this.textarea=textarea2;
+			
+			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+					try {
+					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
+				}
+			});
+			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
+				}
+			});
 			
 			tabbedpane.addTab(fileName,scrollpane2);
 			tabbedpane.addTab("+",pluspanel);
@@ -2819,7 +2876,7 @@ class AutoKeyListener {
 	public List<String> data = new ArrayList<String>();
 	private JPanel panelgridlayout;
 	private Main main;
-	private JFrame suggestionbox;
+	public JFrame suggestionbox;
 	private JTextField search_textfield;
 	private GridLayout gridlayout;
 	public AutoKeyListener(Main main) {
@@ -3834,4 +3891,3 @@ class MethodSuggestionBox {
 		return labels;
 	}	
 }
-
