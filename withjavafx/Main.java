@@ -318,8 +318,36 @@ public class Main {
 							textarea2.setTabSize(4);
 							textarea2.setText(lines2);
 							
-							textarea2.addKeyListener(new CurlyBraceKeyListener(Main.this));
+							CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(Main.this);
+							textarea2.addKeyListener(curlybracekeylistener);
 							//positiontrackers.add(new PositionTracker(textarea2));
+							
+							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
+							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
 							
 							tabbedpane.addTab(filename,scrollpane2);
 						}
@@ -382,7 +410,7 @@ public class Main {
 		component.setMinimumSize(component.getPreferredSize());
 	}
 	public List<String> fileNames = new LinkedList<String>();
-	public JScrollPane scrollpane;
+	//public JScrollPane scrollpane;
 	public void setLayout() {
 		JMenuBar menubar = new InnerGridBagLayout();
 
@@ -414,7 +442,7 @@ public class Main {
 		
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-		scrollpane = new JScrollPane(textarea);
+		//scrollpane = new JScrollPane(textarea);
 		//tabbedpane.add(getFileName(fileName),scrollpane);
 
 		//tabbedpane.addTab("+",pluspanel);
@@ -865,6 +893,7 @@ public class Main {
 		            	if(wholedocumentindex <= (textarea.getText().length()) ) {
 					Rectangle2D viewposition=textarea.modelToView2D(wholedocumentindex);
 					Point caretposition=new Point(0,(int)viewposition.getY());
+					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					scrollpane.getViewport().setViewPosition(caretposition);
 					textarea.grabFocus();
 					textarea.setCaretPosition(wholedocumentindex);
@@ -889,7 +918,7 @@ public class Main {
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
-					
+					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 					
 					/*verticalscrollbar.setValue(textarea.getText().length()-1);
@@ -921,7 +950,7 @@ public class Main {
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
-					
+					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 					
 					/*verticalscrollbar.setValue(textarea.getText().length()-1);
