@@ -318,8 +318,36 @@ public class Main {
 							textarea2.setTabSize(4);
 							textarea2.setText(lines2);
 							
-							textarea2.addKeyListener(new CurlyBraceKeyListener(Main.this));
+							CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);
+							textarea2.addKeyListener(curlybracekeylistener);
 							//positiontrackers.add(new PositionTracker(textarea2));
+							
+							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
+							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
 							
 							tabbedpane.addTab(filename,scrollpane2);
 						}

@@ -3,7 +3,8 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
