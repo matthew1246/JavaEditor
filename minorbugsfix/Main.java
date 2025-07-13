@@ -144,9 +144,26 @@ public class Main {
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 
 		JScrollPane scrollpane2 = new JScrollPane(textarea);
+		
 		textarea.setTabSize(4);
 		
-		textarea.addKeyListener(new CurlyBraceKeyListener(this));
+		CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
+		textarea.addKeyListener(curlybracekeylistener);
+		
+		scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+			try {
+				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+					int caretposition = textarea.getCaretPosition();
+					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+					Point screencoordinates= new Point((int)rectanglecoords.getX(),(int)rectanglecoords.getY());
+					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+					curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+				}
+			} catch (BadLocationException ex) {
+				ex.printStackTrace();
+			}
+		});
+		
 		tabbedpane.addTab("",scrollpane2);
 		tabbedpane.addTab("+",pluspanel);
 		
@@ -2684,7 +2701,7 @@ class AutoKeyListener {
 	public List<String> data = new ArrayList<String>();
 	private JPanel panelgridlayout;
 	private Main main;
-	private JFrame suggestionbox;
+	public JFrame suggestionbox;
 	private JTextField search_textfield;
 	private GridLayout gridlayout;
 	public AutoKeyListener(Main main) {
