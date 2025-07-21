@@ -93,7 +93,7 @@ public class Main {
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
 	public JButton deprecated;	
-	public static MuckFX muck = new MuckFX();
+	public static MuckFX muck;
 	public Expandable expandable;
 	public JComboBox<String> filenamescombobox = new JComboBox<String>();	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
@@ -378,6 +378,18 @@ public class Main {
 		}catch(ArrayIndexOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}
+		Thread thread = new Thread(new Runnable() {
+			@Override	
+			public void run() {
+				Main.muck = new MuckFX();
+				setFullPackageNames();		
+				setSubpackages();
+				setPackages();
+				setApiClasses();
+				setKeywords();
+			}
+		});
+		thread.start();
 	}
 	public String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
@@ -1104,9 +1116,6 @@ public class Main {
 			
 		});
 	
-		setFullPackageNames();		
-		setSubpackages();
-		setPackages();
 		opennewtab.addActionListener((ev) -> {
 			addOrUpdateTab(ev);
 		});
@@ -1116,8 +1125,7 @@ public class Main {
 				Main.this.addOrUpdateTab(changeevent);	
 			}
 		});	
-		setApiClasses();
-		setKeywords();
+		
 		generatejar.addActionListener((ev) -> {
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -2527,15 +2535,15 @@ public class Main {
 			}
 		}
 	}		
-	public List<String> apiclasses;
+	public List<String> apiclasses=new ArrayList<String>();
 	public void setApiClasses() {
-		if(apiclasses == null) {	
+		if(Main.muck != null && apiclasses.size() == 0) {	
 			apiclasses=muck.links.getAPIClasses();
 		}
 	}
-	public List<String> keywords;
+	public List<String> keywords=new ArrayList<String>();
 	public void setKeywords() {
-		if(keywords ==null) {
+		if(Main.muck != null && keywords.size() == 0) {
 			/*keywords=new ArrayList<String>();
 			SourceVersion sourceversion=SourceVersion.latest();
 			Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)");
@@ -2556,21 +2564,21 @@ public class Main {
 			"null","super","new","import","true","false"));
 		}
 	}
-	public List<String> packages;
+	public List<String> packages=new ArrayList<String>();
 	public void setPackages() {
-		if(packages == null) {
+		if(Main.muck != null && packages.size() == 0) {
 			packages = muck.links.getPackages();
 		}
 	}
-	public List<String> subpackages;
+	public List<String> subpackages=new ArrayList<String>();
 	public void setSubpackages() {
-		if(subpackages == null) {
+		if(Main.muck != null && subpackages.size() == 0) {
 			subpackages = muck.links.getSubpackages();
 		}
 	}
-	public List<String> fullpackagenames;
+	public List<String> fullpackagenames=new ArrayList<String>();
 	public void setFullPackageNames() {
-		if(fullpackagenames == null) {
+		if(Main.muck != null && fullpackagenames.size() == 0) {
 			fullpackagenames = muck.links.getFullPackageNames();
 		}
 	}
