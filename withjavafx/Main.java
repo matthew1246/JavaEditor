@@ -2840,7 +2840,10 @@ private boolean isControlDown = false;
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		if(line.length() > 1) {
+		if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
+			autokeylistener.search_textfield.setText(autokeylistener.search_textfield.getText()+ev.getKeyChar());
+		}
+		else if(line.length() > 1 && ( (autokeylistener.suggestionbox != null && !(autokeylistener.suggestionbox.isVisible())) || autokeylistener.suggestionbox == null )) {
 			Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
 			Matcher matcher=pattern.matcher(line);
 			if(matcher.find()) {
@@ -2970,7 +2973,7 @@ class AutoKeyListener {
 	private JPanel panelgridlayout;
 	private Main main;
 	public JFrame suggestionbox;
-	private JTextField search_textfield;
+	public JTextField search_textfield;
 	private GridLayout gridlayout;
 	public AutoKeyListener(Main main) {
 		this.main = main;

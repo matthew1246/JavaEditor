@@ -2712,16 +2712,21 @@ class CurlyBraceKeyListener implements KeyListener {
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
-			autokeylistener.search_textfield.setText(autokeylistener.search_textfield.getText()+ev.getKeyChar());
-		}
-		else if(line.length() > 1 && ( (autokeylistener.suggestionbox != null && !(autokeylistener.suggestionbox.isVisible())) || autokeylistener.suggestionbox == null )) {
-			Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
-			Matcher matcher=pattern.matcher(line);
-			if(matcher.find()) {
-				String variablename = matcher.group(1);
-				if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-					autokeylistener.open(variablename,caretposition);
+		if(line.length() > 1) {
+			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
+				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
+				autokeylistener.variablename = oldplusnew;
+				//autokeylistener.caretposition = caretposition+1;
+				autokeylistener.search_textfield.setText(oldplusnew);
+			}
+			else {
+				Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
+				Matcher matcher=pattern.matcher(line);
+				if(matcher.find()) {
+					String variablename = matcher.group(1);
+					if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
+						autokeylistener.open(variablename,caretposition);
+					}
 				}
 			}
 			if(ev.isControlDown()) {
@@ -2848,7 +2853,7 @@ class AutoKeyListener {
 	public AutoKeyListener(Main main) {
 		this.main = main;
 	}
-	private String variablename;
+	public String variablename;
 	public int caretposition;
 	public void open(String variablename,int caretposition) {
 		run(variablename,caretposition);
@@ -3065,7 +3070,7 @@ class AutoKeyListener {
 			String first=text.substring(0,caretposition);
 			//variablename=variablename.substring(variablename.length()-1,variablename.length());
 			first=first.substring(0,first.length()-variablename.length()+1);
-			String second = text.substring(caretposition+1,text.length());
+			String second = text.substring(caretposition+variablename.length(),text.length());
 			/*System.out.println("Start");
 			System.out.println(second);
 			System.out.println("End");
