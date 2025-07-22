@@ -3069,7 +3069,7 @@ class AutoKeyListener {
 	
 			String first=text.substring(0,caretposition);
 			//variablename=variablename.substring(variablename.length()-1,variablename.length());
-			first=first.substring(0,first.length()-variablename.length()+1);
+			//first=first.substring(0,first.length()-variablename.length()+1);
 			String second = text.substring(caretposition+variablename.length(),text.length());
 			/*System.out.println("Start");
 			System.out.println(second);
