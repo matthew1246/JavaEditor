@@ -2716,7 +2716,7 @@ class CurlyBraceKeyListener implements KeyListener {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
-				autokeylistener.position = autokeylistener.caretposition+1;
+				autokeylistener.position = autokeylistener.position+1;
 				autokeylistener.setLocation(autokeylistener.position);
 				autokeylistener.search_textfield.setText(oldplusnew);
 			}
@@ -2860,6 +2860,7 @@ class AutoKeyListener {
 		run(variablename,caretposition);
 	}
 	public void run(String variablename,int caretposition) {
+		position = caretposition;		
 		caretposition-=variablename.length()-1;
 		this.variablename = variablename;
 		this.caretposition = caretposition;
@@ -2870,7 +2871,6 @@ class AutoKeyListener {
 	}
 	public int position;
 	public void setLayout() {
-		position = caretposition;	
 		suggestionbox = new JFrame();			
 		suggestionbox.setTitle("Variable name suggestion box");
 		suggestionbox.setSize(100,500);
