@@ -153,7 +153,7 @@ public class Main {
 		scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 			try {
 				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-					int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+					int caretposition = curlybracekeylistener.autokeylistener.position;
 					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -166,7 +166,7 @@ public class Main {
 		scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 			try {
 				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-					int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+					int caretposition = curlybracekeylistener.autokeylistener.position;
 					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -219,7 +219,7 @@ public class Main {
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 					try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-						int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+						int caretposition = curlybracekeylistener.autokeylistener.position;
 						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -232,7 +232,7 @@ public class Main {
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 				try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-						int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+						int caretposition = curlybracekeylistener.autokeylistener.position;
 						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -272,7 +272,7 @@ public class Main {
 				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 				try {
 						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-							int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+							int caretposition = curlybracekeylistener.autokeylistener.position;
 							Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 							SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -285,7 +285,7 @@ public class Main {
 				scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 				try {
 						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-							int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+							int caretposition = curlybracekeylistener.autokeylistener.position;
 							Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 							SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -325,7 +325,7 @@ public class Main {
 							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 							try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-										int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+										int caretposition = curlybracekeylistener.autokeylistener.position;
 										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -338,7 +338,7 @@ public class Main {
 							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 							try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-										int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+										int caretposition = curlybracekeylistener.autokeylistener.position;
 										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -2220,7 +2220,7 @@ public class Main {
 						scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 							try {
 								if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-									int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+									int caretposition = curlybracekeylistener.autokeylistener.position;
 									Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 									Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 									SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -2233,7 +2233,7 @@ public class Main {
 						scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 							try {
 								if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-									int caretposition = curlybracekeylistener.autokeylistener.caretposition;
+									int caretposition = curlybracekeylistener.autokeylistener.position;
 									Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
 									Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
 									SwingUtilities.convertPointToScreen(screencoordinates,textarea);
@@ -2716,7 +2716,8 @@ class CurlyBraceKeyListener implements KeyListener {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
-				//autokeylistener.caretposition = caretposition+1;
+				autokeylistener.position = autokeylistener.caretposition+1;
+				autokeylistener.setLocation(autokeylistener.position);
 				autokeylistener.search_textfield.setText(oldplusnew);
 			}
 			else {
@@ -2725,7 +2726,6 @@ class CurlyBraceKeyListener implements KeyListener {
 				if(matcher.find()) {
 					String variablename = matcher.group(1);
 					if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-						caretposition-=variablename.length()-1;
 						autokeylistener.open(variablename,caretposition);
 					}
 				}
@@ -2860,6 +2860,7 @@ class AutoKeyListener {
 		run(variablename,caretposition);
 	}
 	public void run(String variablename,int caretposition) {
+		caretposition-=variablename.length()-1;
 		this.variablename = variablename;
 		this.caretposition = caretposition;
 		setLayout();
@@ -2867,7 +2868,9 @@ class AutoKeyListener {
 		fillComboBox();
 		suggestionbox.setVisible(true);
 	}
+	public int position;
 	public void setLayout() {
+		position = caretposition;	
 		suggestionbox = new JFrame();			
 		suggestionbox.setTitle("Variable name suggestion box");
 		suggestionbox.setSize(100,500);
@@ -2884,7 +2887,7 @@ class AutoKeyListener {
 		//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
 		suggestionbox.add(scrollpane);
 		try {
-			Rectangle2D rectanglecoords=main.textarea.modelToView2D(caretposition);
+			Rectangle2D rectanglecoords=main.textarea.modelToView2D(position);
 			Point screencoordinates= new Point((int)rectanglecoords.getX(),(int)rectanglecoords.getY());
 			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
 			suggestionbox.setLocation(screencoordinates);
@@ -3069,7 +3072,7 @@ class AutoKeyListener {
 			//JOptionPane.showMessageDialog(null,caretposition+"");
 	
 			String first=text.substring(0,caretposition);
-			//JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
+			// JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
 			
 			String second = text.substring(caretposition+variablename.length(),text.length());
 			/*System.out.println("Start");
@@ -3191,6 +3194,16 @@ class AutoKeyListener {
 		}
 		data = variablenames2;
 		return variablenames2.size() > 0;
+	}
+	public void setLocation(int caretposition3) {
+		try {
+			Rectangle2D rectanglecoords=main.textarea.modelToView2D(caretposition3);
+			Point screencoordinates= new Point((int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
+			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
+			suggestionbox.setLocation(screencoordinates);
+		} catch (BadLocationException ex) {
+			ex.printStackTrace();
+		}
 	}
 }
 class MethodSuggestionBox {
