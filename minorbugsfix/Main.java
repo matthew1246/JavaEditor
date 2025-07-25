@@ -2871,7 +2871,9 @@ class AutoKeyListener {
 	}
 	public int position;
 	public void setLayout() {
-		suggestionbox = new JFrame();			
+		suggestionbox = new JFrame();	
+		suggestionbox.setAlwaysOnTop(true);
+				
 		suggestionbox.setTitle("Variable name suggestion box");
 		suggestionbox.setSize(100,500);
 		panelgridlayout = new JPanel();
