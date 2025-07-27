@@ -3501,18 +3501,18 @@ class MethodSuggestionBox {
 			}
 			catch(ClassNotFoundException ex4) {
 				ex4.printStackTrace();
-				try {
-					return Class.forName("java.lang.Object");
-				}
-				catch(ClassNotFoundException ex5) {
-					ex5.printStackTrace();
-					return null;
-				}
+				return null;
 			}
 		}
 	}
 	public Member[] getAllPropertyAndMethods(String classname,String text) {
-		return getAllPropertyAndMethods(getClassQuestionMark(classname,text));
+		Class<?> members = 	getClassQuestionMark(classname,text);
+		if(members != null) {
+			return getAllPropertyAndMethods(members);
+		}
+		else {
+			return new Member[0];
+		}
 	}
 	public List<Class<?>> getAncestorsForClassQuestionMark(Class<?> classquestionmark) {
 		List<Class<?>> list = new ArrayList<Class<?>>();
