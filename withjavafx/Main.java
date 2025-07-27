@@ -3698,23 +3698,9 @@ class MethodSuggestionBox {
 			suggestionbox.setTitle(search);
 			suggestionbox.setSize(100,500);
 			JPanel panelgridlayout = new JPanel();
-			//Member[] unorderedmethods=getAllPropertyAndMethods(classquestionmark);
-			//Object[] unorderedmethods = getAllPropertyAndMethodsAndEnums(classquestionmark);
-			/*for(Object object:unorderedmethods) {
-				if(object instanceof Enum) {
-					System.out.println(((Enum)object).name());
-				}
-			}
-			System.out.println();
-			System.out.println();
-			*/
+			
 			final Object[] methods = CurlyBraceKeyListener.suggestionboxselected.Reordered(unorderedmethods,search);
-			/*for(Object object:methods) {
-				if(object instanceof Enum) {
-					System.out.println(((Enum)object).name());
-				}
-			}
-			*/
+			
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
 			panelgridlayout.setLayout(gridlayout);
 			JTextField search_textfield=new JTextField();
@@ -3730,6 +3716,9 @@ class MethodSuggestionBox {
 					if(name.contains("$")) {
 						name=name.replaceAll(".+\\$","");
 					}
+					
+					name+=getParanthesesAndParameters(methods[i]);
+					
 					labels[i] = new JLabel(name);
 					panelgridlayout.add(labels[i]);
 				}
@@ -3837,37 +3826,14 @@ class MethodSuggestionBox {
 						JLabel selected_label2 =labels2[selected_index];
 						String selected = selected_label2.getText();
 						CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
-						String methodorproperty = "";
-						breaky:for(int i = 0; i < labels2.length; i++) {
-							if(labels2[i] == null) {
-								JOptionPane.showMessageDialog(null,"labels2[i] is null");
-							}
-							if(selected_label2 == null) {
-								JOptionPane.showMessageDialog(null,"selected_label2 is null");
-							}
-							if(labels2[i].equals(selected_label2)) {
-								if(methods2[i] instanceof Method) {
-									methodorproperty = "(";
-									if(((Method)methods2[i]).getParameterCount() > 0) {
-										Parameter[] parametertypes=((Method)methods2[i]).getParameters();
-										String[] variabletypes= new String[parametertypes.length];
-										for(int j = 0; j < parametertypes.length; j++) {
-											variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
-										}
-										methodorproperty+=String.join(",",variabletypes);
-									}
-									methodorproperty+=")";
-									break breaky;
-								}
-							}
-						}
+						
 						if(!ifdotbefore.equals(""))
 							selected=ifdotbefore+"."+selected;
-						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
-						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected+methodorproperty;
+						String firsthalf=text.substring(0,caretposition)+"."+selected;
+						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 						String second =text.substring(caretposition+1,text.length());
 						main.textarea.setText(firsthalf+second);
-						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
+						main.textarea.setCaretPosition(caretposition+1+selected.length());
 					}
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 						liveiterator.reset();
@@ -3961,6 +3927,21 @@ class MethodSuggestionBox {
 		catch(BadLocationException ex) {
 			ex.printStackTrace();
 		}
+	}
+	public String getParanthesesAndParameters(Object method) {
+		String methodorproperty = "(";
+		if(method instanceof Method) {
+			if(((Method)method).getParameterCount() > 0) {
+				Parameter[] parametertypes=((Method)method).getParameters();
+				String[] variabletypes= new String[parametertypes.length];
+				for(int j = 0; j < parametertypes.length; j++) {
+					variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
+				}
+				methodorproperty+=String.join(",",variabletypes);
+			}
+		}
+		methodorproperty+=")";
+		return methodorproperty;
 	}
 	public JLabel[] getLabels(Object[] methods) {
 		JLabel[] labels = new JLabel[methods.length];
