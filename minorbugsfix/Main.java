@@ -390,6 +390,14 @@ public class Main {
 			}
 		});
 		thread.start();
+		openLastSelectedLine();
+	}
+	public void openLastSelectedLine() {
+		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+		if(fileName != null && !fileName.equals("")) {
+			int caretposition=storeselectedfile.getCaretPosition(fileName);
+			scrollToCaretPosition(caretposition);
+		}
 	}
 	public String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
