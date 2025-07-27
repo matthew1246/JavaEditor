@@ -3696,37 +3696,14 @@ class MethodSuggestionBox {
 						JLabel selected_label2 =labels2[selected_index];
 						String selected = selected_label2.getText();
 						CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
-						String methodorproperty = "";
-						breaky:for(int i = 0; i < labels2.length; i++) {
-							if(labels2[i] == null) {
-								JOptionPane.showMessageDialog(null,"labels2[i] is null");
-							}
-							if(selected_label2 == null) {
-								JOptionPane.showMessageDialog(null,"selected_label2 is null");
-							}
-							if(labels2[i].equals(selected_label2)) {
-								if(methods2[i] instanceof Method) {
-									methodorproperty = "(";
-									if(((Method)methods2[i]).getParameterCount() > 0) {
-										Parameter[] parametertypes=((Method)methods2[i]).getParameters();
-										String[] variabletypes= new String[parametertypes.length];
-										for(int j = 0; j < parametertypes.length; j++) {
-											variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
-										}
-										methodorproperty+=String.join(",",variabletypes);
-									}
-									methodorproperty+=")";
-									break breaky;
-								}
-							}
-						}
+						
 						if(!ifdotbefore.equals(""))
 							selected=ifdotbefore+"."+selected;
-						String firsthalf=text.substring(0,caretposition)+"."+selected+methodorproperty;
-						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected+methodorproperty;
+						String firsthalf=text.substring(0,caretposition)+"."+selected;
+						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 						String second =text.substring(caretposition+1,text.length());
 						main.textarea.setText(firsthalf+second);
-						main.textarea.setCaretPosition(caretposition+1+selected.length()+methodorproperty.length());
+						main.textarea.setCaretPosition(caretposition+1+selected.length());
 					}
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 						liveiterator.reset();
