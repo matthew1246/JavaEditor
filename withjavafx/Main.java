@@ -2332,6 +2332,7 @@ public class Main {
 						}						
 						tabbedpane.remove(pluspanel);
 						JTextArea textarea2 = new JTextArea();
+						Main.this.textarea = textarea2;
 						Font originalFont = textarea.getFont();
 						textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 	
