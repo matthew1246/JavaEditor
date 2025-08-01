@@ -209,10 +209,11 @@ public class Main {
 			JScrollPane scrollpane2 = new JScrollPane(textarea2);
 			textarea2.setTabSize(4);
 			
+			this.textarea=textarea2;
+			
 			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
 			textarea2.addKeyListener(curlybracekeylistener);
 			
-			this.textarea=textarea2;
 			
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 					try {
@@ -262,11 +263,11 @@ public class Main {
 				JScrollPane scrollpane2 = new JScrollPane(textarea2);
 				textarea2.setTabSize(4);
 				
+				this.textarea=textarea2;
+				
 				CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
 				textarea2.addKeyListener(curlybracekeylistener);
 				//positiontrackers.add(new PositionTracker(textarea2));
-				
-				this.textarea=textarea2;
 				
 				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 				try {
@@ -307,6 +308,7 @@ public class Main {
 						for(String directoryandfilename:tabs) {
 						try {
 							JTextArea textarea2 = new JTextArea();
+							Main.this.textarea = textarea2;
 							Font originalFont = textarea.getFont();
 							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 		
