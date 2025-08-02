@@ -730,27 +730,6 @@ public class Main {
 
 		menubar.validate();
 		menubar.repaint();
-
-		JLabel javafxLabel = new JLabel("javafx: ");
-		javafxLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		gbc.gridx = 26;
-		gbc.weightx=2.0;
-		gbc.gridwidth=2;
-		menubar.add(javafxLabel,gbc);
-		
-		menubar.validate();
-		menubar.repaint();
-		
-		javafxcheckbox = new JCheckBox();
-		javafxcheckbox.setSelected(true);
-		
-		gbc.gridx=28;
-		gbc.weightx=1.0;
-		gbc.gridwidth=1;
-		menubar.add(javafxcheckbox,gbc);
-		
-		menubar.validate();
-		menubar.repaint();
 		
 		gbc.gridx=0;
 		gbc.gridy=1;
@@ -862,15 +841,6 @@ public class Main {
 		gbc.gridwidth=2;
 		gbc.gridheight=1;
 		menubar.add(reload,gbc);
-
-		menubar.validate();
-		menubar.repaint();
-		
-		deprecated = new JButton("deprecated");
-		gbc.gridx=26;
-		gbc.weightx=3.0;
-		gbc.gridwidth=3;
-		menubar.add(deprecated,gbc);
 		
 		menubar.validate();
 		menubar.repaint();
@@ -1444,6 +1414,7 @@ public class Main {
 				break;
 			}
 		});
+		/*
 		deprecated.addActionListener((ev) -> {
 			try {
 				if(fileName.equals("")) {
@@ -1501,6 +1472,7 @@ public class Main {
 				ex.printStackTrace();
 			}
 		});
+		*/
 		reload.addActionListener( (ev) -> {
 			try {
 				String lines = Files.readString(Paths.get(fileName),StandardCharsets.UTF_8);
