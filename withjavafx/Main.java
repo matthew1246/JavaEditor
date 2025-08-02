@@ -2142,27 +2142,47 @@ public class Main {
 									storeselectedfile.set(fileName);
 									storeselectedfile.setStarterClass(save);
 									
-									if(javafxcheckbox.isSelected()) {
+									
+									String[] options={"Yes","No"};
+									int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									if(option2 ==JOptionPane.YES_OPTION) {
 										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 										commandline.addJavaFX();
 										save=extractjavafxjars.starter;
 									}
+									else if(option2 == JOptionPane.NO_OPTION) {
+										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+										File javafxlauncher=new File(maintwo);
+										if(javafxlauncher.exists()) {
+											javafxlauncher.delete();
+										}
+									}
+									
 									commandline.setMainClass(save);
-
 									Preferences preferences=storeselectedfile.get(classpath1+selected+".java");
 									for(String jar:preferences.jars) {
 										commandline.addExternalJar(jar);
 									}
 								}
 								else {
-									if(javafxcheckbox.isSelected()) {
+											
+									String[] options={"Yes","No"};
+									int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									if(option2 ==JOptionPane.YES_OPTION) {
 										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 										commandline.addJavaFX();
 										commandline.setMainClass(extractjavafxjars.starter);
 									}
-									else {
+									else if(option2 == JOptionPane.NO_OPTION) {
+										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+										File javafxlauncher=new File(maintwo);
+										if(javafxlauncher.exists()) {
+											javafxlauncher.delete();
+										}
 										commandline.setMainClass(fileNameWithoutDotJava);
-									}
+
+									}	
+								
 									StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									Preferences preferences=storeselectedfile.get(fileName);
 									for(String jar:preferences.jars) {																		
@@ -2197,14 +2217,24 @@ public class Main {
 									commandline.addJunit();
 								String main_class = fileName.replaceAll(".+\\\\","");									
 								main_class =main_class.replaceAll("\\.java","");
-								if(javafxcheckbox.isSelected()) {
+								
+								String[] options={"Yes","No"};
+								int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+								if(option2 ==JOptionPane.YES_OPTION) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									commandline.addJavaFX();
 									commandline.setMainClass(extractjavafxjars.starter);
 								}
-								else {
+								else if(option2 == JOptionPane.NO_OPTION) {
+									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+									File javafxlauncher=new File(maintwo);
+									if(javafxlauncher.exists()) {
+										javafxlauncher.delete();
+									}
 									commandline.setMainClass(main_class);
-								}
+
+								}	
+								
 								if(checkbox.isSelected()) {
 									commandline.addClasspathCheckboxFeature();
 								}	
@@ -2240,25 +2270,40 @@ public class Main {
 										for(String jar:preferences.jars) {
 											commandline.addExternalJar(jar);
 										}
-										if(javafxcheckbox.isSelected()) {
+										
+										option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										if(option2 ==JOptionPane.YES_OPTION) {
 											ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 											commandline.addJavaFX();
 											commandline.setMainClass(extractjavafxjars.starter);
 										}
-										else {
+										else if(option2 == JOptionPane.NO_OPTION) {
+											String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+											File javafxlauncher=new File(maintwo);
+											if(javafxlauncher.exists()) {
+												javafxlauncher.delete();
+											}
 											commandline.setMainClass(save);
-										}
+										}																
 									}
 									else {
 										fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
-										if(javafxcheckbox.isSelected()) {
+										
+										option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										if(option2 ==JOptionPane.YES_OPTION) {
 											ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 											commandline.addJavaFX();
 											commandline.setMainClass(extractjavafxjars.starter);
 										}
-										else {
+										else if(option2 == JOptionPane.NO_OPTION) {
+											String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+											File javafxlauncher=new File(maintwo);
+											if(javafxlauncher.exists()) {
+												javafxlauncher.delete();
+											}
 											commandline.setMainClass(fileNameWithoutDotJava);
-										}
+										}	
+										
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName);
 										for(String jar:preferences.jars) {										
