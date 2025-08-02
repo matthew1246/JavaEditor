@@ -537,6 +537,8 @@ public class Main {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
 				String filename=((JMenuItem)ev.getSource()).getText();
+				if(filename.startsWith("lastopened: "))
+					filename=filename.replaceFirst("lastopened: ","");
 				Main.this.OpenNewTab(filename);
 			}
 		};
