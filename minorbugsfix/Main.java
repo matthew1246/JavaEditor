@@ -531,10 +531,21 @@ public class Main {
 		menu.add(opennewtab);
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
-		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-		LinkedHashMap<String,Preferences> hashmap=storeselectedfile.getBackup();
+		StoreSelectedFile storeselectedfile2 =new StoreSelectedFile();
+		LinkedHashMap<String,Preferences> hashmap=storeselectedfile2.getBackup();
+		ActionListener opennewtab = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				String filename=((JMenuItem)ev.getSource()).getText();
+				Main.this.OpenNewTab(filename);
+			}
+		};
 		for(String filename:hashmap.keySet()) {
-			recent.add(new JMenuItem(filename));
+			if(filename.equals("lastopened"))
+				filename="lastopened: "+fileName;
+			JMenuItem recentmenuitem = new JMenuItem(filename);
+			recentmenuitem.addActionListener(opennewtab);
+			recent.add(recentmenuitem);
 		}  
 		menu.add(recent);
 		menu.add(saveItem);
@@ -2187,6 +2198,125 @@ public class Main {
 			filename+=".java";
 		}
 		return filename;
+	}
+	public void OpenNewTab(String filename) {
+		int index=tabbedpane.getSelectedIndex();
+		if(index != -1) {
+			try {			
+				//Component plustab = tabbedpane.getComponentAt(index);
+				String dir = filename;
+				if(!dir.equals("")) {
+					dir = dir.replaceAll("[^\\\\]+\\.java","");
+				}
+				else {
+					dir = System.getProperty("user.home");
+				}
+										
+				tabbedpane.remove(pluspanel);
+				JTextArea textarea2 = new JTextArea();
+				Main.this.textarea = textarea2;
+				Font originalFont = textarea.getFont();
+				textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+				JScrollPane scrollpane2 = new JScrollPane(textarea2);
+				fileNames.add(filename);
+				StoreSelectedFile storeselectedfile=  new StoreSelectedFile();
+				storeselectedfile.setTabs(fileNames);
+				
+				Path path = Paths.get(filename);
+				String lines = Files.readString(path,StandardCharsets.UTF_8);
+				textarea2.setTabSize(4);
+				textarea2.setText(lines);
+				
+				CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
+				textarea2.addKeyListener(curlybracekeylistener);
+				//positiontrackers.add(new PositionTracker(textarea2));
+				
+				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+					try {
+						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+							int caretposition = curlybracekeylistener.autokeylistener.position;
+							Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+							SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+							curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+						}
+					} catch (BadLocationException ex) {
+						ex.printStackTrace();
+					}
+				});
+				scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+					try {
+						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+							int caretposition = curlybracekeylistener.autokeylistener.position;
+							Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+							SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+							curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+						}
+					} catch (BadLocationException ex) {
+						ex.printStackTrace();
+					}
+				});
+				
+				tabbedpane.addTab(filename,scrollpane2);
+				tabbedpane.addTab("+",pluspanel);
+				tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+				
+				fileName=filename;
+				//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+				
+				if(filelistmodifier.isEmpty()) {
+					filelistmodifier.fillList(fileName);
+				}			
+				else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
+					filelistmodifier = new FileListModifier();
+					filelistmodifier.fillList(fileName);
+				}
+				else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
+					filelistmodifier = new FileListModifier();
+					filelistmodifier.fillList(fileName);
+				}
+				git.Change(fileName);
+				expandable.open();
+				
+				getclassmethods = new GetClassMethods(textarea);		
+				getclassname = new GetClassName(textarea);
+				
+				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+				storeselectedfile3.set(fileName);
+				setStarterClassBoxes();
+				if(fileName != null && !fileName.equals("")) {
+					frame.setTitle(fileName.replaceAll(".+\\\\",""));
+				}
+				filelistmodifier.setSelected(getFileName(fileName));
+				/*if(!deselected.equals("")) {
+					filelistmodifier.setToMostRecentAfterSelected(deselected);	
+				}*/
+				String dir1= filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
+				String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
+				/*if(!dir.equals(dir2)) {
+					filelistmodifier.fillList(fileName);
+					
+				}*/
+				
+				this.fileName=fileName;
+					
+				loadComboboxes(filelistmodifier);
+				filenamescombobox.setSelectedItem(getFileName(fileName));
+				
+				//filenamescombobox.setSelectedItem(getFileName(fileName));
+				/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+				int caretposition=storeselectedfile3.getCaretPosition(fileName);
+				if(caretposition != 0)
+				scrollToCaretPosition(caretposition);
+				*/
+			} catch(IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
