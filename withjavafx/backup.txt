@@ -4,7 +4,8 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MSDOS.java"
     ],
     "caretposition": 0
   },
@@ -24,10 +25,10 @@
     "caretposition": 134390
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MSDOS.java": {
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 763
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java": {
     "starterclass": "",
@@ -573,6 +574,27 @@
     "caretposition": 4263
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Content.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java": {
+    "starterclass": "MuckFX",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 1120
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",

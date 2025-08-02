@@ -79,7 +79,7 @@ public class Git {
 	public void setLayout() {
 		frame.setSize(500,100);
  // previously 400,100
-		frame.setLocation(1050,0);
+		frame.setLocation(1000,0);
 		frame.getContentPane().add(input,BorderLayout.CENTER);
 		run = new JButton("run");
 		frame.getContentPane().add(run,BorderLayout.SOUTH);

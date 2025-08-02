@@ -15,7 +15,7 @@ public class MuckFX {
 	public void setLayout() {
 		frame= new JFrame();
 		frame.setTitle("Class");
-		frame.setLocation(1050,100);
+		frame.setLocation(1000,100);
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
 		textfield = new JTextField(15);

@@ -457,7 +457,7 @@ public class Main {
 		else {
 			frame.setTitle("");
 		}
-		frame.setSize(870,600);
+		frame.setSize(800,600);
 		
 		textarea = new JTextArea();
 		combobox = new JComboBox<String>();
