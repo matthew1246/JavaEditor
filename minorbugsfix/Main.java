@@ -2259,7 +2259,7 @@ public class Main {
 					}
 				});
 				
-				tabbedpane.addTab(filename,scrollpane2);
+				tabbedpane.addTab(getFileName(filename),scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
 				tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 				

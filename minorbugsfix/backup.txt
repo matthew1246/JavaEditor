@@ -1,12 +1,13 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java"
     ],
     "caretposition": 0
   },
