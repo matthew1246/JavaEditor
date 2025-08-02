@@ -2027,11 +2027,22 @@ public class Main {
 							}
 							String main_class = fileName.replaceAll(".+\\\\","");						
 							main_class =main_class.replaceAll("\\.java","");
-							if(javafxcheckbox.isSelected()) {
+							
+							String[] options={"Yes","No"};
+							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+							if(option2 ==JOptionPane.YES_OPTION) {
 								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 								commandline.addJavaFX();
 								main_class=extractjavafxjars.starter;
 							}
+							else if(option2 == JOptionPane.NO_OPTION) {
+								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+								File javafxlauncher=new File(maintwo);
+								if(javafxlauncher.exists()) {
+									javafxlauncher.delete();
+								}
+							}
+							
 							commandline.setMainClass(main_class);
 							if(checkbox.isSelected()) {
 								commandline.addClasspathCheckboxFeature();
