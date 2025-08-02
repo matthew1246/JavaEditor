@@ -85,7 +85,7 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-public class Main {
+public class Main {		
 	public JMenuItem closetab = new JMenuItem("Close Tab");		
 	public JCheckBox javafxcheckbox;
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
@@ -1946,9 +1946,18 @@ public class Main {
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
 						
-						if(javafxcheckbox.isSelected()) {
+						String[] options={"Yes","No"};
+						int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+						if(option2 ==JOptionPane.YES_OPTION) {
 							ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 							commandline.addJavaFX();
+						}
+						else if(option2 == JOptionPane.NO_OPTION) {
+							String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+							File javafxlauncher=new File(maintwo);
+							if(javafxlauncher.exists()) {
+								javafxlauncher.delete();
+							}
 						}
 						for(String jar:preferences.jars) {
 							commandline.addExternalJar(jar);
