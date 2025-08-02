@@ -530,6 +530,13 @@ public class Main {
 		menu.add(opennewwindow);
 		menu.add(opennewtab);
 		menu.add(closetab);
+		JMenu recent = new JMenu("Recent Files");
+		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+		LinkedHashMap<String,Preferences> hashmap=storeselectedfile.getBackup();
+		for(String filename:hashmap.keySet()) {
+			recent.add(new JMenuItem(filename));
+		}  
+		menu.add(recent);
 		menu.add(saveItem);
 		menu.add(saveasitem);
 		menu.add(generatejar);
