@@ -1,0 +1,26 @@
+{
+  "": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 127
+  },
+  "lastopened": {
+    "starterclass": "C:\\Users\\Owner\\Documents\\New Folder\\Maintwo.java",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder\\Main.java": {
+    "starterclass": "Maintwo",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 105
+  },
+  "C:\\Users\\Owner\\Documents\\New Folder\\Maintwo.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  }
+}

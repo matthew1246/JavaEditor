@@ -3330,7 +3330,7 @@ class AutoKeyListener {
 		List<String> variablenames = new ArrayList<String>();
 		String text = main.textarea.getText();
 		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
-		JOptionPane.showMessageDialog(null,""+caretposition);
+		//JOptionPane.showMessageDialog(null,""+caretposition);
 		
 		Matcher matcher2=pattern2.matcher(text.substring(0,caretposition));
 		while(matcher2.find()) {
