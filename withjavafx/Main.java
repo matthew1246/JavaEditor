@@ -3027,7 +3027,7 @@ private boolean isControlDown = false;
 		*/
 		int caretposition = main.textarea.getCaretPosition();
 		
-		JOptionPane.showMessageDialog(null,""+caretposition);
+		//JOptionPane.showMessageDialog(null,""+caretposition);
 		
 		Middle middle = new Middle(main.textarea);
 		String line=middle.getCurrentLine();
