@@ -6,9 +6,12 @@
     "caretposition": 127
   },
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\New Folder\\Maintwo.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
-    "fileNames": [],
+    "fileNames": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+    ],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\New Folder\\Main.java": {
@@ -18,6 +21,18 @@
     "caretposition": 105
   },
   "C:\\Users\\Owner\\Documents\\New Folder\\Maintwo.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
