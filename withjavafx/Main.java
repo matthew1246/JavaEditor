@@ -3398,9 +3398,17 @@ class AutoKeyListener {
 			String text = main.textarea.getText();
 			//JOptionPane.showMessageDialog(null,caretposition+"");
 	
+			if(caretposition > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}								
 			String first=text.substring(0,caretposition);
 			// JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
 			
+			if((caretposition+variablename.length()) > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}
 			String second = text.substring(caretposition+variablename.length(),text.length());
 			/*System.out.println("Start");
 			System.out.println(second);
