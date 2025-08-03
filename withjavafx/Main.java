@@ -2128,6 +2128,9 @@ public class Main {
 										if(javafxlauncher.exists()) {
 											javafxlauncher.delete();
 										}
+										if(save.endsWith("two")) {
+											save=save.substring(0,save.length()-3);
+										}
 									}
 									
 									commandline.setMainClass(save);
@@ -2255,6 +2258,8 @@ public class Main {
 											if(javafxlauncher.exists()) {
 												javafxlauncher.delete();
 											}
+											if(save.endsWith("two"))
+												save=save.substring(0,save.length()-3);
 											commandline.setMainClass(save);
 										}																
 									}
