@@ -4031,9 +4031,47 @@ class RightClick extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent me) {
 		if(SwingUtilities.isRightMouseButton(me)) {
-			JTextArea textarea5=(JTextArea)me.getSource();
-			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_C,'C'));
+			RightClickJFrame rightclickjframe = new RightClickJFrame(me);
 		}				
+	}
+	
+}
+class RightClickJFrame {
+	public int caretposition;	
+	public JButton copy;
+	public JButton paste;	
+	public JTextArea textarea5;
+	public RightClickJFrame(MouseEvent me) {
+		textarea5=(JTextArea)me.getSource();
+		this.caretposition = textarea5.getCaretPosition();
+		setLayout();
+		setListeners();
+	}
+	public void setLayout() {
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		GridLayout gridlayout = new GridLayout(2,1);
+		panel.setLayout(gridlayout);
+		
+		copy = new JButton("copy");
+		panel.add(copy);
+		
+		paste = new JButton("paste");
+		panel.add(paste);
+		
+		frame.add(panel);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocation(
+		frame.setVisible(true);
+	}
+	public void setListeners() {
+		copy.addActionListener((ev) -> {
+			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_C,'C'));
+		});
+		paste.addActionListener((ev) -> {
+			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_V,'V'));
+		});
 	}
 }
 
