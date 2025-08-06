@@ -1,6 +1,7 @@
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
+import java.awt.event.InputEvent;
 import javax.swing.event.ChangeEvent;
 import java.awt.Point;
 import javax.swing.text.BadLocationException;
@@ -86,6 +87,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {		
+	public MouseListener rightclick = new RightClick();	
 	public JMenuItem closetab = new JMenuItem("Close Tab");		
 	public JCheckBox javafxcheckbox;
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
@@ -176,6 +178,7 @@ public class Main {
 				ex.printStackTrace();
 			}
 		});
+		textarea.addMouseListener(rightclick);
 		
 		tabbedpane.addTab("",scrollpane2);
 		tabbedpane.addTab("+",pluspanel);
@@ -241,6 +244,8 @@ public class Main {
 					ex.printStackTrace();
 				}
 			});
+			textarea2.addMouseListener(rightclick);
+			
 			
 			tabbedpane.addTab(fileName,scrollpane2);
 			tabbedpane.addTab("+",pluspanel);
@@ -295,6 +300,7 @@ public class Main {
 						ex.printStackTrace();
 					}
 				});
+				textarea2.addMouseListener(rightclick);
 				
 				tabbedpane.addTab(fileName,scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
@@ -350,6 +356,7 @@ public class Main {
 									ex.printStackTrace();
 								}
 							});
+							textarea2.addMouseListener(rightclick);
 							
 							tabbedpane.addTab(filename,scrollpane2);
 						}
@@ -2424,6 +2431,7 @@ public class Main {
 						ex.printStackTrace();
 					}
 				});
+				textarea2.addMouseListener(rightclick);
 				
 				tabbedpane.addTab(getFileName(filename),scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
@@ -2559,6 +2567,7 @@ public class Main {
 								ex.printStackTrace();
 							}
 						});
+						textarea2.addMouseListener(rightclick);
 						
 						tabbedpane.addTab(filename,scrollpane2);
 						tabbedpane.addTab("+",pluspanel);
@@ -4189,4 +4198,62 @@ class MethodSuggestionBox {
 		}
 		return labels;
 	}	
+}
+class RightClick extends MouseAdapter {
+	@Override
+	public void mousePressed(MouseEvent me) {
+		if(SwingUtilities.isRightMouseButton(me)) {
+			RightClickJFrame rightclickjframe = new RightClickJFrame(me);
+		}				
+	}
+	
+}
+class RightClickJFrame {
+	public int caretposition;	
+	public JButton copy;
+	public JButton paste;	
+	public JTextArea textarea5;
+	public JFrame frame;
+	public RightClickJFrame(MouseEvent me) {
+		textarea5=(JTextArea)me.getSource();
+		this.caretposition = textarea5.getCaretPosition()-1;
+		setLayout();
+		setListeners();
+	}
+	public void setLayout() {
+		frame = new JFrame();
+		JPanel panel = new JPanel();
+		GridLayout gridlayout = new GridLayout(2,1);
+		panel.setLayout(gridlayout);
+		
+		copy = new JButton("copy");
+		panel.add(copy);
+		
+		paste = new JButton("paste");
+		panel.add(paste);
+		
+		frame.add(panel);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLocation();
+		frame.setVisible(true);
+	}
+	public void setListeners() {
+		copy.addActionListener((ev) -> {
+			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_C,'C'));
+		});
+		paste.addActionListener((ev) -> {
+			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_V,'V'));
+		});
+	}
+	public void setLocation() {
+		try {
+			Rectangle2D rectanglecoords=textarea5.modelToView2D(caretposition);
+			Point screencoordinates= new Point((int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
+			SwingUtilities.convertPointToScreen(screencoordinates,textarea5);
+			frame.setLocation(screencoordinates);
+		} catch (BadLocationException ex) {
+			ex.printStackTrace();
+		}
+	}
 }
