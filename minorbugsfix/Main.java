@@ -2858,7 +2858,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if(ev.getKeyChar() =='.') {
+		if(ev.getKeyChar() =='.' && !ev.isControlDown() ) {
 			MethodSuggestionBox methodsuggestionbox= new MethodSuggestionBox(main);
 		}
 		/**
@@ -2872,7 +2872,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		if(line.length() > 1) {
+		if(line.length() > 1 && !ev.isControlDown()) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
