@@ -1,3 +1,4 @@
+import java.awt.event.InputEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
@@ -130,6 +131,7 @@ public class Main {
 	public String fileName = "";
 	public static String value = System.getProperty("user.home")+"\\load_program.ser";
 	//public String value="load_program.ser";
+	public MouseAdapter rightclick = new RightClick();
 	public static void main(String[] args) 	{ 
 		Main main = new Main(new OpenDefaultContent());
 	}
@@ -176,6 +178,7 @@ public class Main {
 				ex.printStackTrace();
 			}
 		});
+		textarea.addMouseListener(rightclick);
 		
 		tabbedpane.addTab("",scrollpane2);
 		tabbedpane.addTab("+",pluspanel);
@@ -243,6 +246,7 @@ public class Main {
 					ex.printStackTrace();
 				}
 			});
+			textarea2.addMouseListener(rightclick);
 			
 			tabbedpane.addTab(fileName,scrollpane2);
 			tabbedpane.addTab("+",pluspanel);
@@ -298,6 +302,7 @@ public class Main {
 						ex.printStackTrace();
 					}
 				});
+				textarea2.addMouseListener(rightclick);
 				
 				tabbedpane.addTab(fileName,scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
@@ -352,6 +357,7 @@ public class Main {
 									ex.printStackTrace();
 								}
 							});
+							textarea2.addMouseListener(rightclick);
 							
 							tabbedpane.addTab(filename,scrollpane2);
 						}
@@ -2260,6 +2266,7 @@ public class Main {
 						ex.printStackTrace();
 					}
 				});
+				textarea2.addMouseListener(rightclick);
 				
 				tabbedpane.addTab(getFileName(filename),scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
@@ -2395,6 +2402,7 @@ public class Main {
 								ex.printStackTrace();
 							}
 						});
+						textarea2.addMouseListener(rightclick);
 						
 						tabbedpane.addTab(filename,scrollpane2);
 						tabbedpane.addTab("+",pluspanel);
@@ -4019,3 +4027,24 @@ class MethodSuggestionBox {
 		return labels;
 	}	
 }
+class RightClick extends MouseAdapter {
+	@Override
+	public void mousePressed(MouseEvent me) {
+		if(SwingUtilities.isRightMouseButton(me)) {
+			JTextArea textarea5=(JTextArea)me.getSource();
+			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_C,'C'));
+		}				
+	}
+}
+
+		
+		
+
+
+
+
+
+
+
+
+		
