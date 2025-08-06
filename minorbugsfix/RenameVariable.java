@@ -29,6 +29,8 @@ public class RenameVariable {
 		Matcher matcher = pattern.matcher(line);
 		if(matcher.find()) {
 			if(!startTracking) {
+				//JOptionPane.showMessageDialog(null,"Started");
+					
 				int index = middle.getCurrentLineCaretIndex();
 				int matcherend1=matcher.end(4);
 				startTracking= index >= matcher.start(4) && index <= matcherend1;
