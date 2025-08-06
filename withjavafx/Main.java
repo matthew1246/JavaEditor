@@ -3027,7 +3027,7 @@ private boolean isControlDown = false;
 				renamevariable.track();
 			break;	
 		}		
-		if(ev.getKeyChar() =='.') {
+		if(ev.getKeyChar() =='.' && !ev.isControlDown()) {
 			MethodSuggestionBox methodsuggestionbox= new MethodSuggestionBox(main);
 		}
 		/**
@@ -3042,7 +3042,7 @@ private boolean isControlDown = false;
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		if(line.length() > 1) {
+		if(line.length() > 1 && !ev.isControlDown()) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
