@@ -3122,7 +3122,7 @@ private boolean isControlDown = false;
 		else {
 			main.go_to_line_is_executed = false;
 		}
-		if(isControlDown && ev.getKeyCode() == KeyEvent.VK_D) {
+		if(ev.isControlDown() && ev.getKeyCode() == KeyEvent.VK_D) {
 			int oldcaretposition = main.textarea.getCaretPosition();
 			Middle middle = new Middle(main.textarea);
 			
