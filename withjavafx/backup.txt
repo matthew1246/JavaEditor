@@ -1,10 +1,4 @@
 {
-  "": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 127
-  },
   "lastopened": {
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
@@ -14,29 +8,17 @@
     ],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\New Folder\\Main.java": {
-    "starterclass": "Maintwo",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 105
-  },
-  "C:\\Users\\Owner\\Documents\\New Folder\\Maintwo.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
-    "starterclass": "Main",
+    "starterclass": "",
     "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
-    "starterclass": "Main",
+    "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
