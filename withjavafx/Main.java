@@ -1482,10 +1482,12 @@ public class Main {
 		*/
 		reload.addActionListener( (ev) -> {
 			try {
-				String lines = Files.readString(Paths.get(fileName),StandardCharsets.UTF_8);
-				int caretposition = textarea.getCaretPosition();
-				textarea.setText(lines);
-				textarea.setCaretPosition(caretposition);
+				if(!fileName.equals("")) {
+					String lines = Files.readString(Paths.get(fileName),StandardCharsets.UTF_8);
+					int caretposition = textarea.getCaretPosition();
+					textarea.setText(lines);
+					textarea.setCaretPosition(caretposition);
+				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
