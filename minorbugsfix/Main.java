@@ -3929,9 +3929,10 @@ class MethodSuggestionBox {
 								selected=ifdotbefore+"."+selected;
 							String firsthalf=text.substring(0,caretposition)+"."+selected;
 							//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
-							String second =text.substring(caretposition+1,text.length());
+							String second =text.substring(caretposition,text.length());
 							main.textarea.setText(firsthalf+second);
 							main.textarea.setCaretPosition(caretposition+1+selected.length());	
+							suggestionbox.dispose();
 							return;
 						}
 						
