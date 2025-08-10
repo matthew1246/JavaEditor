@@ -3004,7 +3004,6 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	private boolean isShift = false;
 	
-private boolean isControlDown = false;
 	private boolean isTab = false;
 	private SelectedLines selectedlines;
 	public PositionTracker positiontracker;
@@ -3061,9 +3060,6 @@ private boolean isControlDown = false;
 						autokeylistener.open(variablename,caretposition);
 					}
 				}
-			}
-			if(ev.isControlDown()) {
-				isControlDown = true;
 			}
 		}
 	}
@@ -3146,7 +3142,7 @@ private boolean isControlDown = false;
 			main.textarea.setText(first_half_string+"\n"+secondhalfstring);
 			main.textarea.setCaretPosition(oldcaretposition);
 		}
-		else if(isControlDown && ev.getKeyCode() == KeyEvent.VK_R) {
+		else if(ev.isControlDown() && ev.getKeyCode() == KeyEvent.VK_R) {
 			try {
 				String lines = Files.readString(Paths.get(main.fileName),StandardCharsets.UTF_8);
 				int caretposition = main.textarea.getCaretPosition();
@@ -3155,9 +3151,6 @@ private boolean isControlDown = false;
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-		}
-		if(isControlDown) {
-			isControlDown = false;
 		}
 	}
 	public static SuggestionBoxSelected suggestionboxselected = new SuggestionBoxSelected();
