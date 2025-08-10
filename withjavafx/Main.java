@@ -3184,6 +3184,9 @@ class AutoKeyListener {
 	public String variablename;
 	public int caretposition;
 	public void open(String variablename,int caretposition) {
+		int selectionstart = main.textarea.getSelectionStart();
+		if(selectionstart != caretposition)
+			caretposition = selectionstart;
 		run(variablename,caretposition);
 	}
 	public void run(String variablename,int caretposition) {
@@ -3403,7 +3406,7 @@ class AutoKeyListener {
 			if(caretposition > text.length()) {
 				suggestionbox.dispose();
 				return;
-			}		
+			}	
 			String first=text.substring(0,caretposition);
 			// JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
 			
@@ -4086,8 +4089,21 @@ class MethodSuggestionBox {
 							selected_index = 0;
 						}
 						if(labels2.length == 0) {
-							suggestionbox.dispose();
-							main.textarea.setCaretPosition((caretposition+1));		
+							/*suggestionbox.dispose();
+							main.textarea.setCaretPosition((caretposition+1));	
+							*/
+							/*
+							String selected = selected_label2.getText();
+							if(!ifdotbefore.equals(""))
+							*/
+							String selected = methodname;
+							if(!ifdotbefore.equals(""))
+								selected=ifdotbefore+"."+selected;
+							String firsthalf=text.substring(0,caretposition)+"."+selected;
+							//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
+							String second =text.substring(caretposition+1,text.length());
+							main.textarea.setText(firsthalf+second);
+							main.textarea.setCaretPosition(caretposition+1+selected.length());	
 							return;
 						}
 						
