@@ -4056,6 +4056,7 @@ class RightClick extends MouseAdapter {
 }
 class RightClickJFrame {
 	public int caretposition;	
+	public JButton cut;
 	public JButton copy;
 	public JButton paste;	
 	public JTextArea textarea5;
@@ -4069,7 +4070,7 @@ class RightClickJFrame {
 	public void setLayout() {
 		frame = new JFrame();
 		JPanel panel = new JPanel();
-		GridLayout gridlayout = new GridLayout(2,1);
+		GridLayout gridlayout = new GridLayout(3,1);
 		panel.setLayout(gridlayout);
 		
 		copy = new JButton("copy");
@@ -4078,6 +4079,9 @@ class RightClickJFrame {
 		paste = new JButton("paste");
 		panel.add(paste);
 		
+		cut = new JButton("cut");
+		panel.add(cut);
+		
 		frame.add(panel);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -4085,6 +4089,10 @@ class RightClickJFrame {
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		cut.addActionListener( ev -> {
+			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_X,'X'));
+			frame.dispose();
+		});
 		copy.addActionListener((ev) -> {
 			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_C,'C'));
 			frame.dispose();	
