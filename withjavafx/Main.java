@@ -152,6 +152,7 @@ public class Main {
 		CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
 		textarea.addKeyListener(curlybracekeylistener);
 		
+		addCaretListener(textarea);
 		scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 			try {
 				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -217,7 +218,7 @@ public class Main {
 			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
 			textarea2.addKeyListener(curlybracekeylistener);
 			
-			
+			addCaretListener(textarea2);
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 					try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -274,6 +275,7 @@ public class Main {
 				textarea2.addKeyListener(curlybracekeylistener);
 				//positiontrackers.add(new PositionTracker(textarea2));
 				
+				addCaretListener(textarea2);
 				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 				try {
 						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -330,6 +332,7 @@ public class Main {
 							textarea2.addKeyListener(curlybracekeylistener);
 							//positiontrackers.add(new PositionTracker(textarea2));
 							
+							addCaretListener(textarea2);
 							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 							try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -1752,30 +1755,8 @@ public class Main {
 				frame2.setVisible(true);
 				//replaceinput.setVisible(false);
 			}
-		});		
-		textarea.addCaretListener(new CaretListener() {
-			public void caretUpdate(CaretEvent e) {
-				CurlyBraceKeyListener curlybracekeylistener = null;
-				KeyListener[] keylisteners=textarea.getKeyListeners();
-				for(KeyListener keylistener:keylisteners) {
-					if(keylistener instanceof CurlyBraceKeyListener) {
-						if(curlybracekeylistener != null) {
-							JOptionPane.showMessageDialog(null,"Found more than one CurlyBraceKeyListener!");				
-							break;
-						}	
-						curlybracekeylistener = (CurlyBraceKeyListener)keylistener;
-					}
-				}				
-				if(!curlybracekeylistener.is_content_update) {
-					String text = textarea.getText();
-					int position = textarea.getCaretPosition();
-					if(text.length() >= (position+1))
-						line.setText("line number: "+getLineNumber(text.substring(0,position+1))+" ");
-					else
-						line.setText("line number: "+getLineNumber(text.substring(0,position))+" ");
-				}
-			}
-		});
+		});	
+		addCaretListener(textarea);
 		newopenwindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				Main main = new Main();
@@ -2407,6 +2388,7 @@ public class Main {
 				textarea2.addKeyListener(curlybracekeylistener);
 				//positiontrackers.add(new PositionTracker(textarea2));
 				
+				addCaretListener(textarea2);
 				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 					try {
 						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -2543,6 +2525,7 @@ public class Main {
 						textarea2.addKeyListener(curlybracekeylistener);
 						//positiontrackers.add(new PositionTracker(textarea2));
 						
+						addCaretListener(textarea2);
 						scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 							try {
 								if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -2812,6 +2795,31 @@ public class Main {
 		if(Main.muck != null && fullpackagenames.size() == 0) {
 			fullpackagenames = muck.links.getFullPackageNames();
 		}
+	}
+	public void addCaretListener(JTextArea textarea) {
+		textarea.addCaretListener(new CaretListener() {
+			public void caretUpdate(CaretEvent e) {
+				CurlyBraceKeyListener curlybracekeylistener = null;
+				KeyListener[] keylisteners=textarea.getKeyListeners();
+				for(KeyListener keylistener:keylisteners) {
+					if(keylistener instanceof CurlyBraceKeyListener) {
+						if(curlybracekeylistener != null) {
+							JOptionPane.showMessageDialog(null,"Found more than one CurlyBraceKeyListener!");				
+							break;
+						}	
+						curlybracekeylistener = (CurlyBraceKeyListener)keylistener;
+					}
+				}				
+				if(!curlybracekeylistener.is_content_update) {
+					String text = textarea.getText();
+					int position = textarea.getCaretPosition();
+					if(text.length() >= (position+1))
+						line.setText("line number: "+getLineNumber(text.substring(0,position+1))+" ");
+					else
+						line.setText("line number: "+getLineNumber(text.substring(0,position))+" ");
+				}
+			}
+		});
 	}
 }
 class Expandable {
