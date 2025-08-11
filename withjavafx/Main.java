@@ -4244,7 +4244,7 @@ class RightClickJFrame {
 	public void setLayout() {
 		frame = new JFrame();
 		JPanel panel = new JPanel();
-		GridLayout gridlayout = new GridLayout(2,1);
+		GridLayout gridlayout = new GridLayout(3,1);
 		panel.setLayout(gridlayout);
 		
 		copy = new JButton("copy");
