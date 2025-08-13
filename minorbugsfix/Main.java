@@ -1583,7 +1583,7 @@ public class Main {
 				frame2.setSize(300,140);
 				
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new FlowLayout(FlowLayout.LEFT,2,10));
+				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,10));
 				
 				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 0));
 				
