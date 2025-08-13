@@ -1630,10 +1630,13 @@ public class Main {
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-
+				frame2.setSize(300,140);
+				
 				JPanel panel0 = new JPanel();
-				frame2.getContentPane().add(panel0);
-				panel0.setLayout(new GridBagLayout());
+				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,10));
+				
+				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 0));
+				
 				JTextField input = new JTextField(20);
 				GridBagConstraints gbc = new GridBagConstraints();
 				gbc.gridx=0;
@@ -1645,7 +1648,7 @@ public class Main {
 				gbc.gridwidth=8;
 				gbc.gridheight=1;
 				gbc.insets=new Insets(4,0,0,0);
-				panel0.add(input,gbc);
+				panel0.add(input);
 				
 				panel0.validate();
 				panel0.repaint();
@@ -1659,7 +1662,7 @@ public class Main {
 				gbc.anchor=gbc.CENTER;
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
-				panel0.add(click,gbc);
+				panel0.add(click);
 
 				panel0.validate();
 				panel0.repaint();
@@ -1674,7 +1677,7 @@ public class Main {
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
-				panel0.add(searchall,gbc);
+				panel0.add(searchall);
 				
 				panel0.validate();
 				panel0.repaint();
@@ -1689,7 +1692,7 @@ public class Main {
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
-				panel0.add(casey,gbc);
+				panel0.add(casey);
 		
 				panel0.validate();
 				panel0.repaint();
@@ -1704,7 +1707,7 @@ public class Main {
 				gbc.anchor=gbc.CENTER;
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
-				panel0.add(replaceinput,gbc);
+				panel0.add(replaceinput);
 				
 				panel0.validate();
 				panel0.repaint();
@@ -1718,7 +1721,7 @@ public class Main {
 				gbc.anchor=gbc.CENTER;
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
-				panel0.add(replace,gbc);
+				panel0.add(replace);
 				replace.addActionListener( (ev3) -> {
 					replaceinput.setEditable(true);
 				});
@@ -1736,12 +1739,15 @@ public class Main {
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
-				panel0.add(selection,gbc);
+				panel0.add(selection);
 					
 				panel0.validate();
 				panel0.repaint();
 
-				frame2.pack();
+				frame2.getContentPane().add(panel0);
+				
+				//frame2.pack();
+				//frame2.setResizable(false);
 				frame2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey);
 				ActionListener clicky=new ActionListener() {
