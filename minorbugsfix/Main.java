@@ -1583,9 +1583,9 @@ public class Main {
 				frame2.setSize(300,140);
 				
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new FlowLayout(FlowLayout.LEFT,0,10));
+				panel0.setLayout(new FlowLayout(FlowLayout.LEFT,2,10));
 				
-				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 0));
+				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 0));
 				
 				JTextField input = new JTextField(20);
 				GridBagConstraints gbc = new GridBagConstraints();
