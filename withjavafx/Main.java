@@ -1149,6 +1149,294 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		makeajar.addActionListener( ev -> {
+			String[] options={"Yes","No"};
+			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+			switch(option) {
+				case JOptionPane.YES_OPTION:
+					JFrame getjavaversion = new JFrame();
+					JPanel panelversion = new JPanel();
+					JLabel label = new JLabel("Version of Java:");
+					panelversion.add(label);
+					JComboBox<Integer> combobox = new JComboBox<Integer>();
+					for(int i = 0; i < 23; i++) {
+						combobox.addItem(i+1);
+					}					
+					combobox.setSelectedItem(23);
+					panelversion.add(combobox);
+					JButton compiley = new JButton("compile");
+					panelversion.add(compiley);
+					getjavaversion.add(panelversion);
+					getjavaversion.pack();
+					getjavaversion.setVisible(true);
+				
+					compiley.addActionListener((ev4) -> {
+						Thread thread1 = new Thread(() -> {
+							try {
+								int javaversionnumber=(Integer)combobox.getSelectedItem();
+								getjavaversion.dispose();
+								Compile compile = new Compile();
+								
+								boolean isJavaFX = false;
+								int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+								if(option2 ==JOptionPane.YES_OPTION) {
+									isJavaFX = true;
+								}
+								else if(option2 == JOptionPane.NO_OPTION) {
+									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+									File javafxlauncher=new File(maintwo);
+									if(javafxlauncher.exists()) {
+										javafxlauncher.delete();
+									}
+									
+									isJavaFX = false;
+								}
+								compile.compileall(fileName,javaversionnumber,sal,ev4,isJavaFX,this);
+								
+								CommandLine commandline = new CommandLine();
+								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+								Preferences preferences=storeselectedfile.get(fileName);
+								String main=preferences.starterclass;
+								String dir = fileName.replaceAll("[^\\\\]+\\.java","");
+								if(!fileName.equals("")) {
+									List<String> jars = preferences.jars;
+									for(String jar:jars) {
+										jar = getFileName(jar);
+										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+										process.waitFor();
+										//output.write(" "+jar);
+									}
+								}
+								if(!fileName.equals("")) {
+									if(main.equals("")) {
+										main=fileName.replaceAll(".+\\\\","");
+										main = main.replaceAll("\\.java","");
+									}
+									storeselectedfile.set(fileName);
+									LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
+									linkedhashmap.get(fileName).starterclass=main;
+									storeselectedfile.setBackup(linkedhashmap);
+								}
+								FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
+								BufferedWriter output = new BufferedWriter(filewriter);
+								output.write("Manifest-Version: 1.0");
+								output.write("\n");
+								output.write("Main-Class: ");
+								if(!isJavaFX) {
+									output.write(main);
+								}
+								else { // isJavaFX == true
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);								
+									output.write(extractjavafxjars.starter);
+								}
+								output.write("\n");
+								//output.write("Class-Path:");
+								//output.write(" *");
+								//output.write("\n");
+								output.close();
+								
+								AllFiles allfiles = new AllFiles(main,dir);
+								if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+									commandline = new CommandLine();
+									JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
+									FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
+									BufferedWriter output2 = new BufferedWriter(filewriter2);
+									output2.write("cd "+dir);
+									output2.write("\n");
+									output2.write("START /B /WAIT taskkill /F /im java.exe");
+									output2.write("\n");
+									output2.write("START /B /WAIT taskkill /F /im javaw.exe");
+									output2.write("\n");
+									for(int i = 0; i < allfiles.files.size(); i++) {
+										File file2 = new File(allfiles.files.get(i));
+										if(file2.exists()) {
+											output2.write("del "+allfiles.files.get(i));
+											output2.write("\n");
+										}
+									}
+									// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+									output2.write("\n");
+									
+									commandline = new CommandLine();
+									output2.write("java -jar ForJava"+javaversionnumber+"_"+main+".jar");
+									output2.write("\n");
+									output2.write("\n");
+									output2.close();
+									commandline = new CommandLine();							
+									String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
+								
+									commandline.runWithMSDOS(liney,dir);
+								}
+								else {
+									String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+									JOptionPane.showMessageDialog(null,input);
+									Process process=commandline.run(input,dir);
+									
+									InputStream inputstream = process.getErrorStream();
+									InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
+									BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
+									String line = bufferedreader.readLine();
+									if(line == null) {
+										JOptionPane.showMessageDialog(null,"jar created");
+									}
+									else {
+										String lines = line;
+										while(true) {
+											line = bufferedreader.readLine();
+											if(line == null)
+												break;
+											lines = lines+"\n"+line;
+										}
+										JOptionPane.showMessageDialog(null,lines);
+									}
+								}
+							} catch(InterruptedException ex) {
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null,ex.getMessage());
+							} catch(IOException ex) {
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null,ex.getMessage());
+							}
+						});
+						thread1.start();
+					});
+				break;
+				case JOptionPane.NO_OPTION:
+					Thread thread2 = new Thread(() -> {
+						try {
+							Compile compile = new Compile();
+							boolean isJavaFX = false;
+							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+							if(option2 ==JOptionPane.YES_OPTION) {
+								isJavaFX = true;
+							}
+							else if(option2 == JOptionPane.NO_OPTION) {
+								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+								File javafxlauncher=new File(maintwo);
+								if(javafxlauncher.exists()) {
+									javafxlauncher.delete();
+								}
+							
+								isJavaFX = false;
+							}
+							compile.compileall(fileName,sal,ev,isJavaFX,this);
+							
+							CommandLine commandline = new CommandLine();
+							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+							Preferences preferences=storeselectedfile.get(fileName);
+							String main=preferences.starterclass;
+							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
+							if(!fileName.equals("")) {
+								List<String> jars = preferences.jars;
+								for(String jar:jars) {
+									jar = getFileName(jar);
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+									process.waitFor();
+									//output.write(" "+jar);
+								}
+							}
+							if(!fileName.equals("")) {
+								if(main.equals("")) {
+									main=fileName.replaceAll(".+\\\\","");
+									main = main.replaceAll("\\.java","");
+								}
+								storeselectedfile.set(fileName);
+								LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
+								linkedhashmap.get(fileName).starterclass=main;
+								storeselectedfile.setBackup(linkedhashmap);
+							}
+							
+							FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
+							BufferedWriter output = new BufferedWriter(filewriter);
+							output.write("Manifest-Version: 1.0");
+							output.write("\n");
+							output.write("Main-Class: ");
+							
+							if(!isJavaFX) {
+								output.write(main);
+							}
+							else { // isJavaFX == true
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
+								output.write(extractjavafxjars.starter);
+							}
+							
+							output.write("\n");
+							//output.write("Class-Path: ");
+							//output.write("javafx/lib/");
+							
+							//output.write(" *");
+							//output.write("\n");
+							output.close();
+							
+							//File file = new File(dir+main+".jar");
+							AllFiles allfiles = new AllFiles(main,dir);
+							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+								commandline = new CommandLine();
+								JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
+								FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
+								BufferedWriter output2 = new BufferedWriter(filewriter2);
+								output2.write("cd "+dir);
+								output2.write("\n");
+								output2.write("START /B /WAIT taskkill /F /im java.exe");
+								output2.write("\n");
+								output2.write("START /B /WAIT taskkill /F /im javaw.exe");
+								output2.write("\n");
+								for(int i = 0; i < allfiles.files.size(); i++) {
+									File file2 = new File(allfiles.files.get(i));
+									if(file2.exists()) {
+										output2.write("del "+allfiles.files.get(i));
+										output2.write("\n");
+									}
+								}
+								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
+								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+								output2.write("\n");
+								
+								commandline = new CommandLine();
+								output2.write("java -jar "+main+".jar");
+								output2.write("\n");
+								output2.write("\n");
+								output2.close();
+								String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
+								
+								commandline.runWithMSDOS(liney,dir);
+							}
+							else { 
+								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+								JOptionPane.showMessageDialog(null,input);
+								Process process=commandline.run(input,dir);
+								
+								InputStream inputstream = process.getErrorStream();
+								InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
+								BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
+								String line = bufferedreader.readLine();
+								if(line == null) {
+									JOptionPane.showMessageDialog(null,"jar created");
+								}
+								else {
+									String lines = line;
+									while(true) {
+										line = bufferedreader.readLine();
+										if(line == null)
+											break;
+										lines = lines+"\n"+line;
+									}
+									JOptionPane.showMessageDialog(null,lines);
+								}
+							}
+						} catch(InterruptedException ex) {
+							ex.printStackTrace();
+							JOptionPane.showMessageDialog(null,ex.getMessage());
+						} catch(IOException ex) {
+							ex.printStackTrace();
+							JOptionPane.showMessageDialog(null,ex.getMessage());
+						}
+					});
+					thread2.start();
+				break;
+			}
+		});
 		compileforjavafx.addActionListener( e -> {
 			Thread thread = new Thread( () -> {
 				try {
