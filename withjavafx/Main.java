@@ -1139,6 +1139,75 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		compileforjavafx.addActionListener( e -> {
+			Thread thread = new Thread( () -> {
+				try {
+					if(fileName.equals("")) {
+						NoFileOpen nofileopen=new NoFileOpen(textarea);
+						fileName=nofileopen.getFileName();
+					}
+					sal.actionPerformed(e);
+					if(!fileName.equals("")) {
+						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+	
+						CommandLine commandline = new CommandLine();
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						Preferences preferences=storeselectedfile.get(fileName);
+						for(String jar:preferences.jars) {
+							commandline.addExternalJar(jar);
+						}
+						if(jarcheckbox.isSelected()) {
+							commandline.addJunit();
+						}
+						String main_class = fileName.replaceAll(".+\\\\","");						
+						main_class =main_class.replaceAll("\\.java","");
+					
+						ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+						commandline.addJavaFX();
+						main_class=extractjavafxjars.starter;
+						
+						commandline.setMainClass(main_class);
+						if(checkbox.isSelected()) {
+							commandline.addClasspathCheckboxFeature();
+						}
+						// JOptionPane.showMessageDialog(null,commandline.javac());
+						// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
+						String[] command = new String[3];
+						command[0] = "cmd.exe";
+						command[1] = "/c";
+						command[2] = commandline.javac();
+						Runtime runtime = Runtime.getRuntime();
+						Process process = runtime.exec(command,null,new File(classpath));
+						// process = compileFromMSDOS(fileName,classpath);
+						
+						InputStream inputstream = process.getErrorStream();
+						InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
+						BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
+						String line = bufferedreader.readLine();
+						if(line == null) {
+							JOptionPane.showMessageDialog(null,"compiled");
+						}
+						else {
+							String lines = line;
+							while(true) {
+								line = bufferedreader.readLine();
+								if(line == null)
+									break;
+								lines = lines+"\n"+line;
+							}
+							JOptionPane.showMessageDialog(null,lines);
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"No filename saved.");
+					}
+				}
+				catch(IOException ex) {
+					ex.printStackTrace();
+				}
+			});
+			thread.start();
+		});
 		closetab.addActionListener((ev) -> {	
 			int tabindex=tabbedpane.getSelectedIndex();
 			fileNames.remove(tabindex);
@@ -1996,7 +2065,7 @@ public class Main {
 			thread4.start();
 		});
 			
-		compile.addActionListener(new ActionListener() {								
+		compile.addActionListener(new ActionListener() {										
 			public void actionPerformed(ActionEvent e) {
 				Thread thread = new Thread( () -> {
 					try {	
