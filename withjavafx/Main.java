@@ -94,6 +94,7 @@ public class Main {
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
+	public JButton makeajar;
 	public JButton deprecated;	
 	public JButton compileforjavafx;		
 	public static MuckFX muck;
@@ -873,10 +874,19 @@ public class Main {
 		compileforjavafx = new JButton("compile for javafx");
 		gbc.gridx = 5;
 		gbc.gridy = 2;
-		gbc.weightx = 21.0;
+		gbc.weightx = 14.0;
 		gbc.weighty = 1.0;
-		gbc.gridwidth = 21;
+		gbc.gridwidth = 14;
 		menubar.add(compileforjavafx,gbc);
+		
+		menubar.validate();
+		menubar.repaint();
+		
+		makeajar = new JButton("make a jar");
+		gbc.gridx = 19;
+		gbc.weightx = 7.0;
+		gbc.gridwidth = 7;
+		menubar.add(makeajar,gbc);
 		
 		menubar.validate();
 		menubar.repaint();
