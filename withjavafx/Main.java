@@ -95,6 +95,7 @@ public class Main {
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
 	public JButton deprecated;	
+	public JButton compileforjavafx;		
 	public static MuckFX muck;
 	public Expandable expandable;
 	public JComboBox<String> filenamescombobox = new JComboBox<String>();	
@@ -855,6 +856,31 @@ public class Main {
 		menubar.validate();
 		menubar.repaint();
 		
+		deprecated = new JButton("deprecated");
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weightx = 5.0;
+		gbc.weighty = 1.0;
+		gbc.anchor = gbc.CENTER;
+		gbc.gridwidth = 5;
+		gbc.gridheight = 1;
+		menubar.add(deprecated,gbc);	
+		
+		menubar.validate();
+		menubar.repaint();
+		
+		compileforjavafx = new JButton("compile for javafx");
+		gbc.gridx = 5;
+		gbc.gridy = 2;
+		gbc.weightx = 21.0;
+		gbc.weighty = 1.0;
+		gbc.gridwidth = 21;
+		menubar.add(compileforjavafx,gbc);
+		
+		menubar.validate();
+		menubar.repaint();
+				
 		frame.setJMenuBar(menubar);
 		
 		menubar.revalidate();
@@ -1424,7 +1450,6 @@ public class Main {
 				break;
 			}
 		});
-		/*
 		deprecated.addActionListener((ev) -> {
 			try {
 				if(fileName.equals("")) {
@@ -1482,7 +1507,6 @@ public class Main {
 				ex.printStackTrace();
 			}
 		});
-		*/
 		reload.addActionListener( (ev) -> {
 			try {
 				if(!fileName.equals("")) {
