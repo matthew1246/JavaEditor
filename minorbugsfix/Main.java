@@ -3308,7 +3308,7 @@ class AutoKeyListener {
 					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
 						Set<String> method_names=value.keySet();
 						for(String method_name:method_names) {
-							methods.add(method_name);
+							methods.add(method_name+"()");
 						}
 					}
 				};	
