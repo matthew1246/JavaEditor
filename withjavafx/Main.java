@@ -3861,9 +3861,33 @@ class AutoKeyListener {
 			return new ArrayList<String>();
 		}
 	}
+	public List<String> getMethods() {
+		List<String> methods = new ArrayList<String>();
+		try {
+			if(!main.fileName.equals("")) {
+				GetClassMethods getclassmethods3 = new GetClassMethods(main.textarea);	
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods3.getMethods();
+				if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
+				
+				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
+					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
+						Set<String> method_names=value.keySet();
+						for(String method_name:method_names) {
+							methods.add(method_name+"()");
+						}
+					}
+				};	
+				iterator.iterate();
+			}		
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return methods;
+	}				
 	public boolean search(String input) {
-		
 		fillData();
+		List<String> methods=getMethods();
 		List<String> variablenames2 = new ArrayList<String>();
 		TreeSet<String> treeset = new TreeSet<String>(new Comparator<String>() {
 			@Override
@@ -3913,6 +3937,11 @@ class AutoKeyListener {
 					treeset.add(fullpackagename);
 				}
 			}
+			for(String method:methods) {
+				if(method.startsWith(input)) {
+					treeset.add(method);
+				}
+			}
 			//System.out.println("end");
 			variablenames2=new ArrayList<String>(treeset);
 		}
@@ -3934,6 +3963,9 @@ class AutoKeyListener {
 			}
 			for(String fullpackagename:main.fullpackagenames) {
 				treeset.add(fullpackagename);
+			}
+			for(String method:methods) {
+				treeset.add(method);
 			}
 			variablenames2=new ArrayList<String>(treeset);
 		}
