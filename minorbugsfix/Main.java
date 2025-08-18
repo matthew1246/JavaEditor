@@ -3012,6 +3012,7 @@ class CurlyBraceKeyListener implements KeyListener {
 ** This is a Variable Automatic Suggestion Box.
 */
 class AutoKeyListener {
+	public JButton search_unique;
 	public List<String> data = new ArrayList<String>();
 	private JPanel panelgridlayout;
 	private Main main;
@@ -3051,16 +3052,20 @@ class AutoKeyListener {
 		//GridLayout gridlayout=new GridLayout(variablenames2.size()+1,1);
 		gridlayout=new GridLayout(1,1);
 		panelgridlayout.setLayout(gridlayout);
+		/*
 		JPanel top_panel = new JPanel();
 		top_panel.setLayout(new BorderLayout());
+		*/
 		search_textfield=new JTextField();
 		search_textfield.setText(variablename.trim());
+		/*
 		top_panel.add(search_textfield,BorderLayout.CENTER);
-		JButton search_unique = new JButton("\uD83D\uDD0D");
-		//search_unique.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 24));
+		search_unique = new JButton("\uD83D\uDD0D");
 		top_panel.add(search_unique,BorderLayout.EAST);
 		
 		panelgridlayout.add(top_panel);
+		*/
+		panelgridlayout.add(search_textfield);	
 		JScrollPane scrollpane = new JScrollPane(panelgridlayout);
 		
 		//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
@@ -3077,6 +3082,11 @@ class AutoKeyListener {
 		}
 	}
 	public void setListeners() {
+		/*search_unique.addActionListener(ev -> {
+			if(searchOnlyAPI(input)) {
+				fillComboBox();
+			}
+		});*/
 		suggestionbox.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				EnterText();
@@ -3349,6 +3359,11 @@ class AutoKeyListener {
 			}
 		});
 		if(!input.equals("")) {
+			for(String api:main.fullpackagenames) {
+				if(api.contains(input)) {
+					treeset.add(api);
+				}
+			}				
 			for(String variablename2:data) {
 				if(variablename2.startsWith(input))
 					treeset.add(variablename2);
