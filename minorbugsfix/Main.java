@@ -3152,6 +3152,10 @@ class AutoKeyListener {
 						CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
 						EnterText(selected_label2.getText());
 					}
+					else if(selected_label2.getText().contains(".")) {
+						CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
+						EnterText(selected_label2.getText());
+					}
 					else {
 						EnterText();
 					}
