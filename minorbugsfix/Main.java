@@ -3051,9 +3051,16 @@ class AutoKeyListener {
 		//GridLayout gridlayout=new GridLayout(variablenames2.size()+1,1);
 		gridlayout=new GridLayout(1,1);
 		panelgridlayout.setLayout(gridlayout);
+		JPanel top_panel = new JPanel();
+		top_panel.setLayout(new BorderLayout());
 		search_textfield=new JTextField();
 		search_textfield.setText(variablename.trim());
-		panelgridlayout.add(search_textfield);
+		top_panel.add(search_textfield,BorderLayout.CENTER);
+		JButton search_unique = new JButton("\uD83D\uDD0D");
+		//search_unique.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 24));
+		top_panel.add(search_unique,BorderLayout.EAST);
+		
+		panelgridlayout.add(top_panel);
 		JScrollPane scrollpane = new JScrollPane(panelgridlayout);
 		
 		//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
