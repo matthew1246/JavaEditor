@@ -2873,7 +2873,7 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;	
 		}		
 		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) ||  methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
-			if(methodsuggestionbox != null && methodsuggestionbox.suggestionbox.isVisible()) {
+			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 				String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
 				methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
 				methodsuggestionbox.position = methodsuggestionbox.position+1;
@@ -3814,7 +3814,8 @@ class MethodSuggestionBox {
 	*/
 	public void show(Object[] unorderedmethods,int caretposition,String search) {
 		try {	
-			suggestionbox = new JFrame();			
+			suggestionbox = new JFrame();	
+			suggestionbox.setAlwaysOnTop(true);		
 			suggestionbox.setTitle(search);
 			suggestionbox.setSize(100,500);
 			JPanel panelgridlayout = new JPanel();
