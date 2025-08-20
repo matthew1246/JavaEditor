@@ -2899,7 +2899,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		
 		
 		
-		if(line.length() > 1 && !ev.isControlDown() ) {
+		if(line.length() > 1 && !ev.isControlDown() && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
