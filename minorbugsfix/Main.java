@@ -2872,8 +2872,10 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) ||  methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
+		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) || (methodsuggestionbox != null && methodsuggestionbox.isVisible()) ) {
 			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
+				//JOptionPane.showMessageDialog(null,"two characters");
+							
 				String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
 				methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
 				methodsuggestionbox.position = methodsuggestionbox.position+1;
@@ -2895,7 +2897,9 @@ class CurlyBraceKeyListener implements KeyListener {
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		if(line.length() > 1 && !ev.isControlDown()) {
+		
+		
+		if(line.length() > 1 && !ev.isControlDown() ) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
@@ -3467,6 +3471,7 @@ class MethodSuggestionBox {
 		text = main.textarea.getText();
 		Middle middle = new Middle(main.textarea);
 		int caretposition = main.textarea.getCaretPosition();
+		position = caretposition;
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
 		if(currentline2.length() > 0) {
@@ -3815,7 +3820,7 @@ class MethodSuggestionBox {
 	public void show(Object[] unorderedmethods,int caretposition,String search) {
 		try {	
 			suggestionbox = new JFrame();	
-			suggestionbox.setAlwaysOnTop(true);		
+			// suggestionbox.setAlwaysOnTop(true);		
 			suggestionbox.setTitle(search);
 			suggestionbox.setSize(100,500);
 			JPanel panelgridlayout = new JPanel();
@@ -4130,6 +4135,8 @@ class MethodSuggestionBox {
 			Point screencoordinates= new Point((int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
 			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
 			suggestionbox.setLocation(screencoordinates);
+			suggestionbox.validate();
+			suggestionbox.repaint();
 		} catch (BadLocationException ex) {
 			ex.printStackTrace();
 		}
