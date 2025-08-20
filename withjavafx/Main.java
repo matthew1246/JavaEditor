@@ -3407,14 +3407,14 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean isEndOfFile() {
 		return main.textarea.getCaretPosition() == main.textarea.getText().length();
 	}
+	public MethodSuggestionBox methodsuggestionbox;
 	private boolean isShift = false;
-	
 	private boolean isTab = false;
 	private SelectedLines selectedlines;
 	public PositionTracker positiontracker;
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public AutoKeyListener autokeylistener;	
-	public void keyPressed(KeyEvent ev) {
+	public void keyPressed(KeyEvent ev)  {
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
 			case KeyEvent.VK_SHIFT:
@@ -3433,22 +3433,34 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if(ev.getKeyChar() =='.' && !ev.isControlDown()) {
-			MethodSuggestionBox methodsuggestionbox= new MethodSuggestionBox(main);
+		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) || (methodsuggestionbox != null && methodsuggestionbox.isVisible()) ) {
+			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
+				//JOptionPane.showMessageDialog(null,"two characters");
+							
+				String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
+				methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
+				methodsuggestionbox.position = methodsuggestionbox.position+1;
+				methodsuggestionbox.setLocation(methodsuggestionbox.position);
+				methodsuggestionbox.search_textfield.setText(oldplusnew);
+			}
+			else {
+				methodsuggestionbox= new MethodSuggestionBox(main);
+			}
 		}
 		/**
 		** This is a variable suggestion box not a method
 		** suggestionbox.
 		*/
 		int caretposition = main.textarea.getCaretPosition();
-		
-		//JOptionPane.showMessageDialog(null,""+caretposition);
+		//JOptionPane.showMessageDialog(null,caretposition+"");
 		
 		Middle middle = new Middle(main.textarea);
 		String line=middle.getCurrentLine();
 		line=line+ev.getKeyChar();
 		
-		if(line.length() > 1 && !ev.isControlDown()) {
+		
+		
+		if(line.length() > 1 && !ev.isControlDown() && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
@@ -3572,7 +3584,6 @@ class CurlyBraceKeyListener implements KeyListener {
 	}	
 
 }
-
 /*
 ** This is a Variable Automatic Suggestion Box.
 */
@@ -4010,6 +4021,10 @@ class AutoKeyListener {
 	}
 }
 class MethodSuggestionBox {
+	public int replacelength = 1;
+	public int position;
+	public JTextField search_textfield;	
+	public JFrame suggestionbox;	
 	public String text;
 	public String currentline;	
 	public Main main;	
@@ -4018,6 +4033,7 @@ class MethodSuggestionBox {
 		text = main.textarea.getText();
 		Middle middle = new Middle(main.textarea);
 		int caretposition = main.textarea.getCaretPosition();
+		position = caretposition;
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
 		if(currentline2.length() > 0) {
@@ -4365,7 +4381,8 @@ class MethodSuggestionBox {
 	*/
 	public void show(Object[] unorderedmethods,int caretposition,String search) {
 		try {	
-			JFrame suggestionbox = new JFrame();			
+			suggestionbox = new JFrame();	
+			// suggestionbox.setAlwaysOnTop(true);		
 			suggestionbox.setTitle(search);
 			suggestionbox.setSize(100,500);
 			JPanel panelgridlayout = new JPanel();
@@ -4374,7 +4391,7 @@ class MethodSuggestionBox {
 			
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
 			panelgridlayout.setLayout(gridlayout);
-			JTextField search_textfield=new JTextField();
+			search_textfield=new JTextField();
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
@@ -4502,7 +4519,8 @@ class MethodSuggestionBox {
 							selected=ifdotbefore+"."+selected;
 						String firsthalf=text.substring(0,caretposition)+"."+selected;
 						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
-						String second =text.substring(caretposition+1,text.length());
+						///String second =text.substring(caretposition+1,text.length());
+						String second =text.substring(caretposition+replacelength,text.length());
 						main.textarea.setText(firsthalf+second);
 						main.textarea.setCaretPosition(caretposition+1+selected.length());
 					}
@@ -4673,6 +4691,26 @@ class MethodSuggestionBox {
 		}
 		return labels;
 	}	
+	public void setLocation(int caretposition3) {
+		try {
+			Rectangle2D rectanglecoords=main.textarea.modelToView2D(caretposition3);
+			Point screencoordinates= new Point((int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
+			SwingUtilities.convertPointToScreen(screencoordinates,main.textarea);
+			suggestionbox.setLocation(screencoordinates);
+			suggestionbox.validate();
+			suggestionbox.repaint();
+		} catch (BadLocationException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public boolean isVisible() {
+		if(suggestionbox != null && suggestionbox.isVisible()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
 class RightClick extends MouseAdapter {
 	@Override
@@ -4698,6 +4736,7 @@ class RightClickJFrame {
 	}
 	public void setLayout() {
 		frame = new JFrame();
+		frame.setAlwaysOnTop(true);
 		JPanel panel = new JPanel();
 		GridLayout gridlayout = new GridLayout(3,1);
 		panel.setLayout(gridlayout);
@@ -4721,7 +4760,7 @@ class RightClickJFrame {
 		cut.addActionListener( ev -> {
 			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_X,'X'));
 			frame.dispose();
-		});	
+		});
 		copy.addActionListener((ev) -> {
 			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_C,'C'));
 			frame.dispose();	
