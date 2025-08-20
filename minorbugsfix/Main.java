@@ -4167,6 +4167,7 @@ class RightClickJFrame {
 	}
 	public void setLayout() {
 		frame = new JFrame();
+		frame.setAlwaysOnTop(true);
 		JPanel panel = new JPanel();
 		GridLayout gridlayout = new GridLayout(3,1);
 		panel.setLayout(gridlayout);
