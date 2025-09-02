@@ -2571,6 +2571,41 @@ public class Main {
 									lines = lines+"\n"+line;
 								}
 								JOptionPane.showMessageDialog(null,lines);
+								options=new String[2];
+								options[0] = "Yes";
+								options[1] = "No";
+								option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+								if(option2 == JOptionPane.YES_OPTION) {
+									Pattern pattern=Pattern.compile(getFileName(fileName)+":([0-9]+):");
+									Matcher matcher=pattern.matcher(lines);
+									if(matcher.find()) {
+										int line_number=Integer.parseInt(matcher.group(1));
+										
+										try {
+											String wholetext=textarea.getText();
+											LineNumberReader linenumberreader=new LineNumberReader(new StringReader(wholetext));
+											while((line = linenumberreader.readLine()) != null) {
+												int linenumber2=linenumberreader.getLineNumber();
+												if(line_number == linenumber2) break;
+											}
+											int startOfLine = -1;
+											while((startOfLine = wholetext.indexOf(line,++startOfLine)) != -1) {
+												//int startOfLine=wholetext.indexOf(line);
+												String firsthalf=wholetext.substring(0,startOfLine+1);
+												if(getLineNumber(firsthalf) == line_number) {
+													textarea.grabFocus();
+													textarea.setCaretPosition(startOfLine);
+													break;
+												}
+											}
+										} catch(IOException ex) {
+											ex.printStackTrace();
+										}
+									}
+									else {
+										JOptionPane.showMessageDialog(null,"Could not find line number.");
+									}
+								}		
 							}
 						}
 						else {
