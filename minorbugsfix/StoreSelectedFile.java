@@ -170,7 +170,7 @@ public class StoreSelectedFile {
 	public void setBackup(LinkedHashMap<String,Preferences> hashmap) {
 		try {
 			if( ((new File("original.txt")).exists() ) && noduplicate.IsDuplicate(hashmap)) {
-				JOptionPane.showMessageDialog(null,"Replace backup.txt with original.txt");
+				//JOptionPane.showMessageDialog(null,"Replace backup.txt with original.txt");
 				noduplicate.ReplaceWithOriginal();
 				return;
 			}
