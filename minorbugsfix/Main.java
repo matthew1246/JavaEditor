@@ -2011,7 +2011,7 @@ public class Main {
 			}		
 		});
 			
-		compile.addActionListener(new ActionListener() {								
+		compile.addActionListener(new ActionListener() {												
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(fileName.equals("")) {
@@ -2068,10 +2068,37 @@ public class Main {
 							options[1] = "No";
 							int option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							if(option2 == JOptionPane.YES_OPTION) {
-								JOptionPane.showMessageDialog(null,"Hello get Line number!");
+								Pattern pattern=Pattern.compile(getFileName(fileName)+":([0-9]+):");
+								Matcher matcher=pattern.matcher(lines);
+								if(matcher.find()) {
+									int line_number=Integer.parseInt(matcher.group(1));
+									
+									try {
+										String wholetext=textarea.getText();
+										LineNumberReader linenumberreader=new LineNumberReader(new StringReader(wholetext));
+										while((line = linenumberreader.readLine()) != null) {
+											int linenumber2=linenumberreader.getLineNumber();
+											if(line_number == linenumber2) break;
+										}
+										int startOfLine = -1;
+										while((startOfLine = wholetext.indexOf(line,++startOfLine)) != -1) {
+											//int startOfLine=wholetext.indexOf(line);
+											String firsthalf=wholetext.substring(0,startOfLine+1);
+											if(getLineNumber(firsthalf) == line_number) {
+												textarea.grabFocus();
+												textarea.setCaretPosition(startOfLine);
+												break;
+											}
+										}
+									} catch(IOException ex) {
+										ex.printStackTrace();
+									}
+								}
+								else {
+									JOptionPane.showMessageDialog(null,"Could not find line number.");
+								}
 							}		
 						}
-						j
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"No filename saved.");
@@ -2120,8 +2147,8 @@ public class Main {
 								NoFileOpen nofileopen=new NoFileOpen(textarea);
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
+							}
 							
-}
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
 							String fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
