@@ -1232,6 +1232,7 @@ public class Main {
 			
 		});
 				
+				
 		opennewtab.addActionListener((ev) -> {
 			addOrUpdateTab(ev);
 		});
@@ -2062,7 +2063,15 @@ public class Main {
 								lines = lines+"\n"+line;
 							}
 							JOptionPane.showMessageDialog(null,lines);
+							String[] options=new String[2];
+							options[0] = "Yes";
+							options[1] = "No";
+							int option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+							if(option2 == JOptionPane.YES_OPTION) {
+								JOptionPane.showMessageDialog(null,"Hello get Line number!");
+							}		
 						}
+						j
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"No filename saved.");
