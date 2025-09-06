@@ -32,75 +32,29 @@ public class SuggestionBoxSelected {
 		}
 	}
 	
-	public Object[] Reordered(Object[] members,Class<?> classquestionmark) {
+	public String[] Reordered(String[] members,Class<?> classquestionmark) {
 		return Reordered(members,classquestionmark.getSimpleName());
 	}		
 	
-public Object[] Reordered(Object[] members,String classname) {
+public String[] Reordered(String[] members,String classname) {
+		List<String> nameslist = new ArrayList<String>();
+		for(int i = 0; i < members.length; i++) {
+			String member=members[i];
+			nameslist.add(member);
+		}
 		if(linkedhashmap.get(classname) != null) {
-			List<Object> nameslist = new LinkedList<Object>();
-			for(int i = 0; i < members.length; i++) {
-				Object member=members[i];
-				/*if(member instanceof Member) {
-					System.out.println(((Member)member).getName());
-				}
-				else if(member.getClass().isEnum()) {
-					System.out.println("Enum is "+((Enum)member).name());
-				}
-				else {
-					System.out.println("Enums");
-				}*/
-				nameslist.add(member);
-			}
 			for(String methodname:linkedhashmap.get(classname)) {
 				for(int j = 0; j < nameslist.size(); j++) {
-					Object member = nameslist.get(j);
-					if(member instanceof String) {
+					String member = nameslist.get(j);
+					if(member.equals(methodname)) {
 						nameslist.remove(member);
 						nameslist.add(0,member);
 					}
-					else if(member instanceof Method) {
-						if(methodname.equals(((Method)member).getName())) {
-							nameslist.remove(member);
-							nameslist.add(0,member);
-							break;
-						}
-					}
-					else if(member instanceof Field) {
-						if(methodname.equals(((Field)member).getName())) {
-							nameslist.remove(member);
-							nameslist.add(0,member);
-							break;
-						}
-					}
-					else if( member instanceof Enum) {
-						if( methodname.equals( ((Enum)member).name() )) {
-							nameslist.remove(member);
-							nameslist.add(0,member);
-							break;
-						}
-					}
-					else if(member instanceof Member) {					
-						if(methodname.equals(((Member)member).getName())) {
-							nameslist.remove(member);
-							nameslist.add(0,member);
-							break;
-						}
-					}
-					else { // if( member instanceof Class<?> && ((Class<?>)member).isLocalClass() )
-						if( methodname.equals( ((Class<?>)member).getName() )) {
-							nameslist.remove(member);
-							nameslist.add(0,member);
-							break;
-						}
-					}
 				}
 			}
-			return nameslist.toArray(new Object[nameslist.size()]);
+			
 		}
-		else {
-			return members;
-		}
+		return nameslist.toArray(new String[nameslist.size()]);
 	}
 	public Member[] Reordered(Member[] members,Class<?> classquestionmark) {
 		return Reordered(members,classquestionmark.getSimpleName());
