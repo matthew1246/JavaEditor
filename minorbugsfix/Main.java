@@ -4004,7 +4004,55 @@ class MethodSuggestionBox {
 			//ex.printStackTrace();
 			return new Object[0];
 		}
-	}																																						
+	}
+	public String[] getStrings(Object[] methods) {
+		String[] strings = new String[methods.length];	
+		for(int i = 0; i < methods.length; i++) {
+			if(methods[i] instanceof String) {
+				strings[i] = (String)methods[i];
+			}		
+			else if(methods[i] instanceof Method) {
+				String name=((Method)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				
+				name+=getParanthesesAndParameters(methods[i]);
+				
+				strings[i] = name;
+			}
+			else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
+				String name=((Class<?>)methods[i]).getName();
+				//String name=((Enum)methods[i]).name();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				strings[i] =name;
+			}
+			else if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
+				String name=((Class<?>)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				strings[i] =name;
+			}
+			else if(methods[i] instanceof Member) {
+				String name=((Member)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				strings[i] =name;
+			}
+			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
+				String name= methods[i].toString();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				strings[i] =name;
+			}
+		}	
+		return strings;
+	}																																																																																																																																								
 	/*
 	** Old method signature for show() was:
 	** public void Popup(Class<?> classquestionmark,int caretposition) {
@@ -4017,7 +4065,8 @@ class MethodSuggestionBox {
 			suggestionbox.setSize(100,500);
 			JPanel panelgridlayout = new JPanel();
 			
-			final Object[] methods = CurlyBraceKeyListener.suggestionboxselected.Reordered(unorderedmethods,search);
+			String[] unorderedmethods2 = getStrings(unorderedmethods);
+			final String[] methods = CurlyBraceKeyListener.suggestionboxselected.Reordered(unorderedmethods2,search);
 			
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
 			panelgridlayout.setLayout(gridlayout);
@@ -4025,54 +4074,8 @@ class MethodSuggestionBox {
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
-				if(methods[i] instanceof String) {
-					labels[i] = new JLabel((String)methods[i]);
-					panelgridlayout.add(labels[i]);
-				}		
-				else if(methods[i] instanceof Method) {
-					String name=((Method)methods[i]).getName();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					
-					name+=getParanthesesAndParameters(methods[i]);
-					
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
-					String name=((Class<?>)methods[i]).getName();
-					//String name=((Enum)methods[i]).name();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else if( methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isInterface() ) {
-					String name=((Class<?>)methods[i]).getName();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else if(methods[i] instanceof Member) {
-					String name=((Member)methods[i]).getName();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
-				else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
-					String name= methods[i].toString();
-					if(name.contains("$")) {
-						name=name.replaceAll(".+\\$","");
-					}
-					labels[i] = new JLabel(name);
-					panelgridlayout.add(labels[i]);
-				}
+				labels[i] = new JLabel((String)methods[i]);
+				panelgridlayout.add(labels[i]);
 			}
 			JScrollPane scrollpane = new JScrollPane(panelgridlayout);
 			
