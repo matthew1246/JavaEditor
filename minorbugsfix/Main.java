@@ -89,6 +89,7 @@ import java.awt.event.KeyAdapter;
 public class Main {
 	public JMenuItem closetab = new JMenuItem("Close Tab");	
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
+	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
@@ -632,7 +633,7 @@ public class Main {
 		saveItem.setAccelerator(save_Key_Stroke);
 		
 		KeyStroke control_t=KeyStroke.getKeyStroke("control T");
-		opennewtab.setAccelerator(control_t);
+		openemptynewtab.setAccelerator(control_t);
 		
 		menuitem.addActionListener(oal);
 		menu.add(newitem);
@@ -640,6 +641,7 @@ public class Main {
 		menu.add(menuitem);
 		menu.add(opennewwindow);
 		menu.add(opennewtab);
+		menu.add(openemptynewtab);
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
 		StoreSelectedFile storeselectedfile2 =new StoreSelectedFile();
@@ -1219,6 +1221,8 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
+		openemptynewtab.addActionListener( (ev) -> {
+		});		
 		closetab.addActionListener((ev) -> {	
 			int tabindex=tabbedpane.getSelectedIndex();
 			fileNames.remove(tabindex);
