@@ -89,6 +89,7 @@ import java.awt.event.KeyAdapter;
 public class Main {
 	public JMenuItem closetab = new JMenuItem("Close Tab");	
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
+	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
@@ -400,10 +401,12 @@ public class Main {
 							JScrollPane scrollpane2 = new JScrollPane(textarea2);
 							String filename = Main.this.getFileName(directoryandfilename);
 							
-							Path path = Paths.get(directoryandfilename);
-							String lines2= Files.readString(path,StandardCharsets.UTF_8);
+							if(!filename.equals("")) {
+								Path path = Paths.get(directoryandfilename);
+								String lines2= Files.readString(path,StandardCharsets.UTF_8);
+								textarea2.setText(lines2);
+							}
 							textarea2.setTabSize(4);
-							textarea2.setText(lines2);
 							
 							CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);
 							textarea2.addKeyListener(curlybracekeylistener);
@@ -502,6 +505,7 @@ public class Main {
 				setPackages();
 				setApiClasses();				
 				setKeywords();
+				setAllClassesInFile();
 			}
 		});
 		thread.start();
@@ -632,7 +636,7 @@ public class Main {
 		saveItem.setAccelerator(save_Key_Stroke);
 		
 		KeyStroke control_t=KeyStroke.getKeyStroke("control T");
-		opennewtab.setAccelerator(control_t);
+		openemptynewtab.setAccelerator(control_t);
 		
 		menuitem.addActionListener(oal);
 		menu.add(newitem);
@@ -640,6 +644,7 @@ public class Main {
 		menu.add(menuitem);
 		menu.add(opennewwindow);
 		menu.add(opennewtab);
+		menu.add(openemptynewtab);
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
 		StoreSelectedFile storeselectedfile2 =new StoreSelectedFile();
@@ -1219,6 +1224,94 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
+		openemptynewtab.addActionListener( (ev2) -> {
+			tabbedpane.remove(pluspanel);
+			JTextArea textarea2 = new JTextArea();
+			Main.this.textarea = textarea2;
+			Font originalFont = textarea.getFont();
+			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+
+			JScrollPane scrollpane2 = new JScrollPane(textarea2);
+			String filename = "";
+			fileNames.add(filename);
+			StoreSelectedFile storeselectedfile=  new StoreSelectedFile();
+			storeselectedfile.setTabs(fileNames);
+			
+			textarea2.setTabSize(4);
+			
+			CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
+			textarea2.addKeyListener(curlybracekeylistener);
+			//positiontrackers.add(new PositionTracker(textarea2));
+			
+			addCaretListener(textarea2);
+			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.autokeylistener.position;
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
+				}
+			});
+			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.autokeylistener.position;
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
+				}
+			});
+			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.methodsuggestionbox.position;
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+						curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
+				}
+			});
+			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.methodsuggestionbox.position;
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+						curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
+				}
+			});
+			textarea2.addMouseListener(rightclick);
+			
+			tabbedpane.addTab("",scrollpane2);
+			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+			
+			fileName=filename;
+			//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+			
+			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			storeselectedfile3.set(fileName);
+			
+			this.fileName=fileName;
+		});		
 		closetab.addActionListener((ev) -> {	
 			int tabindex=tabbedpane.getSelectedIndex();
 			fileNames.remove(tabindex);
@@ -1486,6 +1579,7 @@ public class Main {
 				if(fileName.equals("")) {
 					NoFileOpen nofileopen=new NoFileOpen(textarea);
 					fileName=nofileopen.getFileName();
+					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 				}
 				sal.actionPerformed(ev);
 				String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -1959,6 +2053,7 @@ public class Main {
 				if(fileName.equals("")) {
 					NoFileOpen nofileopen=new NoFileOpen(textarea);
 					fileName=nofileopen.getFileName();
+					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 				}
 				sal.actionPerformed(ev);
 				if(!fileName.equals("")) {
@@ -2011,12 +2106,13 @@ public class Main {
 			}		
 		});
 			
-		compile.addActionListener(new ActionListener() {												
+		compile.addActionListener(new ActionListener() {														
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(fileName.equals("")) {
 						NoFileOpen nofileopen=new NoFileOpen(textarea);
 						fileName=nofileopen.getFileName();
+						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 					}
 					sal.actionPerformed(e);
 					if(!fileName.equals("")) {
@@ -2147,6 +2243,7 @@ public class Main {
 								NoFileOpen nofileopen=new NoFileOpen(textarea);
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
+								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 							}
 							
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -2825,6 +2922,12 @@ public class Main {
 	public void setFullPackageNames() {
 		if(Main.muck != null && fullpackagenames.size() == 0) {
 			fullpackagenames = muck.links.getFullPackageNames();
+		}
+	}
+	public AllClassesInFile allclassesinfile;
+	public void setAllClassesInFile() {
+		if(allclassesinfile == null && !fileName.equals("")) {
+			allclassesinfile = new AllClassesInFile(textarea);
 		}
 	}
 	public void addCaretListener(JTextArea textarea) {
@@ -3569,6 +3672,11 @@ class AutoKeyListener {
 			}
 		});
 		if(!input.equals("")) {
+			for(String class1:main.allclassesinfile.classes) {
+				if(class1.contains(input)) {
+					treeset.add(class1);
+				}
+			}				
 			for(String api:main.fullpackagenames) {
 				if(api.contains(input)) {
 					treeset.add(api);
@@ -3613,6 +3721,9 @@ class AutoKeyListener {
 			variablenames2=new ArrayList<String>(treeset);
 		}
 		else { // if(input.equals(""))
+			for(String class1:main.allclassesinfile.classes) {
+				treeset.add(class1);
+			}				
 			for(String variablename2:data) {
 				treeset.add(variablename2);
 			}
@@ -4425,4 +4536,4 @@ class RightClickJFrame {
 
 
 
-		
+			
