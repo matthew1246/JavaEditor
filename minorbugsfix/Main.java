@@ -505,6 +505,7 @@ public class Main {
 				setPackages();
 				setApiClasses();				
 				setKeywords();
+				setAllClassesInFile();
 			}
 		});
 		thread.start();
@@ -1578,6 +1579,7 @@ public class Main {
 				if(fileName.equals("")) {
 					NoFileOpen nofileopen=new NoFileOpen(textarea);
 					fileName=nofileopen.getFileName();
+					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 				}
 				sal.actionPerformed(ev);
 				String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -2051,6 +2053,7 @@ public class Main {
 				if(fileName.equals("")) {
 					NoFileOpen nofileopen=new NoFileOpen(textarea);
 					fileName=nofileopen.getFileName();
+					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 				}
 				sal.actionPerformed(ev);
 				if(!fileName.equals("")) {
@@ -2103,12 +2106,13 @@ public class Main {
 			}		
 		});
 			
-		compile.addActionListener(new ActionListener() {												
+		compile.addActionListener(new ActionListener() {														
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(fileName.equals("")) {
 						NoFileOpen nofileopen=new NoFileOpen(textarea);
 						fileName=nofileopen.getFileName();
+						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 					}
 					sal.actionPerformed(e);
 					if(!fileName.equals("")) {
@@ -2239,6 +2243,7 @@ public class Main {
 								NoFileOpen nofileopen=new NoFileOpen(textarea);
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
+								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 							}
 							
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -2917,6 +2922,12 @@ public class Main {
 	public void setFullPackageNames() {
 		if(Main.muck != null && fullpackagenames.size() == 0) {
 			fullpackagenames = muck.links.getFullPackageNames();
+		}
+	}
+	public AllClassesInFile allclassesinfile;
+	public void setAllClassesInFile() {
+		if(allclassesinfile == null && !fileName.equals("")) {
+			allclassesinfile = new AllClassesInFile(textarea);
 		}
 	}
 	public void addCaretListener(JTextArea textarea) {
@@ -3661,6 +3672,11 @@ class AutoKeyListener {
 			}
 		});
 		if(!input.equals("")) {
+			for(String class1:main.allclassesinfile.classes) {
+				if(class1.contains(input)) {
+					treeset.add(class1);
+				}
+			}				
 			for(String api:main.fullpackagenames) {
 				if(api.contains(input)) {
 					treeset.add(api);
@@ -3705,6 +3721,9 @@ class AutoKeyListener {
 			variablenames2=new ArrayList<String>(treeset);
 		}
 		else { // if(input.equals(""))
+			for(String class1:main.allclassesinfile.classes) {
+				treeset.add(class1);
+			}				
 			for(String variablename2:data) {
 				treeset.add(variablename2);
 			}
@@ -4517,4 +4536,4 @@ class RightClickJFrame {
 
 
 
-		
+			

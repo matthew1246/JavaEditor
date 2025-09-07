@@ -1,0 +1,2 @@
+public class Extreme {
+}
