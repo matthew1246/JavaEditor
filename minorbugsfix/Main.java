@@ -401,10 +401,12 @@ public class Main {
 							JScrollPane scrollpane2 = new JScrollPane(textarea2);
 							String filename = Main.this.getFileName(directoryandfilename);
 							
-							Path path = Paths.get(directoryandfilename);
-							String lines2= Files.readString(path,StandardCharsets.UTF_8);
+							if(!filename.equals("")) {
+								Path path = Paths.get(directoryandfilename);
+								String lines2= Files.readString(path,StandardCharsets.UTF_8);
+								textarea2.setText(lines2);
+							}
 							textarea2.setTabSize(4);
-							textarea2.setText(lines2);
 							
 							CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);
 							textarea2.addKeyListener(curlybracekeylistener);
