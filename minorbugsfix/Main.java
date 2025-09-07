@@ -89,7 +89,7 @@ import java.awt.event.KeyAdapter;
 public class Main {
 	public JMenuItem closetab = new JMenuItem("Close Tab");	
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
-	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab Tab");
+	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
