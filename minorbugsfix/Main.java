@@ -3516,6 +3516,7 @@ class AutoKeyListener {
 		while(matcher3.find()) {
 			variablenames.add(matcher3.group(4));
 		}
+		java.util.Collections.reverse(variablenames);
 		
 		Pattern pattern = Pattern.compile("\\((.*?)\\)");
 		Matcher matcher = pattern.matcher(text);
