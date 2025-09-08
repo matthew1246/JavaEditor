@@ -146,6 +146,8 @@ public class Main {
 	public Main() {
 		setLayout();
 		this.textarea = new JTextArea();
+		textarea.setLineWrap(true);
+		textarea.setWrapStyleWord(true);
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 
@@ -236,6 +238,8 @@ public class Main {
 		expandable = new Expandable(this);	
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextArea();
+			textarea2.setLineWrap(true);
+			textarea2.setWrapStyleWord(true);
 			Font originalFont = textarea.getFont();
 			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 
@@ -318,6 +322,8 @@ public class Main {
 				fileNames.add(fileName);
 				
 				JTextArea textarea2 = new JTextArea();
+				textarea2.setLineWrap(true);
+				textarea2.setWrapStyleWord(true);
 				Font originalFont = textarea.getFont();
 				textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 	
@@ -397,6 +403,8 @@ public class Main {
 						for(String directoryandfilename:tabs) {
 						try {
 							JTextArea textarea2 = new JTextArea();
+							textarea2.setLineWrap(true);
+							textarea2.setWrapStyleWord(true);
 							Main.this.textarea = textarea2;
 							Font originalFont = textarea.getFont();
 							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
@@ -580,6 +588,8 @@ public class Main {
 		frame.setSize(800,600);
 		
 		textarea = new JTextArea();
+		textarea.setLineWrap(true);
+		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
 		
 		Font originalFont = textarea.getFont();
@@ -1261,6 +1271,8 @@ public class Main {
 		openemptynewtab.addActionListener( (ev2) -> {
 			tabbedpane.remove(pluspanel);
 			JTextArea textarea2 = new JTextArea();
+			textarea2.setLineWrap(true);
+			textarea2.setWrapStyleWord(true);
 			Main.this.textarea = textarea2;
 			Font originalFont = textarea.getFont();
 			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
@@ -3075,6 +3087,8 @@ public class Main {
 										
 				tabbedpane.remove(pluspanel);
 				JTextArea textarea2 = new JTextArea();
+				textarea2.setLineWrap(true);
+				textarea2.setWrapStyleWord(true);
 				Main.this.textarea = textarea2;
 				Font originalFont = textarea.getFont();
 				textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
@@ -3237,6 +3251,8 @@ public class Main {
 						}						
 						tabbedpane.remove(pluspanel);
 						JTextArea textarea2 = new JTextArea();
+						textarea2.setLineWrap(true);
+						textarea2.setWrapStyleWord(true);
 						Main.this.textarea = textarea2;
 						Font originalFont = textarea.getFont();
 						textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
