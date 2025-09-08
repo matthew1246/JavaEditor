@@ -3371,6 +3371,7 @@ public class Main {
 				ex.printStackTrace();
 			}
 		}
+		allclassesinfile.ChangeFile(textarea,fileName);
 	}
 	public int getLineNumber(String stringuptocaretposition) {
 		int linenumber2=0;
@@ -3556,8 +3557,8 @@ public class Main {
 	}
 	public AllClassesInFile allclassesinfile;
 	public void setAllClassesInFile() {
-		if(allclassesinfile == null && !fileName.equals("")) {
-			allclassesinfile = new AllClassesInFile(textarea);
+		if(allclassesinfile == null) {
+			allclassesinfile = new AllClassesInFile(textarea,fileName);
 		}
 	}
 	public void addCaretListener(JTextArea textarea) {
