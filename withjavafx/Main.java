@@ -1269,6 +1269,15 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
+	          		public void windowStateChanged(WindowEvent e) {
+	                		if ((e.getNewState() & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH) {
+	           				int caretposition=textarea.getCaretPosition();
+	           				textarea.setCaretPosition(caretposition);
+	           				Main.this.scrollToCaretPosition(caretposition);
+	                		}
+	            	}
+	        	});	
 		openemptynewtab.addActionListener( (ev2) -> {
 			tabbedpane.remove(pluspanel);
 			JTextArea textarea2 = new JTextArea();
@@ -4170,6 +4179,7 @@ class AutoKeyListener {
 	}
 	public void fillData() {
 		List<String> variablenames = new ArrayList<String>();
+		
 		String text = main.textarea.getText();
 		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
 		Matcher matcher2=pattern2.matcher(text.substring(0,caretposition));

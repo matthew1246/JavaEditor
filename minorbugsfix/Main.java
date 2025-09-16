@@ -1236,6 +1236,16 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
+		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
+	          		public void windowStateChanged(WindowEvent e) {
+	                		if ((e.getNewState() & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH) {
+	           				int caretposition=textarea.getCaretPosition();
+	           				textarea.setCaretPosition(caretposition);
+	           				Main.this.scrollToCaretPosition(caretposition);
+	                }
+	            }
+	        });
+		
 		openemptynewtab.addActionListener( (ev2) -> {
 			tabbedpane.remove(pluspanel);
 			JTextArea textarea2 = new JTextArea();
