@@ -517,6 +517,7 @@ public class Main {
 				setApiClasses();
 				setKeywords();
 				setAllClassesInFile();
+				setAllClassesInFolder();
 			}
 		});
 		thread.start();
@@ -2626,6 +2627,8 @@ public class Main {
 		
 							CommandLine commandline = new CommandLine();
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+							storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
+							
 							Preferences preferences=storeselectedfile.get(fileName);
 							for(String jar:preferences.jars) {
 								commandline.addExternalJar(jar);
@@ -3577,6 +3580,17 @@ public class Main {
 			allclassesinfile = new AllClassesInFile(textarea,fileName);
 		}
 	}
+	List<String> allclassesinfolder;
+	public void setAllClassesInFolder() {
+		if(allclassesinfolder == null) {
+			allclassesinfolder=new ArrayList<String>();
+			FileListModifier filelistmodifier = new FileListModifier();
+			filelistmodifier.fillList(fileName);
+			for(String filename:filelistmodifier.filelist) {
+				allclassesinfolder.add(filename.replace(".java",""));
+			}				
+		}
+	}
 	public void addCaretListener(JTextArea textarea) {
 		textarea.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
@@ -4323,6 +4337,11 @@ class AutoKeyListener {
 			}
 		});
 		if(!input.equals("")) {
+			for(String filename:main.allclassesinfolder) {
+				if(filename.contains(input)) {
+					treeset.add(filename);
+				}
+			}	
 			for(String class1:main.allclassesinfile.classes) {
 				if(class1.contains(input)) {
 					treeset.add(class1);
@@ -4372,6 +4391,9 @@ class AutoKeyListener {
 			variablenames2=new ArrayList<String>(treeset);
 		}
 		else { // if(input.equals(""))
+			for(String filename:main.allclassesinfolder) {
+				treeset.add(filename);
+			}	
 			for(String class1:main.allclassesinfile.classes) {
 				treeset.add(class1);
 			}				
