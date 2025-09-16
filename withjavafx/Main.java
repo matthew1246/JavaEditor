@@ -4189,7 +4189,7 @@ class AutoKeyListener {
 			
 			removeData();
 			if(variablenames2.size() > 0) {
-				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input);
+				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input,data);
 				gridlayout.setRows(1+variablenames2.size());
 				for(int i = 0; i < variablenames2.size(); i++) {
 					JLabel label = new JLabel(variablenames2.get(i));
@@ -4327,7 +4327,7 @@ class AutoKeyListener {
 				if(class1.contains(input)) {
 					treeset.add(class1);
 				}
-			}		
+			}				
 			for(String api:main.fullpackagenames) {
 				if(api.contains(input)) {
 					treeset.add(api);
@@ -4374,7 +4374,7 @@ class AutoKeyListener {
 		else { // if(input.equals(""))
 			for(String class1:main.allclassesinfile.classes) {
 				treeset.add(class1);
-			}		
+			}				
 			for(String variablename2:data) {
 				treeset.add(variablename2);
 			}
