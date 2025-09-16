@@ -59,7 +59,7 @@ public class VariableSuggestionBoxSelected {
 		}	
 		return labels;
 	}
-	public List<String> ReorderedStrings(List<String> labels,String textfieldinput) {
+	public List<String> ReorderedStrings(List<String> labels,String textfieldinput,List<String> data) {
 		LiveIterator<String> liveiterator = new LiveIterator<String>(labels,true); // clone List
 		try {
 		if(linkedhashmap.get(textfieldinput) != null) {
@@ -74,6 +74,15 @@ public class VariableSuggestionBoxSelected {
 			for(String variablename:linkedhashmap.get(textfieldinput)) {
 				liveiterator.list.add(0,variablename);
 			}
+			for(String data0:data) {
+				if(liveiterator.contains(data0))	
+					liveiterator.remove(data0);
+			}
+			for(int i = data.size() -1; i >= 0; i--) {
+				String data0 = data.get(i);
+				liveiterator.list.add(0,data0);
+			}
+				
 			return liveiterator.list;
 		}
 		} catch (NoSuchMethodError error) {

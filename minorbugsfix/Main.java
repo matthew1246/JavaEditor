@@ -3556,7 +3556,7 @@ class AutoKeyListener {
 			
 			removeData();
 			if(variablenames2.size() > 0) {
-				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input);
+				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input,data);
 				gridlayout.setRows(1+variablenames2.size());
 				for(int i = 0; i < variablenames2.size(); i++) {
 					JLabel label = new JLabel(variablenames2.get(i));
