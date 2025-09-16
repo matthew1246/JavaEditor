@@ -1238,13 +1238,23 @@ public class Main {
 	public void setListeners() {	
 		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
 	          		public void windowStateChanged(WindowEvent e) {
-	                		if ((e.getNewState() & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH) {
+	                		int state=e.getNewState();
+	                		if ((state & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH) {
 	           				int caretposition=textarea.getCaretPosition();
 	           				textarea.setCaretPosition(caretposition);
 	           				Main.this.scrollToCaretPosition(caretposition);
-	                }
-	            }
-	        });
+	                		}
+	                		else if ((state & JFrame.ICONIFIED) == JFrame.ICONIFIED) {
+      	 				int caretposition=textarea.getCaretPosition();
+	           				textarea.setCaretPosition(caretposition);
+	           				Main.this.scrollToCaretPosition(caretposition);
+   				 } else if ((state & JFrame.NORMAL) == JFrame.NORMAL) {
+        					int caretposition=textarea.getCaretPosition();
+	           				textarea.setCaretPosition(caretposition);
+	           				Main.this.scrollToCaretPosition(caretposition);
+    				}
+	            	}
+	        	});
 		
 		openemptynewtab.addActionListener( (ev2) -> {
 			tabbedpane.remove(pluspanel);
