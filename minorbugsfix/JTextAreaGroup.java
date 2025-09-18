@@ -20,7 +20,7 @@ public class JTextAreaGroup extends JTextArea {
 		super.paintComponent(graphics);
 		
 		graphics.setColor(java.awt.Color.blue);
-		graphics.setFont(new Font("Arial",Font.BOLD,20));
+		//graphics.setFont(new Font("Arial",Font.BOLD,25));
 		//graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
 		//graphics.drawString("-",10,20);
 		String text = super.getText();
@@ -30,7 +30,7 @@ public class JTextAreaGroup extends JTextArea {
 				if(character.equals("{")) {
 					try {
 						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
-graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+10));
+graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
 					}												catch(BadLocationException ex) {
 						ex.printStackTrace();
 					}						
