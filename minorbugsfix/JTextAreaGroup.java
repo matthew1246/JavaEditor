@@ -30,7 +30,7 @@ public class JTextAreaGroup extends JTextArea {
 				if(character.equals("{")) {
 					try {
 						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
-graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+19));
+graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
 					}												catch(BadLocationException ex) {
 						ex.printStackTrace();
 					}						
