@@ -1,12 +1,15 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java",
+      ""
     ],
     "caretposition": 0
   },
@@ -17,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 44472
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "starterclass": "Main",
@@ -68,7 +71,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 285
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java": {
     "starterclass": "",
@@ -141,5 +144,32 @@
     ],
     "fileNames": [],
     "caretposition": 13957
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java": {
+    "starterclass": "Main",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 1142
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 73
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestJTextAreaGroup.java": {
+    "starterclass": "TestJTextAreaGroup",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 298
   }
 }

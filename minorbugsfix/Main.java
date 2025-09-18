@@ -142,7 +142,7 @@ public class Main {
 	*/
 	public Main() {			
 		setLayout();
-		this.textarea = new JTextArea();
+		this.textarea = new JTextAreaGroup();
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		
@@ -236,7 +236,7 @@ public class Main {
 		setLayout();
 		expandable = new Expandable(this);	
 		if(fileName.equals("")) {
-			JTextArea textarea2 = new JTextArea();
+			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
 			Font originalFont = textarea.getFont();
@@ -319,7 +319,7 @@ public class Main {
 			if(tabs.size() <= 1) {
 				fileNames.add(fileName);
 				
-				JTextArea textarea2 = new JTextArea();
+				JTextArea textarea2 = new JTextAreaGroup();
 				textarea2.setLineWrap(true);
 				textarea2.setWrapStyleWord(true);
 				Font originalFont = textarea.getFont();
@@ -400,7 +400,7 @@ public class Main {
 					public void run() {	
 						for(String directoryandfilename:tabs) {
 						try {
-							JTextArea textarea2 = new JTextArea();
+							JTextArea textarea2 = new JTextAreaGroup();
 							textarea2.setLineWrap(true);
 							textarea2.setWrapStyleWord(true);
 							Main.this.textarea = textarea2;
@@ -595,7 +595,7 @@ public class Main {
 		}
 		frame.setSize(800,600);
 		
-		textarea = new JTextArea();
+		textarea = new JTextAreaGroup();
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
@@ -1258,7 +1258,7 @@ public class Main {
 		
 		openemptynewtab.addActionListener( (ev2) -> {
 			tabbedpane.remove(pluspanel);
-			JTextArea textarea2 = new JTextArea();
+			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
 			Main.this.textarea = textarea2;
@@ -2481,7 +2481,7 @@ public class Main {
 				}
 										
 				tabbedpane.remove(pluspanel);
-				JTextArea textarea2 = new JTextArea();
+				JTextArea textarea2 = new JTextAreaGroup();
 				textarea2.setLineWrap(true);
 				textarea2.setWrapStyleWord(true);
 				Main.this.textarea = textarea2;
@@ -2644,7 +2644,7 @@ public class Main {
 							selectedFile=new File(addDotJava(selectedFile.getAbsolutePath()));
 						}						
 						tabbedpane.remove(pluspanel);
-						JTextArea textarea2 = new JTextArea();
+						JTextArea textarea2 = new JTextAreaGroup();
 						textarea2.setLineWrap(true);
 						textarea2.setWrapStyleWord(true);
 						Main.this.textarea = textarea2;
