@@ -13,17 +13,22 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 public class JTextAreaGroup extends JTextArea {
+	public List<String> codes = new LinkedList<String>();
 	public JTextAreaGroup() {
 		super();
 		
 		this.addMouseListener(new MouseAdapter() { 
 			@Override
-			public void mouseClicked(MouseEvent me) {
+			public void mousePressed(MouseEvent me) {
 				int caretposition=viewToModel2D(me.getPoint());
 				Group group = groups.get(caretposition);
 				if(group != null) {
 					String text = getText();
-							JOptionPane.showMessageDialog(null,text.substring(group.start,group.end));
+					codes.add(text.substring(group.start,group.end));
+					String first=text.substring(0,group.start+1);
+					String last = text.substring(group.end-1,text.length());
+					setText(first+last);
+					setCaretPosition(group.start+1);
 				}
 			}
 		});
