@@ -7,19 +7,40 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.text.BadLocationException;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 public class JTextAreaGroup extends JTextArea {
 	public JTextAreaGroup() {
 		super();
+		
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent me) {
+				int caretposition=viewToModel2D(me.getPoint());
+				if(groups.get(caretposition) != null)
+					JOptionPane.showMessageDialog(null,"you clicked");
+			}
+		});
 	}
-	List<Group> groups = new LinkedList<Group>();
+	HashMap<Integer,Group> groups;
 	public String text1 = "";
+	public Font font;
+	public FontMetrics fontmetrics;
 	@Override
 	public void paintComponent(Graphics graphics) {
+		groups = new HashMap<Integer,Group>();		
 		Stack<Integer> leftcurlybraces= new Stack<Integer>();
 			
 		super.paintComponent(graphics);
 		
 		graphics.setColor(java.awt.Color.blue);
+		if(font == null)
+			font =graphics.getFont();
+		if(fontmetrics == null)
+			fontmetrics = graphics.getFontMetrics();
 		//graphics.setFont(new Font("Arial",Font.BOLD,25));
 		//graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
 		//graphics.drawString("-",10,19);
@@ -31,6 +52,7 @@ public class JTextAreaGroup extends JTextArea {
 					try {
 						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
 graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
+					groups.put(i+2,new Group());
 					}												catch(BadLocationException ex) {
 						ex.printStackTrace();
 					}						
