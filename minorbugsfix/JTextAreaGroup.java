@@ -27,8 +27,6 @@ public class JTextAreaGroup extends JTextArea {
 	}
 	HashMap<Integer,Group> groups;
 	public String text1 = "";
-	public Font font;
-	public FontMetrics fontmetrics;
 	@Override
 	public void paintComponent(Graphics graphics) {
 		groups = new HashMap<Integer,Group>();		
@@ -37,10 +35,7 @@ public class JTextAreaGroup extends JTextArea {
 		super.paintComponent(graphics);
 		
 		graphics.setColor(java.awt.Color.blue);
-		if(font == null)
-			font =graphics.getFont();
-		if(fontmetrics == null)
-			fontmetrics = graphics.getFontMetrics();
+	
 		//graphics.setFont(new Font("Arial",Font.BOLD,25));
 		//graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
 		//graphics.drawString("-",10,19);
