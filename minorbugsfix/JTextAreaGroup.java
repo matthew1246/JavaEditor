@@ -27,7 +27,7 @@ public class JTextAreaGroup extends JTextArea {
 					codes.add(text.substring(group.start,group.end));
 					String first=text.substring(0,group.start+1);
 					String last = text.substring(group.end-1,text.length());
-					setText(first+last);
+					setText(first+"+"+last);
 					setCaretPosition(group.start+1);
 				}
 			}
