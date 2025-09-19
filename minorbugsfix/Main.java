@@ -133,7 +133,7 @@ public class Main {
 	public static String value = System.getProperty("user.home")+"\\load_program.ser";
 	//public String value="load_program.ser";
 	public MouseAdapter rightclick = new RightClick();
-	public static void main(String[] args) 	{ 
+	public static void main(String[] args) 	{  
 		Main main = new Main(new OpenDefaultContent());
 	}
 	/*

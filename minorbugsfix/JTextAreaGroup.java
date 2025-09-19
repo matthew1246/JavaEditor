@@ -16,7 +16,7 @@ public class JTextAreaGroup extends JTextArea {
 	public JTextAreaGroup() {
 		super();
 		
-		this.addMouseListener(new MouseAdapter() {
+		this.addMouseListener(new MouseAdapter() { 
 			@Override
 			public void mouseClicked(MouseEvent me) {
 				int caretposition=viewToModel2D(me.getPoint());
@@ -47,8 +47,28 @@ public class JTextAreaGroup extends JTextArea {
 					try {
 						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
 graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
-					groups.put(i+2,new Group());
-					}												catch(BadLocationException ex) {
+						groups.put(i+2,new Group());
+						Stack<Integer> stack = new Stack<Integer>();
+						stack.push(i);
+						int j = i+1;
+						while(true && j < text.length()) {
+							String character2 = text.substring(j,j+1);
+							if(character2.equals("{")) {
+								stack.push(j);
+							}
+							else if(character2.equals("}")) {
+								int rightcurlybrace=stack.pop();
+								if(stack.size() == 0) {
+									Group group=groups.get(i+2);
+									group.start = i;
+									group.end =j;
+									groups.put(i+2,group);
+									break;
+								}
+							}
+							j++;
+						}
+					} catch(BadLocationException ex) {
 						ex.printStackTrace();
 					}						
 				}
