@@ -22,7 +22,7 @@ public class JTextAreaGroup extends JTextArea {
 			public void mousePressed(MouseEvent me) {
 				int caretposition=viewToModel2D(me.getPoint());
 				Group group = groups.get(caretposition);
-				if(group != null) {
+				if(group != null && group.start != 0 &&group.end != 0) {
 					String text = getText();
 					codes.add(text.substring(group.start,group.end));
 					String first=text.substring(0,group.start+1);
