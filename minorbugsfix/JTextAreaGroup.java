@@ -20,8 +20,11 @@ public class JTextAreaGroup extends JTextArea {
 			@Override
 			public void mouseClicked(MouseEvent me) {
 				int caretposition=viewToModel2D(me.getPoint());
-				if(groups.get(caretposition) != null)
-					JOptionPane.showMessageDialog(null,"you clicked");
+				Group group = groups.get(caretposition);
+				if(group != null) {
+					String text = getText();
+							JOptionPane.showMessageDialog(null,text.substring(group.start,group.end));
+				}
 			}
 		});
 	}
@@ -61,7 +64,7 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 								if(stack.size() == 0) {
 									Group group=groups.get(i+2);
 									group.start = i;
-									group.end =j;
+									group.end =j+1;
 									groups.put(i+2,group);
 									break;
 								}
