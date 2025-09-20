@@ -24,9 +24,14 @@ public class JTextAreaGroup extends JTextArea {
 				Group group = groups.get(caretposition);
 				if(group != null) {
 					String text = getText();
-					codes.add(text.substring(group.start,group.end));
+
 					String first=text.substring(0,group.start+1);
 					String last = text.substring(group.end-1,text.length());
+					Codes codes2 = new Codes(JTextAreaGroup.this);
+					List<Integer> codesindex=codes2.getCodes();
+					int index=codes2.getIndex(codesindex,first.length());
+						codes.add(index,text.substring(group.start,group.end));
+					
 					setText(first+"+"+last);
 					setCaretPosition(group.start+1);
 				}
