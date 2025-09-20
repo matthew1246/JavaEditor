@@ -33,7 +33,7 @@ public class JTextAreaGroup extends JTextArea {
 								
 							Codes codes2 = new Codes(JTextAreaGroup.this);
 							List<Integer> codesindex=codes2.getCodes();
-							int index=codes2.getIndex(codesindex,matcher.start()+1);
+							int index=codes2.getIndex(codesindex,matcher.start());
 							String code=codes.get(index);
 							String first=text.substring(0,matcher.start());
 							String second=text.substring(matcher.end(),text.length());
