@@ -2940,7 +2940,7 @@ public class Main {
 											commandline.addExternalJar(jar);
 										}
 										
-										option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										//option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 										if(option2 ==JOptionPane.YES_OPTION) {
 											ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 											commandline.addJavaFX();
@@ -2960,7 +2960,7 @@ public class Main {
 									else {
 										fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
 										
-										option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										//option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 										if(option2 ==JOptionPane.YES_OPTION) {
 											ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 											commandline.addJavaFX();
@@ -3010,7 +3010,7 @@ public class Main {
 									options=new String[2];
 									options[0] = "Yes";
 									options[1] = "No";
-									option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									//option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 									if(option2 == JOptionPane.YES_OPTION) {
 										Pattern pattern=Pattern.compile(getFileName(fileName)+":([0-9]+):");
 										Matcher matcher=pattern.matcher(lines);
