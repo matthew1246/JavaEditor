@@ -12,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 public class JTextAreaGroup extends JTextArea {
 	public List<String> codes = new LinkedList<String>();
 	public JTextAreaGroup() {
@@ -22,7 +24,25 @@ public class JTextAreaGroup extends JTextArea {
 			public void mousePressed(MouseEvent me) {
 				int caretposition=viewToModel2D(me.getPoint());
 				Group group = groups.get(caretposition);
-				if(group != null) {
+				if(group == null) {
+					Pattern pattern=Pattern.compile("\\{\\+\\}");
+					text = JTextAreaGroup.this.getText();
+					Matcher matcher=pattern.matcher(text);
+					while(matcher.find()) {
+						if(caretposition >= matcher.start() && caretposition <= matcher.end()) {
+								
+							Codes codes2 = new Codes(JTextAreaGroup.this);
+							List<Integer> codesindex=codes2.getCodes();
+							int index=codes2.getIndex(codesindex,matcher.start()+1);
+							String code=codes.get(index);
+							String first=text.substring(0,matcher.start());
+							String second=text.substring(matcher.end(),text.length());
+							JTextAreaGroup.this.setText(first+code+second);
+							JTextAreaGroup.this.setCaretPosition(caretposition);
+						}	
+					}																										
+				}
+				else if(group != null) {
 					String text = getText();
 
 					String first=text.substring(0,group.start+1);

@@ -30,7 +30,7 @@ public class Codes {
 	public int getIndex(List<Integer> codes,int caretposition) {
 		for(int i = 0; i < codes.size(); i++) {
 			int code = codes.get(i);
-			if(code > caretposition)
+			if(code >= caretposition)
 				return i;
 		}
 		return codes.size();
