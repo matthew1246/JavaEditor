@@ -39,6 +39,7 @@ public class JTextAreaGroup extends JTextArea {
 							String second=text.substring(matcher.end(),text.length());
 							JTextAreaGroup.this.setText(first+code+second);
 							JTextAreaGroup.this.setCaretPosition(caretposition);
+							codes.remove(index);
 						}	
 					}																										
 				}
