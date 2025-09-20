@@ -39,7 +39,7 @@ public class JTextAreaGroup extends JTextArea {
 		});
 	}
 	HashMap<Integer,Group> groups;
-	public String text1 = "";
+	public String text = "";
 	@Override
 	public void paintComponent(Graphics graphics) {
 		groups = new HashMap<Integer,Group>();		
@@ -52,11 +52,11 @@ public class JTextAreaGroup extends JTextArea {
 		//graphics.setFont(new Font("Arial",Font.BOLD,25));
 		//graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
 		//graphics.drawString("-",10,19);
-		String text = super.getText();
+		text = super.getText();
 		//if(!text1.equals(text)) {
 			for(int i = 0; i < (text.length()-4); i++) {
 				String character = text.substring(i,i+1);
-				if(character.equals("{")) {
+				if(character.equals("{") && !isPlus(i+1) && !isRightCurlyBrace(i+2)) {
 					try {
 						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
 graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
@@ -94,4 +94,15 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 			}
 		//}
 	}
+	public boolean isPlus(int caretposition) {
+		if((caretposition+1) > text.length())
+			return false;	
+		return text.substring(caretposition,caretposition+1).equals("+");
+	}
+	public boolean isRightCurlyBrace(int caretposition) {
+		if((caretposition+1) > text.length())
+			return false;
+		return text.substring(caretposition,caretposition+1).equals("}");
+	}
+			
 }
