@@ -1372,6 +1372,8 @@ public class Main {
 		});	
 		
 		generatejar.addActionListener((ev) -> {
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll();	
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 			switch(option) {
@@ -2083,6 +2085,8 @@ public class Main {
 			}
 		});
 		compile_all.addActionListener((ev) -> {		
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll();	
 			try {
 				if(fileName.equals("")) {
 					NoFileOpen nofileopen=new NoFileOpen(textarea);
@@ -2142,6 +2146,8 @@ public class Main {
 			
 		compile.addActionListener(new ActionListener() {																
 			public void actionPerformed(ActionEvent e) {
+				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+				textarea3.ExpandAll();	
 				try {
 					if(fileName.equals("")) {
 						NoFileOpen nofileopen=new NoFileOpen(textarea);
@@ -2243,6 +2249,8 @@ public class Main {
 		});
 		run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+				textarea3.ExpandAll();	
 				Thread thread = new Thread() {
 					public void run() {
 						try {	

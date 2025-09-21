@@ -72,21 +72,22 @@ public class JTextAreaGroup extends JTextArea {
 			}
 		});
 	}
-	public void ExpandAll(int caretposition) {
+	public void ExpandAll() {
+		int caretposition = getCaretPosition();	
 		Pattern pattern=Pattern.compile("\\{\\+\\}");
 		text = JTextAreaGroup.this.getText();
 		Matcher matcher=pattern.matcher(text);
 		while(matcher.find()) {
-			Codes codes2 = new Codes(JTextAreaGroup.this);
+			Codes codes2 = new Codes(this);
 			List<Integer> codesindex=codes2.getCodes();
 			int index=codes2.getIndex(codesindex,matcher.start());
 			String code=codes.get(index);
 			String first=text.substring(0,matcher.start());
 			String second=text.substring(matcher.end(),text.length());
-			JTextAreaGroup.this.setText(first+code+second);
-			JTextAreaGroup.this.setCaretPosition(caretposition);
-			codes.remove(index);
-		}	
+			setText(first+code+second);
+		}
+		codes = new LinkedList<String>();	
+		setCaretPosition(caretposition);
 	}		
 	HashMap<Integer,Group> groups;
 	public String text = "";
