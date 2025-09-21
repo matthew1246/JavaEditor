@@ -100,7 +100,7 @@ public class JTextAreaGroup extends JTextArea {
 			setText(first+code+second);
 		}
 		*/
-		
+		codes = new LinkedList<String>();
 		setCaretPosition(caretposition);
 	}		
 	HashMap<Integer,Group> groups;
