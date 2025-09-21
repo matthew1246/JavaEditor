@@ -2979,16 +2979,16 @@ public class Main {
 			allclassesinfile = new AllClassesInFile(textarea,fileName);
 		}
 	}
-	List<String> allclassesinfolder;
+	List<String> allclassesinfolder = new ArrayList<String>();
 	public void setAllClassesInFolder() {
-		if(allclassesinfolder == null) {
+		//if(allclassesinfolder == null) {
 			allclassesinfolder=new ArrayList<String>();
 			FileListModifier filelistmodifier = new FileListModifier();
 			filelistmodifier.fillList(fileName);
 			for(String filename:filelistmodifier.filelist) {
 				allclassesinfolder.add(filename.replace(".java",""));
 			}				
-		}
+		//}
 	}
 	public void addCaretListener(JTextArea textarea) {
 		textarea.addCaretListener(new CaretListener() {
