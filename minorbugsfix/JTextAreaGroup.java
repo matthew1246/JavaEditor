@@ -74,9 +74,10 @@ public class JTextAreaGroup extends JTextArea {
 		//graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
 		//graphics.drawString("-",10,19);
 		text = super.getText();
-		//if(!text1.equals(text)) {
-			for(int i = 0; i < (text.length()-4); i++) {
-				String character = text.substring(i,i+1);
+		String text3 = RemoveAll.LeftCurlyBraceInsideComments(text);
+		//if(!text31.equals(text3)) {
+			for(int i = 0; i < (text3.length()-4); i++) {
+				String character = text3.substring(i,i+1);
 				if(character.equals("{") && !isPlus(i+1) && !isRightCurlyBrace(i+2)) {
 					try {
 						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
@@ -85,8 +86,8 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 						Stack<Integer> stack = new Stack<Integer>();
 						stack.push(i);
 						int j = i+1;
-						while(true && j < text.length()) {
-							String character2 = text.substring(j,j+1);
+						while(true && j < text3.length()) {
+							String character2 = text3.substring(j,j+1);
 							if(character2.equals("{")) {
 								stack.push(j);
 							}
