@@ -75,18 +75,32 @@ public class JTextAreaGroup extends JTextArea {
 	public void ExpandAll() {
 		int caretposition = getCaretPosition();	
 		Pattern pattern=Pattern.compile("\\{\\+\\}");
-		text = JTextAreaGroup.this.getText();
+		text = getText();
 		Matcher matcher=pattern.matcher(text);
+		int count = -1;
+		
+		StringBuilder stringbuilder = new StringBuilder();
 		while(matcher.find()) {
-			Codes codes2 = new Codes(this);
-			List<Integer> codesindex=codes2.getCodes();
-			int index=codes2.getIndex(codesindex,matcher.start());
-			String code=codes.get(index);
+			count++;
+			String match=matcher.group();
+			match=match.replaceAll("\\{\\+\\}",codes.get(count));
+			matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(match));
+		}
+		matcher.appendTail(stringbuilder);
+		setText(stringbuilder.toString());
+
+		/*
+		while(matcher.find()) {
+			count++;
+			String code=codes.get(count);
+			JOptionPane.showMessageDialog(null,"*"+code+"*");
+			
 			String first=text.substring(0,matcher.start());
 			String second=text.substring(matcher.end(),text.length());
 			setText(first+code+second);
 		}
-		codes = new LinkedList<String>();	
+		*/
+		
 		setCaretPosition(caretposition);
 	}		
 	HashMap<Integer,Group> groups;
