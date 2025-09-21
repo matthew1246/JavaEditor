@@ -14,6 +14,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.TreeMap;		
 public class JTextAreaGroup extends JTextArea {
 	public List<String> codes = new LinkedList<String>();
 	public JTextAreaGroup() {
@@ -24,6 +25,18 @@ public class JTextAreaGroup extends JTextArea {
 			public void mousePressed(MouseEvent me) {
 				int caretposition=viewToModel2D(me.getPoint());
 				Group group = groups.get(caretposition);
+				// debug click {-
+				/*
+				System.out.println(caretposition);
+				TreeMap<Integer,Group> treemap = new TreeMap<Integer,Group>();
+				for(int b:groups.keySet()) {
+					treemap.put(b,null);
+				}
+				for(int b:treemap.keySet()) {
+					System.out.print(b+",");
+				}
+				System.out.println();
+				*/
 				if(group == null) {
 					Pattern pattern=Pattern.compile("\\{\\+\\}");
 					text = JTextAreaGroup.this.getText();
@@ -59,6 +72,22 @@ public class JTextAreaGroup extends JTextArea {
 			}
 		});
 	}
+	public void ExpandAll(int caretposition) {
+		Pattern pattern=Pattern.compile("\\{\\+\\}");
+		text = JTextAreaGroup.this.getText();
+		Matcher matcher=pattern.matcher(text);
+		while(matcher.find()) {
+			Codes codes2 = new Codes(JTextAreaGroup.this);
+			List<Integer> codesindex=codes2.getCodes();
+			int index=codes2.getIndex(codesindex,matcher.start());
+			String code=codes.get(index);
+			String first=text.substring(0,matcher.start());
+			String second=text.substring(matcher.end(),text.length());
+			JTextAreaGroup.this.setText(first+code+second);
+			JTextAreaGroup.this.setCaretPosition(caretposition);
+			codes.remove(index);
+		}	
+	}		
 	HashMap<Integer,Group> groups;
 	public String text = "";
 	@Override
@@ -82,7 +111,7 @@ public class JTextAreaGroup extends JTextArea {
 					try {
 						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
 graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
-						groups.put(i+2,new Group());
+						groups.put(i+1,new Group());
 						Stack<Integer> stack = new Stack<Integer>();
 						stack.push(i);
 						int j = i+1;
@@ -94,7 +123,7 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 							else if(character2.equals("}")) {
 								int rightcurlybrace=stack.pop();
 								if(stack.size() == 0) {
-									Group group=groups.get(i+2);
+									Group group=groups.get(i+1);
 									group.start = i;
 									group.end =j+1;
 									groups.put(i+2,group);
