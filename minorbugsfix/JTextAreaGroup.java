@@ -83,7 +83,7 @@ public class JTextAreaGroup extends JTextArea {
 		while(matcher.find()) {
 			count++;
 			String match=matcher.group();
-			match=match.replaceAll("\\{\\+\\}",codes.get(count));
+			match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(codes.get(count)));
 			matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(match));
 		}
 		matcher.appendTail(stringbuilder);
