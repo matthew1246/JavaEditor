@@ -145,7 +145,7 @@ public class Main {
 	*/
 	public Main() {
 		setLayout();
-		this.textarea = new JTextArea();
+		this.textarea = new JTextAreaGroup();
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		Font originalFont = textarea.getFont();
@@ -237,7 +237,7 @@ public class Main {
 		setLayout();
 		expandable = new Expandable(this);	
 		if(fileName.equals("")) {
-			JTextArea textarea2 = new JTextArea();
+			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
 			Font originalFont = textarea.getFont();
@@ -321,7 +321,7 @@ public class Main {
 			if(tabs.size() <= 1) {
 				fileNames.add(fileName);
 				
-				JTextArea textarea2 = new JTextArea();
+				JTextArea textarea2 = new JTextAreaGroup();
 				textarea2.setLineWrap(true);
 				textarea2.setWrapStyleWord(true);
 				Font originalFont = textarea.getFont();
@@ -402,7 +402,7 @@ public class Main {
 					public void run() {	
 						for(String directoryandfilename:tabs) {
 						try {
-							JTextArea textarea2 = new JTextArea();
+							JTextArea textarea2 = new JTextAreaGroup();
 							textarea2.setLineWrap(true);
 							textarea2.setWrapStyleWord(true);
 							Main.this.textarea = textarea2;
@@ -588,7 +588,7 @@ public class Main {
 		}
 		frame.setSize(800,600);
 		
-		textarea = new JTextArea();
+		textarea = new JTextAreaGroup();
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
@@ -1290,7 +1290,7 @@ public class Main {
 	        	});	
 		openemptynewtab.addActionListener( (ev2) -> {
 			tabbedpane.remove(pluspanel);
-			JTextArea textarea2 = new JTextArea();
+			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
 			Main.this.textarea = textarea2;
@@ -1379,7 +1379,8 @@ public class Main {
 			this.fileName=fileName;
 		});			
 		makeajar.addActionListener( ev -> {
-				
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll();	
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 			switch(option) {
@@ -1796,6 +1797,8 @@ public class Main {
 		});	
 		
 		generatejar.addActionListener((ev) -> {
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll();	
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 			switch(option) {
@@ -2558,6 +2561,8 @@ public class Main {
 			}
 		});
 		compile_all.addActionListener((ev) -> {
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll();		
 			Thread thread4=new Thread(() -> {
 					try {
 					if(fileName.equals("")) {
@@ -2633,6 +2638,8 @@ public class Main {
 			
 		compile.addActionListener(new ActionListener() {										
 			public void actionPerformed(ActionEvent e) {
+				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+				textarea3.ExpandAll();		
 				Thread thread = new Thread( () -> {
 					try {	
 						if(fileName.equals("")) {
@@ -2753,6 +2760,8 @@ public class Main {
 		});
 		run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+				textarea3.ExpandAll();		
 				Thread thread = new Thread() {
 					public void run() {
 						try {	
@@ -3108,7 +3117,7 @@ public class Main {
 				}
 										
 				tabbedpane.remove(pluspanel);
-				JTextArea textarea2 = new JTextArea();
+				JTextArea textarea2 = new JTextAreaGroup();
 				textarea2.setLineWrap(true);
 				textarea2.setWrapStyleWord(true);
 				Main.this.textarea = textarea2;
@@ -3272,7 +3281,7 @@ public class Main {
 							selectedFile=new File(addDotJava(selectedFile.getAbsolutePath()));
 						}						
 						tabbedpane.remove(pluspanel);
-						JTextArea textarea2 = new JTextArea();
+						JTextArea textarea2 = new JTextAreaGroup();
 						textarea2.setLineWrap(true);
 						textarea2.setWrapStyleWord(true);
 						Main.this.textarea = textarea2;
