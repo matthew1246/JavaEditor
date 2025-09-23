@@ -479,6 +479,7 @@ public class Main {
 							textarea2.addMouseListener(rightclick);
 							
 							tabbedpane.addTab(filename,scrollpane2);
+							openLastSelectedLine(textarea2,directoryandfilename);
 						}
 						catch (IOException ex) {
 							ex.printStackTrace();
@@ -521,7 +522,14 @@ public class Main {
 			}
 		});
 		thread.start();
-		openLastSelectedLine();
+		//openLastSelectedLine();
+	}
+	public void openLastSelectedLine(JTextArea textarea3,String filename) {
+		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+		if(filename != null && !filename.equals("")) {
+			int caretposition=storeselectedfile.getCaretPosition(filename);
+			scrollToCaretPosition(textarea3,caretposition);
+		}
 	}
 	public void openLastSelectedLine() {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -1064,6 +1072,30 @@ public class Main {
 			}
 		}
 	}	
+	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumentindex) {
+		SwingUtilities.invokeLater(new Runnable() {
+		        public void run(){
+		            try {
+		            	if(wholedocumentindex <= (textarea3.getText().length()) ) {
+					Rectangle2D viewposition=textarea3.modelToView2D(wholedocumentindex);
+					Point caretposition=new Point(0,(int)viewposition.getY());
+					
+					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+					
+					scrollpane.getViewport().setViewPosition(caretposition);
+					textarea3.grabFocus();
+					textarea3.setCaretPosition(wholedocumentindex);
+					line.setText("line number: "+getLineNumber(textarea3.getText().substring(0,wholedocumentindex))+" ");
+				}
+		            }
+			catch (BadLocationException exception) {
+				exception.printStackTrace();
+			}
+
+		        }
+		    });
+
+	}
 	public void scrollToCaretPosition(int wholedocumentindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
