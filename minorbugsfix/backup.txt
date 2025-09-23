@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RemoveAll.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -21,7 +21,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 23113
+    "caretposition": 21663
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "starterclass": "Main",
@@ -180,7 +180,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 882
+    "caretposition": 953
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
     "starterclass": "",
@@ -287,6 +287,48 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "AllClassesInFile.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "FileListModifier.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "JTextAreaGroup.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "Codes.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "RenameVariable.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "RemoveAll.java": {
+    "starterclass": "",
+    "jars": [],
     "fileNames": [],
     "caretposition": 0
   }

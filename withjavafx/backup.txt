@@ -22,7 +22,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 94471
+    "caretposition": 94482
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "Main",
