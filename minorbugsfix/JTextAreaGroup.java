@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.TreeMap;		
 public class JTextAreaGroup extends JTextArea {
-	public List<String> codes = new LinkedList<String>();
+	public List<Code> codes = new LinkedList<Code>();
 	public JTextAreaGroup() {
 		super();
 		
@@ -47,7 +47,7 @@ public class JTextAreaGroup extends JTextArea {
 							Codes codes2 = new Codes(JTextAreaGroup.this);
 							List<Integer> codesindex=codes2.getCodes();
 							int index=codes2.getIndex(codesindex,matcher.start());
-							String code=codes.get(index);
+							String code=codes.get(index).code;
 							String first=text.substring(0,matcher.start());
 							String second=text.substring(matcher.end(),text.length());
 							JTextAreaGroup.this.setText(first+code+second);
@@ -64,7 +64,7 @@ public class JTextAreaGroup extends JTextArea {
 					Codes codes2 = new Codes(JTextAreaGroup.this);
 					List<Integer> codesindex=codes2.getCodes();
 					int index=codes2.getIndex(codesindex,first.length());
-						codes.add(index,text.substring(group.start,group.end));
+						codes.add(index,new Code(text.substring(group.start,group.end)));
 					
 					setText(first+"+"+last);
 					setCaretPosition(group.start+1);
@@ -83,7 +83,7 @@ public class JTextAreaGroup extends JTextArea {
 		while(matcher.find()) {
 			count++;
 			String match=matcher.group();
-			match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(codes.get(count)));
+			match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(codes.get(count).code));
 			matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(match));
 		}
 		matcher.appendTail(stringbuilder);
@@ -100,7 +100,7 @@ public class JTextAreaGroup extends JTextArea {
 			setText(first+code+second);
 		}
 		*/
-		codes = new LinkedList<String>();
+		codes = new LinkedList<Code>();
 		setCaretPosition(caretposition);
 	}		
 	HashMap<Integer,Group> groups;

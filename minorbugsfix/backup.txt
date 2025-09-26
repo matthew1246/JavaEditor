@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RemoveAll.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -10,7 +10,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Codes.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RemoveAll.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RemoveAll.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java",
+      ""
     ],
     "caretposition": 0
   },
@@ -21,7 +23,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 21663
+    "caretposition": 2946
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "starterclass": "Main",
@@ -153,7 +155,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 3322
+    "caretposition": 3358
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
     "starterclass": "",
@@ -331,5 +333,11 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 142
   }
 }
