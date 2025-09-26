@@ -5,5 +5,5 @@ public class Code {
 	public Code(String code) {
 		this.code = code;
 	}
-	public List<String> codes = new ArrayList<String>();
+	public List<Code> codes = new ArrayList<Code>();
 }
