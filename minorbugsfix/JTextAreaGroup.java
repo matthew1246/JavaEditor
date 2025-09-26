@@ -75,7 +75,7 @@ public class JTextAreaGroup extends JTextArea {
 							code.codes.add(codes.get(index+i));
 						}
 						for(int i = 0; i < sum; i++) {
-							codes.remove(index+i);
+							codes.remove(index);
 						}
 						codes.add(index,code);
 						
