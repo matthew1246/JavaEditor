@@ -87,7 +87,7 @@ public class JTextAreaGroup extends JTextArea {
 	public void ExpandAll() {
 		if(codes.size() > 0) {
 			int caretposition = getCaretPosition();	
-			Pattern pattern=Pattern.compile("\\{\\+\\}");
+			Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
 			text = getText();
 			Matcher matcher=pattern.matcher(text);
 			int count = -1;
