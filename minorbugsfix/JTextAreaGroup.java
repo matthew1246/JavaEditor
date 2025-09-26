@@ -71,10 +71,10 @@ public class JTextAreaGroup extends JTextArea {
 					int sum=Count(middle);
 					Code code = new Code(text.substring(group.start,group.end));
 					for(int i = 0; i < sum; i++) {
-						code.codes.add(codes.get(index+i));
+						code.codes.add(codes.get(index-1+i));
 					}
 					for(int i = 0; i < sum; i++) {
-						codes.remove(index+i);
+						codes.remove(index-1+i);
 					}
 					codes.add(index,code);
 					

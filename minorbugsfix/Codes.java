@@ -20,7 +20,7 @@ public class Codes {
 		List<Integer> list = new ArrayList<Integer>();
 				
 		String text = textarea.getText();
-		Pattern pattern=Pattern.compile("\\{\\+\\}");
+		Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
 		Matcher matcher=pattern.matcher(text);
 		while(matcher.find()) {
 			list.add(matcher.start());
