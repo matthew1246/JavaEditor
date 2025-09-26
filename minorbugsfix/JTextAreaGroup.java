@@ -38,7 +38,7 @@ public class JTextAreaGroup extends JTextArea {
 				System.out.println();
 				*/
 				if(group == null) {  // If expand code
-					Pattern pattern=Pattern.compile("\\{\\+\\}");
+					Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
 					text = JTextAreaGroup.this.getText();
 					Matcher matcher=pattern.matcher(text);
 					while(matcher.find()) {
