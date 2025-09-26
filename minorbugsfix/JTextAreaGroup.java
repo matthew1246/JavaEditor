@@ -61,25 +61,29 @@ public class JTextAreaGroup extends JTextArea {
 					}																		
 				}
 				else if(group != null) {  // will compress code
-					String text = getText();
-					String first=text.substring(0,group.start+1);
-					String last = text.substring(group.end-1,text.length());
-					Codes codes2 = new Codes(JTextAreaGroup.this);
-					List<Integer> codesindex=codes2.getCodes();
-					int index=codes2.getIndex(codesindex,first.length());
-					String middle = text.substring(group.start,group.end);
-					int sum=Count(middle);
-					Code code = new Code(text.substring(group.start,group.end));
-					for(int i = 0; i < sum; i++) {
-						code.codes.add(codes.get(index+i));
+					try {
+						String text = getText();
+						String first=text.substring(0,group.start+1);
+						String last = text.substring(group.end-1,text.length());
+						Codes codes2 = new Codes(JTextAreaGroup.this);
+						List<Integer> codesindex=codes2.getCodes();
+						int index=codes2.getIndex(codesindex,first.length());
+						String middle = text.substring(group.start,group.end);
+						int sum=Count(middle);
+						Code code = new Code(text.substring(group.start,group.end));
+						for(int i = 0; i < sum; i++) {
+							code.codes.add(codes.get(index+i));
+						}
+						for(int i = 0; i < sum; i++) {
+							codes.remove(index+i);
+						}
+						codes.add(index,code);
+						
+						setText(first+"+"+last);
+						setCaretPosition(group.start+1);
+					} catch(IndexOutOfBoundsException ex) {
+						ex.printStackTrace();
 					}
-					for(int i = 0; i < sum; i++) {
-						codes.remove(index+i);
-					}
-					codes.add(index,code);
-					
-					setText(first+"+"+last);
-					setCaretPosition(group.start+1);
 				}
 			}
 		});
