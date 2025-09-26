@@ -47,7 +47,11 @@ public class JTextAreaGroup extends JTextArea {
 							Codes codes2 = new Codes(JTextAreaGroup.this);
 							List<Integer> codesindex=codes2.getCodes();
 							int index=codes2.getIndex(codesindex,matcher.start());
-							String code=codes.get(index).code;
+							Code code2 = codes.get(index);
+							for(int i = 0; i < code2.codes.size(); i++) {
+								codes.add(index+i,code2.codes.get(i));
+							}
+							String code=code2.code;
 							String first=text.substring(0,matcher.start());
 							String second=text.substring(matcher.end(),text.length());
 							JTextAreaGroup.this.setText(first+code+second);
