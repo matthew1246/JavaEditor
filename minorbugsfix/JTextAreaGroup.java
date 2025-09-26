@@ -48,6 +48,7 @@ public class JTextAreaGroup extends JTextArea {
 							List<Integer> codesindex=codes2.getCodes();
 							int index=codes2.getIndex(codesindex,matcher.start());
 							Code code2 = codes.get(index);
+							codes.remove(index);
 							for(int i = 0; i < code2.codes.size(); i++) {
 								codes.add(index+i,code2.codes.get(i));
 							}
@@ -56,7 +57,6 @@ public class JTextAreaGroup extends JTextArea {
 							String second=text.substring(matcher.end(),text.length());
 							JTextAreaGroup.this.setText(first+code+second);
 							JTextAreaGroup.this.setCaretPosition(caretposition);
-							codes.remove(index);
 						}	
 					}																		
 				}
