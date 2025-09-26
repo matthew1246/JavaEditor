@@ -155,7 +155,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 1694
+    "caretposition": 6372
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
     "starterclass": "",

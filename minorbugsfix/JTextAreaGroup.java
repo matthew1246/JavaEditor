@@ -185,12 +185,12 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 		return text.substring(caretposition,caretposition+1).equals("}");
 	}
 	public int Count(String text) {
-		 int index = 0;
+		 Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
+		 Matcher matcher=pattern.matcher(text);
 		 int count = 0;
-		 while ((index = text.indexOf("{+}", index)) != -1) {
-            		count++;
-            		index += ("{+}").length(); // Move past the last found substring
-        		}
-		return count;
+		 while(matcher.find()) {
+		 	count++;
+	 	}
+	 	return count;
 	}
 }
