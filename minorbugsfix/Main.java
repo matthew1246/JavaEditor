@@ -1299,7 +1299,7 @@ public class Main {
 				
 				output2.write("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " HasJavaFX_ForJava23_Windows11x64.jar");
 				output2.write("\n");
-				output2.write("java -jar "+onlyfilename);
+				output2.write("java -jar HasJavaFX_ForJava23_Windows11x64.jar");
 				output2.write("\n");
 				output2.write("\n");
 				output2.close();
