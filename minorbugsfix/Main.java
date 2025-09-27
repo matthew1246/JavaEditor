@@ -1284,7 +1284,7 @@ public class Main {
 				filename=filename.replace("/","\\");
 				JOptionPane.showMessageDialog(null,filename);
 				
-				String dir = filename.replaceAll(".+\\\\","");
+				String dir = filename.replaceAll("[^\\\\]+\\.jar","");
 				
 				
 				FileWriter filewriter2 = new FileWriter(dir+"closeandrenamejar.bat",StandardCharsets.UTF_8);
