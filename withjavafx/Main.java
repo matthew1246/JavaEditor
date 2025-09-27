@@ -1701,6 +1701,8 @@ public class Main {
 			}
 		});
 		compileforjavafx.addActionListener( e -> {
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll();	
 			Thread thread = new Thread( () -> {
 				try {
 					if(fileName.equals("")) {
