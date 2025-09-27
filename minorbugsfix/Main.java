@@ -1324,9 +1324,11 @@ public class Main {
 					ex.printStackTrace();
 				}
 			});
-			get_filename_button.getActionListeners()
+			try {		filename_textfield.addActionListener(get_filename_button.getActionListeners()[0]);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 			getfilename.setVisible(true);
-			
 		});
 		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
 	          		public void windowStateChanged(WindowEvent e) {
