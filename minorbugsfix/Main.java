@@ -1,3 +1,4 @@
+import java.net.URISyntaxException;
 import java.awt.event.InputEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
@@ -1271,6 +1272,22 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
+		rename_file.addActionListener((ev) -> {
+			//try {
+				String filename=Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+				File file = new File(filename);
+				//filename = file.getName();
+				
+				JOptionPane.showMessageDialog(null,filename);
+				
+				if(filename.startsWith("/"))
+					filename=filename.substring(1,filename.length());
+				filename=filename.replace("/","\\");
+				JOptionPane.showMessageDialog(null,filename);
+			/*} catch(URISyntaxException ex) {
+				ex.printStackTrace();
+			}*/
+		});
 		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
 	          		public void windowStateChanged(WindowEvent e) {
 	                		int state=e.getNewState();
