@@ -87,6 +87,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JMenuItem rename_file = new JMenuItem("Rename File");
 	public JMenuItem closetab = new JMenuItem("Close Tab");	
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
 	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");
@@ -659,6 +660,7 @@ public class Main {
 		openemptynewtab.setAccelerator(control_t);
 		
 		menuitem.addActionListener(oal);
+		menu.add(rename_file);
 		menu.add(newitem);
 		menu.add(newopenwindow);
 		menu.add(menuitem);
