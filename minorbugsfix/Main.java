@@ -1276,7 +1276,7 @@ public class Main {
 			JFrame getfilename = new JFrame("Get File Name");
 			JPanel panel = new JPanel();
 			panel.add(new JLabel("Enter File Name:"));
-			JTextField filename_textfield = new JTextField("HasJavaFX_ForJava23_Windows11x64.jar");
+			JTextField filename_textfield = new JTextField("Main2.jar");
 			panel.add(filename_textfield);
 			JButton get_filename_button = new JButton("Rename File");
 			panel.add(get_filename_button);
