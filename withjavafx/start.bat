@@ -1,5 +1,11 @@
 @echo off
-if exist Main.jar (
+if exist HasJavaFX_ForJava23_Windows11x64.jar (
+	echo java -jar HasJavaFX_ForJava23_Windows11x64.jar
+	java -jar HasJavaFX_ForJava23_Windows11x64.jar
+) else if exist HasJavaFX_ForJava22_Windows11x64.jar (
+	echo java -jar HasJavaFX_ForJava22_Windows11x64.jar
+	java -jar HasJavaFX_ForJava22_Windows11x64.jar
+) else if exist Main.jar (
 	echo java -jar Main.jar
 	java -jar Main.jar
 ) else (
