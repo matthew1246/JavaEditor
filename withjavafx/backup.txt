@@ -1,6 +1,6 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
@@ -12,7 +12,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Codes.java",
       "",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Code.java"
     ],
     "caretposition": 0
   },
@@ -107,7 +108,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6405
+    "caretposition": 6412
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
     "starterclass": "",
@@ -161,6 +162,6 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 195
+    "caretposition": 950
   }
 }
