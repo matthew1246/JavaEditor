@@ -1273,43 +1273,60 @@ public class Main {
 	String deselected = "";
 	public void setListeners() {	
 		rename_file.addActionListener((ev) -> {
-			try {
-				String filename=Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-				File file = new File(filename);
-							
-				JOptionPane.showMessageDialog(null,filename);
-				
-				if(filename.startsWith("/"))
-					filename=filename.substring(1,filename.length());
-				filename=filename.replace("/","\\");
-				JOptionPane.showMessageDialog(null,filename);
-				
-				String dir = filename.replaceAll("[^\\\\]+\\.jar","");
-				
-				
-				FileWriter filewriter2 = new FileWriter(dir+"closeandrenamejar.bat",StandardCharsets.UTF_8);
-				BufferedWriter output2 = new BufferedWriter(filewriter2);
-				output2.write("cd "+dir);
-				output2.write("\n");
-				output2.write("START /B /WAIT taskkill /F /im java.exe");
-				output2.write("\n");
-				output2.write("START /B /WAIT taskkill /F /im javaw.exe");
-				output2.write("\n");
-				String onlyfilename = file.getName();
-				
-				output2.write("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " HasJavaFX_ForJava23_Windows11x64.jar");
-				output2.write("\n");
-				output2.write("java -jar HasJavaFX_ForJava23_Windows11x64.jar");
-				output2.write("\n");
-				output2.write("\n");
-				output2.close();
-				CommandLine commandline = new CommandLine();
-				String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandrenamejar.bat\"'\"";
+			JFrame getfilename = new JFrame("Get File Name");
+			JPanel panel = new JPanel();
+			panel.add(new JLabel("Enter File Name:"));
+			JTextField filename_textfield = new JTextField("HasJavaFX_ForJava23_Windows11x64.jar");
+			panel.add(filename_textfield);
+			JButton get_filename_button = new JButton("Rename File");
+			panel.add(get_filename_button);
+			getfilename.add(panel);
+			getfilename.pack();
+			getfilename.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
-				commandline.runWithMSDOS(liney,dir);
-			} catch(IOException ex) {
-				ex.printStackTrace();
-			}
+			get_filename_button.addActionListener((ev2) -> {	
+				try {
+					String renamedfile = filename_textfield.getText();
+					String filename=Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+					File file = new File(filename);
+								
+					//JOptionPane.showMessageDialog(null,filename);
+					
+					if(filename.startsWith("/"))
+						filename=filename.substring(1,filename.length());
+					filename=filename.replace("/","\\");
+					//JOptionPane.showMessageDialog(null,filename);
+					
+					String dir = filename.replaceAll("[^\\\\]+\\.jar","");
+					
+					
+					FileWriter filewriter2 = new FileWriter(dir+"closeandrenamejar.bat",StandardCharsets.UTF_8);
+					BufferedWriter output2 = new BufferedWriter(filewriter2);
+					output2.write("cd "+dir);
+					output2.write("\n");
+					output2.write("START /B /WAIT taskkill /F /im java.exe");
+					output2.write("\n");
+					output2.write("START /B /WAIT taskkill /F /im javaw.exe");
+					output2.write("\n");
+					String onlyfilename = file.getName();
+					
+					output2.write("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " "+renamedfile);
+					output2.write("\n");
+					output2.write("java -jar "+renamedfile);
+					output2.write("\n");
+					output2.write("\n");
+					output2.close();
+					CommandLine commandline = new CommandLine();
+					String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandrenamejar.bat\"'\"";
+				
+					commandline.runWithMSDOS(liney,dir);
+				} catch(IOException ex) {
+					ex.printStackTrace();
+				}
+			});
+			get_filename_button.getActionListeners()
+			getfilename.setVisible(true);
+			
 		});
 		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
 	          		public void windowStateChanged(WindowEvent e) {
