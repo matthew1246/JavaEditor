@@ -2185,6 +2185,8 @@ public class Main {
 					int caretposition = textarea.getCaretPosition();
 					textarea.setText(lines);
 					textarea.setCaretPosition(caretposition);
+					
+					((JTextAreaGroup)textarea).codes = new LinkedList<Code>();
 				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
