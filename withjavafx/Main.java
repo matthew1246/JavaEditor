@@ -87,6 +87,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {		
+	public JMenuItem rename_file = new JMenuItem("Rename File");
 	public MouseListener rightclick = new RightClick();	
 	public JMenuItem closetab = new JMenuItem("Close Tab");		
 	public JCheckBox javafxcheckbox;
@@ -653,6 +654,7 @@ public class Main {
 		openemptynewtab.setAccelerator(control_t);
 		
 		menuitem.addActionListener(oal);
+		menu.add(rename_file);
 		menu.add(newitem);
 		menu.add(newopenwindow);
 		menu.add(menuitem);
@@ -1301,6 +1303,64 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		rename_file.addActionListener((ev) -> {
+			JFrame getfilename = new JFrame("Get File Name");
+			JPanel panel = new JPanel();
+			panel.add(new JLabel("Enter File Name:"));
+			JTextField filename_textfield = new JTextField("HasJavaFX_ForJava23_Windows11x64.jar");
+			panel.add(filename_textfield);
+			JButton get_filename_button = new JButton("Rename File");
+			panel.add(get_filename_button);
+			getfilename.add(panel);
+			getfilename.pack();
+			getfilename.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			get_filename_button.addActionListener((ev2) -> {	
+				try {
+					String renamedfile = filename_textfield.getText();
+					String filename=Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+					File file = new File(filename);
+								
+					//JOptionPane.showMessageDialog(null,filename);
+					
+					if(filename.startsWith("/"))
+						filename=filename.substring(1,filename.length());
+					filename=filename.replace("/","\\");
+					//JOptionPane.showMessageDialog(null,filename);
+					
+					String dir = filename.replaceAll("[^\\\\]+\\.jar","");
+					
+					
+					FileWriter filewriter2 = new FileWriter(dir+"closeandrenamejar.bat",StandardCharsets.UTF_8);
+					BufferedWriter output2 = new BufferedWriter(filewriter2);
+					output2.write("cd "+dir);
+					output2.write("\n");
+					output2.write("START /B /WAIT taskkill /F /im java.exe");
+					output2.write("\n");
+					output2.write("START /B /WAIT taskkill /F /im javaw.exe");
+					output2.write("\n");
+					String onlyfilename = file.getName();
+					
+					output2.write("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " "+renamedfile);
+					output2.write("\n");
+					output2.write("java -jar "+renamedfile);
+					output2.write("\n");
+					output2.write("\n");
+					output2.close();
+					CommandLine commandline = new CommandLine();
+					String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandrenamejar.bat\"'\"";
+				
+					commandline.runWithMSDOS(liney,dir);
+				} catch(IOException ex) {
+					ex.printStackTrace();
+				}
+			});
+			try {		filename_textfield.addActionListener(get_filename_button.getActionListeners()[0]);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+			getfilename.setVisible(true);
+		});
 		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
 	          		public void windowStateChanged(WindowEvent e) {
 	                		int state=e.getNewState();
