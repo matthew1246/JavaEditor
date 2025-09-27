@@ -11,7 +11,8 @@
       "",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Codes.java",
       "",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java"
     ],
     "caretposition": 0
   },
@@ -106,7 +107,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 5547
+    "caretposition": 6405
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
     "starterclass": "",
@@ -146,5 +147,20 @@
     ],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Code.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 195
   }
 }

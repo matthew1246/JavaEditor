@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.TreeMap;		
 public class JTextAreaGroup extends JTextArea {
-	public List<String> codes = new LinkedList<String>();
+	public List<Code> codes = new LinkedList<Code>();
 	public JTextAreaGroup() {
 		super();
 		
@@ -37,8 +37,8 @@ public class JTextAreaGroup extends JTextArea {
 				}
 				System.out.println();
 				*/
-				if(group == null) {
-					Pattern pattern=Pattern.compile("\\{\\+\\}");
+				if(group == null) {  // If expand code
+					Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
 					text = JTextAreaGroup.this.getText();
 					Matcher matcher=pattern.matcher(text);
 					while(matcher.find()) {
@@ -47,62 +47,80 @@ public class JTextAreaGroup extends JTextArea {
 							Codes codes2 = new Codes(JTextAreaGroup.this);
 							List<Integer> codesindex=codes2.getCodes();
 							int index=codes2.getIndex(codesindex,matcher.start());
-							String code=codes.get(index);
+							Code code2 = codes.get(index);
+							codes.remove(index);
+							for(int i = 0; i < code2.codes.size(); i++) {
+								codes.add(index+i,code2.codes.get(i));
+							}
+							String code=code2.code;
 							String first=text.substring(0,matcher.start());
 							String second=text.substring(matcher.end(),text.length());
 							JTextAreaGroup.this.setText(first+code+second);
 							JTextAreaGroup.this.setCaretPosition(caretposition);
-							codes.remove(index);
 						}	
-					}																										
+					}																		
 				}
 				else if(group != null)
- {
-					String text = getText();
-
-					String first=text.substring(0,group.start+1);
-					String last = text.substring(group.end-1,text.length());
-					Codes codes2 = new Codes(JTextAreaGroup.this);
-					List<Integer> codesindex=codes2.getCodes();
-					int index=codes2.getIndex(codesindex,first.length());
-						codes.add(index,text.substring(group.start,group.end));
-					
-					setText(first+"+"+last);
-					setCaretPosition(group.start+1);
+ {  // will compress code
+					try {
+						String text = getText();
+						String first=text.substring(0,group.start+1);
+						String last = text.substring(group.end-1,text.length());
+						Codes codes2 = new Codes(JTextAreaGroup.this);
+						List<Integer> codesindex=codes2.getCodes();
+						int index=codes2.getIndex(codesindex,first.length());
+						String middle = text.substring(group.start,group.end);
+						int sum=Count(middle);
+						Code code = new Code(text.substring(group.start,group.end));
+						for(int i = 0; i < sum; i++) {
+							code.codes.add(codes.get(index+i));
+						}
+						for(int i = 0; i < sum; i++) {
+							codes.remove(index);
+						}
+						codes.add(index,code);
+						
+						setText(first+"+"+last);
+						setCaretPosition(group.start+1);
+					} catch(IndexOutOfBoundsException ex) {
+						ex.printStackTrace();
+					}
 				}
 			}
 		});
 	}
 	public void ExpandAll() {
-		int caretposition = getCaretPosition();	
-		Pattern pattern=Pattern.compile("\\{\\+\\}");
-		text = getText();
-		Matcher matcher=pattern.matcher(text);
-		int count = -1;
-		
-		StringBuilder stringbuilder = new StringBuilder();
-		while(matcher.find()) {
-			count++;
-			String match=matcher.group();
-			match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(codes.get(count)));
-			matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(match));
-		}
-		matcher.appendTail(stringbuilder);
-		setText(stringbuilder.toString());
-
-		/*
-		while(matcher.find()) {
-			count++;
-			String code=codes.get(count);
-			JOptionPane.showMessageDialog(null,"*"+code+"*");
+		if(codes.size() > 0) {
+			int caretposition = getCaretPosition();	
+			Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
+			text = getText();
+			Matcher matcher=pattern.matcher(text);
+			int count = -1;
 			
-			String first=text.substring(0,matcher.start());
-			String second=text.substring(matcher.end(),text.length());
-			setText(first+code+second);
+			StringBuilder stringbuilder = new StringBuilder();
+			while(matcher.find()) {
+				count++;
+				String match=matcher.group();
+				match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(codes.get(count).code));
+				matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(match));
+			}
+			matcher.appendTail(stringbuilder);
+			setText(stringbuilder.toString());
+	
+			/*
+			while(matcher.find()) {
+				count++;
+				String code=codes.get(count);
+				JOptionPane.showMessageDialog(null,"*"+code+"*");
+				
+				String first=text.substring(0,matcher.start());
+				String second=text.substring(matcher.end(),text.length());
+				setText(first+code+second);
+			}
+			*/
+			codes = new LinkedList<Code>();
+			setCaretPosition(caretposition);
 		}
-		*/
-		codes = new LinkedList<String>();
-		setCaretPosition(caretposition);
 	}		
 	HashMap<Integer,Group> groups;
 	public String text = "";
@@ -171,5 +189,13 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 			return false;
 		return text.substring(caretposition,caretposition+1).equals("}");
 	}
-			
+	public int Count(String text) {
+		 Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
+		 Matcher matcher=pattern.matcher(text);
+		 int count = 0;
+		 while(matcher.find()) {
+		 	count++;
+	 	}
+	 	return count;
+	}
 }
