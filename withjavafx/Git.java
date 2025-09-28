@@ -74,12 +74,13 @@ public class Git {
 	public JTextField input = new JTextField();
 	public JButton run;
 	public JButton clear;
-	public JButton switch2_branch;	
+	public JButton switch2_branch;
+	
 	public JButton reset;
 	public void setLayout() {
 		frame.setSize(500,100);
  // previously 400,100
-		frame.setLocation(1000,0);
+		frame.setLocation(980,0);
 		frame.getContentPane().add(input,BorderLayout.CENTER);
 		run = new JButton("run");
 		frame.getContentPane().add(run,BorderLayout.SOUTH);
@@ -222,7 +223,8 @@ public class Git {
 			public void run() {
 				CommandLine commandline = new CommandLine();
 				// commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'git status; exec bash\'",root_directory);
-				commandline.run("\"C:\\Program Files\\Git\\git-bash.exe\" -c \'"+command+"; exec bash\'",directory);
+				String echo ="echo \""+command+"\"; ";	
+				commandline.run("\"C:\\Program Files\\Git\\git-bash.exe\" -c \'"+echo+command+"; exec bash\'",directory);
 			}
 		};
 		thread.start();
@@ -260,7 +262,8 @@ public class Git {
 		} catch(IOException ex) {
 			ex.printStackTrace();
 			return "IOException";
-		}*/
+		}
+*/
 		CommandLine commandline = new CommandLine();
 		Process process=commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
 		DisplayOutput displayoutput = new DisplayOutput();
@@ -269,4 +272,4 @@ public class Git {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
