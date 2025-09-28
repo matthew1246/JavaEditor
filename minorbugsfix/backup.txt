@@ -13,7 +13,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RemoveAll.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
     ],
     "caretposition": 0
   },
@@ -358,5 +359,14 @@
     ],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 7783
   }
 }
