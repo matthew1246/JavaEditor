@@ -219,6 +219,7 @@ public class Main {
 		setListeners();
 		expandable = new Expandable(this);
 	}
+	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
 	public Git git;
 	/*
@@ -399,10 +400,15 @@ public class Main {
 		
 			}
 			else { // if(tabs.size() > 1) {
-				SwingUtilities.invokeAndWait(new Runnable() {
-					public void run() {	
-						for(String directoryandfilename:tabs) {
+				SwingUtilities.invokeAndWait(() -> {
+					int count = -1;
+					for(String directoryandfilename:tabs) {
 						try {
+							if(tabs_selected == -1) {
+								count++;
+								if(fileName.equals(directoryandfilename))
+									tabs_selected = count;
+							}
 							JTextArea textarea2 = new JTextAreaGroup();
 							textarea2.setLineWrap(true);
 							textarea2.setWrapStyleWord(true);
@@ -485,11 +491,15 @@ public class Main {
 						catch (IOException ex) {
 							ex.printStackTrace();
 						}
-						}
 					}
 				});
 				fileNames = tabs;
 				tabbedpane.addTab("+",pluspanel);
+				
+				if(tabs_selected != -1) {
+					fileName = tabs.get(tabs_selected);
+					tabbedpane.setSelectedIndex(tabs_selected);
+				}
 				
 				filelistmodifier = new FileListModifier();
 				filelistmodifier.fillList(fileName);
@@ -3503,6 +3513,9 @@ public class Main {
 					
 				loadComboboxes(filelistmodifier);
 				filenamescombobox.setSelectedItem(getFileName(fileName));
+				
+				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
+				storeselectedfile4.set(fileName);
 				
 				//filenamescombobox.setSelectedItem(getFileName(fileName));
 				/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
