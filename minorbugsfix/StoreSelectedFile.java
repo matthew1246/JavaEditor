@@ -61,12 +61,9 @@ public class StoreSelectedFile {
 				if( !(new File("original.txt").exists()) ) {
 					noduplicate.CreateOriginal();
 				}		
-				preferences.starterclass=filenameandpath;
-				setBackup(linkedhashmap);
-			}
-			else {
-				return;
-			}
+			}	
+			preferences.starterclass=filenameandpath;
+			setBackup(linkedhashmap);
 		}
 		else {
 			preferences = new Preferences();
@@ -228,43 +225,14 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			if(lastopened.fileNames.size() == 0) {
-				return lastopened.starterclass;
-			}
-			else {
-				return lastopened.fileNames.get(0);
-			}
+			return lastopened.starterclass;
 		}
 		else {
 			return "";
 		}
 	}
-	/*public String get() {
-		LinkedHashMap<String,String> hashmap= getBackup();
-		String lastopened=hashmap.get("lastopened");
-		if(lastopened != null) {
-			return lastopened;
-		}
-		else {
-			return "";
-		}
-	}*/
-	/*public String get() {
-		try {
-		Scanner scanner = new Scanner(new File(System.getProperty("user.home")+"\\backup.txt"));
-		if(scanner.hasNext()) {
-			return scanner.next();
-		}
-		else {
-			return "";
-		}
-		}
-		catch (FileNotFoundException ex) {
-			ex.printStackTrace();
-			return "";
-		}
-	}
-	*/
+
+
 	public void setStarterClass(String mainclass) {
 		LinkedHashMap<String,Preferences> hashmap=getBackup();
 		Preferences filenameanddirectory=hashmap.get("lastopened");
