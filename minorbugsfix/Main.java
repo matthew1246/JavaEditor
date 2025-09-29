@@ -497,7 +497,6 @@ public class Main {
 				
 				if(tabs_selected != -1) {
 					fileName = tabs.get(tabs_selected);
-					JOptionPane.showMessageDialog(null,fileName);
 					tabbedpane.setSelectedIndex(tabs_selected);
 				}
 				
@@ -2887,7 +2886,6 @@ public class Main {
 				filenamescombobox.setSelectedItem(getFileName(fileName));
 				
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
-				JOptionPane.showMessageDialog(null,fileName);
 				storeselectedfile4.set(fileName);
 				
 				//filenamescombobox.setSelectedItem(getFileName(fileName));
