@@ -60,13 +60,7 @@ public class NoFileOpen {
 	public void saveTabs(String fileName) {
 		StoreSelectedFile storeselectedfile12 = new StoreSelectedFile();
 		List<String> tabs=storeselectedfile12.getTabs();
-		int tabsize = tabbedpane.getSelectedIndex();
-		if(tabs.size() <= tabsize) {
-			tabs.add(fileName);
-		}
-		else {
-			tabs.set(tabsize,fileName);
-		}
+		tabs.set(tabbedpane.getSelectedIndex(),fileName);
 		storeselectedfile12.setTabs(tabs);
 	}
 }
