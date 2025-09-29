@@ -1,13 +1,41 @@
 {
+  "": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 108
+  },
   "lastopened": {
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java",
-      "C:\\Users\\Owner\\Documents\\a\\TestTest.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\MainTwo.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 2230
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 2283
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "Main",
@@ -15,372 +43,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
-    "fileNames": [],
-    "caretposition": 81971
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 178732
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 4504
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoDuplicate.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 7698
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 108
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestTwoThree.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 2273
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Extreme.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\VariableSuggestionBoxSelected.java": {
-    "starterclass": "VariableSuggestionBoxSelected",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MatthewLayout.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 13957
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java": {
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 1195
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 73
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestJTextAreaGroup.java": {
-    "starterclass": "TestJTextAreaGroup",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 298
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Codes.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 618
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FindMethodName.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FindMethodNameString.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassName.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetMainClasses.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetVariable.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\IGetClassName.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\IsVariable.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\IsVariableSelected.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RemoveAll.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "Main.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "AllClassesInFile.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "FileListModifier.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "JTextAreaGroup.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "Codes.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "RenameVariable.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "RemoveAll.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 385
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 7783
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Beta.java": {
-    "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
-  },
-  "C:\\Users\\Owner\\Documents\\a\\TestTest.java": {
-    "starterclass": "",
-    "jars": [],
     "fileNames": [],
     "caretposition": 0
   }

@@ -40,7 +40,6 @@ public class NoFileOpen {
 		String fileName = output+classname+".java";
 		File file = new File(fileName);
 		if(!file.exists()) {
-			storeselectedfile.set(fileName);
 			saveTabs(fileName);
 			return fileName;
 		}
@@ -48,7 +47,6 @@ public class NoFileOpen {
 			int yesorno=JOptionPane.showConfirmDialog(null,"Overwrite existing file?","Do you want overwrite the existing file with this code?",JOptionPane.YES_NO_OPTION);
 			switch(yesorno) {
 				case JOptionPane.YES_OPTION:
-					storeselectedfile.set(fileName);
 					saveTabs(fileName);
 					return fileName;
 				case JOptionPane.NO_OPTION:
