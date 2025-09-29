@@ -1776,7 +1776,7 @@ public class Main {
 			Thread thread = new Thread( () -> {
 				try {
 					if(fileName.equals("")) {
-						NoFileOpen nofileopen=new NoFileOpen(textarea);
+						NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
 						fileName=nofileopen.getFileName();
 						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 					}
@@ -2193,7 +2193,7 @@ public class Main {
 		deprecated.addActionListener((ev) -> {
 			try {
 				if(fileName.equals("")) {
-					NoFileOpen nofileopen=new NoFileOpen(textarea);
+					NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
 					fileName=nofileopen.getFileName();
 					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 				}
@@ -2672,7 +2672,7 @@ public class Main {
 			Thread thread4=new Thread(() -> {
 					try {
 					if(fileName.equals("")) {
-						NoFileOpen nofileopen=new NoFileOpen(textarea);
+						NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
 						fileName=nofileopen.getFileName();
 						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 					}
@@ -2749,7 +2749,7 @@ public class Main {
 				Thread thread = new Thread( () -> {
 					try {	
 						if(fileName.equals("")) {
-							NoFileOpen nofileopen=new NoFileOpen(textarea);
+							NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
 							fileName=nofileopen.getFileName();
 							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 						}
@@ -2901,7 +2901,7 @@ public class Main {
 								}
 							}
 							else {
-								NoFileOpen nofileopen=new NoFileOpen(textarea);
+								NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
@@ -3203,7 +3203,7 @@ public class Main {
 		});		
 		frame.getRootPane().setDefaultButton(go_to_line_number);		
 	}
-	public String addDotJava(String filename) {	
+	public static String addDotJava(String filename) {	
 		if(!(filename.endsWith(".java"))) {
 			filename+=".java";
 		}
