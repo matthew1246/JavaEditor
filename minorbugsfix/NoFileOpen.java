@@ -7,9 +7,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.io.File;
 public class NoFileOpen {
+	public Main main;
 	public JTabbedPane tabbedpane;
 	public JTextArea textarea;
-	public NoFileOpen(JTextArea textarea,JTabbedPane tabbedpane) {
+	public NoFileOpen(Main main,JTextArea textarea,JTabbedPane tabbedpane) {
+		this.main = main;
 		this.textarea = textarea;
 		this.tabbedpane = tabbedpane;
 	}		
@@ -56,6 +58,7 @@ public class NoFileOpen {
                	}
 
 		storeselectedfile12.setTabs(tabs);
+		main.fileNames = tabs;
 	}
 	public String CreateFile() {
 		while(true) {

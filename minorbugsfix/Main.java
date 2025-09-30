@@ -91,7 +91,7 @@ public class Main {
 	public JMenuItem rename_file = new JMenuItem("Rename File");
 	public JMenuItem closetab = new JMenuItem("Close Tab");	
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
-	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");
+	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");	
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
@@ -2195,7 +2195,7 @@ public class Main {
 			textarea3.ExpandAll();	
 			try {
 				if(fileName.equals("")) {
-					NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
+					NoFileOpen nofileopen=new NoFileOpen(this,textarea,tabbedpane);
 					fileName=nofileopen.getFileName();
 					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 				}
@@ -2256,7 +2256,7 @@ public class Main {
 				textarea3.ExpandAll();	
 				try {
 					if(fileName.equals("")) {
-						NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
+						NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);
 						fileName=nofileopen.getFileName();
 						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 					}
@@ -2390,7 +2390,7 @@ public class Main {
 								}
 							}
 							else {
-								NoFileOpen nofileopen=new NoFileOpen(textarea,tabbedpane);
+								NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
