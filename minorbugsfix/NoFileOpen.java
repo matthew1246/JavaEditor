@@ -68,7 +68,7 @@ public class NoFileOpen {
 				fileName=Main.addDotJava(fileName);
 				
 				saveTabs(fileName);
-				
+				JOptionPane.showMessageDialog(null,"test");
 				return fileName;
 			}
 		}
