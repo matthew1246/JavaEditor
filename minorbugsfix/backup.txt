@@ -3,47 +3,45 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 108
+    "caretposition": 105
   },
   "lastopened": {
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java"
     ],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\Main.java": {
+  "C:\\Users\\Owner\\Documents\\cccccc\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\MainTwo.java": {
+  "C:\\Users\\Owner\\Documents\\ddddddddd\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
+    "starterclass": "Main",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2230
+    "caretposition": 697
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2283
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 0
+    "caretposition": 1882
   }
 }

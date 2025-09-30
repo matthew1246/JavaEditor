@@ -17,20 +17,7 @@ public class NoFileOpen {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		String previousfile=storeselectedfile.get();
 		if(previousfile.equals("")) {
-			JFileChooser fileChooser = new JFileChooser();
-			FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
-			fileChooser.setFileFilter(filenameextensionfilter);
-			int status =fileChooser.showSaveDialog(textarea);
-			if(status == JFileChooser.APPROVE_OPTION) {
-				File file = fileChooser.getSelectedFile();
-				
-				String fileName= file.getPath();
-				fileName=Main.addDotJava(fileName);
-				
-				saveTabs(fileName);
-				
-				return fileName;
-			}
+			return CreateFile();
 		}
 		String output =previousfile.replaceAll("[^\\\\]+\\.java","");
 		
@@ -50,7 +37,7 @@ public class NoFileOpen {
 					saveTabs(fileName);
 					return fileName;
 				case JOptionPane.NO_OPTION:
-					return "";
+					return CreateFile();
 			}
 		}
 		return "";
@@ -67,6 +54,24 @@ public class NoFileOpen {
                	}
 
 		storeselectedfile12.setTabs(tabs);
+	}
+	public String CreateFile() {
+		while(true) {
+			JFileChooser fileChooser = new JFileChooser();
+			FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
+			fileChooser.setFileFilter(filenameextensionfilter);
+			int status =fileChooser.showSaveDialog(textarea);
+			if(status == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				
+				String fileName= file.getPath();
+				fileName=Main.addDotJava(fileName);
+				
+				saveTabs(fileName);
+				
+				return fileName;
+			}
+		}
 	}
 }
 

@@ -94,22 +94,7 @@ public class StoreSelectedFile {
 			return;
 		}
 	}
-	/*public void set(String filenameandpath) {
-		LinkedHashMap<String,String> hashmap = getBackup();
-		hashmap.put("lastopened",filenameandpath);
-		setBackup(hashmap);
-	}*/
-	/*public void set(String filenameandpath) {
-		try {
-		filewriter = new FileWriter(System.getProperty("user.home")+"\\backup.txt");
-		filewriter.write(filenameandpath);
-		filewriter.close();
-		}
-		catch(IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	*/
+
 	public LinkedHashMap<String,Preferences> getBackup() {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
@@ -140,29 +125,7 @@ public class StoreSelectedFile {
 		System.exit(0);
 		return null; // This line will never be reached.	
 	}
-	/*public LinkedHashMap<String,String> getBackup() {
-		GsonBuilder gsonbuilder=new GsonBuilder();
-		gsonbuilder.setPrettyPrinting();
-		Gson gson = gsonbuilder.create();
-		File backup = new File(System.getProperty("user.home")+"\\backup.txt");
-		if(!backup.exists()) {
-			return new LinkedHashMap<String,String>();
-		}
-		else {
-			try {
-				TypeToken<LinkedHashMap<String,String>> typetoken = new TypeToken<LinkedHashMap<String,String>>(){};
-				return gson.fromJson(new FileReader(backup),typetoken.getType());
-			}			
-			catch(FileNotFoundException ex) {
-				ex.printStackTrace();
-				JOptionPane.showMessageDialog(null,"Backup.txt file not found.");
-				System.exit(0);
-			}
-		}
-		System.exit(0);
-		return null; // This line will never be reached.	
-	}
-	*/
+
 	private IsEqual isequal = new IsEqual();
 	public void setBackup(LinkedHashMap<String,Preferences> hashmap) {
 		try {
@@ -187,22 +150,7 @@ public class StoreSelectedFile {
 			JOptionPane.showMessageDialog(null,"StoreSelectedFile.setBackup() crashed.");
 		}
 	}
-	/*public void setBackup(LinkedHashMap<String,String> hashmap) {
-		try {
-			GsonBuilder gsonbuilder = new GsonBuilder();
-			gsonbuilder.setPrettyPrinting();
-			Gson gson = gsonbuilder.create();
-			String contents = gson.toJson(hashmap);
-			PrintWriter printwriter=new PrintWriter(new File(System.getProperty("user.home")+"\\backup.txt"));
-			printwriter.print(contents);		
-			printwriter.close();
-		}
-		catch(FileNotFoundException ex) {
-			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null,"StoreSelectedFile.setBackup() crashed.");
-		}
-	}
-	*/
+	
 	public void setTabs(List<String> tabs) {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
@@ -242,25 +190,7 @@ public class StoreSelectedFile {
 			setBackup(hashmap);
 		}
 	}
-	/*public void setStarterClass(String mainclass) {
-		LinkedHashMap<String,String> hashmap=getBackup();
-		String filenameanddirectory=hashmap.get("lastopened");
-		hashmap.put(filenameanddirectory,mainclass);
-		setBackup(hashmap);
-	}*/
-	/*
-	public void setStarterClass(String mainclass) {
-		try {
-			filewriter = new FileWriter(System.getProperty("user.home")+"\\backup.txt",true);
-			filewriter.append("\n");
-			filewriter.append(mainclass);
-			filewriter.close();
-		}
-		catch(IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	*/
+
 	public String getStarterClass() {
 		LinkedHashMap<String,Preferences> hashmap=getBackup();
 		Preferences filenameanddirectory=hashmap.get("lastopened");
