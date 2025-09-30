@@ -21,6 +21,8 @@ public class Git {
 	      	}
 	}
 	public boolean isFileInsideGitRepository(String fileName) {
+		if(fileName.equals(""))
+			return false;	
 		directory=fileName.replaceAll("[^\\\\]+\\.java","");
 		CommandLine commandline = new CommandLine();
 		Process process=commandline.run("git rev-parse --show-toplevel",directory);
