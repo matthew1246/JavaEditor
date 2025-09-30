@@ -3,26 +3,27 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 102
+    "caretposition": 105
   },
   "lastopened": {
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
-    "fileNames": [
-      "",
-      "C:\\Users\\Owner\\Documents\\ccxc\\Main.java",
-      "",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
-    ],
+    "fileNames": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\z\\Main.java": {
+  "C:\\Users\\Owner\\Documents\\jvcjkvjk\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\ccxc\\Main.java": {
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 1577
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],

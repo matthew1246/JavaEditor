@@ -44,6 +44,8 @@ public class NoFileOpen {
 	}
 	public void saveTabs(String fileName) {
 		StoreSelectedFile storeselectedfile12 = new StoreSelectedFile();
+		if(storeselectedfile12.get().equals("")) storeselectedfile12.set(fileName);
+		
 		List<String> tabs=storeselectedfile12.getTabs();
 		int tabsize = tabbedpane.getSelectedIndex();
 		if(tabs.size() <= tabsize) {
@@ -68,7 +70,7 @@ public class NoFileOpen {
 				fileName=Main.addDotJava(fileName);
 				
 				saveTabs(fileName);
-				JOptionPane.showMessageDialog(null,"test");
+				
 				return fileName;
 			}
 		}
