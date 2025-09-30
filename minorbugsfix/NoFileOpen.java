@@ -1,11 +1,11 @@
-import java.util.List;
-import javax.swing.JTabbedPane;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.util.regex.*;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import java.io.File;
+import java.util.List;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
 public class NoFileOpen {
 	public JTabbedPane tabbedpane;
 	public JTextArea textarea;
@@ -44,15 +44,15 @@ public class NoFileOpen {
 	}
 	public void saveTabs(String fileName) {
 		StoreSelectedFile storeselectedfile12 = new StoreSelectedFile();
-		List<String> tabs=storeselectedfile12.getTabs();
-		int tabsize = tabbedpane.getSelectedIndex();
-		if(tabs.size() <= tabsize) {
-                       	tabs.add(fileName);
-               	}
-               	else {
-                       	tabs.set(tabsize,fileName);
-               	}
-
+		List<String> tabs = storeselectedfile12.getTabs();
+		int tabsize = tabbedpane.getTabCount();
+		int selectedIndex = tabbedpane.getSelectedIndex();
+		// Ensure tabs list matches tab count
+		while (tabs.size() < tabsize) {
+			tabs.add("");
+		}
+		// Set fileName for the selected tab
+		tabs.set(selectedIndex, fileName);
 		storeselectedfile12.setTabs(tabs);
 	}
 	public String CreateFile() {
@@ -75,4 +75,3 @@ public class NoFileOpen {
 	}
 }
 
-		
