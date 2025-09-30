@@ -2857,6 +2857,8 @@ public class Main {
 					filelistmodifier = new FileListModifier();
 					filelistmodifier.fillList(fileName);
 				}
+				if(git == null)
+					git = new Git(fileName);	
 				git.Change(fileName);
 				expandable.open();
 				

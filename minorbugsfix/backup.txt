@@ -8,22 +8,20 @@
   "lastopened": {
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
-    "fileNames": [],
+    "fileNames": [
+      "",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+    ],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\jvcjkvjk\\Main.java": {
+  "C:\\Users\\Owner\\Documents\\abc\\Main.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
-    "starterclass": "",
-    "jars": [],
-    "fileNames": [],
-    "caretposition": 1577
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
@@ -36,6 +34,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 107571
   }
 }
