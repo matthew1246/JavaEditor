@@ -7,9 +7,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.io.File;
 public class NoFileOpen {
+	public Main main;
 	public JTabbedPane tabbedpane;
 	public JTextArea textarea;
-	public NoFileOpen(JTextArea textarea,JTabbedPane tabbedpane) {
+	public NoFileOpen(Main main,JTextArea textarea,JTabbedPane tabbedpane) {
+		this.main = main;
 		this.textarea = textarea;
 		this.tabbedpane = tabbedpane;
 	}		
@@ -17,20 +19,7 @@ public class NoFileOpen {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		String previousfile=storeselectedfile.get();
 		if(previousfile.equals("")) {
-			JFileChooser fileChooser = new JFileChooser();
-			FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
-			fileChooser.setFileFilter(filenameextensionfilter);
-			int status =fileChooser.showSaveDialog(textarea);
-			if(status == JFileChooser.APPROVE_OPTION) {
-				File file = fileChooser.getSelectedFile();
-				
-				String fileName= file.getPath();
-				fileName=Main.addDotJava(fileName);
-				
-				saveTabs(fileName);
-				
-				return fileName;
-			}
+			return CreateFile();
 		}
 		String output =previousfile.replaceAll("[^\\\\]+\\.java","");
 		
@@ -50,13 +39,15 @@ public class NoFileOpen {
 					saveTabs(fileName);
 					return fileName;
 				case JOptionPane.NO_OPTION:
-					return "";
+					return CreateFile();
 			}
 		}
 		return "";
 	}
 	public void saveTabs(String fileName) {
 		StoreSelectedFile storeselectedfile12 = new StoreSelectedFile();
+		if(storeselectedfile12.get().equals("")) storeselectedfile12.set(fileName);
+		
 		List<String> tabs=storeselectedfile12.getTabs();
 		int tabsize = tabbedpane.getSelectedIndex();
 		if(tabs.size() <= tabsize) {
@@ -67,6 +58,25 @@ public class NoFileOpen {
                	}
 
 		storeselectedfile12.setTabs(tabs);
+		main.fileNames = tabs;
+	}
+	public String CreateFile() {
+		while(true) {
+			JFileChooser fileChooser = new JFileChooser();
+			FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
+			fileChooser.setFileFilter(filenameextensionfilter);
+			int status =fileChooser.showSaveDialog(textarea);
+			if(status == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				
+				String fileName= file.getPath();
+				fileName=Main.addDotJava(fileName);
+				
+				saveTabs(fileName);
+				
+				return fileName;
+			}
+		}
 	}
 }
 
