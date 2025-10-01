@@ -11,7 +11,7 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java"
     ],
     "caretposition": 0
   },
@@ -62,5 +62,14 @@
     ],
     "fileNames": [],
     "caretposition": 2577
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
