@@ -2247,7 +2247,7 @@ public class Main {
 						options[1] = "No";
 						int option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 						if(option2 == JOptionPane.YES_OPTION) {
-							Pattern pattern=Pattern.compile("([A-Za-z0-9]+\\.java):([0-9]+):");
+							Pattern pattern=Pattern.compile("([A-Za-z0-9_]+\\.java):([0-9]+):");
 							Matcher matcher=pattern.matcher(lines);
 							if(matcher.find()) {
 								Main.this.fileName = Main.this.fileName.replaceAll("[^\\\\]+\\.java","")+matcher.group(1);
