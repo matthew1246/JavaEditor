@@ -2233,12 +2233,14 @@ public class Main {
 					}
 					else {
 						String lines = line;
+						
 						while(true) {
 							line = bufferedreader.readLine();
 							if(line == null)
 								break;
 							lines = lines+"\n"+line;
 						}
+						
 						JOptionPane.showMessageDialog(null,lines);
 						String[] options=new String[2];
 						options[0] = "Yes";
@@ -2265,6 +2267,8 @@ public class Main {
 										if(getLineNumber(firsthalf) == line_number) {
 											textarea.grabFocus();
 											textarea.setCaretPosition(startOfLine);
+											Main.this.scrollToCaretPosition(startOfLine);
+											
 											break;
 										}
 									}
