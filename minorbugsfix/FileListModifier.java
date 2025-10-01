@@ -57,6 +57,7 @@ public class FileListModifier implements Cloneable {
 			
 			File[] files=currentdirectory.listFiles();
 			Arrays.sort(files,new FileComparator());
+			filelist = new ArrayList<String>();
 			//filelist.add(current_editorfilename);
 			for(File file:files) {
 				String filename=file.getName();
@@ -80,6 +81,7 @@ public class FileListModifier implements Cloneable {
 					originalfiles.add(file);
 				}						
 			}
+			original = new ArrayList<String>();
 			//Collections.sort(originalfiles,new FileComparator());
 			for(File file:originalfiles) {
 				original.add(file.getName());
