@@ -2245,11 +2245,12 @@ public class Main {
 						options[1] = "No";
 						int option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 						if(option2 == JOptionPane.YES_OPTION) {
-							Pattern pattern=Pattern.compile(getFileName(fileName)+":([0-9]+):");
+							Pattern pattern=Pattern.compile("([A-Za-z0-9]+\\.java):([0-9]+):");
 							Matcher matcher=pattern.matcher(lines);
 							if(matcher.find()) {
-								int line_number=Integer.parseInt(matcher.group(1));
-								
+								Main.this.fileName = Main.this.fileName.replaceAll("[^\\\\]+\\.java","")+matcher.group(1);
+								Main.this.open(matcher.group(1));
+								int line_number=Integer.parseInt(matcher.group(2));
 								try {
 									String wholetext=textarea.getText();
 									LineNumberReader linenumberreader=new LineNumberReader(new StringReader(wholetext));
@@ -2270,11 +2271,10 @@ public class Main {
 								} catch(IOException ex) {
 									ex.printStackTrace();
 								}
-							}
-							else {
+							} else {
 								JOptionPane.showMessageDialog(null,"Could not find line number.");
 							}
-						}	
+						}
 					}
 				}
 				else {
@@ -2388,7 +2388,7 @@ public class Main {
 				}
 			}
 		});
-		bug
+		
 		run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
