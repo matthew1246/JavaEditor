@@ -54,6 +54,18 @@ public String[] Reordered(String[] members,String classname) {
 			}
 			
 		}
+		List<String> properties = new ArrayList<String>();
+		for(String name:nameslist) {
+			if(!name.contains("(")) {
+				properties.add(0,name);
+			}
+		}
+		for(String name:properties) {
+			nameslist.remove(name);
+		}
+		for(String name:properties) {
+			nameslist.add(0,name);
+		}
 		return nameslist.toArray(new String[nameslist.size()]);
 	}
 	public Member[] Reordered(Member[] members,Class<?> classquestionmark) {
