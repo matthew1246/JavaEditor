@@ -4396,6 +4396,12 @@ class MethodSuggestionBox {
 			JPanel panelgridlayout = new JPanel();
 			
 			String[] unorderedmethods2 = getStrings(unorderedmethods);
+			LinkedHashSet<String> linkedhashset = new LinkedHashSet<String>();
+			for(String method:unorderedmethods2) {
+				linkedhashset.add(method);
+			}
+			unorderedmethods2=linkedhashset.toArray(new String[linkedhashset.size()]);
+			
 			final String[] methods = CurlyBraceKeyListener.suggestionboxselected.Reordered(unorderedmethods2,search);
 			
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
