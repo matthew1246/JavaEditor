@@ -73,9 +73,9 @@ public class Control_F {
 					String middle=original.substring(selectionstart,selectionend);
 					Pattern pattern;
 					if(!casey.isSelected()) {
-						pattern=Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+						pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
 					} else {
-						pattern=Pattern.compile(find2);
+						pattern=Pattern.compile(Pattern.quote(find2));
 					}
 					Matcher matcher=pattern.matcher(middle);
 					String selected=matcher.replaceAll(replaceinput.getText());
@@ -146,9 +146,9 @@ public class Control_F {
 						if(replace.isSelected()) {
 							Pattern pattern;
 							if(!casey.isSelected()) {
-								pattern=Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+								pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
 							} else {
-								pattern=Pattern.compile(find2);
+								pattern=Pattern.compile(Pattern.quote(find2));
 							}
 							Matcher matcher=pattern.matcher(original);
 							String selected=matcher.replaceAll(replaceinput.getText());
