@@ -72,7 +72,6 @@ public class StoreSelectedFile {
 			setBackup(linkedhashmap);
 		}
 		if(!linkedhashmap.containsKey(filenameandpath)) {
-			JOptionPane.showMessageDialog(null,"remove");
 			noduplicate.Delete();
 			preferences = new Preferences();
 			

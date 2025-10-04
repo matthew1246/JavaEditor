@@ -1475,13 +1475,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				tabbedpane.setSelectedIndex(0);
 			tabbedpane.remove(tabindex);
 			fileNames.remove(tabindex);
+			/*
 			System.out.println("fileNames:");
 			for(String filename:fileNames){
 				System.out.println(filename);
 			}
 			System.out.println();
+			*/
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
+			/*
 			StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
 			System.out.println("Tabs:");
 			List<String> tabs2=storeselectedfile2.getTabs();
@@ -1489,6 +1492,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				System.out.println(tab);
 			}
 			System.out.println();
+			*/
 		});
 				
 				
