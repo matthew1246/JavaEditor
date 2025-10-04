@@ -95,10 +95,12 @@ public class Main {
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
-	public JButton deprecated;	
+	public JButton deprecated;
+	
 	public static Muck muck;
 	public Expandable expandable;
-	public JComboBox<String> filenamescombobox = new JComboBox<String>();	
+	public JComboBox<String> filenamescombobox = new JComboBox<String>();
+	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
@@ -114,21 +116,25 @@ public class Main {
 	public JMenuItem exitItem = new JMenuItem("Exit");
 	public JMenuItem fontmenuitem = new JMenuItem("Font");
 	public JMenuItem saveItem = new JMenuItem("Save");
-	public JMenuItem saveasitem = new JMenuItem("Save As");		
+	public JMenuItem saveasitem = new JMenuItem("Save As");
+		
 	public JMenuItem newitem = new JMenuItem("New");
 	public JMenuItem tabSizeMenuItem = new JMenuItem("Tab");
 	
-	public JMenuItem opennewwindow = new JMenuItem("Open New Window");		
+	public JMenuItem opennewwindow = new JMenuItem("Open New Window");
+		
 	public SaveActionListener sal = new SaveActionListener(this);
 	public JButton compile = new JButton("compile");
-	public JButton compile_all = new JButton("compile all");		
+	public JButton compile_all = new JButton("compile all");
+		
 	public JButton run = new JButton("run");
 	public JCheckBox checkbox = new JCheckBox();
 	public JLabel jarlabel = new JLabel("JUnit");
 	public JCheckBox jarcheckbox = new JCheckBox();
 	public JButton reload;
 	public JButton addjar=new JButton("jar");
-	public OpenActionListener oal = new OpenActionListener(this);	
+	public OpenActionListener oal = new OpenActionListener(this);
+	
 	public JFrame frame;
 	public JTextArea textarea;
 	public String fileName = "";
@@ -142,7 +148,8 @@ public class Main {
 	** If have no default content for window
 	
 	*/
-	public Main() {			
+	public Main() {
+			
 		setLayout();
 		this.textarea = new JTextAreaGroup();
 		textarea.setLineWrap(true);
@@ -313,7 +320,7 @@ public class Main {
 			tabbedpane.addTab("+",pluspanel);
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
-		}
+		}
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
 			
@@ -396,7 +403,8 @@ public class Main {
 				tabbedpane.addTab(fileName,scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
 				tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
-				open(getFileName(fileName));		
+				open(getFileName(fileName));
+		
 			}
 			else { // if(tabs.size() > 1) {
 				SwingUtilities.invokeAndWait(() -> {
@@ -653,7 +661,8 @@ public class Main {
 		
 		menubar.setLayout(new GridBagLayout());
 		
-		JMenu menu = new JMenu("File");		
+		JMenu menu = new JMenu("File");
+		
 		JMenuItem menuitem = new JMenuItem("Open");
 		generatejar = new JMenuItem("Make Jar");			
 		opennewwindow = new JMenuItem("Open New Window");
@@ -1017,10 +1026,12 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		textarea.requestFocus();
-		textarea.setTabSize(4);		
+		textarea.setTabSize(4);
+		
 	}
 	public void updateMethodComboBox(ActionEvent ie) {
-		if(classnamescombobox.hasFocus()) {	
+		if(classnamescombobox.hasFocus()) {
+	
 			final String classname = (String)classnamescombobox.getSelectedItem();
 			if(classname != null && !classname.equals("")) {
 				combobox.removeAllItems();
@@ -1105,7 +1116,7 @@ public class Main {
 			}
 
 		        }
-		    });
+		    });
 	}
 
 	public void selectCode(ActionEvent ev) {
@@ -1118,7 +1129,8 @@ public class Main {
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
-					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+					JScrollPane scrollpane=
+((JScrollPane)tabbedpane.getSelectedComponent());
 					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 					
 					/*verticalscrollbar.setValue(textarea.getText().length()-1);
@@ -1146,11 +1158,13 @@ public class Main {
 			if(classname != null && !classname.equals("")) {
 				String methodname = (String)combobox.getSelectedItem();
 				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();			
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+			
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
-					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+					JScrollPane scrollpane=
+((JScrollPane)tabbedpane.getSelectedComponent());
 					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 					
 					/*verticalscrollbar.setValue(textarea.getText().length()-1);
@@ -1165,8 +1179,10 @@ public class Main {
 					
 					verticalscrollbar.setValue(wholedocumentindex);
 					
-					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-					if(storeselectedfile.getCaretPosition(fileName) != 0) scrollToCaretPosition(wholedocumentindex);
+					
+StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					if(storeselectedfile.getCaretPosition(fileName) != 0)
+ scrollToCaretPosition(wholedocumentindex);
 				}
 			}
 		}
@@ -1281,7 +1297,8 @@ public class Main {
 	//public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() {	
+	public void setListeners() {
+	
 		rename_file.addActionListener((ev) -> {
 			JFrame getfilename = new JFrame("Get File Name");
 			JPanel panel = new JPanel();
@@ -1450,17 +1467,28 @@ public class Main {
 			
 			this.fileName=fileName;
 		});		
-		closetab.addActionListener((ev) -> {	
+		closetab.addActionListener((ev) -> {					
 			int tabindex=tabbedpane.getSelectedIndex();
-			fileNames.remove(tabindex);
 			if(fileNames.size() != 0 && tabindex != 0)
 				tabbedpane.setSelectedIndex((tabindex-1));
 			else if(fileNames.size() == 1 && tabindex == 0)
 				tabbedpane.setSelectedIndex(0);
 			tabbedpane.remove(tabindex);
+			fileNames.remove(tabindex);
+			System.out.println("fileNames:");
+			for(String filename:fileNames){
+				System.out.println(filename);
+			}
+			System.out.println();
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
-			
+			StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
+			System.out.println("Tabs:");
+			List<String> tabs2=storeselectedfile2.getTabs();
+			for(String tab:tabs2){
+				System.out.println(tab);
+			}
+			System.out.println();
 		});
 				
 				
@@ -1914,10 +1942,13 @@ public class Main {
 		});
 		/*combobox.addItemListener((ev) -> {
 			selectCode(ev);
-		});*/
-		//curlybracekeylistener = new CurlyBraceKeyListener(this);				
+		});
+*/
+		//curlybracekeylistener = new CurlyBraceKeyListener(this);
+				
 		//positiontrackers.add(curlybracekeylistener.positiontracker);
- 		//textarea.addKeyListener(curlybracekeylistener); 		
+ 		//textarea.addKeyListener(curlybracekeylistener);
+ 		
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
@@ -2190,7 +2221,8 @@ public class Main {
 				t.start();
 			}
 		});
-		compile_all.addActionListener((ev) -> {		
+		compile_all.addActionListener((ev) -> {
+		
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll();	
 			try {
@@ -2289,7 +2321,8 @@ public class Main {
 			}		
 		});
 			
-		compile.addActionListener(new ActionListener() {																
+		compile.addActionListener(new ActionListener() {
+																
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll();	
@@ -2434,7 +2467,8 @@ public class Main {
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
-							}
+							
+}
 							
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -2613,7 +2647,8 @@ public class Main {
 				}
 			}
 		});		
-		frame.getRootPane().setDefaultButton(go_to_line_number);		
+		frame.getRootPane().setDefaultButton(go_to_line_number);
+		
 	}
 	public static String addDotJava(String filename) {	
 		if(!(filename.endsWith(".java"))) {
@@ -3273,7 +3308,8 @@ class SaveActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		try {
 			String text = main.textarea.getText();
-			if(!main.fileName.equals("")) {						
+			if(!main.fileName.equals("")) {
+						
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
 				output.close();
@@ -3340,7 +3376,7 @@ class OpenActionListener implements ActionListener {
 }
 
 class CurlyBraceKeyListener implements KeyListener {
-	public Main main;
+	public Main main;
 	protected Tracker tracker;
 	public RenameVariable renamevariable;
 	public CurlyBraceKeyListener(Main main) {
@@ -3529,7 +3565,8 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;
 		}*/
 	}	
-}
+
+}
 /*
 ** This is a Variable Automatic Suggestion Box.
 */

@@ -72,6 +72,7 @@ public class StoreSelectedFile {
 			setBackup(linkedhashmap);
 		}
 		if(!linkedhashmap.containsKey(filenameandpath)) {
+			JOptionPane.showMessageDialog(null,"remove");
 			noduplicate.Delete();
 			preferences = new Preferences();
 			
@@ -129,14 +130,14 @@ public class StoreSelectedFile {
 	private IsEqual isequal = new IsEqual();
 	public void setBackup(LinkedHashMap<String,Preferences> hashmap) {
 		try {
-			if( ((new File("original.txt")).exists() ) && noduplicate.IsDuplicate(hashmap)) {
+			/*if( ((new File("original.txt")).exists() ) && noduplicate.IsDuplicate(hashmap)) {
 				//JOptionPane.showMessageDialog(null,"Replace backup.txt with original.txt");
 				noduplicate.ReplaceWithOriginal();
 				return;
 			}
 			if(isequal.isEqual(hashmap,getBackup())) {
 				return;
-			}
+			}*/
 			GsonBuilder gsonbuilder = new GsonBuilder();
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();
@@ -155,8 +156,15 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
+			System.out.println("StoreSelectedFile:");
+			for(String tab:tabs) {
+				System.out.println(tab);
+			}
 			lastopened.fileNames = tabs;
 			setBackup(hashmap);
+		}
+		else {
+			JOptionPane.showMessageDialog(null,"lastopened is null");
 		}
 	}
 	public List<String> getTabs() {
@@ -203,38 +211,7 @@ public class StoreSelectedFile {
 			return starterclass;
 		}
 	}
-	/*public String getStarterClass() {
-		LinkedHashMap<String,String> hashmap=getBackup();
-		String filenameanddirectory=hashmap.get("lastopened");
-		String starterclass= hashmap.get(filenameanddirectory);
-		if(starterclass == null) {
-			return "";
-		}
-		else {
-			return starterclass;
-		}
-	}*/
-	/*public String getStarterClass() {
-		try {
-		Scanner scanner = new Scanner(new File(System.getProperty("user.home")+"\\backup.txt"));
-		if(scanner.hasNext()) {
-			scanner.next();
-			if(scanner.hasNext()) {
-				return scanner.next();
-			}
-			else {
-				return "";
-			}
-		}
-		else {
-			return "";
-		}
-		}
-		catch (FileNotFoundException ex) {
-			ex.printStackTrace();
-			return "";
-		}
-	}*/
+	
 	public void addJar(String directory,String jarpath) {
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
 		Preferences preferences=linkedhashmap.get(directory);

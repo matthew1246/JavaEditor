@@ -13,8 +13,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java"
     ],
     "caretposition": 0
   },
