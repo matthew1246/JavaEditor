@@ -119,7 +119,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 2712
+    "caretposition": 5457
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoDuplicate.java": {
     "starterclass": "",
