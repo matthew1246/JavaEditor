@@ -12,7 +12,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -83,6 +85,15 @@
     "caretposition": 2104
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java": {
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
