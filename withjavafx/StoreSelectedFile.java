@@ -155,10 +155,12 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
+			/*
 			System.out.println("StoreSelectedFile:");
 			for(String tab:tabs) {
 				System.out.println(tab);
 			}
+			*/
 			lastopened.fileNames = tabs;
 			setBackup(hashmap);
 		}
