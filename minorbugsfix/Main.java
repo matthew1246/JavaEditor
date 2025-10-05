@@ -4515,6 +4515,7 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
+				public String two_keys = ""; 
 				boolean justStarted = true;	
 				Object[] methods2=methods;	
 				String ifdotbefore = "";
@@ -4523,6 +4524,7 @@ class MethodSuggestionBox {
 				int selected_index = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
+					two_keys = search_textfield.getText()+keyevent.getKeyChar();
 					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
 						suggestionbox.dispose();
 					}
@@ -4591,13 +4593,16 @@ class MethodSuggestionBox {
 						main.textarea.setCaretPosition(caretposition+1+selected.length());
 					}
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+						String methodname=search_textfield.getText();
+						if(two_keys.length() != methodname.length()) {
+							methodname = two_keys;
+						}
 						liveiterator.reset();
 						while(liveiterator.hasNext()) {
 							JLabel label = liveiterator.next();
 							panelgridlayout.remove(label);
 						}
 						
-						String methodname=search_textfield.getText();
 						if(methodname.length() > 0 && (methodname.substring(methodname.length()-1,methodname.length())).equals(".")) {
 							String output=currentline+".";
 							String output2=methodname;
