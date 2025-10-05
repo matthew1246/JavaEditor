@@ -142,7 +142,7 @@ public class JTextAreaGroup extends JTextArea {
 				String character = text3.substring(i,i+1);
 				if(character.equals("{") && !isPlus(i+1) && !isRightCurlyBrace(i+2)) {
 					try {
-						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
+						Rectangle2D rectanglecoords=super.modelToView2D(i+1);
 graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
 						groups.put(i+1,new Group());
 						Stack<Integer> stack = new Stack<Integer>();
@@ -161,8 +161,14 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 									group.end =j+1;
 									groups.put(i+2,group);
 									
-									String line=getLine(text3,i+1);
+									//String middle = text3.substring((i+1),j);
+									
+									//String line=getLine(text3,i+1);
+									//String tabs=getFirstTabs(line);
+									
+									String line=getLine(text3,j+1);
 									System.out.println("*"+line+"*");
+									
 									break;
 								}
 							}
@@ -186,6 +192,14 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 		 String[] lines=text.split("\\R");
 		 return lines[lines.length-1];
 	 }
+	 public String getFirstTabs(String line) {
+	 	Pattern pattern=Pattern.compile("^(\s+)");
+	 	Matcher matcher=pattern.matcher(line);
+	 	if(matcher.find()) {
+	 		return matcher.group(1);
+ 		}
+ 		return "";
+ 	}
 	public boolean isPlus(int caretposition) {
 		if((caretposition+1) > text.length())
 			return false;	
