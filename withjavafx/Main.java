@@ -1,3 +1,4 @@
+import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
@@ -4239,8 +4240,12 @@ class AutoKeyListener {
 			}
 		});
 		search_textfield.addKeyListener(new KeyListener() {
+			int two_keys_code = 0;
+			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
+				two_keys=search_textfield.getText()+keyevent.getKeyChar();
+				two_keys_code = keyevent.getKeyCode();
 				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 					List<JLabel> labels=getLabels();
 					JLabel selected_label=getSelected();
@@ -4308,18 +4313,43 @@ class AutoKeyListener {
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 					String input = search_textfield.getText();
-					if(search(input)) {
-						fillComboBox();
-					}
-					else {
-						EnterText(input);
-						if(keyevent.getKeyChar()=='.') {
-							main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-							//main.curlybracekeylistener.keyPressed(keyevent);
-							KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
-							main.textarea.dispatchEvent(keyevent2);
+					Timer timer = new Timer(100,new ActionListener() {
+						public void actionPerformed(ActionEvent ev) {
+							final String two_keys_b = two_keys;
+							final int two_keys_code_b = two_keys_code;
+							if(input.length() != two_keys_b.length()) {
+								if(search(two_keys_b)) {
+									fillComboBox(two_keys_b);
+								}
+								else {
+									EnterText(two_keys_b);
+									if(keyevent.getKeyChar()=='.') {
+										main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+										//main.curlybracekeylistener.keyPressed(keyevent);
+										KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,two_keys_code_b,'.');
+										main.textarea.dispatchEvent(keyevent2);
+									}
+								}
+							}
+							else {
+								if(search(input)) {
+									fillComboBox();
+								}
+								else {
+									EnterText(input);
+									if(keyevent.getKeyChar()=='.') {
+										main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+										//main.curlybracekeylistener.keyPressed(keyevent);
+										KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
+										main.textarea.dispatchEvent(keyevent2);
+									}
+								}
+							}
+
 						}
-					}
+					});
+					timer.setRepeats(false);
+					timer.start();
 				}
 			}
 			@Override
@@ -4342,7 +4372,6 @@ class AutoKeyListener {
 	}
 	public void fillData() {
 		List<String> variablenames = new ArrayList<String>();
-		
 		String text = main.textarea.getText();
 		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[0-9a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
 		Matcher matcher2=pattern2.matcher(text.substring(0,caretposition));
@@ -4368,6 +4397,31 @@ class AutoKeyListener {
 		
 		data=variablenames;
 	}
+	public void fillComboBox(String input) {
+		List<String> variablenames2;
+		input=input.trim();
+		if(data.size() > 0) {
+			variablenames2=data;
+			
+			removeData();
+			if(variablenames2.size() > 0) {
+				variablenames2=CurlyBraceKeyListener.variablesuggestionboxselected.ReorderedStrings(variablenames2,input,data);
+				gridlayout.setRows(1+variablenames2.size());
+				for(int i = 0; i < variablenames2.size(); i++) {
+					JLabel label = new JLabel(variablenames2.get(i));
+					if(i == 0) {
+						label.setOpaque(true);
+						label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					}
+					panelgridlayout.add(label);
+				}
+				panelgridlayout.validate();
+				panelgridlayout.repaint();
+				suggestionbox.pack();	
+			}
+		}
+	}
+
 	public void fillComboBox() {
 		List<String> variablenames2;
 		String input=search_textfield.getText().trim();
@@ -4514,7 +4568,7 @@ class AutoKeyListener {
 				if(filename.contains(input)) {
 					treeset.add(filename);
 				}
-			}	
+			}				
 			for(String class1:main.allclassesinfile.classes) {
 				if(class1.contains(input)) {
 					treeset.add(class1);
@@ -4566,7 +4620,7 @@ class AutoKeyListener {
 		else { // if(input.equals(""))
 			for(String filename:main.allclassesinfolder) {
 				treeset.add(filename);
-			}	
+			}				
 			for(String class1:main.allclassesinfile.classes) {
 				treeset.add(class1);
 			}				
