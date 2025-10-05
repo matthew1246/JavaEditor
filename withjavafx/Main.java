@@ -538,10 +538,11 @@ public class Main {
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-		int caretposition=storeselectedfile.getCaretPosition(filename);
-		textarea3.setCaretPosition(caretposition);
-		scrollToCaretPosition(textarea3,caretposition);
-
+		if(filename != null && !filename.equals("")) {
+			int caretposition=storeselectedfile.getCaretPosition(filename);
+			textarea3.setCaretPosition(caretposition);
+			scrollToCaretPosition(textarea3,caretposition);
+		}
 	}
 	public void openLastSelectedLine() {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();

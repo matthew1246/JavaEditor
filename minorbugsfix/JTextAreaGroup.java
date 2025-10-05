@@ -161,11 +161,12 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 									group.end =j+1;
 									groups.put(i+2,group);
 									
-									String line= getLine(text3,(i+1));
+									/*String line= getLine(text3,(i+1));
 									String firsttabs = getFirstTabs(line);
 									String middle = text3.substring((i+1),(j+1));
 									String[] lines=middle.split("\\R");
 									int q = i+2;
+									*/
 									/*for(int p = 0; p < lines.length; p++) {
 										String line2= lines[p];
 										q=q+line2.length();
