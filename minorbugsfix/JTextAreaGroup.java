@@ -68,8 +68,8 @@ public class JTextAreaGroup extends JTextArea {
 						Codes codes2 = new Codes(JTextAreaGroup.this);
 						List<Integer> codesindex=codes2.getCodes();
 						int index=codes2.getIndex(codesindex,first.length());
-						String middle = text.substring(group.start,group.end);
-						int sum=Count(middle);
+						String m = text.substring(group.start,group.end);
+						int sum=Count(m);
 						Code code = new Code(text.substring(group.start,group.end));
 						for(int i = 0; i < sum; i++) {
 							code.codes.add(codes.get(index+i));
@@ -161,13 +161,28 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 									group.end =j+1;
 									groups.put(i+2,group);
 									
-									//String middle = text3.substring((i+1),j);
+									String line= getLine(text3,(i+1));
+									String firsttabs = getFirstTabs(line);
+									String middle = text3.substring((i+1),(j+1));
+									String[] lines=middle.split("\\R");
+									int q = i+2;
+									/*for(int p = 0; p < lines.length; p++) {
+										String line2= lines[p];
+										q=q+line2.length();
+										Rectangle2D rectanglecoords2=super.modelToView2D((q+firsttabs.length()));
+graphics.drawString("-",(int)Math.round(rectanglecoords2.getX()),(int)Math.round(rectanglecoords2.getY()+20));
+									}
+									*/
+
+									
 									
 									//String line=getLine(text3,i+1);
 									//String tabs=getFirstTabs(line);
 									
-									String line=getLine(text3,j+1);
+									
+									/*String line=getLine(text3,j+1);
 									System.out.println("*"+line+"*");
+									*/
 									
 									break;
 								}
