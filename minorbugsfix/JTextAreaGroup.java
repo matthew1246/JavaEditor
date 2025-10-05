@@ -160,6 +160,9 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 									group.start = i;
 									group.end =j+1;
 									groups.put(i+2,group);
+									
+									String line=getLine(text3,i+1);
+									System.out.println("*"+line+"*");
 									break;
 								}
 							}
@@ -178,6 +181,11 @@ graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(
 			}
 		//}
 	}
+	public String getLine(String text,int caretposition) {
+		 text=text.substring(0,caretposition);
+		 String[] lines=text.split("\\R");
+		 return lines[lines.length-1];
+	 }
 	public boolean isPlus(int caretposition) {
 		if((caretposition+1) > text.length())
 			return false;	
