@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import javax.swing.JTextArea;
 import java.awt.Graphics;
 import java.util.List;
@@ -69,8 +70,8 @@ public class JTextAreaGroup extends JTextArea {
 						Codes codes2 = new Codes(JTextAreaGroup.this);
 						List<Integer> codesindex=codes2.getCodes();
 						int index=codes2.getIndex(codesindex,first.length());
-						String middle = text.substring(group.start,group.end);
-						int sum=Count(middle);
+						String m = text.substring(group.start,group.end);
+						int sum=Count(m);
 						Code code = new Code(text.substring(group.start,group.end));
 						for(int i = 0; i < sum; i++) {
 							code.codes.add(codes.get(index+i));
@@ -121,64 +122,151 @@ public class JTextAreaGroup extends JTextArea {
 			codes = new LinkedList<Code>();
 			setCaretPosition(caretposition);
 		}
-	}		
+	}
+	public boolean showLines = false;	
+	public List<Integer> xaxisses = new ArrayList<Integer>();
+	public List<Integer> yaxisses = new ArrayList<Integer>();
+	public String previoustext="";
 	HashMap<Integer,Group> groups;
 	public String text = "";
 	@Override
 	public void paintComponent(Graphics graphics) {
-		groups = new HashMap<Integer,Group>();		
-		Stack<Integer> leftcurlybraces= new Stack<Integer>();
-			
 		super.paintComponent(graphics);
-		
 		graphics.setColor(java.awt.Color.blue);
-	
-		//graphics.setFont(new Font("Arial",Font.BOLD,25));
-		//graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
-		//graphics.drawString("-",10,19);
-		text = super.getText();
-		String text3 = RemoveAll.LeftCurlyBraceInsideComments(text);
-		//if(!text31.equals(text3)) {
-			for(int i = 0; i < (text3.length()-4); i++) {
-				String character = text3.substring(i,i+1);
-				if(character.equals("{") && !isPlus(i+1) && !isRightCurlyBrace(i+2)) {
-					try {
-						Rectangle2D		 rectanglecoords=super.modelToView2D(i+1);
-graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()+20));
-						groups.put(i+1,new Group());
-						Stack<Integer> stack = new Stack<Integer>();
-						stack.push(i);
-						int j = i+1;
-						while(true && j < text3.length()) {
-							String character2 = text3.substring(j,j+1);
-							if(character2.equals("{")) {
-								stack.push(j);
+
+		String text5 = super.getText();
+		if(previoustext.equals(text5)) {
+			if(showLines) {
+				for(int i = 0; i < xaxisses.size(); i++) {
+					graphics.drawString("-",xaxisses.get(i),yaxisses.get(i));
+				}	
+			}		
+		}
+		else {
+			previoustext = text5;	
+			xaxisses=new ArrayList<Integer>();
+			yaxisses=new ArrayList<Integer>();
+			
+			groups = new HashMap<Integer,Group>();		
+			Stack<Integer> leftcurlybraces= new Stack<Integer>();
+				
+			
+			
+			
+		
+			//graphics.setFont(new Font("Arial",Font.BOLD,25));
+			//graphics.drawString("-",(int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
+			//graphics.drawString("-",10,19);
+			text = super.getText();
+			String text3 = RemoveAll.LeftCurlyBraceInsideComments(text);
+			//if(!text31.equals(text3)) {
+				for(int i = 0; i < (text3.length()-4); i++) {
+					String character = text3.substring(i,i+1);
+					if(character.equals("{") && !isPlus(i+1) && !isRightCurlyBrace(i+2)) {
+						try {
+							Rectangle2D rectanglecoords = null;
+							if(showLines) {
+								rectanglecoords=super.modelToView2D(i+1);
+								int a = (int)Math.round(rectanglecoords.getX());
+								int b = (int)Math.round(rectanglecoords.getY()+20);			
+								graphics.drawString("-",a,b);
+								xaxisses.add(a);
+								yaxisses.add(b);		
 							}
-							else if(character2.equals("}")) {
-								int rightcurlybrace=stack.pop();
-								if(stack.size() == 0) {
-									Group group=groups.get(i+1);
-									group.start = i;
-									group.end =j+1;
-									groups.put(i+2,group);
-									break;
+							
+							groups.put(i+1,new Group());
+							Stack<Integer> stack = new Stack<Integer>();
+							stack.push(i);
+							int j = i+1;
+							while(true && j < text3.length()) {
+								String character2 = text3.substring(j,j+1);
+								if(character2.equals("{")) {
+									stack.push(j);
 								}
+								else if(character2.equals("}")) {
+									int rightcurlybrace=stack.pop();
+									if(stack.size() == 0) {
+										Group group=groups.get(i+1);
+										group.start = i;
+										group.end =j+1;
+										groups.put(i+2,group);
+										
+										if(showLines) {
+											String text4 = text3.substring(0,i+1);
+											String[] lines=text4.split("\\R");
+											String line = lines[lines.length-1];
+											//System.out.println("*"+line+"*");
+											
+											String firsttabs=getFirstTabs(line);
+											//System.out.println("*"+firsttabs+"*");
+											int z=line.length()-firsttabs.length();
+											z=(i+1)-z;
+											int x = (int)(super.modelToView2D(z).getX());
+											int vertical_limit =(int)(super.modelToView2D(j+1).getY());
+											for(int y = ((int)Math.round(rectanglecoords.getY()+20)); y <= vertical_limit; y+=20) {
+												graphics.drawString("-",x,y);
+												xaxisses.add(x);
+												yaxisses.add(y);
+											}
+											
+											/*
+											String line= getLine(text3,(i+1));
+											String firsttabs = getFirstTabs(line);
+											String middle = text3.substring((i+1),(j+1));
+											
+											int q = i+2;
+											*/
+											/*for(int p = 0; p < lines.length; p++) {
+												String line2= lines[p];
+												q=q+line2.length();
+												Rectangle2D rectanglecoords2=super.modelToView2D((q+firsttabs.length()));
+		graphics.drawString("-",(int)Math.round(rectanglecoords2.getX()),(int)Math.round(rectanglecoords2.getY()+20));
+											}
+											*/
+		
+											
+											
+											//String line=getLine(text3,i+1);
+											//String tabs=getFirstTabs(line);
+											
+											
+											/*String line=getLine(text3,j+1);
+											System.out.println("*"+line+"*");
+											*/
+										}		
+										break;
+									}
+								}
+								j++;
 							}
-							j++;
-						}
-					} catch(BadLocationException ex) {
-						ex.printStackTrace();
-					}						
+						} catch(BadLocationException ex) {
+							ex.printStackTrace();
+						}						
+					}
+					/*else if(character.equals("}")) {
+						int leftcurlybrace=leftcurlybraces.pop();
+						Group group = new Group();
+						group.start = leftcurlybrace;
+						
+					}*/
 				}
-				/*else if(character.equals("}")) {
-					int leftcurlybrace=leftcurlybraces.pop();
-					Group group = new Group();
-					group.start = leftcurlybrace;
-					
-				}*/
-			}
-		//}
+			//}
+
+		}
 	}
+	public String getLine(String text,int caretposition) {
+		 text=text.substring(0,caretposition);
+		 String[] lines=text.split("\\R");
+		 return lines[lines.length-1];
+	 }
+	 public String getFirstTabs(String line) {
+	 	Pattern pattern=Pattern.compile("^(\\s+)");
+	 	Matcher matcher=pattern.matcher(line);
+	 	if(matcher.find()) {
+	 		return matcher.group(1);
+ 		}
+ 		return "";
+ 	}
 	public boolean isPlus(int caretposition) {
 		if((caretposition+1) > text.length())
 			return false;	

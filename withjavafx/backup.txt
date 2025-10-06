@@ -7,7 +7,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java"
     ],
     "caretposition": 0
   },
@@ -18,7 +19,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 23604
+    "caretposition": 28846
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "starterclass": "",
@@ -136,5 +137,14 @@
     ],
     "fileNames": [],
     "caretposition": 6118
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 9147
   }
 }

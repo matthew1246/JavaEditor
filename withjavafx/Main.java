@@ -88,6 +88,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {		
+	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
 	public JMenuItem rename_file = new JMenuItem("Rename File");
 	public MouseListener rightclick = new RightClick();	
 	public JMenuItem closetab = new JMenuItem("Close Tab");		
@@ -701,8 +702,7 @@ public class Main {
 		edit.add(control_f);
 		edit.add(fontmenuitem);
 		edit.add(tabSizeMenuItem);
-		
-		
+		edit.add(functionLines);
 		
 		menubar.invalidate();
 		menubar.repaint();
@@ -1315,6 +1315,18 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		functionLines.addActionListener( ev -> {
+			JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
+			textareagroup.showLines=true;
+			textareagroup.previoustext = "";
+		});
+		frame.addComponentListener(new ComponentAdapter() {
+	           	 	@Override
+	            	public void componentResized(ComponentEvent e) {
+	            		JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
+	            		textareagroup.previoustext = "";
+	            	}
+        		});
 		rename_file.addActionListener((ev) -> {
 			JFrame getfilename = new JFrame("Get File Name");
 			JPanel panel = new JPanel();
