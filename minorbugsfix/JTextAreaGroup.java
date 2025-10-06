@@ -135,10 +135,8 @@ public class JTextAreaGroup extends JTextArea {
 
 		String text5 = super.getText();
 		if(previoustext.equals(text5)) {
-			if(showLines) {
-				for(int i = 0; i < xaxisses.size(); i++) {
-					graphics.drawString("-",xaxisses.get(i),yaxisses.get(i));
-				}	
+			for(int i = 0; i < xaxisses.size(); i++) {
+				graphics.drawString("-",xaxisses.get(i),yaxisses.get(i));	
 			}		
 		}
 		else {
@@ -163,15 +161,12 @@ public class JTextAreaGroup extends JTextArea {
 					String character = text3.substring(i,i+1);
 					if(character.equals("{") && !isPlus(i+1) && !isRightCurlyBrace(i+2)) {
 						try {
-							Rectangle2D rectanglecoords = null;
-							if(showLines) {
-								rectanglecoords=super.modelToView2D(i+1);
-								int a = (int)Math.round(rectanglecoords.getX());
-								int b = (int)Math.round(rectanglecoords.getY()+20);			
-								graphics.drawString("-",a,b);
-								xaxisses.add(a);
-								yaxisses.add(b);		
-							}
+							Rectangle2D rectanglecoords=super.modelToView2D(i+1);
+							int a = (int)Math.round(rectanglecoords.getX());
+							int b = (int)Math.round(rectanglecoords.getY()+20);			
+							graphics.drawString("-",a,b);
+							xaxisses.add(a);
+							yaxisses.add(b);		
 							
 							groups.put(i+1,new Group());
 							Stack<Integer> stack = new Stack<Integer>();
