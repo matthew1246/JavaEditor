@@ -88,6 +88,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {		
+	public JButton showlines;
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
 	public JMenuItem rename_file = new JMenuItem("Rename File");
 	public MouseListener rightclick = new RightClick();	
@@ -1026,9 +1027,18 @@ public class Main {
 		
 		makeajar = new JButton("make a jar");
 		gbc.gridx = 19;
-		gbc.weightx = 7.0;
-		gbc.gridwidth = 7;
+		gbc.weightx = 4.0;
+		gbc.gridwidth = 4;
 		menubar.add(makeajar,gbc);
+		
+		menubar.validate();
+		menubar.repaint();
+		
+		showlines=new JButton("{ to }");
+		gbc.gridx = 23;
+		gbc.weightx =3.0;
+		gbc.gridwidth=3;
+		menubar.add(showlines,gbc);
 		
 		menubar.validate();
 		menubar.repaint();
@@ -1315,6 +1325,13 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		showlines.addActionListener( ev -> {
+			JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
+			textareagroup.showLines=!textareagroup.showLines;
+			textareagroup.previoustext = "";
+			textareagroup.validate();
+			textareagroup.repaint();
+		});
 		functionLines.addActionListener( ev -> {
 			JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
 			textareagroup.showLines=true;
