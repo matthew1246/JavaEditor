@@ -1300,7 +1300,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
-	
+		frame.addComponentListener(new ComponentAdapter() {
+	           	 	@Override
+	            	public void componentResized(ComponentEvent e) {
+	            		JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
+	            		textareagroup.previoustext = "";
+	            	}
+        		});
+			
 		rename_file.addActionListener((ev) -> {
 			JFrame getfilename = new JFrame("Get File Name");
 			JPanel panel = new JPanel();
