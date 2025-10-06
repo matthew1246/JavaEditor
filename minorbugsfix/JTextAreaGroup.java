@@ -194,7 +194,7 @@ public class JTextAreaGroup extends JTextArea {
 										z=(i+1)-z;
 										int x = (int)(super.modelToView2D(z).getX());
 										int vertical_limit =(int)(super.modelToView2D(j+1).getY());
-										for(int y = ((int)Math.round(rectanglecoords.getY()+20)); y < vertical_limit; y++) {
+										for(int y = ((int)Math.round(rectanglecoords.getY()+20)); y <= vertical_limit; y+=20) {
 											graphics.drawString("-",x,y);
 											xaxisses.add(x);
 											yaxisses.add(y);
