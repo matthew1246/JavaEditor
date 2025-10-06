@@ -1319,6 +1319,8 @@ public class Main {
 			JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
 			textareagroup.showLines=true;
 			textareagroup.previoustext = "";
+			textareagroup.validate();
+			textareagroup.repaint();
 		});
 		frame.addComponentListener(new ComponentAdapter() {
 	           	 	@Override
