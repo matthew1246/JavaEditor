@@ -121,7 +121,8 @@ public class JTextAreaGroup extends JTextArea {
 			codes = new LinkedList<Code>();
 			setCaretPosition(caretposition);
 		}
-	}	
+	}
+	public boolean showLines = false;	
 	public List<Integer> xaxisses = new ArrayList<Integer>();
 	public List<Integer> yaxisses = new ArrayList<Integer>();
 	public String previoustext="";
@@ -134,8 +135,10 @@ public class JTextAreaGroup extends JTextArea {
 
 		String text5 = super.getText();
 		if(previoustext.equals(text5)) {
-			for(int i = 0; i < xaxisses.size(); i++) {
-				graphics.drawString("-",xaxisses.get(i),yaxisses.get(i));
+			if(showLines) {
+				for(int i = 0; i < xaxisses.size(); i++) {
+					graphics.drawString("-",xaxisses.get(i),yaxisses.get(i));
+				}	
 			}		
 		}
 		else {
@@ -160,12 +163,15 @@ public class JTextAreaGroup extends JTextArea {
 					String character = text3.substring(i,i+1);
 					if(character.equals("{") && !isPlus(i+1) && !isRightCurlyBrace(i+2)) {
 						try {
-							Rectangle2D rectanglecoords=super.modelToView2D(i+1);
-							int a = (int)Math.round(rectanglecoords.getX());
-							int b = (int)Math.round(rectanglecoords.getY()+20);			
-							graphics.drawString("-",a,b);
-							xaxisses.add(a);
-							yaxisses.add(b);		
+							Rectangle2D rectanglecoords = null;
+							if(showLines) {
+								rectanglecoords=super.modelToView2D(i+1);
+								int a = (int)Math.round(rectanglecoords.getX());
+								int b = (int)Math.round(rectanglecoords.getY()+20);			
+								graphics.drawString("-",a,b);
+								xaxisses.add(a);
+								yaxisses.add(b);		
+							}
 							
 							groups.put(i+1,new Group());
 							Stack<Integer> stack = new Stack<Integer>();
@@ -183,48 +189,50 @@ public class JTextAreaGroup extends JTextArea {
 										group.start = i;
 										group.end =j+1;
 										groups.put(i+2,group);
-										String text4 = text3.substring(0,i+1);
-										String[] lines=text4.split("\\R");
-										String line = lines[lines.length-1];
-										//System.out.println("*"+line+"*");
 										
-										String firsttabs=getFirstTabs(line);
-										//System.out.println("*"+firsttabs+"*");
-										int z=line.length()-firsttabs.length();
-										z=(i+1)-z;
-										int x = (int)(super.modelToView2D(z).getX());
-										int vertical_limit =(int)(super.modelToView2D(j+1).getY());
-										for(int y = ((int)Math.round(rectanglecoords.getY()+20)); y <= vertical_limit; y+=20) {
-											graphics.drawString("-",x,y);
-											xaxisses.add(x);
-											yaxisses.add(y);
-										}
-										
-										/*
-										String line= getLine(text3,(i+1));
-										String firsttabs = getFirstTabs(line);
-										String middle = text3.substring((i+1),(j+1));
-										
-										int q = i+2;
-										*/
-										/*for(int p = 0; p < lines.length; p++) {
-											String line2= lines[p];
-											q=q+line2.length();
-											Rectangle2D rectanglecoords2=super.modelToView2D((q+firsttabs.length()));
-	graphics.drawString("-",(int)Math.round(rectanglecoords2.getX()),(int)Math.round(rectanglecoords2.getY()+20));
-										}
-										*/
-	
-										
-										
-										//String line=getLine(text3,i+1);
-										//String tabs=getFirstTabs(line);
-										
-										
-										/*String line=getLine(text3,j+1);
-										System.out.println("*"+line+"*");
-										*/
-										
+										if(showLines) {
+											String text4 = text3.substring(0,i+1);
+											String[] lines=text4.split("\\R");
+											String line = lines[lines.length-1];
+											//System.out.println("*"+line+"*");
+											
+											String firsttabs=getFirstTabs(line);
+											//System.out.println("*"+firsttabs+"*");
+											int z=line.length()-firsttabs.length();
+											z=(i+1)-z;
+											int x = (int)(super.modelToView2D(z).getX());
+											int vertical_limit =(int)(super.modelToView2D(j+1).getY());
+											for(int y = ((int)Math.round(rectanglecoords.getY()+20)); y <= vertical_limit; y+=20) {
+												graphics.drawString("-",x,y);
+												xaxisses.add(x);
+												yaxisses.add(y);
+											}
+											
+											/*
+											String line= getLine(text3,(i+1));
+											String firsttabs = getFirstTabs(line);
+											String middle = text3.substring((i+1),(j+1));
+											
+											int q = i+2;
+											*/
+											/*for(int p = 0; p < lines.length; p++) {
+												String line2= lines[p];
+												q=q+line2.length();
+												Rectangle2D rectanglecoords2=super.modelToView2D((q+firsttabs.length()));
+		graphics.drawString("-",(int)Math.round(rectanglecoords2.getX()),(int)Math.round(rectanglecoords2.getY()+20));
+											}
+											*/
+		
+											
+											
+											//String line=getLine(text3,i+1);
+											//String tabs=getFirstTabs(line);
+											
+											
+											/*String line=getLine(text3,j+1);
+											System.out.println("*"+line+"*");
+											*/
+										}		
 										break;
 									}
 								}
