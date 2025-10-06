@@ -6,7 +6,7 @@
     "caretposition": 105
   },
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java",
@@ -143,7 +143,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 5799
+    "caretposition": 6545
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SelectedLines.java": {
     "starterclass": "",
