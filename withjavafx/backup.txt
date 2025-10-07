@@ -4,11 +4,7 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
