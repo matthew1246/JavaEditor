@@ -536,14 +536,19 @@ public class Main {
 			}
 		});
 		thread.start();
-		//openLastSelectedLine();
+		openLastSelectedLine();
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+		int caretposition=storeselectedfile.getCaretPosition(filename);
 		if(filename != null && !filename.equals("")) {
-			int caretposition=storeselectedfile.getCaretPosition(filename);
 			textarea3.setCaretPosition(caretposition);
 			scrollToCaretPosition(textarea3,caretposition);
+
+			int caretposition2=textarea3.getCaretPosition();
+			scrollToCaretPosition(caretposition2);
+			textarea3.validate();
+			textarea3.repaint();
 		}
 	}
 	public void openLastSelectedLine() {
@@ -1514,6 +1519,9 @@ public class Main {
 			this.fileName=fileName;
 		});			
 		makeajar.addActionListener( ev -> {
+			int caretposition=textarea.getCaretPosition();
+			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
+			storeselectedfile2.setCaretPosition(fileName,caretposition);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll();	
 			String[] options={"Yes","No"};
@@ -1954,6 +1962,9 @@ public class Main {
 		});	
 		
 		generatejar.addActionListener((ev) -> {
+			int caretposition=textarea.getCaretPosition();
+			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
+			storeselectedfile2.setCaretPosition(fileName,caretposition);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll();	
 			String[] options={"Yes","No"};
