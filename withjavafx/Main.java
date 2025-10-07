@@ -1912,15 +1912,35 @@ public class Main {
 		});
 		closetab.addActionListener((ev) -> {	
 			int tabindex=tabbedpane.getSelectedIndex();
-			fileNames.remove(tabindex);
-			if(fileNames.size() != 0 && tabindex != 0)
+			//if(fileNames.size() != 0 && tabindex != 0)
+				//tabbedpane.setSelectedIndex((tabindex-1));
+			//else if(fileNames.size() > 1 && tabindex == 0)
+				// tabbedpane.setSelectedIndex(1);
+			if(tabindex == (tabbedpane.getTabCount()-2)) {
 				tabbedpane.setSelectedIndex((tabindex-1));
-			else if(fileNames.size() == 1 && tabindex == 0)
-				tabbedpane.setSelectedIndex(0);
+			}
+			
+			fileNames.remove(tabindex);
 			tabbedpane.remove(tabindex);
+			
+			/*
+			System.out.println("fileNames:");
+			for(String filename:fileNames){
+				System.out.println(filename);
+			}
+			System.out.println();
+			*/
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
-			
+			/*
+			StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
+			System.out.println("Tabs:");
+			List<String> tabs2=storeselectedfile2.getTabs();
+			for(String tab:tabs2){
+				System.out.println(tab);
+			}
+			System.out.println();
+			*/
 		});
 	
 		opennewtab.addActionListener((ev) -> {
