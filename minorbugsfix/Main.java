@@ -234,7 +234,8 @@ public class Main {
 	/*
 	** If have default content for window
 	*/
-	public Main(OpenDefaultContent odc) {
+	public Main(OpenDefaultContent odc) 
+	{
 		try {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
@@ -542,7 +543,7 @@ public class Main {
 			}
 		});
 		thread.start();
-		//openLastSelectedLine();
+		openLastSelectedLine();
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -550,6 +551,10 @@ public class Main {
 		if(filename != null && !filename.equals("")) {
 			textarea3.setCaretPosition(caretposition);
 			scrollToCaretPosition(textarea3,caretposition);
+			int caretposition2=textarea3.getCaretPosition();
+			scrollToCaretPosition(caretposition2);
+			textarea3.validate();
+			textarea3.repaint();
 		}
 	}
 	public void openLastSelectedLine() {
@@ -1529,6 +1534,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});	
 		
 		generatejar.addActionListener((ev) -> {
+			int caretposition=textarea.getCaretPosition();
+			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
+			storeselectedfile2.setCaretPosition(fileName,caretposition);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll();	
 			String[] options={"Yes","No"};
