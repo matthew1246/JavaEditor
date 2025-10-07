@@ -1485,12 +1485,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});		
 		closetab.addActionListener((ev) -> {					
 			int tabindex=tabbedpane.getSelectedIndex();
-			if(fileNames.size() != 0 && tabindex != 0)
-				tabbedpane.setSelectedIndex((tabindex-1));
-			else if(fileNames.size() == 1 && tabindex == 0)
-				tabbedpane.setSelectedIndex(0);
-			tabbedpane.remove(tabindex);
+			//if(fileNames.size() != 0 && tabindex != 0)
+				//tabbedpane.setSelectedIndex((tabindex-1));
+			//else if(fileNames.size() > 1 && tabindex == 0)
+				// tabbedpane.setSelectedIndex(1);
+			
 			fileNames.remove(tabindex);
+			tabbedpane.remove(tabindex);
+			
 			/*
 			System.out.println("fileNames:");
 			for(String filename:fileNames){
