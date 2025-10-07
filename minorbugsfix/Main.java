@@ -1489,6 +1489,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				//tabbedpane.setSelectedIndex((tabindex-1));
 			//else if(fileNames.size() > 1 && tabindex == 0)
 				// tabbedpane.setSelectedIndex(1);
+			if(tabindex == (tabbedpane.getTabCount()-2)) {
+				tabbedpane.setSelectedIndex((tabindex-1));
+			}
 			
 			fileNames.remove(tabindex);
 			tabbedpane.remove(tabindex);
