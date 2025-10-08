@@ -3674,11 +3674,6 @@ class AutoKeyListener {
 		}
 	}
 	public void setListeners() {
-		/*search_unique.addActionListener(ev -> {
-			if(searchOnlyAPI(input)) {
-				fillComboBox();
-			}
-		});*/
 		suggestionbox.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				EnterText();
@@ -3689,7 +3684,7 @@ class AutoKeyListener {
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
-				two_keys=search_textfield.getText()+keyevent.getKeyChar();
+				two_keys=two_keys+keyevent.getKeyChar();
 				two_keys_code = keyevent.getKeyCode();
 				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 					List<JLabel> labels=getLabels();
@@ -3759,46 +3754,40 @@ class AutoKeyListener {
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 					String input = search_textfield.getText();
-					Timer timer = new Timer(100,new ActionListener() {
-						public void actionPerformed(ActionEvent ev) {
-							if(!no_duplicate) {
-								final String two_keys_b = two_keys;
-								final int two_keys_code_b = two_keys_code;
-								if(input.length() != two_keys_b.length()) {
-									no_duplicate=true;
-									if(search(two_keys_b)) {
-										fillComboBox(two_keys_b);
-										no_duplicate = false;
-									}
-									else {
-										EnterText(two_keys_b);
-										if(keyevent.getKeyChar()=='.') {
-											main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-											//main.curlybracekeylistener.keyPressed(keyevent);
-											KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,two_keys_code_b,'.');
-											main.textarea.dispatchEvent(keyevent2);
-										}
-									}
-								}
-								else {
-									if(search(input)) {
-										fillComboBox();
-									}
-									else {
-										EnterText(input);
-										if(keyevent.getKeyChar()=='.') {
-											main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-											//main.curlybracekeylistener.keyPressed(keyevent);
-											KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
-											main.textarea.dispatchEvent(keyevent2);
-										}
-									}
-								}
+					
+					final String two_keys_b = two_keys;
+					final int two_keys_code_b = two_keys_code;
+					if(input.length() < two_keys_b.length()) {
+						System.out.println("*"+two_keys_b+"*");
+						if(search(two_keys_b)) {
+							fillComboBox(two_keys_b);
+							
+							no_duplicate = false;
+						}
+						else {
+							EnterText(two_keys_b);
+							if(keyevent.getKeyChar()=='.') {
+								main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+								//main.curlybracekeylistener.keyPressed(keyevent);
+								KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,two_keys_code_b,'.');
+								main.textarea.dispatchEvent(keyevent2);
 							}
-						}
-					});
-					timer.setRepeats(false);
-					timer.start();
+						}
+					}
+					else {
+						if(search(input)) {
+							fillComboBox();
+						}
+						else {
+							EnterText(input);
+							if(keyevent.getKeyChar()=='.') {
+								main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+								//main.curlybracekeylistener.keyPressed(keyevent);
+								KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
+								main.textarea.dispatchEvent(keyevent2);
+							}
+						}
+					}
 				}
 			}
 			@Override
@@ -4572,7 +4561,7 @@ class MethodSuggestionBox {
 				int selected_index = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
-					two_keys = search_textfield.getText()+keyevent.getKeyChar();
+					two_keys = two_keys+keyevent.getKeyChar();
 					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
 						suggestionbox.dispose();
 					}
@@ -4644,7 +4633,7 @@ class MethodSuggestionBox {
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 						Timer timer = new Timer(100, ev -> {
 							String methodname=search_textfield.getText();
-							if(two_keys.length() != methodname.length()) {
+							if(!two_keys.equals(methodname)) {
 								methodname = two_keys;
 							}
 							liveiterator.reset();
