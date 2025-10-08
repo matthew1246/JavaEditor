@@ -4388,12 +4388,12 @@ class MethodSuggestionBox {
 				//Member[] methodsandproperties=getAllPropertyAndMethods(property);
 				Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
 				String last=properties[i];
-				JOptionPane.showMessageDialog(null,"*"+last+"*");
+				//JOptionPane.showMessageDialog(null,"*"+last+"*");
 				escapey:for(Object member:methodsandproperties) {
 					if(member instanceof Method) {
 						String name = ((Method)member).getName();
-						JOptionPane.showMessageDialog(null,"Method");
-						JOptionPane.showMessageDialog(null,name);
+						//JOptionPane.showMessageDialog(null,"Method");
+						//JOptionPane.showMessageDialog(null,name);
 						
 						if(name.contains("$")) {
 							name=name.replaceAll(".+\\$","");
@@ -4403,10 +4403,10 @@ class MethodSuggestionBox {
 							break escapey;
 						}
 					}
-					else if(member instanceof Field) {									JOptionPane.showMessageDialog(null,"Field");			
+					else if(member instanceof Field) {									//JOptionPane.showMessageDialog(null,"Field");			
 									
 						String name=((Member)member).getName();
-						JOptionPane.showMessageDialog(null,name);
+						//JOptionPane.showMessageDialog(null,name);
 						if(name.contains("$")) {
 							name=name.replaceAll(".+\\$","");
 						}
@@ -4416,9 +4416,9 @@ class MethodSuggestionBox {
 						}
 					}
 					else if(member instanceof Class<?> && ((Class<?>)member).isEnum()) {						
-						JOptionPane.showMessageDialog(null,"Class<?> and isEnum()");
+						//JOptionPane.showMessageDialog(null,"Class<?> and isEnum()");
 						String name=((Class<?>)member).getName();
-						JOptionPane.showMessageDialog(null,name);
+						//JOptionPane.showMessageDialog(null,name);
 						if(name.contains("$")) {
 							name=name.replaceAll(".+\\$","");
 						}
@@ -4428,9 +4428,9 @@ class MethodSuggestionBox {
 						}
 					}
 					else if(member instanceof Class<?> && ((Class<?>)member).isInterface() ) { // Is a Enum					
-						JOptionPane.showMessageDialog(null,"Class<?> and isInterface()");	
+						//JOptionPane.showMessageDialog(null,"Class<?> and isInterface()");	
 						String name=((Class<?>)member).getName();
-						JOptionPane.showMessageDialog(null,name);
+						//JOptionPane.showMessageDialog(null,name);
 						if(name.contains("$")) {
 							name=name.replaceAll(".+\\$","");
 						}
@@ -4441,8 +4441,8 @@ class MethodSuggestionBox {
 					}
 					else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
 						String name=((Class<?>)member).getName();
-						JOptionPane.showMessageDialog(null,"else");
-						JOptionPane.showMessageDialog(null,name);
+						//JOptionPane.showMessageDialog(null,"else");
+						//JOptionPane.showMessageDialog(null,name);
 						if(name.contains("$")) {
 							name=name.replaceAll(".+\\$","");
 						}
