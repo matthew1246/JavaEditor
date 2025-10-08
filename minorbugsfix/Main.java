@@ -3680,12 +3680,12 @@ class AutoKeyListener {
 			}
 		});
 		search_textfield.addKeyListener(new KeyListener() {
-			int two_keys_code = 0;
+			int count = 0;
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
-				two_keys=two_keys+keyevent.getKeyChar();
-				two_keys_code = keyevent.getKeyCode();
+				count=count+1;
+				//two_keys_code = keyevent.getKeyCode();
 				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 					List<JLabel> labels=getLabels();
 					JLabel selected_label=getSelected();
@@ -3733,9 +3733,11 @@ class AutoKeyListener {
 					suggestionbox.dispose();
 				}
 			}
+			public int count_release = 0;
 			public boolean no_duplicate = false; 
 			@Override
 			public void keyReleased(KeyEvent keyevent) {
+				count_release=count_release+1;
 				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 					String text = main.textarea.getText();	
 					String selected = search_textfield.getText().trim();
@@ -3755,26 +3757,9 @@ class AutoKeyListener {
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 					String input = search_textfield.getText();
 					
-					final String two_keys_b = two_keys;
-					final int two_keys_code_b = two_keys_code;
-					if(input.length() < two_keys_b.length()) {
-						System.out.println("*"+two_keys_b+"*");
-						if(search(two_keys_b)) {
-							fillComboBox(two_keys_b);
-							
-							no_duplicate = false;
-						}
-						else {
-							EnterText(two_keys_b);
-							if(keyevent.getKeyChar()=='.') {
-								main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-								//main.curlybracekeylistener.keyPressed(keyevent);
-								KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,two_keys_code_b,'.');
-								main.textarea.dispatchEvent(keyevent2);
-							}
-						}
-					}
-					else {
+					System.out.println(count+ " "+count_release);
+						
+					if(count == count_release) {
 						if(search(input)) {
 							fillComboBox();
 						}
