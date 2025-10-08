@@ -4755,6 +4755,8 @@ class MethodSuggestionBox {
 		}
 	}
 	public Object[] search(String input) {
+		// JOptionPane.showMessageDialog(null,input);
+		
 		Object[] innerpackages=getInnerPackages(input);
 		Object[] classes = getClassesFromPackage(input);
 		Object[] allobjects=addMembersToMembers(innerpackages,classes);
@@ -5230,8 +5232,9 @@ class MethodSuggestionBox {
 						String selected = selected_label2.getText();
 						CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
 						
-						if(!ifdotbefore.equals(""))
+						/*if(!ifdotbefore.equals(""))
 							selected=ifdotbefore+"."+selected;
+						*/
 						String firsthalf=text.substring(0,caretposition)+"."+selected;
 						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 						///String second =text.substring(caretposition+1,text.length());
@@ -5297,8 +5300,9 @@ class MethodSuggestionBox {
 								if(!ifdotbefore.equals(""))
 								*/
 								String selected = methodname;
-								if(!ifdotbefore.equals(""))
+								/*if(!ifdotbefore.equals(""))
 									selected=ifdotbefore+"."+selected;
+								*/
 								String firsthalf=text.substring(0,caretposition)+"."+selected;
 								//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 								String second =text.substring(caretposition,text.length());
