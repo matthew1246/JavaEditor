@@ -4561,7 +4561,7 @@ class MethodSuggestionBox {
 				int selected_index = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
-					two_keys = two_keys+keyevent.getKeyChar();
+					//two_keys = two_keys+keyevent.getKeyChar();
 					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
 						suggestionbox.dispose();
 					}
@@ -4633,9 +4633,9 @@ class MethodSuggestionBox {
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 						Timer timer = new Timer(100, ev -> {
 							String methodname=search_textfield.getText();
-							if(!two_keys.equals(methodname)) {
+							/*if(!two_keys.equals(methodname)) {
 								methodname = two_keys;
-							}
+							}*/
 							liveiterator.reset();
 							while(liveiterator.hasNext()) {
 								JLabel label = liveiterator.next();
