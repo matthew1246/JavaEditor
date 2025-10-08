@@ -3738,6 +3738,7 @@ class AutoKeyListener {
 					suggestionbox.dispose();
 				}
 			}
+			public boolean no_duplicate = false; 
 			@Override
 			public void keyReleased(KeyEvent keyevent) {
 				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
@@ -3760,37 +3761,41 @@ class AutoKeyListener {
 					String input = search_textfield.getText();
 					Timer timer = new Timer(100,new ActionListener() {
 						public void actionPerformed(ActionEvent ev) {
-							final String two_keys_b = two_keys;
-							final int two_keys_code_b = two_keys_code;
-							if(input.length() != two_keys_b.length()) {
-								if(search(two_keys_b)) {
-									fillComboBox(two_keys_b);
-								}
-								else {
-									EnterText(two_keys_b);
-									if(keyevent.getKeyChar()=='.') {
-										main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-										//main.curlybracekeylistener.keyPressed(keyevent);
-										KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,two_keys_code_b,'.');
-										main.textarea.dispatchEvent(keyevent2);
+							if(!no_duplicate) {
+								final String two_keys_b = two_keys;
+								final int two_keys_code_b = two_keys_code;
+								if(input.length() != two_keys_b.length()) {
+									no_duplicate=true;
+									if(search(two_keys_b)) {
+										fillComboBox(two_keys_b);
+										no_duplicate = false;
+									}
+									else {
+										EnterText(two_keys_b);
+										if(keyevent.getKeyChar()=='.') {
+											main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+											//main.curlybracekeylistener.keyPressed(keyevent);
+											KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,two_keys_code_b,'.');
+											main.textarea.dispatchEvent(keyevent2);
+										}
 									}
 								}
+								else {
+									if(search(input)) {
+										fillComboBox();
+									}
+									else {
+										EnterText(input);
+										if(keyevent.getKeyChar()=='.') {
+											main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+											//main.curlybracekeylistener.keyPressed(keyevent);
+											KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
+											main.textarea.dispatchEvent(keyevent2);
+										}
+									}
+								}
 							}
-							else {
-								if(search(input)) {
-									fillComboBox();
-								}
-								else {
-									EnterText(input);
-									if(keyevent.getKeyChar()=='.') {
-										main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-										//main.curlybracekeylistener.keyPressed(keyevent);
-										KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
-										main.textarea.dispatchEvent(keyevent2);
-									}
-								}
-							}
-						}
+						}
 					});
 					timer.setRepeats(false);
 					timer.start();
@@ -4136,6 +4141,8 @@ class MethodSuggestionBox {
 		}
 	}
 	public Object[] search(String input) {
+		// JOptionPane.showMessageDialog(null,input);
+		
 		Object[] innerpackages=getInnerPackages(input);
 		Object[] classes = getClassesFromPackage(input);
 		Object[] allobjects=addMembersToMembers(innerpackages,classes);
