@@ -632,6 +632,8 @@ public class Main {
 		frame.setSize(800,600);
 		
 		textarea = new JTextAreaGroup();
+		targetArea = textarea;
+		
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
@@ -1301,10 +1303,28 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			ex.printStackTrace();
 		}
 	}
+	public javax.swing.text.JTextComponent targetArea = textarea;
 	//public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {
+	          		if (event.getID() == KeyEvent.KEY_TYPED) {
+	                    		SwingUtilities.invokeLater(() -> {
+                       			if(targetArea instanceof JTextArea) {
+                       				//((JTextArea)targetArea).append(String.valueOf(event.getKeyChar()));
+                       				((JTextArea)targetArea).dispatchEvent(event);
+                       			}
+                       			else if(targetArea instanceof JTextField) {
+                       				//KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,event.getKeyCode(),'.');
+                       				//((JTextField)targetArea).dispatchEvent(keyevent2);
+                       				((JTextField)targetArea).dispatchEvent(event);
+                       			}
+	                    		});
+	                	}
+	            	return false; // Don't consume the event
+	            });
+
 		functionLines.addActionListener( ev -> {
 			JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
 			textareagroup.showLines=true;
@@ -3910,6 +3930,7 @@ class AutoKeyListener {
 			*/
 			main.textarea.setText(first+input+second);
 			main.textarea.setCaretPosition(first.length()+input.length());
+			main.targetArea = main.textarea;
 			suggestionbox.dispose();
 	}
 	public JLabel getSelected() {
@@ -4883,16 +4904,4 @@ class RightClickJFrame {
 			ex.printStackTrace();
 		}
 	}
-}
-
-		
-		
-
-
-
-
-
-
-
-
-			
+}
