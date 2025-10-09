@@ -3696,6 +3696,7 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 	}
+	public String extra = "";
 	public void setListeners() {
 		suggestionbox.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
@@ -3707,6 +3708,7 @@ class AutoKeyListener {
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
+				extra=extra+keyevent.getKeyChar();
 				count=count+1;
 				System.out.println("A "+keyevent.getKeyChar());
 				//two_keys_code = keyevent.getKeyCode();
@@ -3789,7 +3791,8 @@ class AutoKeyListener {
 							fillComboBox();
 						}
 						else {
-							EnterText(input);
+							setExtra(input);
+							EnterTextPlusExtra(input);
 							if(keyevent.getKeyChar()=='.') {
 								main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
 								//main.curlybracekeylistener.keyPressed(keyevent);
@@ -3797,14 +3800,15 @@ class AutoKeyListener {
 								main.textarea.dispatchEvent(keyevent2);
 							}
 						}
-					//}
+					//}
+
 				}
 			}
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				
 			}
-		});
+		});		
 		panelgridlayout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
@@ -3814,6 +3818,12 @@ class AutoKeyListener {
 				}
 			}
 		});
+	}
+	public void setExtra(String extra) {
+		this.extra = extra;
+	}
+	public String getExtra() {
+		return extra;
 	}
 	public String getInput() {
 		return search_textfield.getText().trim();
@@ -3910,34 +3920,65 @@ class AutoKeyListener {
 		EnterText(input);
 	}
 	public void EnterText(String input) {
-			SwingUtilities.invokeLater(() -> {
-				main.targetArea = main.textarea;
-				String text = main.textarea.getText();
-				//JOptionPane.showMessageDialog(null,caretposition+"");
-		
-				if(caretposition > text.length()) {
-					suggestionbox.dispose();
-					return;
-				}	
-				String first=text.substring(0,caretposition);
-				// JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
-				
-				if((caretposition+variablename.length()) > text.length()) {
-					suggestionbox.dispose();
-					return;
-				}
-				String second = text.substring(caretposition+variablename.length(),text.length());
-				/*System.out.println("Start");
-				System.out.println(second);
-				System.out.println("End");
-				*/
-				main.textarea.setText(first+input+second);
-				main.textarea.setCaretPosition(first.length()+input.length());
-				
-				suggestionbox.setVisible(false);
-			});
+		SwingUtilities.invokeLater(() -> {
+			main.targetArea = main.textarea;
+			String text = main.textarea.getText();
+			//JOptionPane.showMessageDialog(null,caretposition+"");
+	
+			if(caretposition > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}	
+			String first=text.substring(0,caretposition);
+			// JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
 			
+			if((caretposition+variablename.length()) > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}
+			String second = text.substring(caretposition+variablename.length(),text.length());
+			/*System.out.println("Start");
+			System.out.println(second);
+			System.out.println("End");
+			*/
+			
+			main.textarea.setText(first+input+second);
+			main.textarea.setCaretPosition(first.length()+input.length());
+			
+			suggestionbox.setVisible(false);
+		});
 	}
+	public void EnterTextPlusExtra(String input) {
+		SwingUtilities.invokeLater(() -> {
+			main.targetArea = main.textarea;
+			String text = main.textarea.getText();
+			//JOptionPane.showMessageDialog(null,caretposition+"");
+	
+			if(caretposition > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}	
+			String first=text.substring(0,caretposition);
+			// JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
+			
+			if((caretposition+variablename.length()) > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}
+			String second = text.substring(caretposition+variablename.length(),text.length());
+			/*System.out.println("Start");
+			System.out.println(second);
+			System.out.println("End");
+			*/
+			String extra = getExtra();
+			
+			main.textarea.setText(first+extra+second);
+			main.textarea.setCaretPosition(first.length()+extra.length());
+			
+			suggestionbox.setVisible(false);
+		});
+	}
+
 	public JLabel getSelected() {
 		for(Component component:panelgridlayout.getComponents()) {
 			if(component instanceof JLabel) {
