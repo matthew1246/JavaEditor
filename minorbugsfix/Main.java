@@ -3431,6 +3431,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev)  {
+		System.out.println("C: "+ev.getKeyChar());
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
 			case KeyEvent.VK_SHIFT:
@@ -3498,6 +3499,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
+		System.out.println("D: "+ev.getKeyChar());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
 			positiontracker.add();
 		}
@@ -3685,6 +3687,7 @@ class AutoKeyListener {
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
 				count=count+1;
+				System.out.println("A "+keyevent.getKeyChar());
 				//two_keys_code = keyevent.getKeyCode();
 				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 					List<JLabel> labels=getLabels();
@@ -3738,6 +3741,7 @@ class AutoKeyListener {
 			@Override
 			public void keyReleased(KeyEvent keyevent) {
 				count_release=count_release+1;
+				System.out.println("B "+keyevent.getKeyChar());
 				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 					String text = main.textarea.getText();	
 					String selected = search_textfield.getText().trim();
@@ -3757,9 +3761,9 @@ class AutoKeyListener {
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 					String input = search_textfield.getText();
 					
-					System.out.println(count+ " "+count_release);
+					//System.out.println(count+ " "+count_release);
 						
-					if(count == count_release) {
+					//if(count == count_release) {
 						if(search(input)) {
 							fillComboBox();
 						}
@@ -3772,7 +3776,7 @@ class AutoKeyListener {
 								main.textarea.dispatchEvent(keyevent2);
 							}
 						}
-					}
+					//}
 				}
 			}
 			@Override
