@@ -105,7 +105,13 @@ public class Git {
 	}
 	public void setListeners() {
 		everythingbutthekitchensink.addActionListener(ev -> {
-			String command = "eval $(git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
+			String command = "eval $(";
+			// git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
+			for(String branch:getAllBranches()) {
+				command=command+"git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+branch+"; git push;\" refs/remotes; ";
+			}
+			command+=")";
+			
 			JOptionPane.showMessageDialog(null,command);
 			git(command);
 		});
