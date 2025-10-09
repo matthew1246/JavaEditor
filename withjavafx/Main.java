@@ -617,6 +617,7 @@ public class Main {
 		frame.setSize(800,600);
 		
 		textarea = new JTextAreaGroup();
+		targetArea = textarea;
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
@@ -1326,10 +1327,27 @@ public class Main {
 			ex.printStackTrace();
 		}
 	}
+	public javax.swing.text.JTextComponent targetArea = textarea;
 	public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {
+	          		if (event.getID() == KeyEvent.KEY_TYPED) {
+	                    		SwingUtilities.invokeLater(() -> {
+                       			if(targetArea instanceof JTextArea) {
+                       				//((JTextArea)targetArea).append(String.valueOf(event.getKeyChar()));
+                       				((JTextArea)targetArea).dispatchEvent(event);
+                       			}
+                       			else if(targetArea instanceof JTextField) {
+                       				//KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,event.getKeyCode(),'.');
+                       				//((JTextField)targetArea).dispatchEvent(keyevent2);
+                       				((JTextField)targetArea).dispatchEvent(event);
+                       			}
+	                    		});
+	                	}
+	            	return false; // Don't consume the event
+	            });
 		showlines.addActionListener( ev -> {
 			JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
 			textareagroup.showLines=!textareagroup.showLines;
@@ -4246,6 +4264,7 @@ class AutoKeyListener {
 		this.variablename = variablename;
 		this.caretposition = caretposition;
 		setLayout();
+		main.targetArea = search_textfield;
 		setListeners();
 		fillComboBox();
 		suggestionbox.setVisible(true);
@@ -4291,6 +4310,7 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 	}
+	public String extra = "";
 	public void setListeners() {
 		suggestionbox.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
@@ -4298,12 +4318,14 @@ class AutoKeyListener {
 			}
 		});
 		search_textfield.addKeyListener(new KeyListener() {
-			int two_keys_code = 0;
+			int count = 0;
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
-				two_keys=two_keys+keyevent.getKeyChar();
-				two_keys_code = keyevent.getKeyCode();
+				extra=extra+keyevent.getKeyChar();
+				count=count+1;
+				System.out.println("A "+keyevent.getKeyChar());
+				//two_keys_code = keyevent.getKeyCode();
 				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 					List<JLabel> labels=getLabels();
 					JLabel selected_label=getSelected();
@@ -4351,9 +4373,12 @@ class AutoKeyListener {
 					suggestionbox.dispose();
 				}
 			}
+			public int count_release = 0;
 			public boolean no_duplicate = false; 
 			@Override
 			public void keyReleased(KeyEvent keyevent) {
+				count_release=count_release+1;
+				System.out.println("B "+keyevent.getKeyChar());
 				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 					String text = main.textarea.getText();	
 					String selected = search_textfield.getText().trim();
@@ -4373,31 +4398,15 @@ class AutoKeyListener {
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 					String input = search_textfield.getText();
 					
-					final String two_keys_b = two_keys;
-					final int two_keys_code_b = two_keys_code;
-					if(input.length() < two_keys_b.length()) {
-						System.out.println("*"+two_keys_b+"*");
-						if(search(two_keys_b)) {
-							fillComboBox(two_keys_b);
-							
-							no_duplicate = false;
-						}
-						else {
-							EnterText(two_keys_b);
-							if(keyevent.getKeyChar()=='.') {
-								main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-								//main.curlybracekeylistener.keyPressed(keyevent);
-								KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,two_keys_code_b,'.');
-								main.textarea.dispatchEvent(keyevent2);
-							}
-						}
-					}
-					else {
+					//System.out.println(count+ " "+count_release);
+						
+					//if(count == count_release) {
 						if(search(input)) {
 							fillComboBox();
 						}
 						else {
-							EnterText(input);
+							setExtra(input);
+							EnterTextPlusExtra(input);
 							if(keyevent.getKeyChar()=='.') {
 								main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
 								//main.curlybracekeylistener.keyPressed(keyevent);
@@ -4405,7 +4414,7 @@ class AutoKeyListener {
 								main.textarea.dispatchEvent(keyevent2);
 							}
 						}
-					}
+					//}
 
 				}
 			}
@@ -4413,7 +4422,7 @@ class AutoKeyListener {
 			public void keyTyped(KeyEvent ke) {
 				
 			}
-		});
+		});		
 		panelgridlayout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
@@ -4423,6 +4432,12 @@ class AutoKeyListener {
 				}
 			}
 		});
+	}
+	public void setExtra(String extra) {
+		this.extra = extra;
+	}
+	public String getExtra() {
+		return extra;
 	}
 	public String getInput() {
 		return search_textfield.getText().trim();
@@ -4519,6 +4534,8 @@ class AutoKeyListener {
 		EnterText(input);
 	}
 	public void EnterText(String input) {
+		SwingUtilities.invokeLater(() -> {
+			main.targetArea = main.textarea;
 			String text = main.textarea.getText();
 			//JOptionPane.showMessageDialog(null,caretposition+"");
 	
@@ -4538,10 +4555,44 @@ class AutoKeyListener {
 			System.out.println(second);
 			System.out.println("End");
 			*/
+			
 			main.textarea.setText(first+input+second);
 			main.textarea.setCaretPosition(first.length()+input.length());
-			suggestionbox.dispose();
+			
+			suggestionbox.setVisible(false);
+		});
 	}
+	public void EnterTextPlusExtra(String input) {
+		SwingUtilities.invokeLater(() -> {
+			main.targetArea = main.textarea;
+			String text = main.textarea.getText();
+			//JOptionPane.showMessageDialog(null,caretposition+"");
+	
+			if(caretposition > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}	
+			String first=text.substring(0,caretposition);
+			// JOptionPane.showMessageDialog(null,text.substring(caretposition,caretposition+variablename.length()));
+			
+			if((caretposition+variablename.length()) > text.length()) {
+				suggestionbox.dispose();
+				return;
+			}
+			String second = text.substring(caretposition+variablename.length(),text.length());
+			/*System.out.println("Start");
+			System.out.println(second);
+			System.out.println("End");
+			*/
+			String extra = getExtra();
+			
+			main.textarea.setText(first+extra+second);
+			main.textarea.setCaretPosition(first.length()+extra.length());
+			
+			suggestionbox.setVisible(false);
+		});
+	}
+
 	public JLabel getSelected() {
 		for(Component component:panelgridlayout.getComponents()) {
 			if(component instanceof JLabel) {
@@ -4718,6 +4769,7 @@ class AutoKeyListener {
 		}
 	}
 }
+
 class MethodSuggestionBox {
 	public int replacelength = 1;
 	public int position;
