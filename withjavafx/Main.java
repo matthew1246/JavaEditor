@@ -4318,6 +4318,7 @@ class AutoKeyListener {
 			}
 		});
 		search_textfield.addKeyListener(new KeyListener() {
+			boolean isFinished = false;
 			int count = 0;
 			String two_keys = "";
 			@Override
@@ -4396,26 +4397,28 @@ class AutoKeyListener {
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-					String input = search_textfield.getText();
-					
-					//System.out.println(count+ " "+count_release);
+					if(!isFinished) {
+						String input = search_textfield.getText();
 						
-					//if(count == count_release) {
-						if(search(input)) {
-							fillComboBox();
-						}
-						else {
-							setExtra(input);
-							EnterTextPlusExtra(input);
-							if(keyevent.getKeyChar()=='.') {
-								main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-								//main.curlybracekeylistener.keyPressed(keyevent);
-								KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
-								main.textarea.dispatchEvent(keyevent2);
+						//System.out.println(count+ " "+count_release);
+							
+						//if(count == count_release) {
+							if(search(input)) {
+								fillComboBox();
 							}
-						}
-					//}
-
+							else {
+								isFinished=true;
+								setExtra(input);
+								EnterTextPlusExtra(input);
+								if(keyevent.getKeyChar()=='.') {
+									main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+									//main.curlybracekeylistener.keyPressed(keyevent);
+									KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
+									main.textarea.dispatchEvent(keyevent2);
+								}
+							}
+						//}
+					}
 				}
 			}
 			@Override
@@ -4769,6 +4772,7 @@ class AutoKeyListener {
 		}
 	}
 }
+
 
 class MethodSuggestionBox {
 	public int replacelength = 1;
