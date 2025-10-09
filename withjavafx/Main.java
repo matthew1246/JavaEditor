@@ -4410,12 +4410,6 @@ class AutoKeyListener {
 								isFinished=true;
 								setExtra(input);
 								EnterTextPlusExtra(input);
-								if(keyevent.getKeyChar()=='.') {
-									main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-									//main.curlybracekeylistener.keyPressed(keyevent);
-									KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,keyevent.getKeyCode(),'.');
-									main.textarea.dispatchEvent(keyevent2);
-								}
 							}
 						//}
 					}
@@ -4593,6 +4587,13 @@ class AutoKeyListener {
 			main.textarea.setCaretPosition(first.length()+extra.length());
 			
 			suggestionbox.setVisible(false);
+			
+			if(extra.charAt((extra.length()-1)) == '.') {
+				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+				//main.curlybracekeylistener.keyPressed(keyevent);
+				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
+				main.textarea.dispatchEvent(keyevent2);
+			}
 		});
 	}
 
@@ -4772,6 +4773,7 @@ class AutoKeyListener {
 		}
 	}
 }
+
 
 
 class MethodSuggestionBox {
