@@ -70,7 +70,7 @@ public class Git {
 		      	}
 	      	}
       	}
-      	
+      	public JButton everythingbutthekitchensink;
       	public JButton addtoall;
       	public JButton upload;
 	public JTextField input = new JTextField();
@@ -97,11 +97,18 @@ public class Git {
 		east.add(upload);
 		addtoall = new JButton("add to all");
 		east.add(addtoall);
+		everythingbutthekitchensink = new JButton("*");
+		east.add(everythingbutthekitchensink);
 		frame.getContentPane().add(east,BorderLayout.EAST);
 		
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		everythingbutthekitchensink.addActionListener(ev -> {
+			String command = "eval $(git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
+			JOptionPane.showMessageDialog(null,command);
+			git(command);
+		});
 		addtoall.addActionListener( (ev) -> {
 			String command = "eval $(git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
 			JOptionPane.showMessageDialog(null,command);
@@ -274,4 +281,4 @@ public class Git {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
