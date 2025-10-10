@@ -215,7 +215,13 @@ public JButton everythingbutthekitchensink;
 		Process process=commandline.run("git for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/",root_directory);
 		DisplayOutput displayoutput = new DisplayOutput();
 		String substring = displayoutput.Multiline(process);
-		return substring.split("\\r?\\n|\\r");
+		String[] allbranches= substring.split("\\r?\\n|\\r");
+		java.util.List<String> branches2=new java.util.ArrayList<String>();
+		for(String branch:allbranches) {
+			if(!branch.contains("/"))
+				branches2.add(branch);
+		}
+		return branches2.toArray(new String[branches2.size()]);
 	}
 	public String getMainBranch() {
 		CommandLine commandline = new CommandLine();
