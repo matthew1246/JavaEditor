@@ -218,7 +218,7 @@ public JButton everythingbutthekitchensink;
 		String[] allbranches= substring.split("\\r?\\n|\\r");
 		java.util.List<String> branches2=new java.util.ArrayList<String>();
 		for(String branch:allbranches) {
-			if(!branch.contains("/"))
+			if(!branch.contains("/") && !branch.equals("origin"))
 				branches2.add(branch);
 		}
 		return branches2.toArray(new String[branches2.size()]);
