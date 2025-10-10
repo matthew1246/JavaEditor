@@ -3470,7 +3470,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) || (methodsuggestionbox != null && methodsuggestionbox.isVisible()) ) {
+		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 				//JOptionPane.showMessageDialog(null,"two characters");
 							
@@ -4158,6 +4158,15 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 	}
+	public boolean isVisible() {
+		if(suggestionbox != null && suggestionbox.isVisible()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 }
 class MethodSuggestionBox {
 	public int replacelength = 1;
