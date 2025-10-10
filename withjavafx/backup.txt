@@ -56,7 +56,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 10164
+    "caretposition": 10317
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
     "starterclass": "",
