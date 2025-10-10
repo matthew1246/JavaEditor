@@ -4045,7 +4045,6 @@ class OpenActionListener implements ActionListener {
 
 class CurlyBraceKeyListener implements KeyListener {
 	public Main main;
-
 	protected Tracker tracker;
 	public RenameVariable renamevariable;
 	public CurlyBraceKeyListener(Main main) {
@@ -4067,6 +4066,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev)  {
+		System.out.println("C: "+ev.getKeyChar());
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
 			case KeyEvent.VK_SHIFT:
@@ -4085,7 +4085,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) || (methodsuggestionbox != null && methodsuggestionbox.isVisible()) ) {
+		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 				//JOptionPane.showMessageDialog(null,"two characters");
 							
@@ -4134,6 +4134,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
+		System.out.println("D: "+ev.getKeyChar());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
 			positiontracker.add();
 		}
@@ -4236,6 +4237,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	}	
 
 }
+
 /*
 ** This is a Variable Automatic Suggestion Box.
 */
@@ -4772,9 +4774,15 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 	}
+	public boolean isVisible() {
+		if(suggestionbox != null && suggestionbox.isVisible()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
-
-
 
 class MethodSuggestionBox {
 	public int replacelength = 1;
