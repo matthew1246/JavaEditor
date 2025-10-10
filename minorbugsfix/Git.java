@@ -70,7 +70,8 @@ public class Git {
 		      	}
 	      	}
       	}
-      	public JButton everythingbutthekitchensink;
+      	
+public JButton everythingbutthekitchensink;
       	public JButton addtoall;
       	public JButton upload;
 	public JTextField input = new JTextField();
@@ -217,7 +218,7 @@ public class Git {
 		String[] allbranches= substring.split("\\r?\\n|\\r");
 		java.util.List<String> branches2=new java.util.ArrayList<String>();
 		for(String branch:allbranches) {
-			if(!branch.contains("/"))
+			if(!branch.contains("/") && !branch.equals("origin"))
 				branches2.add(branch);
 		}
 		return branches2.toArray(new String[branches2.size()]);
@@ -297,4 +298,4 @@ public class Git {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
