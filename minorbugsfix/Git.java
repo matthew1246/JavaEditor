@@ -244,7 +244,7 @@ public class Git {
 			public void run() {
 				CommandLine commandline = new CommandLine();
 				// commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'git status; exec bash\'",root_directory);
-				String echo ="echo \""+command+"\"; ";	
+				String echo ="echo "+command+"; ";	
 				commandline.run("\"C:\\Program Files\\Git\\git-bash.exe\" -c \'"+echo+command+"; exec bash\'",directory);
 			}
 		};
