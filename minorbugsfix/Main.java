@@ -3828,7 +3828,7 @@ class AutoKeyListener {
 	public void fillData() {
 		List<String> variablenames = new ArrayList<String>();
 		String text = main.textarea.getText();
-		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[0-9a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
+		Pattern pattern2=Pattern.compile("((\\s+\\b(public|protected|private)\\b)?\\s+[\\[\\]0-9a-zA-Z<>]+\\s+([a-zA-Z0-9_]+)(?=\\s*=|;))");
 		Matcher matcher2=pattern2.matcher(text.substring(0,caretposition));
 		while(matcher2.find()) {
 			variablenames.add(0,matcher2.group(4));			
