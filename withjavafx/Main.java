@@ -4458,12 +4458,27 @@ class AutoKeyListener {
 		Matcher matcher = pattern.matcher(text);
 		while (matcher.find()) {
 		    String params = matcher.group(1); // everything inside ()
-		    String[] paramList = params.split(",");
-		    for (String param : paramList) {
-		        param = param.trim();
-		        String type = param.replaceAll("\\s+\\w+$", ""); // remove variable name
-		        variablenames.add(type);
+		    if(params.contains(":"))
+		    {
+	    	    	String[] params2=params.split(":");
+	    	    	if(params2.length > 0) {
+	    	    		String param =params2[0];
+	    	    		Pattern variablewithoutsemicolon=Pattern.compile("[a-zA-Z0-9]+\\s+([a-zA-Z0-9]+)\\z");
+	    	    		Matcher matcher4=variablewithoutsemicolon.matcher(param);
+	    	    		if(matcher4.find()) {
+	    	    			variablenames.add(matcher4.group(1));
+    	    			}
+        			}
+	    	    }
+	    	    else {
+			    String[] paramList = params.split(",");
+			    for (String param : paramList) {
+			        param = param.trim();
+			        String type = param.replaceAll("\\s+\\w+$", ""); // remove variable name
+			        variablenames.add(type);
+			    }
 		    }
+
 		}
 		
 		data=variablenames;
@@ -4782,7 +4797,9 @@ class AutoKeyListener {
 			return false;
 		}
 	}
+
 }
+
 
 class MethodSuggestionBox {
 	public int replacelength = 1;
