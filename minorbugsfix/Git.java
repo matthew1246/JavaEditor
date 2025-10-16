@@ -13,12 +13,39 @@ public class Git {
 		if(isGitInstalled()) {
 			isGitInstalled = true;
 			if(isFileInsideGitRepository(fileName)) {
+				setWhereIsGitBashDotExe();
 				isVisible = true;
 				Change(fileName);
 				setLayout();
 			      	setListeners();
 		      	}
 	      	}
+	}
+	public String gitbashdotexe = "";
+	public boolean setWhereIsGitBashDotExe() {
+		String[] commonPaths = {
+		    "C:\\Program Files\\Git\\git-bash.exe",
+		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
+		};
+		
+		for(String path : commonPaths) {
+			File file = new File(path);
+		    	if (file.exists()) {
+		        		gitbashdotexe=file.getAbsolutePath();
+		    		return true;		
+		    	}
+	    	}
+		String[] options={"Yes","No"};
+		int option=JOptionPane.showOptionDialog(null,"Where is git-bash.exe installed?","Do you want to set where git-bash.exe is?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		switch(option) {
+			case JOptionPane.YES_OPTION:
+				JFileChooser filechooser = new JFileChooser();
+				break;
+			case JOptionPane.NO_OPTION:
+				JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
+				return false;
+				break;			
+		}		
 	}
 	public boolean isFileInsideGitRepository(String fileName) {
 		if(fileName.equals(""))
@@ -298,4 +325,4 @@ public JButton everythingbutthekitchensink;
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
