@@ -4679,6 +4679,7 @@ class MethodSuggestionBox {
 						}
 					}
 				}
+				public String ifSearchTwice = "";
 				@Override
 				public void keyReleased(KeyEvent keyevent) {
 					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
@@ -4689,9 +4690,8 @@ class MethodSuggestionBox {
 						String selected = selected_label2.getText();
 						CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
 						
-						/*if(!ifdotbefore.equals(""))
-							selected=ifdotbefore+"."+selected;
-						*/
+						if(!ifSearchTwice.equals(""))
+							selected=ifSearchTwice+"."+selected;
 						String firsthalf=text.substring(0,caretposition)+"."+selected;
 						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 						///String second =text.substring(caretposition+1,text.length());
@@ -4714,8 +4714,10 @@ class MethodSuggestionBox {
 							if(methodname.length() > 0 && (methodname.substring(methodname.length()-1,methodname.length())).equals(".")) {
 								String output=currentline+".";
 								String output2=methodname;
-								if(methodname.endsWith("."))
-									output2=methodname.substring(0,(methodname.length()-1));	
+								if(methodname.endsWith(".")) {
+									output2=methodname.substring(0,(methodname.length()-1));
+									ifSearchTwice =output2;	
+								}		
 								ifdotbefore=output2;
 								
 								output=output+output2;	
