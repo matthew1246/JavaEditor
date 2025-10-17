@@ -4383,7 +4383,7 @@ class AutoKeyListener {
 				count_release=count_release+1;
 				System.out.println("B "+keyevent.getKeyChar());
 				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-					isFinished = true;
+					isFinished= true;
 					String text = main.textarea.getText();	
 					String selected = search_textfield.getText().trim();
 					JLabel selected_label2 =getSelected();
@@ -4405,16 +4405,21 @@ class AutoKeyListener {
 						
 						//System.out.println(count+ " "+count_release);
 							
-						//if(count == count_release) {
+						if(input.length() > 0 && input.charAt((input.length()-1)) != '.') {
 							if(search(input)) {
 								fillComboBox();
 							}
 							else {
 								isFinished=true;
 								setExtra(input);
-								EnterTextPlusExtra(input);
+								EnterTextPlusExtra();
 							}
-						//}
+						}
+						else if(input.length() > 0 && (input.charAt((input.length()-1)) == '.') ) {
+							isFinished=true;
+							setExtra(input);
+							EnterTextPlusExtra();
+						}
 					}
 				}
 			}
@@ -4577,7 +4582,7 @@ class AutoKeyListener {
 			suggestionbox.setVisible(false);
 		});
 	}
-	public void EnterTextPlusExtra(String input) {
+	public void EnterTextPlusExtra() {
 		SwingUtilities.invokeLater(() -> {
 			main.targetArea = main.textarea;
 			String text = main.textarea.getText();
