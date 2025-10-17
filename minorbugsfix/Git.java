@@ -1,3 +1,4 @@
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -11,9 +12,8 @@ public class Git {
 	public JFrame frame=new JFrame();
 	public Git(String fileName) {
 		if(isGitInstalled()) {
-			isGitInstalled = true;
-			if(isFileInsideGitRepository(fileName)) {
-				//setWhereIsGitBashDotExe();
+			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
+				isGitInstalled = true;
 				isVisible = true;
 				Change(fileName);
 				setLayout();
@@ -22,7 +22,7 @@ public class Git {
 	      	}
 	}
 	public String gitbashdotexe = "";
-	public boolean setWhereIsGitBashDotExe() {
+	public boolean setWhereIsGitBashDotExe(String fileName) {
 		String[] commonPaths = {
 		    "C:\\Program Files\\Git\\git-bash.exe",
 		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
@@ -39,12 +39,37 @@ public class Git {
 		int option=JOptionPane.showOptionDialog(null,"Where is git-bash.exe installed?","Do you want to set where git-bash.exe is?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 		switch(option) {
 			case JOptionPane.YES_OPTION:
-				JFileChooser filechooser = new JFileChooser();
-				return true;
+				String dir = fileName;
+				if(!fileName.equals("")) {
+					dir = fileName.replaceAll("[^\\\\]+\\.java","");
+				}
+				else {
+					dir = System.getProperty("user.home");
+				}
+				JFileChooser filechooser = new JFileChooser(new File(dir));
+				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open git-bash.exe","exe");
+				filechooser.setFileFilter(filenameextensionfilter);
+				int result = filechooser.showOpenDialog(null);
+		                       if(result == JFileChooser.APPROVE_OPTION) {
+                       			File selectedFile = filechooser.getSelectedFile();
+                       			gitbashdotexe = selectedFile.getAbsolutePath();
+					if(gitbashdotexe.endsWith("git-bash.exe")) {
+						return true;
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
+						return false;
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
+					return false;
+				}
 			case JOptionPane.NO_OPTION:
 				JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 				return false;
 		}
+		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 		return false;		
 	}
 	public boolean isFileInsideGitRepository(String fileName) {
