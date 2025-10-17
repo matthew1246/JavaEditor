@@ -4383,6 +4383,7 @@ class AutoKeyListener {
 				count_release=count_release+1;
 				System.out.println("B "+keyevent.getKeyChar());
 				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
+					isFinished = true;
 					String text = main.textarea.getText();	
 					String selected = search_textfield.getText().trim();
 					JLabel selected_label2 =getSelected();
