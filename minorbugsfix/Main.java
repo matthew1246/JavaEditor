@@ -3789,16 +3789,21 @@ class AutoKeyListener {
 						
 						//System.out.println(count+ " "+count_release);
 							
-						//if(count == count_release) {
+						if(input.charAt((extra.length()-1)) != '.') {
 							if(search(input)) {
 								fillComboBox();
 							}
 							else {
 								isFinished=true;
 								setExtra(input);
-								EnterTextPlusExtra(input);
+								EnterTextPlusExtra();
 							}
-						//}
+						}
+						else {  //if(extra.charAt((extra.length()-1)) == '.') {
+							isFinished=true;
+							setExtra(input);
+							EnterTextPlusExtra();
+						}
 					}
 				}
 			}
@@ -3960,7 +3965,7 @@ class AutoKeyListener {
 			suggestionbox.setVisible(false);
 		});
 	}
-	public void EnterTextPlusExtra(String input) {
+	public void EnterTextPlusExtra() {
 		SwingUtilities.invokeLater(() -> {
 			main.targetArea = main.textarea;
 			String text = main.textarea.getText();
