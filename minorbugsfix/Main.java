@@ -3789,7 +3789,7 @@ class AutoKeyListener {
 						
 						//System.out.println(count+ " "+count_release);
 							
-						if(input.charAt((extra.length()-1)) != '.') {
+						if(input.length() > 0 && input.charAt((input.length()-1)) != '.') {
 							if(search(input)) {
 								fillComboBox();
 							}
@@ -3799,7 +3799,7 @@ class AutoKeyListener {
 								EnterTextPlusExtra();
 							}
 						}
-						else {  //if(extra.charAt((extra.length()-1)) == '.') {
+						else if(input.length() > 0 && (input.charAt((input.length()-1)) == '.') ) {
 							isFinished=true;
 							setExtra(input);
 							EnterTextPlusExtra();
