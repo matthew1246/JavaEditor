@@ -22,10 +22,10 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2383
+    "caretposition": 1069
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "Main",

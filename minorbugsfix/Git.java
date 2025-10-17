@@ -36,16 +36,10 @@ public class Git {
 		    	}
 	    	}
 		String[] options={"Yes","No"};
-		int option=JOptionPane.showOptionDialog(null,"Where is git-bash.exe installed?","Do you want to set where git-bash.exe is?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		int option=JOptionPane.showOptionDialog(null,"Do you want to set where git-bash.exe is?","Where is git-bash.exe installed?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 		switch(option) {
 			case JOptionPane.YES_OPTION:
-				String dir = fileName;
-				if(!fileName.equals("")) {
-					dir = fileName.replaceAll("[^\\\\]+\\.java","");
-				}
-				else {
-					dir = System.getProperty("user.home");
-				}
+				String dir =  System.getenv("ProgramFiles");
 				JFileChooser filechooser = new JFileChooser(new File(dir));
 				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open git-bash.exe","exe");
 				filechooser.setFileFilter(filenameextensionfilter);
