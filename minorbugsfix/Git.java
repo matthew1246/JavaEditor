@@ -13,7 +13,7 @@ public class Git {
 		if(isGitInstalled()) {
 			isGitInstalled = true;
 			if(isFileInsideGitRepository(fileName)) {
-				setWhereIsGitBashDotExe();
+				//setWhereIsGitBashDotExe();
 				isVisible = true;
 				Change(fileName);
 				setLayout();
@@ -40,12 +40,12 @@ public class Git {
 		switch(option) {
 			case JOptionPane.YES_OPTION:
 				JFileChooser filechooser = new JFileChooser();
-				break;
+				return true;
 			case JOptionPane.NO_OPTION:
 				JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 				return false;
-				break;			
-		}		
+		}
+		return false;		
 	}
 	public boolean isFileInsideGitRepository(String fileName) {
 		if(fileName.equals(""))
