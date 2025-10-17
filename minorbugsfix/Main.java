@@ -4702,11 +4702,13 @@ class MethodSuggestionBox {
 						}
 					}
 				}
+				public boolean isFinished = false;
 				public String ifSearchTwice = "";
 				@Override
 				public void keyReleased(KeyEvent keyevent) {
 					System.out.println("G");
 					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
+						isFinished = true;
 						main.targetArea = main.textarea;
 						suggestionbox.setVisible(false);
 						String text = main.textarea.getText();
@@ -4727,38 +4729,79 @@ class MethodSuggestionBox {
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 						String methodname0=search_textfield.getText();
 						setExtra(methodname0);
-						Timer timer = new Timer(100, ev -> {
-							String methodname = getExtra();
-							
-							/*if(!two_keys.equals(methodname)) {
-								methodname = two_keys;
-							}*/
-							liveiterator.reset();
-							while(liveiterator.hasNext()) {
-								JLabel label = liveiterator.next();
-								panelgridlayout.remove(label);
-							}
-							
-							if(methodname.length() > 0 && (methodname.substring(methodname.length()-1,methodname.length())).equals(".")) {
-								String output=currentline+".";
-								String output2=methodname;
-								if(methodname.endsWith(".")) {
-									output2=methodname.substring(0,(methodname.length()-1));
-									ifSearchTwice =output2;	
-								}		
-								ifdotbefore=output2;
+						if(!isFinished) {
+							Timer timer = new Timer(100, ev -> {
+								String methodname = getExtra();
 								
-								output=output+output2;	
-								//currentline=output;
-								Object[] allobjects2=MethodSuggestionBox.this.search(output);
-								if(allobjects2.length == 0) {
-									main.targetArea = main.textarea;
+								/*if(!two_keys.equals(methodname)) {
+									methodname = two_keys;
+								}*/
+								liveiterator.reset();
+								while(liveiterator.hasNext()) {
+									JLabel label = liveiterator.next();
+									panelgridlayout.remove(label);
+								}
+								
+								if(methodname.length() > 0 && (methodname.substring(methodname.length()-1,methodname.length())).equals(".")) {
+									String output=currentline+".";
+									String output2=methodname;
+									if(methodname.endsWith(".")) {
+										output2=methodname.substring(0,(methodname.length()-1));
+										ifSearchTwice =output2;	
+									}		
+									ifdotbefore=output2;
 									
+									output=output+output2;	
+									//currentline=output;
+									Object[] allobjects2=MethodSuggestionBox.this.search(output);
+									if(allobjects2.length == 0) {
+										isFinished = true;
+										main.targetArea = main.textarea;
+										
+										//String selected = keys_typed;
+										String selected = methodname;
+										/*if(!ifSearchTwice.equals(""))
+												selected=ifSearchTwice+"."+selected;
+										*/
+										String firsthalf=text.substring(0,caretposition)+"."+selected;
+										//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
+										String second =text.substring(caretposition,text.length());
+										main.textarea.setText(firsthalf+second);
+										main.textarea.setCaretPosition(caretposition+1+selected.length());	
+										suggestionbox.setVisible(false);
+										return;
+	
+									}
+										
+									methods2=allobjects2;
+									labels2=getLabels(allobjects2);
+									selected_index = 0;
+								}
+						
+								liveiterator = new LiveIterator<JLabel>(labels2);	
+								
+								if(keyevent.getKeyCode() != KeyEvent.VK_PERIOD) {
+									String searchy = methodname.toLowerCase();
+									if(methodname.contains(".")) {
+										String[] properties=searchy.split("\\.");
+										searchy = properties[(properties.length-1)];
+									}
+									for(JLabel label:labels2) {	
+										if( ! (label.getText().toLowerCase().startsWith(searchy)) ) {
+											liveiterator.remove(label);
+										}
+									}
+									labels2=liveiterator.list.toArray(new JLabel[liveiterator.list.size()]);
+									selected_index = 0;
+								}
+								if(labels2.length == 0) {
 									//String selected = keys_typed;
 									String selected = methodname;
 									/*if(!ifSearchTwice.equals(""))
 											selected=ifSearchTwice+"."+selected;
 									*/
+									isFinished = true;
+									main.targetArea = main.textarea;
 									String firsthalf=text.substring(0,caretposition)+"."+selected;
 									//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 									String second =text.substring(caretposition,text.length());
@@ -4766,65 +4809,28 @@ class MethodSuggestionBox {
 									main.textarea.setCaretPosition(caretposition+1+selected.length());	
 									suggestionbox.setVisible(false);
 									return;
-
 								}
-									
-								methods2=allobjects2;
-								labels2=getLabels(allobjects2);
-								selected_index = 0;
-							}
-					
-							liveiterator = new LiveIterator<JLabel>(labels2);	
-							
-							if(keyevent.getKeyCode() != KeyEvent.VK_PERIOD) {
-								String searchy = methodname.toLowerCase();
-								if(methodname.contains(".")) {
-									String[] properties=searchy.split("\\.");
-									searchy = properties[(properties.length-1)];
+								
+								gridlayout.setRows(liveiterator.list.size()+1);
+								liveiterator.reset();
+								while(liveiterator.hasNext()) {
+									JLabel label = liveiterator.next();
+									panelgridlayout.add(label);
 								}
-								for(JLabel label:labels2) {	
-									if( ! (label.getText().toLowerCase().startsWith(searchy)) ) {
-										liveiterator.remove(label);
-									}
+								if(!isSelected()) {
+									selected_index = 0;
+									JLabel label5 = labels2[selected_index];	
+									label5.setOpaque(true);
+									label5.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 								}
-								labels2=liveiterator.list.toArray(new JLabel[liveiterator.list.size()]);
-								selected_index = 0;
-							}
-							if(labels2.length == 0) {
-								//String selected = keys_typed;
-								String selected = methodname;
-								/*if(!ifSearchTwice.equals(""))
-										selected=ifSearchTwice+"."+selected;
-								*/
-								main.targetArea = main.textarea;
-								String firsthalf=text.substring(0,caretposition)+"."+selected;
-								//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
-								String second =text.substring(caretposition,text.length());
-								main.textarea.setText(firsthalf+second);
-								main.textarea.setCaretPosition(caretposition+1+selected.length());	
-								suggestionbox.setVisible(false);
-								return;
-							}
-							
-							gridlayout.setRows(liveiterator.list.size()+1);
-							liveiterator.reset();
-							while(liveiterator.hasNext()) {
-								JLabel label = liveiterator.next();
-								panelgridlayout.add(label);
-							}
-							if(!isSelected()) {
-								selected_index = 0;
-								JLabel label5 = labels2[selected_index];	
-								label5.setOpaque(true);
-								label5.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
-							}
-							
-							panelgridlayout.validate();
-							panelgridlayout.repaint();
-							suggestionbox.pack();	
-						});
-						timer.setRepeats(false);
-						timer.start();
+								
+								panelgridlayout.validate();
+								panelgridlayout.repaint();
+								suggestionbox.pack();	
+							});
+							timer.setRepeats(false);
+							timer.start();
+						}
 					}
 				}
 				public boolean isSelected() {
