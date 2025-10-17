@@ -4599,7 +4599,12 @@ class MethodSuggestionBox {
 			}
 		}	
 		return strings;
-	}																																																																																																																																								
+	}																								public String extra = "";																					public void setExtra(String input) {
+		extra = input;
+	}
+	public String getExtra() {
+		return extra;
+	}														
 	/*
 	** Old method signature for show() was:
 	** public void Popup(Class<?> classquestionmark,int caretposition) {
@@ -4636,7 +4641,7 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
-				public String keys_typed = "";
+				// public String keys_typed = "";
 				public String two_keys = ""; 
 				boolean justStarted = true;	
 				Object[] methods2=methods;	
@@ -4647,7 +4652,7 @@ class MethodSuggestionBox {
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
 					System.out.println("F");		
-					keys_typed = keys_typed+keyevent.getKeyChar();
+					setExtra(getExtra()+keyevent.getKeyChar());
 					//two_keys = two_keys+keyevent.getKeyChar();
 					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
 						suggestionbox.dispose();
@@ -4720,8 +4725,11 @@ class MethodSuggestionBox {
 						main.textarea.setCaretPosition(caretposition+1+selected.length());
 					}
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+						String methodname0=search_textfield.getText();
+						setExtra(methodname0);
 						Timer timer = new Timer(100, ev -> {
-							String methodname=search_textfield.getText();
+							String methodname = getExtra();
+							
 							/*if(!two_keys.equals(methodname)) {
 								methodname = two_keys;
 							}*/
@@ -4745,9 +4753,20 @@ class MethodSuggestionBox {
 								Object[] allobjects2=MethodSuggestionBox.this.search(output);
 								if(allobjects2.length == 0) {
 									main.targetArea = main.textarea;
+									
+									//String selected = keys_typed;
+									String selected = methodname;
+									/*if(!ifSearchTwice.equals(""))
+											selected=ifSearchTwice+"."+selected;
+									*/
+									String firsthalf=text.substring(0,caretposition)+"."+selected;
+									//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
+									String second =text.substring(caretposition,text.length());
+									main.textarea.setText(firsthalf+second);
+									main.textarea.setCaretPosition(caretposition+1+selected.length());	
 									suggestionbox.setVisible(false);
-									main.textarea.setCaretPosition((caretposition+1));
 									return;
+
 								}
 									
 								methods2=allobjects2;
@@ -4772,7 +4791,8 @@ class MethodSuggestionBox {
 								selected_index = 0;
 							}
 							if(labels2.length == 0) {
-								String selected = keys_typed;
+								//String selected = keys_typed;
+								String selected = methodname;
 								/*if(!ifSearchTwice.equals(""))
 										selected=ifSearchTwice+"."+selected;
 								*/
