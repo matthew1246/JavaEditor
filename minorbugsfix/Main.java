@@ -4635,6 +4635,7 @@ class MethodSuggestionBox {
 			labels[0].setOpaque(true);
 			labels[0].setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 			KeyListener keylistener = new KeyListener() {
+				public String keys_typed = "";
 				public String two_keys = ""; 
 				boolean justStarted = true;	
 				Object[] methods2=methods;	
@@ -4644,6 +4645,8 @@ class MethodSuggestionBox {
 				int selected_index = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
+					System.out.println("F");		
+					keys_typed = keys_typed+keyevent.getKeyChar();
 					//two_keys = two_keys+keyevent.getKeyChar();
 					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
 						suggestionbox.dispose();
@@ -4696,6 +4699,7 @@ class MethodSuggestionBox {
 				public String ifSearchTwice = "";
 				@Override
 				public void keyReleased(KeyEvent keyevent) {
+					System.out.println("G");
 					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 						suggestionbox.dispose();
 						String text = main.textarea.getText();
@@ -4765,17 +4769,11 @@ class MethodSuggestionBox {
 								selected_index = 0;
 							}
 							if(labels2.length == 0) {
-								/*suggestionbox.dispose();
-								main.textarea.setCaretPosition((caretposition+1));	
+								String selected = keys_typed;
+								/*if(!ifSearchTwice.equals(""))
+										selected=ifSearchTwice+"."+selected;
 								*/
-								/*
-								String selected = selected_label2.getText();
-								if(!ifdotbefore.equals(""))
-								*/
-								String selected = methodname;
-								/*if(!ifdotbefore.equals(""))
-									selected=ifdotbefore+"."+selected;
-								*/
+								
 								String firsthalf=text.substring(0,caretposition)+"."+selected;
 								//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 								String second =text.substring(caretposition,text.length());
