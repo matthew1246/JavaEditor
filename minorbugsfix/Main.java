@@ -4624,6 +4624,7 @@ class MethodSuggestionBox {
 			GridLayout gridlayout=new GridLayout(methods.length+1,1);
 			panelgridlayout.setLayout(gridlayout);
 			search_textfield=new JTextField();
+			
 			panelgridlayout.add(search_textfield);
 			JLabel[] labels = new JLabel[methods.length];
 			for(int i = 0; i < methods.length; i++) {
@@ -4701,7 +4702,8 @@ class MethodSuggestionBox {
 				public void keyReleased(KeyEvent keyevent) {
 					System.out.println("G");
 					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-						suggestionbox.dispose();
+						main.targetArea = main.textarea;
+						suggestionbox.setVisible(false);
 						String text = main.textarea.getText();
 						// String selected = search_textfield.getText().trim();
 						JLabel selected_label2 =labels2[selected_index];
@@ -4742,7 +4744,8 @@ class MethodSuggestionBox {
 								//currentline=output;
 								Object[] allobjects2=MethodSuggestionBox.this.search(output);
 								if(allobjects2.length == 0) {
-									suggestionbox.dispose();
+									main.targetArea = main.textarea;
+									suggestionbox.setVisible(false);
 									main.textarea.setCaretPosition((caretposition+1));
 									return;
 								}
@@ -4773,13 +4776,13 @@ class MethodSuggestionBox {
 								/*if(!ifSearchTwice.equals(""))
 										selected=ifSearchTwice+"."+selected;
 								*/
-								
+								main.targetArea = main.textarea;
 								String firsthalf=text.substring(0,caretposition)+"."+selected;
 								//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 								String second =text.substring(caretposition,text.length());
 								main.textarea.setText(firsthalf+second);
 								main.textarea.setCaretPosition(caretposition+1+selected.length());	
-								suggestionbox.dispose();
+								suggestionbox.setVisible(false);
 								return;
 							}
 							
@@ -4814,6 +4817,9 @@ class MethodSuggestionBox {
 				@Override
 				public void keyTyped(KeyEvent ev) { }
 			};
+			
+			main.targetArea=search_textfield;
+			
 			search_textfield.addKeyListener(keylistener);
 			//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
 			suggestionbox.add(scrollpane);
