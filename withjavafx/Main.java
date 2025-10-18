@@ -3586,6 +3586,9 @@ public class Main {
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 					}
+					else if(result == JFileChooser.CANCEL_OPTION) {
+						return;
+					}	
 				}
 				fileName=fileNames.get(tabbedpane.getSelectedIndex());
 				//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
