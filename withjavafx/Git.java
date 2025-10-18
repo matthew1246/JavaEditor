@@ -296,7 +296,7 @@ public JButton everythingbutthekitchensink;
 				//.replace(")", "\\)")
 				+"\"; ";	
 				System.out.println(echo);
-				commandline.run("\"C:\\Program Files\\Git\\git-bash.exe\" -c \'"+echo+command+"; exec bash\'",directory);
+				commandline.run("\""+gitbashdotexe+"\" -c \'"+echo+command+"; exec bash\'",directory);
 			}
 		};
 		thread.start();
