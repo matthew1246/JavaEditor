@@ -1603,8 +1603,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 						}
 						else {
-							allversionsjar.Compile(22);	
-							allversionsjar.MakeJarUsingmsdos(22,main);	
+							for(int i = 18; i <= 22; i++) {
+								allversionsjar.Compile(i);	
+								allversionsjar.MakeJarUsingmsdos(i,main);	
+							}
 						}
 					});
 				
