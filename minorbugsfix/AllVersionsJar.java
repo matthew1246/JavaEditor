@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import java.io.File;
 /*
 ** This generates all versions of Java for Jars
 */
@@ -73,9 +74,11 @@ public class AllVersionsJar {
 		AllFiles allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete()));
 	}
-	public void MakeJarUsingmsdos(int javaversionnumber) {
+	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+			File file = new File(dir);
+			File parentdirectory=file.getParentFile();
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .";
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
 			Process process=commandline.run(input,dir);
