@@ -1575,6 +1575,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					panelversion.add(combobox);
 					JButton compiley = new JButton("compile");
 					panelversion.add(compiley);
+					panelversion.add(Box.createHorizontalStrut(9999));
+					JButton compileallversions = new JButton("Make Jars for all Versions");
+					panelversion.add(compileallversions);
+					
 					getjavaversion.add(panelversion);
 					getjavaversion.pack();
 					getjavaversion.setVisible(true);
