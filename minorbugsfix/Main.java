@@ -1600,7 +1600,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
-						JOptionPane.showMessageDialog(null,"*"+main+"*");
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 						}
