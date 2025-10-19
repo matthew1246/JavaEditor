@@ -1565,9 +1565,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			switch(option) {
 				case JOptionPane.YES_OPTION:
 					JFrame getjavaversion = new JFrame();
-					JPanel panelversion = new JPanel(new FlowLayout(FlowLayout.LEFT));
-					JPanel boxpanel = new JPanel();
-					boxpanel.setLayout(new BoxLayout(boxpanel,BoxLayout.Y_AXIS));
+					JPanel panelversion = new JPanel();
+					JPanel panel2 = new JPanel();
 					JLabel label = new JLabel("Version of Java:");
 					panelversion.add(label);
 					JComboBox<Integer> combobox = new JComboBox<Integer>();
@@ -1579,11 +1578,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					JButton compiley = new JButton("compile");
 					panelversion.add(compiley);
 					
-					boxpanel.add(panelversion);
+					getjavaversion.add(panelversion);
 					JButton compileallversions = new JButton("Make Jars for all Versions");
-					boxpanel.add(compileallversions);
+					panel2.add(compileallversions);
 					
-					getjavaversion.add(boxpanel);
+					getjavaversion.add(panel2);
 					getjavaversion.pack();
 					getjavaversion.setVisible(true);
 				
