@@ -1,4 +1,5 @@
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 /*
 ** This generates all versions of Java for Jars
 */
@@ -65,6 +66,38 @@ public class AllVersionsJar {
 			//output.write("\n");
 			output.close();
 		} catch(java.io.IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public boolean isMatthewJavaEditor(String main_class) {
+		AllFiles allfiles = new AllFiles(main_class,dir);
+		return (allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete()));
+	}
+	public void MakeJarUsingmsdos(int javaversionnumber) {
+		try {
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+			JOptionPane.showMessageDialog(null,input);
+			CommandLine commandline = new CommandLine();
+			Process process=commandline.run(input,dir);
+			
+			java.io.InputStream inputstream = process.getErrorStream();
+			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);
+			java.io.BufferedReader bufferedreader = new java.io.BufferedReader(inputstreamreader);
+			String line = bufferedreader.readLine();
+			if(line == null) {
+				JOptionPane.showMessageDialog(null,"jar created");
+			}
+			else {
+				String lines = line;
+				while(true) {
+					line = bufferedreader.readLine();
+					if(line == null)
+						break;
+					lines = lines+"\n"+line;
+				}
+				JOptionPane.showMessageDialog(null,lines);
+			}
+		} catch (java.io.IOException ex) {
 			ex.printStackTrace();
 		}
 	}

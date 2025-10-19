@@ -1601,7 +1601,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
 						allversionsjar.WriteManifest(main);
-						
+						if(allversionsjar.isMatthewJavaEditor(main)) {
+						}
 					});
 				
 					compiley.addActionListener((ev4) -> {
