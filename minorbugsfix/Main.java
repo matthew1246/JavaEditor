@@ -1596,7 +1596,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					compileallversions.addActionListener( (ev5) -> {
 						getjavaversion.dispose();
 						AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
-						allversionsjar.Compile(22);
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
@@ -1604,6 +1603,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 						}
 						else {
+							allversionsjar.Compile(22);	
 							allversionsjar.MakeJarUsingmsdos(22,main);	
 						}
 					});
