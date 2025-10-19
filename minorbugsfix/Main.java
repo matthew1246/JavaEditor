@@ -1603,6 +1603,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 						}
+						else {
+							allversionsjar.MakeJarUsingmsdos(22,main);	
+						}
 					});
 				
 					compiley.addActionListener((ev4) -> {
