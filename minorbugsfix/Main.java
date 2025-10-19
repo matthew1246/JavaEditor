@@ -1594,7 +1594,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					getjavaversion.setVisible(true);
 				
 					compileallversions.addActionListener( (ev5) -> {
-							
+						getjavaversion.dispose();
+						AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
+						allversionsjar.Compile(22);
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
+						String main=allversionsjar.getMain(storeselectedfile,preferences);
+						allversionsjar.WriteManifest(main);
+						
 					});
 				
 					compiley.addActionListener((ev4) -> {
@@ -1603,6 +1610,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							getjavaversion.dispose();
 							Compile compile = new Compile();
 							compile.compileall(this,fileName,javaversionnumber,sal,ev4);
+							
 							CommandLine commandline = new CommandLine();
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=storeselectedfile.get(fileName);
