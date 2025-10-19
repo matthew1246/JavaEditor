@@ -1566,6 +1566,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				case JOptionPane.YES_OPTION:
 					JFrame getjavaversion = new JFrame();
 					JPanel bigpanel = new JPanel();
+					bigpanel.setLayout(new GridLayout(2,1,10,10));
 					JPanel panelversion = new JPanel();
 					JPanel panel2 = new JPanel();
 					JLabel label = new JLabel("Version of Java:");
