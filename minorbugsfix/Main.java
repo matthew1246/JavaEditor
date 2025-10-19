@@ -1,3 +1,4 @@
+import javax.swing.BoxLayout;
 import javax.swing.Timer;
 import java.net.URISyntaxException;
 import java.awt.event.InputEvent;
@@ -1564,7 +1565,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			switch(option) {
 				case JOptionPane.YES_OPTION:
 					JFrame getjavaversion = new JFrame();
-					JPanel panelversion = new JPanel();
+					JPanel panelversion = new JPanel(new FlowLayout(FlowLayout.LEFT));
+					JPanel boxpanel = new JPanel();
+					boxpanel.setLayout(new BoxLayout(boxpanel,BoxLayout.Y_AXIS));
 					JLabel label = new JLabel("Version of Java:");
 					panelversion.add(label);
 					JComboBox<Integer> combobox = new JComboBox<Integer>();
@@ -1575,11 +1578,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					panelversion.add(combobox);
 					JButton compiley = new JButton("compile");
 					panelversion.add(compiley);
-					panelversion.add(Box.createHorizontalStrut(9999));
-					JButton compileallversions = new JButton("Make Jars for all Versions");
-					panelversion.add(compileallversions);
 					
-					getjavaversion.add(panelversion);
+					boxpanel.add(panelversion);
+					JButton compileallversions = new JButton("Make Jars for all Versions");
+					boxpanel.add(compileallversions);
+					
+					getjavaversion.add(boxpanel);
 					getjavaversion.pack();
 					getjavaversion.setVisible(true);
 				
