@@ -78,7 +78,7 @@ public class AllVersionsJar {
 		try {
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .";
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .";
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
 			Process process=commandline.run(input,dir);
