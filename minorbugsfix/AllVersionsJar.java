@@ -42,9 +42,13 @@ public class AllVersionsJar {
 	public String getMain(StoreSelectedFile storeselectedfile,Preferences preferences) {
 		String main_string=preferences.starterclass;
 		if(!fileName.equals("")) {
+			JOptionPane.showMessageDialog(null,"2*"+main_string+"*");
 			if(main.equals("")) {
+				JOptionPane.showMessageDialog(null,"3*"+main_string+"*");
 				main_string=fileName.replaceAll(".+\\\\","");
+				JOptionPane.showMessageDialog(null,"4*"+main_string+"*");
 				main_string = main_string.replaceAll("\\.java","");
+				JOptionPane.showMessageDialog(null,"5*"+main_string+"*");
 			}
 			storeselectedfile.set(fileName);
 			java.util.LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
