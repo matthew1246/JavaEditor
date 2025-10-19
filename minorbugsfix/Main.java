@@ -1570,7 +1570,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					JPanel panelversion = new JPanel();
 					//panelversion.setLayout(new FlowLayout(FlowLayout.LEFT,5,0));
 					JPanel panel2 = new JPanel();
-					panel2.setLayout(new FlowLayout(FlowLayout.LEFT,5,0));
+					panel2.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
 					JLabel label = new JLabel("Version of Java:");
 					panelversion.add(label);
 					JComboBox<Integer> combobox = new JComboBox<Integer>();
