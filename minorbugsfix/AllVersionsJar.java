@@ -1,8 +1,13 @@
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
+import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
+import java.io.BufferedWriter;
+import java.io.IOException;
 /*
 ** This generates all versions of Java for Jars
+** This class is only if Main.jar is not running.
 */
 public class AllVersionsJar {
 	private String dir;
@@ -70,8 +75,9 @@ public class AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
+	private AllFiles allfiles;
 	public boolean isMatthewJavaEditor(String main_class) {
-		AllFiles allfiles = new AllFiles(main_class,dir);
+		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete()));
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
@@ -101,6 +107,42 @@ public class AllVersionsJar {
 				JOptionPane.showMessageDialog(null,lines);
 			}
 		} catch (java.io.IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void Powershell(int javaversionnumber,String main_class) {
+		try {
+			CommandLine commandline = new CommandLine();
+			JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main_class+".jar is already open. Run script to close "+main_class+".jar");
+			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
+			BufferedWriter output2 = new BufferedWriter(filewriter2);
+			output2.write("cd "+dir);
+			output2.write("\n");
+			output2.write("START /B /WAIT taskkill /F /im java.exe");
+			output2.write("\n");
+			output2.write("START /B /WAIT taskkill /F /im javaw.exe");
+			output2.write("\n");
+			for(int i = 0; i < allfiles.files.size(); i++) {
+				File file2 = new File(allfiles.files.get(i));
+				if(file2.exists()) {
+					output2.write("del "+allfiles.files.get(i));
+					output2.write("\n");
+				}
+			}
+			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
+			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
+			output2.write("\n");
+			
+			commandline = new CommandLine();
+			output2.write("java -jar ForJava"+javaversionnumber+"_"+main_class+".jar");
+			output2.write("\n");
+			output2.write("\n");
+			output2.close();
+			commandline = new CommandLine();
+			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
+		
+			commandline.runWithMSDOS(liney,dir);
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
