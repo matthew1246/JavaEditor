@@ -1593,6 +1593,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					getjavaversion.pack();
 					getjavaversion.setVisible(true);
 				
+					compileallversions.addActionListener( (ev5) -> {
+							
+					});
+				
 					compiley.addActionListener((ev4) -> {
 						try {
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
