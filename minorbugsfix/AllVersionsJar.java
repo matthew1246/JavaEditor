@@ -112,7 +112,6 @@ public class AllVersionsJar {
 	}
 	public void Powershell(int javaversionnumber,String main_class) {
 		try {
-			CommandLine commandline = new CommandLine();
 			JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main_class+".jar is already open. Run script to close "+main_class+".jar");
 			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 			BufferedWriter output2 = new BufferedWriter(filewriter2);
@@ -129,8 +128,24 @@ public class AllVersionsJar {
 					output2.write("\n");
 				}
 			}
+			
+			CommandLine commandline = new CommandLine();
+			commandline.compileAll();
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			Preferences preferences=storeselectedfile.get(fileName);
+			
+			for(String jar:preferences.jars) {
+				commandline.addExternalJar(jar);
+			}
+			
+			commandline.earlierjavaversion(javaversionnumber);
+			
+			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
+			
+			File file = new File(dir);
+			File parentdirectory=file.getParentFile();
 			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
+			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
 			output2.write("\n");
 			
 			commandline = new CommandLine();
