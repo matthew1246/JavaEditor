@@ -1568,7 +1568,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					JPanel bigpanel = new JPanel();
 					bigpanel.setLayout(new GridLayout(2,1,0,0));
 					JPanel panelversion = new JPanel();
-					//panelversion.setLayout(new FlowLayout(FlowLayout.LEFT,5,0));
+					panelversion.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
 					JPanel panel2 = new JPanel();
 					panel2.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
 					JLabel label = new JLabel("Version of Java:");
