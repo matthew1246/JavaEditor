@@ -1547,7 +1547,14 @@ public class Main {
 			switch(option) {
 				case JOptionPane.YES_OPTION:
 					JFrame getjavaversion = new JFrame();
+					JPanel bigpanel = new JPanel();
+					bigpanel.setLayout(new GridLayout(2,1,0,0));
 					JPanel panelversion = new JPanel();
+					panelversion.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
+					panelversion.setBorder(new javax.swing.border.EmptyBorder(5,0,5,0));
+					JPanel panel2 = new JPanel();
+					panel2.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
+					panel2.setBorder(new javax.swing.border.EmptyBorder(0,0,5,0));
 					JLabel label = new JLabel("Version of Java:");
 					panelversion.add(label);
 					JComboBox<Integer> combobox = new JComboBox<Integer>();
@@ -1558,9 +1565,36 @@ public class Main {
 					panelversion.add(combobox);
 					JButton compiley = new JButton("compile");
 					panelversion.add(compiley);
-					getjavaversion.add(panelversion);
+					
+					bigpanel.add(panelversion);
+					JButton compileallversions = new JButton("Make Jars for all Versions");
+					panel2.add(compileallversions);
+					bigpanel.add(panel2);
+					
+					getjavaversion.add(bigpanel);
 					getjavaversion.pack();
 					getjavaversion.setVisible(true);
+				
+					compileallversions.addActionListener( (ev5) -> {
+						Thread thread = new Thread( () -> {
+							getjavaversion.dispose();
+							AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
+							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
+							String main=allversionsjar.getMain(storeselectedfile,preferences);
+							allversionsjar.WriteManifest(main);
+							if(allversionsjar.isMatthewJavaEditor(main)) {
+								allversionsjar.Powershell(main);
+							}
+							else {
+								for(int i = 18; i <= 22; i++) {
+									allversionsjar.Compile(i);	
+									allversionsjar.MakeJarUsingmsdos(i,main);	
+								}
+							}
+						});
+						thread.start();
+					});
 				
 					compiley.addActionListener((ev4) -> {
 						Thread thread1 = new Thread(() -> {
