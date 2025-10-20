@@ -87,7 +87,9 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-public class Main {		
+import javafx.application.Application;
+import javafx.stage.Stage;
+public class Main extends Application {		
 	public JButton showlines;
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
 	public JMenuItem rename_file = new JMenuItem("Rename File");
@@ -140,6 +142,9 @@ public class Main {
 	public String fileName = "";
 	public static String value = System.getProperty("user.home")+"\\load_program.ser";
 	//public String value="load_program.ser";
+	public void start(Stage stage) {
+		Main.main(null);
+	}
 	public static void main(String[] args) 		{ 
 		Main main = new Main(new OpenDefaultContent());
 	}
