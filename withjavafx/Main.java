@@ -1730,7 +1730,7 @@ public class Main {
 						getjavaversion.dispose();
 						
 						Thread thread = new Thread(() -> {
-								boolean isJavaFX = false;
+							boolean isJavaFX = false;
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							if(option2 ==JOptionPane.YES_OPTION) {
 								isJavaFX = true;
