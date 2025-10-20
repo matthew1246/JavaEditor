@@ -1760,6 +1760,10 @@ public class Main {
 							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
+								if(isJavaFX) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									extractjavafxjars.extractJars();
+								}		
 								allversionsjar.Powershell(isJavaFX,main);
 							}
 							else {
