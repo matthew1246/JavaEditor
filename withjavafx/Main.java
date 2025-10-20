@@ -1739,6 +1739,7 @@ public class Main {
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							if(option2 ==JOptionPane.YES_OPTION) {
 								isJavaFX = true;
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 							}
 							else if(option2 == JOptionPane.NO_OPTION) {
 								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");

@@ -16,7 +16,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java"
     ],
     "caretposition": 0
   },
@@ -220,5 +221,14 @@
     ],
     "fileNames": [],
     "caretposition": 2727
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java": {
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
