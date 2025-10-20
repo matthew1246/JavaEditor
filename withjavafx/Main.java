@@ -1578,17 +1578,33 @@ public class Main {
 					compileallversions.addActionListener( (ev5) -> {
 						Thread thread = new Thread( () -> {
 							getjavaversion.dispose();
+							
+							boolean isJavaFX = false;
+							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+							if(option2 ==JOptionPane.YES_OPTION) {
+								isJavaFX = true;
+							}
+							else if(option2 == JOptionPane.NO_OPTION) {
+								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+								File javafxlauncher=new File(maintwo);
+								if(javafxlauncher.exists()) {
+									javafxlauncher.delete();
+								}
+								
+								isJavaFX = false;
+							}
+							
 							AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
-							String main=allversionsjar.getMain(storeselectedfile,preferences);
+							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								allversionsjar.Powershell(main);
 							}
 							else {
 								for(int i = 18; i <= 22; i++) {
-									allversionsjar.Compile(i);	
+									allversionsjar.Compile(isJavaFX,i);	
 									allversionsjar.MakeJarUsingmsdos(i,main);	
 								}
 							}
