@@ -93,6 +93,7 @@ public class AllVersionsJar {
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
+			JOptionPane.showMessageDialog(null,"*"+dir+"*");
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
 			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .";
