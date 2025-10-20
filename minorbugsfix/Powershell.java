@@ -5,8 +5,12 @@ import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.IOException;
 public class Powershell {
+	protected String main_class;
+	protected String dir;
 	protected BufferedWriter output2;
-	public Powershell(Main main,String dir,AllFiles allfiles) {
+	public Powershell(Main main,String main_class,String dir,AllFiles allfiles) {
+		this.dir = dir;
+		main_class = main_class;
 		try {
 			String filename=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			filename = main.getFileName(filename);
@@ -49,6 +53,18 @@ public class Powershell {
 			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
 			output2.write("\n");
 			
+			//output2.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void makeJar(int javaversionnumber) {
+		try {
+			File file = new File(dir);
+			File parentdirectory=file.getParentFile();
+			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
+			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
+			output2.write("\n");
 			output2.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();

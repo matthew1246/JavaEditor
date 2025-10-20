@@ -110,8 +110,8 @@ public class AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell() {
-		Powershell powershell = new Powershell(main,dir,allfiles);
+	public void Powershell(String main_class) {
+		Powershell powershell = new Powershell(main,main_class,dir,allfiles);
 		powershell.Compile(22,fileName);
 		/*
 		try {
