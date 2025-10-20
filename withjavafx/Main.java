@@ -1730,6 +1730,11 @@ public class Main {
 						getjavaversion.dispose();
 						
 						Thread thread = new Thread(() -> {
+							if(fileName.equals("")) {
+								NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+								Main.this.fileName = nofileopen.getFileName();
+							}
+							
 							boolean isJavaFX = false;
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							if(option2 ==JOptionPane.YES_OPTION) {
