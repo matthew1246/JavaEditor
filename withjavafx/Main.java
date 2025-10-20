@@ -1762,7 +1762,7 @@ public class Main {
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								//if(isJavaFX) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									extractjavafxjars.extractJars();
+									extractjavafxjars.unzipJars();
 								//}		
 								allversionsjar.Powershell(isJavaFX,main);
 							}
