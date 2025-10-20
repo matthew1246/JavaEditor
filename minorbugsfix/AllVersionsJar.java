@@ -110,7 +110,9 @@ public class AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(int javaversionnumber,String main_class) {
+	public void Powershell() {
+		Powershell powershell = new Powershell(main,dir,allfiles);
+		/*
 		try {
 			JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main_class+".jar is already open. Run script to close "+main_class+".jar");
 			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
@@ -160,5 +162,6 @@ public class AllVersionsJar {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		*/
 	}
 }

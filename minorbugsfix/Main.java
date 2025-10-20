@@ -1601,7 +1601,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-								
+							allversionsjar.Powershell();
 						}
 						else {
 							for(int i = 18; i <= 22; i++) {
