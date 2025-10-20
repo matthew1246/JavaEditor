@@ -218,6 +218,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 670
+    "caretposition": 401
   }
 }

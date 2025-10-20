@@ -10,7 +10,7 @@ public class Powershell {
 	protected BufferedWriter output2;
 	public Powershell(Main main,String main_class,String dir,AllFiles allfiles) {
 		this.dir = dir;
-		main_class = main_class;
+		this.main_class = main_class;
 		try {
 			String filename=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			filename = main.getFileName(filename);
