@@ -65,7 +65,11 @@ public class Powershell {
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
 			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
+			String main_class2 = main_class;
+			if(main_class.endsWith("two")) {
+				main_class2=main_class2.substring(0,(main_class2.length()-3));
+			}		
+			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
 			output2.write("\n");
 			// output2.close();
 		} catch (IOException ex) {
