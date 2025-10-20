@@ -14,7 +14,9 @@ public class Powershell {
 		try {
 			String filename=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			filename = main.getFileName(filename);
-			JOptionPane.showMessageDialog(null,filename+" is already open. Run script to close "+filename+".jar");
+			if(filename.startsWith("\\"))
+				filename=filename.substring(1,filename.length());
+			JOptionPane.showMessageDialog(null,filename+" is already open. Run script to close "+filename);
 			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 			output2 = new BufferedWriter(filewriter2);
 			output2.write("cd "+dir);

@@ -113,6 +113,7 @@ public class AllVersionsJar {
 	public void Powershell(String main_class) {
 		Powershell powershell = new Powershell(main,main_class,dir,allfiles);
 		powershell.Compile(22,fileName);
+		powershell.makeJar(22);
 		/*
 		try {
 			JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main_class+".jar is already open. Run script to close "+main_class+".jar");
