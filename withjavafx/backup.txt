@@ -19,7 +19,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 58902
+    "caretposition": 64178
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "starterclass": "",
@@ -73,7 +73,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 24075
+    "caretposition": 68919
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "starterclass": "",
