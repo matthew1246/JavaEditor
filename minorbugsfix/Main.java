@@ -1595,6 +1595,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 					compileallversions.addActionListener( (ev5) -> {
 						getjavaversion.dispose();
+						
+						if(fileName.equals("")) {
+							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+							Main.this.fileName = nofileopen.getFileName();
+						}
+						
 						AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
