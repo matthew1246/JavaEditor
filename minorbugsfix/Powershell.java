@@ -67,6 +67,13 @@ public class Powershell {
 			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
 			output2.write("\n");
+			// output2.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void Finish() {
+		try {
 			output2.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();

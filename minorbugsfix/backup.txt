@@ -200,7 +200,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 4231
+    "caretposition": 4289
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java": {
     "starterclass": "",
@@ -218,6 +218,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 612
+    "caretposition": 2770
   }
 }
