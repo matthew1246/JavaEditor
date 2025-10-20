@@ -75,6 +75,11 @@ public class Powershell {
 	public void Finish() {
 		try {
 			output2.close();
+			CommandLine commandline = new CommandLine();
+			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
+		
+			commandline.runWithMSDOS(liney,dir);
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
