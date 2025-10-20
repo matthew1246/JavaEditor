@@ -7,8 +7,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java"
     ],
     "caretposition": 0
   },
@@ -19,7 +19,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 63250
+    "caretposition": 64327
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "starterclass": "",
@@ -163,7 +163,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 6761
+    "caretposition": 4692
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
     "starterclass": "",
@@ -172,7 +172,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 2428
+    "caretposition": 2534
   },
   "": {
     "starterclass": "",
@@ -184,7 +184,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2995
+    "caretposition": 2720
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java": {
     "starterclass": "",

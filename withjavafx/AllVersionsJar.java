@@ -121,11 +121,19 @@ public class AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(String main_class) {
+	public void Powershell(boolean isJavaFX,String main_class) {
 		Powershell powershell = new Powershell(main,main_class,dir,allfiles);
-		for(int i = 18; i <= 22; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
+		if(!isJavaFX) {
+			for(int i = 18; i <= 22; i++) {
+				powershell.Compile(i,fileName);
+				powershell.makeJar(i);
+			}
+		}
+		else { // Has JavaFX code.
+			for(int i = 22; i <= 23; i++) {
+				powershell.Compile(i,fileName);
+				powershell.makeJar(i);
+			}
 		}
 		powershell.Finish();
 

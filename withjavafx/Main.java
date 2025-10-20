@@ -1756,13 +1756,21 @@ public class Main {
 							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
-								allversionsjar.Powershell(main);
+								allversionsjar.Powershell(isJavaFX,main);
 							}
 							else {
-								for(int i = 18; i <= 22; i++) {
-									allversionsjar.Compile(isJavaFX,i);	
-									allversionsjar.MakeJarUsingmsdos(i,main);	
+								if(!isJavaFX) {
+									for(int i = 18; i <= 22; i++) {
+										allversionsjar.Compile(isJavaFX,i);	
+										allversionsjar.MakeJarUsingmsdos(i,main);	
+									}
 								}
+								else { // Has JavaFX code.
+									for(int i = 22; i <= 23; i++) {
+										allversionsjar.Compile(isJavaFX,i);	
+										allversionsjar.MakeJarUsingmsdos(i,main);	
+									}
+								}				
 							}
 						});
 						thread.start();
