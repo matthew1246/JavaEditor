@@ -1776,7 +1776,8 @@ public class Main {
 								else { // Has JavaFX code.
 									for(int i = 22; i <= 23; i++) {
 										allversionsjar.Compile(isJavaFX,i);	
-										allversionsjar.MakeJarUsingmsdos(i,main);	
+										String main2 = main.substring(0,(main.length()-3));
+										allversionsjar.MakeJarUsingmsdos(i,main2);	
 									}
 								}				
 							}
