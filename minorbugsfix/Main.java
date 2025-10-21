@@ -1610,7 +1610,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.Powershell(main);
 						}
 						else {
-							for(int i = 18; i <= 22; i++) {
+							for(int i = 18; i <= 23; i++) {
 								allversionsjar.Compile(i);	
 								allversionsjar.MakeJarUsingmsdos(i,main);	
 							}
