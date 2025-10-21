@@ -5,11 +5,8 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java"
     ],
     "caretposition": 0
   },
@@ -20,7 +17,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 65071
+    "caretposition": 101878
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "starterclass": "",
@@ -146,7 +143,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 9051
+    "caretposition": 9469
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java": {
     "starterclass": "",

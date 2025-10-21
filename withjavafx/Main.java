@@ -1539,7 +1539,7 @@ public class Main {
 		
 		compileforjavafx.addActionListener( e -> {
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-			textarea3.ExpandAll();	
+			textarea3.ExpandAll(this);	
 			Thread thread = new Thread( () -> {
 				try {
 					if(fileName.equals("")) {
@@ -1692,7 +1692,7 @@ public class Main {
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-			textarea3.ExpandAll();	
+			textarea3.ExpandAll(this);	
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 			switch(option) {
@@ -2532,7 +2532,7 @@ public class Main {
 		});
 		compile_all.addActionListener((ev) -> {
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-			textarea3.ExpandAll();		
+			textarea3.ExpandAll(this);		
 			Thread thread4=new Thread(() -> {
 					try {
 					if(fileName.equals("")) {
@@ -2644,7 +2644,7 @@ public class Main {
 		compile.addActionListener(new ActionListener() {										
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-				textarea3.ExpandAll();		
+				textarea3.ExpandAll(Main.this);		
 				Thread thread = new Thread( () -> {
 					try {	
 						if(fileName.equals("")) {
@@ -2766,7 +2766,7 @@ public class Main {
 		run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-				textarea3.ExpandAll();		
+				textarea3.ExpandAll(Main.this);		
 				Thread thread = new Thread() {
 					public void run() {
 						try {	
