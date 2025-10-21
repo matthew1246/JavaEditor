@@ -89,9 +89,18 @@ public class JTextAreaGroup extends JTextArea {
 			}
 		});
 	}
+	public int getAmountOfCodesBeforeCaretPosition(int caretposition) {
+		Codes codes2 = new Codes(this);
+		List<Integer> codesindex=codes2.getCodes();
+		int index=codes2.getIndex(codesindex,caretposition);
+		// JOptionPane.showMessageDialog(null,index+"");
+		return index;
+	}
 	public void ExpandAll() {
 		if(codes.size() > 0) {
 			int caretposition = getCaretPosition();	
+			int caretpositionrelativetocompressedcode=getAmountOfCodesBeforeCaretPosition(caretposition);
+
 			Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
 			text = getText();
 			Matcher matcher=pattern.matcher(text);
@@ -101,7 +110,11 @@ public class JTextAreaGroup extends JTextArea {
 			while(matcher.find()) {
 				count++;
 				String match=matcher.group();
-				match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(codes.get(count).ExpandAll()));
+				String insidecode=codes.get(count).ExpandAll();
+				if((count+1) == caretpositionrelativetocompressedcode) {
+					caretposition=caretposition+insidecode.length();
+				}
+				match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(insidecode));
 				matcher.appendReplacement(stringbuilder,matcher.quoteReplacement(match));
 			}
 			matcher.appendTail(stringbuilder);

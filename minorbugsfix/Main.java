@@ -1629,6 +1629,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=storeselectedfile.get(fileName);
 							String main=preferences.starterclass;
 							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
+							
 							if(!fileName.equals("")) {
 								List<String> jars = preferences.jars;
 								for(String jar:jars) {
@@ -1724,6 +1725,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							JOptionPane.showMessageDialog(null,ex.getMessage());
 						}
 					});
+						
 				break;
 				case JOptionPane.NO_OPTION:
 					try {
