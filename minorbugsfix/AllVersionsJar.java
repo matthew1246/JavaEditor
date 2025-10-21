@@ -84,9 +84,11 @@ public class AllVersionsJar {
 		try {
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			if(javaversionnumber == 23)
-				main_class = "Main";
 			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .";
+			if(javaversionnumber == 23) {
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar mf.txt .";
+			}
+		
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
 			Process process=commandline.run(input,dir);
