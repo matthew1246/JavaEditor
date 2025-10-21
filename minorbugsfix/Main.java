@@ -1812,6 +1812,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
 							BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
 							String line = bufferedreader.readLine();
+							
 							if(line == null) {
 								JOptionPane.showMessageDialog(null,"jar created");
 							}
@@ -1836,6 +1837,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				break;
 			}
 		});
+		
 		/*deprecated.addActionListener((ev) -> {
 			try {
 				if(fileName.equals("")) {

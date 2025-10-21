@@ -111,7 +111,7 @@ public class JTextAreaGroup extends JTextArea {
 				count++;
 				String match=matcher.group();
 				String insidecode=codes.get(count).ExpandAll();
-				if((count+1) == caretpositionrelativetocompressedcode) {
+				if((count+1) <= caretpositionrelativetocompressedcode) {
 					caretposition=caretposition+insidecode.length();
 				}
 				match=match.replaceAll("\\{\\+\\}",Matcher.quoteReplacement(insidecode));
