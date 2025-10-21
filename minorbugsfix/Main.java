@@ -1559,7 +1559,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-			textarea3.ExpandAll();	
+			textarea3.ExpandAll(this);	
 			String[] options={"Yes","No"};
 			int option=JOptionPane.showOptionDialog(null,"Compile for previous versions of Java?","Deprecated versions of Java",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 			switch(option) {
@@ -2318,7 +2318,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		compile_all.addActionListener((ev) -> {
 		
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-			textarea3.ExpandAll();	
+			textarea3.ExpandAll(this);	
 			try {
 				if(fileName.equals("")) {
 					NoFileOpen nofileopen=new NoFileOpen(this,textarea,tabbedpane);
@@ -2419,7 +2419,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 																
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-				textarea3.ExpandAll();	
+				textarea3.ExpandAll(Main.this);	
 				try {
 					if(fileName.equals("")) {
 						NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);
@@ -2523,7 +2523,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-				textarea3.ExpandAll();	
+				textarea3.ExpandAll(Main.this);	
 				Thread thread = new Thread() {
 					public void run() {
 						try {	

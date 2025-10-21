@@ -96,7 +96,7 @@ public class JTextAreaGroup extends JTextArea {
 		// JOptionPane.showMessageDialog(null,index+"");
 		return index;
 	}
-	public void ExpandAll() {
+	public void ExpandAll(Main main) {
 		if(codes.size() > 0) {
 			int caretposition = getCaretPosition();	
 			int caretpositionrelativetocompressedcode=getAmountOfCodesBeforeCaretPosition(caretposition);
@@ -132,7 +132,8 @@ public class JTextAreaGroup extends JTextArea {
 			}
 			*/
 			codes = new LinkedList<Code>();
-			setCaretPosition(caretposition);
+			super.setCaretPosition(caretposition);
+			main.scrollToCaretPosition(caretposition);
 		}
 	}
 	public boolean showLines = false;	
