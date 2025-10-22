@@ -33,7 +33,14 @@ public class ExtractJavaFXJars {
 		if(!dllFilesExtracted()) {
 			extractDLLFiles();
 		}
+		delete_moduleinfo();
 		createStarter();
+	}
+	public void delete_moduleinfo() {
+		File file = new File("module-info.java");
+		if(file.exists()) {
+			System.out.println("module-info.java exists");
+		}
 	}
 	public String starter;
 	public void createStarter() {
