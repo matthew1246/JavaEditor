@@ -190,6 +190,7 @@ public class ExtractJavaFXJars {
 		 		}
 	        	        	  // break;
 	            }
+	            delete_moduleinfo();
 	}
 	public void extractDLLFiles() {
 		try {
