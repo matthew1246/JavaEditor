@@ -38,6 +38,7 @@ public class ExtractJavaFXJars {
 	}
 	public void delete_moduleinfo() {
 		File file = new File("module-info.class");
+		System.out.println("ExtractJavaFXJars.delete_moduleinfo() is being executed!");
 		if(file.exists()) {
 			System.out.println("module-info.class exists");
 		}
