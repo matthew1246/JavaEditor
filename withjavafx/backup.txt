@@ -208,6 +208,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 1256
+    "caretposition": 1038
   }
 }
