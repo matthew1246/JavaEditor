@@ -41,6 +41,8 @@ public class ExtractJavaFXJars {
 		System.out.println("ExtractJavaFXJars.delete_moduleinfo() is being executed!");
 		if(file.exists()) {
 			System.out.println("module-info.class exists");
+			file.delete();
+			System.out.println("module-info.class deleted!");
 		}
 	}
 	public String starter;
