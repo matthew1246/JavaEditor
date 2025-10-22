@@ -37,9 +37,9 @@ public class ExtractJavaFXJars {
 		createStarter();
 	}
 	public void delete_moduleinfo() {
-		File file = new File("module-info.java");
+		File file = new File("module-info.class");
 		if(file.exists()) {
-			System.out.println("module-info.java exists");
+			System.out.println("module-info.class exists");
 		}
 	}
 	public String starter;
