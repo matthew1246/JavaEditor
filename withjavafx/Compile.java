@@ -58,7 +58,8 @@ public class Compile {
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
 			if(withJavaFX) {
-				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main);						
+				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main);
+				commandline.addJavaFX();						
 			}
 			commandline.compileAll();
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
