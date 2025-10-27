@@ -151,10 +151,10 @@ public class Main {
 	** If have no default content for window
 	
 	*/
-	public Main() {
-			
+	public Main() {	
 		setLayout();
 		this.textarea = new JTextAreaGroup();
+		allclassesinfile = new AllClassesInFile(this.textarea,fileName);
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		
