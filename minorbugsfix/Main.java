@@ -230,6 +230,7 @@ public class Main {
 			tabbedpane.addTab("+",pluspanel);
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
+			allclassesinfile = new AllClassesInFile(textarea2,"");
 		}	
 	}
 	public int tabs_selected = -1;

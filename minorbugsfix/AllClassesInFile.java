@@ -19,10 +19,11 @@ public class AllClassesInFile {
 				iterator2.iterate();	
 			} catch(Exception ex) {
 				ex.printStackTrace();
-			}											}		
+			}											
+		}		
 	}
 	public void ChangeFile(JTextArea textarea,String fileName) {
-		if(!this.fileName.equals(fileName)) {
+		if(!this.fileName.equals(fileName) && (!fileName.equals(""))) {
 			this.fileName = fileName;		
 			classes = new ArrayList<String>();
 			try {
