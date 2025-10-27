@@ -148,79 +148,94 @@ public class Main {
 	
 	*/
 	public Main() {
+		fileName = "";
 		setLayout();
-		this.textarea = new JTextAreaGroup();
-		textarea.setLineWrap(true);
-		textarea.setWrapStyleWord(true);
-		Font originalFont = textarea.getFont();
-		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+		expandable = new Expandable(this);		
+		if(fileName.equals("")) {
+			JTextArea textarea2 = new JTextAreaGroup();
+			textarea2.setLineWrap(true);
+			textarea2.setWrapStyleWord(true);
+			Font originalFont = textarea.getFont();
+			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 
-		JScrollPane scrollpane2 = new JScrollPane(textarea);
-		textarea.setTabSize(4);
-		
-		CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
-		textarea.addKeyListener(curlybracekeylistener);
-		
-		addCaretListener(textarea);
-		scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-			try {
-				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-					int caretposition = curlybracekeylistener.autokeylistener.position;
-					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
-					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
-					curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+			JScrollPane scrollpane2 = new JScrollPane(textarea2);
+			textarea2.setTabSize(4);
+			
+			this.textarea=textarea2;
+			
+			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
+			textarea2.addKeyListener(curlybracekeylistener);
+			
+			addCaretListener(textarea2);
+			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+					try {
+					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.autokeylistener.position;
+						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
 				}
-			} catch (BadLocationException ex) {
-				ex.printStackTrace();
-			}
-		});
-		scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-			try {
-				if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-					int caretposition = curlybracekeylistener.autokeylistener.position;
-					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
-					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
-					curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+			});
+			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.autokeylistener.position;
+						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
 				}
-			} catch (BadLocationException ex) {
-				ex.printStackTrace();
-			}
-		});
-		scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-			try {
-				if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
-					int caretposition = curlybracekeylistener.methodsuggestionbox.position;
-					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
-					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
-					curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+			});
+			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.methodsuggestionbox.position;
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+						curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
 				}
-			} catch (BadLocationException ex) {
-				ex.printStackTrace();
-			}
-		});
-		scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-			try {
-				if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
-					int caretposition = curlybracekeylistener.methodsuggestionbox.position;
-					Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
-					Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-					SwingUtilities.convertPointToScreen(screencoordinates,textarea);
-					curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+			});
+			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+				try {
+					if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
+						int caretposition = curlybracekeylistener.methodsuggestionbox.position;
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+						curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+					}
+				} catch (BadLocationException ex) {
+					ex.printStackTrace();
 				}
-			} catch (BadLocationException ex) {
-				ex.printStackTrace();
-			}
-		});
-		textarea.addMouseListener(rightclick);
-		
-		tabbedpane.addTab("",scrollpane2);
-		tabbedpane.addTab("+",pluspanel);
-		
+			});
+			textarea2.addMouseListener(rightclick);
+			
+			
+			tabbedpane.addTab(fileName,scrollpane2);
+			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+			fileNames.add("");
+			allclassesinfile = new AllClassesInFile(textarea2,"");
+		}
 		setListeners();
-		expandable = new Expandable(this);
+		setFullPackageNames();		
+		setSubpackages();
+		setPackages();
+		setApiClasses();				
+		setKeywords();
+		setAllClassesInFile();
+		setAllClassesInFolder();	
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
@@ -1334,17 +1349,21 @@ public class Main {
 	public void setListeners() {
 		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {
 	          		if (event.getID() == KeyEvent.KEY_TYPED) {
-	                    		SwingUtilities.invokeLater(() -> {
-                       			if(targetArea instanceof JTextArea) {
-                       				//((JTextArea)targetArea).append(String.valueOf(event.getKeyChar()));
-                       				((JTextArea)targetArea).dispatchEvent(event);
-                       			}
-                       			else if(targetArea instanceof JTextField) {
-                       				//KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,event.getKeyCode(),'.');
-                       				//((JTextField)targetArea).dispatchEvent(keyevent2);
-                       				((JTextField)targetArea).dispatchEvent(event);
-                       			}
-	                    		});
+	                    		Component component=(Component)event.getSource();
+	                    		if(component == targetArea) {
+		                    		System.out.println("Working");
+		                    		SwingUtilities.invokeLater(() -> {
+	                       			if(targetArea instanceof JTextArea) {
+	                       				//((JTextArea)targetArea).append(String.valueOf(event.getKeyChar()));
+	                       				((JTextArea)targetArea).dispatchEvent(event);
+	                       			}
+	                       			else if(targetArea instanceof JTextField) {
+	                       				//KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,event.getKeyCode(),'.');
+	                       				//((JTextField)targetArea).dispatchEvent(keyevent2);
+	                       				((JTextField)targetArea).dispatchEvent(event);
+	                       			}
+		                    		});
+	                    		}
 	                	}
 	            	return false; // Don't consume the event
 	            });
@@ -2405,10 +2424,14 @@ public class Main {
 		addCaretListener(textarea);
 		newopenwindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				Main main = new Main();
+				SwingUtilities.invokeLater(() -> {
+					Main main = new Main();
+				});
+				/*Main main = new Main();
 				FileListModifier filelistmodifier2 = (FileListModifier)filelistmodifier.clone();
 				filelistmodifier2.addNew();		
 				main.loadComboboxes(filelistmodifier2);
+				*/
 			}
 		});
 		exitItem.addActionListener(new ActionListener() {

@@ -141,7 +141,7 @@ public class JTextAreaGroup extends JTextArea {
 	public List<Integer> xaxisses = new ArrayList<Integer>();
 	public List<Integer> yaxisses = new ArrayList<Integer>();
 	public String previoustext="";
-	HashMap<Integer,Group> groups;
+	HashMap<Integer,Group> groups = new HashMap<Integer,Group>();
 	public String text = "";
 	@Override
 	public void paintComponent(Graphics graphics) {
