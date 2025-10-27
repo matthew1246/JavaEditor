@@ -24,7 +24,7 @@ public class RenameVariable {
 		Middle middle = new Middle(main.textarea);
 		// "^((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))"
 		// "^((\\s+\\b(public|protected|private)\\b)?\\s+\\b(?!return\\b)[a-zA-Z<>]+\\b\\s+([a-zA-Z0-9]+)(?=\\s*=|;))"
-		Pattern pattern = Pattern.compile("^((\\s+\\b(public|protected|private)\\b)?\\s+(?!return)[a-zA-Z<>]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))");
+		Pattern pattern = Pattern.compile("^((\\s+\\b(public|protected|private)\\b)?\\s+(?!return)[a-zA-Z<>\\[\\]]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))");
 		String line = middle.getCurrentWholeLine();
 		Matcher matcher = pattern.matcher(line);
 		if(matcher.find()) {
@@ -67,7 +67,7 @@ public class RenameVariable {
 			Middle middle = new Middle(main.textarea);
 			// "^((\\s+\\b(public|protected|private)\\b)?\\s+[a-zA-Z<>]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))"
 			// "^((\\s+\\b(public|protected|private)\\b)?\\s+\\b(?!return\\b)[a-zA-Z<>]+\\b\\s+([a-zA-Z0-9]+)(?=\\s*=|;))"
-			Pattern pattern = Pattern.compile("^((\\s+\\b(public|protected|private)\\b)?\\s+(?!return)[a-zA-Z<>]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))");
+			Pattern pattern = Pattern.compile("^((\\s+\\b(public|protected|private)\\b)?\\s+(?!return)[a-zA-Z<>\\[\\]]+\\s+([a-zA-Z0-9]+)(?=\\s*=|;))");
 			String line = middle.getCurrentWholeLine();
 			Matcher matcher = pattern.matcher(line);
 			if(matcher.find()) {
