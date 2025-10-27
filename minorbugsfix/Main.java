@@ -232,6 +232,14 @@ public class Main {
 			fileNames.add("");
 			allclassesinfile = new AllClassesInFile(textarea2,"");
 		}	
+		setListeners();
+		setFullPackageNames();		
+		setSubpackages();
+		setPackages();
+		setApiClasses();				
+		setKeywords();
+		setAllClassesInFile();
+		setAllClassesInFolder();
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
@@ -1315,17 +1323,21 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public void setListeners() {
 		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {
 	          		if (event.getID() == KeyEvent.KEY_TYPED) {
-	                    		SwingUtilities.invokeLater(() -> {
-                       			if(targetArea instanceof JTextArea) {
-                       				//((JTextArea)targetArea).append(String.valueOf(event.getKeyChar()));
-                       				((JTextArea)targetArea).dispatchEvent(event);
-                       			}
-                       			else if(targetArea instanceof JTextField) {
-                       				//KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,event.getKeyCode(),'.');
-                       				//((JTextField)targetArea).dispatchEvent(keyevent2);
-                       				((JTextField)targetArea).dispatchEvent(event);
-                       			}
-	                    		});
+	                    		Component component=(Component)event.getSource();
+	                    		if(component == targetArea) {
+		                    		System.out.println("Working");
+		                    		SwingUtilities.invokeLater(() -> {
+	                       			if(targetArea instanceof JTextArea) {
+	                       				//((JTextArea)targetArea).append(String.valueOf(event.getKeyChar()));
+	                       				((JTextArea)targetArea).dispatchEvent(event);
+	                       			}
+	                       			else if(targetArea instanceof JTextField) {
+	                       				//KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,event.getKeyCode(),'.');
+	                       				//((JTextField)targetArea).dispatchEvent(keyevent2);
+	                       				((JTextField)targetArea).dispatchEvent(event);
+	                       			}
+		                    		});
+	                    		}
 	                	}
 	            	return false; // Don't consume the event
 	            });
