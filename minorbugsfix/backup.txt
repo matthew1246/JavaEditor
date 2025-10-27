@@ -37,7 +37,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 5805
+    "caretposition": 5764
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "starterclass": "",
@@ -145,7 +145,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 3873
+    "caretposition": 4895
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SelectedLines.java": {
     "starterclass": "",
