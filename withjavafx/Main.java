@@ -622,13 +622,22 @@ public class Main {
 		frame2.pack();
 		frame2.setVisible(true);*/
 		
-		if(fileName != null && !fileName.equals("")) {
+		/*if(fileName != null && !fileName.equals("")) {
 			frame.setTitle(fileName.replaceAll(".+\\\\",""));
 		}
-		
 		else {
 			frame.setTitle("");
 		}
+		*/
+		try {
+			String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+			if(filename2.startsWith("/"))
+				filename2=filename2.substring(1,filename2.length());
+			frame.setTitle(filename2);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
 		frame.setSize(800,600);
 		
 		textarea = new JTextAreaGroup();
