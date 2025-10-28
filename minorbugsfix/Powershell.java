@@ -70,6 +70,8 @@ public class Powershell {
 			}
 			else {
 				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar mf.txt .");
+				output2.write("\n");
+				output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar");
 			}				
 			output2.write("\n");
 			// output2.close();
