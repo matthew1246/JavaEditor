@@ -2136,6 +2136,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
+				searchall.setMargin(new Insets(0,0,0,0));
 				panel0.add(searchall);
 				
 				panel0.validate();
@@ -2151,6 +2152,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
+				casey.setMargin(new Insets(0,0,0,0));
 				panel0.add(casey);
 		
 				panel0.validate();
@@ -2166,6 +2168,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				gbc.anchor=gbc.CENTER;
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
+				replaceinput.setMargin(new Insets(0,0,0,0));
 				panel0.add(replaceinput);
 				
 				panel0.validate();
@@ -2180,6 +2183,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				gbc.anchor=gbc.CENTER;
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
+				replace.setMargin(new Insets(0,0,0,0));
 				panel0.add(replace);
 				replace.addActionListener( (ev3) -> {
 					replaceinput.setEditable(true);
@@ -2198,6 +2202,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
+				selection.setMargin(new Insets(0,0,0,0));
 				panel0.add(selection);
 					
 				panel0.validate();
