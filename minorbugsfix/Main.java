@@ -2080,7 +2080,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JPanel panel0 = new JPanel();
 				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,10));
 				
-				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 0));
+				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				
 				JTextField input = new JTextField(20);
 				GridBagConstraints gbc = new GridBagConstraints();
