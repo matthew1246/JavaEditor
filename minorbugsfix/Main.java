@@ -1,4 +1,5 @@
 import javax.swing.BoxLayout;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.Timer;
 import java.net.URISyntaxException;
 import java.awt.event.InputEvent;
@@ -2097,6 +2098,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				panel0.validate();
 				panel0.repaint();
 				
+				JPanel arrowspanel = new JPanel();
+				arrowspanel.setLayout(new GridLayout(2,1));
+				JButton upArrow = new JButton("\u2191");
+            			JButton downArrow = new JButton("\u2193");
+            			arrowspanel.add(upArrow);
+            			arrowspanel.add(downArrow);
+            			/*Font font=panel0.getFont();
+            			upArrow.setFont(font);
+            			downArrow.setFont(font);
+            			*/
+            			panel0.add(arrowspanel);
+				
 				JButton click = new JButton("Find");
 				gbc.gridx=8;
 				gbc.gridy=0;
@@ -3339,6 +3352,30 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 	}
+	static class ArrowButtonExtractor extends BasicScrollBarUI {
+	        private JButton decButton;
+	        private JButton incButton;
+	
+	        @Override
+	        protected JButton createDecreaseButton(int orientation) {
+	            decButton = super.createDecreaseButton(orientation);
+	            return decButton;
+	        }
+	
+	        @Override
+	        protected JButton createIncreaseButton(int orientation) {
+	            incButton = super.createIncreaseButton(orientation);
+	            return incButton;
+	        }
+	
+	        public JButton getDecreaseButton() {
+	            return decButton;
+	        }
+	
+	        public JButton getIncreaseButton() {
+	            return incButton;
+	        }
+        }
 }
 class Expandable {
 	public Main main;
