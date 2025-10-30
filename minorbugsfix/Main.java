@@ -2078,7 +2078,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				frame2.setSize(300,120);
 				
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,10));
+				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,5));
 				
 				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				
