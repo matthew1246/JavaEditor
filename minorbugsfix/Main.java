@@ -1127,6 +1127,29 @@ public class Main {
 		    });
 
 	}
+	public void scrollToCaretPositionWithoutFocus(int wholedocumentindex) {
+		SwingUtilities.invokeLater(new Runnable() {
+		        public void run(){
+		            try {
+		            	if(wholedocumentindex <= (textarea.getText().length()) ) {
+					Rectangle2D viewposition=textarea.modelToView2D(wholedocumentindex);
+					Point caretposition=new Point(0,(int)viewposition.getY());
+					
+					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+					
+					scrollpane.getViewport().setViewPosition(caretposition);
+					//textarea.grabFocus();
+					textarea.setCaretPosition(wholedocumentindex);
+					line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumentindex))+" ");
+				}
+		            }
+			catch (BadLocationException exception) {
+				exception.printStackTrace();
+			}
+
+		        }
+		    });
+	}
 
 	public void scrollToCaretPosition(int wholedocumentindex) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -2214,6 +2237,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				//frame2.setResizable(false);
 				frame2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey);
+				downArrow.addActionListener((ev2) -> {
+					control_f.FindWithoutFocus(input.getText());
+				});
 				ActionListener clicky=new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						control_f.Find(input.getText());
@@ -3359,30 +3385,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 	}
-	static class ArrowButtonExtractor extends BasicScrollBarUI {
-	        private JButton decButton;
-	        private JButton incButton;
-	
-	        @Override
-	        protected JButton createDecreaseButton(int orientation) {
-	            decButton = super.createDecreaseButton(orientation);
-	            return decButton;
-	        }
-	
-	        @Override
-	        protected JButton createIncreaseButton(int orientation) {
-	            incButton = super.createIncreaseButton(orientation);
-	            return incButton;
-	        }
-	
-	        public JButton getDecreaseButton() {
-	            return decButton;
-	        }
-	
-	        public JButton getIncreaseButton() {
-	            return incButton;
-	        }
-        }
 }
 class Expandable {
 	public Main main;
