@@ -2237,6 +2237,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				//frame2.setResizable(false);
 				frame2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey);
+				upArrow.addActionListener( (ev3) -> {
+					control_f.z = control_f.z-2;
+					control_f.FindWithoutFocus(input.getText());
+				});
 				downArrow.addActionListener((ev2) -> {
 					control_f.FindWithoutFocus(input.getText());
 				});
