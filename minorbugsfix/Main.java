@@ -2102,6 +2102,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				arrowspanel.setLayout(new GridLayout(2,1));
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
+            			upArrow.setMargin(new Insets(0,2,0,2));
+            			downArrow.setMargin(new Insets(0,2,0,2));
             			arrowspanel.add(upArrow);
             			arrowspanel.add(downArrow);
             			/*Font font=panel0.getFont();
