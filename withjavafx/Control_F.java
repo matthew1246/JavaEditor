@@ -28,6 +28,167 @@ public class Control_F {
 		this.replaceinput = replaceinput;
 		this.casey = casey;
 	}
+	public void FindWithoutFocus(String find) {
+		if(!searchall.isSelected()) {
+			String text=textarea.getText();
+			String original = text;
+			int selectionstart = 0;
+			int selectionend = text.length();
+			if(selection.isSelected()) {
+				selectionstart=textarea.getSelectionStart();
+				selectionend = textarea.getSelectionEnd();
+				text=textarea.getText().substring(selectionstart,selectionend);
+			}
+			String find2 = find;
+			if(!casey.isSelected())
+				find = find.toLowerCase();
+			int count = 0;
+			z++;
+			if(!casey.isSelected())
+				text=text.toLowerCase();
+			if(text.contains(find)) {
+				String[] lines = text.split("\n");
+				int x = 0;
+				for(int i = 0; i < lines.length; i++) {
+					String line = lines[i];
+					char[] chars = line.toCharArray();
+					for(int j = 0; j < chars.length; j++) {
+						x++;
+					}
+					x++;
+					if(line.contains(find)) {
+						count++;
+						if(z == count)
+							break;
+					}
+				}
+				x--;
+				if(selection.isSelected()) {
+					x=x+selectionstart;
+				}
+				if(replace.isSelected()) {
+					String first = original.substring(0,selectionstart);
+					String middle=original.substring(selectionstart,selectionend);
+					Pattern pattern;
+					if(!casey.isSelected()) {
+						pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+					} else {
+						pattern=Pattern.compile(Pattern.quote(find2));
+					}
+					Matcher matcher=pattern.matcher(middle);
+					String selected=matcher.replaceAll(replaceinput.getText());
+					String end = original.substring(selectionend,original.length());
+					textarea.setText(first+selected+end);
+					
+					String firsthalf = original.substring(0,x);
+					Matcher matcher2= pattern.matcher(firsthalf);
+					String changed=matcher2.replaceAll(replaceinput.getText());
+					int y =changed.length()-firsthalf.length();
+					x=x+y;
+				}
+				if(x < (textarea.getText().length()-1) ) {
+					main.scrollToCaretPositionWithoutFocus(x);
+				}
+				else {
+					main.scrollToCaretPositionWithoutFocus(textarea.getText().length()-1);
+					z = 0;
+				}
+			}
+		}
+		else {
+			String dir =main.fileName.replaceAll("[^\\\\]+\\.java","");
+			while(liveiterator.hasNext()) {
+				try {
+					if(z == 0)
+						filename = liveiterator.next();
+					String newfilename = dir+filename;
+					Path path = Paths.get(newfilename);
+					String text = Files.readString(path,StandardCharsets.UTF_8);
+		
+					String original = text;
+					String find2 = find;
+					if(!casey.isSelected())
+						find = find.toLowerCase();
+					int count = 0;
+					z++;
+					if(!casey.isSelected())
+						text=text.toLowerCase();
+					if(text.contains(find)) {
+						String[] lines = text.split("\n");
+						int x = 0;
+						for(int i = 0; i < lines.length; i++) {
+							String line = lines[i];
+							char[] chars = line.toCharArray();
+							for(int j = 0; j < chars.length; j++) {
+								x++;
+							}
+							x++;
+							if(line.contains(find)) {
+								//main.scrollToCaretPositionWithoutFocus(x);
+								if(!main.fileName.equals(newfilename)) {
+									main.fileName = newfilename;
+									main.open(filename);
+								}
+								count++;
+								if(z == count) {
+									if(i == (lines.length-1) ) {
+										z = 0;
+									}
+									break;
+								}
+
+
+
+
+
+
+
+							}
+							if(i == (lines.length-1) )
+								z = 0;
+						}
+						x--;
+						if(replace.isSelected()) {
+							Pattern pattern;
+							if(!casey.isSelected()) {
+								pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+							} else {
+								pattern=Pattern.compile(Pattern.quote(find2));
+							}
+							Matcher matcher=pattern.matcher(original);
+							String selected=matcher.replaceAll(replaceinput.getText());
+							textarea.setText(selected);
+							
+							String firsthalf = original.substring(0,x);
+							Matcher matcher2= pattern.matcher(firsthalf);
+							String changed=matcher2.replaceAll(replaceinput.getText());
+							int y =changed.length()-firsthalf.length();
+							x=x+y;
+						}
+						if(z == 0)
+							liveiterator.remove(filename);
+						if(x < (text.length()-1) ) {
+							main.scrollToCaretPositionWithoutFocus(x);
+							return;
+						}
+						else {
+							main.scrollToCaretPositionWithoutFocus(text.length()-1);
+							z = 0;
+							return;
+						}
+					}
+					else {
+						z = 0;
+					}
+				} catch(FileNotFoundException ex) {
+					ex.printStackTrace();
+				}
+				catch(IOException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+	}
 	public String filename = "";
 	public int z = 0;
 	public void Find(String find) {

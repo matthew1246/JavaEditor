@@ -1150,6 +1150,29 @@ public class Main {
 		    });
 
 	}
+	public void scrollToCaretPositionWithoutFocus(int wholedocumentindex) {
+		SwingUtilities.invokeLater(new Runnable() {
+		        public void run(){
+		            try {
+		            	if(wholedocumentindex <= (textarea.getText().length()) ) {
+					Rectangle2D viewposition=textarea.modelToView2D(wholedocumentindex);
+					Point caretposition=new Point(0,(int)viewposition.getY());
+					
+					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+					
+					scrollpane.getViewport().setViewPosition(caretposition);
+					//textarea.grabFocus();
+					textarea.setCaretPosition(wholedocumentindex);
+					line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumentindex))+" ");
+				}
+		            }
+			catch (BadLocationException exception) {
+				exception.printStackTrace();
+			}
+
+		        }
+		    });
+	}
 	public void scrollToCaretPosition(int wholedocumentindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
@@ -2298,12 +2321,12 @@ public class Main {
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-				frame2.setSize(300,140);
+				frame2.setSize(300,120);
 				
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,10));
+				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,5));
 				
-				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 0));
+				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				
 				JTextField input = new JTextField(20);
 				GridBagConstraints gbc = new GridBagConstraints();
@@ -2320,6 +2343,20 @@ public class Main {
 				
 				panel0.validate();
 				panel0.repaint();
+				
+				JPanel arrowspanel = new JPanel();
+				arrowspanel.setLayout(new GridLayout(2,1));
+				JButton upArrow = new JButton("\u2191");
+            			JButton downArrow = new JButton("\u2193");
+            			upArrow.setMargin(new Insets(0,2,0,2));
+            			downArrow.setMargin(new Insets(0,2,0,2));
+            			arrowspanel.add(upArrow);
+            			arrowspanel.add(downArrow);
+            			/*Font font=panel0.getFont();
+            			upArrow.setFont(font);
+            			downArrow.setFont(font);
+            			*/
+            			panel0.add(arrowspanel);
 				
 				JButton click = new JButton("Find");
 				gbc.gridx=8;
@@ -2345,6 +2382,7 @@ public class Main {
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
+				searchall.setMargin(new Insets(0,0,0,0));
 				panel0.add(searchall);
 				
 				panel0.validate();
@@ -2360,6 +2398,7 @@ public class Main {
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
+				casey.setMargin(new Insets(0,0,0,0));
 				panel0.add(casey);
 		
 				panel0.validate();
@@ -2375,6 +2414,7 @@ public class Main {
 				gbc.anchor=gbc.CENTER;
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
+				replaceinput.setMargin(new Insets(0,0,0,0));
 				panel0.add(replaceinput);
 				
 				panel0.validate();
@@ -2389,6 +2429,7 @@ public class Main {
 				gbc.anchor=gbc.CENTER;
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
+				replace.setMargin(new Insets(0,0,0,0));
 				panel0.add(replace);
 				replace.addActionListener( (ev3) -> {
 					replaceinput.setEditable(true);
@@ -2407,6 +2448,7 @@ public class Main {
 				gbc.gridwidth=2;
 				gbc.gridheight=1;
 				gbc.insets = new Insets(0,0,0,0);
+				selection.setMargin(new Insets(0,0,0,0));
 				panel0.add(selection);
 					
 				panel0.validate();
@@ -2418,6 +2460,13 @@ public class Main {
 				//frame2.setResizable(false);
 				frame2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey);
+				upArrow.addActionListener( (ev3) -> {
+					control_f.z = control_f.z-2;
+					control_f.FindWithoutFocus(input.getText());
+				});
+				downArrow.addActionListener((ev2) -> {
+					control_f.FindWithoutFocus(input.getText());
+				});
 				ActionListener clicky=new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						control_f.Find(input.getText());
@@ -2429,7 +2478,7 @@ public class Main {
 				frame2.setVisible(true);
 				//replaceinput.setVisible(false);
 			}
-		});	
+		});		
 		addCaretListener(textarea);
 		newopenwindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
