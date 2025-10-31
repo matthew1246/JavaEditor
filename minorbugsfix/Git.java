@@ -261,7 +261,8 @@ public JButton everythingbutthekitchensink;
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
-			ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
+			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
+			ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command);	
 		
 			processbuilder.directory(new File(directory));
 			
@@ -277,9 +278,11 @@ public JButton everythingbutthekitchensink;
 		//try {
 			//thread.wait();
 			//JOptionPane.showMessageDialog(null,"hello");
-			String branch=whichBranchOpened();
-			
-			frame.setTitle(branch);
+			SwingUtilities.invokeLater( () -> {
+				String branch=whichBranchOpened();
+				
+				frame.setTitle(branch);
+			});
 		/*}
 		catch(InterruptedException ex) {
 			ex.printStackTrace();
