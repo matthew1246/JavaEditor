@@ -24,7 +24,7 @@
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 9324
+    "caretposition": 8763
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "Main",
