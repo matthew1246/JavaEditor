@@ -196,7 +196,7 @@ public JButton everythingbutthekitchensink;
 			git(input.getText(),root_directory);
 		});
 		switch2_branch.addActionListener( (ev) -> {
-			//Thread thread = new Thread( () -> {
+			Thread thread = new Thread( () -> {
 				String mainbranch = getMainBranch();
 				String whichbranch = whichBranchOpened();
 				String whichfolderopened=whichFolderOpened();
@@ -241,9 +241,9 @@ public JButton everythingbutthekitchensink;
 						selectbranch.setVisible(true);
 					}
 				}
-			/*});
+			});
 			thread.start();
-			*/
+			
 		});
 	}
 	public void gitWaitUntilFinish(String command) {
@@ -300,11 +300,11 @@ public JButton everythingbutthekitchensink;
 		//try {
 			//thread.wait();
 			//JOptionPane.showMessageDialog(null,"hello");
-			SwingUtilities.invokeLater( () -> {
+			//SwingUtilities.invokeLater( () -> {
 				String branch=whichBranchOpened();
 				
 				frame.setTitle(branch);
-			});
+			//});
 		/*}
 		catch(InterruptedException ex) {
 			ex.printStackTrace();
