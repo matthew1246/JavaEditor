@@ -251,63 +251,46 @@ public JButton everythingbutthekitchensink;
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
-			/*	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", echo+command+"; exec bash");
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-			*/
-			
 			//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
-			command="echo '" + command + "'; " + command;
+			command="echo '" + command + "'; " + command+"; "+"echo '" + "[exit]'; ";
 			System.out.println(command);
 			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-		
-			/*processbuilder.directory(new File(directory));
-			
-			Process process=processbuilder.start();
-			process.waitFor();	
-			
-			// Escape special characters for bash
-        			String escapedCommand = command
-            		.replace("\\", "\\\\")
-            		.replace("\"", "\\\"")
-            		.replace("$", "\\$");
-
-        			// Compose the full bash command:
-		       	 // 1. Echo the command for visibility
-		        	// 2. Run the command
-		        	// 3. Keep the shell open
-		        	String fullCommand = "echo \"" + escapedCommand + "\"; " + command + "; exec bash";
-		
-		        	// Launch git-bash.exe with the full command
-		        	ProcessBuilder processBuilder = new ProcessBuilder(
-		            gitbashdotexe,
-		            "--login", "-i", "-c", fullCommand
-		        	);
-		        	*/
 		        	
 		        	processBuilder.directory(new File(directory));
-		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
+		        	processBuilder.redirectErrorStream(true);
 		        	
-		        	process.waitFor();
-		        	getBranchAndSetTitle();
-		} catch (InterruptedException ex) {
-        			ex.printStackTrace();				
-		} catch(IOException ex) {
-			ex.printStackTrace();
-		}
+		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
+		        	Thread thread = new Thread( () -> {
+			       	try {
+				       	BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+	
+			               	while (true) {	
+			               		String line = reader.readLine();
+			               		if (line != null && line.equals("[exit]")) {
+			             			getBranchAndSetTitle();
+			             			break;
+			                    		}
+			                    		else if(line == null)
+			                    			break;	
+			                	}
+			           } catch(IOException ex) {
+					ex.printStackTrace();
+				}
+		        	});
+	        		thread.start();
+        		} catch (IOException ex) {
+        			ex.printStackTrace();			
+        		}
 	}	
 	public void getBranchAndSetTitle() {
 		//try {
 			//thread.wait();
 			//JOptionPane.showMessageDialog(null,"hello");
-			//SwingUtilities.invokeLater( () -> {
+			SwingUtilities.invokeLater( () -> {
 				String branch=whichBranchOpened();
 				
 				frame.setTitle(branch);
-			//});
+			});
 		/*}
 		catch(InterruptedException ex) {
 			ex.printStackTrace();
