@@ -201,13 +201,13 @@ public JButton everythingbutthekitchensink;
 			String whichfolderopened=whichFolderOpened();
 			if(whichbranch.equals(whichfolderopened)) {
 				//substring = "master";
-				Thread thread=git("git switch "+mainbranch,root_directory);
-				getBranchAndSetTitle(thread);
+				gitWaitUntilFinish("git switch "+mainbranch,root_directory);
+				getBranchAndSetTitle();
 			}
 			else {
 				if(isBranch(whichfolderopened)) {
-					Thread thread=git("git switch "+whichfolderopened,root_directory);
-					getBranchAndSetTitle(thread);
+					gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
+					getBranchAndSetTitle();
 				}
 				else
 				{
@@ -227,8 +227,8 @@ public JButton everythingbutthekitchensink;
 					openbranch.addActionListener( (ev2) -> {
 						String selectedbranch = (String)combobox.getSelectedItem();
 						
-						Thread thread=git("git switch "+selectedbranch,root_directory);
-						getBranchAndSetTitle(thread);
+						gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
+						getBranchAndSetTitle();
 						selectbranch.dispose();
 					});
 					selectpanel.add(openbranch);
@@ -242,16 +242,36 @@ public JButton everythingbutthekitchensink;
 			}
 		});
 	}
-	public void getBranchAndSetTitle(Thread thread) {
+	public void gitWaitUntilFinish(String command) {
+		git(command,root_directory);
+	}
+	public void gitWaitUntilFinish(String command,String directory) {
 		try {
-			thread.join();
+			String echo ="echo \""+command.replace("\\", "\\\\").replace("$", "\\$").replace("\"", "\\\"")
+					//.replace("(", "\\(")
+					//.replace(")", "\\)")
+					+"\"; ";		
+			
+			ProcessBuilder processbuilder = new ProcessBuilder("\""+gitbashdotexe+"\"","-c",	"\'"+echo+command+"; exec bash\'");
+			Process process=processbuilder.start();
+			process.waitFor();
+		} catch(InterruptedException ex) {
+			ex.printStackTrace();
+		} catch(IOException ex) {
+			ex.printStackTrace();
+		}
+	}	
+	public void getBranchAndSetTitle() {
+		//try {
+			//thread.wait();
+			//JOptionPane.showMessageDialog(null,"hello");
 			String branch=whichBranchOpened();
 			
 			frame.setTitle(branch);
-		}
+		/*}
 		catch(InterruptedException ex) {
 			ex.printStackTrace();
-		}
+		}*/
 	}
 	public String whichFolderOpened() {
 		String substring=directory.replace(root_directory.replace("/","\\"),"");
@@ -297,7 +317,7 @@ public JButton everythingbutthekitchensink;
 	public void git(String command) {
 		git(command,root_directory);
 	}
-	public Thread git(String command,String directory) {
+	public void git(String command,String directory) {
 		Thread thread = new Thread() {
 			public void run() {
 				CommandLine commandline = new CommandLine();
@@ -311,7 +331,6 @@ public JButton everythingbutthekitchensink;
 			}
 		};
 		thread.start();
-		return thread;
 	}
 	
 	public void MSDOS() {
