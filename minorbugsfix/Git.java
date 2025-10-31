@@ -251,13 +251,7 @@ public JButton everythingbutthekitchensink;
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
-			/*String echo ="echo \""+command.replace("\\", "\\\\").replace("$", "\\$").replace("\"", "\\\"")
-					//.replace("(", "\\(")
-					//.replace(")", "\\)")
-					+"\"; ";		
-			System.out.println("\""+gitbashdotexe+"\"");
-			System.out.println("\'"+echo+command+"; exec bash\'");
-			*/
+			/*	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", echo+command+"; exec bash");
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
@@ -271,8 +265,28 @@ public JButton everythingbutthekitchensink;
 			
 			Process process=processbuilder.start();
 			process.waitFor();	
-		} catch(InterruptedException ex) {
-			ex.printStackTrace();
+			*/
+			
+			// Escape special characters for bash
+        String escapedCommand = command
+            .replace("\\", "\\\\")
+            .replace("\"", "\\\"")
+            .replace("$", "\\$");
+
+        // Compose the full bash command:
+        // 1. Echo the command for visibility
+        // 2. Run the command
+        // 3. Keep the shell open
+        String fullCommand = "echo \"" + escapedCommand + "\"; " + command + "; exec bash";
+
+        // Launch git-bash.exe with the full command
+        ProcessBuilder processBuilder = new ProcessBuilder(
+            gitbashdotexe,
+            "--login", "-i", "-c", fullCommand
+        );
+        processBuilder.directory(new File(directory));
+        processBuilder.start(); // Don't wait — let the shell stay open
+
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
