@@ -3995,7 +3995,7 @@ class AutoKeyListener {
     	    			}
         			}
 	    	    }
-	    	    else {
+	    	    else if(params.contains(",")) {
 			    String[] paramList = params.split(",");
 			    for (String param : paramList) {
 			        param = param.trim();
@@ -4003,6 +4003,13 @@ class AutoKeyListener {
 			        variablenames.add(type);
 			    }
 		    }
+		    else {  // if public void run(String variablename) Find variable name
+		    	Pattern pattern11=Pattern.compile("^\\s*[a-zA-Z0-9]+\\s+([a-zA-Z0-9]+)\\s*$");
+		    	Matcher matcher11=pattern11.matcher(params);
+		    	if(matcher11.find()) {
+		    		variablenames.add(matcher11.group(1));
+	    		}
+    		     }
 		}
 		
 		data=variablenames;
