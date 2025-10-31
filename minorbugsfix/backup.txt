@@ -24,7 +24,7 @@
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 11065
+    "caretposition": 10704
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "starterclass": "Main",
@@ -33,7 +33,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 2632
+    "caretposition": 2800
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "starterclass": "",

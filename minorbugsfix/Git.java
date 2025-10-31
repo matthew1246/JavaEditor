@@ -288,8 +288,9 @@ public JButton everythingbutthekitchensink;
 		        	
 		        	processBuilder.directory(new File(directory));
 		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
-		        	getBranchAndSetTitle();
+		        	
 		        	process.waitFor();
+		        	getBranchAndSetTitle();
 		} catch (InterruptedException ex) {
         			ex.printStackTrace();				
 		} catch(IOException ex) {
