@@ -197,18 +197,18 @@ public JButton everythingbutthekitchensink;
 		});
 		switch2_branch.addActionListener( (ev) -> {
 			//Thread thread = new Thread( () -> {
-					String mainbranch = getMainBranch();
+				String mainbranch = getMainBranch();
 				String whichbranch = whichBranchOpened();
 				String whichfolderopened=whichFolderOpened();
 				if(whichbranch.equals(whichfolderopened)) {
 					//substring = "master";
 					gitWaitUntilFinish("git switch "+mainbranch,root_directory);
-					getBranchAndSetTitle();
+					//getBranchAndSetTitle();
 				}
 				else {
 					if(isBranch(whichfolderopened)) {
 						gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
-						getBranchAndSetTitle();
+						//getBranchAndSetTitle();
 					}
 					else
 					{
@@ -229,7 +229,7 @@ public JButton everythingbutthekitchensink;
 							String selectedbranch = (String)combobox.getSelectedItem();
 							
 							gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
-							getBranchAndSetTitle();
+							//getBranchAndSetTitle();
 							selectbranch.dispose();
 						});
 						selectpanel.add(openbranch);
@@ -268,25 +268,28 @@ public JButton everythingbutthekitchensink;
 			*/
 			
 			// Escape special characters for bash
-        String escapedCommand = command
-            .replace("\\", "\\\\")
-            .replace("\"", "\\\"")
-            .replace("$", "\\$");
+        			String escapedCommand = command
+            		.replace("\\", "\\\\")
+            		.replace("\"", "\\\"")
+            		.replace("$", "\\$");
 
-        // Compose the full bash command:
-        // 1. Echo the command for visibility
-        // 2. Run the command
-        // 3. Keep the shell open
-        String fullCommand = "echo \"" + escapedCommand + "\"; " + command + "; exec bash";
-
-        // Launch git-bash.exe with the full command
-        ProcessBuilder processBuilder = new ProcessBuilder(
-            gitbashdotexe,
-            "--login", "-i", "-c", fullCommand
-        );
-        processBuilder.directory(new File(directory));
-        processBuilder.start(); // Don't wait — let the shell stay open
-
+        			// Compose the full bash command:
+		       	 // 1. Echo the command for visibility
+		        	// 2. Run the command
+		        	// 3. Keep the shell open
+		        	String fullCommand = "echo \"" + escapedCommand + "\"; " + command + "; exec bash";
+		
+		        	// Launch git-bash.exe with the full command
+		        	ProcessBuilder processBuilder = new ProcessBuilder(
+		            gitbashdotexe,
+		            "--login", "-i", "-c", fullCommand
+		        	);
+		        	processBuilder.directory(new File(directory));
+		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
+		        	getBranchAndSetTitle();
+		        	process.waitFor();
+		} catch (InterruptedException ex) {
+        			ex.printStackTrace();				
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
