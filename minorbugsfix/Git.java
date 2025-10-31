@@ -259,9 +259,8 @@ public JButton everythingbutthekitchensink;
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
 			*/
 			
-			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
-		
-		
+			//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
+			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
 		
 			/*processbuilder.directory(new File(directory));
 			
