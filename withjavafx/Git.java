@@ -196,51 +196,122 @@ public JButton everythingbutthekitchensink;
 			git(input.getText(),root_directory);
 		});
 		switch2_branch.addActionListener( (ev) -> {
-			String mainbranch = getMainBranch();
-			String whichbranch = whichBranchOpened();
-			String whichfolderopened=whichFolderOpened();
-			if(whichbranch.equals(whichfolderopened)) {
-				//substring = "master";
-				git("git switch "+mainbranch,root_directory);
-				frame.setTitle(mainbranch);			
-			}
-			else {
-				if(isBranch(whichfolderopened)) {
-					git("git switch "+whichfolderopened,root_directory);
-					frame.setTitle(whichfolderopened);
+			Thread thread = new Thread( () -> {
+				String mainbranch = getMainBranch();
+				String whichbranch = whichBranchOpened();
+				String whichfolderopened=whichFolderOpened();
+				if(whichbranch.equals(whichfolderopened)) {
+					//substring = "master";
+					gitWaitUntilFinish("git switch "+mainbranch,root_directory);
+					//getBranchAndSetTitle();
 				}
-				else
-				{
-					JFrame selectbranch = new JFrame();
-					selectbranch.setSize(400,200);
-					
-					selectbranch.setTitle("Select Which Branch");
-					JPanel selectpanel = new JPanel();
-					JLabel selectlabel = new JLabel("Select branch:");
-					selectpanel.add(selectlabel);
-					JComboBox<String> combobox = new JComboBox<String>();
-					for(String branch:getAllBranches()) {
-						combobox.addItem(branch);
+				else {
+					if(isBranch(whichfolderopened)) {
+						gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
+						//getBranchAndSetTitle();
 					}
-					selectpanel.add(combobox);
-					JButton openbranch = new JButton("open branch");
-					openbranch.addActionListener( (ev2) -> {
-						String selectedbranch = (String)combobox.getSelectedItem();
+					else
+					{
+						JFrame selectbranch = new JFrame();
+						selectbranch.setSize(400,200);
 						
-						git("git switch "+selectedbranch,root_directory);
-						frame.setTitle(selectedbranch);
-						selectbranch.dispose();
-					});
-					selectpanel.add(openbranch);
-
-					selectbranch.add(selectpanel);
-					selectbranch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					selectbranch.pack();
-					
-					selectbranch.setVisible(true);
+						selectbranch.setTitle("Select Which Branch");
+						JPanel selectpanel = new JPanel();
+						JLabel selectlabel = new JLabel("Select branch:");
+						selectpanel.add(selectlabel);
+						JComboBox<String> combobox = new JComboBox<String>();
+						for(String branch:getAllBranches()) {
+							combobox.addItem(branch);
+						}
+						selectpanel.add(combobox);
+						JButton openbranch = new JButton("open branch");
+						openbranch.addActionListener( (ev2) -> {
+							String selectedbranch = (String)combobox.getSelectedItem();
+							
+							gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
+							//getBranchAndSetTitle();
+							selectbranch.dispose();
+						});
+						selectpanel.add(openbranch);
+	
+						selectbranch.add(selectpanel);
+						selectbranch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						selectbranch.pack();
+						
+						selectbranch.setVisible(true);
+					}
 				}
-			}
+			});
+			thread.start();
+			
 		});
+	}
+	public void gitWaitUntilFinish(String command) {
+		git(command,root_directory);
+	}
+	public void gitWaitUntilFinish(String command,String directory) {
+		try {
+			/*	
+			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", echo+command+"; exec bash");
+			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
+			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
+			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
+			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
+			*/
+			
+			//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
+			command="echo '" + command + "'; " + command;
+			System.out.println(command);
+			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
+		
+			/*processbuilder.directory(new File(directory));
+			
+			Process process=processbuilder.start();
+			process.waitFor();	
+			
+			// Escape special characters for bash
+        			String escapedCommand = command
+            		.replace("\\", "\\\\")
+            		.replace("\"", "\\\"")
+            		.replace("$", "\\$");
+
+        			// Compose the full bash command:
+		       	 // 1. Echo the command for visibility
+		        	// 2. Run the command
+		        	// 3. Keep the shell open
+		        	String fullCommand = "echo \"" + escapedCommand + "\"; " + command + "; exec bash";
+		
+		        	// Launch git-bash.exe with the full command
+		        	ProcessBuilder processBuilder = new ProcessBuilder(
+		            gitbashdotexe,
+		            "--login", "-i", "-c", fullCommand
+		        	);
+		        	*/
+		        	
+		        	processBuilder.directory(new File(directory));
+		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
+		        	
+		        	process.waitFor();
+		        	getBranchAndSetTitle();
+		} catch (InterruptedException ex) {
+        			ex.printStackTrace();				
+		} catch(IOException ex) {
+			ex.printStackTrace();
+		}
+	}	
+	public void getBranchAndSetTitle() {
+		//try {
+			//thread.wait();
+			//JOptionPane.showMessageDialog(null,"hello");
+			//SwingUtilities.invokeLater( () -> {
+				String branch=whichBranchOpened();
+				
+				frame.setTitle(branch);
+			//});
+		/*}
+		catch(InterruptedException ex) {
+			ex.printStackTrace();
+		}*/
 	}
 	public String whichFolderOpened() {
 		String substring=directory.replace(root_directory.replace("/","\\"),"");
