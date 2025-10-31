@@ -257,15 +257,16 @@ public JButton everythingbutthekitchensink;
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-			ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command);	
+			*/
+			
+			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
 		
 		
 		
-			processbuilder.directory(new File(directory));
+			/*processbuilder.directory(new File(directory));
 			
 			Process process=processbuilder.start();
 			process.waitFor();	
-			*/
 			
 			// Escape special characters for bash
         			String escapedCommand = command
@@ -284,6 +285,8 @@ public JButton everythingbutthekitchensink;
 		            gitbashdotexe,
 		            "--login", "-i", "-c", fullCommand
 		        	);
+		        	*/
+		        	
 		        	processBuilder.directory(new File(directory));
 		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
 		        	getBranchAndSetTitle();
