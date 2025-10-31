@@ -201,13 +201,13 @@ public JButton everythingbutthekitchensink;
 			String whichfolderopened=whichFolderOpened();
 			if(whichbranch.equals(whichfolderopened)) {
 				//substring = "master";
-				git("git switch "+mainbranch,root_directory);
-				frame.setTitle(mainbranch);			
+				Thread thread=git("git switch "+mainbranch,root_directory);
+				getBranchAndSetTitle(thread);
 			}
 			else {
 				if(isBranch(whichfolderopened)) {
-					git("git switch "+whichfolderopened,root_directory);
-					frame.setTitle(whichfolderopened);
+					Thread thread=git("git switch "+whichfolderopened,root_directory);
+					getBranchAndSetTitle(thread);
 				}
 				else
 				{
@@ -227,8 +227,8 @@ public JButton everythingbutthekitchensink;
 					openbranch.addActionListener( (ev2) -> {
 						String selectedbranch = (String)combobox.getSelectedItem();
 						
-						git("git switch "+selectedbranch,root_directory);
-						frame.setTitle(selectedbranch);
+						Thread thread=git("git switch "+selectedbranch,root_directory);
+						getBranchAndSetTitle(thread);
 						selectbranch.dispose();
 					});
 					selectpanel.add(openbranch);
@@ -241,6 +241,17 @@ public JButton everythingbutthekitchensink;
 				}
 			}
 		});
+	}
+	public void getBranchAndSetTitle(Thread thread) {
+		try {
+			thread.join();
+			String branch=whichBranchOpened();
+			
+			frame.setTitle(branch);
+		}
+		catch(InterruptedException ex) {
+			ex.printStackTrace();
+		}
 	}
 	public String whichFolderOpened() {
 		String substring=directory.replace(root_directory.replace("/","\\"),"");
@@ -286,7 +297,7 @@ public JButton everythingbutthekitchensink;
 	public void git(String command) {
 		git(command,root_directory);
 	}
-	public void git(String command,String directory) {
+	public Thread git(String command,String directory) {
 		Thread thread = new Thread() {
 			public void run() {
 				CommandLine commandline = new CommandLine();
@@ -300,6 +311,7 @@ public JButton everythingbutthekitchensink;
 			}
 		};
 		thread.start();
+		return thread;
 	}
 	
 	public void MSDOS() {
