@@ -252,7 +252,7 @@ public JButton everythingbutthekitchensink;
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
 			//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
-			command="echo '" + command + "'; " + command+"; "+"echo '" + "[exit]'; ";
+			command="echo '" + command + "'; " + command+"; "+"echo '" + "[exit]'";
 			System.out.println(command);
 			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
 		        	
