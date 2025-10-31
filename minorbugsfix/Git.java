@@ -263,19 +263,9 @@ public JButton everythingbutthekitchensink;
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
 			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command);	
+			ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command);	
 		
-			String safeCommand = command.replace("\\", "\\\\")
-                                    .replace("$", "\\$")
-                                    .replace("\"", "\\\"");
-
-		         // Build a command that opens Git Bash, runs your command, then keeps it open
-		        // The trick: start a *new* cmd.exe window that runs git-bash.exe
-		        // So Java’s process ends quickly, but git-bash.exe stays open.
-		        String fullCommand = "cmd.exe /c start \"Git Bash\" \"" + gitbashdotexe +
-		                             "\" -c \"" + safeCommand + "; exec bash\"";
 		
-		        ProcessBuilder processbuilder = new ProcessBuilder("cmd.exe", "/c", fullCommand);
 		
 			processbuilder.directory(new File(directory));
 			
