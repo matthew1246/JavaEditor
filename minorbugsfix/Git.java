@@ -253,7 +253,7 @@ public JButton everythingbutthekitchensink;
 					+"\"; ";		
 			System.out.println("\""+gitbashdotexe+"\"");
 			System.out.println("\'"+echo+command+"; exec bash\'");
-			ProcessBuilder processbuilder = new ProcessBuilder("\""+gitbashdotexe+"\"","-c",	"\'"+echo+command+"; exec bash\'");
+			ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", echo+command+"; exec bash");
 			
 			
 			Process process=processbuilder.start();
