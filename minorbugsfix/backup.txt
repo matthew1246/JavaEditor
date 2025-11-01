@@ -6,11 +6,13 @@
     "caretposition": 105
   },
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java"
     ],
     "caretposition": 0
   },
@@ -252,6 +254,18 @@
     "caretposition": 829
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
