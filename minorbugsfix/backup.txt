@@ -6,14 +6,15 @@
     "caretposition": 105
   },
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
       "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java",
       "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
-      "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java"
+      "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -54,7 +55,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 160509
+    "caretposition": 162225
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "starterclass": "",
