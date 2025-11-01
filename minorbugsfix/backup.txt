@@ -270,12 +270,12 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1754
+    "caretposition": 1913
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2266
+    "caretposition": 2403
   }
 }
