@@ -3999,8 +3999,11 @@ class AutoKeyListener {
 			    String[] paramList = params.split(",");
 			    for (String param : paramList) {
 			        param = param.trim();
-			        String type = param.replaceAll("\\s+\\w+$", ""); // remove variable name
-			        variablenames.add(type);
+			        Pattern variablenamepattern=Pattern.compile("[A-Za-z0-9\\[\\]]+\\s+([A-Za-z0-9\\[\\]]+)");
+			        Matcher variablenamematcher= variablenamepattern.matcher(param);
+			        if(variablenamematcher.find()) {
+			        		variablenames.add(variablenamematcher.group(1));
+		        		}
 			    }
 		    }
 		    else {  // if public void run(String variablename) Find variable name

@@ -12,7 +12,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
       "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java",
-      "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java"
+      "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java"
     ],
     "caretposition": 0
   },
@@ -35,7 +36,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 149248
+    "caretposition": 149109
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "starterclass": "",
@@ -269,6 +270,12 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 1754
+  },
+  "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 2266
   }
 }
