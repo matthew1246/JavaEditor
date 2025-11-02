@@ -6,11 +6,14 @@
     "caretposition": 105
   },
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\Formula.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\Moves.java"
     ],
     "caretposition": 0
   },
@@ -264,10 +267,10 @@
     "caretposition": 1862
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java": {
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2098
+    "caretposition": 2447
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java": {
     "starterclass": "",
@@ -285,6 +288,12 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 228
+    "caretposition": 494
+  },
+  "C:\\Users\\Owner\\Documents\\git\\chess\\Formula.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
