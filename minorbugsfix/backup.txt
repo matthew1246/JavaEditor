@@ -6,7 +6,7 @@
     "caretposition": 105
   },
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -14,7 +14,8 @@
       "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java",
       "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
       "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\git\\chess\\Move.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\Moves.java"
     ],
     "caretposition": 0
   },
@@ -37,7 +38,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 149109
+    "caretposition": 48184
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "starterclass": "",
@@ -265,18 +266,30 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 1862
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1913
+    "caretposition": 2098
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java": {
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2403
+    "caretposition": 126
+  },
+  "C:\\Users\\Owner\\Documents\\git\\chess\\Move.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 17
+  },
+  "C:\\Users\\Owner\\Documents\\git\\chess\\Moves.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 228
   }
 }
