@@ -88,6 +88,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {		
+	public JMenuItem saveall = new JMenuItem("Save All");
 	public JButton showlines;
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
 	public JMenuItem rename_file = new JMenuItem("Rename File");
@@ -728,6 +729,7 @@ public class Main {
 		menu.add(recent);
 		menu.add(saveItem);
 		menu.add(saveasitem);
+		menu.add(saveall);
 		menu.add(generatejar);
 		menu.add(exitItem);
 		edit.add(control_f);
@@ -1379,11 +1381,18 @@ public class Main {
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
-		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {
+		saveall.addActionListener((ev) -> {
+			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
+				String title=tabbedpane.getTitleAt(i);
+				if(!title.equals("+")) {
+					tabbedpane.setSelectedIndex(i);
+					sal.actionPerformed(ev);
+				}
+			}
+		});			java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {
 	          		if (event.getID() == KeyEvent.KEY_TYPED) {
 	                    		Component component=(Component)event.getSource();
 	                    		if(component == targetArea) {
-		                    		System.out.println("Working");
 		                    		SwingUtilities.invokeLater(() -> {
 	                       			if(targetArea instanceof JTextArea) {
 	                       				//((JTextArea)targetArea).append(String.valueOf(event.getKeyChar()));
