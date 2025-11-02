@@ -1359,8 +1359,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public void setListeners() {
 		saveall.addActionListener((ev) -> {
 			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
-				tabbedpane.setSelectedIndex(i);
-				sal.actionPerformed(ev);
+				String title=tabbedpane.getTitleAt(i);
+				if(!title.equals("+")) {
+					tabbedpane.setSelectedIndex(i);
+					sal.actionPerformed(ev);
+				}
 			}
 		});		
 		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {		
