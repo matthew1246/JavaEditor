@@ -1618,6 +1618,7 @@ public class Main {
 							commandline.addExternalJar(jar);
 						}
 						if(jarcheckbox.isSelected()) {
+							ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 							commandline.addJunit();
 						}
 						String main_class = fileName.replaceAll(".+\\\\","");						
@@ -2141,6 +2142,7 @@ public class Main {
 					commandline.addExternalJar(jar);
 				}
 				if(jarcheckbox.isSelected()) {
+					ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 					commandline.addJunit();
 				}
 				String main_class = fileName.replaceAll(".+\\\\","");						
@@ -2667,6 +2669,7 @@ public class Main {
 							commandline.addClasspathCheckboxFeature();
 						}
 						if(jarcheckbox.isSelected()) {
+							ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 							commandline.addJunit();
 						}
 						//Process process = compileFromMSDOS("*.java",classpath);
@@ -2764,6 +2767,7 @@ public class Main {
 								commandline.addExternalJar(jar);
 							}
 							if(jarcheckbox.isSelected()) {
+								ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 								commandline.addJunit();
 							}
 							String main_class = fileName.replaceAll(".+\\\\","");						
@@ -2913,7 +2917,7 @@ public class Main {
 								
 								CommandLine commandline = new CommandLine();
 								if(jarcheckbox.isSelected()) {
-									commandline.addJunit();
+									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);												commandline.addJunit();
 								}
 								if(lock.isSelected()) {
 									String save = selected.replace(".java","");
@@ -2995,8 +2999,11 @@ public class Main {
 								for(String jar:preferences.jars) {
 									commandline.addExternalJar(jar);
 								}
-								if(jarcheckbox.isSelected())
+								if(jarcheckbox.isSelected()) {
+									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);	
 									commandline.addJunit();
+								}
+										
 								String main_class = fileName.replaceAll(".+\\\\","");									
 								main_class =main_class.replaceAll("\\.java","");
 								
@@ -3098,6 +3105,7 @@ public class Main {
 										commandline.addClasspathCheckboxFeature();																				
 									}
 									if(jarcheckbox.isSelected()) {
+			ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 										commandline.addJunit();
 									}
 									// JOptionPane.showMessageDialog(null,commandline.java());
