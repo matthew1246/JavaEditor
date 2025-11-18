@@ -56,8 +56,8 @@ public class CommandLine {
 	}
 	
 	public void addJunit() {
-		jars.add(0,"C://junit/junit-4.13.2.jar");
-		jars.add(0,"C://junit/hamcrest-core-1.3.jar");
+		jars.add(0,"junit-4.13.2.jar");
+		jars.add(0,"hamcrest-core-1.3.jar");
 		junitmain_class=" org.junit.runner.JUnitCore";
 		
 		javac_star_nor_dot.setStarNorDot(".");

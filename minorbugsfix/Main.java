@@ -2540,6 +2540,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							commandline.addExternalJar(jar);
 						}
 						if(jarcheckbox.isSelected()) {
+							ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 							commandline.addJunit();
 						}
 						String main_class = fileName.replaceAll(".+\\\\","");						
