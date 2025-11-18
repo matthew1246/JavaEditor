@@ -13,7 +13,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java",
+      "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java"
     ],
     "caretposition": 0
   },
@@ -99,7 +101,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 4380
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
     "starterclass": "",
@@ -258,7 +260,7 @@
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2528
+    "caretposition": 5705
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java": {
     "starterclass": "Main",

@@ -9,12 +9,35 @@ public class CommandLine {
 	private String junitmain_class = "";
 	private String main_class;
 	private List<String> jars = new ArrayList<String>();
-	public boolean isdeprecated = false;
+	
+public boolean isdeprecated = false;
 	public boolean isearlierversion = false;
 	public int javaversion;
 	public void earlierjavaversion(int javaversion) {
 		isearlierversion = true;
 		this.javaversion = javaversion;
+	}
+	public void addJavaFX() {
+		for(String jar:getJavaFX()) {
+			addExternalJar(jar);
+		}
+	}
+	public List<String> getJavaFX() {
+		List<String> javafx = new ArrayList<String>();
+			
+		javafx.add("javafx.base.jar");
+		javafx.add("javafx.controls.jar");
+		javafx.add("javafx.fxml.jar");
+		javafx.add("javafx.graphics.jar");
+		javafx.add("javafx.media.jar");
+		javafx.add("javafx.swing.jar");
+		javafx.add("javafx.web.jar");
+		javafx.add("javafx-swt.jar");
+		javafx.add("jdk.jsobject.jar");
+		javafx.add("jfx.incubator.input.jar");
+		javafx.add("jfx.incubator.richtext.jar");
+		
+		return javafx;
 	}
 	public void deprecated() {
 		isdeprecated = true;
@@ -34,8 +57,8 @@ public class CommandLine {
 	}
 	
 	public void addJunit() {
-		jars.add(0,"C://junit/junit-4.13.2.jar");
-		jars.add(0,"C://junit/hamcrest-core-1.3.jar");
+		jars.add(0,"junit-4.13.2.jar");
+		jars.add(0,"hamcrest-core-1.3.jar");
 		junitmain_class=" org.junit.runner.JUnitCore";
 		
 		javac_star_nor_dot.setStarNorDot(".");
@@ -117,7 +140,8 @@ public class CommandLine {
 	*/
 	public Process run(String command,String dir) {
 		try {
-			String[] command2 =new String[3];
+			
+String[] command2 =new String[3];
 			command2[0] = "cmd.exe";
 			command2[1] = "/c";
 			command2[2] = command;
