@@ -1916,6 +1916,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					commandline.addExternalJar(jar);
 				}
 				if(jarcheckbox.isSelected()) {
+					ExtractJUnit extractjunit = new ExtractJUnit(Main.this);			
 					commandline.addJunit();
 				}
 				String main_class = fileName.replaceAll(".+\\\\","");						
@@ -2441,6 +2442,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						commandline.addClasspathCheckboxFeature();
 					}
 					if(jarcheckbox.isSelected()) {
+						ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 						commandline.addJunit();
 					}
 					//Process process = compileFromMSDOS("*.java",classpath);
@@ -2674,6 +2676,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								
 								CommandLine commandline = new CommandLine();
 								if(jarcheckbox.isSelected()) {
+									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 									commandline.addJunit();
 								}
 								if(lock.isSelected()) {
@@ -2721,8 +2724,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								for(String jar:preferences.jars) {
 									commandline.addExternalJar(jar);
 								}
-								if(jarcheckbox.isSelected())
-									commandline.addJunit();
+								if(jarcheckbox.isSelected()) {
+									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);										commandline.addJunit();
+								}
 								String main_class = fileName.replaceAll(".+\\\\","");									
 								main_class =main_class.replaceAll("\\.java","");
 								commandline.setMainClass(main_class);
@@ -2777,7 +2781,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										commandline.addClasspathCheckboxFeature();																				
 									}
 									if(jarcheckbox.isSelected()) {
-										commandline.addJunit();
+		ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
+								commandline.addJunit();
 									}
 									// JOptionPane.showMessageDialog(null,commandline.java());
 									command = new String[6];
