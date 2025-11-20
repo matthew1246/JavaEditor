@@ -3547,6 +3547,7 @@ class SaveActionListener implements ActionListener {
 			               	}
 			               	StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			               	storeselectedfile.setTabs(tabs);
+			               	storeselectedfile.setStarterClass(main.fileName);
 				}
 			}
 		}catch (FileNotFoundException ex) {
