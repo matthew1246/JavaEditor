@@ -1,6 +1,6 @@
 {
   "": {
-    "starterclass": "",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
     "caretposition": 105
@@ -10,12 +10,7 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java",
-      "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -38,7 +33,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 133845
+    "caretposition": 190282
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "starterclass": "",
@@ -351,5 +346,11 @@
     ],
     "fileNames": [],
     "caretposition": 772
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java": {
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
