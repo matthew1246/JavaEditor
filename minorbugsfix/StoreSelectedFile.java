@@ -196,8 +196,10 @@ public class StoreSelectedFile {
 		filenameanddirectory=hashmap.get(filenameanddirectory.starterclass);
 		if( ! filenameanddirectory.starterclass.equals(mainclass) ) {
 			filenameanddirectory.starterclass=mainclass;		;
-			setBackup(hashmap);
 		}
+		filenameanddirectory=hashmap.get("lastopened");
+		filenameanddirectory.starterclass = mainclass;
+		setBackup(hashmap);
 	}
 
 	public String getStarterClass() {
