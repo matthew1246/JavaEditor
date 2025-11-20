@@ -3534,6 +3534,19 @@ class SaveActionListener implements ActionListener {
 					output.print(text);
 					output.close();
 					main.frame.setTitle(main.fileName.replaceAll(".+\\\\",""));
+					
+	main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),main.fileName.replaceAll(".+\\\\",""));
+					List<String> tabs=main.fileNames;
+					int tabsize = main.tabbedpane.getSelectedIndex();
+
+					if(tabs.size() <= tabsize) {
+			                      		tabs.add(main.fileName);
+			               	}
+			               	else {
+			                       	tabs.set(tabsize,main.fileName);
+			               	}
+			               	StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			               	storeselectedfile.setTabs(tabs);
 				}
 			}
 		}catch (FileNotFoundException ex) {

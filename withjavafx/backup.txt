@@ -1,11 +1,12 @@
 {
   "lastopened": {
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\git\\music\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJUnit.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJUnit.java",
+      "C:\\Users\\Owner\\Documents\\git\\music\\Main.java"
     ],
     "caretposition": 0
   },
@@ -254,5 +255,11 @@
     ],
     "fileNames": [],
     "caretposition": 748
+  },
+  "C:\\Users\\Owner\\Documents\\git\\music\\Main.java": {
+    "starterclass": "Main",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 894
   }
 }
