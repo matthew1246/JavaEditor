@@ -3,7 +3,7 @@ import java.util.*;
 import com.google.gson.*;
 import com.google.gson.reflect.*;
 import javax.swing.JOptionPane;
-public class StoreSelectedFile {
+public class StoreSelectedFile {	
 	FileWriter filewriter;
 	public static void main(String[] args) 	{
 		Gson gson = new Gson();
@@ -18,6 +18,23 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> linkedhashmap2=gson.fromJson(string,typetoken.getType());
 		for(String key:linkedhashmap2.keySet()) {
 			System.out.println(key+" "+linkedhashmap2.get(key).starterclass+" "+linkedhashmap2.get(key).jars.get(0));
+		}
+	}
+	public List<String> getStartupComboBox(String fileName) {
+		Preferences preferences=getBackup().get(fileName);
+		if(preferences != null) {
+			return preferences.startupcombobox;
+		}
+		else {
+			return new ArrayList<String>();
+		}
+	}
+	public void setStartupComboBox(String fileName,List<String> startups) {
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		Preferences preferences=hashmap.get(fileName);
+		if(preferences != null) {
+			preferences.startupcombobox = startups;
+			setBackup(hashmap);
 		}
 	}
 	public int getCaretPosition(String filename) {

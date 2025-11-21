@@ -1245,31 +1245,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		}
 	}
-	public void setStarterClassBoxes() {
-		if(!filelistmodifier.isEmpty()) {
-			// System.out.println(filelistmodifier);
-			List<String> mains=getclassmethods.getMains(filelistmodifier);
-			if(mains.size() == 1)
-				lock.setSelected(true);
-			for(String string:mains) {
-				startupcombobox.addItem(string);
-			}
-			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			String starterclass = storeselectedfile.getStarterClass();
-			/*if(starterclass.contains("/") || starterclass.contains("\\")) {
-				starterclass=fileName.replaceAll(".+\\\\","");
-				starterclass=starterclass.replace(".java","");
-			}*/
-			if(!starterclass.equals("")) {
-				startupcombobox.setSelectedItem(starterclass);
-				lock.setSelected(true);
-			}
-			else if(mains.contains("Main")) {
-				startupcombobox.setSelectedItem("Main");
-				lock.setSelected(true);
-			}
-		}
-	}
+	public StarterJComboBox startercombobox;
+	public void setStarterClassBoxes(String filename) {
+		if(startercombobox == null)
+			startercombobox = new StarterJComboBox(filename,this);
+		else
+			startercombobox.Change(filename);
+	}		
 	public MSDOS msdos;
 	public void open(String selected2) {
 		try {
@@ -1316,7 +1298,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
-			setStarterClassBoxes();
+			setStarterClassBoxes(fileName);
 			if(fileName != null && !fileName.equals("")) {
 				frame.setTitle(fileName.replaceAll(".+\\\\",""));
 			}
@@ -2796,6 +2778,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									command[3] = "cmd";									
 									command[4]= "/k";
 									command[5] = commandline.java();
+									
+									setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
+									
 									process=runtime.exec(command,null,new File(classpath1));
 									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);																
 								}
@@ -2979,7 +2964,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
-				setStarterClassBoxes();
+				setStarterClassBoxes(fileName);
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}
@@ -3150,7 +3135,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(fileName);
-				setStarterClassBoxes();
+				setStarterClassBoxes(fileName);
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}

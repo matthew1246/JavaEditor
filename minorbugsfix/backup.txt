@@ -1,43 +1,51 @@
 {
   "": {
+    "startupcombobox": [],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
     "caretposition": 105
   },
   "lastopened": {
+    "startupcombobox": [],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java"
     ],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\abcdefg\\Main.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 9590
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 83608
+    "caretposition": 44396
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -47,6 +55,7 @@
     "caretposition": 2020
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -56,6 +65,7 @@
     "caretposition": 162225
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -65,6 +75,7 @@
     "caretposition": 2577
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -74,6 +85,7 @@
     "caretposition": 2067
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -83,6 +95,7 @@
     "caretposition": 2104
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Group.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -92,15 +105,17 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 4380
+    "caretposition": 329
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -110,15 +125,17 @@
     "caretposition": 2977
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 8600
+    "caretposition": 1461
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoDuplicate.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -128,6 +145,7 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -137,6 +155,7 @@
     "caretposition": 5721
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -146,6 +165,7 @@
     "caretposition": 4895
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SelectedLines.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -155,6 +175,7 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Middle.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -164,6 +185,7 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -173,6 +195,7 @@
     "caretposition": 1631
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -182,6 +205,7 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -191,6 +215,7 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -200,6 +225,7 @@
     "caretposition": 4373
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -209,6 +235,7 @@
     "caretposition": 380
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -218,6 +245,7 @@
     "caretposition": 2887
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -227,6 +255,7 @@
     "caretposition": 1101
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -236,6 +265,7 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -245,6 +275,7 @@
     "caretposition": 1014
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -254,84 +285,98 @@
     "caretposition": 829
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 5705
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculate.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 1739
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 659
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Piece.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 126
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Move.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 17
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Moves.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 494
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Formula.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Queen.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Checkmate.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 270
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Bishop.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Pawn.java": {
+    "startupcombobox": [],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 1157
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\OOCalculateThreaded.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 1138
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Calculate.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 297
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -341,6 +386,7 @@
     "caretposition": 374
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJUnit.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -350,12 +396,24 @@
     "caretposition": 772
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 268
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -364,13 +422,14 @@
     "fileNames": [],
     "caretposition": 0
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 144
   }
 }

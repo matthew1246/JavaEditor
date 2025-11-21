@@ -7,7 +7,7 @@ public class CommandLine {
  	public StarNorDot javac_star_nor_dot = new StarNorDot();
  	public StarNorDot java_star_nor_dot= new StarNorDot();
 	private String junitmain_class = "";
-	private String main_class;
+	public String main_class;
 	private List<String> jars = new ArrayList<String>();
 	
 public boolean isdeprecated = false;
