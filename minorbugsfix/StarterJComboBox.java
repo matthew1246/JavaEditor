@@ -28,12 +28,12 @@ public class StarterJComboBox {
 	public void Change(String filename) {
 		if(!fileName.equals(filename)) {
 			if(!filename.equals("")) {
-				if(!main.getDirectory(fileName).equals(main.getDirectory(filename))) { // Same folder
-					Remove();
-					for(String filename2:getItems()) {
-						main.startupcombobox.addItem(filename2);
-					}				
-				}
+				Remove();
+				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+				List<String> starterclasses= storeselectedfile.getStartupComboBox(fileName);
+				for(String starterclass2:starterclasses) {
+					main.startupcombobox.addItem(starterclass2);
+				}			
 				String onlyfilename = main.getFileName(filename);
 				if(onlyfilename.endsWith(".java")) {
 					int length = ".java".length();
@@ -41,7 +41,6 @@ public class StarterJComboBox {
 				}
 				if(!Contains(filename)) {
 					main.startupcombobox.addItem(onlyfilename);
-					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					storeselectedfile.setStartupComboBox(fileName,getItems());				
 				}
 				main.startupcombobox.setSelectedItem(onlyfilename);
