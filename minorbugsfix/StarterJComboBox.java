@@ -1,6 +1,7 @@
 import javax.swing.JComboBox;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 public class StarterJComboBox {
 	protected Main main;
 	protected String fileName;
@@ -44,7 +45,10 @@ public class StarterJComboBox {
 					storeselectedfile.setStartupComboBox(fileName,getItems());				
 				}
 				main.startupcombobox.setSelectedItem(onlyfilename);
+				main.startupcombobox.validate();
+				main.startupcombobox.repaint();
 			}
+			this.fileName = filename;
 		}								
 	}
 	public void Add(String starterclass) {

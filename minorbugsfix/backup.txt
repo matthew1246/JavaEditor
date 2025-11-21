@@ -35,14 +35,29 @@
     "caretposition": 9590
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Preferences",
+      "StarterJComboBox",
+      "Main",
+      "StoreSelectedFile",
+      "Preferences",
+      "StarterJComboBox",
+      "Main",
+      "StoreSelectedFile",
+      "Main",
+      "Main",
+      "StoreSelectedFile",
+      "StarterJComboBox",
+      "Main",
+      "StoreSelectedFile"
+    ],
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 76783
+    "caretposition": 119052
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -125,7 +140,23 @@
     "caretposition": 2977
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Preferences",
+      "StarterJComboBox",
+      "Main",
+      "StoreSelectedFile",
+      "Preferences",
+      "StarterJComboBox",
+      "Main",
+      "StoreSelectedFile",
+      "Main",
+      "Main",
+      "StoreSelectedFile",
+      "StarterJComboBox",
+      "Main",
+      "StoreSelectedFile",
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -403,14 +434,17 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "StarterJComboBox",
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 268
+    "caretposition": 1605
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
     "startupcombobox": [],
