@@ -2264,7 +2264,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				input.addActionListener(clicky);
 				
 				frame2.setVisible(true);
-				//replaceinput.setVisible(false);
+				SwingUtilities.invokeLater(() -> {
+					frame2.requestFocus();
+					input.requestFocusInWindow();
+					input.requestFocus();
+				});
 			}
 		});		
 		addCaretListener(textarea);
