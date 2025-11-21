@@ -262,6 +262,9 @@ public class StoreSelectedFile {
 	}
 	public Preferences get(String filenameanddirectory) {
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
+		if(filenameanddirectory.equals("")) {
+			JOptionPane.showMessageDialog(null,"fileName is *\"\"* inside get(String filenameanddirectory)");
+		}
 		Preferences preferences= linkedhashmap.get(filenameanddirectory);
 		if(preferences != null) {
 			return preferences;
