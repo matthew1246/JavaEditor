@@ -579,7 +579,7 @@ public class Main {
 			scrollToCaretPosition(caretposition);
 		}
 	}
-	public String getDirectory(String filename) {
+	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
 			return filename.replaceAll("[^\\\\]+\\.java","");
 		}

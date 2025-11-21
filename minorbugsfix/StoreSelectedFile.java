@@ -3,6 +3,7 @@ import java.util.*;
 import com.google.gson.*;
 import com.google.gson.reflect.*;
 import javax.swing.JOptionPane;
+import java.util.HashSet;
 public class StoreSelectedFile {	
 	FileWriter filewriter;
 	public static void main(String[] args) 	{
@@ -23,7 +24,13 @@ public class StoreSelectedFile {
 	public List<String> getStartupComboBox(String fileName) {
 		Preferences preferences=getBackup().get(fileName);
 		if(preferences != null) {
-			return preferences.startupcombobox;
+			HashSet<String> hashset = new HashSet<String>();
+			for(String startup:preferences.startupcombobox) {
+				hashset.add(startup);
+			}
+			
+			List<String> list=new ArrayList<String>(hashset);
+			return list;
 		}
 		else {
 			return new ArrayList<String>();
