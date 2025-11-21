@@ -39,7 +39,7 @@ public class StarterJComboBox {
 					int length = ".java".length();
 					onlyfilename = onlyfilename.substring(0,onlyfilename.length()-length);
 				}
-				if(!Contains(filename)) {
+				if(!Contains(onlyfilename)) {
 					main.startupcombobox.addItem(onlyfilename);
 				}
 				main.startupcombobox.setSelectedItem(onlyfilename);
@@ -69,8 +69,7 @@ public class StarterJComboBox {
 		return false;			
 	}
 	public void Remove() {
-		for(int i = 0; i < main.startupcombobox.getItemCount(); i++) {
-			String item=main.startupcombobox.getItemAt(i);
+		for(String item:getItems()) {
 			main.startupcombobox.removeItem(item);	
 		}
 		main.startupcombobox.validate();

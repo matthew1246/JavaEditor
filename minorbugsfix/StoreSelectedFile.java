@@ -20,6 +20,7 @@ public class StoreSelectedFile {
 		for(String key:linkedhashmap2.keySet()) {
 			System.out.println(key+" "+linkedhashmap2.get(key).starterclass+" "+linkedhashmap2.get(key).jars.get(0));
 		}
+		System.out.println();
 	}
 	public List<String> getStartupComboBox(String fileName) {
 		Preferences preferences=getBackup().get(fileName);
@@ -28,8 +29,12 @@ public class StoreSelectedFile {
 			for(String startup:preferences.startupcombobox) {
 				hashset.add(startup);
 			}
-			
 			List<String> list=new ArrayList<String>(hashset);
+			System.out.println("list:");
+			for(String item:list) {
+				System.out.print(item+" ");
+			}		
+			System.out.println();
 			return list;
 		}
 		else {
