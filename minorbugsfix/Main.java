@@ -2043,7 +2043,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				deselected = (String)ev.getItem(); 
 			}
 		});
-		// setStarterClassBoxes(); Might need uncomment this in future.
+		setStarterClassBoxes(fileName); // Might need uncomment this in future.
 		filenamescombobox.addActionListener((ev) -> {
 			if(filenamescombobox.hasFocus()) {
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
