@@ -17,11 +17,11 @@ public class StarterJComboBox {
 				for(String starterclass2:starterclasses) {
 					main.startupcombobox.addItem(starterclass2);
 				}
-				if(Contains(starterclass)) {
-					main.startupcombobox.setSelectedItem(starterclass);
+				if(!Contains(starterclass)) {
+					Add(starterclass);
 					// main.lock.setSelected(true);
 				}
-				Add(starterclass);
+				main.startupcombobox.setSelectedItem(starterclass);
 			}
 		}
 	}

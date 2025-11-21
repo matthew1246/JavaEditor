@@ -36,15 +36,13 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "startupcombobox": [
-      "StoreSelectedFile",
       "Preferences",
-      "StoreSelectedFile",
       "Main",
       "StarterJComboBox",
       "Preferences",
       "StoreSelectedFile",
       "Main",
-      "StoreSelectedFile"
+      "StarterJComboBox"
     ],
     "starterclass": "Main",
     "jars": [
@@ -52,7 +50,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 25108
+    "caretposition": 44311
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -420,10 +418,9 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
     "startupcombobox": [
-      "StoreSelectedFile",
-      "StoreSelectedFile",
+      "Main",
       "Preferences",
-      "StoreSelectedFile",
+      "Main",
       "StarterJComboBox",
       "Preferences",
       "StoreSelectedFile",
@@ -436,7 +433,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 1522
+    "caretposition": 851
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
     "startupcombobox": [],
