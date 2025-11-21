@@ -3,7 +3,9 @@ import java.util.*;
 import com.google.gson.*;
 import com.google.gson.reflect.*;
 import javax.swing.JOptionPane;
+import java.util.HashSet;
 public class StoreSelectedFile {
+	
 	FileWriter filewriter;
 	public static void main(String[] args) 	{
 		Gson gson = new Gson();
@@ -18,6 +20,34 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> linkedhashmap2=gson.fromJson(string,typetoken.getType());
 		for(String key:linkedhashmap2.keySet()) {
 			System.out.println(key+" "+linkedhashmap2.get(key).starterclass+" "+linkedhashmap2.get(key).jars.get(0));
+		}
+		System.out.println();
+	}
+	public List<String> getStartupComboBox(String fileName) {
+		Preferences preferences=getBackup().get(fileName);
+		if(preferences != null) {
+			HashSet<String> hashset = new HashSet<String>();
+			for(String startup:preferences.startupcombobox) {
+				hashset.add(startup);
+			}
+			List<String> list=new ArrayList<String>(hashset);
+			System.out.println("list:");
+			for(String item:list) {
+				System.out.print(item+" ");
+			}		
+			System.out.println();
+			return list;
+		}
+		else {
+			return new ArrayList<String>();
+		}
+	}
+	public void setStartupComboBox(String fileName,List<String> startups) {
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		Preferences preferences=hashmap.get(fileName);
+		if(preferences != null) {
+			preferences.startupcombobox = startups;
+			setBackup(hashmap);
 		}
 	}
 	public int getCaretPosition(String filename) {
@@ -214,7 +244,13 @@ public class StoreSelectedFile {
 			return starterclass;
 		}
 	}
-	
+	public String getStarterClass(String fileName) {
+		Preferences preferences=getBackup().get(fileName);
+		if(preferences != null)
+			return preferences.starterclass;
+		else 
+			return "";
+	}		
 	public void addJar(String directory,String jarpath) {
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
 		Preferences preferences=linkedhashmap.get(directory);
@@ -263,6 +299,9 @@ public class StoreSelectedFile {
 	}
 	public Preferences get(String filenameanddirectory) {
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
+		if(filenameanddirectory.equals("")) {
+			JOptionPane.showMessageDialog(null,"fileName is *\"\"* inside get(String filenameanddirectory)");
+		}
 		Preferences preferences= linkedhashmap.get(filenameanddirectory);
 		if(preferences != null) {
 			return preferences;

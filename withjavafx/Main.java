@@ -552,7 +552,14 @@ public class Main {
 			}
 		});
 		thread.start();
-		openLastSelectedLine();
+		try {
+			SwingUtilities.invokeAndWait(() -> {
+				openLastSelectedLine();
+				setStarterClassBoxes(fileName);
+			});
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -574,7 +581,7 @@ public class Main {
 			scrollToCaretPosition(caretposition);
 		}
 	}
-	public String getFileName(String directoryandfilename) {
+	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
 	}
 	
@@ -1260,30 +1267,19 @@ public class Main {
 			}
 		}
 	}
-	public void setStarterClassBoxes() {
-		if(!filelistmodifier.isEmpty()) {
-			// System.out.println(filelistmodifier);
-			List<String> mains=getclassmethods.getMains(filelistmodifier);
-			if(mains.size() == 1)
-				lock.setSelected(true);
-			for(String string:mains) {
-				startupcombobox.addItem(string);
-			}
-			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			String starterclass = storeselectedfile.getStarterClass();
-			/*if(starterclass.contains("/") || starterclass.contains("\\")) {
-				starterclass=fileName.replaceAll(".+\\\\","");
-				starterclass=starterclass.replace(".java","");
-			}*/
-			if(!starterclass.equals("")) {
-				startupcombobox.setSelectedItem(starterclass);
-				lock.setSelected(true);
-			}
-			else if(mains.contains("Main")) {
-				startupcombobox.setSelectedItem("Main");
-				lock.setSelected(true);
-			}
+	public static String getClassName(String filename) {
+		filename=getFileName(filename);
+		if(filename.endsWith(".java")) {
+			return filename.substring(0,filename.length()-".java".length());
 		}
+		return filename;
+	}
+	public StarterJComboBox startercombobox;
+	public void setStarterClassBoxes(String filename) {
+		if(startercombobox == null)
+			startercombobox = new StarterJComboBox(filename,this);
+		else
+			startercombobox.Change(filename);
 	}
 	public String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
@@ -1340,7 +1336,7 @@ public class Main {
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
-			setStarterClassBoxes();
+			setStarterClassBoxes(fileName);
 			if(fileName != null && !fileName.equals("")) {
 				frame.setTitle(fileName.replaceAll(".+\\\\",""));
 			}
@@ -2285,7 +2281,7 @@ public class Main {
 				deselected = (String)ev.getItem(); 
 			}
 		});
-		// setStarterClassBoxes(); Might need uncomment this in future.
+		setStarterClassBoxes(fileName); // Might need uncomment this in future.
 		filenamescombobox.addActionListener((ev) -> {
 			if(filenamescombobox.hasFocus()) {
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -3338,7 +3334,7 @@ public class Main {
 				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
-				setStarterClassBoxes();
+				setStarterClassBoxes(fileName);
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}
@@ -3507,7 +3503,7 @@ public class Main {
 				
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(fileName);
-				setStarterClassBoxes();
+				setStarterClassBoxes(fileName);
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}
