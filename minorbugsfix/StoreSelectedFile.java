@@ -243,7 +243,13 @@ public class StoreSelectedFile {
 			return starterclass;
 		}
 	}
-	
+	public String getStarterClass(String fileName) {
+		Preferences preferences=getBackup().get(fileName);
+		if(preferences != null)
+			return preferences.starterclass;
+		else 
+			return "";
+	}		
 	public void addJar(String directory,String jarpath) {
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
 		Preferences preferences=linkedhashmap.get(directory);

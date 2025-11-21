@@ -10,19 +10,18 @@ public class StarterJComboBox {
 		this.main = main;
 		if(!fileName.equals("")) {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			String starterclass = storeselectedfile.getStarterClass();
-			if(!starterclass.equals("")) {
-				Remove();
-				List<String> starterclasses= storeselectedfile.getStartupComboBox(fileName);
-				for(String starterclass2:starterclasses) {
-					main.startupcombobox.addItem(starterclass2);
-				}
-				if(!Contains(starterclass)) {
-					Add(starterclass);
-					// main.lock.setSelected(true);
-				}
-				main.startupcombobox.setSelectedItem(starterclass);
+			Remove();
+			List<String> starterclasses= storeselectedfile.getStartupComboBox(fileName);
+			for(String starterclass2:starterclasses) {
+				main.startupcombobox.addItem(starterclass2);
 			}
+			String starterclass = storeselectedfile.getStarterClass(fileName);
+			if(starterclass.equals(""))
+				starterclass=Main.getClassName(fileName);		
+			if(!Contains(starterclass)) {
+				Add(starterclass);
+			}
+			main.startupcombobox.setSelectedItem(starterclass);
 		}
 	}
 	public void Change(String filename) {
@@ -45,8 +44,8 @@ public class StarterJComboBox {
 				main.startupcombobox.setSelectedItem(onlyfilename);
 				main.startupcombobox.validate();
 				main.startupcombobox.repaint();
+				this.fileName = filename;	
 			}
-			this.fileName = filename;
 		}								
 	}
 	public void Add(String starterclass) {

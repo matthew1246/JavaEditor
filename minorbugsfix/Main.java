@@ -558,7 +558,14 @@ public class Main {
 			}
 		});
 		thread.start();
-		openLastSelectedLine();
+		try {
+			SwingUtilities.invokeAndWait(() -> {
+				openLastSelectedLine();
+				setStarterClassBoxes(fileName);
+			});
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}	
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -588,10 +595,16 @@ public class Main {
 		}
 		return filename;
 	}
-	public String getFileName(String directoryandfilename) {
+	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
 	}
-	
+	public static String getClassName(String filename) {
+		filename=getFileName(filename);
+		if(filename.endsWith(".java")) {
+			return filename.substring(0,filename.length()-".java".length());
+		}
+		return filename;
+	}
 	public void setNoMargin(JComboBox button) {
 		Border border = button.getBorder();
 		Border margin = new EmptyBorder(0,0,0,0);
