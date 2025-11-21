@@ -30,7 +30,7 @@ public class StarterJComboBox {
 			if(!filename.equals("")) {
 				Remove();
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-				List<String> starterclasses= storeselectedfile.getStartupComboBox(fileName);
+				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
 				for(String starterclass2:starterclasses) {
 					main.startupcombobox.addItem(starterclass2);
 				}			
@@ -41,7 +41,6 @@ public class StarterJComboBox {
 				}
 				if(!Contains(filename)) {
 					main.startupcombobox.addItem(onlyfilename);
-					storeselectedfile.setStartupComboBox(fileName,getItems());				
 				}
 				main.startupcombobox.setSelectedItem(onlyfilename);
 				main.startupcombobox.validate();
