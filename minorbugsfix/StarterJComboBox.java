@@ -28,11 +28,20 @@ public class StarterJComboBox {
 		if(!fileName.equals(filename)) {
 			if(!filename.equals("")) {
 				Remove();
-				getCacheAndAddToComboBox(filename);
+				if( !Main.getDirectory(filename).equals(Main.getDirectory(fileName)) ) { // Not same folder
+					getCacheAndAddToComboBox(filename);
+				}
+				else { // same folder
+					if(main.lock.isSelected()) {
+						String  selected=main.startupcombobox.getSelectedItem();
+						
+				}
 				this.fileName = filename;	
 			}
 		}								
 	}
+	public List<String> getCache() {
+		
 	public void getCacheAndAddToComboBox(String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
 		for(String starterclass2:starterclasses) {
