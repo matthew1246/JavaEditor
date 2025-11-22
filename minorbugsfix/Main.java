@@ -2792,7 +2792,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									command[4]= "/k";
 									command[5] = commandline.java();
 									
-									setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
+									// setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
 									
 									process=runtime.exec(command,null,new File(classpath1));
 									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);																
