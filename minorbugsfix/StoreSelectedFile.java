@@ -30,11 +30,12 @@ public class StoreSelectedFile {
 				hashset.add(startup);
 			}
 			List<String> list=new ArrayList<String>(hashset);
-			System.out.println("list:");
+			/*System.out.println("list:");
 			for(String item:list) {
 				System.out.print(item+" ");
 			}		
 			System.out.println();
+			*/
 			return list;
 		}
 		else {

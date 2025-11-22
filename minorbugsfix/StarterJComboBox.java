@@ -25,23 +25,31 @@ public class StarterJComboBox {
 		}
 	}
 	public void Change(String filename) {
-		if(!fileName.equals(filename)) {
+		
+if(!fileName.equals(filename)) {
 			if(!filename.equals("")) {
-				Remove();
 				if( !Main.getDirectory(filename).equals(Main.getDirectory(fileName)) ) { // Not same folder
+					Remove();
 					getCacheAndAddToComboBox(filename);
 				}
 				else { // same folder
 					if(main.lock.isSelected()) {
 						String selected=(String)main.startupcombobox.getSelectedItem();
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
+						System.out.println("starter:");
+						for(String starter:starterclasses) {
+							System.out.println(starter);
+						}
+						System.out.println();
 						if(!starterclasses.contains(selected)) {
+							Remove();
 							starterclasses.add(0,selected);
 							AddAll(starterclasses);
 							main.startupcombobox.setSelectedItem(selected);
 							storeselectedfile.setStartupComboBox(filename,starterclasses);
 						}
 						else {
+							Remove();
 							getCacheAndAddToComboBox(filename);
 						}
 					}
@@ -88,7 +96,7 @@ public class StarterJComboBox {
 	public boolean Contains(String fileName) {
 		for(int i = 0; i < main.startupcombobox.getItemCount(); i++) {
 			String item=main.startupcombobox.getItemAt(i);
-			if(item.equals(fileName))
+			if(item != null && item.equals(fileName))
 				return true;
 		}
 		return false;			
@@ -100,4 +108,4 @@ public class StarterJComboBox {
 		main.startupcombobox.validate();
 		main.startupcombobox.repaint();
 	}
-}
+}
