@@ -61,7 +61,9 @@
     "caretposition": 2020
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -432,7 +434,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 2061
+    "caretposition": 1182
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
     "startupcombobox": [],
