@@ -28,25 +28,26 @@ public class StarterJComboBox {
 		if(!fileName.equals(filename)) {
 			if(!filename.equals("")) {
 				Remove();
-				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
-				for(String starterclass2:starterclasses) {
-					main.startupcombobox.addItem(starterclass2);
-				}			
-				String onlyfilename = main.getFileName(filename);
-				if(onlyfilename.endsWith(".java")) {
-					int length = ".java".length();
-					onlyfilename = onlyfilename.substring(0,onlyfilename.length()-length);
-				}
-				if(!Contains(onlyfilename)) {
-					main.startupcombobox.addItem(onlyfilename);
-				}
-				main.startupcombobox.setSelectedItem(onlyfilename);
-				main.startupcombobox.validate();
-				main.startupcombobox.repaint();
+				getCacheAndAddToComboBox(filename);
 				this.fileName = filename;	
 			}
 		}								
+	}
+	public void getCacheAndAddToComboBox(String filename) {
+		StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
+		for(String starterclass2:starterclasses) {
+			main.startupcombobox.addItem(starterclass2);
+		}			
+		String onlyfilename = main.getFileName(filename);
+		if(onlyfilename.endsWith(".java")) {
+			int length = ".java".length();
+			onlyfilename = onlyfilename.substring(0,onlyfilename.length()-length);
+		}
+		if(!Contains(onlyfilename)) {
+			main.startupcombobox.addItem(onlyfilename);
+		}
+		main.startupcombobox.setSelectedItem(onlyfilename);
+		main.startupcombobox.validate();			main.startupcombobox.repaint();
 	}
 	public void Add(String starterclass) {
 		main.startupcombobox.addItem(starterclass);
