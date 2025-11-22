@@ -31,6 +31,7 @@ public class StarterJComboBox {
 if(!fileName.equals(filename)) {
 			if(!filename.equals("")) {
 				if( !Main.getDirectory(filename).equals(Main.getDirectory(fileName)) ) { // Not same folder
+					main.lock.setSelected(false);	
 					Remove();
 					getCacheAndAddToComboBox(filename);
 				}

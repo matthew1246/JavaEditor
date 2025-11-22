@@ -307,6 +307,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
     "startupcombobox": [
+      "Main",
       "StarterJComboBox"
     ],
     "starterclass": "",
@@ -325,7 +326,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 4095
+    "caretposition": 4131
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java": {
     "startupcombobox": [],
