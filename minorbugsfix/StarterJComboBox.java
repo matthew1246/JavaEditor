@@ -33,15 +33,26 @@ public class StarterJComboBox {
 				}
 				else { // same folder
 					if(main.lock.isSelected()) {
-						String  selected=main.startupcombobox.getSelectedItem();
-						
+						String selected=(String)main.startupcombobox.getSelectedItem();
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
+						if(!starterclasses.contains(selected)) {
+							starterclasses.add(0,selected);
+							AddAll(starterclasses);
+							main.startupcombobox.setSelectedItem(selected);
+							storeselectedfile.setStartupComboBox(filename,starterclasses);
+						}
+						else {
+							getCacheAndAddToComboBox(filename);
+						}
+					}
+					else {
+						getCacheAndAddToComboBox(filename);
+					}
 				}
 				this.fileName = filename;	
 			}
 		}								
-	}
-	public List<String> getCache() {
-		
+	}	
 	public void getCacheAndAddToComboBox(String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
 		for(String starterclass2:starterclasses) {
@@ -60,6 +71,11 @@ public class StarterJComboBox {
 	}
 	public void Add(String starterclass) {
 		main.startupcombobox.addItem(starterclass);
+	}
+	public void AddAll(List<String> list) {
+		for(String classname:list) {
+			main.startupcombobox.addItem(classname);
+		}
 	}
 	public List<String> getItems() {
 		List<String> items = new ArrayList<String>();
