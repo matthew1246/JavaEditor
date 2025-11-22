@@ -2,6 +2,7 @@ import javax.swing.JComboBox;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.util.Iterator;
 public class StarterJComboBox {
 	protected Main main;
 	protected String fileName;
@@ -12,6 +13,7 @@ public class StarterJComboBox {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Remove();
 			List<String> starterclasses= storeselectedfile.getStartupComboBox(fileName);
+			RemoveNulls(starterclasses);
 			for(String starterclass2:starterclasses) {
 				main.startupcombobox.addItem(starterclass2);
 			}
@@ -51,9 +53,11 @@ if(!fileName.equals(filename)) {
 						else {
 							Remove();
 							getCacheAndAddToComboBox(filename);
+							main.startupcombobox.setSelectedItem(selected);	
 						}
 					}
 					else {
+						Remove();			
 						getCacheAndAddToComboBox(filename);
 					}
 				}
@@ -63,6 +67,8 @@ if(!fileName.equals(filename)) {
 	}	
 	public void getCacheAndAddToComboBox(String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
+		RemoveNulls(starterclasses);		
+			
 		for(String starterclass2:starterclasses) {
 			main.startupcombobox.addItem(starterclass2);
 		}			
@@ -75,8 +81,17 @@ if(!fileName.equals(filename)) {
 			main.startupcombobox.addItem(onlyfilename);
 		}
 		main.startupcombobox.setSelectedItem(onlyfilename);
-		main.startupcombobox.validate();			main.startupcombobox.repaint();
+		main.startupcombobox.validate();			
+		main.startupcombobox.repaint();
+		storeselectedfile.setStartupComboBox(filename,getItems());
 	}
+	public void RemoveNulls(List<String> starterclasses) {
+		Iterator<String> starterclasses_it = starterclasses.iterator();
+		while(starterclasses_it.hasNext()) {
+			if(starterclasses_it.next() == null)
+				starterclasses_it.remove();
+		}
+	}		
 	public void Add(String starterclass) {
 		main.startupcombobox.addItem(starterclass);
 	}
@@ -104,7 +119,7 @@ if(!fileName.equals(filename)) {
 	public void Remove() {
 		for(String item:getItems()) {
 			main.startupcombobox.removeItem(item);	
-		}
+		}	
 		main.startupcombobox.validate();
 		main.startupcombobox.repaint();
 	}
