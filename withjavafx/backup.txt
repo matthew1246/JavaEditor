@@ -1,24 +1,27 @@
 {
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java"
     ],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 23906
+    "caretposition": 44458
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -72,7 +75,10 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "StarterJComboBox",
+      "Main"
+    ],
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -193,7 +199,7 @@
   },
   "": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
@@ -300,7 +306,9 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "StarterJComboBox"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -310,11 +318,14 @@
     "caretposition": 3616
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "StarterJComboBox",
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2449
+    "caretposition": 4095
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java": {
     "startupcombobox": [],

@@ -2,6 +2,7 @@ import javax.swing.JComboBox;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.util.Iterator;
 public class StarterJComboBox {
 	protected Main main;
 	protected String fileName;
@@ -12,6 +13,7 @@ public class StarterJComboBox {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Remove();
 			List<String> starterclasses= storeselectedfile.getStartupComboBox(fileName);
+			RemoveNulls(starterclasses);
 			for(String starterclass2:starterclasses) {
 				main.startupcombobox.addItem(starterclass2);
 			}
@@ -28,29 +30,75 @@ public class StarterJComboBox {
 		
 if(!fileName.equals(filename)) {
 			if(!filename.equals("")) {
-				Remove();
-				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
-				for(String starterclass2:starterclasses) {
-					main.startupcombobox.addItem(starterclass2);
-				}			
-				String onlyfilename = main.getFileName(filename);
-				if(onlyfilename.endsWith(".java")) {
-					int length = ".java".length();
-					onlyfilename = onlyfilename.substring(0,onlyfilename.length()-length);
+				if( !Main.getDirectory(filename).equals(Main.getDirectory(fileName)) ) { // Not same folder
+					Remove();
+					getCacheAndAddToComboBox(filename);
 				}
-				if(!Contains(onlyfilename)) {
-					main.startupcombobox.addItem(onlyfilename);
+				else { // same folder
+					if(main.lock.isSelected()) {
+						String selected=(String)main.startupcombobox.getSelectedItem();
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
+						System.out.println("starter:");
+						for(String starter:starterclasses) {
+							System.out.println(starter);
+						}
+						System.out.println();
+						if(!starterclasses.contains(selected)) {
+							Remove();
+							starterclasses.add(0,selected);
+							AddAll(starterclasses);
+							main.startupcombobox.setSelectedItem(selected);
+							storeselectedfile.setStartupComboBox(filename,starterclasses);
+						}
+						else {
+							Remove();
+							getCacheAndAddToComboBox(filename);
+							main.startupcombobox.setSelectedItem(selected);	
+						}
+					}
+					else {
+						Remove();			
+						getCacheAndAddToComboBox(filename);
+					}
 				}
-				main.startupcombobox.setSelectedItem(onlyfilename);
-				main.startupcombobox.validate();
-				main.startupcombobox.repaint();
 				this.fileName = filename;	
 			}
 		}								
+	}	
+	public void getCacheAndAddToComboBox(String filename) {
+		StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
+		RemoveNulls(starterclasses);		
+			
+		for(String starterclass2:starterclasses) {
+			main.startupcombobox.addItem(starterclass2);
+		}			
+		String onlyfilename = main.getFileName(filename);
+		if(onlyfilename.endsWith(".java")) {
+			int length = ".java".length();
+			onlyfilename = onlyfilename.substring(0,onlyfilename.length()-length);
+		}
+		if(!Contains(onlyfilename)) {
+			main.startupcombobox.addItem(onlyfilename);
+		}
+		main.startupcombobox.setSelectedItem(onlyfilename);
+		main.startupcombobox.validate();			
+		main.startupcombobox.repaint();
+		storeselectedfile.setStartupComboBox(filename,getItems());
 	}
+	public void RemoveNulls(List<String> starterclasses) {
+		Iterator<String> starterclasses_it = starterclasses.iterator();
+		while(starterclasses_it.hasNext()) {
+			if(starterclasses_it.next() == null)
+				starterclasses_it.remove();
+		}
+	}		
 	public void Add(String starterclass) {
 		main.startupcombobox.addItem(starterclass);
+	}
+	public void AddAll(List<String> list) {
+		for(String classname:list) {
+			main.startupcombobox.addItem(classname);
+		}
 	}
 	public List<String> getItems() {
 		List<String> items = new ArrayList<String>();
@@ -63,7 +111,7 @@ if(!fileName.equals(filename)) {
 	public boolean Contains(String fileName) {
 		for(int i = 0; i < main.startupcombobox.getItemCount(); i++) {
 			String item=main.startupcombobox.getItemAt(i);
-			if(item.equals(fileName))
+			if(item != null && item.equals(fileName))
 				return true;
 		}
 		return false;			
@@ -72,6 +120,7 @@ if(!fileName.equals(filename)) {
 		for(String item:getItems()) {
 			main.startupcombobox.removeItem(item);	
 		}
+	
 		main.startupcombobox.validate();
 		main.startupcombobox.repaint();
 	}
