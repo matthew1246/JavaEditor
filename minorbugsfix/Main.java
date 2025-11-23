@@ -2682,7 +2682,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									String save = selected.replace(".java","");
 									StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									storeselectedfile.set(fileName);
-									storeselectedfile.setStarterClass(save);
+									storeselectedfile.setStarterClass(fileName);
 									commandline.setMainClass(save);
 									
 									Preferences preferences=storeselectedfile.get(classpath1+selected+".java");
@@ -2757,7 +2757,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										String save = selected.replace(".java","");
 										storeselectedfile = new StoreSelectedFile();
 										storeselectedfile.set(fileName);
-										storeselectedfile.setStarterClass(save);
+										storeselectedfile.setStarterClass(fileName);
 										
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(classpath1+selected+".java");
@@ -3472,6 +3472,7 @@ class OpenDefaultContent {
 		try {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		this.fileName = storeselectedfile.get();
+		JOptionPane.showMessageDialog(null,"*"+fileName+"*");
 		File file2 = new File(fileName); 
 		if(!file2.exists()) {
 			JOptionPane.showMessageDialog(null,"No previous file found.");
