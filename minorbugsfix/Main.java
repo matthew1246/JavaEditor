@@ -662,7 +662,7 @@ public class Main {
 			String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			if(filename2.startsWith("/"))
 				filename2=filename2.substring(1,filename2.length());
-			frame.setTitle(filename2);
+			frame.setTitle(filename2 +" "+fileName);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -3182,6 +3182,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		}
 		allclassesinfile.ChangeFile(textarea,fileName);
+		try {
+			String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+			if(filename2.startsWith("/"))
+				filename2=filename2.substring(1,filename2.length());
+			frame.setTitle(filename2 +" "+fileName);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	public int getLineNumber(String stringuptocaretposition) {
 		int linenumber2=0;
