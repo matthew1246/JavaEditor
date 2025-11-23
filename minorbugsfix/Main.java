@@ -3972,6 +3972,9 @@ class AutoKeyListener {
 							EnterTextPlusExtra();
 						}
 					}
+					else {
+						JOptionPane.showMessageDialog(null,"Variable Suggestion Box: "+keyevent.getKeyChar()+" key");
+					}
 				}
 			}
 			@Override
@@ -5013,6 +5016,9 @@ class MethodSuggestionBox {
 							});
 							timer.setRepeats(false);
 							timer.start();
+						}
+						else {
+							JOptionPane.showMessageDialog(null,"Method Suggestion Box: "+keyevent.getKeyChar()+" key");	
 						}
 					}
 				}
