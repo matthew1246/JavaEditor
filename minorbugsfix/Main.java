@@ -3472,7 +3472,6 @@ class OpenDefaultContent {
 		try {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		this.fileName = storeselectedfile.get();
-		JOptionPane.showMessageDialog(null,"*"+fileName+"*");
 		File file2 = new File(fileName); 
 		if(!file2.exists()) {
 			JOptionPane.showMessageDialog(null,"No previous file found.");
