@@ -87,7 +87,8 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-public class Main {		
+public class Main {
+		
 	public JMenuItem saveall = new JMenuItem("Save All");
 	public JButton showlines;
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
@@ -101,11 +102,13 @@ public class Main {
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
 	public JButton makeajar;
-	public JButton deprecated;	
+	public JButton deprecated;
+	
 	public JButton compileforjavafx;		
 	public static MuckFX muck;
 	public Expandable expandable;
-	public JComboBox<String> filenamescombobox = new JComboBox<String>();	
+	public JComboBox<String> filenamescombobox = new JComboBox<String>();
+	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
@@ -121,21 +124,24 @@ public class Main {
 	public JMenuItem exitItem = new JMenuItem("Exit");
 	public JMenuItem fontmenuitem = new JMenuItem("Font");
 	public JMenuItem saveItem = new JMenuItem("Save");
-	public JMenuItem saveasitem = new JMenuItem("Save As");		
+	public JMenuItem saveasitem = new JMenuItem("Save As");
+		
 	public JMenuItem newitem = new JMenuItem("New");
 	public JMenuItem tabSizeMenuItem = new JMenuItem("Tab");
 	
 	public JMenuItem opennewwindow = new JMenuItem("Open New Window");
 	public SaveActionListener sal = new SaveActionListener(this);
 	public JButton compile = new JButton("compile");
-	public JButton compile_all = new JButton("compile all");			
+	public JButton compile_all = new JButton("compile all");
+			
 	public JButton run = new JButton("run");
 	public JCheckBox checkbox = new JCheckBox();
 	public JLabel jarlabel = new JLabel("JUnit");
 	public JCheckBox jarcheckbox = new JCheckBox();
 	public JButton reload;
 	public JButton addjar=new JButton("jar");
-	public OpenActionListener oal = new OpenActionListener(this);	
+	public OpenActionListener oal = new OpenActionListener(this);
+	
 	public JFrame frame;
 	public JTextArea textarea;
 	public String fileName = "";
@@ -688,7 +694,8 @@ public class Main {
 		
 		menubar.setLayout(new GridBagLayout());
 		
-		JMenu menu = new JMenu("File");		
+		JMenu menu = new JMenu("File");
+		
 		JMenuItem menuitem = new JMenuItem("Open");
 		generatejar = new JMenuItem("Make Jar");			
 		opennewwindow = new JMenuItem("Open New Window");
@@ -742,7 +749,8 @@ public class Main {
 		edit.add(control_f);
 		edit.add(fontmenuitem);
 		edit.add(tabSizeMenuItem);
-		edit.add(functionLines);
+		
+edit.add(functionLines);
 		
 		menubar.invalidate();
 		menubar.repaint();
@@ -1093,7 +1101,8 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		textarea.requestFocus();
-		textarea.setTabSize(4);		
+		textarea.setTabSize(4);
+		
 	}
 	public void updateMethodComboBox(ActionEvent ie) {
 		if(classnamescombobox.hasFocus()) {
@@ -1201,7 +1210,8 @@ public class Main {
 			}
 
 		        }
-		    });
+		    });
+
 	}
 
 	public void selectCode(ActionEvent ev) {
@@ -1214,7 +1224,8 @@ public class Main {
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
-					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+					
+JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 					
 					/*verticalscrollbar.setValue(textarea.getText().length()-1);
@@ -1242,11 +1253,13 @@ public class Main {
 			if(classname != null && !classname.equals("")) {
 				String methodname = (String)combobox.getSelectedItem();
 				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();			
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+			
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
-					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+					
+JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 					
 					/*verticalscrollbar.setValue(textarea.getText().length()-1);
@@ -1261,8 +1274,10 @@ public class Main {
 					
 					verticalscrollbar.setValue(wholedocumentindex);
 					
-					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-					if(storeselectedfile.getCaretPosition(fileName) != 0) scrollToCaretPosition(wholedocumentindex);
+					
+StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					if(storeselectedfile.getCaretPosition(fileName) != 0)
+ scrollToCaretPosition(wholedocumentindex);
 				}
 			}
 		}
@@ -2321,9 +2336,11 @@ public class Main {
 			selectCode(ev);
 		});
 		*/
-		/*curlybracekeylistener = new CurlyBraceKeyListener(this);				
+		/*curlybracekeylistener = new CurlyBraceKeyListener(this);
+				
 		positiontrackers.add(curlybracekeylistener.positiontracker);
- 		textarea.addKeyListener(curlybracekeylistener); 		
+ 		textarea.addKeyListener(curlybracekeylistener);
+ 		
  		*/
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
@@ -2743,12 +2760,14 @@ public class Main {
 			thread4.start();
 		});
 			
-		compile.addActionListener(new ActionListener() {										
+		compile.addActionListener(new ActionListener() {
+										
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);		
 				Thread thread = new Thread( () -> {
-					try {	
+					try {
+	
 						if(fileName.equals("")) {
 							NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);
 							fileName=nofileopen.getFileName();
@@ -2923,7 +2942,8 @@ public class Main {
 									String save = selected.replace(".java","");
 									StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									storeselectedfile.set(fileName);
-									storeselectedfile.setStarterClass(save);
+									// Store the full filename/path as the "lastopened" starter reference
+									storeselectedfile.setStarterClass(classpath1+selected+".java");
 									
 									
 									String[] options={"Yes","No"};
@@ -2999,7 +3019,8 @@ public class Main {
 								for(String jar:preferences.jars) {
 									commandline.addExternalJar(jar);
 								}
-								if(jarcheckbox.isSelected()) {
+								if(jarcheckbox.isSelected())
+ {
 									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);	
 									commandline.addJunit();
 								}
@@ -3052,7 +3073,8 @@ public class Main {
 										String save = selected.replace(".java","");
 										storeselectedfile = new StoreSelectedFile();
 										storeselectedfile.set(fileName);
-										storeselectedfile.setStarterClass(save);
+										// Store the full filename/path so getStarterClass() can look it up
+										storeselectedfile.setStarterClass(classpath1+selected+".java");
 										
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(classpath1+selected+".java");
@@ -3207,7 +3229,8 @@ public class Main {
 				}
 			}
 		});		
-		frame.getRootPane().setDefaultButton(go_to_line_number);		
+		frame.getRootPane().setDefaultButton(go_to_line_number);
+		
 	}
 	public static String addDotJava(String filename) {	
 		if(!(filename.endsWith(".java"))) {
@@ -3878,7 +3901,8 @@ class SaveActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		try {
 			String text = main.textarea.getText();
-			if(!main.fileName.equals("")) {						
+			if(!main.fileName.equals("")) {
+						
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
 				output.close();

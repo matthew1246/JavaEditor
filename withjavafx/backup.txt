@@ -1,12 +1,15 @@
 {
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "Main",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java"
     ],
     "caretposition": 0
   },
@@ -49,12 +52,10 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 10156
+    "caretposition": 9945
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
-    "startupcombobox": [
-      "StoreSelectedFile"
-    ],
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
@@ -71,7 +72,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 14869
+    "caretposition": 15285
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
     "startupcombobox": [],
@@ -313,8 +314,8 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
     "startupcombobox": [
-      "StarterJComboBox",
-      "Main"
+      "Main",
+      "StarterJComboBox"
     ],
     "starterclass": "",
     "jars": [

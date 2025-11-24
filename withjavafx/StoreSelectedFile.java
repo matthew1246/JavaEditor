@@ -31,11 +31,12 @@ public class StoreSelectedFile {
 				hashset.add(startup);
 			}
 			List<String> list=new ArrayList<String>(hashset);
-			System.out.println("list:");
+			/*System.out.println("list:");
 			for(String item:list) {
 				System.out.print(item+" ");
 			}		
 			System.out.println();
+			*/
 			return list;
 		}
 		else {
@@ -212,24 +213,50 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			return lastopened.starterclass;
+			if(lastopened.starterclass.contains("\\\\") || lastopened.starterclass.contains("\\\\")) {
+				return lastopened.starterclass;
+			}
+			else {
+				return lastopened.fileNames.get(0);
+			}
 		}
 		else {
 			return "";
 		}
 	}
+	public Preferences get(String filenameanddirectory) {
+		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
+		if(filenameanddirectory.equals("")) {
+			JOptionPane.showMessageDialog(null,"fileName is *\"\"* inside get(String filenameanddirectory)");
+		}
+		Preferences preferences= linkedhashmap.get(filenameanddirectory);
+		if(preferences != null) {
+			return preferences;
+		}
+		else { // preferences is null
+			noduplicate.Delete();
+			set(filenameanddirectory);
+			linkedhashmap=getBackup();
+			return linkedhashmap.get(filenameanddirectory);
+		}
+	}
 
 
 	public void setStarterClass(String mainclass) {
-		LinkedHashMap<String,Preferences> hashmap=getBackup();
-		Preferences filenameanddirectory=hashmap.get("lastopened");
-		filenameanddirectory=hashmap.get(filenameanddirectory.starterclass);
-		if( ! filenameanddirectory.starterclass.equals(mainclass) ) {
-			filenameanddirectory.starterclass=mainclass;		;
+		// Store the provided value as the "lastopened" starter reference.
+		// The caller should pass a full filename (path) here. Other code
+		// keeps the actual per-file starter class name in
+		// hashmap.get(fileName).starterclass.
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		Preferences lastopened = hashmap.get("lastopened");
+		if(lastopened == null) {
+			lastopened = new Preferences();
+			hashmap.put("lastopened", lastopened);
 		}
-		filenameanddirectory=hashmap.get("lastopened");
-		filenameanddirectory.starterclass = mainclass;
-		setBackup(hashmap);
+		if(lastopened.starterclass == null || !lastopened.starterclass.equals(mainclass)) {
+			lastopened.starterclass = mainclass; // store full fileName/path
+			setBackup(hashmap);
+		}
 	}
 
 	public String getStarterClass() {
@@ -296,21 +323,5 @@ public class StoreSelectedFile {
 		preferences.jars.remove(jar);
 		setBackup(linkedhashmap);
 		noduplicate.Delete();
-	}
-	public Preferences get(String filenameanddirectory) {
-		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
-		if(filenameanddirectory.equals("")) {
-			JOptionPane.showMessageDialog(null,"fileName is *\"\"* inside get(String filenameanddirectory)");
-		}
-		Preferences preferences= linkedhashmap.get(filenameanddirectory);
-		if(preferences != null) {
-			return preferences;
-		}
-		else { // preferences is null
-			noduplicate.Delete();
-			set(filenameanddirectory);
-			linkedhashmap=getBackup();
-			return linkedhashmap.get(filenameanddirectory);
-		}
 	}
 }

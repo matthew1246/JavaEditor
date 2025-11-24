@@ -15,7 +15,14 @@ public class StarterJComboBox {
 			List<String> starterclasses= storeselectedfile.getStartupComboBox(fileName);
 			RemoveNulls(starterclasses);
 			for(String starterclass2:starterclasses) {
-				main.startupcombobox.addItem(starterclass2);
+				String display = starterclass2;
+				if(display != null && (display.contains("\\") || display.contains("/") || display.endsWith(".java"))) {
+					display = main.getFileName(display);
+					if(display.endsWith(".java")) {
+						display = display.substring(0, display.length() - ".java".length());
+					}
+				}
+				main.startupcombobox.addItem(display);
 			}
 			String starterclass = storeselectedfile.getStarterClass(fileName);
 			if(starterclass.equals(""))
@@ -71,8 +78,15 @@ if(!fileName.equals(filename)) {
 		RemoveNulls(starterclasses);		
 			
 		for(String starterclass2:starterclasses) {
-			main.startupcombobox.addItem(starterclass2);
-		}			
+			String display = starterclass2;
+			if(display != null && (display.contains("\\") || display.contains("/") || display.endsWith(".java"))) {
+				display = main.getFileName(display);
+				if(display.endsWith(".java")) {
+					display = display.substring(0, display.length() - ".java".length());
+				}
+			}
+			main.startupcombobox.addItem(display);
+		}
 		String onlyfilename = main.getFileName(filename);
 		if(onlyfilename.endsWith(".java")) {
 			int length = ".java".length();
@@ -94,7 +108,14 @@ if(!fileName.equals(filename)) {
 		}
 	}		
 	public void Add(String starterclass) {
-		main.startupcombobox.addItem(starterclass);
+		String display = starterclass;
+		if(display != null && (display.contains("\\") || display.contains("/") || display.endsWith(".java"))) {
+			display = main.getFileName(display);
+			if(display.endsWith(".java")) {
+				display = display.substring(0, display.length() - ".java".length());
+			}
+		}
+		main.startupcombobox.addItem(display);
 	}
 	public void AddAll(List<String> list) {
 		for(String classname:list) {
