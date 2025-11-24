@@ -1,13 +1,12 @@
 {
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java"
     ],
     "caretposition": 0
   },
@@ -41,31 +40,38 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "StoreSelectedFile"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 9945
+    "caretposition": 10156
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "StoreSelectedFile"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Git",
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 14867
+    "caretposition": 14869
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
     "startupcombobox": [],
@@ -307,8 +313,8 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
     "startupcombobox": [
-      "Main",
-      "StarterJComboBox"
+      "StarterJComboBox",
+      "Main"
     ],
     "starterclass": "",
     "jars": [
