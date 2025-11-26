@@ -54,6 +54,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.JFrame;
@@ -722,24 +725,50 @@ public class Main {
 		menu.add(openemptynewtab);
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
-		StoreSelectedFile storeselectedfile2 =new StoreSelectedFile();
-		LinkedHashMap<String,Preferences> hashmap=storeselectedfile2.getBackup();
-		ActionListener opennewtab = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				String filename=((JMenuItem)ev.getSource()).getText();
-				if(filename.startsWith("lastopened: "))
-					filename=filename.replaceFirst("lastopened: ","");
-				Main.this.OpenNewTab(filename);
+		StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
+		LinkedHashMap<String,Preferences> hashmap = storeselectedfile2.getBackup();
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		for(String filename : hashmap.keySet()) {
+			String displayName = filename;
+			if(displayName.equals("lastopened")) {
+				displayName = "lastopened: " + fileName;
 			}
-		};
-		for(String filename:hashmap.keySet()) {
-			if(filename.equals("lastopened"))
-				filename="lastopened: "+fileName;
-			JMenuItem recentmenuitem = new JMenuItem(filename);
-			recentmenuitem.addActionListener(opennewtab);
-			recent.add(recentmenuitem);
-		}  
+			listModel.addElement(displayName);
+		}
+		JList<String> recentFilesList = new JList<String>(listModel);
+		recentFilesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		recentFilesList.setVisibleRowCount(10);
+		JScrollPane recentScrollPane = new JScrollPane(recentFilesList);
+		int cellHeight = recentFilesList.getFixedCellHeight();
+		if(cellHeight <= 0) {
+			cellHeight = recentFilesList.getFontMetrics(recentFilesList.getFont()).getHeight() + 4;
+		}
+		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.min(10, listModel.getSize())));
+		recentFilesList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2) {
+					String filename = recentFilesList.getSelectedValue();
+					if(filename != null) {
+						if(filename.startsWith("lastopened: "))
+							filename = filename.replaceFirst("lastopened: ", "");
+						Main.this.OpenNewTab(filename);
+					}
+				}
+			}
+		});
+		recentFilesList.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String filename = recentFilesList.getSelectedValue();
+					if(filename != null) {
+						if(filename.startsWith("lastopened: "))
+							filename = filename.replaceFirst("lastopened: ", "");
+						Main.this.OpenNewTab(filename);
+					}
+				}
+			}
+		});
+		recent.add(recentScrollPane);
 		menu.add(recent);
 		menu.add(saveItem);
 		menu.add(saveasitem);
