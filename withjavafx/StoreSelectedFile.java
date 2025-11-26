@@ -213,7 +213,7 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			if(lastopened.starterclass.contains("\\\\") || lastopened.starterclass.contains("\\\\")) {
+			if(lastopened.starterclass.contains("\\") || lastopened.starterclass.contains("\\")) {
 				return lastopened.starterclass;
 			}
 			else {
