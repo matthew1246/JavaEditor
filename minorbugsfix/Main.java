@@ -3737,6 +3737,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		if(lastkeycurlybracelistener != ev.getKeyChar()) {
 			KeyEvent ev2 = new KeyEvent(ev.getComponent(),KeyEvent.KEY_PRESSED,ev.getWhen(),ev.getModifiersEx(),ev.getKeyCode(),ev.getKeyChar(),ev.getKeyLocation());
 			((Component)ev.getSource()).dispatchEvent(ev2);
+			return;
 		}
 		System.out.println("D: "+ev.getKeyChar());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
