@@ -3656,6 +3656,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean isEndOfFile() {
 		return main.textarea.getCaretPosition() == main.textarea.getText().length();
 	}
+	public char lastkeycurlybracelistener;
 	public MethodSuggestionBox methodsuggestionbox;
 	private boolean isShift = false;
 	private boolean isTab = false;
@@ -3664,6 +3665,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev)  {
+		lastkeycurlybracelistener = ev.getKeyChar();
 		System.out.println("C: "+ev.getKeyChar());
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
@@ -3732,6 +3734,10 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
+		if(lastkeycurlybracelistener != ev.getKeyChar()) {
+			KeyEvent ev2 = new KeyEvent(ev.getComponent(),KeyEvent.KEY_PRESSED,ev.getWhen(),ev.getModifiersEx(),ev.getKeyCode(),ev.getKeyChar(),ev.getKeyLocation());
+			((Component)ev.getSource()).dispatchEvent(ev2);
+		}
 		System.out.println("D: "+ev.getKeyChar());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
 			positiontracker.add();
