@@ -4025,6 +4025,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean isEndOfFile() {
 		return main.textarea.getCaretPosition() == main.textarea.getText().length();
 	}
+	public char lastkeycurlybracelistener;
 	public MethodSuggestionBox methodsuggestionbox;
 	private boolean isShift = false;
 	private boolean isTab = false;
@@ -4033,7 +4034,9 @@ class CurlyBraceKeyListener implements KeyListener {
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev)  {
-		System.out.println("C: "+ev.getKeyChar());
+		if(ev.getKeyChar() != '?' && !ev.isControlDown())
+			lastkeycurlybracelistener = ev.getKeyChar();
+		System.out.println("C: "+ev.getKeyChar() + " "+ev.getKeyCode());
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
 			case KeyEvent.VK_SHIFT:
@@ -4052,7 +4055,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+		if( (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 				//JOptionPane.showMessageDialog(null,"two characters");
 							
@@ -4079,7 +4082,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		
 		
 		
-		if(line.length() > 1 && !ev.isControlDown() && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
+		if( (ev.getKeyCode() != 16 && line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
@@ -4101,7 +4104,57 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
-		System.out.println("D: "+ev.getKeyChar());
+		if(ev.getKeyCode() != 16 && !ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
+			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+					if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
+					//JOptionPane.showMessageDialog(null,"two characters");
+								
+					String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
+					methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
+					methodsuggestionbox.position = methodsuggestionbox.position+1;
+					methodsuggestionbox.setLocation(methodsuggestionbox.position);
+					methodsuggestionbox.search_textfield.setText(oldplusnew);
+				}
+				else {
+					methodsuggestionbox= new MethodSuggestionBox(main);
+				}
+			}
+			/**
+			** This is a variable suggestion box not a method
+			** suggestionbox.
+			*/
+			int caretposition = main.textarea.getCaretPosition();
+			//JOptionPane.showMessageDialog(null,caretposition+"");
+			
+			Middle middle = new Middle(main.textarea);
+			String line=middle.getCurrentLine();
+			line=line+ev.getKeyChar();
+			
+			
+			
+			if( (line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
+				if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
+					String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
+					autokeylistener.variablename = oldplusnew;
+					autokeylistener.position = autokeylistener.position+1;
+					autokeylistener.setLocation(autokeylistener.position);
+					autokeylistener.search_textfield.setText(oldplusnew);
+				}
+				else {
+					Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
+					Matcher matcher=pattern.matcher(line);
+					if(matcher.find()) {
+						String variablename = matcher.group(1);
+						if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
+							autokeylistener.open(variablename,caretposition);
+						}
+					}
+				}
+			}
+			return;
+		}
+				
+		System.out.println("D: "+ev.getKeyChar()+ev.getKeyCode());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
 			positiontracker.add();
 		}
