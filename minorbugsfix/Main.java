@@ -3734,14 +3734,53 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
-		if(!ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
-			KeyEvent ev2 = new KeyEvent(ev.getComponent(),KeyEvent.KEY_PRESSED,ev.getWhen()+500,ev.getModifiersEx(),ev.getKeyCode(),ev.getKeyChar(),ev.getKeyLocation());
-			Component component=(Component)ev.getSource();
-			component.dispatchEvent(ev2);
-			KeyEvent ev3=new KeyEvent(ev.getComponent(),KeyEvent.KEY_RELEASED,ev.getWhen()+1000,ev.getModifiersEx(),ev.getKeyCode(),ev.getKeyChar(),ev.getKeyLocation());
-			component.dispatchEvent(ev3);
-			return;
+		if(lastkeycurlybracelistener != ev.getKeyChar()) {
+			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+					if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
+					//JOptionPane.showMessageDialog(null,"two characters");
+								
+					String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
+					methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
+					methodsuggestionbox.position = methodsuggestionbox.position+1;
+					methodsuggestionbox.setLocation(methodsuggestionbox.position);
+					methodsuggestionbox.search_textfield.setText(oldplusnew);
+				}
+				else {
+					methodsuggestionbox= new MethodSuggestionBox(main);
+				}
+			}
+			/**
+			** This is a variable suggestion box not a method
+			** suggestionbox.
+			*/
+			int caretposition = main.textarea.getCaretPosition();
+			//JOptionPane.showMessageDialog(null,caretposition+"");
 			
+			Middle middle = new Middle(main.textarea);
+			String line=middle.getCurrentLine();
+			line=line+ev.getKeyChar();
+			
+			
+			
+			if( (line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
+				if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
+					String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
+					autokeylistener.variablename = oldplusnew;
+					autokeylistener.position = autokeylistener.position+1;
+					autokeylistener.setLocation(autokeylistener.position);
+					autokeylistener.search_textfield.setText(oldplusnew);
+				}
+				else {
+					Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
+					Matcher matcher=pattern.matcher(line);
+					if(matcher.find()) {
+						String variablename = matcher.group(1);
+						if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
+							autokeylistener.open(variablename,caretposition);
+						}
+					}
+				}
+			}
 		}
 				
 		System.out.println("D: "+ev.getKeyChar());
