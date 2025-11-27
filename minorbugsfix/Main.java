@@ -3665,7 +3665,8 @@ class CurlyBraceKeyListener implements KeyListener {
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev)  {
-		lastkeycurlybracelistener = ev.getKeyChar();
+		if(!ev.isControlDown())
+			lastkeycurlybracelistener = ev.getKeyChar();
 		System.out.println("C: "+ev.getKeyChar());
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
@@ -3734,7 +3735,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
-		if(lastkeycurlybracelistener != ev.getKeyChar()) {
+		if(!ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
 			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 					if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 					//JOptionPane.showMessageDialog(null,"two characters");
