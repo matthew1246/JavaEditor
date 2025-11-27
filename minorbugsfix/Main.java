@@ -3685,7 +3685,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if((ev.getKeyChar() =='.' && !ev.isControlDown() ) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+		if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 				//JOptionPane.showMessageDialog(null,"two characters");
 							
@@ -3712,7 +3712,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		
 		
 		
-		if(line.length() > 1 && !ev.isControlDown() && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
+		if( (line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
@@ -3734,11 +3734,16 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
-		if(lastkeycurlybracelistener != ev.getKeyChar()) {
-			KeyEvent ev2 = new KeyEvent(ev.getComponent(),KeyEvent.KEY_PRESSED,ev.getWhen(),ev.getModifiersEx(),ev.getKeyCode(),ev.getKeyChar(),ev.getKeyLocation());
-			((Component)ev.getSource()).dispatchEvent(ev2);
+		if(!ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
+			KeyEvent ev2 = new KeyEvent(ev.getComponent(),KeyEvent.KEY_PRESSED,ev.getWhen()+500,ev.getModifiersEx(),ev.getKeyCode(),ev.getKeyChar(),ev.getKeyLocation());
+			Component component=(Component)ev.getSource();
+			component.dispatchEvent(ev2);
+			KeyEvent ev3=new KeyEvent(ev.getComponent(),KeyEvent.KEY_RELEASED,ev.getWhen()+1000,ev.getModifiersEx(),ev.getKeyCode(),ev.getKeyChar(),ev.getKeyLocation());
+			component.dispatchEvent(ev3);
 			return;
+			
 		}
+				
 		System.out.println("D: "+ev.getKeyChar());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
 			positiontracker.add();
