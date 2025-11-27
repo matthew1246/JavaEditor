@@ -3667,7 +3667,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public void keyPressed(KeyEvent ev)  {
 		if(ev.getKeyChar() != '?' && !ev.isControlDown())
 			lastkeycurlybracelistener = ev.getKeyChar();
-		System.out.println("C: "+ev.getKeyChar());
+		System.out.println("C: "+ev.getKeyChar() + " "+ev.getKeyCode());
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
 			case KeyEvent.VK_SHIFT:
@@ -3686,7 +3686,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+		if( (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 				//JOptionPane.showMessageDialog(null,"two characters");
 							
@@ -3713,7 +3713,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		
 		
 		
-		if( (line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
+		if( (ev.getKeyCode() != 16 && line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
 			if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
 				String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
 				autokeylistener.variablename = oldplusnew;
@@ -3735,7 +3735,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
-		if(ev.getKeyChar() != '?' && !ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
+		if(ev.getKeyCode() != 16 && !ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
 			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 					if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 					//JOptionPane.showMessageDialog(null,"two characters");
@@ -3782,9 +3782,10 @@ class CurlyBraceKeyListener implements KeyListener {
 					}
 				}
 			}
+			return;
 		}
 				
-		System.out.println("D: "+ev.getKeyChar());
+		System.out.println("D: "+ev.getKeyChar()+ev.getKeyCode());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
 			positiontracker.add();
 		}
