@@ -3735,6 +3735,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	}
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
+		// Add if (!ev.isActionKey()) instead of ev.getKeyCode != 16 
 		if(ev.getKeyCode() != 16 && !ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
 			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 					if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
