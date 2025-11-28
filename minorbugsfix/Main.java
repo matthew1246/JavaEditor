@@ -2139,7 +2139,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-				frame2.setSize(325,120);
+				frame2.setSize(325,110);
 				
 				JPanel panel0 = new JPanel();
 				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
