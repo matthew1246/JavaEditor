@@ -8,7 +8,7 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -21,7 +21,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java"
     ],
     "caretposition": 0
   },
@@ -133,7 +134,9 @@
     "caretposition": 329
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Control_F"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
