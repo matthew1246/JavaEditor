@@ -13,16 +13,8 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java"
     ],
     "caretposition": 0
   },
@@ -56,7 +48,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 126201
+    "caretposition": 123804
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -488,5 +480,17 @@
     ],
     "fileNames": [],
     "caretposition": 49
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java": {
+    "startupcombobox": [
+      "GetClassMethods"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 611
   }
 }
