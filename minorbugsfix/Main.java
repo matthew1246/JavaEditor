@@ -3247,59 +3247,63 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 				if( (new GetClassName(textarea)).getClassName().equals("Can't find class name.") ) 
 					return;	
-				LinkedHashMap<String,Integer> classnames = getclassmethods.getClasses();
-				if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
-				if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
-				LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
-					public void KeyAndValue(String key,Integer integer) {
-						classnamescombobox.addItem(key);
-						if(getclassname.isMainClass(integer)) {
-							mainclass=key;
-							// textarea.setCaretPosition(integer);
-						}	
+				try {
+					LinkedHashMap<String,Integer> classnames = getclassmethods.getClasses();
+					if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
+					if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
+					LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
+						public void KeyAndValue(String key,Integer integer) {
+							classnamescombobox.addItem(key);
+							if(getclassname.isMainClass(integer)) {
+								mainclass=key;
+								// textarea.setCaretPosition(integer);
+							}	
+						}
+					};						
+					iterator2.iterate();
+					if(mainclass.equals("")) {
+						mainclass = getclassname.getClassName();
 					}
-				};						
-				iterator2.iterate();
-				if(mainclass.equals("")) {
-					mainclass = getclassname.getClassName();
-				}
-				// JOptionPane.showMessageDialog(null,mainclass);		
-				
-				// final String classname = mainclass;
-				//classnamescombobox.addItem(classname);
-				// JOptionPane.showMessageDialog(iterator,classname);
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-				if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
-				
-				LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
-				if(linkedhashmap2 == null) {
-					JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
-				}
-				else {
-					LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
-					Integer integer2 =iterator4.getFirstValue();
-					if(integer2 != null) {
-						//scrollToCaretPosition(integer2);
+					// JOptionPane.showMessageDialog(null,mainclass);		
+					
+					// final String classname = mainclass;
+					//classnamescombobox.addItem(classname);
+					// JOptionPane.showMessageDialog(iterator,classname);
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+					if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
+					
+					LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
+					if(linkedhashmap2 == null) {
+						JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
 					}
-				}
-	
-				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
-					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(mainclass.equals(key)) {
-							Set<String> method_names=value.keySet();
-							for(String method_name:method_names) {
-								combobox.addItem(method_name);
-							}
+					else {
+						LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
+						Integer integer2 =iterator4.getFirstValue();
+						if(integer2 != null) {
+							//scrollToCaretPosition(integer2);
 						}
 					}
-				};		
-				iterator.iterate();
-				
-				/*if(classnamescombobox.getItemCount() > 0)
-				classnamescombobox.setSelectedItem(mainclass);
-				if(combobox.getItemCount() > 0)
-				combobox.setSelectedItem(0);
-				*/
+		
+					LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
+						public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
+							if(mainclass.equals(key)) {
+								Set<String> method_names=value.keySet();
+								for(String method_name:method_names) {
+									combobox.addItem(method_name);
+								}
+							}
+						}
+					};		
+					iterator.iterate();
+					
+					/*if(classnamescombobox.getItemCount() > 0)
+					classnamescombobox.setSelectedItem(mainclass);
+					if(combobox.getItemCount() > 0)
+					combobox.setSelectedItem(0);
+					*/
+				} catch(EmptyStackException ex) {
+					ex.printStackTrace();
+				}
 			}
 			catch(NullPointerException ex) {
 				ex.printStackTrace();
