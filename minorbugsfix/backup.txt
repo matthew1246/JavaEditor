@@ -8,13 +8,14 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\GetClassMethods.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\GetClassMethods.java"
     ],
     "caretposition": 0
   },
@@ -492,5 +493,17 @@
     ],
     "fileNames": [],
     "caretposition": 611
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\GetClassMethods.java": {
+    "startupcombobox": [
+      "GetClassMethods"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 5095
   }
 }
