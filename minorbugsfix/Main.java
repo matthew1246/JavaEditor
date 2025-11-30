@@ -250,7 +250,7 @@ public class Main {
 		threecomboboxes = new ThreeComboboxes(this);
 	}
 	public int tabs_selected = -1;
-	public FileListModifier filelistmodifier = new FileListModifier();
+	// public FileListModifier filelistmodifier = new FileListModifier();
 	public Git git;
 	/*
 	** If have default content for window
@@ -1351,7 +1351,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public javax.swing.text.JTextComponent targetArea = textarea;
 	//public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
-	String deselected = "";
+	// String deselected = "";
 	public void setListeners() {
 		saveall.addActionListener((ev) -> {
 			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
