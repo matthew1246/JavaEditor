@@ -1116,20 +1116,7 @@ edit.add(functionLines);
 	public void updateMethodComboBox(ItemEvent ie) {
 		final String classname = (String)classnamescombobox.getSelectedItem();						
 		if(classname != null && !classname.equals("")) {
-			if( ie.getStateChange() == ItemEvent.SELECTED ) {
-				combobox.removeAllItems();
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> lhmpi= new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
-					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(classname.equals(key)) {
-							for(String methodname:value.keySet()) {
-								combobox.addItem(methodname);
-							}
-						}
-					}
-				};
-				lhmpi.iterate();
-			}
+			threecomboboxes.methodCombobox(classname);
 		}
 	}	
 	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumentindex) {

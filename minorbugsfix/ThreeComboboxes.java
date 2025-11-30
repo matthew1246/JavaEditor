@@ -10,16 +10,20 @@ public class ThreeComboboxes {
 		load(fileName);	
 	}
 	public void load(String fileName) {
-		if(fileName != null && !fileName.equals("")) {
+		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName)) {
 			setGetClassName();
 			setClassNames();
 			setGetClassMethods();
 			fileCombobox(fileName);
-			classCombobox(fileName);
+			classCombobox();
 			setMainClass();
-			methodCombobox();	
+			methodCombobox(mainclass);	
 			Open(fileName);
 		}
+		else if(fileName.equals("")) {
+			RemoveFilecombo();
+			RemoveClasscombo(
+		this.fileName = fileName;
 	}
 	protected GetClassName getclassname;
 	public void setGetClassName() {
@@ -36,15 +40,13 @@ public class ThreeComboboxes {
 	protected FileListModifier filelistmodifier;
 	public void fileCombobox(String fileName) {
 		filelistmodifier = new FileListModifier(fileName);
-		if(main.filenamescombobox.getItemCount() > 0) {
-			main.filenamescombobox.removeAllItems();
-		}
+		RemoveFilecombo();
 		List<String> filenames=filelistmodifier.getFileList();
 		for(String filename:filenames) {
 			main.filenamescombobox.addItem(filename);
 		}			
 	}
-	public void classCombobox(String fileName) {
+	public void classCombobox() {
 		try {
 			if(main.classnamescombobox.getItemCount() > 0) {
 				main.classnamescombobox.removeAllItems();
@@ -94,7 +96,7 @@ public class ThreeComboboxes {
 		return mainclass;
 	}
 		
-	public void methodCombobox() {
+	public void methodCombobox(String selectedclass) {
 		if(main.combobox.getItemCount() > 0) {
 			main.combobox.removeAllItems();
 		}
@@ -102,7 +104,7 @@ public class ThreeComboboxes {
 		if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
 		LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
 			public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-				if(mainclass.equals(key)) {
+				if(selectedclass.equals(key)) {
 					Set<String> method_names=value.keySet();
 					for(String method_name:method_names) {
 						main.combobox.addItem(method_name);
@@ -114,5 +116,10 @@ public class ThreeComboboxes {
 	}
 	public void Open(String fileName) {
 		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
+	}
+	public void RemoveFilecombo() {
+		if(main.filenamescombobox.getItemCount() > 0) {
+			main.filenamescombobox.removeAllItems();
+		}	
 	}
 }
