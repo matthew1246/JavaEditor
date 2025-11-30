@@ -2892,17 +2892,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				if(filelistmodifier.isEmpty()) {
-					filelistmodifier.fillList(fileName);
-				}			
-				else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
-				else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
 				git.Change(fileName);
 				expandable.open();
 				
@@ -3266,6 +3255,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 			}
 		});
+	}
+	public boolean isSameDirectory(String fileName1,String fileName2) {
+		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
 	}
 }
 class Expandable {

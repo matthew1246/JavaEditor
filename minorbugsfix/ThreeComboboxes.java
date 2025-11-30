@@ -21,6 +21,9 @@ public class ThreeComboboxes {
 		this.main = main;
 		load(fileName);	
 	}
+	/*
+	** The root change for this is FileComboBox.
+	*/
 	public void load(String fileName) {
 		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName)) { // Saved file
 			setGetClassName();
@@ -34,7 +37,7 @@ public class ThreeComboboxes {
 		}
 		else if(fileName.equals("")) { // Blank JTextArea
 			RemoveAll();	
-		}
+		}
 		this.fileName = fileName;
 	}
 	protected GetClassName getclassname;
