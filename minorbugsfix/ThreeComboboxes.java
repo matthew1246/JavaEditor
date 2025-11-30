@@ -3,9 +3,16 @@ import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Set;
+/*
+** This is load all JComboBoxes fields, 
+** so load all file names, class names and Method names.
+** This object is used to load all data for three JComboBoxes.
+** The three ComboBoxes are classnamescombobox, classnamescombobox
+** and combobox.
+*/
 public class ThreeComboboxes {
 	public Main main;
-	public String fileName;
+	public String fileName = "";
 	public ThreeComboboxes(Main main) {
 		this.fileName = "";
 		this.main = main;
@@ -22,8 +29,8 @@ public class ThreeComboboxes {
 			fileCombobox(fileName);
 			classCombobox();
 			setMainClass();
-			methodCombobox(mainclass);	
-			Open(fileName);
+			methodCombobox(mainclass);
+			Select(fileName,mainclass);	
 		}
 		else if(fileName.equals("")) { // Blank JTextArea
 			RemoveAll();	
@@ -115,8 +122,10 @@ public class ThreeComboboxes {
 		};		
 		iterator.iterate();
 	}
-	public void Open(String fileName) {
+	public void Select(String fileName,String mainclass) {
 		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
+		main.classnamescombobox.setSelectedItem(mainclass);
+		main.combobox.setSelectedItem(0);
 	}
 	public void RemoveAll() {
 		RemoveFilecombo();

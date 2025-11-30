@@ -532,8 +532,6 @@ public class Main {
 					tabbedpane.setSelectedIndex(tabs_selected);
 				}
 				
-				filelistmodifier = new FileListModifier();
-				filelistmodifier.fillList(fileName);
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				// getclassmethods = new GetClassMethods(textarea);		
@@ -1299,13 +1297,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			textarea.setText(lines);
 			// textarea.setCaretPosition(0);
 				
-			if(filelistmodifier.isEmpty()) {
-				filelistmodifier.fillList(fileName);
-			}			
-			else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
-				filelistmodifier = new FileListModifier();
-				filelistmodifier.fillList(fileName);
-			}
 			if(git !=null)
 				git.Change(fileName);
 			expandable.open();
@@ -1320,11 +1311,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			/*if(!deselected.equals("")) {
 				filelistmodifier.setToMostRecentAfterSelected(deselected);	
 			}*/
-			dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
-			String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-			if(!dir.equals(dir2)) {
-				filelistmodifier.fillList(fileName);
-			}
+		
+			threecomboboxes.load(fileName);	
 			//loadComboboxes(filelistmodifier);
 			//filenamescombobox.setSelectedItem(selected2);
 			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
@@ -1351,7 +1339,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public javax.swing.text.JTextComponent targetArea = textarea;
 	//public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
-	// String deselected = "";
+	String deselected = "";
 	public void setListeners() {
 		saveall.addActionListener((ev) -> {
 			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
@@ -3071,17 +3059,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				if(filelistmodifier.isEmpty()) {
-					filelistmodifier.fillList(fileName);
-				}			
-				else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
-				else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
 				if(git == null)
 					git = new Git(fileName);	
 				git.Change(fileName);
@@ -3111,13 +3088,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
 				storeselectedfile4.set(fileName);
-				
-				//filenamescombobox.setSelectedItem(getFileName(fileName));
-				/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
-				int caretposition=storeselectedfile3.getCaretPosition(fileName);
-				if(caretposition != 0)
-				scrollToCaretPosition(caretposition);
-				*/
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
