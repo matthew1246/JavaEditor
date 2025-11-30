@@ -5,12 +5,17 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 public class ThreeComboboxes {
 	public Main main;
+	public String fileName;
+	public ThreeComboboxes(Main main) {
+		this.fileName = "";
+		this.main = main;
+	}
 	public ThreeComboboxes(Main main,String fileName) {
 		this.main = main;
 		load(fileName);	
 	}
 	public void load(String fileName) {
-		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName)) {
+		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName)) { // Saved file
 			setGetClassName();
 			setClassNames();
 			setGetClassMethods();
@@ -20,9 +25,9 @@ public class ThreeComboboxes {
 			methodCombobox(mainclass);	
 			Open(fileName);
 		}
-		else if(fileName.equals("")) {
-			RemoveFilecombo();
-			RemoveClasscombo(
+		else if(fileName.equals("")) { // Blank JTextArea
+			RemoveAll();	
+		}
 		this.fileName = fileName;
 	}
 	protected GetClassName getclassname;
@@ -48,9 +53,7 @@ public class ThreeComboboxes {
 	}
 	public void classCombobox() {
 		try {
-			if(main.classnamescombobox.getItemCount() > 0) {
-				main.classnamescombobox.removeAllItems();
-			}
+			RemoveClasscombo();			
 			if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
 			if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
 			LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
@@ -97,9 +100,7 @@ public class ThreeComboboxes {
 	}
 		
 	public void methodCombobox(String selectedclass) {
-		if(main.combobox.getItemCount() > 0) {
-			main.combobox.removeAllItems();
-		}
+		RemoveMethodcombo();	
 		LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
 		if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
 		LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
@@ -117,9 +118,24 @@ public class ThreeComboboxes {
 	public void Open(String fileName) {
 		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
 	}
+	public void RemoveAll() {
+		RemoveFilecombo();
+		RemoveClasscombo();
+		RemoveMethodcombo();
+	}
 	public void RemoveFilecombo() {
 		if(main.filenamescombobox.getItemCount() > 0) {
 			main.filenamescombobox.removeAllItems();
 		}	
+	}
+	public void RemoveClasscombo() {
+		if(main.classnamescombobox.getItemCount() > 0) {
+			main.classnamescombobox.removeAllItems();
+		}
+	}
+	public void RemoveMethodcombo() {
+		if(main.combobox.getItemCount() > 0) {
+			main.combobox.removeAllItems();
+		}
 	}
 }

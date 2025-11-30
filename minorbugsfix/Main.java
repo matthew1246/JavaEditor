@@ -149,6 +149,7 @@ public class Main {
 	public static String value = System.getProperty("user.home")+"\\load_program.ser";
 	//public String value="load_program.ser";
 	public MouseAdapter rightclick = new RightClick();
+	public ThreeComboboxes threecomboboxes;
 	public static void main(String[] args) 	{  
 		Main main = new Main(new OpenDefaultContent());
 	}
@@ -246,6 +247,7 @@ public class Main {
 		setKeywords();
 		setAllClassesInFile();
 		setAllClassesInFolder();
+		threecomboboxes = new ThreeComboboxes(this);
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
@@ -570,6 +572,7 @@ public class Main {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}	
+		threecomboboxes = new ThreeComboboxes(this,fileName);
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -1197,7 +1200,7 @@ edit.add(functionLines);
 			if(classname != null && !classname.equals("")) {
 				String methodname = (String)combobox.getSelectedItem();
 				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
@@ -1230,7 +1233,7 @@ edit.add(functionLines);
 			if(classname != null && !classname.equals("")) {
 				String methodname = (String)combobox.getSelectedItem();
 				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 			
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
@@ -1306,9 +1309,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			if(git !=null)
 				git.Change(fileName);
 			expandable.open();
-			
-			getclassmethods = new GetClassMethods(textarea);		
-			getclassname = new GetClassName(textarea);
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
@@ -2918,9 +2918,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				git.Change(fileName);
 				expandable.open();
 				
-				getclassmethods = new GetClassMethods(textarea);		
-				getclassname = new GetClassName(textarea);
-				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
 				setStarterClassBoxes(fileName);
@@ -3090,9 +3087,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				git.Change(fileName);
 				expandable.open();
 				
-				getclassmethods = new GetClassMethods(textarea);		
-				getclassname = new GetClassName(textarea);
-				
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(fileName);
 				setStarterClassBoxes(fileName);
@@ -3199,7 +3193,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			final String classname = (String)classnamescombobox.getSelectedItem();
 			if(classname != null && !classname.equals("")) {
 				combobox.removeAllItems();
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
 				
 					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
@@ -3214,38 +3208,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		}
 	}
-	String mainclass = ""; // Need here because anonymous class calls this code.
-	public void loadComboboxes(FileListModifier openfileslist) {
-		if(!openfileslist.isEmpty()) {
-		
-			
-			
-			// final String classname = mainclass;
-			//classnamescombobox.addItem(classname);
-			// JOptionPane.showMessageDialog(iterator,classname);
-			
-			
-			LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
-			if(linkedhashmap2 == null) {
-				JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
-			}
-			else {
-				LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
-				Integer integer2 =iterator4.getFirstValue();
-				if(integer2 != null) {
-					//scrollToCaretPosition(integer2);
-				}
-			}
-
-			
-			
-			/*if(classnamescombobox.getItemCount() > 0)
-			classnamescombobox.setSelectedItem(mainclass);
-			if(combobox.getItemCount() > 0)
-			combobox.setSelectedItem(0);
-			*/
-		}
-	}		
 	public List<String> apiclasses = new ArrayList<String>();
 	public void setApiClasses() {
 		if(Main.muck != null && apiclasses.size() == 0) {	
