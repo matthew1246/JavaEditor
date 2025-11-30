@@ -1,0 +1,118 @@
+import java.util.EmptyStackException;
+import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Set;
+public class ThreeComboboxes {
+	public Main main;
+	public ThreeComboboxes(Main main,String fileName) {
+		this.main = main;
+		load(fileName);	
+	}
+	public void load(String fileName) {
+		if(fileName != null && !fileName.equals("")) {
+			setGetClassName();
+			setClassNames();
+			setGetClassMethods();
+			fileCombobox(fileName);
+			classCombobox(fileName);
+			setMainClass();
+			methodCombobox();	
+			Open(fileName);
+		}
+	}
+	protected GetClassName getclassname;
+	public void setGetClassName() {
+		getclassname = new GetClassName(main.textarea);
+	}
+	LinkedHashMap<String,Integer> classnames;
+	protected void setClassNames() {
+		classnames = getclassmethods.getClasses();
+	}
+	protected GetClassMethods getclassmethods;
+	public void setGetClassMethods() {
+		getclassmethods = new GetClassMethods(main.textarea);
+	}
+	protected FileListModifier filelistmodifier;
+	public void fileCombobox(String fileName) {
+		filelistmodifier = new FileListModifier(fileName);
+		if(main.filenamescombobox.getItemCount() > 0) {
+			main.filenamescombobox.removeAllItems();
+		}
+		List<String> filenames=filelistmodifier.getFileList();
+		for(String filename:filenames) {
+			main.filenamescombobox.addItem(filename);
+		}			
+	}
+	public void classCombobox(String fileName) {
+		try {
+			if(main.classnamescombobox.getItemCount() > 0) {
+				main.classnamescombobox.removeAllItems();
+			}
+			if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
+			if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
+			LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
+				public void KeyAndValue(String key,Integer integer) {
+					main.classnamescombobox.addItem(key);
+				}
+			};						
+			iterator2.iterate();
+		} catch(NullPointerException ex) {
+			ex.printStackTrace();
+		}
+	}
+	protected String mainclass = "";
+	public void setMainClass() {
+		mainclass = getMainClass();
+	}
+	public String getMainClass() {
+		if( getclassname.getClassName().equals("Can't find class name.") ) 
+			return "Can't find class name.";
+		try {
+			LinkedHashMap<String,Integer> classnames = getclassmethods.getClasses();
+			if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
+			if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
+			LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
+				public void KeyAndValue(String key,Integer integer) {
+					if(getclassname.isMainClass(integer)) {
+						mainclass=key;
+					}	
+				}
+			};						
+			iterator2.iterate();
+			if(mainclass.equals("")) {
+				mainclass = getclassname.getClassName();
+			}
+		} catch(EmptyStackException ex){
+			ex.printStackTrace();
+			mainclass = "";
+		}
+		catch (NullPointerException ex) {
+			ex.printStackTrace();
+			mainclass = "";
+		}
+		return mainclass;
+	}
+		
+	public void methodCombobox() {
+		if(main.combobox.getItemCount() > 0) {
+			main.combobox.removeAllItems();
+		}
+		LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+		if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
+		LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
+			public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
+				if(mainclass.equals(key)) {
+					Set<String> method_names=value.keySet();
+					for(String method_name:method_names) {
+						main.combobox.addItem(method_name);
+					}
+				}
+			}
+		};		
+		iterator.iterate();
+	}
+	public void Open(String fileName) {
+		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
+	}
+}

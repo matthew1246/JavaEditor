@@ -9,6 +9,11 @@ public class FileListModifier implements Cloneable {
     	// filelist.remove(selected);
     	filelist.add(0,selected);
     }
+    public FileListModifier(String fileName) {
+    	fillList(fileName);
+    }
+    public FileListModifier() {
+    }
     
     public boolean isEmpty() {
     	return isEmpty;

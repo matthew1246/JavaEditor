@@ -113,8 +113,8 @@ public class Main {
 	public JComboBox<String> combobox;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
 	public JCheckBox lock = new JCheckBox();
-	public GetClassName getclassname;
-	public GetClassMethods getclassmethods;
+	// public GetClassName getclassname;
+	// public GetClassMethods getclassmethods;
 	JMenu edit = new JMenu("Edit");
 	JMenuItem control_f = new JMenuItem("Find");
 	public JTextField line_number = new JTextField();
@@ -534,10 +534,10 @@ public class Main {
 				filelistmodifier.fillList(fileName);
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				textarea=(JTextArea)jscrollpane5.getViewport().getView();
-				getclassmethods = new GetClassMethods(textarea);		
-				getclassname = new GetClassName(textarea);
-				loadComboboxes(filelistmodifier);
-				filenamescombobox.setSelectedItem(getFileName(fileName));
+				// getclassmethods = new GetClassMethods(textarea);		
+				// getclassname = new GetClassName(textarea);
+				//loadComboboxes(filelistmodifier);
+				//filenamescombobox.setSelectedItem(getFileName(fileName));
 			}
 		}
 		setListeners();	
@@ -1111,28 +1111,7 @@ edit.add(functionLines);
 		textarea.requestFocus();
 		textarea.setTabSize(4);
 		
-	}
-	public void updateMethodComboBox(ActionEvent ie) {
-		if(classnamescombobox.hasFocus()) {
-	
-			final String classname = (String)classnamescombobox.getSelectedItem();
-			if(classname != null && !classname.equals("")) {
-				combobox.removeAllItems();
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
-				
-					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(classname.equals(key)) {			
-							for(String method_name:value.keySet()) {					
-								combobox.addItem(method_name);
-							}
-						}	
-					}
-				};
-				Lhmi.iterate();
-			}
-		}
-	}
+	}
 			
 	public void updateMethodComboBox(ItemEvent ie) {
 		final String classname = (String)classnamescombobox.getSelectedItem();						
@@ -1359,8 +1338,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			if(!dir.equals(dir2)) {
 				filelistmodifier.fillList(fileName);
 			}
-			loadComboboxes(filelistmodifier);
-			filenamescombobox.setSelectedItem(selected2);
+			//loadComboboxes(filelistmodifier);
+			//filenamescombobox.setSelectedItem(selected2);
 			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			int caretposition=storeselectedfile3.getCaretPosition(fileName);
 			if(caretposition != 0)
@@ -2974,8 +2953,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				this.fileName=fileName;
 					
-				loadComboboxes(filelistmodifier);
-				filenamescombobox.setSelectedItem(getFileName(fileName));
+				//loadComboboxes(filelistmodifier);
+			
+				// filenamescombobox.setSelectedItem(getFileName(fileName));
 				
 				//filenamescombobox.setSelectedItem(getFileName(fileName));
 				/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
@@ -3145,8 +3125,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				this.fileName=fileName;
 					
-				loadComboboxes(filelistmodifier);
-				filenamescombobox.setSelectedItem(getFileName(fileName));
+				//loadComboboxes(filelistmodifier);
+				//filenamescombobox.setSelectedItem(getFileName(fileName));
 				
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
 				storeselectedfile4.set(fileName);
@@ -3226,88 +3206,57 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			return null;
 		}
 	}
+	public void updateMethodComboBox(ActionEvent ie) {
+		if(classnamescombobox.hasFocus()) {
+	
+			final String classname = (String)classnamescombobox.getSelectedItem();
+			if(classname != null && !classname.equals("")) {
+				combobox.removeAllItems();
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
+				
+					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
+						if(classname.equals(key)) {			
+							for(String method_name:value.keySet()) {					
+								combobox.addItem(method_name);
+							}
+						}	
+					}
+				};
+				Lhmi.iterate();
+			}
+		}
+	}
 	String mainclass = ""; // Need here because anonymous class calls this code.
 	public void loadComboboxes(FileListModifier openfileslist) {
 		if(!openfileslist.isEmpty()) {
-			try {
-				mainclass = "";
-				if(filenamescombobox.getItemCount() > 0) {
-					filenamescombobox.removeAllItems();
-				}
-				if(classnamescombobox.getItemCount() > 0) {
-					classnamescombobox.removeAllItems();
-				}
-				if(combobox.getItemCount() > 0) {
-					combobox.removeAllItems();
-					
-				}
-				List<String> filenames=openfileslist.getFileList();
-				for(String filename:filenames) {
-					filenamescombobox.addItem(filename);
-				}
-				if( (new GetClassName(textarea)).getClassName().equals("Can't find class name.") ) 
-					return;	
-				try {
-					LinkedHashMap<String,Integer> classnames = getclassmethods.getClasses();
-					if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
-					if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
-					LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
-						public void KeyAndValue(String key,Integer integer) {
-							classnamescombobox.addItem(key);
-							if(getclassname.isMainClass(integer)) {
-								mainclass=key;
-								// textarea.setCaretPosition(integer);
-							}	
-						}
-					};						
-					iterator2.iterate();
-					if(mainclass.equals("")) {
-						mainclass = getclassname.getClassName();
-					}
-					// JOptionPane.showMessageDialog(null,mainclass);		
-					
-					// final String classname = mainclass;
-					//classnamescombobox.addItem(classname);
-					// JOptionPane.showMessageDialog(iterator,classname);
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-					if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
-					
-					LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
-					if(linkedhashmap2 == null) {
-						JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
-					}
-					else {
-						LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
-						Integer integer2 =iterator4.getFirstValue();
-						if(integer2 != null) {
-							//scrollToCaretPosition(integer2);
-						}
-					}
 		
-					LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
-						public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-							if(mainclass.equals(key)) {
-								Set<String> method_names=value.keySet();
-								for(String method_name:method_names) {
-									combobox.addItem(method_name);
-								}
-							}
-						}
-					};		
-					iterator.iterate();
-					
-					/*if(classnamescombobox.getItemCount() > 0)
-					classnamescombobox.setSelectedItem(mainclass);
-					if(combobox.getItemCount() > 0)
-					combobox.setSelectedItem(0);
-					*/
-				} catch(EmptyStackException ex) {
-					ex.printStackTrace();
+			
+			
+			// final String classname = mainclass;
+			//classnamescombobox.addItem(classname);
+			// JOptionPane.showMessageDialog(iterator,classname);
+			
+			
+			LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
+			if(linkedhashmap2 == null) {
+				JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
+			}
+			else {
+				LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
+				Integer integer2 =iterator4.getFirstValue();
+				if(integer2 != null) {
+					//scrollToCaretPosition(integer2);
 				}
 			}
-			catch(NullPointerException ex) {
-				ex.printStackTrace();
-			}
+
+			
+			
+			/*if(classnamescombobox.getItemCount() > 0)
+			classnamescombobox.setSelectedItem(mainclass);
+			if(combobox.getItemCount() > 0)
+			combobox.setSelectedItem(0);
+			*/
 		}
 	}		
 	public List<String> apiclasses = new ArrayList<String>();
