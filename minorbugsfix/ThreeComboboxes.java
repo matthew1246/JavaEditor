@@ -77,7 +77,7 @@ public class ThreeComboboxes {
 	public void setGetClassMethods() {
 		getclassmethods = new GetClassMethods(main.textarea);
 	}
-	protected FileListModifier filelistmodifier;
+	public FileListModifier filelistmodifier;
 	public void fileCombobox(String fileName) {
 		filelistmodifier = new FileListModifier(fileName);
 		RemoveFilecombo();

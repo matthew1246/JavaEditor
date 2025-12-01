@@ -9,6 +9,12 @@ public class FileListModifier implements Cloneable {
     	// filelist.remove(selected);
     	filelist.add(0,selected);
     }
+    public FileListModifier(String fileName) {
+    	fillList(fileName);
+    }
+    
+public FileListModifier() {
+    }
     
     public boolean isEmpty() {
     	return isEmpty;
@@ -51,14 +57,14 @@ public class FileListModifier implements Cloneable {
 	
 	public void fillList(String filenameanddirectory) {
 		directoryandfilename = filenameanddirectory;
-		if(!filenameanddirectory.equals("")) {
+		
+if(!filenameanddirectory.equals("")) {
 			String current_editorfilename =filenameanddirectory.replaceAll(".+\\\\","");		
 			File currentdirectory = new File(filenameanddirectory.replaceAll("[^\\\\]+\\.java",""));
 			
 			File[] files=currentdirectory.listFiles();
 			Arrays.sort(files,new FileComparator());
 			filelist = new ArrayList<String>();
-			
 			//filelist.add(current_editorfilename);
 			for(File file:files) {
 				String filename=file.getName();
@@ -74,7 +80,7 @@ public class FileListModifier implements Cloneable {
 			File currentdirectory = new File(filenameanddirectory.replaceAll("[^\\\\]+\\.java",""));
 			
 			File[] files=currentdirectory.listFiles();
-			List<File> originalfiles = new ArrayList<File>();		
+			List<File> originalfiles = new ArrayList<File>();			
 
 			for(File file:files) {
 				String filename=file.getName();
@@ -82,8 +88,7 @@ public class FileListModifier implements Cloneable {
 					originalfiles.add(file);
 				}						
 			}
-			original=new ArrayList<String>();
-			
+			original = new ArrayList<String>();
 			//Collections.sort(originalfiles,new FileComparator());
 			for(File file:originalfiles) {
 				original.add(file.getName());

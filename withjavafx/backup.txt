@@ -1,16 +1,13 @@
 {
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\FileListModifier.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java"
     ],
     "caretposition": 0
   },
@@ -24,7 +21,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 161964
+    "caretposition": 134869
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -93,10 +90,12 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 68919
+    "caretposition": 123488
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "FileListModifier"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -115,7 +114,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 2578
+    "caretposition": 3361
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SuggestionBoxSelected.java": {
     "startupcombobox": [],
@@ -272,24 +271,28 @@
     "caretposition": 4680
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "AllClassesInFile"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 1470
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllClassesInFile.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "AllClassesInFile"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 1477
+    "caretposition": 1500
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJUnit.java": {
     "startupcombobox": [],
@@ -357,5 +360,26 @@
     ],
     "fileNames": [],
     "caretposition": 336
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java": {
+    "startupcombobox": [
+      "ThreeComboboxes"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 2367
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java": {
+    "startupcombobox": [
+      "ThreeComboboxes"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 2331
   }
 }

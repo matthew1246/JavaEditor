@@ -91,7 +91,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
-		
+	public ThreeComboboxes threecomboboxes;
 	public JMenuItem saveall = new JMenuItem("Save All");
 	public JButton showlines;
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
@@ -159,8 +159,7 @@ public class Main {
 	*/
 	public Main() {
 		fileName = "";
-		setLayout();
-		expandable = new Expandable(this);		
+		setLayout();	
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
@@ -246,9 +245,11 @@ public class Main {
 		setKeywords();
 		setAllClassesInFile();
 		setAllClassesInFolder();	
+		threecomboboxes = new ThreeComboboxes(this);
+		expandable = new Expandable(this);	
 	}
 	public int tabs_selected = -1;
-	public FileListModifier filelistmodifier = new FileListModifier();
+	// public FileListModifier filelistmodifier = new FileListModifier();
 	public Git git;
 	/*
 	** If have default content for window
@@ -265,7 +266,6 @@ public class Main {
 				msdos.setFileName(dir);
 		}
 		setLayout();
-		expandable = new Expandable(this);	
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
@@ -529,14 +529,10 @@ public class Main {
 					tabbedpane.setSelectedIndex(tabs_selected);
 				}
 				
-				filelistmodifier = new FileListModifier();
-				filelistmodifier.fillList(fileName);
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				getclassmethods = new GetClassMethods(textarea);		
 				getclassname = new GetClassName(textarea);
-				loadComboboxes(filelistmodifier);
-				filenamescombobox.setSelectedItem(getFileName(fileName));
 			}
 		}
 		setListeners();	
@@ -569,6 +565,8 @@ public class Main {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
+		threecomboboxes = new ThreeComboboxes(this,fileName);
+		expandable = new Expandable(this);	
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -1364,13 +1362,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			textarea.setText(lines);
 			// textarea.setCaretPosition(0);
 				
-			if(filelistmodifier.isEmpty()) {
-				filelistmodifier.fillList(fileName);
-			}			
-			else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
-				filelistmodifier = new FileListModifier();
-				filelistmodifier.fillList(fileName);
-			}
 			if(git !=null)
 				git.Change(fileName);
 			expandable.open();
@@ -1388,13 +1379,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			/*if(!deselected.equals("")) {
 				filelistmodifier.setToMostRecentAfterSelected(deselected);	
 			}*/
-			dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
-			String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-			if(!dir.equals(dir2)) {
-				filelistmodifier.fillList(fileName);
-			}
-			loadComboboxes(filelistmodifier);
-			filenamescombobox.setSelectedItem(selected2);
+			
 			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			int caretposition=storeselectedfile3.getCaretPosition(fileName);
 			if(caretposition != 0)
@@ -1411,6 +1396,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 			tabbedpane.setTitleAt(selectedtab,getFileName(fileName));
 			tabbedpane.repaint();
+			
+			threecomboboxes.load(fileName);
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
@@ -3367,17 +3354,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				if(filelistmodifier.isEmpty()) {
-					filelistmodifier.fillList(fileName);
-				}			
-				else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
-				else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
 				git.Change(fileName);
 				expandable.open();
 				
@@ -3390,21 +3366,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}
-				filelistmodifier.setSelected(getFileName(fileName));
-				/*if(!deselected.equals("")) {
-					filelistmodifier.setToMostRecentAfterSelected(deselected);	
-				}*/
-				String dir1= filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
-				String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-				/*if(!dir.equals(dir2)) {
-					filelistmodifier.fillList(fileName);
-					
-				}*/
 				
 				this.fileName=fileName;
-					
-				loadComboboxes(filelistmodifier);
-				filenamescombobox.setSelectedItem(getFileName(fileName));
 				
 				//filenamescombobox.setSelectedItem(getFileName(fileName));
 				/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
@@ -3412,6 +3375,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				if(caretposition != 0)
 				scrollToCaretPosition(caretposition);
 				*/
+				threecomboboxes.load(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3536,17 +3500,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				if(filelistmodifier.isEmpty()) {
-					filelistmodifier.fillList(fileName);
-				}			
-				else if(!filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","").equals(fileName.replaceAll("[^\\\\]+\\.java",""))) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
-				else if(!filelistmodifier.directoryandfilename.equals(fileName)) {
-					filelistmodifier = new FileListModifier();
-					filelistmodifier.fillList(fileName);
-				}
 				git.Change(fileName);
 				expandable.open();
 				
@@ -3559,31 +3512,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}
-				filelistmodifier.setSelected(getFileName(fileName));
-				/*if(!deselected.equals("")) {
-					filelistmodifier.setToMostRecentAfterSelected(deselected);	
-				}*/
-				String dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
-				String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-				/*if(!dir.equals(dir2)) {
-					filelistmodifier.fillList(fileName);
-					
-				}*/
-				
+				threecomboboxes.load(fileName);
 				this.fileName=fileName;
-					
-				loadComboboxes(filelistmodifier);
-				filenamescombobox.setSelectedItem(getFileName(fileName));
 				
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
 				storeselectedfile4.set(fileName);
-				
-				//filenamescombobox.setSelectedItem(getFileName(fileName));
-				/*StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
-				int caretposition=storeselectedfile3.getCaretPosition(fileName);
-				if(caretposition != 0)
-				scrollToCaretPosition(caretposition);
-				*/
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3653,86 +3586,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			return null;
 		}
 	}
-	String mainclass = ""; // Need here because anonymous class calls this code.
-	public void loadComboboxes(FileListModifier openfileslist) {
-		if(!openfileslist.isEmpty()) {
-			try {
-				mainclass = "";
-				if(filenamescombobox.getItemCount() > 0) {
-					filenamescombobox.removeAllItems();
-				}
-				if(classnamescombobox.getItemCount() > 0) {
-					classnamescombobox.removeAllItems();
-				}
-				if(combobox.getItemCount() > 0) {
-					combobox.removeAllItems();
-					
-				}
-				List<String> filenames=openfileslist.getFileList();
-				for(String filename:filenames) {
-					filenamescombobox.addItem(filename);
-				}
-				if( (new GetClassName(textarea)).getClassName().equals("Can't find class name.") ) 
-					return;	
-				LinkedHashMap<String,Integer> classnames = getclassmethods.getClasses();
-				if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
-				if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
-				LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
-					public void KeyAndValue(String key,Integer integer) {
-						classnamescombobox.addItem(key);
-						if(getclassname.isMainClass(integer)) {
-							mainclass=key;
-							// textarea.setCaretPosition(integer);
-						}	
-					}
-				};						
-				iterator2.iterate();
-				if(mainclass.equals("")) {
-					mainclass = getclassname.getClassName();
-				}
-				// JOptionPane.showMessageDialog(null,mainclass);		
-				
-				// final String classname = mainclass;
-				//classnamescombobox.addItem(classname);
-				// JOptionPane.showMessageDialog(iterator,classname);
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-				if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
-				
-				LinkedHashMap<String,Integer> linkedhashmap2 = classnamesandmethodnames.get(mainclass);
-				if(linkedhashmap2 == null) {
-					JOptionPane.showMessageDialog(null,"linkedhashmap2 is null");
-				}
-				else {
-					LinkedHashMapInterface<String,Integer> iterator4=new LinkedHashMapInterface<String,Integer>(linkedhashmap2);
-					Integer integer2 =iterator4.getFirstValue();
-					if(integer2 != null) {
-						//scrollToCaretPosition(integer2);
-					}
-				}
-	
-				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
-					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(mainclass.equals(key)) {
-							Set<String> method_names=value.keySet();
-							for(String method_name:method_names) {
-								combobox.addItem(method_name);
-							}
-						}
-					}
-				};		
-				iterator.iterate();
-				
-				/*if(classnamescombobox.getItemCount() > 0)
-				classnamescombobox.setSelectedItem(mainclass);
-				if(combobox.getItemCount() > 0)
-				combobox.setSelectedItem(0);
-				*/
-			}
-			catch(NullPointerException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}		
 	public List<String> apiclasses=new ArrayList<String>();
 	public void setApiClasses() {
 		if(Main.muck != null && apiclasses.size() == 0) {	
@@ -3822,6 +3675,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 	}
+	public static boolean isSameDirectory(String fileName1,String fileName2) {
+		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
+	}
 }
 class Expandable {
 	public Main main;
@@ -3834,20 +3690,20 @@ class Expandable {
 		frame.setLocation(0,0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jscrollpane = new JScrollPane();
-		if(!main.filelistmodifier.isEmpty()) {
+		if(!main.threecomboboxes.filelistmodifier.isEmpty()) {
 			open();
 		}
 		frame.add(jscrollpane);
 		frame.setVisible(true);
 	}
 	public void mySingleClick(int selRow,TreePath selPath) {
-		main.open(main.filelistmodifier.original.get(selRow));	
+		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
 	}
 	public void myDoubleClick(int selRow,TreePath selPath) {
-		main.open(main.filelistmodifier.original.get(selRow));	
+		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		jtree = new JTree(main.filelistmodifier.original.toArray(new Object[main.filelistmodifier.original.size()]));
+		jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.filelistmodifier.threecomboboxes.original.size()]));
 		jscrollpane.setViewportView(jtree);
 		setListener();
 	}
