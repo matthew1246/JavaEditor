@@ -3060,11 +3060,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
 				storeselectedfile4.set(fileName);
+				
+				allclassesinfile.ChangeFile(textarea,fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
 		}
-		allclassesinfile.ChangeFile(textarea,fileName);
 		try {
 			String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			if(filename2.startsWith("/"))
