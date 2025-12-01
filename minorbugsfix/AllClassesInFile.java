@@ -26,8 +26,11 @@ public class AllClassesInFile {
 		}		
 	}
 	public void ChangeFile(JTextArea textarea,String fileName) {
-		if(fileName == null || this.fileName == null) {
+		if(this.fileName == null) {
 			javax.swing.JOptionPane.showMessageDialog(null,"is null 2");
+		}
+		if(fileName == null) {
+			javax.swing.JOptionPane.showMessageDialog(null,"is null 3");
 		}
 		if(!this.fileName.equals(fileName) && (!fileName.equals(""))) {
 			this.fileName = fileName;		
