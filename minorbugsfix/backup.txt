@@ -8,7 +8,7 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -50,7 +50,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 109245
+    "caretposition": 24720
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -139,7 +139,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 2977
+    "caretposition": 834
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
     "startupcombobox": [
@@ -520,6 +520,6 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 789
+    "caretposition": 1058
   }
 }

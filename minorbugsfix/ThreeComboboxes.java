@@ -26,27 +26,39 @@ public class ThreeComboboxes {
 	*/
 	public void load(String fileName) {
 		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName) && !Main.isSameDirectory(this.fileName,fileName)) { // Saved file
-			FromScratch();
+			FromScratch(fileName);
 		}
 		else if(Main.isSameDirectory(this.fileName,fileName)) {
 			if(filelistmodifier == null) {
-				FromScratch();
+				FromScratch(fileName);
 			}	
 			else if( filelistmodifier.getFileList().contains(Main.getFileName(fileName)) )	{
 				main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
 			}
 			else {
-				filelistmodifier.				
+				String file = Main.getFileName(fileName);
+				filelistmodifier.filelist.add(file);
+				filelistmodifier.original.add(file);
+				main.filenamescombobox.addItem(file);
+			}
+			setGetClassName();
+			setGetClassMethods();
+			setClassNames();
+			classCombobox();
+			setMainClass();
+			methodCombobox(mainclass);
+			Select(fileName,mainclass);				
 		}
 		else if(fileName.equals("")) { // Blank JTextArea
+			filelistmodifier = null;
 			RemoveAll();	
 		}
 		this.fileName = fileName;
 	}
-	public void FromScratch() {
+	public void FromScratch(String fileName) {
 		setGetClassName();
-		setClassNames();
 		setGetClassMethods();
+		setClassNames();
 		fileCombobox(fileName);
 		classCombobox();
 		setMainClass();
@@ -163,4 +175,4 @@ public class ThreeComboboxes {
 			main.combobox.removeAllItems();
 		}
 	}
-}
+}

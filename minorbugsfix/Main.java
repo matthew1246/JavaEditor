@@ -161,7 +161,6 @@ public class Main {
 	
 		fileName = "";
 		setLayout();
-		expandable = new Expandable(this);	
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
@@ -248,6 +247,7 @@ public class Main {
 		setAllClassesInFile();
 		setAllClassesInFolder();
 		threecomboboxes = new ThreeComboboxes(this);
+		expandable = new Expandable(this);	
 	}
 	public int tabs_selected = -1;
 	// public FileListModifier filelistmodifier = new FileListModifier();
@@ -268,7 +268,6 @@ public class Main {
 				msdos.setFileName(dir);
 		}
 		setLayout();
-		expandable = new Expandable(this);	
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
@@ -571,6 +570,7 @@ public class Main {
 			ex.printStackTrace();
 		}	
 		threecomboboxes = new ThreeComboboxes(this,fileName);
+		expandable = new Expandable(this);	
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -1240,15 +1240,12 @@ edit.add(functionLines);
 ((JScrollPane)tabbedpane.getSelectedComponent());
 					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
 					
-					/*verticalscrollbar.setValue(textarea.getText().length()-1);
-					textarea.setCaretPosition(textarea.getText().length()-1);*/
 					verticalscrollbar.setValue(0);
 					textarea.setCaretPosition(0);
 					textarea.requestFocus();
 					
 					verticalscrollbar.setValue(wholedocumentindex);
 					textarea.setCaretPosition(wholedocumentindex);
-					//JOptionPane.showMessageDialog(null,"Opened new file.");
 					
 					verticalscrollbar.setValue(wholedocumentindex);
 					
@@ -1550,6 +1547,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			storeselectedfile3.set(fileName);
+			
+			threecomboboxes.load("");
 			
 			this.fileName=fileName;
 		});		
@@ -2904,13 +2903,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				threecomboboxes.load(fileName);
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
-				}*/
-				String dir1= filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
-				String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-				/*if(!dir.equals(dir2)) {
-					filelistmodifier.fillList(fileName);
-					
-				}*/
+				}*/
 				
 				this.fileName=fileName;
 					
@@ -3059,17 +3052,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}
-				filelistmodifier.setSelected(getFileName(fileName));
-				/*if(!deselected.equals("")) {
-					filelistmodifier.setToMostRecentAfterSelected(deselected);	
-				}*/
-				String dir = filelistmodifier.directoryandfilename.replaceAll("[^\\\\]+\\.java","");
-				String dir2 = fileName.replaceAll("[^\\\\]+\\.java","");
-				/*if(!dir.equals(dir2)) {
-					filelistmodifier.fillList(fileName);
-					
-				}*/
-				
+				threecomboboxes.load(fileName);
 				this.fileName=fileName;
 					
 				//loadComboboxes(filelistmodifier);
@@ -3151,19 +3134,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	
 			final String classname = (String)classnamescombobox.getSelectedItem();
 			if(classname != null && !classname.equals("")) {
-				combobox.removeAllItems();
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
-				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
-				
-					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(classname.equals(key)) {			
-							for(String method_name:value.keySet()) {					
-								combobox.addItem(method_name);
-							}
-						}	
-					}
-				};
-				Lhmi.iterate();
+				threecomboboxes.methodCombobox(classname);
 			}
 		}
 	}
@@ -3256,7 +3227,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 	}
-	public boolean isSameDirectory(String fileName1,String fileName2) {
+	public static boolean isSameDirectory(String fileName1,String fileName2) {
 		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
 	}
 }
@@ -3271,20 +3242,20 @@ class Expandable {
 		frame.setLocation(0,0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jscrollpane = new JScrollPane();
-		if(!main.filelistmodifier.isEmpty()) {
+		if(!main.threecomboboxes.filelistmodifier.isEmpty()) {
 			open();
 		}
 		frame.add(jscrollpane);
 		frame.setVisible(true);
 	}
 	public void mySingleClick(int selRow,TreePath selPath) {
-		main.open(main.filelistmodifier.original.get(selRow));	
+		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
 	}
 	public void myDoubleClick(int selRow,TreePath selPath) {
-		main.open(main.filelistmodifier.original.get(selRow));	
+		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		jtree = new JTree(main.filelistmodifier.original.toArray(new Object[main.filelistmodifier.original.size()]));
+		jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.threecomboboxes.filelistmodifier.original.size()]));
 		jscrollpane.setViewportView(jtree);
 		setListener();
 	}
