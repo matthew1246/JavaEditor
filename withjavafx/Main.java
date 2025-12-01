@@ -116,8 +116,8 @@ public class Main {
 	public JComboBox<String> combobox;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
 	public JCheckBox lock = new JCheckBox();
-	public GetClassName getclassname;
-	public GetClassMethods getclassmethods;
+	//public GetClassName getclassname;
+	//public GetClassMethods getclassmethods;
 	JMenu edit = new JMenu("Edit");
 	JMenuItem control_f = new JMenuItem("Find");
 	public JTextField line_number = new JTextField();
@@ -531,8 +531,6 @@ public class Main {
 				
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				textarea=(JTextArea)jscrollpane5.getViewport().getView();
-				getclassmethods = new GetClassMethods(textarea);		
-				getclassname = new GetClassName(textarea);
 			}
 		}
 		setListeners();	
@@ -1135,19 +1133,7 @@ edit.add(functionLines);
 		if(classnamescombobox.hasFocus()) {
 			final String classname = (String)classnamescombobox.getSelectedItem();
 			if(classname != null && !classname.equals("")) {
-				combobox.removeAllItems();
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> Lhmi = new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
-				
-					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(classname.equals(key)) {			
-							for(String method_name:value.keySet()) {					
-								combobox.addItem(method_name);
-							}
-						}	
-					}
-				};
-				Lhmi.iterate();
+				threecomboboxes.methodCombobox(classname);
 			}
 		}
 	}
@@ -1156,18 +1142,7 @@ edit.add(functionLines);
 		final String classname = (String)classnamescombobox.getSelectedItem();						
 		if(classname != null && !classname.equals("")) {
 			if( ie.getStateChange() == ItemEvent.SELECTED ) {
-				combobox.removeAllItems();
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
-				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> lhmpi= new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {
-					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
-						if(classname.equals(key)) {
-							for(String methodname:value.keySet()) {
-								combobox.addItem(methodname);
-							}
-						}
-					}
-				};
-				lhmpi.iterate();
+				threecomboboxes.methodCombobox(classname);
 			}
 		}
 	}	
@@ -1247,7 +1222,7 @@ edit.add(functionLines);
 			if(classname != null && !classname.equals("")) {
 				String methodname = (String)combobox.getSelectedItem();
 				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
 					
@@ -1280,7 +1255,7 @@ JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 			if(classname != null && !classname.equals("")) {
 				String methodname = (String)combobox.getSelectedItem();
 				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 			
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 					int wholedocumentindex = classandmethods.get(methodname);
@@ -1365,9 +1340,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			if(git !=null)
 				git.Change(fileName);
 			expandable.open();
-			
-			getclassmethods = new GetClassMethods(textarea);		
-			getclassname = new GetClassName(textarea);
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
@@ -1620,6 +1592,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 			storeselectedfile3.set(fileName);
+			
+			threecomboboxes.load("");
 			
 			this.fileName=fileName;
 		});			
@@ -3357,9 +3331,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				git.Change(fileName);
 				expandable.open();
 				
-				getclassmethods = new GetClassMethods(textarea);		
-				getclassname = new GetClassName(textarea);
-				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
 				setStarterClassBoxes(fileName);
@@ -3502,9 +3473,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				git.Change(fileName);
 				expandable.open();
-				
-				getclassmethods = new GetClassMethods(textarea);		
-				getclassname = new GetClassName(textarea);
 				
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(fileName);
@@ -3703,7 +3671,7 @@ class Expandable {
 		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.filelistmodifier.threecomboboxes.original.size()]));
+		jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.threecomboboxes.filelistmodifier.original.size()]));
 		jscrollpane.setViewportView(jtree);
 		setListener();
 	}

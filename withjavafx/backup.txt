@@ -1,13 +1,12 @@
 {
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java"
     ],
     "caretposition": 0
   },
@@ -21,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 134869
+    "caretposition": 92151
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -137,14 +136,16 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Control_F"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 9821
+    "caretposition": 836
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
     "startupcombobox": [],
