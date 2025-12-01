@@ -316,7 +316,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 1176
+    "caretposition": 857
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
     "startupcombobox": [
