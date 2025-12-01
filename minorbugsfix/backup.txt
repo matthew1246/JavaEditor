@@ -16,7 +16,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java"
     ],
     "caretposition": 0
   },
@@ -50,7 +51,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 111129
+    "caretposition": 116480
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -306,14 +307,16 @@
     "caretposition": 1014
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "AllClassesInFile"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 829
+    "caretposition": 1078
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
     "startupcombobox": [

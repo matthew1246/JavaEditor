@@ -6,6 +6,9 @@ public class AllClassesInFile {
 	public String fileName;
 	public List<String> classes = new ArrayList<String>();	
 	public AllClassesInFile(JTextArea textarea,String fileName) {
+		if(fileName == null) {
+			javax.swing.JOptionPane.showMessageDialog(null,"is null");
+		}
 		if(!fileName.equals("")) {
 			this.fileName = fileName;
 			try {
@@ -23,6 +26,9 @@ public class AllClassesInFile {
 		}		
 	}
 	public void ChangeFile(JTextArea textarea,String fileName) {
+		if(fileName == null) {
+			javax.swing.JOptionPane.showMessageDialog(null,"is null 2");
+		}
 		if(!this.fileName.equals(fileName) && (!fileName.equals(""))) {
 			this.fileName = fileName;		
 			classes = new ArrayList<String>();
