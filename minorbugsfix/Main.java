@@ -2901,7 +2901,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				if(fileName != null && !fileName.equals("")) {
 					frame.setTitle(fileName.replaceAll(".+\\\\",""));
 				}
-				filelistmodifier.setSelected(getFileName(fileName));
+				threecomboboxes.load(fileName);
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
 				}*/

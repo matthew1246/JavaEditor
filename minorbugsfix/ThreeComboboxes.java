@@ -25,20 +25,33 @@ public class ThreeComboboxes {
 	** The root change for this is FileComboBox.
 	*/
 	public void load(String fileName) {
-		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName)) { // Saved file
-			setGetClassName();
-			setClassNames();
-			setGetClassMethods();
-			fileCombobox(fileName);
-			classCombobox();
-			setMainClass();
-			methodCombobox(mainclass);
-			Select(fileName,mainclass);	
+		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName) && !Main.isSameDirectory(this.fileName,fileName)) { // Saved file
+			FromScratch();
+		}
+		else if(Main.isSameDirectory(this.fileName,fileName)) {
+			if(filelistmodifier == null) {
+				FromScratch();
+			}	
+			else if( filelistmodifier.getFileList().contains(Main.getFileName(fileName)) )	{
+				main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
+			}
+			else {
+				filelistmodifier.				
 		}
 		else if(fileName.equals("")) { // Blank JTextArea
 			RemoveAll();	
 		}
 		this.fileName = fileName;
+	}
+	public void FromScratch() {
+		setGetClassName();
+		setClassNames();
+		setGetClassMethods();
+		fileCombobox(fileName);
+		classCombobox();
+		setMainClass();
+		methodCombobox(mainclass);
+		Select(fileName,mainclass);	
 	}
 	protected GetClassName getclassname;
 	public void setGetClassName() {
