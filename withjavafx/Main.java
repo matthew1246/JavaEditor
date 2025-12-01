@@ -3471,6 +3471,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
+				if(git == null)
+					git = new Git(fileName);
 				git.Change(fileName);
 				expandable.open();
 				
