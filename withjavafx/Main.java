@@ -4165,6 +4165,7 @@ class AutoKeyListener {
 				EnterText();
 			}
 		});
+		extra = "";
 		search_textfield.addKeyListener(new KeyListener() {
 			boolean isFinished = false;
 			int count = 0;
@@ -4246,6 +4247,9 @@ class AutoKeyListener {
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+					if(extra.equals("")) {
+						extra = String.valueOf(keyevent.getKeyChar());
+					}
 					if(!isFinished) {
 						String input = search_textfield.getText();
 						
@@ -4266,6 +4270,9 @@ class AutoKeyListener {
 							setExtra(input);
 							EnterTextPlusExtra();
 						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"Variable Suggestion Box: "+keyevent.getKeyChar()+" key");
 					}
 				}
 			}
@@ -4661,6 +4668,7 @@ class AutoKeyListener {
 	}
 
 }
+
 
 class MethodSuggestionBox {
 	public int replacelength = 1;
