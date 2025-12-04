@@ -74,9 +74,19 @@ public class Control_F {
 					String middle=original.substring(selectionstart,selectionend);
 					Pattern pattern;
 					if(!casey.isSelected()) {
-						pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+						if(!regex_checkbox.isSelected()) {
+							pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+						}
+						else {
+							pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+						}
 					} else {
-						pattern=Pattern.compile(Pattern.quote(find2));
+						if(!regex_checkbox.isSelected()) { // is not regex
+							pattern=Pattern.compile(Pattern.quote(find2));
+						}
+						else { // is regex checkbox ticked
+							pattern = Pattern.compile(find2);
+						}
 					}
 					Matcher matcher=pattern.matcher(middle);
 					String selected=matcher.replaceAll(replaceinput.getText());
@@ -155,10 +165,21 @@ public class Control_F {
 						if(replace.isSelected()) {
 							Pattern pattern;
 							if(!casey.isSelected()) {
-								pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+								if(!regex_checkbox.isSelected()) {
+									pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+								}
+								else {
+									pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+								}
 							} else {
-								pattern=Pattern.compile(Pattern.quote(find2));
+								if(!regex_checkbox.isSelected()) { // is not regex
+									pattern=Pattern.compile(Pattern.quote(find2));
+								}
+								else { // is regex checkbox ticked
+									pattern = Pattern.compile(find2);
+								}
 							}
+
 							Matcher matcher=pattern.matcher(original);
 							String selected=matcher.replaceAll(replaceinput.getText());
 							textarea.setText(selected);
@@ -259,9 +280,19 @@ public class Control_F {
 					String middle=original.substring(selectionstart,selectionend);
 					Pattern pattern;
 					if(!casey.isSelected()) {
-						pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+						if(!regex_checkbox.isSelected()) {
+							pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+						}
+						else {
+							pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+						}
 					} else {
-						pattern=Pattern.compile(Pattern.quote(find2));
+						if(!regex_checkbox.isSelected()) { // is not regex
+							pattern=Pattern.compile(Pattern.quote(find2));
+						}
+						else { // is regex checkbox ticked
+							pattern = Pattern.compile(find2);
+						}
 					}
 					Matcher matcher=pattern.matcher(middle);
 					String selected=matcher.replaceAll(replaceinput.getText());
@@ -333,10 +364,21 @@ public class Control_F {
 						if(replace.isSelected()) {
 							Pattern pattern;
 							if(!casey.isSelected()) {
-								pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+								if(!regex_checkbox.isSelected()) {
+									pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
+								}
+								else {
+									pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+								}
 							} else {
-								pattern=Pattern.compile(Pattern.quote(find2));
+								if(!regex_checkbox.isSelected()) { // is not regex
+									pattern=Pattern.compile(Pattern.quote(find2));
+								}
+								else { // is regex checkbox ticked
+									pattern = Pattern.compile(find2);
+								}
 							}
+
 							Matcher matcher=pattern.matcher(original);
 							String selected=matcher.replaceAll(replaceinput.getText());
 							textarea.setText(selected);
