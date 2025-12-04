@@ -18,7 +18,8 @@ public class Control_F {
 	private JCheckBox selection;
 	private JTextField replaceinput;
 	private JCheckBox casey;
-	public Control_F(Main main,JCheckBox searchall,JTextArea textarea,JCheckBox replace,JCheckBox selection,JTextField replaceinput,JCheckBox casey) {
+	private JCheckBox regex_checkbox;
+	public Control_F(Main main,JCheckBox searchall,JTextArea textarea,JCheckBox replace,JCheckBox selection,JTextField replaceinput,JCheckBox casey,JCheckBox  regex_checkbox) {
 		liveiterator= new LiveIterator<String>(main.threecomboboxes.filelistmodifier.original,true);
 		this.main = main;	
 		this.searchall = searchall;	
@@ -27,6 +28,7 @@ public class Control_F {
 		this.selection=selection;
 		this.replaceinput = replaceinput;
 		this.casey = casey;
+		this.regex_checkbox = regex_checkbox;
 	}
 	public void FindWithoutFocus(String find) {
 		if(!searchall.isSelected()) {
@@ -44,9 +46,10 @@ public class Control_F {
 				find = find.toLowerCase();
 			int count = 0;
 			z++;
+			String text2 = text;
 			if(!casey.isSelected())
 				text=text.toLowerCase();
-			if(text.contains(find)) {
+			if(Contains(text2,find2)) {
 				String[] lines = text.split("\n");
 				int x = 0;
 				for(int i = 0; i < lines.length; i++) {
@@ -111,9 +114,10 @@ public class Control_F {
 						find = find.toLowerCase();
 					int count = 0;
 					z++;
+					String text2 = text;
 					if(!casey.isSelected())
 						text=text.toLowerCase();
-					if(text.contains(find)) {
+					if(Contains(text2,find2)) {
 						String[] lines = text.split("\n");
 						int x = 0;
 						for(int i = 0; i < lines.length; i++) {
@@ -189,6 +193,26 @@ public class Control_F {
 			}
 		}
 	}
+	public boolean Contains(String text,String find) {
+		if(!regex_checkbox.isSelected()) {
+			if(!casey.isSelected()) {
+				find = find.toLowerCase();
+				text=text.toLowerCase();
+			}
+			return text.contains(find);
+		}				
+		else { // if(regex_checkbox.isSelected()) { // Start regex_checkbox coding here.
+			Pattern pattern = null;
+			if(!casey.isSelected()) {
+						pattern=Pattern.compile(find,Pattern.CASE_INSENSITIVE);
+			}
+			else { // If not case sensitive
+				pattern=Pattern.compile(find);
+			}
+			Matcher matcher=pattern.matcher(text);
+			return matcher.find();
+		}	
+	}
 	public String filename = "";
 	public int z = 0;
 	public void Find(String find) {
@@ -207,9 +231,10 @@ public class Control_F {
 				find = find.toLowerCase();
 			int count = 0;
 			z++;
+			String text2 = text;
 			if(!casey.isSelected())
 				text=text.toLowerCase();
-			if(text.contains(find)) {
+			if(Contains(text2,find2)) {
 				String[] lines = text.split("\n");
 				int x = 0;
 				for(int i = 0; i < lines.length; i++) {
@@ -274,9 +299,10 @@ public class Control_F {
 						find = find.toLowerCase();
 					int count = 0;
 					z++;
+					String text2 = text;
 					if(!casey.isSelected())
 						text=text.toLowerCase();
-					if(text.contains(find)) {
+					if(Contains(text2,find2)) {
 						String[] lines = text.split("\n");
 						int x = 0;
 						for(int i = 0; i < lines.length; i++) {
