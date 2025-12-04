@@ -78,14 +78,14 @@ public class Control_F {
 							pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
 						}
 						else {
-							pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+							pattern = Pattern.compile(find2.replace("\\\\","\\"),Pattern.CASE_INSENSITIVE);
 						}
 					} else {
 						if(!regex_checkbox.isSelected()) { // is not regex
 							pattern=Pattern.compile(Pattern.quote(find2));
 						}
 						else { // is regex checkbox ticked
-							pattern = Pattern.compile(find2);
+							pattern = Pattern.compile(find2.replace("\\\\","\\"));
 						}
 					}
 					Matcher matcher=pattern.matcher(middle);
@@ -169,14 +169,14 @@ public class Control_F {
 									pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
 								}
 								else {
-									pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+									pattern = Pattern.compile(find2.replace("\\\\","\\"),Pattern.CASE_INSENSITIVE);
 								}
 							} else {
 								if(!regex_checkbox.isSelected()) { // is not regex
 									pattern=Pattern.compile(Pattern.quote(find2));
 								}
 								else { // is regex checkbox ticked
-									pattern = Pattern.compile(find2);
+									pattern = Pattern.compile(find2.replace("\\\\","\\"));
 								}
 							}
 
@@ -215,7 +215,7 @@ public class Control_F {
 		}
 	}
 	public boolean Contains(String text,String find) {
-		if(!regex_checkbox.isSelected()) {
+		if(!regex_checkbox.isSelected()) { // regex is not selected
 			if(!casey.isSelected()) {
 				find = find.toLowerCase();
 				text=text.toLowerCase();
@@ -225,10 +225,10 @@ public class Control_F {
 		else { // if(regex_checkbox.isSelected()) { // Start regex_checkbox coding here.
 			Pattern pattern = null;
 			if(!casey.isSelected()) {
-						pattern=Pattern.compile(find,Pattern.CASE_INSENSITIVE);
+				pattern=Pattern.compile(find.replace("\\\\","\\"),Pattern.CASE_INSENSITIVE);
 			}
 			else { // If not case sensitive
-				pattern=Pattern.compile(find);
+				pattern=Pattern.compile(find.replace("\\\\","\\"));
 			}
 			Matcher matcher=pattern.matcher(text);
 			return matcher.find();
@@ -284,14 +284,14 @@ public class Control_F {
 							pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
 						}
 						else {
-							pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+							pattern = Pattern.compile(find2.replace("\\\\","\\"),Pattern.CASE_INSENSITIVE);
 						}
 					} else {
 						if(!regex_checkbox.isSelected()) { // is not regex
 							pattern=Pattern.compile(Pattern.quote(find2));
 						}
 						else { // is regex checkbox ticked
-							pattern = Pattern.compile(find2);
+							pattern = Pattern.compile(find2.replace("\\\\","\\"));
 						}
 					}
 					Matcher matcher=pattern.matcher(middle);
@@ -368,14 +368,14 @@ public class Control_F {
 									pattern=Pattern.compile(Pattern.quote(find2),Pattern.CASE_INSENSITIVE);
 								}
 								else {
-									pattern = Pattern.compile(find2,Pattern.CASE_INSENSITIVE);
+									pattern = Pattern.compile(find2.replace("\\\\","\\"),Pattern.CASE_INSENSITIVE);
 								}
 							} else {
 								if(!regex_checkbox.isSelected()) { // is not regex
 									pattern=Pattern.compile(Pattern.quote(find2));
 								}
 								else { // is regex checkbox ticked
-									pattern = Pattern.compile(find2);
+									pattern = Pattern.compile(find2.replace("\\\\","\\"));
 								}
 							}
 
