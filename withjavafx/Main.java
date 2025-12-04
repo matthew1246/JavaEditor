@@ -2335,24 +2335,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-				frame2.setSize(300,120);
+				frame2.setSize(325,110);
 				
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,2,5));
+				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 				
 				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				
 				JTextField input = new JTextField(20);
-				GridBagConstraints gbc = new GridBagConstraints();
-				gbc.gridx=0;
-				gbc.gridy=0;
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.weightx=8.0;
-				gbc.weighty=1.0;
-				gbc.anchor=gbc.CENTER;
-				gbc.gridwidth=8;
-				gbc.gridheight=1;
-				gbc.insets=new Insets(4,0,0,0);
 				panel0.add(input);
 				
 				panel0.validate();
@@ -2366,36 +2356,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
             			downArrow.setMargin(new Insets(0,2,0,2));
             			arrowspanel.add(upArrow);
             			arrowspanel.add(downArrow);
-            			/*Font font=panel0.getFont();
-            			upArrow.setFont(font);
-            			downArrow.setFont(font);
-            			*/
             			panel0.add(arrowspanel);
 				
 				JButton click = new JButton("Find");
-				gbc.gridx=8;
-				gbc.gridy=0;
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.weightx=2.0;
-				gbc.weighty=1.0;
-				gbc.anchor=gbc.CENTER;
-				gbc.gridwidth=2;
-				gbc.gridheight=1;
 				panel0.add(click);
 
 				panel0.validate();
 				panel0.repaint();
 		
 				JCheckBox searchall = new JCheckBox("all");
-				gbc.gridx=0;
-				gbc.gridy=1;
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.weightx=2.0;
-				gbc.weighty=1.0;
-				gbc.anchor=gbc.CENTER;
-				gbc.gridwidth=2;
-				gbc.gridheight=1;
-				gbc.insets = new Insets(0,0,0,0);
+
 				searchall.setMargin(new Insets(0,0,0,0));
 				panel0.add(searchall);
 				
@@ -2403,15 +2373,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				panel0.repaint();
 		
 				JCheckBox casey=new JCheckBox("case");
-				gbc.gridx=2;
-				gbc.gridy=1;
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.weightx=2.0;
-				gbc.weighty=1.0;
-				gbc.anchor=gbc.CENTER;
-				gbc.gridwidth=2;
-				gbc.gridheight=1;
-				gbc.insets = new Insets(0,0,0,0);
 				casey.setMargin(new Insets(0,0,0,0));
 				panel0.add(casey);
 		
@@ -2420,14 +2381,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		
 				JTextField replaceinput = new JTextField(5);
 				replaceinput.setEditable(false);
-				gbc.gridx=4;
-				gbc.gridy=1;
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.weightx=2.0;
-				gbc.weighty=1.0;
-				gbc.anchor=gbc.CENTER;
-				gbc.gridwidth=2;
-				gbc.gridheight=1;
 				replaceinput.setMargin(new Insets(0,0,0,0));
 				panel0.add(replaceinput);
 				
@@ -2435,14 +2388,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				panel0.repaint();
 				
 				JCheckBox replace = new JCheckBox("replace");
-				gbc.gridx=6;
-				gbc.gridy=1;
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.weightx=2.0;
-				gbc.weighty=1.0;
-				gbc.anchor=gbc.CENTER;
-				gbc.gridwidth=2;
-				gbc.gridheight=1;
 				replace.setMargin(new Insets(0,0,0,0));
 				panel0.add(replace);
 				replace.addActionListener( (ev3) -> {
@@ -2453,18 +2398,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				panel0.repaint();
 		
 				JCheckBox selection = new JCheckBox("Select");
-				gbc.gridx=8;
-				gbc.gridy=1;
-				gbc.fill = GridBagConstraints.NONE;
-				gbc.weightx=2.0;
-				gbc.weighty=1.0;
-				gbc.anchor=gbc.CENTER;
-				gbc.gridwidth=2;
-				gbc.gridheight=1;
-				gbc.insets = new Insets(0,0,0,0);
 				selection.setMargin(new Insets(0,0,0,0));
 				panel0.add(selection);
 					
+				panel0.validate();
+				panel0.repaint();
+				
+				JCheckBox regex_checkbox = new JCheckBox("regex");
+				regex_checkbox.setMargin(new Insets(0,0,0,0));
+				panel0.add(regex_checkbox);
+				
 				panel0.validate();
 				panel0.repaint();
 
@@ -2473,7 +2416,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				//frame2.pack();
 				//frame2.setResizable(false);
 				frame2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey);
+				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey,regex_checkbox);
 				upArrow.addActionListener( (ev3) -> {
 					control_f.z = control_f.z-2;
 					control_f.FindWithoutFocus(input.getText());

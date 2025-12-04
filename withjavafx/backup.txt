@@ -6,7 +6,8 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java"
     ],
     "caretposition": 0
   },
@@ -20,7 +21,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 133605
+    "caretposition": 90540
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -145,10 +146,12 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 836
+    "caretposition": 12076
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Control_F"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
