@@ -59,7 +59,7 @@ public class Control_F {
 						x++;
 					}
 					x++;
-					if(line.contains(find)) {
+					if(Contains(line,find2)) {
 						count++;
 						if(z == count)
 							break;
@@ -127,7 +127,7 @@ public class Control_F {
 								x++;
 							}
 							x++;
-							if(line.contains(find)) {
+							if(Contains(line,find2)) {
 								//main.scrollToCaretPositionWithoutFocus(x);
 								if(!main.fileName.equals(newfilename)) {
 									main.fileName = newfilename;
@@ -244,7 +244,7 @@ public class Control_F {
 						x++;
 					}
 					x++;
-					if(line.contains(find)) {
+					if(Contains(line,find2)) {
 						count++;
 						if(z == count)
 							break;
@@ -312,7 +312,7 @@ public class Control_F {
 								x++;
 							}
 							x++;
-							if(line.contains(find)) {
+							if(Contains(line,find2)) {
 								//main.scrollToCaretPosition(x);
 								if(!main.fileName.equals(newfilename)) {
 									main.fileName = newfilename;
