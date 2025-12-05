@@ -3101,7 +3101,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					filename2=filename2.substring(1,filename2.length());
 				frame.setTitle(filename2 +" "+fileName);
 			}
-		} catch(Exception ex) {
+		} catch(URISyntaxException ex) {
 			ex.printStackTrace();
 		}
 	}
