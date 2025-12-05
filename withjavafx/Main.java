@@ -642,13 +642,15 @@ public class Main {
 			frame.setTitle("");
 		}
 		*/
-		try {
-			String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-			if(filename2.startsWith("/"))
-				filename2=filename2.substring(1,filename2.length());
-			frame.setTitle(filename2 +" "+fileName);
-		} catch(Exception ex) {
-			ex.printStackTrace();
+		if(fileName != null && !fileName.equals("")) {
+			try {
+				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+				if(filename2.startsWith("/"))
+					filename2=filename2.substring(1,filename2.length());
+				frame.setTitle(filename2 +" "+fileName);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 		
 		frame.setSize(800,600);
@@ -1344,9 +1346,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
 			setStarterClassBoxes(fileName);
+		
 			if(fileName != null && !fileName.equals("")) {
-				frame.setTitle(fileName.replaceAll(".+\\\\",""));
-			}
+				try {
+					String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+					if(filename2.startsWith("/"))
+						filename2=filename2.substring(1,filename2.length());
+					frame.setTitle(filename2 +" "+fileName);
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}	
+		
 			//filelistmodifier.setSelected(selected2);
 			/*if(!deselected.equals("")) {
 				filelistmodifier.setToMostRecentAfterSelected(deselected);	
@@ -2511,7 +2522,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						PrintWriter output = new PrintWriter(fileName);
 						output.print(text);
 						output.close();
-						frame.setTitle(fileName.replaceAll(".+\\\\",""));
+					
+						if(Main.this.fileName != null && !Main.this.fileName.equals("")) {
+							try {
+								String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+								if(filename2.startsWith("/"))
+									filename2=filename2.substring(1,filename2.length());
+								Main.this.frame.setTitle(filename2 +" "+fileName);
+							} catch(Exception ex) {
+								ex.printStackTrace();
+							}
+						}	
+					
 						String selected=Main.this.getFileName(fileName);
 						
 						Main.this.open(selected);
@@ -3277,9 +3299,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
 				setStarterClassBoxes(fileName);
+			
 				if(fileName != null && !fileName.equals("")) {
-					frame.setTitle(fileName.replaceAll(".+\\\\",""));
-				}
+					try {
+						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+						if(filename2.startsWith("/"))
+							filename2=filename2.substring(1,filename2.length());
+						frame.setTitle(filename2 +" "+fileName);
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				}	
 				
 				this.fileName=fileName;
 				
@@ -3422,9 +3452,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(fileName);
 				setStarterClassBoxes(fileName);
+				
 				if(fileName != null && !fileName.equals("")) {
-					frame.setTitle(fileName.replaceAll(".+\\\\",""));
+					try {
+						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+						if(filename2.startsWith("/"))
+							filename2=filename2.substring(1,filename2.length());
+						frame.setTitle(filename2 +" "+fileName);
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
 				}
+					
 				threecomboboxes.load(fileName);
 				this.fileName=fileName;
 				
@@ -3435,13 +3474,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		}
 		allclassesinfile.ChangeFile(textarea,fileName);
-		try {
-			String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-			if(filename2.startsWith("/"))
-				filename2=filename2.substring(1,filename2.length());
-			frame.setTitle(filename2 +" "+fileName);
-		} catch(Exception ex) {
-			ex.printStackTrace();
+		if(fileName != null && !fileName.equals("")) {
+			try {
+				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+				if(filename2.startsWith("/"))
+					filename2=filename2.substring(1,filename2.length());
+				frame.setTitle(filename2 +" "+fileName);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 	public int getLineNumber(String stringuptocaretposition) {
@@ -3704,7 +3745,17 @@ class SaveActionListener implements ActionListener {
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
 				output.close();
-				main.frame.setTitle(main.fileName.replaceAll(".+\\\\",""));
+			
+				if(main.fileName != null && !main.fileName.equals("")) {
+					try {
+						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+						if(filename2.startsWith("/"))
+							filename2=filename2.substring(1,filename2.length());
+						main.frame.setTitle(filename2 +" "+main.fileName);
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				}	
 			}
 			else {
 				JFileChooser fileChooser = new JFileChooser(".");
@@ -3720,7 +3771,17 @@ class SaveActionListener implements ActionListener {
 					PrintWriter output = new PrintWriter(main.fileName);
 					output.print(text);
 					output.close();
-					main.frame.setTitle(main.fileName.replaceAll(".+\\\\",""));
+					
+					if(main.fileName != null && !main.fileName.equals("")) {
+						try {
+							String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+							if(filename2.startsWith("/"))
+								filename2=filename2.substring(1,filename2.length());
+							main.frame.setTitle(filename2 +" "+main.fileName);
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					}
 					
 					main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),main.fileName.replaceAll(".+\\\\",""));
 					List<String> tabs=main.fileNames;
