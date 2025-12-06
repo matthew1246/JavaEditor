@@ -8,7 +8,7 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -17,7 +17,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java"
     ],
     "caretposition": 0
   },
@@ -48,7 +49,8 @@
     "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\httpclient5-5.5.jar"
     ],
     "fileNames": [],
     "caretposition": 27999
@@ -524,5 +526,15 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 1058
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java": {
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 645
   }
 }
