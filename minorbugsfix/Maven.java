@@ -12,6 +12,9 @@ public class Maven {
 		Maven maven = new Maven();
 		maven.run();	
 	}
+	/*
+	** This searches dependencies for Maven.
+	*/
 	public void run() {
 		Console console=System.console();
 		String input=console.readLine("What you like to search? ");
