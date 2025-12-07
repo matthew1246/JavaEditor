@@ -21,9 +21,32 @@ public class Maven {
 		System.out.println("*"+input+"*");
 		String rowsa=console.readLine("How many search results do you want?");
 		int rows=Integer.parseInt(rowsa);
+		
+		String responseJson=Search(rows,input);
+	
+		Parse(responseJson);
+	}
+		
+	public OkHttpClient client = new OkHttpClient();
+	public String Search(int how_many,String query) {
+		int rows = how_many;
+		String input = query;
 		int start_index = 0;
 		String url = "https://search.maven.org/solrsearch/select?q="+input+"&rows="+rows+"&start="+start_index+"&wt=json";
 		String responseJson=get(url);
+		return responseJson;
+	}		
+	public String get(String url) {
+		try {
+			Request request = new Request.Builder().url(url).build();
+			Response response = client.newCall(request).execute();
+			return response.body().string();
+		} catch(IOException ex) {
+			ex.printStackTrace();
+			return "IOException occured.";
+		}
+	}
+	public void Parse(String responseJson) {
 		System.out.println(responseJson);
 		
 		System.out.println();
@@ -72,19 +95,6 @@ public class Maven {
 			}
 			
 			System.out.println();	
-		}
-		
-	}
-		
-	public OkHttpClient client = new OkHttpClient();
-	public String get(String url) {
-		try {
-			Request request = new Request.Builder().url(url).build();
-			Response response = client.newCall(request).execute();
-			return response.body().string();
-		} catch(IOException ex) {
-			ex.printStackTrace();
-			return "IOException occured.";
 		}
 	}
 }
