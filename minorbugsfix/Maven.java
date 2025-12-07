@@ -29,8 +29,18 @@ public class Maven {
 		System.out.println();
 		
 		JsonObject jsonObject = JsonParser.parseString(responseJson).getAsJsonObject();
+		
+		// {"responseHeader":{"status":0,"QTime":145,"params":{"q":"jar","core":"","defType":"dismax","qf":"text^20 g^5 a^10","indent":"off","spellcheck":"true","fl":"id,g,a,latestVersion,p,ec,repositoryId,text,timestamp,versionCount","start":"0","spellcheck.count":"5","sort":"score desc,timestamp desc,g asc,a asc","rows":"25","wt":"json","version":"2.2"}},"response":{"numFound":582830
+		
 		JsonObject response=jsonObject.getAsJsonObject("response");
+		
+		int totalnumber=response.get("numFound").getAsInt();
+		System.out.println("Total number of search results is: "+totalnumber);
+		
+		System.out.println();
+		
 		System.out.println(response);
+		
 		
 		System.out.println();
 		
