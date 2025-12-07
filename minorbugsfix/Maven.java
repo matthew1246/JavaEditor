@@ -19,12 +19,15 @@ public class Maven {
 		Console console=System.console();
 		String input=console.readLine("What you like to search? ");
 		System.out.println("*"+input+"*");
+		GetAll(input);
+		/*
 		String rowsa=console.readLine("How many search results do you want?");
 		int rows=Integer.parseInt(rowsa);
 		
 		String responseJson=Search(rows,input);
 	
 		Parse(responseJson);
+		*/
 	}
 		
 	public OkHttpClient client = new OkHttpClient();
@@ -96,5 +99,23 @@ public class Maven {
 			
 			System.out.println();	
 		}
+	}
+	public void GetAll(String query) {
+		int totalnumber=GetHowMany(query);
+		System.out.println("total number is: "+totalnumber);
+	}
+	/*
+	** This function gets how many dependencies and plugins there
+	** for a given String. The given String is the variable named query.
+	*/
+	public int GetHowMany(String query) {
+		String responseJson=Search(1,query);
+		JsonObject jsonObject = JsonParser.parseString(responseJson).getAsJsonObject();
+		// {"responseHeader":{"status":0,"QTime":145,"params":{"q":"jar","core":"","defType":"dismax","qf":"text^20 g^5 a^10","indent":"off","spellcheck":"true","fl":"id,g,a,latestVersion,p,ec,repositoryId,text,timestamp,versionCount","start":"0","spellcheck.count":"5","sort":"score desc,timestamp desc,g asc,a asc","rows":"25","wt":"json","version":"2.2"}},"response":{"numFound":582830
+		
+		JsonObject response=jsonObject.getAsJsonObject("response");
+		int totalnumber=response.get("numFound").getAsInt();
+		
+		return totalnumber;
 	}
 }
