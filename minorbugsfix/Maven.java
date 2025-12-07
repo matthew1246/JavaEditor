@@ -19,7 +19,7 @@ public class Maven {
 		Console console=System.console();
 		String input=console.readLine("What you like to search? ");
 		System.out.println("*"+input+"*");
-		Parse(GetAll(input));
+		GetAll(input);
 		/*
 		String rowsa=console.readLine("How many search results do you want?");
 		int rows=Integer.parseInt(rowsa);
@@ -32,9 +32,11 @@ public class Maven {
 		
 	public OkHttpClient client = new OkHttpClient();
 	public String Search(int how_many,String query) {
+		return Search(how_many,query,0);
+	}	
+	public String Search(int how_many,String query,int start_index) {
 		int rows = how_many;
 		String input = query;
-		int start_index = 0;
 		String url = "https://search.maven.org/solrsearch/select?q="+input+"&rows="+rows+"&start="+start_index+"&wt=json";
 		String responseJson=get(url);
 		return responseJson;
@@ -99,10 +101,12 @@ public class Maven {
 			System.out.println();	
 		}
 	}
-	public String GetAll(String query) {
+	public void GetAll(String query) {
 		int totalnumber=GetHowMany(query);
 		System.out.println("total number is: "+totalnumber);
-		return Search(totalnumber,query);
+	
+		Parse(Search(20,query,0));
+		Parse(Search(20,query,20));	
 	}
 	/*
 	** This function gets how many dependencies and plugins there
