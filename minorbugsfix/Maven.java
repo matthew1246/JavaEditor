@@ -47,6 +47,20 @@ public class Maven {
 			String version=doc.get("latestVersion").getAsString();
 			System.out.println("groupId: "+groupId+" artifactId: "+artifactId+" version: "+version);
 			
+			System.out.println();
+			
+			String pluginordependency= "jar";
+			if(doc.get("p") != null)
+				pluginordependency=	doc.get("p").getAsString();
+			
+			if(pluginordependency.contains("plugin")) {
+				System.out.println(pluginordependency);
+				System.exit(0);
+			}
+			else {
+				System.out.println("Is a dependency");
+			}
+			
 			System.out.println();	
 		}
 		
