@@ -105,8 +105,9 @@ public class Maven {
 		int totalnumber=GetHowMany(query);
 		System.out.println("total number is: "+totalnumber);
 	
-		Parse(Search(20,query,0));
-		Parse(Search(20,query,20));	
+		for(int i = 0; i < totalnumber; i+=20) {
+			Parse(Search(20,query,i));
+		}
 	}
 	/*
 	** This function gets how many dependencies and plugins there
