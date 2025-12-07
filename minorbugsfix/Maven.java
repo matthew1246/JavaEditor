@@ -19,7 +19,7 @@ public class Maven {
 		Console console=System.console();
 		String input=console.readLine("What you like to search? ");
 		System.out.println("*"+input+"*");
-		GetAll(input);
+		Parse(GetAll(input));
 		/*
 		String rowsa=console.readLine("How many search results do you want?");
 		int rows=Integer.parseInt(rowsa);
@@ -91,7 +91,6 @@ public class Maven {
 			
 			if(pluginordependency.contains("plugin")) {
 				System.out.println(pluginordependency);
-				System.exit(0);
 			}
 			else {
 				System.out.println("Is a dependency");
@@ -100,9 +99,10 @@ public class Maven {
 			System.out.println();	
 		}
 	}
-	public void GetAll(String query) {
+	public String GetAll(String query) {
 		int totalnumber=GetHowMany(query);
 		System.out.println("total number is: "+totalnumber);
+		return Search(totalnumber,query);
 	}
 	/*
 	** This function gets how many dependencies and plugins there
