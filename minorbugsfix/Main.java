@@ -94,6 +94,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public Maven maven = new Maven();
 	public JMenuItem saveall = new JMenuItem("Save All");
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
 	public JMenuItem rename_file = new JMenuItem("Rename File");
@@ -571,7 +572,7 @@ public class Main {
 		}	
 		threecomboboxes = new ThreeComboboxes(this,fileName);
 		expandable = new Expandable(this);	
-		Maven maven = new Maven();
+		maven.Change(fileName);
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();

@@ -7,18 +7,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import java.io.File;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonArray;
 public class Maven {
-	public static void main(String[] args) {
-		Maven maven = new Maven();
-		maven.run();	
-	}
+	public String fileName;
 	public Maven() {
 		setLayout();
 		setListeners();
+	}
+	public void Change(String fileName) {
+		if(fileName != null && !fileName.equals("")) {
+			this.fileName = fileName;
+			String dir=Main.getDirectory(fileName);
+			File file = new File(dir+"pom.xml");
+			if(file.exists()) {
+				showMavenAlreadyInitialised();
+			}
+			else {
+				showNotInitialised();
+			}
+		}
 	}
 	public JFrame frame;
 	public JButton initialise;
@@ -35,15 +46,12 @@ public class Maven {
 		panel.add(initialise);
 		
 		pomxml=new JButton("pom.xml");
-		pomxml.setEnabled(false);
 		panel.add(pomxml);
 		
 		add_dependency=new JButton("Add Dependency");
-		add_dependency.setEnabled(false);
 		panel.add(add_dependency);
 		
 		addplugin=new JButton("Add Plugin");
-		addplugin.setEnabled(false);
 		panel.add(addplugin);
 		
 		frame.add(panel);
@@ -52,13 +60,23 @@ public class Maven {
 	}
 	public void setListeners() {
 		initialise.addActionListener( ev -> {
-			initialise.setEnabled(false);
-			
-			pomxml.setEnabled(true);
-			add_dependency.setEnabled(true);
-			addplugin.setEnabled(true);
+			showMavenAlreadyInitialised();	
 		});
 	}	
+	public void showNotInitialised() {
+		initialise.setEnabled(true);
+		
+		pomxml.setEnabled(false);
+		add_dependency.setEnabled(false);
+		addplugin.setEnabled(false);
+	}
+	public void showMavenAlreadyInitialised() {
+		initialise.setEnabled(false);
+		
+		pomxml.setEnabled(true);
+		add_dependency.setEnabled(true);
+		addplugin.setEnabled(true);
+	}
 	/*
 	** This searches dependency and plugin for Maven.
 	*/
