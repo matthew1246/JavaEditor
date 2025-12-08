@@ -539,6 +539,10 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
+<<<<<<< HEAD
     "caretposition": 1534
+=======
+    "caretposition": 1130
+>>>>>>> minorbugsfix
   }
 }
