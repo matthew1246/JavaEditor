@@ -18,19 +18,46 @@ public class Maven {
 	}
 	public Maven() {
 		setLayout();
+		setListeners();
 	}
-	public JFrame frame;		
+	public JFrame frame;
+	public JButton initialise;
+	public JButton pomxml;
+	public JButton add_dependency;
+	public JButton addplugin;		
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
 		frame.setSize(500,500);
 		frame.setLocation(980,175);
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JButton initialise = new JButton("initialise");
+		initialise = new JButton("initialise");
 		panel.add(initialise);
+		
+		pomxml=new JButton("pom.xml");
+		pomxml.setEnabled(false);
+		panel.add(pomxml);
+		
+		add_dependency=new JButton("Add Dependency");
+		add_dependency.setEnabled(false);
+		panel.add(add_dependency);
+		
+		addplugin=new JButton("Add Plugin");
+		addplugin.setEnabled(false);
+		panel.add(addplugin);
+		
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
+	}
+	public void setListeners() {
+		initialise.addActionListener( ev -> {
+			initialise.setEnabled(false);
+			
+			pomxml.setEnabled(true);
+			add_dependency.setEnabled(true);
+			addplugin.setEnabled(true);
+		});
 	}
 	/*
 	** This searches dependency and plugin for Maven.
