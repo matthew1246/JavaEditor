@@ -3,6 +3,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -12,8 +16,24 @@ public class Maven {
 		Maven maven = new Maven();
 		maven.run();	
 	}
+	public Maven() {
+		setLayout();
+	}
+	public JFrame frame;		
+	public void setLayout() {
+		frame = new JFrame();
+		frame.setTitle("Maven");
+		frame.setSize(500,500);
+		frame.setLocation(980,175);
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JButton initialise = new JButton("initialise");
+		panel.add(initialise);
+		frame.add(panel);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
 	/*
-	** This searches dependencies for Maven.
+	** This searches dependency and plugin for Maven.
 	*/
 	public void run() {
 		Console console=System.console();
