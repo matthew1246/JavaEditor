@@ -29,7 +29,7 @@ public class Maven {
 		JButton initialise = new JButton("initialise");
 		panel.add(initialise);
 		frame.add(panel);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	/*
