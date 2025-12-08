@@ -571,6 +571,7 @@ public class Main {
 		}	
 		threecomboboxes = new ThreeComboboxes(this,fileName);
 		expandable = new Expandable(this);	
+		Maven maven = new Maven();
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();

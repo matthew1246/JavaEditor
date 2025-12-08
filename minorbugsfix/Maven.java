@@ -58,7 +58,7 @@ public class Maven {
 			add_dependency.setEnabled(true);
 			addplugin.setEnabled(true);
 		});
-	}
+	}	
 	/*
 	** This searches dependency and plugin for Maven.
 	*/
