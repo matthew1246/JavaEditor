@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.io.File;
+import java.io.PrintWriter;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -60,7 +61,8 @@ public class Maven {
 	}
 	public void setListeners() {
 		initialise.addActionListener( ev -> {
-			showMavenAlreadyInitialised();	
+			showMavenAlreadyInitialised();
+			Generatepomxml();	
 		});
 	}	
 	public void showNotInitialised() {
@@ -136,6 +138,13 @@ public class Maven {
     				</dependencies>
 		</project>
 		""";
+		try {
+			PrintWriter printwriter = new PrintWriter(Main.getDirectory(fileName)+"pom.xml");
+			printwriter.println(filestring);
+			printwriter.close();
+		} catch (java.io.FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
 	}		
 	/*
 	** This searches dependency and plugin for Maven.
