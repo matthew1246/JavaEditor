@@ -36,7 +36,8 @@ public class Maven {
 	public JButton initialise;
 	public JButton pomxml;
 	public JButton add_dependency;
-	public JButton addplugin;		
+	public JButton addplugin;	
+	public JButton add_dependencyorplugin;	
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -54,6 +55,9 @@ public class Maven {
 		
 		addplugin=new JButton("Add Plugin");
 		panel.add(addplugin);
+		
+		add_dependencyorplugin=new JButton("Add Dependency/Plugin");
+		panel.add(add_dependencyorplugin);
 		
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
