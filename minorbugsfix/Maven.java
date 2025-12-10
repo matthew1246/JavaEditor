@@ -38,6 +38,7 @@ public class Maven {
 	public JButton add_dependency;
 	public JButton addplugin;	
 	public JButton add_dependencyorplugin;	
+	public JButton removedependency;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -59,6 +60,9 @@ public class Maven {
 		add_dependencyorplugin=new JButton("Add Dependency/Plugin");
 		panel.add(add_dependencyorplugin);
 		
+		removedependency = new JButton("Remove Dependency");
+		panel.add(removedependency);
+		
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
@@ -71,6 +75,10 @@ public class Maven {
 		pomxml.addActionListener( ev -> {
 			CommandLine commandline = new CommandLine();
 			commandline.run("explorer "+Main.getDirectory(fileName)+"pom.xml",Main.getDirectory(fileName));
+		});	
+		removedependency.addActionListener( ev -> {
+			DependencyRemover dependencyremover=new DependencyRemover(fileName);
+			dependencyremover.showDependencies();
 		});		
 	}	
 	public void showNotInitialised() {
