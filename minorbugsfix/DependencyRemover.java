@@ -37,9 +37,13 @@ public class DependencyRemover {
 			NodeList nodelist=root.getElementsByTagName("dependency");
 			for(int i = 0; i < nodelist.getLength(); i++) {
 				Element element=(Element)nodelist.item(i);
-				String output=element.getElementsByTagName("groupId").item(0).getTextContent();
+				String groupId=element.getElementsByTagName("groupId").item(0).getTextContent();						String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();						String version=element.getElementsByTagName("version").item(0).getTextContent();			
+				System.out.print(groupId+" "+artifactId+" "+version);
 				
-				System.out.println(output);
+NodeList scope=element.getElementsByTagName("scope");
+				if(scope.getLength() > 0) {
+					System.out.print(" "+scope.item(0).getTextContent());
+				}												System.out.println();
 			}
 			System.out.println();
 		} catch (SAXException ex) {

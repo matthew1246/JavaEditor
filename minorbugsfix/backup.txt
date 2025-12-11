@@ -8,7 +8,7 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -554,8 +554,8 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java": {
     "startupcombobox": [
-      "Main",
-      "DependencyRemover"
+      "DependencyRemover",
+      "Main"
     ],
     "starterclass": "",
     "jars": [
@@ -565,6 +565,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 1283
+    "caretposition": 1767
   }
 }
