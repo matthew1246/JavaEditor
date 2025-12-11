@@ -78,7 +78,6 @@ public class Maven {
 		});	
 		removedependency.addActionListener( ev -> {
 			DependencyRemover dependencyremover=new DependencyRemover(fileName);
-			dependencyremover.showDependencies();
 		});		
 	}	
 	public void showNotInitialised() {
