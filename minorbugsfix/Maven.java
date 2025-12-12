@@ -86,6 +86,8 @@ public class Maven {
 		pomxml.setEnabled(false);
 		add_dependency.setEnabled(false);
 		addplugin.setEnabled(false);
+		add_dependencyorplugin.setEnabled(false);
+		removedependency.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -93,6 +95,8 @@ public class Maven {
 		pomxml.setEnabled(true);
 		add_dependency.setEnabled(true);
 		addplugin.setEnabled(true);
+		add_dependencyorplugin.setEnabled(true);
+		removedependency.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """

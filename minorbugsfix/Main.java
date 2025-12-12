@@ -3092,6 +3092,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile4.set(fileName);
 				
 				allclassesinfile.ChangeFile(textarea,fileName);
+				maven.Change(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
