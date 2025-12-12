@@ -22,14 +22,36 @@ public class Maven {
 	public void Change(String fileName) {
 		if(fileName != null && !fileName.equals("")) {
 			this.fileName = fileName;
-			String dir=Main.getDirectory(fileName);
-			File file = new File(dir+"pom.xml");
-			if(file.exists()) {
+			if(pomxmlExists()) {
 				showMavenAlreadyInitialised();
 			}
 			else {
 				showNotInitialised();
-			}
+			}	
+		}
+	}
+	public boolean pomxmlExists() {
+		File dir = new File(Main.getDirectory(fileName));
+		File[] folders = dir.listFiles(File::isDirectory);
+		if (folders != null) {
+	    		for (File f : folders) {
+	        			File[] files=f.listFiles(File::isFile);
+    				if(files != null) {
+    					for(File file:files) {
+    						if(file.getName().equals("pom.xml")) {
+    							return true;
+    						}
+    					}
+    					return false;	
+    				}
+    				else {
+    					return false;
+    				}										
+		    	}
+		    	return false;
+		}
+		else {
+			return false;
 		}
 	}
 	public JFrame frame;
