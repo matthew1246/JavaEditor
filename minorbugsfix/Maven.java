@@ -70,7 +70,9 @@ public class Maven {
 	public void setListeners() {
 		initialise.addActionListener( ev -> {
 			showMavenAlreadyInitialised();
-			Generatepomxml();	
+			// Generatepomxml();
+			CommandLine commandline = new CommandLine();
+			commandline.runWithMSDOS("mvn archetype:generate",Main.getDirectory(fileName));	
 		});
 		pomxml.addActionListener( ev -> {
 			CommandLine commandline = new CommandLine();
