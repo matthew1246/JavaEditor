@@ -262,11 +262,7 @@ public class Main {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git = new Git(fileName);
-			String dir = getDirectory(fileName);
-			if(msdos == null)
-				msdos = new MSDOS(dir);
-			else
-				msdos.setFileName(dir);
+			msdos.setFileName(fileName);
 		}
 		setLayout();
 		if(fileName.equals("")) {
@@ -1268,7 +1264,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		else
 			startercombobox.Change(filename);
 	}		
-	public MSDOS msdos;
+	public MSDOS msdos = new MSDOS();
 	public void open(String selected2) {
 		try {
 			// JOptionPane.showMessageDialog(null,deselected);
@@ -1283,10 +1279,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			dir=dir+selected2;
 			
-			if(msdos == null)
-				msdos = new MSDOS(dir);
-			else
-				msdos.setFileName(dir);
+			msdos.setFileName(dir);
 				
 			fileName = dir; // Might need uncomment to make Main.java work again.
 			//fileName = dir+".java";
@@ -3093,6 +3086,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				allclassesinfile.ChangeFile(textarea,fileName);
 				maven.Change(fileName);
+				msdos.setFileName(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3430,6 +3424,7 @@ class SaveActionListener implements ActionListener {
 			}
 			if(main.fileName != null && !main.fileName.equals("")) {
 				main.maven.Change(main.fileName);
+				main.msdos.setFileName(main.fileName);
 			}
 		}catch (FileNotFoundException ex) {
 			System.out.println(ex);
