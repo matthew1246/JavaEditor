@@ -132,7 +132,7 @@ public class Maven {
 			}
 		});	
 		removedependency.addActionListener( ev -> {
-			DependencyRemover dependencyremover=new DependencyRemover(fileName);
+			DependencyRemover dependencyremover=new DependencyRemover(getPOMXMLs());
 		});		
 	}	
 	public String getPOMXMLs() {
