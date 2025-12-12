@@ -90,6 +90,7 @@ public class Maven {
 		panel.add(removedependency);
 		
 		code = new JButton("Code");
+		panel.add(code);
 		
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -107,9 +108,8 @@ public class Maven {
 				Element root=doc.getDocumentElement();;
 				String package_com_whatever=root.getElementsByTagName("groupId").item(0).getTextContent();
 				
-				String projectname=  root.getElementsByTagName("artifactId").item(0).getTextContent();
 				CommandLine commandline = new CommandLine();
-				commandline.run(projectname+"/"+projectname+"/"+package_com_whatever.replace(".","/"),Main.getDirectory(pomxml));
+				commandline.run("explorer ." ,Main.getDirectory(pomxml)+"src/main/java/"+package_com_whatever.replace(".","/"));
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			}				

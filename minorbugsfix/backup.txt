@@ -535,14 +535,14 @@
       "Maven",
       "Main"
     ],
-    "starterclass": "",
+    "starterclass": "Maven",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 3167
+    "caretposition": 2997
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyManager.java": {
     "startupcombobox": [
@@ -624,7 +624,9 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\a\\Main.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
