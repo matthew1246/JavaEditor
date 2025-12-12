@@ -4,7 +4,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 105
+    "caretposition": 132
   },
   "lastopened": {
     "startupcombobox": [],
@@ -55,7 +55,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 129278
+    "caretposition": 25835
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -609,6 +609,13 @@
     "caretposition": 398
   },
   "C:\\Users\\Owner\\Documents\\aaaaaaaaa\\Main.java": {
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\aak\\Main.java": {
     "startupcombobox": [],
     "starterclass": "",
     "jars": [],

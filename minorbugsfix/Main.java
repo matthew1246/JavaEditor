@@ -597,6 +597,9 @@ public class Main {
 		else if(filename.endsWith(".jar")) {
 			return filename.replaceAll("[^\\\\]+\\.jar","");
 		}
+		else if(filename.endsWith(".xml")) {
+			return filename.replaceAll("[^\\\\]+\\.xml","");
+		}
 		return filename;
 	}
 	public static String getFileName(String directoryandfilename) {
