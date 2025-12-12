@@ -3428,6 +3428,9 @@ class SaveActionListener implements ActionListener {
 			               	storeselectedfile.setStarterClass(main.fileName);
 				}
 			}
+			if(main.fileName != null && !main.fileName.equals("")) {
+				main.maven.Change(main.fileName);
+			}
 		}catch (FileNotFoundException ex) {
 			System.out.println(ex);
 		}
