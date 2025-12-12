@@ -98,12 +98,43 @@ public class Maven {
 		});
 		pomxml.addActionListener( ev -> {
 			CommandLine commandline = new CommandLine();
-			commandline.run("explorer "+Main.getDirectory(fileName)+"pom.xml",Main.getDirectory(fileName));
+			String pomxml = getPOMXMLs();
+			if(!pomxml.equals("")) {
+				commandline.run("explorer pom.xml",Main.getDirectory(pomxml));
+			}
+			else
+			{
+				javax.swing.JOptionPane.showMessageDialog(null,"Could not find pom.xml");
+			}
 		});	
 		removedependency.addActionListener( ev -> {
 			DependencyRemover dependencyremover=new DependencyRemover(fileName);
 		});		
 	}	
+	public String getPOMXMLs() {
+		File dir = new File(Main.getDirectory(fileName));
+		File[] folders = dir.listFiles(File::isDirectory);
+		if (folders != null) {
+	    		for (File f : folders) {
+	        			File[] files=f.listFiles(File::isFile);
+    				if(files != null) {
+    					for(File file:files) {
+    						if(file.getName().equals("pom.xml")) {
+    							return file.getAbsolutePath();
+    						}
+    					}
+    					return "";
+    				}
+    				else {
+    					return "";
+    				}										
+		    	}
+		    	return "";
+		}
+		else {
+			return "";
+		}
+	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
 		
