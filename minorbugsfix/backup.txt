@@ -4,7 +4,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 105
+    "caretposition": 110
   },
   "lastopened": {
     "startupcombobox": [],
@@ -541,7 +541,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 2053
+    "caretposition": 2008
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyManager.java": {
     "startupcombobox": [
@@ -566,5 +566,23 @@
     ],
     "fileNames": [],
     "caretposition": 2382
+  },
+  "C:\\Users\\Owner\\Documents\\pomgenerator\\Main.java": {
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\aakjjak\\Main.java": {
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }

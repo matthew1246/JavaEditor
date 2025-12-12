@@ -72,7 +72,7 @@ public class Maven {
 			showMavenAlreadyInitialised();
 			// Generatepomxml();
 			CommandLine commandline = new CommandLine();
-			commandline.runWithMSDOS("mvn archetype:generate",Main.getDirectory(fileName));	
+			commandline.runWithMSDOS("echo mvn archetype:generate && mvn archetype:generate",Main.getDirectory(fileName));	
 		});
 		pomxml.addActionListener( ev -> {
 			CommandLine commandline = new CommandLine();
