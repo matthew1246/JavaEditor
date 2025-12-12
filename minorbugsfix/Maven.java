@@ -9,6 +9,9 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.io.File;
 import java.io.PrintWriter;
+import javax.swing.JOptionPane;
+import javax.xml.parsers.*;
+import org.w3c.dom.*;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -61,6 +64,7 @@ public class Maven {
 	public JButton addplugin;	
 	public JButton add_dependencyorplugin;	
 	public JButton removedependency;
+	public JButton code;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -85,11 +89,31 @@ public class Maven {
 		removedependency = new JButton("Remove Dependency");
 		panel.add(removedependency);
 		
+		code = new JButton("Code");
+		
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		code.addActionListener((ev) -> {
+			try {
+				String pomxml=getPOMXMLs();
+				
+				DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				Document doc=builder.parse(new File(pomxml));
+				doc.getDocumentElement().normalize();
+				
+				Element root=doc.getDocumentElement();;
+				String package_com_whatever=root.getElementsByTagName("groupId").item(0).getTextContent();
+				
+				String projectname=  root.getElementsByTagName("artifactId").item(0).getTextContent();
+				CommandLine commandline = new CommandLine();
+				commandline.run(projectname+"/"+projectname+"/"+package_com_whatever.replace(".","/"),Main.getDirectory(pomxml));
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}				
+		});
 		initialise.addActionListener( ev -> {
 			showMavenAlreadyInitialised();
 			// Generatepomxml();
@@ -104,7 +128,7 @@ public class Maven {
 			}
 			else
 			{
-				javax.swing.JOptionPane.showMessageDialog(null,"Could not find pom.xml");
+				JOptionPane.showMessageDialog(null,"Could not find pom.xml");
 			}
 		});	
 		removedependency.addActionListener( ev -> {
@@ -143,6 +167,7 @@ public class Maven {
 		addplugin.setEnabled(false);
 		add_dependencyorplugin.setEnabled(false);
 		removedependency.setEnabled(false);
+		code.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -152,6 +177,7 @@ public class Maven {
 		addplugin.setEnabled(true);
 		add_dependencyorplugin.setEnabled(true);
 		removedependency.setEnabled(true);
+		code.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
