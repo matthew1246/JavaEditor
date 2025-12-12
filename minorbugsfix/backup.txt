@@ -8,7 +8,7 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -19,9 +19,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java",
-      "C:\\Users\\Owner\\Documents\\ajajkaj\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java"
     ],
     "caretposition": 0
   },
