@@ -108,6 +108,19 @@ public class Maven {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
+	public String recurseFolders(File folder) {
+		for(File file:folder.listFiles()) {
+			if(file.isFile()) {
+				if(file.getName().equals("App.java")) {
+					return "";
+				}
+			}
+			else if(file.isDirectory()) {
+				return file.getName()+"/"+recurseFolders(file);
+			}
+		}
+		return "";
+	}																																
 	public String getPackageName() {
 		try {
 			String pomxml=getPOMXMLs();
@@ -119,7 +132,20 @@ public class Maven {
 			Element root=doc.getDocumentElement();;
 			String package_com_whatever=root.getElementsByTagName("groupId").item(0).getTextContent();
 			
-			return package_com_whatever;
+			File folder=new File(Main.getDirectory(pomxml)+"src/main/java/"+package_com_whatever.replace(".","/"));
+			if(folder.exists() && folder.isDirectory()) {
+				return package_com_whatever;
+			}
+			else {
+				folder=new File(Main.getDirectory(pomxml)+"src/main/java/");
+				package_com_whatever=recurseFolders(folder);
+				if(!package_com_whatever.equals(""))
+					return package_com_whatever;
+				else {
+					JOptionPane.showMessageDialog(null,"Can't find package name that stores App.java");
+					return "whatever";
+				}
+			}				
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
