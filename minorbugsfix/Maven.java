@@ -132,8 +132,8 @@ public class Maven {
 			
 			Element root=doc.getDocumentElement();;
 			String package_com_whatever=root.getElementsByTagName("groupId").item(0).getTextContent();
-			
-			File folder=new File(Main.getDirectory(pomxml)+"src/main/java/"+package_com_whatever.replace(".","/"));
+			package_com_whatever=package_com_whatever.replace(".","/");
+			File folder=new File(Main.getDirectory(pomxml)+"src/main/java/"+package_com_whatever);
 			if(folder.exists() && folder.isDirectory()) {
 				return package_com_whatever;
 			}
