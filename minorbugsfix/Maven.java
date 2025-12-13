@@ -97,17 +97,36 @@ public class Maven {
 		code = new JButton("Code");
 		panel.add(code);
 		
-		updatecode=new JButton();
+		updatecode=new JButton("Update Code");
 		panel.add(updatecode);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
+	public String getPackageName() {
+		try {
+			String pomxml=getPOMXMLs();
+				
+			DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc=builder.parse(new File(pomxml));
+			doc.getDocumentElement().normalize();
+			
+			Element root=doc.getDocumentElement();;
+			String package_com_whatever=root.getElementsByTagName("groupId").item(0).getTextContent();
+			
+			return package_com_whatever;
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+			return "";
+		}										
+	}
 	public void setListeners() {
 		updatecode.addActionListener(ev -> {
 			Path sourceDir = Path.of(Main.getDirectory(fileName));
-			Path targetDir = Path.of(Main.getDirectory(getPOMXMLs()));
+			String pomxml = getPOMXMLs();
+			Path targetDir = Path.of(Main.getDirectory(pomxml)+"src/main/java/"+getPackageName().replace(".","/"));
 			
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir)) {
 				for(Path entry:stream) {

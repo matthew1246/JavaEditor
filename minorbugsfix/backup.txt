@@ -4,7 +4,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 107
+    "caretposition": 115
   },
   "lastopened": {
     "startupcombobox": [],
@@ -55,7 +55,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 25835
+    "caretposition": 25855
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -541,7 +541,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 3163
+    "caretposition": 2524
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyManager.java": {
     "startupcombobox": [
@@ -626,6 +626,13 @@
     "startupcombobox": [
       "Main"
     ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\aaaaaaaaaaaaaaaaa\\Main.java": {
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
