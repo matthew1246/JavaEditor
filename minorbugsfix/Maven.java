@@ -198,21 +198,8 @@ public class Maven {
 			}
 		});
 		code.addActionListener((ev) -> {
-			try {
-				String pomxml=getPOMXMLs();
-				
-				DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
-				Document doc=builder.parse(new File(pomxml));
-				doc.getDocumentElement().normalize();
-				
-				Element root=doc.getDocumentElement();;
-				String package_com_whatever=root.getElementsByTagName("groupId").item(0).getTextContent();
-				
-				CommandLine commandline = new CommandLine();
-				commandline.run("explorer ." ,Main.getDirectory(pomxml)+"src/main/java/"+package_com_whatever.replace(".","/"));
-			} catch(Exception ex) {
-				ex.printStackTrace();
-			}				
+			CommandLine commandline = new CommandLine();
+			commandline.run("explorer ." ,Main.getDirectory(getPOMXMLs())+"src/main/java/"+getPackageName());				
 		});
 		initialise.addActionListener( ev -> {
 			showMavenAlreadyInitialised();
