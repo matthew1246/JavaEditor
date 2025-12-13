@@ -184,7 +184,7 @@ public class Maven {
 		updatecode.addActionListener(ev -> {
 			Path sourceDir = Path.of(Main.getDirectory(fileName));
 			String pomxml = getPOMXMLs();
-			Path targetDir = Path.of(Main.getDirectory(pomxml)+"src/main/java/"+getPackageName().replace(".","/"));
+			Path targetDir = Path.of(Main.getDirectory(pomxml)+"src/main/java/"+getPackageName());
 			
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir)) {
 				for(Path entry:stream) {
