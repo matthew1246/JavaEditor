@@ -16,6 +16,10 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Paths;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -66,6 +70,7 @@ public class Maven {
 	public JButton removedependency;
 	public JButton code;
 	public JButton updatecode;
+	public JButton deletecode;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -96,6 +101,9 @@ public class Maven {
 		updatecode=new JButton("Update Code");
 		panel.add(updatecode);
 				
+		deletecode=new JButton("Delete Code");
+		panel.add(deletecode);
+				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
@@ -118,7 +126,34 @@ public class Maven {
 			return "";
 		}										
 	}
+	public static void deleteFolder(Path folderPath) throws IOException {
+		Files.walkFileTree(folderPath,new SimpleFileVisitor<Path>() {
+			@Override
+			public FileVisitResult visitFile(Path file,BasicFileAttributes attrs) throws IOException {
+				Files.delete(file);
+				return FileVisitResult.CONTINUE;
+			}
+			@Override
+			public FileVisitResult postVisitDirectory(Path dir,IOException exc) throws IOException {
+				Files.delete(dir);
+				return FileVisitResult.CONTINUE;
+			}
+		});
+	}												
+				
 	public void setListeners() {
+		deletecode.addActionListener((ev) -> {
+			String pomxml=getPOMXMLs();
+			String dir=Main.getDirectory(pomxml);
+			Path folderPath=Paths.get(dir);
+			
+			try {
+				deleteFolder(folderPath);
+			}
+			catch(IOException ex) {
+				ex.printStackTrace();
+			}
+		});
 		updatecode.addActionListener(ev -> {
 			Path sourceDir = Path.of(Main.getDirectory(fileName));
 			String pomxml = getPOMXMLs();
@@ -203,6 +238,7 @@ public class Maven {
 		removedependency.setEnabled(false);
 		code.setEnabled(false);
 		updatecode.setEnabled(false);
+		deletecode.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -214,6 +250,7 @@ public class Maven {
 		removedependency.setEnabled(true);
 		code.setEnabled(true);
 		updatecode.setEnabled(true);
+		deletecode.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
