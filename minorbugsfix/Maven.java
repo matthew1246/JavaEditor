@@ -20,6 +20,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Paths;
+import javax.swing.JFileChooser;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -143,7 +144,19 @@ public class Maven {
 					return package_com_whatever;
 				else {
 					JOptionPane.showMessageDialog(null,"Can't find package name that stores App.java");
-					return "whatever";
+					JOptionPane.showMessageDialog(null,"Select folder for where code goes.");
+					while(true) {
+						JFileChooser filechooser = new JFileChooser();
+						filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+						filechooser.setCurrentDirectory(folder);
+						int returnValue = filechooser.showOpenDialog(null);
+						if(returnValue == JFileChooser.APPROVE_OPTION) {
+							package_com_whatever=filechooser.getSelectedFile().getAbsolutePath();
+							package_com_whatever= package_com_whatever.replace(folder.getAbsolutePath(),"");	
+							JOptionPane.showMessageDialog(null,package_com_whatever);
+							return package_com_whatever;
+						}
+					}										
 				}
 			}				
 		}
