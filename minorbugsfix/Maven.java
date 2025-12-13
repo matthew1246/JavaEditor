@@ -12,6 +12,10 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -65,6 +69,7 @@ public class Maven {
 	public JButton add_dependencyorplugin;	
 	public JButton removedependency;
 	public JButton code;
+	public JButton updatecode;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -92,11 +97,29 @@ public class Maven {
 		code = new JButton("Code");
 		panel.add(code);
 		
+		updatecode=new JButton();
+		panel.add(updatecode);
+				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		updatecode.addActionListener(ev -> {
+			Path sourceDir = Path.of(Main.getDirectory(fileName));
+			Path targetDir = Path.of(Main.getDirectory(getPOMXMLs()));
+			
+			try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir)) {
+				for(Path entry:stream) {
+					if(Files.isRegularFile(entry)) {
+						Files.copy(entry,targetDir.resolve(entry.getFileName()),StandardCopyOption.REPLACE_EXISTING);
+					}
+				}
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		});
 		code.addActionListener((ev) -> {
 			try {
 				String pomxml=getPOMXMLs();
@@ -168,6 +191,7 @@ public class Maven {
 		add_dependencyorplugin.setEnabled(false);
 		removedependency.setEnabled(false);
 		code.setEnabled(false);
+		updatecode.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -178,6 +202,7 @@ public class Maven {
 		add_dependencyorplugin.setEnabled(true);
 		removedependency.setEnabled(true);
 		code.setEnabled(true);
+		updatecode.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
