@@ -48,12 +48,8 @@ public class Maven {
     						if(file.getName().equals("pom.xml")) {
     							return true;
     						}
-    					}
-    					return false;	
+    					}	
     				}
-    				else {
-    					return false;
-    				}										
 		    	}
 		    	return false;
 		}
@@ -189,11 +185,7 @@ public class Maven {
     							return file.getAbsolutePath();
     						}
     					}
-    					return "";
     				}
-    				else {
-    					return "";
-    				}										
 		    	}
 		    	return "";
 		}
