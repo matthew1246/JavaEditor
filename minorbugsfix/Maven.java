@@ -126,7 +126,7 @@ public class Maven {
 			
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir)) {
 				for(Path entry:stream) {
-					if(Files.isRegularFile(entry)) {
+					if(Files.isRegularFile(entry) && entry.toString().endsWith(".java")) {
 						Files.copy(entry,targetDir.resolve(entry.getFileName()),StandardCopyOption.REPLACE_EXISTING);
 					}
 				}
