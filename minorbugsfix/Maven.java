@@ -153,6 +153,7 @@ public class Maven {
 			catch(IOException ex) {
 				ex.printStackTrace();
 			}
+			showNotInitialised();
 		});
 		updatecode.addActionListener(ev -> {
 			Path sourceDir = Path.of(Main.getDirectory(fileName));

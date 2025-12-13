@@ -55,7 +55,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 25884
+    "caretposition": 47661
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -541,7 +541,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 7274
+    "caretposition": 4169
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyManager.java": {
     "startupcombobox": [
