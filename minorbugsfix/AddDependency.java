@@ -106,11 +106,11 @@ public class AddDependency {
 			gridlayout.setRows(gridlayout.getRows()+1);
 			
 			JPanel row = new JPanel();
-			row.add(new JLabel("groupId: "));
+			row.add(new JLabel("groupId:"));
 			row.add(new JLabel(groupId));
-			row.add(new JLabel(" artifactId: "));
+			row.add(new JLabel(" artifactId:"));
 			row.add(new JLabel(artifactId+ " "));
-			row.add(new JLabel("version: "));
+			row.add(new JLabel("version:"));
 			row.add(new JLabel(version));
 			
 			rows.add(row);
