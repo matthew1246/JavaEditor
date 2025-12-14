@@ -40,6 +40,13 @@ public class AddDependency {
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		showMore.addActionListener((ev) -> {
+			gridlayout.removeLayoutComponent(showMoreRow);
+			gridlayout.setRows(gridlayout.getRows()-1);
+			frame.validate();
+			frame.pack();
+			frame.repaint();
+		});
 		search.addActionListener( (ev) -> {
 			Thread thread = new Thread(() -> {
 				String input = textfield.getText();
@@ -70,6 +77,8 @@ public class AddDependency {
 			return "IOException occured.";
 		}
 	}
+	public JPanel showMoreRow;
+	public JButton showMore = new JButton("Show More");;
 	public void Parse(String responseJson) {
 		//System.out.println(responseJson);
 		
@@ -113,6 +122,8 @@ public class AddDependency {
 			row.add(new JLabel("version:"));
 			row.add(new JLabel(version));
 			
+			
+			
 			rows.add(row);
 			frame.validate();
 			frame.pack();
@@ -131,9 +142,11 @@ public class AddDependency {
 			else {
 				System.out.println("Is a dependency");
 			}
-			
 			System.out.println();
 			*/	
+			frame.validate();
+			frame.pack();
+			frame.repaint();
 		}
 	}
 	public void GetAll(String query) {
