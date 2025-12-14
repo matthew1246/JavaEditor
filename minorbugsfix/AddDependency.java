@@ -14,12 +14,13 @@ public class AddDependency {
 		setLayout();
 		setListeners();
 	}
+	public JFrame frame;
 	public GridLayout gridlayout;
 	public JTextField textfield;
 	public JPanel rows;
 	public JButton search;
 	public void setLayout() {
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		
 		gridlayout = new GridLayout(1,1);
 		rows = new JPanel(gridlayout);
@@ -77,7 +78,7 @@ public class AddDependency {
 		
 		JsonObject response=jsonObject.getAsJsonObject("response");
 		
-		int totalnumber=response.get("numFound").getAsInt();
+		//int totalnumber=response.get("numFound").getAsInt();
 		//System.out.println("Total number of search results is: "+totalnumber);
 		
 		//System.out.println();
@@ -101,6 +102,19 @@ public class AddDependency {
 			//System.out.println("groupId: "+groupId+" artifactId: "+artifactId+" version: "+version);
 			gridlayout.setRows(gridlayout.getRows()+1);
 			
+			JPanel row = new JPanel();
+			row.add(new JLabel("groupId: "));
+			row.add(new JLabel(groupId));
+			row.add(new JLabel(" artifactId: "));
+			row.add(new JLabel(artifactId+ " "));
+			row.add(new JLabel("version: "));
+			row.add(new JLabel(version));
+			
+			rows.add(row);
+			frame.validate();
+			frame.repaint();
+			
+			/*
 			System.out.println();
 			
 			String pluginordependency= "jar";
@@ -114,7 +128,8 @@ public class AddDependency {
 				System.out.println("Is a dependency");
 			}
 			
-			System.out.println();	
+			System.out.println();
+			*/	
 		}
 	}
 	public void GetAll(String query) {
