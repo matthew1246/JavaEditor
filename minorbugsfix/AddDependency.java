@@ -39,8 +39,22 @@ public class AddDependency {
 		frame.pack();
 		frame.setVisible(true);
 	}
+	private JButton showAllButton = new JButton("Show All");
 	private int showMoreIndex = 5;
 	public void setListeners() {
+		showAllButton.addActionListener( (ev) -> {
+			Thread thread = new Thread( () -> {
+				rows.remove(showMoreRow);
+				gridlayout.setRows(gridlayout.getRows()-1);
+				frame.validate();
+				frame.pack();
+				frame.repaint();
+				
+				String input = textfield.getText();
+				GetAll(input);
+			});
+			thread.start();
+		});
 		showMore.addActionListener((ev) -> {
 			Thread thread = new Thread( () -> {
 				rows.remove(showMoreRow);
@@ -160,6 +174,7 @@ public class AddDependency {
 		
 		showMoreRow = new JPanel();
 		showMoreRow.add(showMore);
+		showMoreRow.add(showAllButton);
 		rows.add(showMoreRow);
 		
 		frame.validate();
@@ -168,9 +183,10 @@ public class AddDependency {
 	}
 	public void GetAll(String query) {
 		int totalnumber=GetHowMany(query);
-		System.out.println("total number is: "+totalnumber);
+		//System.out.println("total number is: "+totalnumber);
 	
-		for(int i = 0; i < totalnumber; i+=20) {
+		int i = showMoreIndex;	
+		for(; i < totalnumber; i+=20) {
 			Parse(Search(20,query,i));
 		}
 	}
