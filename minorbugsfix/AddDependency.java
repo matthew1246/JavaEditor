@@ -78,6 +78,9 @@ public class AddDependency {
 				String input = textfield.getText();
 				String responseJson=Search(5,input);
 				Parse(responseJson);
+				JOptionPane.showMessageDialog(null,frame.getWidth()+" "+frame.getHeight());
+				
+				
 			});
 			thread.start();
 		});		
