@@ -181,6 +181,9 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		add_dependency.addActionListener((ev) -> {
+			AddDependency add_dependency = new AddDependency();
+		});
 		deletecode.addActionListener((ev) -> {
 			String pomxml=getPOMXMLs();
 			String dir=Main.getDirectory(pomxml);
