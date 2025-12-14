@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
+import java.awt.event.ActionListener;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -39,9 +40,12 @@ public class AddDependency {
 		frame.pack();
 		frame.setVisible(true);
 	}
+	private ActionListener Add_Dependency_ActionListener;
 	private JButton showAllButton = new JButton("Show All");
 	private int showMoreIndex = 5;
 	public void setListeners() {
+		Add_Dependency_ActionListener = (ev) -> {
+		};
 		showAllButton.addActionListener( (ev) -> {
 			Thread thread = new Thread( () -> {
 				rows.remove(showMoreRow);
@@ -155,6 +159,9 @@ public class AddDependency {
 			row.add(new JLabel(artifactId+ " "));
 			row.add(new JLabel("version:"));
 			row.add(new JLabel(version));
+			JButton Add_Dependency_Button = new JButton("Add Dependency");
+			Add_Dependency_Button.addActionListener(Add_Dependency_ActionListener);
+			row.add(Add_Dependency_Button);
 			
 			/*
 			System.out.println();
