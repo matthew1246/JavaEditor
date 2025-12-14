@@ -112,6 +112,7 @@ public class AddDependency {
 			
 			rows.add(row);
 			frame.validate();
+			frame.pack();
 			frame.repaint();
 			
 			/*
