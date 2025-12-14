@@ -39,6 +39,7 @@ public class AddDependency {
 		frame.pack();
 		frame.setVisible(true);
 	}
+	private int showMoreIndex = 5;
 	public void setListeners() {
 		showMore.addActionListener((ev) -> {
 			Thread thread = new Thread( () -> {
@@ -49,7 +50,8 @@ public class AddDependency {
 				frame.repaint();
 				
 				String input = textfield.getText();
-				String responseJson=Search(5,input,5);
+				String responseJson=Search(5,input,showMoreIndex);
+				showMoreIndex+=5;
 				Parse(responseJson);
 				frame.validate();
 				frame.pack();
