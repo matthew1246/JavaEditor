@@ -9,6 +9,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,47 +41,61 @@ public class DependencyRemover {
 		try {
 			String pomxml=Main.getDirectory(fileName)+"pom.xml";
 			
-			DocumentBuilder builder=DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+			factory.setNamespaceAware(true);
+			
+			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc=builder.parse(new File(pomxml));
 			doc.getDocumentElement().normalize();
 			
 			Element root=doc.getDocumentElement();
-			NodeList dependencies = root.getElementsByTagName("dependencies");
-			if(dependencies.getLength() < 1)
-				return;	
-			for(int j = 0; j < dependencies.getLength(); j++) {
-				NodeList nodelist=((Element)dependencies.item(j)).getElementsByTagName("dependency");
-				for(int i = 0; i < nodelist.getLength(); i++) {
-					gridlayout.setRows(gridlayout.getRows()+1);
-					JPanel row = new JPanel();
-					
-					Element element=(Element)nodelist.item(i);
-					String groupId=element.getElementsByTagName("groupId").item(0).getTextContent();						row.add(new JLabel(groupId));
-						
-					String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();						row.add(new JLabel(artifactId));
-					
-					/*String version=element.getElementsByTagName("version").item(0).getTextContent();	
-					row.add(new JLabel(version));
-					
-					System.out.print(groupId+" "+artifactId+" "+scope);
-					*/
-					
-					
-					NodeList scope=element.getElementsByTagName("scope");
-					if(scope.getLength() > 0) {
-						System.out.print(" "+scope.item(0).getTextContent());
-						row.add(new JLabel(scope.item(0).getTextContent()));
-					}		
-					
-					rows.add(row);
-					rows.validate();
-					rows.repaint();											
-					System.out.println();
-				}
-			}
-			System.out.println();
 			
+			Element dependencies = null;
+			NodeList secondlevel = root.getChildNodes();
+			for(int i = 0; i < secondlevel.getLength(); i++) {
+				Node secondnode=(Node)secondlevel.item(i);
+				if(secondnode.getNodeType() == Node.ELEMENT_NODE) {
+					if(secondnode.getLocalName().equals("dependencies")) {
+						dependencies=(Element)secondnode;
+						break;
+					}
+				}
+			}
+			if(dependencies == null)
+				return;	
+			NodeList nodelist=dependencies.getElementsByTagName("dependency");
+			for(int i = 0; i < nodelist.getLength(); i++) {
+				gridlayout.setRows(gridlayout.getRows()+1);
+				JPanel row = new JPanel();
+				
+				Element element=(Element)nodelist.item(i);
+				String groupId=element.getElementsByTagName("groupId").item(0).getTextContent();						row.add(new JLabel(groupId));
+					
+				String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();						row.add(new JLabel(artifactId));
+				
+				/*String version=element.getElementsByTagName("version").item(0).getTextContent();	
+				row.add(new JLabel(version));
+				
+				System.out.print(groupId+" "+artifactId+" "+scope);
+				*/
+				
+				
+				NodeList scope=element.getElementsByTagName("scope");
+				if(scope.getLength() > 0) {
+					// System.out.print(" "+scope.item(0).getTextContent());
+					row.add(new JLabel(scope.item(0).getTextContent()));
+				}		
+				
+				rows.add(row);
+				rows.validate();
+				rows.repaint();											
+				// System.out.println();
+			}
+			// System.out.println();
+			
+			frame.validate();
 			frame.pack();
+			frame.repaint();
 		} catch (SAXException ex) {
 			ex.printStackTrace();
 		} catch(ParserConfigurationException ex) {
