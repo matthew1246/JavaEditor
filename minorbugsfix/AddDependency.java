@@ -6,6 +6,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
 import java.awt.event.ActionListener;
+import java.awt.Component;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -45,6 +46,15 @@ public class AddDependency {
 	private int showMoreIndex = 5;
 	public void setListeners() {
 		Add_Dependency_ActionListener = (ev) -> {
+			JButton Add_button=(JButton)ev.getSource();
+			
+			JPanel row=(JPanel)Add_button.getParent();
+			Component[] components=row.getComponents();
+			String groupId=((JLabel)components[1]).getText().trim();
+			String artifactId = ((JLabel)components[3]).getText().trim();
+			String version = ((JLabel)components[5]).getText().trim();
+			
+			JOptionPane.showMessageDialog(null,groupId+" "+artifactId+" "+version);
 		};
 		showAllButton.addActionListener( (ev) -> {
 			Thread thread = new Thread( () -> {
