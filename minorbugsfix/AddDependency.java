@@ -41,8 +41,8 @@ public class AddDependency {
 	}
 	public void setListeners() {
 		showMore.addActionListener((ev) -> {
-			gridlayout.removeLayoutComponent(showMoreRow);
 			gridlayout.setRows(gridlayout.getRows()-1);
+			gridlayout.removeLayoutComponent(showMoreRow);
 			frame.validate();
 			frame.pack();
 			frame.repaint();
