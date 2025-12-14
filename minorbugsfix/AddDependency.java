@@ -41,11 +41,21 @@ public class AddDependency {
 	}
 	public void setListeners() {
 		showMore.addActionListener((ev) -> {
-			rows.remove(showMoreRow);
-			gridlayout.setRows(gridlayout.getRows()-1);
-			frame.validate();
-			frame.pack();
-			frame.repaint();
+			Thread thread = new Thread( () -> {
+				rows.remove(showMoreRow);
+				gridlayout.setRows(gridlayout.getRows()-1);
+				frame.validate();
+				frame.pack();
+				frame.repaint();
+				
+				String input = textfield.getText();
+				String responseJson=Search(5,input,5);
+				Parse(responseJson);
+				frame.validate();
+				frame.pack();
+				frame.repaint();
+			});
+			thread.start();
 		});
 		search.addActionListener( (ev) -> {
 			Thread thread = new Thread(() -> {
