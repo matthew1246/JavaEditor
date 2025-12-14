@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 public class AddDependency {
 	public AddDependency() {
 		setLayout();
@@ -7,15 +9,20 @@ public class AddDependency {
 	public JButton search;
 	public void setLayout() {
 		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
 		
-		JTextField textfield = new JTextField();
-		panel.add(textfield);
+		JPanel rows = new JPanel(new GridLayout(1,1));
+		JPanel row = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
-		search = new JButton();
-		panel.add(search);
+		JTextField textfield = new JTextField(15);
+		row.add(textfield);
 		
-		frame.add(panel);
+		search = new JButton("Search");
+		row.add(search);
+		
+		rows.add(row);
+		frame.add(rows);
+		
+		frame.pack();
 		frame.setVisible(true);
 	}
 	public void setListeners() {

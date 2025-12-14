@@ -640,12 +640,12 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java": {
     "startupcombobox": [
-      "Main",
-      "AddDependency"
+      "AddDependency",
+      "Main"
     ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 394
+    "caretposition": 123
   }
 }
