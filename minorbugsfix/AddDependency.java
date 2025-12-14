@@ -57,11 +57,9 @@ public class AddDependency {
 				frame.validate();
 				frame.pack();
 				frame.repaint();
-				 
-				/*				
+				 			
 				String input = textfield.getText();
 				GetAll(input);
-				*/
 			});
 			thread.start();
 		});
