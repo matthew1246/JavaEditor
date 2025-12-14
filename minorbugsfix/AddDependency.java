@@ -6,26 +6,32 @@ public class AddDependency {
 		setLayout();
 		setListeners();
 	}
+	public JTextField textfield;
+	public JPanel rows;
 	public JButton search;
 	public void setLayout() {
 		JFrame frame = new JFrame();
 		
-		JPanel rows = new JPanel(new GridLayout(1,1));
+		rows = new JPanel(new GridLayout(1,1));
 		JPanel row = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
-		JTextField textfield = new JTextField(15);
+		textfield = new JTextField(15);
 		row.add(textfield);
 		
 		search = new JButton("Search");
 		row.add(search);
 		
 		rows.add(row);
+		
 		frame.add(rows);
 		
 		frame.pack();
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		search.addActionListener( (ev) -> {
+			String input = textfield.getText();
 			
+		});		
 	}
 }
