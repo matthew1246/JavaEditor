@@ -50,8 +50,18 @@ public class AddDependency {
 				frame.pack();
 				frame.repaint();
 				
+				frame.remove(rows);
+				JScrollPane jscrollpane = new JScrollPane(rows);
+				jscrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				frame.add(jscrollpane);
+				frame.validate();
+				frame.pack();
+				frame.repaint();
+				 
+				/*				
 				String input = textfield.getText();
 				GetAll(input);
+				*/
 			});
 			thread.start();
 		});
@@ -78,9 +88,6 @@ public class AddDependency {
 				String input = textfield.getText();
 				String responseJson=Search(5,input);
 				Parse(responseJson);
-				JOptionPane.showMessageDialog(null,frame.getWidth()+" "+frame.getHeight());
-				
-				
 			});
 			thread.start();
 		});		
