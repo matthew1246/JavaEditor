@@ -41,9 +41,12 @@ public class AddDependency {
 	}
 	public void setListeners() {
 		search.addActionListener( (ev) -> {
-			String input = textfield.getText();
-			String responseJson=Search(5,input);
-			Parse(responseJson);
+			Thread thread = new Thread(() -> {
+				String input = textfield.getText();
+				String responseJson=Search(5,input);
+				Parse(responseJson);
+			});
+			thread.start();
 		});		
 	}
 	public OkHttpClient client = new OkHttpClient();

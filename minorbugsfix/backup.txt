@@ -643,7 +643,7 @@
       "AddDependency",
       "Main"
     ],
-    "starterclass": "",
+    "starterclass": "AddDependency",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
@@ -651,6 +651,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 3555
+    "caretposition": 1163
   }
 }
