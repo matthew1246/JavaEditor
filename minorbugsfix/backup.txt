@@ -19,7 +19,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java"
     ],
     "caretposition": 0
   },
@@ -498,6 +499,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java": {
     "startupcombobox": [
+      "DependencyRemover",
       "GetClassMethods"
     ],
     "starterclass": "",
@@ -565,7 +567,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 2382
+    "caretposition": 2360
   },
   "C:\\Users\\Owner\\Documents\\pomgenerator\\Main.java": {
     "startupcombobox": [

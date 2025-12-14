@@ -45,32 +45,39 @@ public class DependencyRemover {
 			doc.getDocumentElement().normalize();
 			
 			Element root=doc.getDocumentElement();
-			NodeList nodelist=root.getElementsByTagName("dependency");
-			for(int i = 0; i < nodelist.getLength(); i++) {
-				gridlayout.setRows(gridlayout.getRows()+1);
-				JPanel row = new JPanel();
-				
-				Element element=(Element)nodelist.item(i);
-				String groupId=element.getElementsByTagName("groupId").item(0).getTextContent();						row.add(new JLabel(groupId));
+			NodeList dependencies = root.getElementsByTagName("dependencies");
+			if(dependencies.getLength() < 1)
+				return;	
+			for(int j = 0; j < dependencies.getLength(); j++) {
+				NodeList nodelist=((Element)dependencies.item(j)).getElementsByTagName("dependency");
+				for(int i = 0; i < nodelist.getLength(); i++) {
+					gridlayout.setRows(gridlayout.getRows()+1);
+					JPanel row = new JPanel();
 					
-				String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();						row.add(new JLabel(artifactId));
-				
-				String version=element.getElementsByTagName("version").item(0).getTextContent();	
-				row.add(new JLabel(version));
-				
-				System.out.print(groupId+" "+artifactId+" "+version);
-				
-				
-NodeList scope=element.getElementsByTagName("scope");
-				if(scope.getLength() > 0) {
-					System.out.print(" "+scope.item(0).getTextContent());
-					row.add(new JLabel(scope.item(0).getTextContent()));
-				}		
-				
-				rows.add(row);
-				rows.validate();
-				rows.repaint();											System.out.println();
-			}
+					Element element=(Element)nodelist.item(i);
+					String groupId=element.getElementsByTagName("groupId").item(0).getTextContent();						row.add(new JLabel(groupId));
+						
+					String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();						row.add(new JLabel(artifactId));
+					
+					/*String version=element.getElementsByTagName("version").item(0).getTextContent();	
+					row.add(new JLabel(version));
+					
+					System.out.print(groupId+" "+artifactId+" "+scope);
+					*/
+					
+					
+					NodeList scope=element.getElementsByTagName("scope");
+					if(scope.getLength() > 0) {
+						System.out.print(" "+scope.item(0).getTextContent());
+						row.add(new JLabel(scope.item(0).getTextContent()));
+					}		
+					
+					rows.add(row);
+					rows.validate();
+					rows.repaint();											
+					System.out.println();
+				}
+			}
 			System.out.println();
 			
 			frame.pack();
