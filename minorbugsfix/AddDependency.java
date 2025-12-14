@@ -122,13 +122,6 @@ public class AddDependency {
 			row.add(new JLabel("version:"));
 			row.add(new JLabel(version));
 			
-			
-			
-			rows.add(row);
-			frame.validate();
-			frame.pack();
-			frame.repaint();
-			
 			/*
 			System.out.println();
 			
@@ -144,10 +137,22 @@ public class AddDependency {
 			}
 			System.out.println();
 			*/	
+			
+			rows.add(row);
 			frame.validate();
 			frame.pack();
 			frame.repaint();
 		}
+		
+		gridlayout.setRows(gridlayout.getRows()+1);
+		
+		showMoreRow = new JPanel();
+		showMoreRow.add(showMore);
+		rows.add(showMoreRow);
+		
+		frame.validate();
+		frame.pack();
+		frame.repaint();
 	}
 	public void GetAll(String query) {
 		int totalnumber=GetHowMany(query);
