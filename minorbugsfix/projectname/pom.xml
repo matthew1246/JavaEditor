@@ -44,7 +44,7 @@
     </dependency>
     <dependency>
     	<groupId>com.permuc</groupId>
-	<artifcactId>mucky-jar</artifactId>
+	<artifactId>mucky-jar</artifactId>
 	<version>1.0.0</version>
 	<scope>system</scope>
 	<systemPath>${project.basedir}/lib/Muck.jar</systemPath>
