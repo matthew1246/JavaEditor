@@ -69,8 +69,10 @@ public class DependencyRemover {
 				JPanel row = new JPanel();
 				
 				Element element=(Element)nodelist.item(i);
+				row.add(new JLabel("groupId:"));
 				String groupId=element.getElementsByTagName("groupId").item(0).getTextContent();						row.add(new JLabel(groupId));
 					
+				row.add(new JLabel("artifactId:"));
 				String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();						row.add(new JLabel(artifactId));
 				
 				/*String version=element.getElementsByTagName("version").item(0).getTextContent();	
@@ -83,6 +85,7 @@ public class DependencyRemover {
 				NodeList scope=element.getElementsByTagName("scope");
 				if(scope.getLength() > 0) {
 					// System.out.print(" "+scope.item(0).getTextContent());
+					row.add(new JLabel("scope:"));
 					row.add(new JLabel(scope.item(0).getTextContent()));
 				}		
 				
