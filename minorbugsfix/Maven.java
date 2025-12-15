@@ -182,7 +182,7 @@ public class Maven {
 				
 	public void setListeners() {
 		add_dependency.addActionListener((ev) -> {
-			AddDependency add_dependency = new AddDependency();
+			AddDependency add_dependency = new AddDependency(this);
 		});
 		deletecode.addActionListener((ev) -> {
 			String pomxml=getPOMXMLs();

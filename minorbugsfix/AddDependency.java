@@ -7,12 +7,28 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.Component;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.OutputKeys;
+import java.io.File;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonArray;
 public class AddDependency {
-	public AddDependency() {
+	public Maven maven;	
+	public AddDependency(Maven maven) {
+		this.maven = maven;
 		setLayout();
 		setListeners();
 	}
@@ -55,6 +71,11 @@ public class AddDependency {
 			String version = ((JLabel)components[5]).getText().trim();
 			
 			JOptionPane.showMessageDialog(null,groupId+" "+artifactId+" "+version);
+			try {
+				addDependency(groupId,artifactId,version);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		};
 		showAllButton.addActionListener( (ev) -> {
 			Thread thread = new Thread( () -> {
@@ -104,10 +125,80 @@ public class AddDependency {
 			thread.start();
 		});		
 	}
+	public void addDependency(String groupId,String artifactId,String version) throws Exception {
+		File pomFile=new File(maven.getPOMXMLs());
+		
+		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document doc=builder.parse(pomFile);
+		doc.getDocumentElement().normalize();
+		
+		Element root=doc.getDocumentElement();
+		
+		Element dependencies = null;
+		NodeList secondlevel = root.getChildNodes();
+		for(int i = 0; i < secondlevel.getLength(); i++) {
+			Node secondnode=(Node)secondlevel.item(i);
+			if(secondnode.getNodeType() == Node.ELEMENT_NODE) {
+				if(secondnode.getLocalName().equals("dependencies")) {
+					dependencies=(Element)secondnode;
+					break;
+				}
+			}
+		}
+		if(dependencies == null) {
+			dependencies = doc.createElement("dependencies");
+			doc.getDocumentElement().appendChild(dependencies);
+		}
+		String indent = "\n    ";
+		String indent2 = "\n        ";			
+		dependencies.appendChild(doc.createTextNode(indent));
+			
+		Element dependency = doc.createElement("dependency");
+		dependencies.appendChild(dependency);
+		dependency.appendChild(doc.createTextNode(indent2));
+		
+		Element groupIdElement=doc.createElement("groupId");
+		groupIdElement.appendChild(doc.createTextNode(groupId));
+		dependency.appendChild(groupIdElement);
+		
+		Element artifactIdElement=doc.createElement("artifactId");
+		artifactIdElement.appendChild(doc.createTextNode(artifactId));
+		dependency.appendChild(artifactIdElement);
+		
+		Element versionElement=doc.createElement("version");
+		versionElement.appendChild(doc.createTextNode(version));
+		dependency.appendChild(versionElement);
+		
+		writeBack(doc, pomFile);
+	}
+
+    private static String getChildText(Element parent, String tag) {
+        NodeList nodes = parent.getElementsByTagName(tag);
+        if (nodes.getLength() == 0) return null;
+        return nodes.item(0).getTextContent().trim();
+    }
+
+    private static void writeBack(Document doc, File file) throws Exception {
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer transformer = tf.newTransformer();
+        //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,"no");
+        
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount","4");
+
+        doc.setXmlStandalone(true);
+        transformer.transform(
+                new DOMSource(doc),
+                new StreamResult(file)
+        );
+    }
 	public OkHttpClient client = new OkHttpClient();
 	public String Search(int how_many,String query) {
 		return Search(how_many,query,0);
-	}	
+	}
 	public String Search(int how_many,String query,int start_index) {
 		int rows = how_many;
 		String input = query;

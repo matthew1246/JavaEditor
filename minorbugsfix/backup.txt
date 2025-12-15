@@ -8,7 +8,7 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -19,8 +19,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java"
     ],
     "caretposition": 0
   },
@@ -56,7 +55,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 46660
+    "caretposition": 47026
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -543,7 +542,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 5538
+    "caretposition": 5536
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyManager.java": {
     "startupcombobox": [
@@ -653,6 +652,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 1520
+    "caretposition": 5759
   }
 }
