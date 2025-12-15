@@ -11,11 +11,15 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
+import javax.swing.JOptionPane;
+import java.awt.Component;
+import javax.swing.JButton;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
 /*
 ** This class shows all dependencies inside pom.xml
 ** This class also allows you to add and remove Dependencies.
@@ -25,6 +29,8 @@ public class DependencyRemover {
 	public DependencyRemover(String fileName) {
 		this.fileName= fileName;
 		setLayout();
+		setListeners();
+		showDependencies();
 	}
 	public JFrame frame;
 	public JPanel rows;
@@ -35,7 +41,27 @@ public class DependencyRemover {
 		rows = new JPanel(gridlayout);
 		frame.add(rows);
 		frame.setVisible(true);
-		showDependencies();
+	}
+	ActionListener add_dependency_listener;
+	public void setListeners() {
+		add_dependency_listener = (ev) -> {
+			JButton add_dependency_btn=(JButton)ev.getSource();
+			JPanel row = (JPanel)add_dependency_btn.getParent();
+			Component[] components = row.getComponents();
+			String groupId=((JLabel)components[1]).getText();
+			String artifactId=((JLabel)components[3]).getText();
+			
+			if(isJLabel(components[5])) {
+				String scope = ((JLabel)components[5]).getText();
+				JOptionPane.showMessageDialog(null,groupId+" "+artifactId+" "+scope);
+			}
+			else {
+				JOptionPane.showMessageDialog(null,groupId+" "+artifactId);
+			}
+		};
+	}
+	public boolean isJLabel(Component component) {
+		return component instanceof JLabel;
 	}
 	public void showDependencies() {
 		try {
@@ -88,6 +114,9 @@ public class DependencyRemover {
 					row.add(new JLabel("scope:"));
 					row.add(new JLabel(scope.item(0).getTextContent()));
 				}		
+				JButton add_dependency_btn = new JButton("Add Dependency");			
+				add_dependency_btn.addActionListener(add_dependency_listener);
+				row.add(add_dependency_btn);
 				
 				rows.add(row);
 				rows.validate();
