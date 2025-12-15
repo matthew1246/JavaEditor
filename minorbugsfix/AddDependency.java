@@ -161,19 +161,19 @@ public class AddDependency {
 		dependency.appendChild(doc.createTextNode(indent2));
 		
 		Element groupIdElement=doc.createElement("groupId");
-		groupIdElement.appendChild(doc.createTextNode(groupId));
+		groupIdElement.setTextContent(groupId);
 		dependency.appendChild(groupIdElement);
-		groupIdElement.appendChild(doc.createTextNode(indent2));
+		dependency.appendChild(doc.createTextNode(indent2));
 		
 		Element artifactIdElement=doc.createElement("artifactId");
-		artifactIdElement.appendChild(doc.createTextNode(artifactId));
+		artifactIdElement.setTextContent(artifactId);
 		dependency.appendChild(artifactIdElement);
-		artifactIdElement.appendChild(doc.createTextNode(indent2));
+		dependency.appendChild(doc.createTextNode(indent2));
 		
 		Element versionElement=doc.createElement("version");
-		versionElement.appendChild(doc.createTextNode(version));
+		versionElement.setTextContent(version);
 		dependency.appendChild(versionElement);
-		versionElement.appendChild(doc.createTextNode(indent2));
+		dependency.appendChild(doc.createTextNode(indent));
 		
 		writeBack(doc, pomFile);
 	}
