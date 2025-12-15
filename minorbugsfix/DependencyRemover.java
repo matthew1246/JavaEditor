@@ -180,6 +180,7 @@ public class DependencyRemover {
         Transformer transformer = tf.newTransformer();
         //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
+        doc.setXmlStandalone(true);
         transformer.transform(
                 new DOMSource(doc),
                 new StreamResult(file)
