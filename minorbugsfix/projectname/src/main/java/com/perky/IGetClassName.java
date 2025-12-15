@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.*;
 import java.util.regex.*;
 public class IGetClassName {

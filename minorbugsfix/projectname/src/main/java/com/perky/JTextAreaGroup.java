@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.ArrayList;
 import javax.swing.JTextArea;
 import java.awt.Graphics;
@@ -61,7 +63,8 @@ public class JTextAreaGroup extends JTextArea {
 						}	
 					}																		
 				}
-				else if(group != null) {  // will compress code
+				else if(group != null)
+ {  // will compress code
 					try {
 						String text = getText();
 						String first=text.substring(0,group.start+1);
@@ -258,7 +261,7 @@ public class JTextAreaGroup extends JTextArea {
 						
 					}*/
 				}
-			//}
+			//}
 		}
 	}
 	public String getLine(String text,int caretposition) {

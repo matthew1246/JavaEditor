@@ -1,5 +1,8 @@
+package com.perky;
+
 import java.io.*;
-import javax.swing.JOptionPane;
+
+import javax.swing.JOptionPane;
 public class ClassInFolderClassLoader extends ClassLoader {
 	
 	protected String folder;

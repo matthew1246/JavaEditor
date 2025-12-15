@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 public class RemoveAll {
@@ -136,7 +138,9 @@ public class RemoveAll {
 		catch (StackOverflowError error) {
 			JOptionPane.showMessageDialog(null,"RemoveAll.Strings() error.");
 			error.printStackTrace();
-		}
+		}
+
+
 		return wholetext;
 	}
-}
+}

@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
 import java.util.*;
@@ -113,7 +115,8 @@ class Middle {
 		String prelines=String.join("\n",lines);
 		return prelines.length()+currentlineindex;
 	}
-	/*
+	
+/*
 	** This is opposite of getWholeDocumentIndexFromCurrentLineIndex()
 	*/
 	public int getLineIndexFromWholeDocumentIndex(int wholedocumentindex) {
@@ -205,4 +208,4 @@ class Middle {
 			textarea.setText(first+second);
 		}
 	}		
-}
+}

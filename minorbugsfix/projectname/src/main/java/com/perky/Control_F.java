@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
@@ -355,7 +357,13 @@ public class Control_F {
 										z = 0;
 									}
 									break;
-								}
+								}
+
+
+
+
+
+
 							}
 							if(i == (lines.length-1) )
 								z = 0;
@@ -413,4 +421,4 @@ public class Control_F {
 			}
 		}
 	}
-}
+}

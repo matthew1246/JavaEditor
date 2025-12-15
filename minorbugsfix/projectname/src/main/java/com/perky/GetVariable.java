@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.*;
 import java.util.regex.*;
 public class GetVariable {
@@ -5,7 +7,8 @@ public class GetVariable {
 	public GetVariable(JTextArea textarea) {
 		this.textarea = textarea;
 	}
-	public int start;
+	
+public int start;
 	public String getVariable() {
 		Middle middle = new Middle(textarea);
 		String line = middle.getCurrentWholeLine();

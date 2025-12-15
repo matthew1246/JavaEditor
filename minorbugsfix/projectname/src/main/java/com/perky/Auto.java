@@ -1,3 +1,5 @@
+package com.perky;
+
 public class Auto {
 	private String main;
 	private enum Hello {

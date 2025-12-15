@@ -1,3 +1,5 @@
+package com.perky;
+
 public class MiddleString {
 	private String wholetext;
 	public MiddleString(String wholetext) {

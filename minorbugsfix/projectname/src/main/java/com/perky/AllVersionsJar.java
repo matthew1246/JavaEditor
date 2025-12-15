@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -120,7 +122,7 @@ public class AllVersionsJar {
 			powershell.Compile(i,fileName);
 			powershell.makeJar(i);
 		}
-		powershell.Finish();
+		powershell.Finish();
 		/*
 		try {
 			JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main_class+".jar is already open. Run script to close "+main_class+".jar");

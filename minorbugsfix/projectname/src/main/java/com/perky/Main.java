@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.BoxLayout;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.Timer;
@@ -1115,7 +1117,7 @@ edit.add(functionLines);
 		textarea.requestFocus();
 		textarea.setTabSize(4);
 		
-	}
+	}
 			
 	public void updateMethodComboBox(ItemEvent ie) {
 		final String classname = (String)classnamescombobox.getSelectedItem();						
@@ -2130,7 +2132,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				panel0.validate();
 				panel0.repaint();
 		
-				JCheckBox searchall = new JCheckBox("all");
+				JCheckBox searchall = new JCheckBox("all");
 				searchall.setMargin(new Insets(0,0,0,0));
 				panel0.add(searchall);
 				
@@ -2931,7 +2933,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				threecomboboxes.load(fileName);
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
-				}*/
+				}*/
 				
 				this.fileName=fileName;
 					
@@ -5137,4 +5139,4 @@ class RightClickJFrame {
 			ex.printStackTrace();
 		}
 	}
-}
+}

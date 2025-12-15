@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -106,7 +108,8 @@ public class DependencyRemover {
 				String groupId=element.getElementsByTagName("groupId").item(0).getTextContent();						row.add(new JLabel(groupId));
 					
 				row.add(new JLabel("artifactId:"));
-				String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();						row.add(new JLabel(artifactId));
+				String artifactId=element.getElementsByTagName("artifactId").item(0).getTextContent();				
+		row.add(new JLabel(artifactId));
 				
 				/*String version=element.getElementsByTagName("version").item(0).getTextContent();	
 				row.add(new JLabel(version));

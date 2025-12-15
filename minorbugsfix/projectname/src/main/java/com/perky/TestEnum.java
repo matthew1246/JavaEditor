@@ -1,3 +1,5 @@
+package com.perky;
+
 public class TestEnum {
 	private enum Size {
 		small,medium,large

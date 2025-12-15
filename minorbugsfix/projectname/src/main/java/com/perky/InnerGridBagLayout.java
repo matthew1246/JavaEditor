@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.awt.GridBagLayout;
 import java.awt.Container;
 import java.util.ArrayList;
@@ -22,7 +24,8 @@ public class InnerGridBagLayout extends JMenuBar {
 	}
 	public void Sort() {
 		List<ComponentGridBagConstraints> components2 = clone();
-		LiveIterator<ComponentGridBagConstraints> liveiterator = new LiveIterator<ComponentGridBagConstraints>(components2);
+		
+LiveIterator<ComponentGridBagConstraints> liveiterator = new LiveIterator<ComponentGridBagConstraints>(components2);
 		while(liveiterator.hasNext()) {
 			ComponentGridBagConstraints componentgbc= liveiterator.next();
 			liveiterator.remove(componentgbc);
@@ -37,7 +40,257 @@ public class InnerGridBagLayout extends JMenuBar {
 				}
 			}
 		}
-	}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public boolean Compare(LiveIterator<ComponentGridBagConstraints> liveiterator,ComponentGridBagConstraints componentgbc,ComponentGridBagConstraints componentgbc2,List<ComponentGridBagConstraints> components2) {
 		boolean didcompare = false;
 		if(componentgbc.gbc.gridwidth < componentgbc2.gbc.gridwidth) {

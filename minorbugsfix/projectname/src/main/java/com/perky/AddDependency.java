@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.*;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -123,7 +125,8 @@ public class AddDependency {
 				Parse(responseJson);
 			});
 			thread.start();
-		});		
+		});	
+	
 	}
 	public void addDependency(String groupId,String artifactId,String version) throws Exception {
 		File pomFile=new File(maven.getPOMXMLs());

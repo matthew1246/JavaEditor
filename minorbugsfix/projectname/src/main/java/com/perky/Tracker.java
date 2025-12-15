@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.JTextArea;
 public class Tracker {
 	public boolean isDeleted = false;
@@ -40,7 +42,8 @@ public class Tracker {
 	}
 	
 	public boolean isVariableStillSelected() {
-		if(hasFinished || start == -1) {
+		if(hasFinished || start == -1)
+ {
 			return false;
 		}
 		int cursor = main.textarea.getCaretPosition();

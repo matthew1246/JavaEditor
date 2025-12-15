@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.io.*;
 import javax.swing.JOptionPane;
 public class DisplayOutput {
@@ -51,7 +53,8 @@ public class DisplayOutput {
 		}
 	}
 	public String OneLine(Process process) {
-		try {
+		
+try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String line = input.readLine();
 			if(line == null) 

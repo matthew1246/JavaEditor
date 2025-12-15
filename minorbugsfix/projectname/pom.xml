@@ -42,13 +42,7 @@
         <artifactId>okhttp</artifactId>
         <version>3.14.9</version>
     </dependency>
-    <dependency>
-    	<groupId>com.permuc</groupId>
-	<artifactId>mucky-jar</artifactId>
-	<version>1.0.0</version>
-	<scope>system</scope>
-	<systemPath>${project.basedir}/lib/Muck.jar</systemPath>
-     </dependency>
+    
   </dependencies>
 
   <build>

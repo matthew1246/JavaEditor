@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.*;
 import java.io.*;
 public class FileListModifier implements Cloneable {
@@ -12,7 +14,8 @@ public class FileListModifier implements Cloneable {
     public FileListModifier(String fileName) {
     	fillList(fileName);
     }
-    public FileListModifier() {
+    
+public FileListModifier() {
     }
     
     public boolean isEmpty() {
@@ -56,7 +59,8 @@ public class FileListModifier implements Cloneable {
 	
 	public void fillList(String filenameanddirectory) {
 		directoryandfilename = filenameanddirectory;
-		if(!filenameanddirectory.equals("")) {
+		
+if(!filenameanddirectory.equals("")) {
 			String current_editorfilename =filenameanddirectory.replaceAll(".+\\\\","");		
 			File currentdirectory = new File(filenameanddirectory.replaceAll("[^\\\\]+\\.java",""));
 			

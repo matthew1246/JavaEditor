@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.EmptyStackException;
 import javax.swing.JOptionPane;
 import java.util.List;
@@ -52,7 +54,7 @@ public class ThreeComboboxes {
 		else if(fileName.equals("")) { // Blank JTextArea
 			filelistmodifier = null;
 			RemoveAll();	
-		}
+		}
 		this.fileName = fileName;
 	}
 	public void FromScratch(String fileName) {
@@ -152,7 +154,8 @@ public class ThreeComboboxes {
 	}
 	public void Select(String fileName,String mainclass) {
 		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
-		main.classnamescombobox.setSelectedItem(mainclass);
+		main.classnamescombobox.setSelectedItem(
+mainclass);
 		main.combobox.setSelectedItem(0);
 	}
 	public void RemoveAll() {
@@ -175,4 +178,4 @@ public class ThreeComboboxes {
 			main.combobox.removeAllItems();
 		}
 	}
-}
+}

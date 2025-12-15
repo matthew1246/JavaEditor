@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.*;
 import java.util.regex.*;
 class Content {
@@ -29,9 +31,11 @@ class Content {
 		
 	public void NewLineCharacter() {
 		Middle middle = new Middle(textArea);
-		String line =middle.getWholePreviousLine();	
+		String line =middle.getWholePreviousLine();
+	
 		//JOptionPane.showMessageDialog(null,"*"+line+"*");
-		String pretabs = PreTabs(line);		
+		String pretabs = PreTabs(line);
+		
 		middle.addMiddle(pretabs);		
 	}
 	public void Semicolon() {

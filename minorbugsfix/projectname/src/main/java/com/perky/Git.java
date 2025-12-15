@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
@@ -416,4 +418,4 @@ public JButton everythingbutthekitchensink;
 		substring=substring.trim();
 		return substring;
 	}
-}
+}

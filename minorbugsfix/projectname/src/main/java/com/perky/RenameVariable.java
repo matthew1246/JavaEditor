@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.JTextArea;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
@@ -96,7 +98,7 @@ public class RenameVariable {
 			else {
 				startTracking = false;
 			}    
-		}
+		}
 		else {
 			startTracking= false;
 		}
@@ -123,4 +125,4 @@ public class RenameVariable {
 		System.out.println("*"+uptoline+"*");
 		return uptoline.length();
 	}*/
-}
+}

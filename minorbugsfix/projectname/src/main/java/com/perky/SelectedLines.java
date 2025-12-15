@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
 public class SelectedLines {
@@ -10,8 +12,10 @@ public class SelectedLines {
     public void ShiftTab() {
 	  	start=main.textarea.getSelectionStart();
 		end= main.textarea.getSelectionEnd();
-	  	// javax.swing.JOptionPane.showMessageDialog(selected,"shifttab");
-		  String wholetext = main.textarea.getText();		  
+	
+  	// javax.swing.JOptionPane.showMessageDialog(selected,"shifttab");
+		  String wholetext = main.textarea.getText();
+		  
 	  
 	  
 		  
@@ -109,5 +113,6 @@ public class SelectedLines {
 	  	main.textarea.setSelectionEnd(start+1);
   	}
   }
-}
+
+}
 						

@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.*;
 import java.awt.event.*;
 public class MSDOS {
@@ -31,7 +33,8 @@ public class MSDOS {
 	}
 	public void setListeners() {
 		ActionListener actionlistener = new ActionListener() {
-			public void actionPerformed(ActionEvent ev) {
+			public void actionPerformed
+(ActionEvent ev) {
 				CommandLine commandline = new CommandLine();
 				String dir=filename.replaceAll("[^\\\\]+\\.java","");
 				commandline.runWithMSDOS(input.getText(),dir);

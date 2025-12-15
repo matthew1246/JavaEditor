@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.*;
 public class LinkedHashMapInterface<K,V> {
 	public LinkedHashMap<K, V> linkedhashmap;
@@ -32,7 +34,8 @@ public class LinkedHashMapInterface<K,V> {
 	public V getFirstValue() {
 		Set<K> keys= linkedhashmap.keySet();
 		if(keys == null)
-			return null;
+			return
+ null;
 		for(K key:keys) {
 			V value=linkedhashmap.get(key);
 			return value;

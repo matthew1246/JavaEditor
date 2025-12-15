@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.*;
 import java.io.*;
 import com.google.gson.*;
@@ -35,7 +37,8 @@ public class SuggestionBoxSelected {
 	public String[] Reordered(String[] members,Class<?> classquestionmark) {
 		return Reordered(members,classquestionmark.getSimpleName());
 	}		
-	public String[] Reordered(String[] members,String classname) {
+	
+public String[] Reordered(String[] members,String classname) {
 		List<String> nameslist = new ArrayList<String>();
 		for(int i = 0; i < members.length; i++) {
 			String member=members[i];
@@ -83,7 +86,8 @@ public class SuggestionBoxSelected {
 					Member member = nameslist.get(j);
 					if(methodname.equals(member.getName())) {
 						nameslist.remove(member);
-						nameslist.add(0,member);						
+						nameslist.add(0,member);
+						
 						break;
 					}
 				}
@@ -130,4 +134,4 @@ public class SuggestionBoxSelected {
 			JOptionPane.showMessageDialog(null,ex.getStackTrace());
 		}
 	}
-}							
+}							

@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.regex.*;
 import javax.swing.*;
 public class FindMethodNameString {

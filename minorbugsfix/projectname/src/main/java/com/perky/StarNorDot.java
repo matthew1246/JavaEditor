@@ -1,3 +1,5 @@
+package com.perky;
+
 public class StarNorDot { 	
  	private boolean isLocked = false;
  	private String str_nor_dot = "";

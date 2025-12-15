@@ -1,3 +1,5 @@
+package com.perky;
+
 import javax.swing.*;
 import java.awt.event.*;
 public class Muck {
@@ -38,4 +40,4 @@ public class Muck {
 			links.openLink(class_one);
 		}
 	}
-}
+}

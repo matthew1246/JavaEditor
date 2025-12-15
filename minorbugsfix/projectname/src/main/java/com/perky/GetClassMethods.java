@@ -1,3 +1,5 @@
+package com.perky;
+
 import java.util.*;
 import javax.swing.*;
 import java.io.*;
@@ -121,7 +123,8 @@ public class GetClassMethods {
 						break;
 						case "}":
 							if(stackleftcurlybrace.size() > 0) {
-								int leftcurlybrace=(Integer)stackleftcurlybrace.pop();							
+								int leftcurlybrace=(Integer)stackleftcurlybrace.pop();
+							
 								if(stackleftcurlybrace.size() == 1) {
 									String methodname=findmethodnamestring.getMethodName(leftcurlybrace);
 									if(methodname.equals("main"))
@@ -142,4 +145,4 @@ public class GetClassMethods {
 		}
 		return new ArrayList<String>(mainclasses);
 	}
-}
+}
