@@ -2,10 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.perky</groupId>
-  <artifactId>projectname</artifactId>
+  <artifactId>project_start_folder</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>projectname</name>
+  <name>project_start_folder</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -40,7 +40,10 @@
     </dependency>
   
     <dependency>
-        <groupId>org.webjars</groupId><artifactId>startbootstrap-creative</artifactId><version>6.0.4</version></dependency></dependencies>
+        <groupId>com.github.airk000
+        </groupId><artifactId>trigger
+        </artifactId><version>1.1.1
+        </version></dependency></dependencies>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
