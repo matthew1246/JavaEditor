@@ -175,6 +175,8 @@ public class AddDependency {
 		dependency.appendChild(versionElement);
 		dependency.appendChild(doc.createTextNode(indent));
 		
+		dependencies.appendChild(doc.createTextNode("\n  "));
+			
 		writeBack(doc, pomFile);
 	}
 
