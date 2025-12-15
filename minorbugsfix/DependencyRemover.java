@@ -10,6 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.OutputKeys;
 
 import javax.swing.JOptionPane;
 import java.awt.Component;
@@ -42,11 +44,11 @@ public class DependencyRemover {
 		frame.add(rows);
 		frame.setVisible(true);
 	}
-	ActionListener add_dependency_listener;
+	ActionListener remove_dependency_listener;
 	public void setListeners() {
-		add_dependency_listener = (ev) -> {
-			JButton add_dependency_btn=(JButton)ev.getSource();
-			JPanel row = (JPanel)add_dependency_btn.getParent();
+		remove_dependency_listener = (ev) -> {
+			JButton remove_dependency_btn=(JButton)ev.getSource();
+			JPanel row = (JPanel)remove_dependency_btn.getParent();
 			Component[] components = row.getComponents();
 			String groupId=((JLabel)components[1]).getText();
 			String artifactId=((JLabel)components[3]).getText();
@@ -57,6 +59,11 @@ public class DependencyRemover {
 			}
 			else {
 				JOptionPane.showMessageDialog(null,groupId+" "+artifactId);
+			}
+			try {
+				removeDependency(groupId,artifactId);
+			} catch(Exception ex) {
+				ex.printStackTrace();	
 			}
 		};
 	}
@@ -114,9 +121,9 @@ public class DependencyRemover {
 					row.add(new JLabel("scope:"));
 					row.add(new JLabel(scope.item(0).getTextContent()));
 				}		
-				JButton add_dependency_btn = new JButton("Add Dependency");			
-				add_dependency_btn.addActionListener(add_dependency_listener);
-				row.add(add_dependency_btn);
+				JButton remove_dependency_btn = new JButton("Remove Dependency");			
+				remove_dependency_btn.addActionListener(remove_dependency_listener);
+				row.add(remove_dependency_btn);
 				
 				rows.add(row);
 				rows.validate();
@@ -136,4 +143,46 @@ public class DependencyRemover {
 			ex.printStackTrace();
 		}								
 	}
+	public void removeDependency(String groupId,String artifactId) throws Exception {
+		File pomFile= new File(Main.getDirectory(fileName)+"pom.xml");
+        
+        		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        		factory.setNamespaceAware(true);
+	
+	       	DocumentBuilder builder = factory.newDocumentBuilder();
+	        	Document doc = builder.parse(pomFile);
+	       	doc.getDocumentElement().normalize();
+	
+	        	NodeList dependencyNodes = doc.getElementsByTagName("dependency");
+	
+	        	for (int i = 0; i < dependencyNodes.getLength(); i++) {
+	        		Element dependency = (Element) dependencyNodes.item(i);
+		
+		           	String groupId2= getChildText(dependency, "groupId");
+		           	String artifactId2=getChildText(dependency, "artifactId");
+		
+		         	if (groupId.equals(groupId2) && artifactId.equals(artifactId2)) {
+				dependency.getParentNode().removeChild(dependency);
+		                	break; // remove only one
+		          	}
+	          	}				
+		writeBack(doc, pomFile);
+	}
+
+    private static String getChildText(Element parent, String tag) {
+        NodeList nodes = parent.getElementsByTagName(tag);
+        if (nodes.getLength() == 0) return null;
+        return nodes.item(0).getTextContent().trim();
+    }
+
+    private static void writeBack(Document doc, File file) throws Exception {
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer transformer = tf.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+        transformer.transform(
+                new DOMSource(doc),
+                new StreamResult(file)
+        );
+    }
 }
