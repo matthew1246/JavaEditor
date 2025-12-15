@@ -567,7 +567,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 4148
+    "caretposition": 6172
   },
   "C:\\Users\\Owner\\Documents\\pomgenerator\\Main.java": {
     "startupcombobox": [

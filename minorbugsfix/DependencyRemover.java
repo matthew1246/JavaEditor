@@ -178,7 +178,7 @@ public class DependencyRemover {
     private static void writeBack(Document doc, File file) throws Exception {
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer transformer = tf.newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         transformer.transform(
                 new DOMSource(doc),
