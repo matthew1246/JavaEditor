@@ -4,15 +4,67 @@
   <groupId>com.perky</groupId>
   <artifactId>projecttwo</artifactId>
   <version>1.0-SNAPSHOT</version>
-
+<profiles>
+  <profile>
+    <id>java17</id>
+    <properties>
+      <java.release>17</java.release>
+      <jar.suffix>java17</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java18</id>
+    <properties>
+      <java.release>18</java.release>
+      <jar.suffix>java18</jar.suffix>
+    </properties>
+  </profile>  
+  <profile>
+    <id>java19</id>
+    <properties>
+      <java.release>19</java.release>
+      <jar.suffix>java19</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java20</id>
+    <properties>
+      <java.release>20</java.release>
+      <jar.suffix>java20</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java21</id>
+    <properties>
+      <java.release>21</java.release>
+      <jar.suffix>java21</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java22</id>
+    <properties>
+      <java.release>22</java.release>
+      <jar.suffix>java22</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java23</id>
+    <properties>
+      <java.release>23</java.release>
+      <jar.suffix>java23</jar.suffix>
+    </properties>
+  </profile>
+</profiles>
   <name>projecttwo</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
-  </properties>
+    <maven.compiler.release>${java.release}</maven.compiler.release>
+    <!-- safe default if no profile is selected -->
+    <java.release>17</java.release>  
+</properties>
 
   <dependencyManagement>
     <dependencies>
@@ -67,6 +119,7 @@
           </goals>
 
           <configuration>
+	    <finalName>${project.artifactId}-${project.version}-${jar.suffix}</finalName>
             <!-- Prevent dependency-reduced-pom.xml -->
             <createDependencyReducedPom>false</createDependencyReducedPom>
 
