@@ -159,7 +159,8 @@ public class Main {
 	
 	*/
 	public Main() {
-	
+		threecomboboxes = new ThreeComboboxes(this);
+		expandable = new Expandable(this);	
 		fileName = "";
 		setLayout();
 		if(fileName.equals("")) {
@@ -247,8 +248,6 @@ public class Main {
 		setKeywords();
 		setAllClassesInFile();
 		setAllClassesInFolder();
-		threecomboboxes = new ThreeComboboxes(this);
-		expandable = new Expandable(this);	
 	}
 	public int tabs_selected = -1;
 	// public FileListModifier filelistmodifier = new FileListModifier();
@@ -258,6 +257,8 @@ public class Main {
 	*/
 	public Main(OpenDefaultContent odc) 
 	{
+		threecomboboxes = new ThreeComboboxes(this);
+		expandable = new Expandable(this);	
 		try {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
@@ -565,9 +566,7 @@ public class Main {
 			});
 		} catch(Exception ex) {
 			ex.printStackTrace();
-		}	
-		threecomboboxes = new ThreeComboboxes(this,fileName);
-		expandable = new Expandable(this);	
+		}		
 		maven.Change(fileName);
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
@@ -3269,11 +3268,13 @@ class Expandable {
 	Expandable(Main main) {
 		this.main = main;
 		JFrame frame = new JFrame();
+		if(main.frame != null)
 		frame.setSize(200,main.frame.getHeight());
+		else frame.setSize(200,600);
 		frame.setLocation(0,0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jscrollpane = new JScrollPane();
-		if(!main.threecomboboxes.filelistmodifier.isEmpty()) {
+		if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null &&  !main.threecomboboxes.filelistmodifier.isEmpty()) {
 			open();
 		}
 		frame.add(jscrollpane);
@@ -3286,9 +3287,11 @@ class Expandable {
 		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.threecomboboxes.filelistmodifier.original.size()]));
-		jscrollpane.setViewportView(jtree);
-		setListener();
+		if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null) {
+			jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.threecomboboxes.filelistmodifier.original.size()]));
+			jscrollpane.setViewportView(jtree);
+			setListener();
+		}
 	}
 	public void setListener() {
 		MouseListener ml = new MouseAdapter() {

@@ -28,7 +28,7 @@ public class ThreeComboboxes {
 		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName) && !Main.isSameDirectory(this.fileName,fileName)) { // Saved file
 			FromScratch(fileName);
 		}
-		else if(Main.isSameDirectory(this.fileName,fileName)) {
+		else if(fileName != null && Main.isSameDirectory(this.fileName,fileName)) {
 			if(filelistmodifier == null) {
 				FromScratch(fileName);
 			}	
@@ -49,10 +49,11 @@ public class ThreeComboboxes {
 			methodCombobox(mainclass);
 			Select(fileName,mainclass);				
 		}
-		else if(fileName.equals("")) { // Blank JTextArea
+		else if(fileName != null && fileName.equals("")) { // Blank JTextArea
 			filelistmodifier = null;
 			RemoveAll();	
 		}
+		if(fileName != null)
 		this.fileName = fileName;
 	}
 	public void FromScratch(String fileName) {
