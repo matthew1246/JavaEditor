@@ -200,18 +200,36 @@ public class Maven {
 		updatecode.addActionListener(ev -> {
 			Path sourceDir = Path.of(Main.getDirectory(fileName));
 			String pomxml = getPOMXMLs();
-			Path targetDir = Path.of(Main.getDirectory(pomxml)+"src/main/java/"+getPackageName());
 			
-			try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir)) {
-				for(Path entry:stream) {
-					if(Files.isRegularFile(entry) && entry.toString().endsWith(".java")) {
-						Files.copy(entry,targetDir.resolve(entry.getFileName()),StandardCopyOption.REPLACE_EXISTING);
-					}
+			String packagePath = getPackageName(); // e.g. com/perky
+		    	String packageLine = "package " + packagePath.replace("/", ".") + ";";
+			
+	    		Path targetDir = Path.of(
+		       	Main.getDirectory(pomxml) + "src/main/java/" + packagePath);
+		
+		   	try {
+	        			//Files.createDirectories(targetDir);
+		
+			       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir, "*.java")) {
+				          	for (Path entry : stream) {
+				
+						// Read file
+						String content = Files.readString(entry);
+					
+						// Remove existing package if present
+						//content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+					
+						// Prepend correct package
+						content = packageLine + "\n\n" + content;
+					
+						// Write to target
+						Path targetFile = targetDir.resolve(entry.getFileName());
+						Files.writeString(targetFile, content);
+				            }
 				}
-			}
-			catch(Exception ex) {
-				ex.printStackTrace();
-			}
+			} catch (Exception ex) {
+		        		ex.printStackTrace();
+		    	}
 		});
 		code.addActionListener((ev) -> {
 			CommandLine commandline = new CommandLine();
