@@ -227,6 +227,7 @@ public class Maven {
 						Files.writeString(targetFile, content);
 				            }
 				}
+				JOptionPane.showMessageDialog(null,"Code Updated");
 			} catch (Exception ex) {
 		        		ex.printStackTrace();
 		    	}
