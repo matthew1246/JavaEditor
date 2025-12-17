@@ -568,7 +568,7 @@ public class Maven {
 </project>
 	""";
 		try {
-			PrintWriter printwriter = new PrintWriter(Main.getDirectory(fileName)+"pom.xml");
+			PrintWriter printwriter = new PrintWriter(getPOMXMLs());
 			printwriter.println(fileString);
 			printwriter.close();
 		} catch (java.io.FileNotFoundException ex) {
