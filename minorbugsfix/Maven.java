@@ -195,7 +195,7 @@ public class Maven {
     "if exist jars rmdir /s /q jars && " +
     "mkdir jars && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
-    "  mvn clean package -Pjava%v && " +
+    "  mvn clean package -Pjava%v " +
     "  copy /Y target\\projecttwo-1.0-SNAPSHOT-java%v.jar jars\\ " +
     ") && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
