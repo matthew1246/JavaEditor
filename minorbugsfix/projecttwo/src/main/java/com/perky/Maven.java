@@ -74,6 +74,8 @@ public class Maven {
 	public JButton code;
 	public JButton updatecode;
 	public JButton deletecode;
+	public JButton makeJarButton;
+	public JButton makeJarsForAllVersionsOfJava;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -106,6 +108,12 @@ public class Maven {
 				
 		deletecode=new JButton("Delete Code");
 		panel.add(deletecode);
+
+		makeJarButton=new JButton("update pom.xml with fat jar settings");
+		panel.add(makeJarButton);
+		
+		makeJarsForAllVersionsOfJava = new JButton("Make fat Jars for all versions of java");
+		panel.add(makeJarsForAllVersionsOfJava);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -183,6 +191,25 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		makeJarsForAllVersionsOfJava.addActionListener(ev -> {
+			CommandLine commandline = new CommandLine();
+			String cmd =
+    "if exist jars rmdir /s /q jars && " +
+    "mkdir jars && " +
+    "for %v in (17 18 19 20 21 22 23) do (" +
+    "  mvn clean package -Pjava%v && " +
+    "  copy /Y target\\projecttwo-1.0-SNAPSHOT-java%v.jar jars\\ " +
+    ") && " +
+    "for %v in (17 18 19 20 21 22 23) do (" +
+    "  copy /Y jars\\projecttwo-1.0-SNAPSHOT-java%v.jar target\\ " +
+    ")";
+			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
+		});
+
+		makeJarButton.addActionListener( ev -> {
+			makeFatJar();
+			JOptionPane.showMessageDialog(null,"updated pom.xml with fat jar settings");
+		});		
 		add_dependency.addActionListener((ev) -> {
 			AddDependency add_dependency = new AddDependency(this);
 		});
@@ -369,7 +396,206 @@ public class Maven {
 		} catch (java.io.FileNotFoundException ex) {
 			ex.printStackTrace();
 		}
-	}		
+	}	
+	public void makeFatJar() {
+		String fileString = """
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.perky</groupId>
+  <artifactId>projecttwo</artifactId>
+  <version>1.0-SNAPSHOT</version>
+<profiles>
+  <profile>
+    <id>default-java17</id>
+    <activation>
+      <activeByDefault>true</activeByDefault>
+    </activation>
+    <properties>
+      <java.release>17</java.release>
+      <jar.suffix>java17</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java17</id>
+    <properties>
+      <java.release>17</java.release>
+      <jar.suffix>java17</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java18</id>
+    <properties>
+      <java.release>18</java.release>
+      <jar.suffix>java18</jar.suffix>
+    </properties>
+  </profile>  
+  <profile>
+    <id>java19</id>
+    <properties>
+      <java.release>19</java.release>
+      <jar.suffix>java19</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java20</id>
+    <properties>
+      <java.release>20</java.release>
+      <jar.suffix>java20</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java21</id>
+    <properties>
+      <java.release>21</java.release>
+      <jar.suffix>java21</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java22</id>
+    <properties>
+      <java.release>22</java.release>
+      <jar.suffix>java22</jar.suffix>
+    </properties>
+  </profile>
+  <profile>
+    <id>java23</id>
+    <properties>
+      <java.release>23</java.release>
+      <jar.suffix>java23</jar.suffix>
+    </properties>
+  </profile>
+</profiles>
+  <name>projecttwo</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.release>17</java.release>
+    <maven.compiler.release>${java.release}</maven.compiler.release>  
+</properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.11.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Optionally: parameterized tests support -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+  
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+   <dependency>
+     <groupId>com.squareup.okhttp3</groupId>
+     <artifactId>okhttp</artifactId>
+     <version>3.0.0-RC1</version>
+   </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+	<plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-shade-plugin</artifactId>
+      <version>3.5.1</version>
+
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals>
+            <goal>shade</goal>
+          </goals>
+
+          <configuration>
+	    <finalName>${project.artifactId}-${project.version}-${jar.suffix}</finalName>
+            <!-- Prevent dependency-reduced-pom.xml -->
+            <createDependencyReducedPom>false</createDependencyReducedPom>
+
+            <!-- Main class -->
+            <transformers>
+              <transformer
+                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <mainClass>com.perky.App</mainClass>
+              </transformer>
+            </transformers>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.4.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.12.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.6.1</version>
+        </plugin>
+      </plugins>
+  </build>
+</project>
+	""";
+		try {
+			PrintWriter printwriter = new PrintWriter(getPOMXMLs());
+			printwriter.println(fileString);
+			printwriter.close();
+		} catch (java.io.FileNotFoundException ex) {
+			ex.printStackTrace();
+		}	
+	}				
 	/*
 	** This searches dependency and plugin for Maven.
 	*/
