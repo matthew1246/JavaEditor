@@ -191,18 +191,17 @@ public class Maven {
 	public void setListeners() {
 		makeJarsForAllVersionsOfJava.addActionListener(ev -> {
 			CommandLine commandline = new CommandLine();
-			String command=	"""
-rmdir /s /q jars
-mkdir jars
-for %v in (17 18 19 20 21 22 23) do (
-  mvn clean package -Pjava%v
-  copy target\\projecttwo-1.0-SNAPSHOT-java%v.jar jars\\
-)
-for %v in (17 18 19 20 21 22 23) do (
-  copy /Y jars\\projecttwo-1.0-SNAPSHOT-java%v.jar target\\
-)
-""";
-			commandline.runWithMSDOS(command,Main.getDirectory(getPOMXMLs()));
+			String cmd =
+    "if exist jars rmdir /s /q jars && " +
+    "mkdir jars && " +
+    "for %v in (17 18 19 20 21 22 23) do (" +
+    "  mvn clean package -Pjava%v && " +
+    "  copy /Y target\\projecttwo-1.0-SNAPSHOT-java%v.jar jars\\ " +
+    ") && " +
+    "for %v in (17 18 19 20 21 22 23) do (" +
+    "  copy /Y jars\\projecttwo-1.0-SNAPSHOT-java%v.jar target\\ " +
+    ")";
+			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
 		});
 
 		makeJarButton.addActionListener( ev -> {
