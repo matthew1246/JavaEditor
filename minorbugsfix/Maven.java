@@ -73,6 +73,7 @@ public class Maven {
 	public JButton updatecode;
 	public JButton deletecode;
 	public JButton makeJarButton;
+	public JButton makeJarsForAllVersionsOfJava;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -106,8 +107,11 @@ public class Maven {
 		deletecode=new JButton("Delete Code");
 		panel.add(deletecode);
 
-		makeJarButton=new JButton("Make Fat Jar pom.xml");
+		makeJarButton=new JButton("update pom.xml with fat jar settings");
 		panel.add(makeJarButton);
+		
+		makeJarsForAllVersionsOfJava = new JButton("Make fat Jars for all versions of java");
+		panel.add(makeJarsForAllVersionsOfJava);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -185,6 +189,22 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		makeJarsForAllVersionsOfJava.addActionListener(ev -> {
+			CommandLine commandline = new CommandLine();
+			String command=	"""
+rmdir /s /q jars
+mkdir jars
+for %v in (17 18 19 20 21 22 23) do (
+  mvn clean package -Pjava%v
+  copy target\\projecttwo-1.0-SNAPSHOT-java%v.jar jars\\
+)
+for %v in (17 18 19 20 21 22 23) do (
+  copy /Y jars\\projecttwo-1.0-SNAPSHOT-java%v.jar target\\
+)
+""";
+			commandline.runWithMSDOS(command,Main.getDirectory(getPOMXMLs()));
+		});
+
 		makeJarButton.addActionListener( ev -> {
 			makeFatJar();
 			JOptionPane.showMessageDialog(null,"updated pom.xml with fat jar settings");
