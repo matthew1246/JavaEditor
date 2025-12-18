@@ -20,7 +20,7 @@ public class Control_F {
 	private JCheckBox casey;
 	private JCheckBox regex_checkbox;
 	public Control_F(Main main,JCheckBox searchall,JTextArea textarea,JCheckBox replace,JCheckBox selection,JTextField replaceinput,JCheckBox casey,JCheckBox  regex_checkbox) {
-		liveiterator= new LiveIterator<String>(main.threecomboboxes.filelistmodifier.original,true);
+		liveiterator= new LiveIterator<String>(main.filelistmodifier.original,true);
 		this.main = main;	
 		this.searchall = searchall;	
 		this.textarea = textarea;

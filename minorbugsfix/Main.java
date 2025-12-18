@@ -250,7 +250,7 @@ public class Main {
 		setAllClassesInFolder();
 	}
 	public int tabs_selected = -1;
-	// public FileListModifier filelistmodifier = new FileListModifier();
+	public FileListModifier filelistmodifier = new FileListModifier();
 	public Git git;
 	/*
 	** If have default content for window
@@ -3262,36 +3262,41 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	}
 }
 class Expandable {
+	public JFrame frame;
 	public Main main;
 	public JScrollPane jscrollpane;
 	public JTree jtree = new JTree();
 	Expandable(Main main) {
 		this.main = main;
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		if(main.frame != null)
 		frame.setSize(200,main.frame.getHeight());
 		else frame.setSize(200,600);
 		frame.setLocation(0,0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jscrollpane = new JScrollPane();
-		if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null &&  !main.threecomboboxes.filelistmodifier.isEmpty()) {
+		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null &&  !main.threecomboboxes.filelistmodifier.isEmpty()) {
 			open();
-		}
+		//}
 		frame.add(jscrollpane);
 		frame.setVisible(true);
 	}
 	public void mySingleClick(int selRow,TreePath selPath) {
-		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
+		main.open(main.filelistmodifier.original.get(selRow));	
 	}
 	public void myDoubleClick(int selRow,TreePath selPath) {
-		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
+		main.open(main.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null) {
-			jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.threecomboboxes.filelistmodifier.original.size()]));
+		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null) {
+			if(main.frame != null) {
+				frame.setSize(200,main.frame.getHeight());
+			}
+				
+			jtree = new JTree(main.filelistmodifier.original.toArray(new Object[main.filelistmodifier.original.size()]));
 			jscrollpane.setViewportView(jtree);
 			setListener();
-		}
+		//}
 	}
 	public void setListener() {
 		MouseListener ml = new MouseAdapter() {

@@ -249,7 +249,7 @@ public class Main {
 		expandable = new Expandable(this);	
 	}
 	public int tabs_selected = -1;
-	// public FileListModifier filelistmodifier = new FileListModifier();
+	public FileListModifier filelistmodifier = new FileListModifier();
 	public Git git;
 	/*
 	** If have default content for window
