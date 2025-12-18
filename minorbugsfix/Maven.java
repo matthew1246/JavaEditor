@@ -30,6 +30,7 @@ public class Maven {
 	public Maven() {
 		setLayout();
 		setListeners();
+		showAllNotInitialised();
 	}
 	public void Change(String fileName) {
 		if(fileName != null && !fileName.equals("")) {
@@ -40,6 +41,9 @@ public class Maven {
 			else {
 				showNotInitialised();
 			}	
+		}
+		else if(fileName != null && fileName.equals("")) {
+			showAllNotInitialised();
 		}
 	}
 	public boolean pomxmlExists() {
@@ -304,6 +308,19 @@ public class Maven {
 			return "";
 		}
 	}
+	public void showAllNotInitialised() {
+		initialise.setEnabled(false);
+		pomxml.setEnabled(false);
+		add_dependency.setEnabled(false);
+		addplugin.setEnabled(false);
+		add_dependencyorplugin.setEnabled(false);
+		removedependency.setEnabled(false);
+		code.setEnabled(false);
+		updatecode.setEnabled(false);
+		deletecode.setEnabled(false);
+		makeJarButton.setEnabled(false);
+		makeJarsForAllVersionsOfJava.setEnabled(false);
+	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
 		
@@ -315,6 +332,8 @@ public class Maven {
 		code.setEnabled(false);
 		updatecode.setEnabled(false);
 		deletecode.setEnabled(false);
+		makeJarButton.setEnabled(false);
+		makeJarsForAllVersionsOfJava.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -327,6 +346,8 @@ public class Maven {
 		code.setEnabled(true);
 		updatecode.setEnabled(true);
 		deletecode.setEnabled(true);
+		makeJarButton.setEnabled(true);
+		makeJarsForAllVersionsOfJava.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
