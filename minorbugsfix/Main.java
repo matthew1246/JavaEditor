@@ -568,6 +568,8 @@ public class Main {
 			ex.printStackTrace();
 		}		
 		maven.Change(fileName);
+		threecomboboxes.load(fileName);
+		expandable.open();	
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
