@@ -150,7 +150,8 @@ public class Main {
 	public String fileName = "";
 	public static String value = System.getProperty("user.home")+"\\load_program.ser";
 	//public String value="load_program.ser";
-	public static void main(String[] args) 		{ 
+	// public Maven maven = new Maven();
+	public static void main(String[] args) { 
 		Main main = new Main(new OpenDefaultContent());
 	}
 	/*
@@ -256,14 +257,13 @@ public class Main {
 	*/
 	public Main(OpenDefaultContent odc) {
 		try {
+		threecomboboxes = new ThreeComboboxes(this);
+		expandable = new Expandable(this);	
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git = new Git(fileName);
 			String dir = getDirectory(fileName);
-			if(msdos == null)
-				msdos = new MSDOS(dir);
-			else
-				msdos.setFileName(dir);
+			msdos.setFileName(fileName);
 		}
 		setLayout();
 		if(fileName.equals("")) {
@@ -563,8 +563,8 @@ public class Main {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		threecomboboxes = new ThreeComboboxes(this,fileName);
-		expandable = new Expandable(this);	
+		threecomboboxes.load(fileName);
+		expandable.open();
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		int caretposition = -1;
@@ -1323,7 +1323,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		}
 		return filename;
 	}
-	public MSDOS msdos;
+	public MSDOS msdos = new MSDOS();
 	public void open(String selected2) {
 		try {
 			// JOptionPane.showMessageDialog(null,deselected);
@@ -1338,10 +1338,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			dir=dir+selected2;
 			
-			if(msdos == null)
-				msdos = new MSDOS(dir);
-			else
-				msdos.setFileName(dir);
+			msdos.setFileName(dir);
 				
 			fileName = dir; // Might need uncomment to make Main.java work again.
 			//fileName = dir+".java";
@@ -1355,7 +1352,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 			if(git !=null)
 				git.Change(fileName);
-			expandable.open();
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
@@ -1623,6 +1619,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			expandable.open();
 			
 			this.fileName=fileName;
+			
+			msdos.setFileName(fileName);
 		});			
 		
 		compileforjavafx.addActionListener( e -> {
@@ -3336,6 +3334,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				*/
 				threecomboboxes.load(fileName);
 				expandable.open();
+				msdos.setFileName(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3486,6 +3485,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
 				storeselectedfile4.set(fileName);
+				
+				msdos.setFileName(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
