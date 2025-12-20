@@ -79,6 +79,7 @@ public class Maven {
 	public JButton makeJarButton;
 	public JButton makeJarsForAllVersionsOfJava;
 	public JButton addHTML;
+	public JButton jarinsidejar;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -120,6 +121,9 @@ public class Maven {
 				
 		addHTML = new JButton("Add HTML file");
 		panel.add(addHTML);
+		
+		jarinsidejar = new JButton("Add jar within jar");
+		panel.add(jarinsidejar);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -197,6 +201,31 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		jarinsidejar.addActionListener(ev -> {
+			JFileChooser chooser = new JFileChooser();
+        			chooser.setDialogTitle("Select a file to copy");
+
+			int result = chooser.showOpenDialog(null);
+			
+			if (result == JFileChooser.APPROVE_OPTION) {
+			            File selectedFile = chooser.getSelectedFile();
+			
+			            File targetDir = new File(Main.getDirectory(getPOMXMLs())+"src/Main/resources");   // destination folder
+				targetDir.mkdirs();	
+			            File targetFile = new File(targetDir, selectedFile.getName());
+			
+			            try {
+			                Files.copy(
+			                        selectedFile.toPath(),
+			                        targetFile.toPath(),
+			                        StandardCopyOption.REPLACE_EXISTING
+			                );
+			                JOptionPane.showMessageDialog(null, "File copied successfully!");
+			            } catch (IOException e) {
+			                JOptionPane.showMessageDialog(null, "Copy failed: " + e.getMessage());
+			            }
+			}
+		});
 		addHTML.addActionListener((ev) -> {
 			JFileChooser chooser = new JFileChooser();
         			chooser.setDialogTitle("Select a file to copy");
@@ -351,6 +380,7 @@ public class Maven {
 		makeJarButton.setEnabled(false);
 		makeJarsForAllVersionsOfJava.setEnabled(false);
 		addHTML.setEnabled(false);
+		jarinsidejar.setEnabled(false);
 	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
@@ -366,6 +396,7 @@ public class Maven {
 		makeJarButton.setEnabled(false);
 		makeJarsForAllVersionsOfJava.setEnabled(false);
 		addHTML.setEnabled(false);
+		jarinsidejar.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -381,6 +412,7 @@ public class Maven {
 		makeJarButton.setEnabled(true);
 		makeJarsForAllVersionsOfJava.setEnabled(true);
 		addHTML.setEnabled(true);
+		jarinsidejar.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
