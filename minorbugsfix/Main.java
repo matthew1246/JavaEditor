@@ -1320,7 +1320,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				filelistmodifier.setToMostRecentAfterSelected(deselected);	
 			}*/
 		
-			threecomboboxes.load(fileName);	
+			threecomboboxes.load(fileName);
+			expandable.open();
+				
 			//loadComboboxes(filelistmodifier);
 			//filenamescombobox.setSelectedItem(selected2);
 			StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
@@ -1560,6 +1562,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile3.set(fileName);
 			
 			threecomboboxes.load("");
+			expandable.open();
 			
 			this.fileName=fileName;
 		});		
@@ -2915,7 +2918,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
 				git.Change(fileName);
-				expandable.open();
 				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
@@ -2931,6 +2933,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 				}
 				threecomboboxes.load(fileName);
+				expandable.open();
+
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
 				}*/
@@ -3081,6 +3085,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				setStarterClassBoxes(fileName);
 			
 				threecomboboxes.load(fileName);
+				expandable.open();
 				this.fileName=fileName;
 					
 				//loadComboboxes(filelistmodifier);

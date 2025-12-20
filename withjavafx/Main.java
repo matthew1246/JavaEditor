@@ -158,6 +158,8 @@ public class Main {
 	
 	*/
 	public Main() {
+		threecomboboxes = new ThreeComboboxes(this);
+		expandable = new Expandable(this);	
 		fileName = "";
 		setLayout();	
 		if(fileName.equals("")) {
@@ -235,7 +237,7 @@ public class Main {
 			tabbedpane.addTab("+",pluspanel);
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
-			allclassesinfile = new AllClassesInFile(textarea2,"");
+			allclassesinfile.ChangeFile(textarea2,"");
 		}
 		setListeners();
 		setFullPackageNames();		
@@ -245,8 +247,6 @@ public class Main {
 		setKeywords();
 		setAllClassesInFile();
 		setAllClassesInFolder();	
-		threecomboboxes = new ThreeComboboxes(this);
-		expandable = new Expandable(this);	
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
@@ -3587,11 +3587,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			fullpackagenames = muck.links.getFullPackageNames();
 		}
 	}
-	public AllClassesInFile allclassesinfile;
+	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public void setAllClassesInFile() {
 		if(allclassesinfile == null) {
-			allclassesinfile = new AllClassesInFile(textarea,fileName);
+			allclassesinfile = new AllClassesInFile();
 		}
+		allclassesinfile.ChangeFile(textarea,fileName);
 	}
 	List<String> allclassesinfolder = new ArrayList<String>();
 	public void setAllClassesInFolder() {
@@ -3634,32 +3635,42 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	}
 }
 class Expandable {
+	public JFrame frame;
 	public Main main;
 	public JScrollPane jscrollpane;
 	public JTree jtree = new JTree();
 	Expandable(Main main) {
 		this.main = main;
-		JFrame frame = new JFrame();
+		frame = new JFrame();
+		if(main.frame != null)
 		frame.setSize(200,main.frame.getHeight());
+		else frame.setSize(200,600);
 		frame.setLocation(0,0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jscrollpane = new JScrollPane();
-		if(!main.threecomboboxes.filelistmodifier.isEmpty()) {
+		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null &&  !main.threecomboboxes.filelistmodifier.isEmpty()) {
 			open();
-		}
+		//}
 		frame.add(jscrollpane);
 		frame.setVisible(true);
 	}
 	public void mySingleClick(int selRow,TreePath selPath) {
-		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
+		main.open(main.filelistmodifier.original.get(selRow));	
 	}
 	public void myDoubleClick(int selRow,TreePath selPath) {
-		main.open(main.threecomboboxes.filelistmodifier.original.get(selRow));	
+		main.open(main.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		jtree = new JTree(main.threecomboboxes.filelistmodifier.original.toArray(new Object[main.threecomboboxes.filelistmodifier.original.size()]));
-		jscrollpane.setViewportView(jtree);
-		setListener();
+		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null) {
+			if(main.frame != null) {
+				frame.setSize(200,main.frame.getHeight());
+			}
+				
+			jtree = new JTree(main.filelistmodifier.original.toArray(new Object[main.filelistmodifier.original.size()]));
+			jscrollpane.setViewportView(jtree);
+			setListener();
+		//}
+
 	}
 	public void setListener() {
 		MouseListener ml = new MouseAdapter() {
@@ -3679,6 +3690,7 @@ class Expandable {
  		jtree.addMouseListener(ml);
  	}
 }
+
 class OpenDefaultContent {
 	private String fileName = "";
 	private String lines = "";

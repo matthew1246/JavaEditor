@@ -20,7 +20,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java"
     ],
     "caretposition": 0
   },
@@ -56,7 +57,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 122098
+    "caretposition": 124507
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -654,5 +655,17 @@
     ],
     "fileNames": [],
     "caretposition": 5445
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java": {
+    "startupcombobox": [
+      "ThreeComboboxes"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }

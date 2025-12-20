@@ -28,17 +28,17 @@ public class ThreeComboboxes {
 		if(fileName != null && !fileName.equals("") && !this.fileName.equals(fileName) && !Main.isSameDirectory(this.fileName,fileName)) { // Saved file
 			FromScratch(fileName);
 		}
-		else if(Main.isSameDirectory(this.fileName,fileName)) {
-			if(filelistmodifier == null) {
+		else if(fileName != null && Main.isSameDirectory(this.fileName,fileName)) {
+			if(main.filelistmodifier == null) {
 				FromScratch(fileName);
 			}	
-			else if( filelistmodifier.getFileList().contains(Main.getFileName(fileName)) )	{
+			else if( main.filelistmodifier.getFileList().contains(Main.getFileName(fileName)) )	{
 				main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
 			}
 			else {
 				String file = Main.getFileName(fileName);
-				filelistmodifier.filelist.add(file);
-				filelistmodifier.original.add(file);
+				main.filelistmodifier.filelist.add(file);
+				main.filelistmodifier.original.add(file);
 				main.filenamescombobox.addItem(file);
 			}
 			setGetClassName();
@@ -49,11 +49,12 @@ public class ThreeComboboxes {
 			methodCombobox(mainclass);
 			Select(fileName,mainclass);				
 		}
-		else if(fileName.equals("")) { // Blank JTextArea
-			filelistmodifier = null;
+		else if(fileName != null && fileName.equals("")) { // Blank JTextArea
+			main.filelistmodifier = new FileListModifier();
 			RemoveAll();	
 		}
 
+		if(fileName != null)	
 		this.fileName = fileName;
 	}
 	public void FromScratch(String fileName) {
@@ -78,11 +79,10 @@ public class ThreeComboboxes {
 	public void setGetClassMethods() {
 		getclassmethods = new GetClassMethods(main.textarea);
 	}
-	public FileListModifier filelistmodifier;
 	public void fileCombobox(String fileName) {
-		filelistmodifier = new FileListModifier(fileName);
+		main.filelistmodifier = new FileListModifier(fileName);
 		RemoveFilecombo();
-		List<String> filenames=filelistmodifier.getFileList();
+		List<String> filenames=main.filelistmodifier.getFileList();
 		for(String filename:filenames) {
 			main.filenamescombobox.addItem(filename);
 		}			
