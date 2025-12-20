@@ -567,20 +567,24 @@ public class Main {
 		expandable = new Expandable(this);	
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
+		int caretposition = -1;
 		try {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			int caretposition=storeselectedfile.getCaretPosition(filename);
+			caretposition=storeselectedfile.getCaretPosition(filename);
 			if(filename != null && !filename.equals("")) {
-				textarea3.setCaretPosition(caretposition);
-				scrollToCaretPosition(textarea3,caretposition);
-	
-				int caretposition2=textarea3.getCaretPosition();
-				scrollToCaretPosition(caretposition2);
-				textarea3.validate();
-				textarea3.repaint();
+				if(caretposition <= textarea3.getDocument().getLength()) {
+					textarea3.setCaretPosition(caretposition);
+					scrollToCaretPosition(textarea3,caretposition);
+		
+					int caretposition2=textarea3.getCaretPosition();
+					scrollToCaretPosition(caretposition2);
+					textarea3.validate();
+					textarea3.repaint();
+				}
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null,filename+ " "+caretposition);
 		}
 	}
 	public void openLastSelectedLine() {
@@ -588,7 +592,9 @@ public class Main {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			if(fileName != null && !fileName.equals("")) {
 				int caretposition=storeselectedfile.getCaretPosition(fileName);
-				scrollToCaretPosition(caretposition);
+				if(caretposition <= textarea.getDocument().getLength()) {
+					scrollToCaretPosition(caretposition);
+				}
 			}
 		} catch(Exception ex){
 			ex.printStackTrace();
@@ -1389,6 +1395,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			tabbedpane.repaint();
 			
 			threecomboboxes.load(fileName);
+			expandable.open();
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
@@ -1613,6 +1620,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile3.set(fileName);
 			
 			threecomboboxes.load("");
+			expandable.open();
 			
 			this.fileName=fileName;
 		});			
@@ -3302,7 +3310,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
 				git.Change(fileName);
-				expandable.open();
 				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
@@ -3328,6 +3335,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				scrollToCaretPosition(caretposition);
 				*/
 				threecomboboxes.load(fileName);
+				expandable.open();
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3455,7 +3463,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				if(git == null)
 					git = new Git(fileName);
 				git.Change(fileName);
-				expandable.open();
 				
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(fileName);
@@ -3473,6 +3480,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 					
 				threecomboboxes.load(fileName);
+				expandable.open();
+
 				this.fileName=fileName;
 				
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();

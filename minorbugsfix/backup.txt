@@ -8,7 +8,7 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -21,7 +21,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java"
     ],
     "caretposition": 0
   },
@@ -79,7 +80,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 25416
+    "caretposition": 25513
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "startupcombobox": [
@@ -94,14 +95,16 @@
     "caretposition": 491
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Control_F"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 2067
+    "caretposition": 883
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
     "startupcombobox": [],
@@ -659,6 +662,18 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java": {
     "startupcombobox": [
       "ThreeComboboxes"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\LiveIterator.java": {
+    "startupcombobox": [
+      "LiveIterator"
     ],
     "starterclass": "",
     "jars": [
