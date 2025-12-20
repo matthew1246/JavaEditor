@@ -78,6 +78,7 @@ public class Maven {
 	public JButton deletecode;
 	public JButton makeJarButton;
 	public JButton makeJarsForAllVersionsOfJava;
+	public JButton addHTML;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -116,6 +117,9 @@ public class Maven {
 		
 		makeJarsForAllVersionsOfJava = new JButton("Make fat Jars for all versions of java");
 		panel.add(makeJarsForAllVersionsOfJava);
+				
+		addHTML = new JButton("Add HTML file");
+		panel.add(addHTML);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -193,6 +197,32 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		addHTML.addActionListener((ev) -> {
+			JFileChooser chooser = new JFileChooser();
+        			chooser.setDialogTitle("Select a file to copy");
+
+			int result = chooser.showOpenDialog(null);
+			
+			if (result == JFileChooser.APPROVE_OPTION) {
+			            File selectedFile = chooser.getSelectedFile();
+			
+			            File targetDir = new File(Main.getDirectory(getPOMXMLs())+"src/Main/");   // destination folder
+			
+			            File targetFile = new File(targetDir, selectedFile.getName());
+			
+			            try {
+			                Files.copy(
+			                        selectedFile.toPath(),
+			                        targetFile.toPath(),
+			                        StandardCopyOption.REPLACE_EXISTING
+			                );
+			                JOptionPane.showMessageDialog(null, "File copied successfully!");
+			            } catch (IOException e) {
+			                JOptionPane.showMessageDialog(null, "Copy failed: " + e.getMessage());
+			            }
+			}
+		});
+			
 		makeJarsForAllVersionsOfJava.addActionListener(ev -> {
 			CommandLine commandline = new CommandLine();
 			String cmd =
@@ -320,6 +350,7 @@ public class Maven {
 		deletecode.setEnabled(false);
 		makeJarButton.setEnabled(false);
 		makeJarsForAllVersionsOfJava.setEnabled(false);
+		addHTML.setEnabled(false);
 	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
@@ -334,6 +365,7 @@ public class Maven {
 		deletecode.setEnabled(false);
 		makeJarButton.setEnabled(false);
 		makeJarsForAllVersionsOfJava.setEnabled(false);
+		addHTML.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -348,6 +380,7 @@ public class Maven {
 		deletecode.setEnabled(true);
 		makeJarButton.setEnabled(true);
 		makeJarsForAllVersionsOfJava.setEnabled(true);
+		addHTML.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
