@@ -206,8 +206,8 @@ public class Maven {
 			if (result == JFileChooser.APPROVE_OPTION) {
 			            File selectedFile = chooser.getSelectedFile();
 			
-			            File targetDir = new File(Main.getDirectory(getPOMXMLs())+"src/Main/");   // destination folder
-			
+			            File targetDir = new File(Main.getDirectory(getPOMXMLs())+"src/Main/resources");   // destination folder
+				targetDir.mkdirs();	
 			            File targetFile = new File(targetDir, selectedFile.getName());
 			
 			            try {
