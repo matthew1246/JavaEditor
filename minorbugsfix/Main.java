@@ -94,6 +94,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public Maven maven = new Maven();
 	public JMenuItem saveall = new JMenuItem("Save All");
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
@@ -238,7 +239,7 @@ public class Main {
 			tabbedpane.addTab("+",pluspanel);
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
-			allclassesinfile = new AllClassesInFile(textarea2,"");
+			allclassesinfile.ChangeFile(textarea2,"");
 		}	
 		setListeners();
 		setFullPackageNames();		
@@ -3217,11 +3218,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			fullpackagenames = muck.links.getFullPackageNames();
 		}
 	}
-	public AllClassesInFile allclassesinfile;
 	public void setAllClassesInFile() {
 		if(allclassesinfile == null) {
-			allclassesinfile = new AllClassesInFile(textarea,fileName);
+			allclassesinfile = new AllClassesInFile();
 		}
+		allclassesinfile.ChangeFile(textarea,fileName);
 	}
 	List<String> allclassesinfolder = new ArrayList<String>();
 	public void setAllClassesInFolder() {
