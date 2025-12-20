@@ -567,24 +567,32 @@ public class Main {
 		expandable = new Expandable(this);	
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
-		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-		int caretposition=storeselectedfile.getCaretPosition(filename);
-		if(filename != null && !filename.equals("")) {
-			textarea3.setCaretPosition(caretposition);
-			scrollToCaretPosition(textarea3,caretposition);
-
-			int caretposition2=textarea3.getCaretPosition();
-			scrollToCaretPosition(caretposition2);
-			textarea3.validate();
-			textarea3.repaint();
-		}
+		try {
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			int caretposition=storeselectedfile.getCaretPosition(filename);
+			if(filename != null && !filename.equals("")) {
+				textarea3.setCaretPosition(caretposition);
+				scrollToCaretPosition(textarea3,caretposition);
+	
+				int caretposition2=textarea3.getCaretPosition();
+				scrollToCaretPosition(caretposition2);
+				textarea3.validate();
+				textarea3.repaint();
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	public void openLastSelectedLine() {
-		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-		if(fileName != null && !fileName.equals("")) {
-			int caretposition=storeselectedfile.getCaretPosition(fileName);
-			scrollToCaretPosition(caretposition);
-		}
+		try {
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			if(fileName != null && !fileName.equals("")) {
+				int caretposition=storeselectedfile.getCaretPosition(fileName);
+				scrollToCaretPosition(caretposition);
+			}
+		} catch(Exception ex){
+			ex.printStackTrace();
+		}		
 	}
 	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
