@@ -576,20 +576,24 @@ public class Main {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		int caretposition=storeselectedfile.getCaretPosition(filename);
 		if(filename != null && !filename.equals("")) {
-			textarea3.setCaretPosition(caretposition);
-			scrollToCaretPosition(textarea3,caretposition);
-
-			int caretposition2=textarea3.getCaretPosition();
-			scrollToCaretPosition(caretposition2);
-			textarea3.validate();
-			textarea3.repaint();
+			if(caretposition <= textarea3.getDocument().getLength()) {
+				textarea3.setCaretPosition(caretposition);
+				scrollToCaretPosition(textarea3,caretposition);
+	
+				int caretposition2=textarea3.getCaretPosition();
+				scrollToCaretPosition(caretposition2);
+				textarea3.validate();
+				textarea3.repaint();
+			}
 		}
 	}
 	public void openLastSelectedLine() {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		if(fileName != null && !fileName.equals("")) {
 			int caretposition=storeselectedfile.getCaretPosition(fileName);
-			scrollToCaretPosition(caretposition);
+			if(caretposition <= textarea.getDocument().getLength()) {
+				scrollToCaretPosition(caretposition);
+			}
 		}
 	}
 	public static String getDirectory(String filename) {
