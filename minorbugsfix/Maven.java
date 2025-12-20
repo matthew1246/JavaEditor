@@ -196,7 +196,7 @@ public class Maven {
 		makeJarsForAllVersionsOfJava.addActionListener(ev -> {
 			CommandLine commandline = new CommandLine();
 			String cmd =
-    "if exist jars rmdir /s /q jars && " +
+    "(if exist jars rmdir /s /q jars || echo no jars folder) && " +
     "mkdir jars && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
     "  mvn clean package -Pjava%v && " +
