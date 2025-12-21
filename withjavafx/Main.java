@@ -1322,6 +1322,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		else if(filename.endsWith(".jar")) {
 			return filename.replaceAll("[^\\\\]+\\.jar","");
 		}
+		else if(filename.endsWith(".xml")) {
+			return filename.replaceAll("[^\\\\]+\\.xml","");
+		}
 		return filename;
 	}
 	public MSDOS msdos = new MSDOS();
