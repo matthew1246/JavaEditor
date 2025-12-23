@@ -212,8 +212,8 @@ public class AddPlugin {
 		//try {
 			int rows = how_many;
 			String input = query;
-			// input = URLEncoder.encode(input,StandardCharsets.UTF_8.toString());
-			String url = "https://search.maven.org/solrsearch/select?q="+input+"&rows="+rows+"&start="+start_index+"&wt=json";
+			input = URLEncoder.encode(input,StandardCharsets.UTF_8);
+			String url = "https://central.sonatype.com/api/search?q="+input+"&p=maven-plugin"+"&rows="+rows+"&start="+start_index;
 			String responseJson=get(url);
 			return responseJson;
 		/*}
