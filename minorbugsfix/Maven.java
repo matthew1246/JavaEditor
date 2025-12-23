@@ -201,6 +201,9 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		addplugin.addActionListener((ev) -> {
+			AddPlugin addplugin = new AddPlugin(this);
+		});
 		jarinsidejar.addActionListener(ev -> {
 			JFileChooser chooser = new JFileChooser();
         			chooser.setDialogTitle("Select a file to copy");
