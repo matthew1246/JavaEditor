@@ -678,10 +678,12 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddPlugin.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "AddPlugin"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 945
+    "caretposition": 6772
   }
 }
