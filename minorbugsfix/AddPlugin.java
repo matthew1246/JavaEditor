@@ -211,7 +211,7 @@ public class AddPlugin {
 	public String Search(int how_many,String query,int start_index) {
 		try {
 			int rows = how_many;
-			String input = query+" AND p:\"maven-plugin\"";
+			String input = query+" AND p:maven-plugin";
 			input = URLEncoder.encode(input,StandardCharsets.UTF_8.toString());
 			String url = "https://search.maven.org/solrsearch/select?q="+input+"&rows="+rows+"&start="+start_index+"&wt=json";
 			String responseJson=get(url);
