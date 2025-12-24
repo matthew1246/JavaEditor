@@ -208,20 +208,18 @@ public class AddPlugin {
 	public String Search(int how_many,String query) {
 		return Search(how_many,query,0);
 	}
-	public String Search(int how_many,String query,int start_index) {
-		//try {
-			int rows = how_many;
-			String input = query;
-			input = URLEncoder.encode(input,StandardCharsets.UTF_8);
-			String url = "https://central.sonatype.com/api/search?q="+input+"&p=maven-plugin"+"&rows="+rows+"&start="+start_index;
-			String responseJson=get(url);
-			return responseJson;
-		/*}
-		catch (UnsupportedEncodingException ex) {
-			ex.printStackTrace();
-			return "UnsupportedEncodingException";
-		}*/
-	}		
+	public String Search(int rows, String query, int start) {
+		String q =
+        "packaging:maven-plugin AND " + query;
+        		String url =
+        "https://search.maven.org/solrsearch/select"
+      + "?q=" + URLEncoder.encode(q, StandardCharsets.UTF_8)
+      + "&rows=" + rows
+      + "&start=" + start
+      + "&wt=json";
+      		System.out.println(url);
+      		return get(url);
+}
 	public String get(String url) {
 		try {
 			Request request = new Request.Builder().url(url).build();
@@ -235,9 +233,9 @@ public class AddPlugin {
 	public JPanel showMoreRow;
 	public JButton showMore = new JButton("Show More");;
 	public void Parse(String responseJson) {
-		//System.out.println(responseJson);
+		System.out.println(responseJson);
 		
-		//System.out.println();
+		System.out.println();
 		
 		JsonObject jsonObject = JsonParser.parseString(responseJson).getAsJsonObject();
 		
