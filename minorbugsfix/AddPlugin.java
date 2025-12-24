@@ -209,11 +209,10 @@ public class AddPlugin {
 		return Search(how_many,query,0);
 	}
 	public String Search(int rows, String query, int start) {
-		String q =
-        "packaging:maven-plugin AND " + query;
         		String url =
         "https://search.maven.org/solrsearch/select"
-      + "?q=" + URLEncoder.encode(q, StandardCharsets.UTF_8)
+      + "?q=" + query
+      + "&packaging=maven-plugin"
       + "&rows=" + rows
       + "&start=" + start
       + "&wt=json";
@@ -233,7 +232,7 @@ public class AddPlugin {
 	public JPanel showMoreRow;
 	public JButton showMore = new JButton("Show More");;
 	public void Parse(String responseJson) {
-		System.out.println(responseJson);
+		System.out.println("json: "+responseJson);
 		
 		System.out.println();
 		
