@@ -95,8 +95,10 @@ public class Git {
 				isGitInstalled = true;
 				isVisible = true;
 				setDirectoryAndRootDirectory(fileName);
-				setLayout();
-			      	setListeners();
+				if(!frame.isVisible()) {
+					setLayout();
+			      		setListeners();
+		      		}
 			      	frame.setTitle(whichBranchOpened());
 		      	}
 	      	}
