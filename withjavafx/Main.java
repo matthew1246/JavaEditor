@@ -565,6 +565,7 @@ public class Main {
 		threecomboboxes.load(fileName);
 		expandable.open();
 		maven.Change(fileName);
+		git.Change(fileName);
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		int caretposition = -1;
@@ -1396,6 +1397,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			threecomboboxes.load(fileName);
 			expandable.open();
 			maven.Change(fileName);
+			git.Change(fileName);
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
@@ -1626,6 +1628,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			msdos.setFileName(fileName);
 			maven.Change(fileName);
+			git.Change(fileName);
 		});			
 		
 		compileforjavafx.addActionListener( e -> {
@@ -3341,6 +3344,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				expandable.open();
 				msdos.setFileName(fileName);
 				maven.Change(fileName);
+				git.Change(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3492,6 +3496,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				msdos.setFileName(fileName);
 				maven.Change(fileName);
+				git.Change(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
