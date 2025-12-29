@@ -15,8 +15,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\DependencyRemover.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
-      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java"
     ],
     "caretposition": 0
   },
