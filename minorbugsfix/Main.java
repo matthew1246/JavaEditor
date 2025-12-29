@@ -252,7 +252,7 @@ public class Main {
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
-	public Git git;
+	public Git git = new Git();
 	/*
 	** If have default content for window
 	*/
@@ -263,7 +263,7 @@ public class Main {
 		try {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
-			git = new Git(fileName);
+			git.Change(fileName);
 			msdos.setFileName(fileName);
 		}
 		setLayout();
@@ -570,7 +570,8 @@ public class Main {
 		}		
 		maven.Change(fileName);
 		threecomboboxes.load(fileName);
-		expandable.open();	
+		expandable.open();
+		git.Change(fileName);	
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -1326,6 +1327,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		
 			threecomboboxes.load(fileName);
 			expandable.open();
+			git.Change(fileName);
 				
 			//loadComboboxes(filelistmodifier);
 			//filenamescombobox.setSelectedItem(selected2);
@@ -1567,6 +1569,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			threecomboboxes.load("");
 			expandable.open();
+			git.Change(fileName);
 			
 			this.fileName=fileName;
 		});		
@@ -2938,6 +2941,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 				threecomboboxes.load(fileName);
 				expandable.open();
+				git.Change(fileName);
 
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
@@ -3079,8 +3083,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				if(git == null)
-					git = new Git(fileName);	
 				git.Change(fileName);
 				expandable.open();
 				
@@ -3091,6 +3093,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				threecomboboxes.load(fileName);
 				expandable.open();
 				this.fileName=fileName;
+				git.Change(fileName);
 					
 				//loadComboboxes(filelistmodifier);
 				//filenamescombobox.setSelectedItem(getFileName(fileName));
@@ -3485,8 +3488,7 @@ class OpenActionListener implements ActionListener {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.setTabs(main.fileNames);
 			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));
-			if(original.equals(""))
-				main.git = new Git(main.fileName);
+			main.git.Change(main.fileName);
 			main.open(main.getFileName(main.fileName));
 		}
 	}

@@ -10,16 +10,8 @@ public class Git {
 	public String root_directory;
 	public String directory;
 	public JFrame frame=new JFrame();
-	public Git(String fileName) {
-		if(isGitInstalled()) {
-			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
-				isGitInstalled = true;
-				isVisible = true;
-				Change(fileName);
-				setLayout();
-			      	setListeners();
-		      	}
-	      	}
+	public Git() {
+		// Change(fileName);	
 	}
 	public String gitbashdotexe = "";
 	public boolean setWhereIsGitBashDotExe(String fileName) {
@@ -98,6 +90,20 @@ public class Git {
             }
 
 	public void Change(String fileName) {
+		if(isGitInstalled()) {
+			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
+				isGitInstalled = true;
+				isVisible = true;
+				setDirectoryAndRootDirectory(fileName);
+				if(!frame.isVisible()) {
+					setLayout();
+			      		setListeners();
+		      		}
+			      	frame.setTitle(whichBranchOpened());
+		      	}
+	      	}
+      	}
+      	public void setDirectoryAndRootDirectory(String fileName) {
 		if(isGitInstalled) {
 			if( new File(fileName).exists() ) {
 				if(isFileInsideGitRepository(fileName)) {
@@ -106,18 +112,12 @@ public class Git {
 					Process process=commandline.run("git rev-parse --show-toplevel",directory);
 					DisplayOutput displayoutput = new DisplayOutput();
 					root_directory = displayoutput.OneLine(process);
-				      	//JOptionPane.showMessageDialog(n,root_directory);
-				      	if(!isVisible) {
-						setLayout();
-						setListeners();
-			      		}
-			      		frame.setTitle(whichBranchOpened());
-			      	}	      			      		      			      	
+				}
 		      	}
 	      	}
       	}
       	
-public JButton everythingbutthekitchensink;
+	public JButton everythingbutthekitchensink;
       	public JButton addtoall;
       	public JButton upload;
 	public JTextField input = new JTextField();
@@ -416,4 +416,4 @@ public JButton everythingbutthekitchensink;
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
