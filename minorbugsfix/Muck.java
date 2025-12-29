@@ -19,6 +19,7 @@ public class Muck {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
 		textfield = new JTextField(15);
+		textfield.setText("JButton");
 		panel.add(textfield);
 		button=new JButton("run");
 		panel.add(button);
