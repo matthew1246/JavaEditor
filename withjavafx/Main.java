@@ -251,7 +251,7 @@ public class Main {
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
-	public Git git;
+	public Git git = new Git();
 	/*
 	** If have default content for window
 	*/
@@ -261,8 +261,7 @@ public class Main {
 		expandable = new Expandable(this);	
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
-			git = new Git(fileName);
-			String dir = getDirectory(fileName);
+			git.Change(fileName);
 			msdos.setFileName(fileName);
 		}
 		setLayout();
@@ -3466,8 +3465,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				if(git == null)
-					git = new Git(fileName);
 				git.Change(fileName);
 				
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -3870,8 +3867,7 @@ class OpenActionListener implements ActionListener {
 			int selectedtab = main.tabbedpane.getSelectedIndex();
 			main.fileNames.set(selectedtab,main.fileName);
 			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));
-			if(original.equals(""))
-				main.git = new Git(main.fileName);
+			main.git.Change(main.fileName);
 			main.open(main.getFileName(main.fileName));
 		}
 	}
