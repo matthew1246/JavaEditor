@@ -13,7 +13,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AddDependency.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\DependencyRemover.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\DependencyRemover.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java"
     ],
     "caretposition": 0
   },
@@ -394,7 +395,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 5799
+    "caretposition": 3805
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java": {
     "startupcombobox": [
@@ -483,7 +484,9 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\DependencyRemover.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "DependencyRemover"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
