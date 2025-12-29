@@ -1,7 +1,7 @@
 {
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
@@ -14,7 +14,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AddDependency.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\DependencyRemover.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
     ],
     "caretposition": 0
   },
@@ -79,10 +81,12 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 15285
+    "caretposition": 14898
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Git"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],

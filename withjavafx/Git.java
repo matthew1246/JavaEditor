@@ -130,6 +130,7 @@ public JButton everythingbutthekitchensink;
 		frame.setSize(500,100);
  // previously 400,100
 		frame.setLocation(980,0);
+		input.setText("git status");
 		frame.getContentPane().add(input,BorderLayout.CENTER);
 		run = new JButton("run");
 		frame.getContentPane().add(run,BorderLayout.SOUTH);
