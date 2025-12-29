@@ -15,7 +15,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\DependencyRemover.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java"
     ],
     "caretposition": 0
   },
@@ -494,5 +495,14 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 6342
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java": {
+    "startupcombobox": [
+      "MuckFX"
+    ],
+    "starterclass": "MuckFX",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 574
   }
 }

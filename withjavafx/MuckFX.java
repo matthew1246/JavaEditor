@@ -15,10 +15,11 @@ public class MuckFX {
 	public void setLayout() {
 		frame= new JFrame();
 		frame.setTitle("Class");
-		frame.setLocation(1000,100);
+		frame.setLocation(980,100);
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
 		textfield = new JTextField(15);
+		textfield.setText("JButton");
 		panel.add(textfield);
 		button=new JButton("run");
 		panel.add(button);
