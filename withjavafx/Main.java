@@ -159,6 +159,7 @@ public class Main {
 	
 	*/
 	public Main() {
+		msdos = new MSDOS(this);
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
 		fileName = "";
@@ -257,12 +258,12 @@ public class Main {
 	*/
 	public Main(OpenDefaultContent odc) {
 		try {
+		msdos = new MSDOS(this);
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git.Change(fileName);
-			msdos.setFileName(fileName);
 		}
 		setLayout();
 		if(fileName.equals("")) {
@@ -1327,7 +1328,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		}
 		return filename;
 	}
-	public MSDOS msdos = new MSDOS();
+	public MSDOS msdos;
 	public void open(String selected2) {
 		try {
 			// JOptionPane.showMessageDialog(null,deselected);
@@ -1341,8 +1342,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			if(selected2 == null) JOptionPane.showMessageDialog(null,"filename combox value is null");
 			
 			dir=dir+selected2;
-			
-			msdos.setFileName(dir);
 				
 			fileName = dir; // Might need uncomment to make Main.java work again.
 			//fileName = dir+".java";
@@ -1626,7 +1625,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			this.fileName=fileName;
 			
-			msdos.setFileName(fileName);
 			maven.Change(fileName);
 			git.Change(fileName);
 		});			
@@ -3342,7 +3340,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				*/
 				threecomboboxes.load(fileName);
 				expandable.open();
-				msdos.setFileName(fileName);
 				maven.Change(fileName);
 				git.Change(fileName);
 			} catch(IOException ex) {
@@ -3494,7 +3491,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
 				storeselectedfile4.set(fileName);
 				
-				msdos.setFileName(fileName);
 				maven.Change(fileName);
 				git.Change(fileName);
 			} catch(IOException ex) {
