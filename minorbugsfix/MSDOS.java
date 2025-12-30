@@ -1,19 +1,13 @@
 import javax.swing.*;
 import java.awt.event.*;
 public class MSDOS {
-	public static void main(String[] args) {
-		MSDOS msdos = new MSDOS();
-	}
-	private String filename;
 	private JTextField input;
 	private JButton run;
-	public MSDOS() {
+	private Main main;
+	public MSDOS(Main main) {
+		this.main =main;
 		setLayout();
 		setListeners();
-	}
-	public void setFileName(String fileName) {
-		if(fileName != null && !fileName.equals(""))
-			this.filename = fileName;
 	}
 	public void setLayout() {
 		JFrame frame = new JFrame();
@@ -33,7 +27,7 @@ public class MSDOS {
 		ActionListener actionlistener = new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				CommandLine commandline = new CommandLine();
-				String dir=filename.replaceAll("[^\\\\]+\\.java","");
+				String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
 				commandline.runWithMSDOS(input.getText(),dir);
 			}
 		};

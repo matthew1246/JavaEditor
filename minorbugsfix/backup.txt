@@ -17,7 +17,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddPlugin.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java"
     ],
     "caretposition": 0
   },
@@ -53,7 +54,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 124728
+    "caretposition": 6024
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -609,7 +610,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 398
+    "caretposition": 69
   },
   "C:\\Users\\Owner\\Documents\\aaaaaaaaa\\Main.java": {
     "startupcombobox": [],

@@ -160,7 +160,8 @@ public class Main {
 	
 	*/
 	public Main() {
-		threecomboboxes = new ThreeComboboxes(this);
+		msdos = new MSDOS(this);
+		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
 		fileName = "";
 		setLayout();
@@ -258,13 +259,13 @@ public class Main {
 	*/
 	public Main(OpenDefaultContent odc) 
 	{
+		msdos = new MSDOS(this);
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
 		try {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git.Change(fileName);
-			msdos.setFileName(fileName);
 		}
 		setLayout();
 		if(fileName.equals("")) {
@@ -1274,7 +1275,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		else
 			startercombobox.Change(filename);
 	}		
-	public MSDOS msdos = new MSDOS();
+	public MSDOS msdos;
 	public void open(String selected2) {
 		try {
 			// JOptionPane.showMessageDialog(null,deselected);
@@ -1288,8 +1289,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			if(selected2 == null) JOptionPane.showMessageDialog(null,"filename combox value is null");
 			
 			dir=dir+selected2;
-			
-			msdos.setFileName(dir);
 				
 			fileName = dir; // Might need uncomment to make Main.java work again.
 			//fileName = dir+".java";
@@ -3103,7 +3102,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				allclassesinfile.ChangeFile(textarea,fileName);
 				maven.Change(fileName);
-				msdos.setFileName(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3450,7 +3448,6 @@ class SaveActionListener implements ActionListener {
 			}
 			if(main.fileName != null && !main.fileName.equals("")) {
 				main.maven.Change(main.fileName);
-				main.msdos.setFileName(main.fileName);
 			}
 		}catch (FileNotFoundException ex) {
 			System.out.println(ex);
