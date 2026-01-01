@@ -90,7 +90,7 @@ public class ThreeComboboxes {
 		try {
 			RemoveClasscombo();			
 			if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
-			if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
+			// if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
 			LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
 				public void KeyAndValue(String key,Integer integer) {
 					main.classnamescombobox.addItem(key);
@@ -111,7 +111,7 @@ public class ThreeComboboxes {
 		try {
 			LinkedHashMap<String,Integer> classnames = getclassmethods.getClasses();
 			if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
-			if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
+			// if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
 			LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
 				public void KeyAndValue(String key,Integer integer) {
 					if(getclassname.isMainClass(integer)) {
