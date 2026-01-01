@@ -90,7 +90,7 @@ public class ThreeComboboxes {
 	public void classCombobox() {
 		try {
 			RemoveClasscombo();			
-			if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
+			// if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
 			// if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
 			LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
 				public void KeyAndValue(String key,Integer integer) {
