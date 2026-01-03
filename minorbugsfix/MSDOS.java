@@ -15,6 +15,8 @@ public class MSDOS {
 		
 		JPanel panel = new JPanel();
 		input =	new JTextField(17);
+		input.setText("del backup.txt");
+		
 		panel.add(input);
 		run = new JButton("run");
 		panel.add(run);
