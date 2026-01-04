@@ -18,7 +18,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddPlugin.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java"
     ],
     "caretposition": 0
   },
@@ -251,7 +252,9 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "AllVersionsJar"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -697,6 +700,6 @@
     "starterclass": "Muck",
     "jars": [],
     "fileNames": [],
-    "caretposition": 562
+    "caretposition": 715
   }
 }
