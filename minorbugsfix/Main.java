@@ -3501,7 +3501,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		tracker = new Tracker(main);
 		renamevariable=new RenameVariable(main);
 		positiontracker= new PositionTracker(main.textarea);
-		autokeylistener = new VariableSuggestionBox(main);
+		autokeylistener = new AutoKeyListener(main);
 	}
 	public boolean isEndOfFile() {
 		return main.textarea.getCaretPosition() == main.textarea.getText().length();
@@ -3513,7 +3513,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	private SelectedLines selectedlines;
 	public PositionTracker positiontracker;
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
-	public VariableSuggestionBox autokeylistener;	
+	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev)  {
 		if(ev.getKeyChar() != '?' && !ev.isControlDown())
 			lastkeycurlybracelistener = ev.getKeyChar();
@@ -3742,7 +3742,7 @@ class CurlyBraceKeyListener implements KeyListener {
 /*
 ** This is a Variable Automatic Suggestion Box.
 */
-class VariableSuggestionBox {
+class AutoKeyListener {
 	public JButton search_unique;
 	public List<String> data = new ArrayList<String>();
 	private JPanel panelgridlayout;
@@ -3750,7 +3750,7 @@ class VariableSuggestionBox {
 	public JFrame suggestionbox;
 	public JTextField search_textfield;
 	private GridLayout gridlayout;
-	public VariableSuggestionBox(Main main) {
+	public AutoKeyListener(Main main) {
 		this.main = main;
 	}
 	public String variablename;
@@ -3941,7 +3941,7 @@ class VariableSuggestionBox {
 			public void mouseClicked(MouseEvent me) {
 				Component label=panelgridlayout.getComponentAt(me.getPoint());
 				if(label instanceof JLabel) {
-					VariableSuggestionBox.this.EnterText(((JLabel)label).getText());
+					AutoKeyListener.this.EnterText(((JLabel)label).getText());
 				}
 			}
 		});
