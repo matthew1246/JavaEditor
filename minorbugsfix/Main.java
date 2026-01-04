@@ -3828,56 +3828,58 @@ class AutoKeyListener {
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
-				extra=extra+keyevent.getKeyChar();
-				count=count+1;
-				System.out.println("A "+keyevent.getKeyChar());
-				//two_keys_code = keyevent.getKeyCode();
-				if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-					List<JLabel> labels=getLabels();
-					JLabel selected_label=getSelected();
-					int selected_index = 0;
-					for(int i = 0; i < labels.size(); i++) {
-						if(selected_label.hashCode() == labels.get(i).hashCode()) {
-							selected_index = i;
-							break;
+				if(!isFinished) {
+						extra=extra+keyevent.getKeyChar();
+					count=count+1;
+					System.out.println("A "+keyevent.getKeyChar());
+					//two_keys_code = keyevent.getKeyCode();
+					if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
+						List<JLabel> labels=getLabels();
+						JLabel selected_label=getSelected();
+						int selected_index = 0;
+						for(int i = 0; i < labels.size(); i++) {
+							if(selected_label.hashCode() == labels.get(i).hashCode()) {
+								selected_index = i;
+								break;
+							}
+						}
+						selected_index++;
+						if(selected_index < labels.size()) {
+							// Turn off highlighted
+							selected_label.setOpaque(false);
+							selected_label.setBackground(new JLabel().getBackground());
+							selected_label=labels.get(selected_index);
+							// Make highlighted
+							selected_label.setOpaque(true);
+							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 						}
 					}
-					selected_index++;
-					if(selected_index < labels.size()) {
-						// Turn off highlighted
-						selected_label.setOpaque(false);
-						selected_label.setBackground(new JLabel().getBackground());
-						selected_label=labels.get(selected_index);
-						// Make highlighted
-						selected_label.setOpaque(true);
-						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
-					}
-				}
-				else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-					List<JLabel> labels=getLabels();
-					JLabel selected_label=getSelected();
-					int selected_index = 0;
-					for(int i = 0; i < labels.size(); i++) {
-						if(selected_label.hashCode() == labels.get(i).hashCode()) {
-							selected_index = i;
-							break;
+					else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
+						List<JLabel> labels=getLabels();
+						JLabel selected_label=getSelected();
+						int selected_index = 0;
+						for(int i = 0; i < labels.size(); i++) {
+							if(selected_label.hashCode() == labels.get(i).hashCode()) {
+								selected_index = i;
+								break;
+							}
+						}
+						selected_index--;
+						if(selected_index > -1) {
+							// Turn off highlighted
+							selected_label.setOpaque(false);
+							selected_label.setBackground(new JLabel().getBackground());
+							selected_label=labels.get(selected_index);
+							// Make highlighted
+							selected_label.setOpaque(true);
+							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 						}
 					}
-					selected_index--;
-					if(selected_index > -1) {
-						// Turn off highlighted
-						selected_label.setOpaque(false);
-						selected_label.setBackground(new JLabel().getBackground());
-						selected_label=labels.get(selected_index);
-						// Make highlighted
-						selected_label.setOpaque(true);
-						selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					else if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+						EnterText();
+						suggestionbox.dispose();
 					}
-				}
-				else if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					EnterText();
-					suggestionbox.dispose();
-				}
+				}
 			}
 			public int count_release = 0;
 			public boolean no_duplicate = false; 
