@@ -1,3 +1,4 @@
+import java.awt.Toolkit;
 import javax.swing.BoxLayout;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.Timer;
@@ -3927,7 +3928,12 @@ class AutoKeyListener {
 						}
 					}
 					else {
-						JOptionPane.showMessageDialog(null,"Variable Suggestion Box: "+keyevent.getKeyChar()+" key");
+						//JOptionPane.showMessageDialog(null,"Variable Suggestion Box: "+keyevent.getKeyChar()+" key");
+						System.out.println("AutoKeyListener.isFinished=true");
+						Toolkit.getDefaultToolkit().beep();
+						
+						main.targetArea = main.textarea;
+						main.targetArea.dispatchEvent(keyevent);
 					}
 				}
 			}
