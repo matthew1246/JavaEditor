@@ -463,9 +463,9 @@ public class Main {
 							try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
 										int caretposition = curlybracekeylistener.autokeylistener.position;
-										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
 										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
 										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
 									}
 								} catch (BadLocationException ex) {
@@ -476,9 +476,9 @@ public class Main {
 							try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
 										int caretposition = curlybracekeylistener.autokeylistener.position;
-										Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
 										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-										SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
 										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
 									}
 								} catch (BadLocationException ex) {
