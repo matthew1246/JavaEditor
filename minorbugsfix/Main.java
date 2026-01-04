@@ -3934,7 +3934,6 @@ class AutoKeyListener {
 						System.out.println("AutoKeyListener.isFinished=true");
 						Toolkit.getDefaultToolkit().beep();
 						
-						main.targetArea = main.textarea;
 						main.targetArea.dispatchEvent(keyevent);
 					}
 				}
