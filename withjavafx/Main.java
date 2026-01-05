@@ -4497,8 +4497,8 @@ class AutoKeyListener {
 				if(!extra.endsWith("."))		
 				afterextra=extra.substring(lastindexof+1,extra.length());
 				extra=extra.substring(0,lastindexof+1);
-				JOptionPane.showMessageDialog(null,extra);
-				JOptionPane.showMessageDialog(null,afterextra);
+				//JOptionPane.showMessageDialog(null,extra);
+				//JOptionPane.showMessageDialog(null,afterextra);
 			}
 			
 			main.textarea.setText(first+extra+second);
@@ -4510,10 +4510,11 @@ class AutoKeyListener {
 				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
 				//main.curlybracekeylistener.keyPressed(keyevent);
 				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
+				
 				main.textarea.dispatchEvent(keyevent2);
 				if(!afterextra.equals("")) {
 					for(int i = 0; i < afterextra.length(); i++) {
-						main.targetArea.dispatchEvent(new KeyEvent(main.targetArea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i)));
+						main.targetArea.dispatchEvent(new KeyEvent(main.targetArea,KeyEvent.KEY_RELEASED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i)));
 					}
 				}
 			}
