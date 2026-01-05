@@ -3745,11 +3745,13 @@ class AutoKeyListener {
 		main.targetArea = search_textfield;
 		setListeners();
 		fillComboBox();
-		suggestionbox.setVisible(true);
-		SwingUtilities.invokeLater(() -> {
-			search_textfield.requestFocusInWindow();
-			main.targetArea = search_textfield;
+		suggestionbox.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+        				search_textfield.requestFocusInWindow();
+    			}
 		});
+		suggestionbox.setVisible(true);
 	}
 	public int position;
 	public void setLayout() {
@@ -4131,6 +4133,7 @@ class AutoKeyListener {
 				main.textarea.dispatchEvent(keyevent2);
 				if(!afterextra.equals("")) {
 					MethodSuggestionBox methodsuggestionbox= ((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).methodsuggestionbox;
+					SwingUtilities.invokeLater(() -> methodsuggestionbox.search_textfield.requestFocusInWindow());
 					main.targetArea = methodsuggestionbox.search_textfield;
 					Component msb2=(Component)methodsuggestionbox.search_textfield;
 					for(int i = 0; i < afterextra.length(); i++) {
