@@ -4513,8 +4513,20 @@ class AutoKeyListener {
 				
 				main.textarea.dispatchEvent(keyevent2);
 				if(!afterextra.equals("")) {
+					MethodSuggestionBox methodsuggestionbox= ((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).methodsuggestionbox;
+					main.targetArea = methodsuggestionbox.search_textfield;
+					Component msb2=(Component)methodsuggestionbox.search_textfield;
 					for(int i = 0; i < afterextra.length(); i++) {
-						main.targetArea.dispatchEvent(new KeyEvent(main.targetArea,KeyEvent.KEY_RELEASED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i)));
+						String oldplusnew = methodsuggestionbox.search_textfield.getText()+afterextra.charAt(i);
+						methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
+						methodsuggestionbox.position = methodsuggestionbox.position+1;
+						methodsuggestionbox.setLocation(methodsuggestionbox.position);				
+						methodsuggestionbox.search_textfield.setText(oldplusnew);
+						
+						KeyEvent keyevent4=  new KeyEvent(msb2,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i));
+						methodsuggestionbox.search_textfield.dispatchEvent(keyevent4);
+						KeyEvent keyevent3= new KeyEvent(msb2,KeyEvent.KEY_RELEASED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i));
+						methodsuggestionbox.search_textfield.dispatchEvent(keyevent3);
 					}
 				}
 			}
