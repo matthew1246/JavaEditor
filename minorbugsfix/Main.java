@@ -3746,6 +3746,10 @@ class AutoKeyListener {
 		setListeners();
 		fillComboBox();
 		suggestionbox.setVisible(true);
+		SwingUtilities.invokeLater(() -> {
+			search_textfield.requestFocusInWindow();
+			main.targetArea = search_textfield;
+		});
 	}
 	public int position;
 	public void setLayout() {
@@ -3905,7 +3909,7 @@ class AutoKeyListener {
 						}
 					}
 					else {
-						main.targetArea = main.textarea;
+						//main.targetArea = main.textarea;
 						main.targetArea.dispatchEvent(keyevent);
 					}
 				}
