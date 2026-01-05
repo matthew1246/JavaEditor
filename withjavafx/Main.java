@@ -4510,6 +4510,9 @@ class AutoKeyListener {
 				main.textarea.dispatchEvent(keyevent2);
 				if(!afterextra.equals("")) {
 					MethodSuggestionBox methodsuggestionbox= ((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).methodsuggestionbox;
+										SwingUtilities.invokeLater(() -> {
+						methodsuggestionbox.search_textfield.requestFocusInWindow();
+					});		
 					main.targetArea = methodsuggestionbox.search_textfield;
 					Component msb2=(Component)methodsuggestionbox.search_textfield;
 					for(int i = 0; i < afterextra.length(); i++) {
