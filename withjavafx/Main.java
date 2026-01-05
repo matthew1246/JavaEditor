@@ -4518,8 +4518,8 @@ class AutoKeyListener {
 					Component msb2=(Component)methodsuggestionbox.search_textfield;
 					for(int i = 0; i < afterextra.length(); i++) {
 						String oldplusnew = methodsuggestionbox.search_textfield.getText()+afterextra.charAt(i);
-						methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
-						methodsuggestionbox.position = methodsuggestionbox.position+1;
+						//methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
+						//methodsuggestionbox.position = methodsuggestionbox.position+1;
 						methodsuggestionbox.setLocation(methodsuggestionbox.position);				
 						methodsuggestionbox.search_textfield.setText(oldplusnew);
 						
