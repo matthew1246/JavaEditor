@@ -541,9 +541,8 @@ public class Main {
 		}catch(ArrayIndexOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}
-		Thread thread = new Thread(new Runnable() {
-			@Override	
-			public void run() {
+		try {
+			SwingUtilities.invokeAndWait(() -> {
 				Main.muck = new MuckFX();
 				setFullPackageNames();		
 				setSubpackages();
@@ -552,9 +551,10 @@ public class Main {
 				setKeywords();
 				setAllClassesInFile();
 				setAllClassesInFolder();
-			}
-		});
-		thread.start();
+			});
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		try {
 			SwingUtilities.invokeAndWait(() -> {
 				openLastSelectedLine();
@@ -563,10 +563,16 @@ public class Main {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		threecomboboxes.load(fileName);
-		expandable.open();
-		maven.Change(fileName);
-		git.Change(fileName);
+		try {
+			SwingUtilities.invokeAndWait(() -> {
+				threecomboboxes.load(fileName);
+				expandable.open();
+				maven.Change(fileName);
+				git.Change(fileName);
+			});
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		int caretposition = -1;
