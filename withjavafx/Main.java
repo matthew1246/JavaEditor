@@ -5259,10 +5259,11 @@ class MethodSuggestionBox {
 						main.textarea.setCaretPosition(caretposition+1+selected.length());
 					}
 					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-						String methodname0=search_textfield.getText();
-						setExtra(methodname0);
+						//String methodname0=search_textfield.getText();
+						//setExtra(methodname0);
 						if(!isFinished) {
-							String methodname = getExtra();
+							//String methodname = getExtra();
+							String methodname = search_textfield.getText();
 							
 							/*if(!two_keys.equals(methodname)) {
 								methodname = two_keys;
