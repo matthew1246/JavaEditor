@@ -4494,6 +4494,7 @@ class AutoKeyListener {
 			
 			suggestionbox.setVisible(false);
 			
+			JOptionPane.showMessageDialog(null,"extra:"+extra);
 			if(extra.charAt((extra.length()-1)) == '.') {
 				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
 				//main.curlybracekeylistener.keyPressed(keyevent);
