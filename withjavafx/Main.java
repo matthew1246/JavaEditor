@@ -5191,7 +5191,7 @@ class MethodSuggestionBox {
 				int selected_index = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
-					System.out.println("F");		
+					System.out.println("F: "+keyevent.getKeyChar());		
 					setExtra(getExtra()+keyevent.getKeyChar());
 					//two_keys = two_keys+keyevent.getKeyChar();
 					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -5246,7 +5246,7 @@ class MethodSuggestionBox {
 				public String ifSearchTwice = "";
 				@Override
 				public void keyReleased(KeyEvent keyevent) {
-					System.out.println("G");
+					System.out.println("G: "+keyevent.getKeyChar());
 					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 						isFinished = true;
 						main.targetArea = main.textarea;
