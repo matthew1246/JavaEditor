@@ -4291,7 +4291,7 @@ class AutoKeyListener {
 						//JOptionPane.showMessageDialog(null,"Variable Suggestion Box: "+keyevent.getKeyChar()+" key");
 						System.out.println("AutoKeyListener.isFinished=true");
 						Toolkit.getDefaultToolkit().beep();
-						
+						main.targetArea = main.textarea;
 						main.targetArea.dispatchEvent(keyevent);
 					}
 				}
