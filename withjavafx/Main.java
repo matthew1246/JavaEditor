@@ -5274,6 +5274,7 @@ class MethodSuggestionBox {
 							String methodname = search_textfield.getText();
 							if(!methodname.endsWith(".") && !methodname.endsWith(keyevent.getKeyChar()+"")) {
 								methodname+=keyevent.getKeyChar()+"";
+								search_textfield.setText(methodname);
 							}
 							// JOptionPane.showMessageDialog(null,methodname);
 							
