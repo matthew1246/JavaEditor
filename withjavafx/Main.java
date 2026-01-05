@@ -3967,19 +3967,10 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
 		// Add if (!ev.isActionKey()) instead of ev.getKeyCode != 16 
-		if(ev.getKeyCode() != 16 && !ev.isControlDown() && lastkeycurlybracelistener != ev.getKeyChar()) {
+		if(ev.getKeyCode() != 16 && !ev.isControlDown()) {
 			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
-					if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
-					//JOptionPane.showMessageDialog(null,"two characters");
-								
-					String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
-					methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
-					methodsuggestionbox.position = methodsuggestionbox.position+1;
-					methodsuggestionbox.setLocation(methodsuggestionbox.position);
-					methodsuggestionbox.search_textfield.setText(oldplusnew);
-				}
-				else {
-					methodsuggestionbox= new MethodSuggestionBox(main);
+				if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
+					main.targetArea = methodsuggestionbox.search_textfield;
 				}
 			}
 			/**
@@ -3997,24 +3988,9 @@ class CurlyBraceKeyListener implements KeyListener {
 			
 			if( (line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
 				if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
-					String oldplusnew = autokeylistener.search_textfield.getText()+ev.getKeyChar();
-					autokeylistener.variablename = oldplusnew;
-					autokeylistener.position = autokeylistener.position+1;
-					autokeylistener.setLocation(autokeylistener.position);
-					autokeylistener.search_textfield.setText(oldplusnew);
-				}
-				else {
-					Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
-					Matcher matcher=pattern.matcher(line);
-					if(matcher.find()) {
-						String variablename = matcher.group(1);
-						if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-							autokeylistener.open(variablename,caretposition);
-						}
-					}
+					main.targetArea = autokeylistener.search_textfield;	
 				}
 			}
-			return;
 		}
 				
 		System.out.println("D: "+ev.getKeyChar()+ev.getKeyCode());
@@ -5264,6 +5240,7 @@ class MethodSuggestionBox {
 						if(!isFinished) {
 							//String methodname = getExtra();
 							String methodname = search_textfield.getText();
+							// JOptionPane.showMessageDialog(null,methodname);
 							
 							/*if(!two_keys.equals(methodname)) {
 								methodname = two_keys;
@@ -5362,9 +5339,9 @@ class MethodSuggestionBox {
 							panelgridlayout.repaint();
 							suggestionbox.pack();	
 						}
-					}
-					else {
-						JOptionPane.showMessageDialog(null,"Method Suggestion Box: "+keyevent.getKeyChar()+" key");	
+						else {
+							JOptionPane.showMessageDialog(null,"Method Suggestion Box: "+keyevent.getKeyChar()+" key");	
+						}
 					}
 				}
 				public boolean isSelected() {
@@ -5377,8 +5354,6 @@ class MethodSuggestionBox {
 				@Override
 				public void keyTyped(KeyEvent ev) { }
 			};
-			
-			main.targetArea=search_textfield;
 			
 			search_textfield.addKeyListener(keylistener);
 			//methodscombobox.getEditor().getEditorComponent().addKeyListener(keylistener);
