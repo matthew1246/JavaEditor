@@ -4522,7 +4522,7 @@ class AutoKeyListener {
 						KeyEvent keyevent4=  new KeyEvent(msb2,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i));
 						methodsuggestionbox.search_textfield.dispatchEvent(keyevent4);
 						KeyEvent keyevent3= new KeyEvent(msb2,KeyEvent.KEY_RELEASED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i));
-						methodsuggestionbox.search_textfield.dispatchEvent(keyevent3);
+						methodsuggestionbox.search_textfield.dispatchEvent(keyevent3);			
 					}
 				}
 			}
@@ -5272,6 +5272,9 @@ class MethodSuggestionBox {
 						if(!isFinished) {
 							//String methodname = getExtra();
 							String methodname = search_textfield.getText();
+							if(!methodname.endsWith(".") && !methodname.endsWith(keyevent.getKeyChar()+"")) {
+								methodname+=keyevent.getKeyChar()+"";
+							}
 							// JOptionPane.showMessageDialog(null,methodname);
 							
 							/*if(!two_keys.equals(methodname)) {
