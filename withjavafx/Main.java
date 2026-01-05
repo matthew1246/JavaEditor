@@ -4129,6 +4129,10 @@ class AutoKeyListener {
 		setListeners();
 		fillComboBox();
 		suggestionbox.setVisible(true);
+		SwingUtilities.invokeLater(() -> {
+			search_textfield.requestFocusInWindow();
+			main.targetArea = search_textfield;
+		});
 	}
 	public int position;
 	public void setLayout() {
@@ -4288,7 +4292,7 @@ class AutoKeyListener {
 						}
 					}
 					else {
-						main.targetArea = main.textarea;
+						//main.targetArea = main.textarea;
 						main.targetArea.dispatchEvent(keyevent);
 					}
 				}
@@ -4510,9 +4514,6 @@ class AutoKeyListener {
 				main.textarea.dispatchEvent(keyevent2);
 				if(!afterextra.equals("")) {
 					MethodSuggestionBox methodsuggestionbox= ((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).methodsuggestionbox;
-										SwingUtilities.invokeLater(() -> {
-						methodsuggestionbox.search_textfield.requestFocusInWindow();
-					});		
 					main.targetArea = methodsuggestionbox.search_textfield;
 					Component msb2=(Component)methodsuggestionbox.search_textfield;
 					for(int i = 0; i < afterextra.length(); i++) {
@@ -4723,7 +4724,6 @@ class AutoKeyListener {
 	}
 
 }
-
 class MethodSuggestionBox {
 	public int replacelength = 1;
 	public int position;
@@ -5275,7 +5275,7 @@ class MethodSuggestionBox {
 						if(!isFinished) {
 							//String methodname = getExtra();
 							String methodname = search_textfield.getText();
-							if(!methodname.equals("") && !methodname.endsWith(".") && !methodname.endsWith(keyevent.getKeyChar()+"")) {
+							if(!methodname.endsWith(".") && !methodname.endsWith(keyevent.getKeyChar()+"")) {
 								methodname+=keyevent.getKeyChar()+"";
 								search_textfield.setText(methodname);
 							}
@@ -5489,7 +5489,6 @@ class MethodSuggestionBox {
 		}
 	}
 }
-
 class RightClick extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent me) {
