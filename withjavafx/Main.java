@@ -3921,18 +3921,15 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;	
 		}		
 		if( (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
-			if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
-				//JOptionPane.showMessageDialog(null,"two characters");
-							
-				String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
-				methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
-				methodsuggestionbox.position = methodsuggestionbox.position+1;
-				methodsuggestionbox.setLocation(methodsuggestionbox.position);
-				methodsuggestionbox.search_textfield.setText(oldplusnew);
-			}
-			else {
-				methodsuggestionbox= new MethodSuggestionBox(main);
-			}
+			methodsuggestionbox= new MethodSuggestionBox(main);
+		}
+		else if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {			
+			//JOptionPane.showMessageDialog(null,"two characters");
+			String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
+			methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
+			methodsuggestionbox.position = methodsuggestionbox.position+1;
+			methodsuggestionbox.setLocation(methodsuggestionbox.position);				
+			methodsuggestionbox.search_textfield.setText(oldplusnew);
 		}
 		/**
 		** This is a variable suggestion box not a method
