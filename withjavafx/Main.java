@@ -4287,13 +4287,14 @@ class AutoKeyListener {
 							EnterTextPlusExtra();
 						}
 					}
-					else {
+					/*else {
 						//JOptionPane.showMessageDialog(null,"Variable Suggestion Box: "+keyevent.getKeyChar()+" key");
 						System.out.println("AutoKeyListener.isFinished=true");
 						Toolkit.getDefaultToolkit().beep();
 						main.targetArea = main.textarea;
 						main.targetArea.dispatchEvent(keyevent);
 					}
+					*/
 				}
 			}
 			@Override
@@ -4489,18 +4490,39 @@ class AutoKeyListener {
 			*/
 			String extra = getExtra();
 			
+			String afterextra = "";
+			int lastindexof = 0;
+			if(extra.contains(".")) {
+				lastindexof = extra.lastIndexOf(".");
+				if(!extra.endsWith("."))		
+				afterextra=extra.substring(lastindexof+1,extra.length());
+				extra=extra.substring(0,lastindexof+1);
+				JOptionPane.showMessageDialog(null,extra);
+				JOptionPane.showMessageDialog(null,afterextra);
+			}
+			
 			main.textarea.setText(first+extra+second);
 			main.textarea.setCaretPosition(first.length()+extra.length());
 			
 			suggestionbox.setVisible(false);
 			
-			JOptionPane.showMessageDialog(null,"extra:"+extra);
-			if(extra.charAt((extra.length()-1)) == '.') {
+			if(extra.contains(".")) {
 				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
 				//main.curlybracekeylistener.keyPressed(keyevent);
 				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
 				main.textarea.dispatchEvent(keyevent2);
+				if(!afterextra.equals("")) {
+					for(int i = 0; i < afterextra.length(); i++) {
+						main.targetArea.dispatchEvent(new KeyEvent(main.targetArea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i)));
+					}
+				}
 			}
+			/*if(extra.charAt((extra.length()-1)) == '.') {
+				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
+				//main.curlybracekeylistener.keyPressed(keyevent);
+				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
+				main.textarea.dispatchEvent(keyevent2);
+			}*/
 		});
 	}
 
