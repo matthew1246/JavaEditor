@@ -3549,6 +3549,8 @@ class CurlyBraceKeyListener implements KeyListener {
 			}
 			else {
 				methodsuggestionbox= new MethodSuggestionBox(main);
+				main.targetArea = methodsuggestionbox.search_textfield;
+				methodsuggestionbox.search_textfield.dispatchEvent(ev);
 			}
 		}
 		/**
