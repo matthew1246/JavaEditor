@@ -3804,14 +3804,14 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 	}
-	public String extra = "";
+	public StringBuilder extra;
 	public void setListeners() {
 		suggestionbox.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				EnterText();
 			}
 		});
-		extra = "";
+		extra = new StringBuilder();
 		search_textfield.addKeyListener(new KeyListener() {
 			boolean isFinished = false;
 			int count = 0;
@@ -3819,8 +3819,8 @@ class AutoKeyListener {
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
 				System.out.println("A "+keyevent.getKeyChar());
-				if(keyevent.getKeyChar() != '?')
-				extra=extra+keyevent.getKeyChar();
+				if(keyevent.getKeyChar() != keyevent.CHAR_UNDEFINED)
+				extra=extra.append(keyevent.getKeyChar());
 				if(!isFinished) {
 					count=count+1;
 					//two_keys_code = keyevent.getKeyCode();
@@ -3939,10 +3939,10 @@ class AutoKeyListener {
 			}
 		});
 	}
-	public void setExtra(String extra) {
+	public void setExtra(StringBuilder extra) {
 		this.extra = extra;
 	}
-	public String getExtra() {
+	public StringBuilder getExtra() {
 		return extra;
 	}
 	public String getInput() {
@@ -4115,7 +4115,7 @@ class AutoKeyListener {
 			System.out.println(second);
 			System.out.println("End");
 			*/
-			String extra = getExtra();
+			String extra = getExtra().toString();
 			
 			String afterextra = "";
 			int lastindexof = 0;
