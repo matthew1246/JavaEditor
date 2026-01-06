@@ -3591,9 +3591,13 @@ class CurlyBraceKeyListener implements KeyListener {
 	public void keyReleased(KeyEvent ev) {
 		// Add if (!ev.isActionKey()) instead of ev.getKeyCode != 16 
 		if(ev.getKeyCode() != 16 && !ev.isControlDown()) {
-			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+			if( !ev.isControlDown() && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 				if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
-					main.targetArea = methodsuggestionbox.search_textfield;
+					String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
+					//methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
+					//methodsuggestionbox.position = methodsuggestionbox.position+1;
+					methodsuggestionbox.setLocation(methodsuggestionbox.position);				
+					methodsuggestionbox.search_textfield.setText(oldplusnew);
 				}
 			}
 			/**
@@ -3814,10 +3818,11 @@ class AutoKeyListener {
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
+				System.out.println("A "+keyevent.getKeyChar());
+				if(keyevent.getKeyChar() != '?')
+				extra=extra+keyevent.getKeyChar();
 				if(!isFinished) {
-						extra=extra+keyevent.getKeyChar();
 					count=count+1;
-					System.out.println("A "+keyevent.getKeyChar());
 					//two_keys_code = keyevent.getKeyCode();
 					if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 						List<JLabel> labels=getLabels();
@@ -3892,9 +3897,6 @@ class AutoKeyListener {
 					}
 				}
 				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-					if(extra.equals("")) {
-						extra = String.valueOf(keyevent.getKeyChar());
-					}
 					if(!isFinished) {
 						String input = search_textfield.getText();
 						
@@ -3906,18 +3908,18 @@ class AutoKeyListener {
 							}
 							else {
 								isFinished=true;
-								setExtra(input);
+								//setExtra(input);
 								EnterTextPlusExtra();
 							}
 						}
 						else if(input.length() > 0 && (input.charAt((input.length()-1)) == '.') ) {
 							isFinished=true;
-							setExtra(input);
+							//setExtra(input);
 							EnterTextPlusExtra();
 						}
 					}
 					else {
-						//main.targetArea = main.textarea;
+						main.targetArea = main.textarea;
 						main.targetArea.dispatchEvent(keyevent);
 					}
 				}
