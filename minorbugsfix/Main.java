@@ -3812,6 +3812,7 @@ class AutoKeyListener {
 			}
 		});
 		extra = new StringBuilder();
+		extra.append(variablename);
 		search_textfield.addKeyListener(new KeyListener() {
 			boolean isFinished = false;
 			int count = 0;
