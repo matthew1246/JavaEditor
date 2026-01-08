@@ -153,6 +153,7 @@ public class Main {
 	//public String value="load_program.ser";
 	public MouseAdapter rightclick = new RightClick();
 	public ThreeComboboxes threecomboboxes;
+	public StringBuilder extra = new StringBuilder();
 	public static void main(String[] args) 	{  
 		Main main = new Main(new OpenDefaultContent());
 	}
@@ -3807,15 +3808,14 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 	}
-	public StringBuilder extra;
 	public void setListeners() {
 		suggestionbox.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				EnterText();
 			}
 		});
-		extra = new StringBuilder();
-		extra.append(variablename);
+		main.extra= new StringBuilder();
+		main.extra.append(variablename);
 		search_textfield.addKeyListener(new KeyListener() {
 			boolean isFinished = false;
 			int count = 0;
@@ -3824,7 +3824,7 @@ class AutoKeyListener {
 			public void keyPressed(KeyEvent keyevent) {
 				System.out.println("A "+keyevent.getKeyChar());
 				if(keyevent.getKeyChar() != keyevent.CHAR_UNDEFINED)
-				extra=extra.append(keyevent.getKeyChar());
+				AutoKeyListener.this.main.extra.append(keyevent.getKeyChar());
 				if(!isFinished) {
 					count=count+1;
 					//two_keys_code = keyevent.getKeyCode();
@@ -3942,12 +3942,6 @@ class AutoKeyListener {
 				}
 			}
 		});
-	}
-	public void setExtra(StringBuilder extra) {
-		this.extra = extra;
-	}
-	public StringBuilder getExtra() {
-		return extra;
 	}
 	public String getInput() {
 		return search_textfield.getText().trim();
@@ -4119,7 +4113,7 @@ class AutoKeyListener {
 			System.out.println(second);
 			System.out.println("End");
 			*/
-			String extra = getExtra().toString();
+			String extra = main.extra.toString();
 			
 			String afterextra = "";
 			int lastindexof = 0;
@@ -4379,7 +4373,9 @@ class MethodSuggestionBox {
 			if(matcher0.find()) {
 				currentline = matcher0.group(2);
 				//JOptionPane.showMessageDialog(null,currentline);
-									
+				
+				if(main.extra.length() != 0)
+				currentline = main.extra.toString();
 				Object[] allobjects=search(currentline);
 				if(allobjects.length > 0)
 					show(allobjects,caretposition,currentline);	

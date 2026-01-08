@@ -55,7 +55,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 133141
+    "caretposition": 161297
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
