@@ -3544,7 +3544,8 @@ class CurlyBraceKeyListener implements KeyListener {
 			break;	
 		}		
 		if( (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
-			methodsuggestionbox= new MethodSuggestionBox(main);
+			SwingUtilities.invokeLater(() -> {									methodsuggestionbox= new MethodSuggestionBox(main);
+			});
 		}
 		else if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {			
 			//JOptionPane.showMessageDialog(null,"two characters");
