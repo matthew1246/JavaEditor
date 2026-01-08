@@ -4092,7 +4092,6 @@ class AutoKeyListener {
 		});
 	}
 	public void EnterTextPlusExtra() {
-		SwingUtilities.invokeLater(() -> {
 			main.targetArea = main.textarea;
 			String text = main.textarea.getText();
 			//JOptionPane.showMessageDialog(null,caretposition+"");
@@ -4137,7 +4136,7 @@ class AutoKeyListener {
 				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
 				
 				main.textarea.dispatchEvent(keyevent2);
-				if(!afterextra.equals("")) {
+				/*if(!afterextra.equals("")) {
 					MethodSuggestionBox methodsuggestionbox= ((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).methodsuggestionbox;
 					SwingUtilities.invokeLater(() -> methodsuggestionbox.search_textfield.requestFocusInWindow());
 					main.targetArea = methodsuggestionbox.search_textfield;
@@ -4154,7 +4153,7 @@ class AutoKeyListener {
 						KeyEvent keyevent3= new KeyEvent(msb2,KeyEvent.KEY_RELEASED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(afterextra.charAt(i)),afterextra.charAt(i));
 						methodsuggestionbox.search_textfield.dispatchEvent(keyevent3);			
 					}
-				}
+				}*/
 			}
 			/*if(extra.charAt((extra.length()-1)) == '.') {
 				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
@@ -4162,7 +4161,6 @@ class AutoKeyListener {
 				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
 				main.textarea.dispatchEvent(keyevent2);
 			}*/
-		});
 	}
 
 	public JLabel getSelected() {
