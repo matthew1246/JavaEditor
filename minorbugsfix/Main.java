@@ -3581,7 +3581,9 @@ class CurlyBraceKeyListener implements KeyListener {
 				if(matcher.find()) {
 					String variablename = matcher.group(1);
 					if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
-						autokeylistener.open(variablename,caretposition);
+						SwingUtilities.invokeLater(() -> {
+							autokeylistener.open(variablename,caretposition);
+						});
 					}
 				}
 			}
