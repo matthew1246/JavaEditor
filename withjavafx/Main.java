@@ -1,5 +1,4 @@
-import javax.swing.Timer;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.Time javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
 import java.awt.event.InputEvent;
@@ -4278,12 +4277,13 @@ class AutoKeyListener {
 					if(extra.equals("")) {
 						extra = String.valueOf(keyevent.getKeyChar());
 					}
+SwingUtilities.invokeLater(() -> {
 					if(!isFinished) {
 						String input = search_textfield.getText();
 						
 						//System.out.println(count+ " "+count_release);
 							
-						if(input.length() > 0 && input.charAt((input.length()-1)) != '.') {
+						if(input.length() > 0 && !input.contains('.')) {
 							if(search(input)) {
 								fillComboBox();
 							}
@@ -4293,7 +4293,7 @@ class AutoKeyListener {
 								EnterTextPlusExtra();
 							}
 						}
-						else if(input.length() > 0 && (input.charAt((input.length()-1)) == '.') ) {
+						else if(input.length() > 0 && input.contains('.') ) {
 							isFinished=true;
 							setExtra(input);
 							EnterTextPlusExtra();
@@ -4303,6 +4303,7 @@ class AutoKeyListener {
 						//main.targetArea = main.textarea;
 						main.targetArea.dispatchEvent(keyevent);
 					}
+});
 				}
 			}
 			@Override
