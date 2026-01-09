@@ -154,8 +154,10 @@ public class Main {
 	public MouseAdapter rightclick = new RightClick();
 	public ThreeComboboxes threecomboboxes;
 	public StringBuilder extra = new StringBuilder();
-	public static void main(String[] args) 	{  
-		Main main = new Main(new OpenDefaultContent());
+	public static void main(String[] args) {  
+		SwingUtilities.invokeLater(() -> {
+			Main main = new Main(new OpenDefaultContent());
+		});
 	}
 	/*
 	** If have no default content for window
@@ -270,6 +272,10 @@ public class Main {
 			git.Change(fileName);
 		}
 		setLayout();
+		setFullPackageNames();		
+		setSubpackages();
+		setPackages();
+		setKeywords();
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
@@ -432,7 +438,6 @@ public class Main {
 		
 			}
 			else { // if(tabs.size() > 1) {
-				SwingUtilities.invokeAndWait(() -> {
 					int count = -1;
 					for(String directoryandfilename:tabs) {
 						try {
@@ -524,7 +529,6 @@ public class Main {
 							ex.printStackTrace();
 						}
 					}
-				});
 				fileNames = tabs;
 				tabbedpane.addTab("+",pluspanel);
 				
@@ -542,42 +546,40 @@ public class Main {
 			}
 		}
 		setListeners();	
-		} catch(InvocationTargetException ex) {
+		/*} catch(InvocationTargetException ex) {
 			ex.printStackTrace();
 		} catch(InterruptedException ex) {
-			ex.printStackTrace();								
+			ex.printStackTrace();
+		*/								
 		}catch(ArrayIndexOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}
 		try {
-			SwingUtilities.invokeAndWait(() -> {
+			new Thread(() -> {
 				Main.muck = new Muck();
-				setFullPackageNames();		
-				setSubpackages();
-				setPackages();
-				setApiClasses();				
-				setKeywords();
-				setAllClassesInFile();
-				setAllClassesInFolder();
-			});
+			
+				SwingUtilities.invokeLater(() -> {
+					setApiClasses();				
+					setAllClassesInFile();
+					setAllClassesInFolder();
+				});
+			}).start();
+			
+						
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		try {
-			SwingUtilities.invokeAndWait(() -> {
 				openLastSelectedLine();
 				setStarterClassBoxes(fileName);
-			});
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}		
 		try {
-			SwingUtilities.invokeAndWait(() -> {
 				maven.Change(fileName);
 				threecomboboxes.load(fileName);
 				expandable.open();
 				git.Change(fileName);	
-			});
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -3523,9 +3525,9 @@ class CurlyBraceKeyListener implements KeyListener {
 	public static VariableSuggestionBoxSelected variablesuggestionboxselected= new VariableSuggestionBoxSelected();	
 	public AutoKeyListener autokeylistener;	
 	public void keyPressed(KeyEvent ev)  {
+		System.out.println("C: "+ev.getKeyChar() + " "+ev.getKeyCode());
 		if(ev.getKeyChar() != '?' && !ev.isControlDown())
 			lastkeycurlybracelistener = ev.getKeyChar();
-		System.out.println("C: "+ev.getKeyChar() + " "+ev.getKeyCode());
 		positiontracker.startTracking();		
 		switch(ev.getKeyCode()) {
 			case KeyEvent.VK_SHIFT:
@@ -3594,36 +3596,6 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean is_content_update = false;
 	public void keyReleased(KeyEvent ev) {
 		// Add if (!ev.isActionKey()) instead of ev.getKeyCode != 16 
-		if(ev.getKeyCode() != 16 && !ev.isControlDown()) {
-			if( !ev.isControlDown() && (autokeylistener == null || !autokeylistener.isVisible()) ) {
-				if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
-					String oldplusnew = methodsuggestionbox.search_textfield.getText()+ev.getKeyChar();
-					//methodsuggestionbox.replacelength = methodsuggestionbox.replacelength+1;
-					//methodsuggestionbox.position = methodsuggestionbox.position+1;
-					methodsuggestionbox.setLocation(methodsuggestionbox.position);				
-					methodsuggestionbox.search_textfield.setText(oldplusnew);
-				}
-			}
-			/**
-			** This is a variable suggestion box not a method
-			** suggestionbox.
-			*/
-			int caretposition = main.textarea.getCaretPosition();
-			//JOptionPane.showMessageDialog(null,caretposition+"");
-			
-			Middle middle = new Middle(main.textarea);
-			String line=middle.getCurrentLine();
-			line=line+ev.getKeyChar();
-			
-			
-			
-			if( (line.length() > 1 && !ev.isControlDown()) && (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) ) {
-				if(autokeylistener.suggestionbox != null && autokeylistener.suggestionbox.isVisible()) {
-					main.targetArea = autokeylistener.search_textfield;	
-				}
-			}
-		}
-				
 		System.out.println("D: "+ev.getKeyChar()+ev.getKeyCode());
 		if(!ev.isControlDown() && ( ev.getKeyCode() != KeyEvent.VK_Z || ev.getKeyCode() != KeyEvent.VK_Y) ) {
 			positiontracker.add();
@@ -3883,50 +3855,50 @@ class AutoKeyListener {
 			public void keyReleased(KeyEvent keyevent) {
 				count_release=count_release+1;
 				System.out.println("B "+keyevent.getKeyChar());
-				if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-					isFinished= true;
-					String text = main.textarea.getText();	
-					String selected = search_textfield.getText().trim();
-					JLabel selected_label2 =getSelected();
-					if(selected_label2.getText().startsWith(selected)) {
-						CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
-						EnterText(selected_label2.getText());
+						if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
+						isFinished= true;
+						String text = main.textarea.getText();	
+						String selected = search_textfield.getText().trim();
+						JLabel selected_label2 =getSelected();
+						if(selected_label2.getText().startsWith(selected)) {
+							CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
+							EnterText(selected_label2.getText());
+						}
+						else if(selected_label2.getText().contains(".")) {
+							CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
+							EnterText(selected_label2.getText());
+						}
+						else {
+							EnterText();
+						}
 					}
-					else if(selected_label2.getText().contains(".")) {
-						CurlyBraceKeyListener.variablesuggestionboxselected.Save(selected,selected_label2.getText());
-						EnterText(selected_label2.getText());
-					}
-					else {
-						EnterText();
-					}
-				}
-				else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-					if(!isFinished) {
-						String input = search_textfield.getText();
-						
-						//System.out.println(count+ " "+count_release);
+					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+						if(!isFinished) {
+							String input = search_textfield.getText();
 							
-						if(input.length() > 0 && input.charAt((input.length()-1)) != '.') {
-							if(search(input)) {
-								fillComboBox();
+							//System.out.println(count+ " "+count_release);
+								
+							if(input.length() > 0 && input.charAt((input.length()-1)) != '.') {
+								if(search(input)) {
+									fillComboBox();
+								}
+								else {
+									isFinished=true;
+									//setExtra(input);
+									EnterTextPlusExtra();
+								}
 							}
-							else {
+							else if(input.length() > 0 && (input.charAt((input.length()-1)) == '.') ) {
 								isFinished=true;
 								//setExtra(input);
 								EnterTextPlusExtra();
 							}
 						}
-						else if(input.length() > 0 && (input.charAt((input.length()-1)) == '.') ) {
-							isFinished=true;
-							//setExtra(input);
-							EnterTextPlusExtra();
+						else {
+							main.targetArea = main.textarea;
+							main.targetArea.dispatchEvent(keyevent);
 						}
 					}
-					else {
-						main.targetArea = main.textarea;
-						main.targetArea.dispatchEvent(keyevent);
-					}
-				}
 			}
 			@Override
 			public void keyTyped(KeyEvent ke) {
@@ -4092,6 +4064,8 @@ class AutoKeyListener {
 		});
 	}
 	public void EnterTextPlusExtra() {
+		SwingUtilities.invokeLater(() -> {
+			String extra=main.extra.toString();
 			main.targetArea = main.textarea;
 			String text = main.textarea.getText();
 			//JOptionPane.showMessageDialog(null,caretposition+"");
@@ -4112,7 +4086,7 @@ class AutoKeyListener {
 			System.out.println(second);
 			System.out.println("End");
 			*/
-			String extra = main.extra.toString();
+			
 			
 			String afterextra = "";
 			int lastindexof = 0;
@@ -4134,7 +4108,6 @@ class AutoKeyListener {
 				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
 				//main.curlybracekeylistener.keyPressed(keyevent);
 				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
-				
 				main.textarea.dispatchEvent(keyevent2);
 				/*if(!afterextra.equals("")) {
 					MethodSuggestionBox methodsuggestionbox= ((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).methodsuggestionbox;
@@ -4161,6 +4134,7 @@ class AutoKeyListener {
 				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
 				main.textarea.dispatchEvent(keyevent2);
 			}*/
+		});
 	}
 
 	public JLabel getSelected() {
@@ -4374,6 +4348,7 @@ class MethodSuggestionBox {
 				
 				if(main.extra.length() != 0)
 				currentline = main.extra.toString();
+				JOptionPane.showMessageDialog(null,currentline);
 				Object[] allobjects=search(currentline);
 				if(allobjects.length > 0)
 					show(allobjects,caretposition,currentline);	
