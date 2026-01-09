@@ -1,4 +1,4 @@
-import javax.swing.Time 
+import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
@@ -4278,33 +4278,33 @@ class AutoKeyListener {
 					if(extra.equals("")) {
 						extra = String.valueOf(keyevent.getKeyChar());
 					}
-SwingUtilities.invokeLater(() -> {
-					if(!isFinished) {
-						String input = search_textfield.getText();
-						
-						//System.out.println(count+ " "+count_release);
+					SwingUtilities.invokeLater(() -> {
+						if(!isFinished) {
+							String input = search_textfield.getText();
 							
-						if(input.length() > 0 && !input.contains('.')) {
-							if(search(input)) {
-								fillComboBox();
+							//System.out.println(count+ " "+count_release);
+								
+							if(input.length() > 0 && !input.contains(".")) {
+								if(search(input)) {
+									fillComboBox();
+								}
+								else {
+									isFinished=true;
+									setExtra(input);
+									EnterTextPlusExtra();
+								}
 							}
-							else {
+							else if(input.length() > 0 && input.contains(".") ) {
 								isFinished=true;
 								setExtra(input);
 								EnterTextPlusExtra();
 							}
 						}
-						else if(input.length() > 0 && input.contains('.') ) {
-							isFinished=true;
-							setExtra(input);
-							EnterTextPlusExtra();
+						else {
+							//main.targetArea = main.textarea;
+							main.targetArea.dispatchEvent(keyevent);
 						}
-					}
-					else {
-						//main.targetArea = main.textarea;
-						main.targetArea.dispatchEvent(keyevent);
-					}
-});
+					});
 				}
 			}
 			@Override
