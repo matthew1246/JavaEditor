@@ -1,4 +1,5 @@
-import javax.swing.Time javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.Time 
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
 import java.awt.event.InputEvent;
