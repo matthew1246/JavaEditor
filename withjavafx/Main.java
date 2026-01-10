@@ -5208,51 +5208,54 @@ class MethodSuggestionBox {
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
 					System.out.println("F: "+keyevent.getKeyChar());		
-					setExtra(getExtra()+keyevent.getKeyChar());
-					//two_keys = two_keys+keyevent.getKeyChar();
-					if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
-						suggestionbox.dispose();
-					}
-					else if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-						labels2[selected_index].setOpaque(false);
-						labels2[selected_index].setBackground(new JLabel().getBackground());
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						int live_index = liveiterator.indexOf(labels2[selected_index]);						
-						if( live_index < (liveiterator.list.size()-1) ) {
-							live_index++;
-							JLabel selected_label=liveiterator.list.get(live_index);
-							selected_label.setOpaque(true);
-							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+					if(!isFinished) {
+						setExtra(getExtra()+keyevent.getKeyChar());
+						//two_keys = two_keys+keyevent.getKeyChar();
+						if(keyevent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+							isFinished = true;	
+							suggestionbox.dispose();
+						}
+						else if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
+							labels2[selected_index].setOpaque(false);
+							labels2[selected_index].setBackground(new JLabel().getBackground());
 							panelgridlayout.validate();
 							panelgridlayout.repaint();
-							
-							label3:for(int i = 0; i < labels2.length; i++) {
-								if(selected_label.equals(labels2[i])) {
-									selected_index = i;
-									break label3;
+							int live_index = liveiterator.indexOf(labels2[selected_index]);						
+							if( live_index < (liveiterator.list.size()-1) ) {
+								live_index++;
+								JLabel selected_label=liveiterator.list.get(live_index);
+								selected_label.setOpaque(true);
+								selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+								panelgridlayout.validate();
+								panelgridlayout.repaint();
+								
+								label3:for(int i = 0; i < labels2.length; i++) {
+									if(selected_label.equals(labels2[i])) {
+										selected_index = i;
+										break label3;
+									}
 								}
 							}
 						}
-					}
-					else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-						labels2[selected_index].setOpaque(false);
-						labels2[selected_index].setBackground(new JLabel().getBackground());
-						panelgridlayout.validate();
-						panelgridlayout.repaint();
-						int live_index = liveiterator.indexOf(labels2[selected_index]);
-						if(live_index > 0) {
-							live_index--;
-							JLabel selected_label=liveiterator.list.get(live_index);
-							selected_label.setOpaque(true);
-							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+						else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
+							labels2[selected_index].setOpaque(false);
+							labels2[selected_index].setBackground(new JLabel().getBackground());
 							panelgridlayout.validate();
 							panelgridlayout.repaint();
-							
-							label4:for(int i = 0; i < labels2.length; i++) {
-								if(selected_label.equals(labels2[i])) {
-									selected_index = i;
-									break label4;
+							int live_index = liveiterator.indexOf(labels2[selected_index]);
+							if(live_index > 0) {
+								live_index--;
+								JLabel selected_label=liveiterator.list.get(live_index);
+								selected_label.setOpaque(true);
+								selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
+								panelgridlayout.validate();
+								panelgridlayout.repaint();
+								
+								label4:for(int i = 0; i < labels2.length; i++) {
+									if(selected_label.equals(labels2[i])) {
+										selected_index = i;
+										break label4;
+									}
 								}
 							}
 						}
@@ -5263,29 +5266,29 @@ class MethodSuggestionBox {
 				@Override
 				public void keyReleased(KeyEvent keyevent) {
 					System.out.println("G: "+keyevent.getKeyChar());
-					if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
-						isFinished = true;
-						main.targetArea = main.textarea;
-						suggestionbox.setVisible(false);
-						String text = main.textarea.getText();
-						// String selected = search_textfield.getText().trim();
-						JLabel selected_label2 =labels2[selected_index];
-						String selected = selected_label2.getText();
-						CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
-						
-						if(!ifSearchTwice.equals(""))
-							selected=ifSearchTwice+"."+selected;
-						String firsthalf=text.substring(0,caretposition)+"."+selected;
-						//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
-						///String second =text.substring(caretposition+1,text.length());
-						String second =text.substring(caretposition+replacelength,text.length());
-						main.textarea.setText(firsthalf+second);
-						main.textarea.setCaretPosition(caretposition+1+selected.length());
-					}
-					else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
-						//String methodname0=search_textfield.getText();
-						//setExtra(methodname0);
-						if(!isFinished) {
+					if(!isFinished) {
+						if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
+							isFinished = true;
+							main.targetArea = main.textarea;
+							suggestionbox.setVisible(false);
+							String text = main.textarea.getText();
+							// String selected = search_textfield.getText().trim();
+							JLabel selected_label2 =labels2[selected_index];
+							String selected = selected_label2.getText();
+							CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
+							
+							if(!ifSearchTwice.equals(""))
+								selected=ifSearchTwice+"."+selected;
+							String firsthalf=text.substring(0,caretposition)+"."+selected;
+							//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
+							///String second =text.substring(caretposition+1,text.length());
+							String second =text.substring(caretposition+replacelength,text.length());
+							main.textarea.setText(firsthalf+second);
+							main.textarea.setCaretPosition(caretposition+1+selected.length());
+						}
+						else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+							//String methodname0=search_textfield.getText();
+							//setExtra(methodname0);
 							//String methodname = getExtra();
 							String methodname = search_textfield.getText();
 							if(!methodname.endsWith(".") && !methodname.endsWith(keyevent.getKeyChar()+"")) {
@@ -5390,9 +5393,6 @@ class MethodSuggestionBox {
 							panelgridlayout.validate();
 							panelgridlayout.repaint();
 							suggestionbox.pack();	
-						}
-						else {
-							JOptionPane.showMessageDialog(null,"Method Suggestion Box: "+keyevent.getKeyChar()+" key");	
 						}
 					}
 				}
