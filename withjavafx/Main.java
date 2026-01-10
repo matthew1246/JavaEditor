@@ -4278,10 +4278,9 @@ class AutoKeyListener {
 					if(extra.equals("")) {
 						extra = String.valueOf(keyevent.getKeyChar());
 					}
-					SwingUtilities.invokeLater(() -> {
+					Timer timer = new Timer(400,e -> {
+						String input = search_textfield.getText();
 						if(!isFinished) {
-							String input = search_textfield.getText();
-							
 							//System.out.println(count+ " "+count_release);
 								
 							if(input.length() > 0 && !input.contains(".")) {
@@ -4300,11 +4299,14 @@ class AutoKeyListener {
 								EnterTextPlusExtra();
 							}
 						}
-						else {
+						/*else {
 							//main.targetArea = main.textarea;
+							//JOptionPane.showMessageDialog(null,input);
 							main.targetArea.dispatchEvent(keyevent);
-						}
+						}*/
 					});
+					timer.setRepeats(false);
+					timer.start();
 				}
 			}
 			@Override
