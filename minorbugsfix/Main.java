@@ -4381,7 +4381,7 @@ class MethodSuggestionBox {
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
 				currentline = matcher0.group(2);
-				//JOptionPane.showMessageDialog(null,currentline);
+				System.out.println("*"+currentline+"*");
 									
 				Object[] allobjects=search(currentline);
 				if(allobjects.length > 0)
@@ -4887,7 +4887,7 @@ class MethodSuggestionBox {
 				public String ifSearchTwice = "";
 				@Override
 				public void keyReleased(KeyEvent keyevent) {
-					System.out.println("G: "+keyevent.getKeyChar());
+					System.out.println("G: "+keyevent.getKeyChar()+ " "+keyevent.getKeyCode()+" *"+search_textfield.getText()+"*");
 					if(!isFinished) {
 						if(keyevent.getKeyCode() == KeyEvent.VK_ENTER) {			
 							isFinished = true;
@@ -4908,7 +4908,7 @@ class MethodSuggestionBox {
 							main.textarea.setText(firsthalf+second);
 							main.textarea.setCaretPosition(caretposition+1+selected.length());
 						}
-						else if(keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
+						else if(!search_textfield.getText().equals("") && keyevent.getKeyCode() != KeyEvent.VK_ENTER && keyevent.getKeyCode() != KeyEvent.VK_DOWN && keyevent.getKeyCode() != KeyEvent.VK_UP) {
 							//String methodname0=search_textfield.getText();
 							//setExtra(methodname0);
 							//String methodname = getExtra();
