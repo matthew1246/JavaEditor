@@ -3548,6 +3548,7 @@ class CurlyBraceKeyListener implements KeyListener {
 		}		
 		if( (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) && (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
 			methodsuggestionbox= new MethodSuggestionBox(main);
+			main.targetArea = methodsuggestionbox.search_textfield;
 		}
 		else if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {			
 			//JOptionPane.showMessageDialog(null,"two characters");
