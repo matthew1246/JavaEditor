@@ -351,7 +351,7 @@ public class Main {
 		}
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
-			SwingWorker<Void,String> stringworker =new SwingWorker<Void,String>() {
+			SwingWorker<Void,String> swingworker =new SwingWorker<Void,String>() {
     @Override
     protected void doInBackground() {
        StoreSelectedFile storeselectedfile=new StoreSelectedFile();
@@ -366,6 +366,7 @@ public class Main {
       }
     }
      });
+   swingworker.execute();
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();	
 			List<String> tabs=storeselectedfile.getTabs();
 			if(tabs.size() <= 1) {
