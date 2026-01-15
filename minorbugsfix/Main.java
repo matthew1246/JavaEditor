@@ -351,7 +351,21 @@ public class Main {
 		}
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
-			
+			SwingWorker<Void,String> stringworker =new SwingWorker<Void,String>() {
+    @Override
+    protected void doInBackground() {
+       StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+        List<String> tabs=storeselectedfile.getTabs();
+       for(String tab:tabs) {
+         publish(tab);
+       }
+    }
+    protected void process(List<String> list) {
+      forString tab:list) {
+           tabbedpane.addTab(tab);
+      }
+    }
+     });
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();	
 			List<String> tabs=storeselectedfile.getTabs();
 			if(tabs.size() <= 1) {
