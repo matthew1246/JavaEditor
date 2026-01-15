@@ -272,10 +272,7 @@ public class Main {
 			git.Change(fileName);
 		}
 		setLayout();
-		setFullPackageNames();		
-		setSubpackages();
-		setPackages();
-		setKeywords();
+		
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
@@ -559,7 +556,11 @@ public class Main {
 				Main.muck = new Muck();
 			
 				SwingUtilities.invokeLater(() -> {
-					setApiClasses();				
+					setFullPackageNames();		
+		setSubpackages();
+		setPackages();
+		setKeywords();
+setApiClasses();				
 					setAllClassesInFile();
 					setAllClassesInFolder();
 				});
