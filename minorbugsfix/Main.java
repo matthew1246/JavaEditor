@@ -375,7 +375,7 @@ public class Main {
          						try {
 	         						TabFileNameAndContent tabfilenameandcontent = new TabFileNameAndContent();
 	         						tabfilenameandcontent.fileName=tab;
-	         						
+	         						tabfilenameandcontent.lastcaretposition = storeselectedfile.getCaretPosition(tab);
 	         						if(!tab.equals("")) {
 								Path path = Paths.get(tab);
 								String lines2= Files.readString(path,StandardCharsets.UTF_8);
@@ -478,7 +478,7 @@ public class Main {
 							textarea2.addMouseListener(rightclick);
 							
 							tabbedpane.addTab(filename,scrollpane2);
-							openLastSelectedLine(textarea2,tabfilenameandcontent.fileName);
+							openLastSelectedLine(tabfilenameandcontent.lastcaretposition,textarea2,tabfilenameandcontent.fileName);
 						//}
   	 	 	 	 	}
  	 	 	 		tabbedpane.addTab("+",pluspanel);
@@ -704,7 +704,7 @@ setApiClasses();
 			ex.printStackTrace();
 		}
 		try {
-				openLastSelectedLine();
+				//openLastSelectedLine();
 				setStarterClassBoxes(fileName);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -718,6 +718,20 @@ setApiClasses();
 				ex.printStackTrace();
 			}
 	}
+	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
+		if(filename != null && !filename.equals("")) {
+			if(caretposition <= textarea3.getDocument().getLength()) {
+				textarea3.setCaretPosition(caretposition);
+				scrollToCaretPosition(textarea3,caretposition);
+	
+				int caretposition2=textarea3.getCaretPosition();
+				scrollToCaretPosition(caretposition2);
+				textarea3.validate();
+				textarea3.repaint();
+			}
+		}
+	}
+
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		int caretposition=storeselectedfile.getCaretPosition(filename);
