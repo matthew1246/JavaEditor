@@ -725,6 +725,7 @@ setApiClasses();
 				scrollToCaretPosition(textarea3,caretposition);
 	
 				int caretposition2=textarea3.getCaretPosition();
+				
 				scrollToCaretPosition(caretposition2);
 				textarea3.validate();
 				textarea3.repaint();
@@ -2059,66 +2060,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		/*deprecated.addActionListener((ev) -> {
-			try {
-				if(fileName.equals("")) {
-					NoFileOpen nofileopen=new NoFileOpen(textarea);
-					fileName=nofileopen.getFileName();
-					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
-				}
-				sal.actionPerformed(ev);
-				String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
-
-				CommandLine commandline = new CommandLine();
-				commandline.deprecated();
-				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-				Preferences preferences=storeselectedfile.get(fileName);
-				for(String jar:preferences.jars) {
-					commandline.addExternalJar(jar);
-				}
-				if(jarcheckbox.isSelected()) {
-					ExtractJUnit extractjunit = new ExtractJUnit(Main.this);			
-					commandline.addJunit();
-				}
-				String main_class = fileName.replaceAll(".+\\\\","");						
-				main_class =main_class.replaceAll("\\.java","");
-				commandline.setMainClass(main_class);
-				if(checkbox.isSelected()) {
-					commandline.addClasspathCheckboxFeature();
-				}
-				// JOptionPane.showMessageDialog(null,commandline.javac());
-				// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
-				String[] command = new String[3];
-				command[0] = "cmd.exe";
-				command[1] = "/c";				
-				command[2] = commandline.javac();
-				Runtime runtime = Runtime.getRuntime();
-				Process process = runtime.exec(command,null,new File(classpath));
-				// process = compileFromMSDOS(fileName,classpath);
-				
-				InputStream inputstream = process.getErrorStream();
-				InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-				BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-				String line = bufferedreader.readLine();
-				if(line == null) {
-					JOptionPane.showMessageDialog(null,"compiled");
-				}
-				else {
-					String lines = line;
-					while(true) {
-						line = bufferedreader.readLine();
-						if(line == null)
-							break;
-						lines = lines+"\n"+line;
-					}
-					JOptionPane.showMessageDialog(null,lines);
-				}
-			}
-			catch(IOException ex) {
-				ex.printStackTrace();
-			}
-		});
-		*/
+		
 		reload.addActionListener( (ev) -> {
 			try {
 				if(!fileName.equals("")) {
