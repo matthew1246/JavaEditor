@@ -1,3 +1,5 @@
+import java.util.concurrent.ExecutionException;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
@@ -152,7 +154,26 @@ public class Main {
 	//public String value="load_program.ser";
 	public Maven maven = new Maven();
 	public static void main(String[] args) { 
-		Main main = new Main(new OpenDefaultContent());
+		SwingUtilities.invokeLater(() -> {
+			SwingWorker<OpenDefaultContent,Void> swingworker = new SwingWorker<>() {
+				@Override
+				protected OpenDefaultContent doInBackground() throws Exception {
+					return new OpenDefaultContent();
+				}
+				@Override
+				protected void done() {
+					try {
+						Main main = new Main(get());
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+
+
+
+			};
+			swingworker.execute();
+		});
 	}
 	/*
 	** If have no default content for window
@@ -345,7 +366,135 @@ public class Main {
 
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
-			
+			SwingWorker<Void,TabFileNameAndContent> swingworker =new SwingWorker<>() {
+				@Override
+				protected Void doInBackground() {
+					StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+        					List<String> tabs=storeselectedfile.getTabs();
+       					for(String tab:tabs) {
+         						try {
+	         						TabFileNameAndContent tabfilenameandcontent = new TabFileNameAndContent();
+	         						tabfilenameandcontent.fileName=tab;
+	         						tabfilenameandcontent.lastcaretposition = storeselectedfile.getCaretPosition(tab);
+	         						if(!tab.equals("")) {
+								Path path = Paths.get(tab);
+								String lines2= Files.readString(path,StandardCharsets.UTF_8);
+								tabfilenameandcontent.content=lines2;
+								
+								publish(tabfilenameandcontent);
+							}	
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}         						         						         						         						
+       					}
+       					return null;
+    				}
+    				@Override
+    				protected void process(List<TabFileNameAndContent> list) {
+  	 	 	 	 	System.out.println("process()");
+  	 	 	 	 	
+  	 	 	 	 	int count = -1;
+  	 	 	 	 	for(TabFileNameAndContent tabfilenameandcontent:list) {
+      	 	 	 	 	 	Main.this.fileNames.add(tabfilenameandcontent.fileName);
+      	 	 	 	 	 	//try {
+							if(tabs_selected == -1) {
+								count++;
+								if(Main.this.fileName.equals(tabfilenameandcontent.fileName))
+									tabs_selected = count;
+							}				
+							JTextArea textarea2 = new JTextAreaGroup();
+							textarea2.setLineWrap(true);
+							textarea2.setWrapStyleWord(true);
+							Main.this.textarea = textarea2;
+							Font originalFont = textarea.getFont();
+							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
+		
+							JScrollPane scrollpane2 = new JScrollPane(textarea2);
+							String filename = Main.this.getFileName(tabfilenameandcontent.fileName);
+							
+							if(!filename.equals("")) {
+								textarea2.setText(tabfilenameandcontent.content);
+							}
+							
+							textarea2.setTabSize(4);
+							
+							CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);
+							textarea2.addKeyListener(curlybracekeylistener);
+							//positiontrackers.add(new PositionTracker(textarea2));
+							
+							addCaretListener(textarea2);
+							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.autokeylistener.position;
+										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
+							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.autokeylistener.position;
+										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
+							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+								try {
+									if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.methodsuggestionbox.position;
+										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+										curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
+							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
+								try {
+									if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
+										int caretposition = curlybracekeylistener.methodsuggestionbox.position;
+										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+										curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
+									}
+								} catch (BadLocationException ex) {
+									ex.printStackTrace();
+								}
+							});
+							textarea2.addMouseListener(rightclick);
+							
+							tabbedpane.addTab(filename,scrollpane2);
+							openLastSelectedLine(tabfilenameandcontent.lastcaretposition,textarea2,tabfilenameandcontent.fileName);
+						//}
+  	 	 	 	 	}
+ 	 	 	 		tabbedpane.addTab("+",pluspanel);
+					
+					if(tabs_selected != -1) {
+						fileName = fileNames.get(tabs_selected);
+						tabbedpane.setSelectedIndex(tabs_selected);
+					}
+					
+					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+ 	 	 	 	}
+   	 	 	};
+ 	 	 	swingworker.execute();
+
+			/*
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();	
 			List<String> tabs=storeselectedfile.getTabs();
 			if(tabs.size() <= 1) {
@@ -532,46 +681,56 @@ public class Main {
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				textarea=(JTextArea)jscrollpane5.getViewport().getView();
 			}
+			*/	
 		}
-		setListeners();	
-		} catch(InvocationTargetException ex) {
-			ex.printStackTrace();
-		} catch(InterruptedException ex) {
-			ex.printStackTrace();								
+		setListeners();								
 		}catch(ArrayIndexOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}
 		try {
-			SwingUtilities.invokeAndWait(() -> {
+			new Thread(() -> {
 				Main.muck = new MuckFX();
-				setFullPackageNames();		
-				setSubpackages();
-				setPackages();
-				setApiClasses();
-				setKeywords();
-				setAllClassesInFile();
-				setAllClassesInFolder();
-			});
+			
+				SwingUtilities.invokeLater(() -> {
+					setFullPackageNames();		
+					setSubpackages();
+					setPackages();
+					setApiClasses();
+					setKeywords();
+					setAllClassesInFile();
+					setAllClassesInFolder();
+				});
+			}).start();
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		try {
-			SwingUtilities.invokeAndWait(() -> {
-				openLastSelectedLine();
-				setStarterClassBoxes(fileName);
-			});
+			openLastSelectedLine();
+			setStarterClassBoxes(fileName);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		try {
-			SwingUtilities.invokeAndWait(() -> {
-				threecomboboxes.load(fileName);
-				expandable.open();
-				maven.Change(fileName);
-				git.Change(fileName);
-			});
+			threecomboboxes.load(fileName);
+			expandable.open();
+			maven.Change(fileName);
+			git.Change(fileName);
 		} catch (Exception ex) {
 			ex.printStackTrace();
+		}
+	}
+	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
+		if(filename != null && !filename.equals("")) {
+			if(caretposition <= textarea3.getDocument().getLength()) {
+				textarea3.setCaretPosition(caretposition);
+				scrollToCaretPosition(textarea3,caretposition);
+	
+				int caretposition2=textarea3.getCaretPosition();
+				
+				scrollToCaretPosition(caretposition2);
+				textarea3.validate();
+				textarea3.repaint();
+			}
 		}
 	}
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
@@ -596,17 +755,30 @@ public class Main {
 		}
 	}
 	public void openLastSelectedLine() {
-		try {
-			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			if(fileName != null && !fileName.equals("")) {
+		SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
+			@Override
+			protected Integer doInBackground() {
+				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				int caretposition=storeselectedfile.getCaretPosition(fileName);
-				if(caretposition <= textarea.getDocument().getLength()) {
-					scrollToCaretPosition(caretposition);
+				return caretposition;
+			}
+			@Override
+			protected void done() {
+				try {
+				int caretposition=get();
+				if(fileName != null && !fileName.equals("")) {
+					if(caretposition <= textarea.getDocument().getLength()) {
+						scrollToCaretPosition(caretposition);
+					}
+				}
+				} catch (ExecutionException ex) {
+					ex.printStackTrace();
+				} catch(InterruptedException ex){
+					ex.printStackTrace();
 				}
 			}
-		} catch(Exception ex){
-			ex.printStackTrace();
-		}		
+		};
+		swingworker.execute();	
 	}
 	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
