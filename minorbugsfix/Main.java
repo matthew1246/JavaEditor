@@ -1,3 +1,4 @@
+import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import java.awt.Toolkit;
 import javax.swing.BoxLayout;
@@ -704,7 +705,7 @@ setApiClasses();
 			ex.printStackTrace();
 		}
 		try {
-				//openLastSelectedLine();
+				openLastSelectedLine();
 				setStarterClassBoxes(fileName);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -749,13 +750,30 @@ setApiClasses();
 		}
 	}
 	public void openLastSelectedLine() {
-		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-		if(fileName != null && !fileName.equals("")) {
-			int caretposition=storeselectedfile.getCaretPosition(fileName);
-			if(caretposition <= textarea.getDocument().getLength()) {
-				scrollToCaretPosition(caretposition);
+		SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
+			@Override
+			protected Integer doInBackground() {
+				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+				int caretposition=storeselectedfile.getCaretPosition(fileName);
+				return caretposition;
 			}
-		}
+			@Override
+			protected void done() {
+				try {
+				int caretposition=get();
+				if(fileName != null && !fileName.equals("")) {
+					if(caretposition <= textarea.getDocument().getLength()) {
+						scrollToCaretPosition(caretposition);
+					}
+				}
+				} catch (ExecutionException ex) {
+					ex.printStackTrace();
+				} catch(InterruptedException ex){
+					ex.printStackTrace();
+				}
+			}
+		};
+		swingworker.execute();
 	}
 	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
