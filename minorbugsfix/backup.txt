@@ -21,7 +21,10 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TabFileNameAndContent.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java",
+      "C:\\Users\\Owner\\Documents\\git\\muck\\Muck.java",
+      "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java"
     ],
     "caretposition": 0
   },
@@ -57,7 +60,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 46083
+    "caretposition": 17869
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -702,7 +705,7 @@
     "starterclass": "Muck",
     "jars": [],
     "fileNames": [],
-    "caretposition": 715
+    "caretposition": 271
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TabFileNameAndContent.java": {
     "startupcombobox": [
@@ -717,5 +720,28 @@
     ],
     "fileNames": [],
     "caretposition": 116
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java": {
+    "startupcombobox": [
+      "Links"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 2806
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java": {
+    "startupcombobox": [
+      "Links"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 2842
   }
 }

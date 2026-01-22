@@ -1,14 +1,16 @@
 import javax.swing.*;
 import java.awt.event.*;
 public class Muck {
-	public Links links = new Links();
+	public Links links;
 	public JFrame frame;
 	public JButton button;
 	public JTextField textfield;
 	public static void main(String[] args) 	{
-		Muck main = new Muck();
+		Links links = new Links();
+		Muck main = new Muck(links);
 	}
-	public Muck() {
+	public Muck(Links links) {
+		this.links = links;
 		setLayout();
 		setListeners();
 	}
