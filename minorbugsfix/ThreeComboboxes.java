@@ -66,17 +66,26 @@ public class ThreeComboboxes {
 		methodCombobox(mainclass);
 		Select(fileName,mainclass);	
 	}
+	public void BackgroundThreadfromScratch(String fileName) {
+		BackgroundThreadfileCombobox(fileName);
+	}
+	public void EDTfromScratch() {
+		setGetClassName();
+		setGetClassMethods();
+		setClassNames();
+		EDTfileCombobox();
+	}
 	protected GetClassName getclassname;
 	public void setGetClassName() {
 		getclassname = new GetClassName(main.textarea);
 	}
-	LinkedHashMap<String,Integer> classnames;
-	protected void setClassNames() {
-		classnames = getclassmethods.getClasses();
-	}
 	protected GetClassMethods getclassmethods;
 	public void setGetClassMethods() {
 		getclassmethods = new GetClassMethods(main.textarea);
+	}
+	LinkedHashMap<String,Integer> classnames;
+	protected void setClassNames() {
+		classnames = getclassmethods.getClasses();
 	}
 	public void fileCombobox(String fileName) {
 		main.filelistmodifier = new FileListModifier(fileName);
@@ -85,6 +94,16 @@ public class ThreeComboboxes {
 		for(String filename:filenames) {
 			main.filenamescombobox.addItem(filename);
 		}			
+	}
+	public void BackgroundThreadfileCombobox(String fileName) {
+		main.filelistmodifier = new FileListModifier(fileName);
+	}
+	public void EDTfileCombobox() {
+		RemoveFilecombo();
+		List<String> filenames=main.filelistmodifier.getFileList();
+		for(String filename:filenames) {
+			main.filenamescombobox.addItem(filename);
+		}
 	}
 	public void classCombobox() {
 		try {
