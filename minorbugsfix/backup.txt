@@ -29,7 +29,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\LinkedHashMapInterface.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassName.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassName.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java"
     ],
     "caretposition": 0
   },
@@ -65,7 +67,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 21644
+    "caretposition": 22121
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -336,7 +338,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 176
+    "caretposition": 237
   },
   "C:\\Users\\Owner\\Documents\\git\\chess\\Main.java": {
     "startupcombobox": [

@@ -505,7 +505,7 @@ public class Main {
 			@Override
 			protected Void doInBackground() {
 				threecomboboxes.BackgroundThreadfromScratch(Main.this.fileName);
-				
+				setAllClassesInFolder();
 				return null;
 			}
 			@Override
@@ -513,23 +513,23 @@ public class Main {
 				threecomboboxes.EDTfromScratch(Main.this.fileName);
 				Main.this.msdos = new MSDOS(Main.this);	
 				setKeywords();
+				expandable = new Expandable(Main.this);
+				setAllClassesInFile();	
+				openLastSelectedLine();
 			}
 		};
 		swingworker4.execute();
 		
-		threecomboboxes = new ThreeComboboxes(this);
-		expandable = new Expandable(this);	
-		setAllClassesInFile();
+		
+		
 		
 		// setStarterClassBoxes(fileName); // Might need uncomment this in future.
-		setAllClassesInFolder();
+		
 		setStarterClassBoxes(fileName);
 		maven.Change(fileName);
-		threecomboboxes.load(fileName);
-		expandable.open();
 		git.Change(fileName);	
 		try {
-			openLastSelectedLine();
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}		
@@ -586,22 +586,24 @@ public class Main {
 		}
 	}
 	public void openLastSelectedLine() {
-		SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
+		/*SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
 			@Override
 			protected Integer doInBackground() {
+		*/
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				int caretposition=storeselectedfile.getCaretPosition(fileName);
-				return caretposition;
+				/*return caretposition;
 			}
 			@Override
 			protected void done() {
 				try {
 				int caretposition=get();
 				if(fileName != null && !fileName.equals("")) {
+					*/
 					if(caretposition <= textarea.getDocument().getLength()) {
 						scrollToCaretPosition(caretposition);
 					}
-				}
+				/*}
 				} catch (ExecutionException ex) {
 					ex.printStackTrace();
 				} catch(InterruptedException ex){
@@ -610,6 +612,7 @@ public class Main {
 			}
 		};
 		swingworker.execute();
+		*/
 	}
 	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
