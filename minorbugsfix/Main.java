@@ -281,6 +281,7 @@ public class Main {
 	{
 		fileName = odc.getFileName();
 		threecomboboxes = new ThreeComboboxes(this);
+		startercombobox = new StarterJComboBox(this);
 		if(fileName != null && !fileName.equals("")) {
 			git.Change(fileName);
 		}
@@ -506,6 +507,7 @@ public class Main {
 			protected Void doInBackground() {
 				threecomboboxes.BackgroundThreadfromScratch(Main.this.fileName);
 				setAllClassesInFolder();
+				startercombobox.BackgroundThread(fileName);
 				return null;
 			}
 			@Override
@@ -515,17 +517,12 @@ public class Main {
 				setKeywords();
 				expandable = new Expandable(Main.this);
 				setAllClassesInFile();	
+				startercombobox.EDT();
 				openLastSelectedLine();
 			}
 		};
 		swingworker4.execute();
 		
-		
-		
-		
-		// setStarterClassBoxes(fileName); // Might need uncomment this in future.
-		
-		setStarterClassBoxes(fileName);
 		maven.Change(fileName);
 		git.Change(fileName);	
 		try {
@@ -1284,13 +1281,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		}
 	}
-	public StarterJComboBox startercombobox;
-	public void setStarterClassBoxes(String filename) {
-		if(startercombobox == null)
-			startercombobox = new StarterJComboBox(filename,this);
-		else
-			startercombobox.Change(filename);
-	}		
+	public StarterJComboBox startercombobox;		
 	public MSDOS msdos;
 	public void open(String selected2) {
 		try {
@@ -1322,7 +1313,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
-			setStarterClassBoxes(fileName);
+			startercombobox.Change(fileName);
 			
 			if(fileName != null && !fileName.equals("")) {
 				try {
@@ -2884,7 +2875,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
-				setStarterClassBoxes(fileName);
+				startercombobox.Change(fileName);
 				if(fileName != null && !fileName.equals("")) {
 					try {
 						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
@@ -3044,7 +3035,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(fileName);
-				setStarterClassBoxes(fileName);
+				startercombobox.Change(fileName);
 			
 				threecomboboxes.load(fileName);
 				expandable.open();

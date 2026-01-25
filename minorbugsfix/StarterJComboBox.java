@@ -6,6 +6,43 @@ import java.util.Iterator;
 public class StarterJComboBox {
 	protected Main main;
 	protected String fileName;
+	public StarterJComboBox(Main main) {
+		this.main = main;
+	}
+	public List<String> starterclasses = new ArrayList<String>();
+	public List<String> displays = new ArrayList<String>();
+	public String starterclass = "";
+	public void BackgroundThread(String fileName) {
+		this.fileName = fileName;
+		if(!fileName.equals("")) {
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			starterclasses=storeselectedfile.getStartupComboBox(fileName);
+				for(String starterclass2:starterclasses) {			
+				String display = starterclass2;
+				if(display != null && (display.contains("\\") || display.contains("/") || display.endsWith(".java"))) {
+					display = main.getFileName(display);
+					if(display.endsWith(".java")) {
+						display = display.substring(0, display.length() - ".java".length());
+					}
+				}
+				displays.add(display);
+			}
+			starterclass = storeselectedfile.getStarterClass(fileName);
+			if(starterclass.equals(""))
+				starterclass=Main.getClassName(fileName);	
+		}
+	}
+	public void EDT() {
+		Remove();
+		RemoveNulls(starterclasses);	
+		for(String display:displays) {
+			main.startupcombobox.addItem(display);		
+		}
+		if(!Contains(starterclass)) {
+			Add(starterclass);
+		}
+		main.startupcombobox.setSelectedItem(starterclass);
+	}				
 	public StarterJComboBox(String fileName,Main main) {
 		this.fileName = fileName;
 		this.main = main;
@@ -146,4 +183,4 @@ if(!fileName.equals(filename)) {
 		main.startupcombobox.validate();
 		main.startupcombobox.repaint();
 	}
-}
+}

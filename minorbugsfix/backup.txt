@@ -67,7 +67,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 22121
+    "caretposition": 22092
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -475,7 +475,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 1182
+    "caretposition": 1368
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
     "startupcombobox": [],
