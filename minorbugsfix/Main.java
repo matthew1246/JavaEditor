@@ -279,7 +279,6 @@ public class Main {
 	*/
 	public Main(OpenDefaultContent odc) 
 	{
-		try {
 		fileName = odc.getFileName();
 		if(fileName != null && !fileName.equals("")) {
 			git.Change(fileName);
@@ -364,9 +363,9 @@ public class Main {
 		}
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
-			SwingWorker<Links,TabFileNameAndContent> swingworker =new SwingWorker<>() {
+			SwingWorker<Void,TabFileNameAndContent> swingworker =new SwingWorker<>() {
 				@Override
-				protected Links doInBackground() {
+				protected Void doInBackground() {
 					StoreSelectedFile storeselectedfile=new StoreSelectedFile();
         					List<String> tabs=storeselectedfile.getTabs();
        					for(String tab:tabs) {
@@ -383,19 +382,12 @@ public class Main {
 							}	
 						} catch (IOException ex) {
 							ex.printStackTrace();
-						}         						         						         						         						
+						}
        					}
-       					Links links= new Links();
-					setFullPackageNames();
-					setSubpackages();
-					setPackages();
-					setApiClasses();
-					return links;
+       					return null;
     				}
     				@Override
     				protected void process(List<TabFileNameAndContent> list) {
-  	 	 	 	 	System.out.println("process()");
-  	 	 	 	 	
   	 	 	 	 	int count = -1;
   	 	 	 	 	for(TabFileNameAndContent tabfilenameandcontent:list) {
       	 	 	 	 	 	Main.this.fileNames.add(tabfilenameandcontent.fileName);
@@ -501,14 +493,6 @@ public class Main {
 								}
 							});
 							textarea2.addMouseListener(rightclick);
-							try {
-								Links links=get();
-								Main.muck = new Muck(links);
-							} catch (InterruptedException ex) {
-								ex.printStackTrace();
-							} catch (ExecutionException ex) {
-								ex.printStackTrace();
-							}
 						}
 					}
 				}	
@@ -516,9 +500,6 @@ public class Main {
  	 	 	swingworker.execute();
 		}
 		setListeners();									
-		}catch(ArrayIndexOutOfBoundsException ex) {
-			ex.printStackTrace();
-		}
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
@@ -548,6 +529,27 @@ public class Main {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}		
+		SwingWorker<Links,Void> swingworker10 = new SwingWorker<>() {
+			@Override
+			protected Links doInBackground() {
+				Links links= new Links();
+				setFullPackageNames();
+				setSubpackages();
+				setPackages();
+				setApiClasses();
+				return links;
+			}
+			@Override
+			protected void done() {
+				try {
+					Links links=get();
+					Main.muck = new Muck(links);
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		};
+		swingworker10.execute();
 	}
 	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
 		if(filename != null && !filename.equals("")) {
