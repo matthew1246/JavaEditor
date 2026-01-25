@@ -27,7 +27,9 @@
       "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassMethods.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\LinkedHashMapInterface.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassName.java"
     ],
     "caretposition": 0
   },
@@ -542,7 +544,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2288
+    "caretposition": 2364
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java": {
     "startupcombobox": [
@@ -746,5 +748,33 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 2842
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\LinkedHashMapInterface.java": {
+    "startupcombobox": [
+      "LinkedHashMapInterface"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GetClassName.java": {
+    "startupcombobox": [
+      "GetClassName"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }

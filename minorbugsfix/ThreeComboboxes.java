@@ -3,6 +3,8 @@ import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 /*
 ** This is load all JComboBoxes fields, 
 ** so load all file names, class names and Method names.
@@ -68,12 +70,18 @@ public class ThreeComboboxes {
 	}
 	public void BackgroundThreadfromScratch(String fileName) {
 		BackgroundThreadfileCombobox(fileName);
+		classComboboxBackgroundThread();
+		setMainClass();
+		methodComboboxBackgroundThread(mainclass);
 	}
-	public void EDTfromScratch() {
+	public void EDTfromScratch(String fileName) {
 		setGetClassName();
 		setGetClassMethods();
 		setClassNames();
 		EDTfileCombobox();
+		classComboboxEDT();
+		methodComboboxEDT();
+		Select(fileName,mainclass);
 	}
 	protected GetClassName getclassname;
 	public void setGetClassName() {
@@ -120,6 +128,24 @@ public class ThreeComboboxes {
 			ex.printStackTrace();
 		}
 	}
+	public List<String> keys=new ArrayList<String>();
+	public void classComboboxBackgroundThread() {
+		if(classnames == null)
+		JOptionPane.showMessageDialog(null,"classnames 1 is null.");		// if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
+		keys=new ArrayList<String>();
+		LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
+			public void KeyAndValue(String key,Integer integer) {
+				keys.add(key);
+			}
+		};						
+		iterator2.iterate();
+	}
+	public void classComboboxEDT() {
+		RemoveClasscombo();			
+		for(String key:keys) {
+			main.classnamescombobox.addItem(key);
+		}
+	}						
 	protected String mainclass = "";
 	public void setMainClass() {
 		mainclass = getMainClass();
@@ -169,6 +195,28 @@ public class ThreeComboboxes {
 		};		
 		iterator.iterate();
 	}
+	public List<String> methods = new ArrayList<String>();
+	public void methodComboboxBackgroundThread(String selectedclass) {
+		LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
+		if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
+		LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
+			public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
+				if(selectedclass.equals(key)) {
+					Set<String> method_names=value.keySet();
+					for(String method_name:method_names) {
+						methods.add(method_name);
+					}
+				}
+			}
+		};		
+		iterator.iterate();
+	}
+	public void methodComboboxEDT() {
+		RemoveMethodcombo();
+		for(String method:methods) {
+			main.combobox.addItem(method);
+		}
+	}		
 	public void Select(String fileName,String mainclass) {
 		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
 		main.classnamescombobox.setSelectedItem(mainclass);
