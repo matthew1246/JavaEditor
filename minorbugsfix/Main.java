@@ -280,6 +280,7 @@ public class Main {
 	public Main(OpenDefaultContent odc) 
 	{
 		fileName = odc.getFileName();
+		threecomboboxes = new ThreeComboboxes(this);
 		if(fileName != null && !fileName.equals("")) {
 			git.Change(fileName);
 		}
@@ -503,10 +504,13 @@ public class Main {
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
-				return null;	
+				threecomboboxes.BackgroundThreadfromScratch(Main.this.fileName);
+				
+				return null;
 			}
 			@Override
 			protected void done() {
+				threecomboboxes.EDTfromScratch(Main.this.fileName);
 				Main.this.msdos = new MSDOS(Main.this);	
 				setKeywords();
 			}

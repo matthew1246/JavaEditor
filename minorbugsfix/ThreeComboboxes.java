@@ -16,7 +16,6 @@ public class ThreeComboboxes {
 	public Main main;
 	public String fileName = "";
 	public ThreeComboboxes(Main main) {
-		this.fileName = "";
 		this.main = main;
 	}
 	public ThreeComboboxes(Main main,String fileName) {
@@ -69,6 +68,7 @@ public class ThreeComboboxes {
 		Select(fileName,mainclass);	
 	}
 	public void BackgroundThreadfromScratch(String fileName) {
+		this.fileName = fileName;
 		BackgroundThreadfileCombobox(fileName);
 		classComboboxBackgroundThread();
 		setMainClass();
