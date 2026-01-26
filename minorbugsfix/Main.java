@@ -263,10 +263,12 @@ public class Main {
 			allclassesinfile.ChangeFile(textarea2,"");
 		}	
 		setListeners();
+		/*
 		setFullPackageNames();		
 		setSubpackages();
 		setPackages();
-		setApiClasses();				
+		setApiClasses();	
+		*/			
 		setKeywords();
 		setAllClassesInFile();
 		setAllClassesInFolder();
@@ -542,17 +544,17 @@ public class Main {
 			@Override
 			protected Links doInBackground() {
 				Links links= new Links();
-				setFullPackageNames();
-				setSubpackages();
-				setPackages();
-				setApiClasses();
 				return links;
 			}
 			@Override
 			protected void done() {
 				try {
-					Links links=get();
+					Links links = get();
 					Main.muck = new Muck(links);
+					setFullPackageNames(links);
+					setSubpackages(links);
+					setPackages(links);
+					setApiClasses(links);
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
@@ -3142,9 +3144,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		}
 	}
 	public List<String> apiclasses = new ArrayList<String>();
-	public void setApiClasses() {
-		if(Main.muck != null && apiclasses.size() == 0) {	
-			apiclasses=muck.links.getAPIClasses();
+	public void setApiClasses(Links links) {
+		if(apiclasses.size() == 0) {	
+			apiclasses=links.getAPIClasses();
 		}
 	}
 	public List<String> keywords= new ArrayList<String>();
@@ -3171,21 +3173,21 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		}
 	}
 	public List<String> packages = new ArrayList<String>();
-	public void setPackages() {
-		if(Main.muck != null && packages.size() == 0) {
-			packages = muck.links.getPackages();
+	public void setPackages(Links links) {
+		if(packages.size() == 0) {
+			packages = links.getPackages();
 		}
 	}
 	public List<String> subpackages = new ArrayList<String>();
-	public void setSubpackages() {
-		if(Main.muck != null && subpackages.size() == 0) {
-			subpackages = muck.links.getSubpackages();
+	public void setSubpackages(Links links) {
+		if(subpackages.size() == 0) {
+			subpackages = links.getSubpackages();
 		}
 	}
 	public List<String> fullpackagenames = new ArrayList<String>();
-	public void setFullPackageNames() {
-		if(Main.muck != null && fullpackagenames.size() == 0) {
-			fullpackagenames = muck.links.getFullPackageNames();
+	public void setFullPackageNames(Links links) {
+		if(fullpackagenames.size() == 0) {
+			fullpackagenames = links.getFullPackageNames();
 		}
 	}
 	public void setAllClassesInFile() {
