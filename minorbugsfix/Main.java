@@ -1628,7 +1628,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			@Override
 			public void stateChanged(ChangeEvent changeevent) {
 				Main.this.addOrUpdateTab(changeevent);	
-				
 			}
 		});	
 		tabbedpane.addMouseListener(new MouseAdapter() {
