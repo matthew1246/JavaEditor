@@ -146,11 +146,13 @@ public class Git {
 		      	}
 	      	}
       	}
+      	public boolean isFileInsideGitRepository = false;
       	public boolean isGitBashDotExeFoundByBackgroundThread = false;
       	public String whichbranchopened="";
       	public void ChangeBackgroundThread(String fileName) {
      		if(isGitInstalled()) {
      			if(isFileInsideGitRepository(fileName)) {
+     				isFileInsideGitRepository = true;
      				isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
      				setDirectoryAndRootDirectory(fileName);
      				whichbranchopened=whichBranchOpened();	
@@ -158,15 +160,17 @@ public class Git {
      		}
      	}
       	public void ChangeEDT(String fileName) {
-      		if(!isGitBashDotExeFoundByBackgroundThread) {
-      			isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
-      		}
-      		if(isGitBashDotExeFoundByBackgroundThread) {
-      			if(!frame.isVisible()) {
-				setLayout();
-		      		setListeners();
+      		if(isFileInsideGitRepository) {
+	      		if(!isGitBashDotExeFoundByBackgroundThread) {
+	      			isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
 	      		}
-		      	frame.setTitle(whichbranchopened);
+	      		if(isGitBashDotExeFoundByBackgroundThread) {
+	      			if(!frame.isVisible()) {
+					setLayout();
+			      		setListeners();
+		      		}
+			      	frame.setTitle(whichbranchopened);
+		      	}
 	      	}
       	}
       	public void setDirectoryAndRootDirectory(String fileName) {
