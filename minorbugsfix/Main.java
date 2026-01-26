@@ -276,14 +276,12 @@ public class Main {
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier=new FileListModifier();
 	public Git git;
-	public boolean isStartup = false;
 	/*
 	** If have default content for window
 	*/
 	public Main(OpenDefaultContent odc) 
 	{
 		msdos = new MSDOS(this);
-		isStartup = true;
 		fileName = odc.getFileName();
 		
 		setLayout();
@@ -561,7 +559,6 @@ public class Main {
 			}
 		};
 		swingworker10.execute();
-		isStartup = false;
 	}
 	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
 		if(filename != null && !filename.equals("")) {
@@ -1155,20 +1152,20 @@ edit.add(functionLines);
 			threecomboboxes.methodCombobox(classname);
 		}
 	}	
-	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumentindex) {
+	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumenttindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
 		            try {
-		            	if(wholedocumentindex <= (textarea3.getText().length()) ) {
-					Rectangle2D viewposition=textarea3.modelToView2D(wholedocumentindex);
+		            	if(wholedocumenttindex <= (textarea3.getText().length()) ) {
+					Rectangle2D viewposition=textarea3.modelToView2D(wholedocumenttindex);
 					Point caretposition=new Point(0,(int)viewposition.getY());
 					
 					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					
 					scrollpane.getViewport().setViewPosition(caretposition);
 					textarea3.grabFocus();
-					textarea3.setCaretPosition(wholedocumentindex);
-					line.setText("line number: "+getLineNumber(textarea3.getText().substring(0,wholedocumentindex))+" ");
+					textarea3.setCaretPosition(wholedocumenttindex);
+					line.setText("line number: "+getLineNumber(textarea3.getText().substring(0,wholedocumenttindex))+" ");
 				}
 		            }
 			catch (BadLocationException exception) {
@@ -1179,20 +1176,20 @@ edit.add(functionLines);
 		    });
 
 	}
-	public void scrollToCaretPositionWithoutFocus(int wholedocumentindex) {
+	public void scrollToCaretPositionWithoutFocus(int wholedocumenttindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
 		            try {
-		            	if(wholedocumentindex <= (textarea.getText().length()) ) {
-					Rectangle2D viewposition=textarea.modelToView2D(wholedocumentindex);
+		            	if(wholedocumenttindex <= (textarea.getText().length()) ) {
+					Rectangle2D viewposition=textarea.modelToView2D(wholedocumenttindex);
 					Point caretposition=new Point(0,(int)viewposition.getY());
 					
 					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					
 					scrollpane.getViewport().setViewPosition(caretposition);
 					//textarea.grabFocus();
-					textarea.setCaretPosition(wholedocumentindex);
-					line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumentindex))+" ");
+					textarea.setCaretPosition(wholedocumenttindex);
+					line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumenttindex))+" ");
 				}
 		            }
 			catch (BadLocationException exception) {
@@ -1203,20 +1200,20 @@ edit.add(functionLines);
 		    });
 	}
 
-	public void scrollToCaretPosition(int wholedocumentindex) {
+	public void scrollToCaretPosition(int wholedocumenttindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
 		            try {
-		            	if(wholedocumentindex <= (textarea.getText().length()) ) {
-					Rectangle2D viewposition=textarea.modelToView2D(wholedocumentindex);
+		            	if(wholedocumenttindex <= (textarea.getText().length()) ) {
+					Rectangle2D viewposition=textarea.modelToView2D(wholedocumenttindex);
 					Point caretposition=new Point(0,(int)viewposition.getY());
 					
 					JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					
 					scrollpane.getViewport().setViewPosition(caretposition);
 					textarea.grabFocus();
-					textarea.setCaretPosition(wholedocumentindex);
-					line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumentindex))+" ");
+					textarea.setCaretPosition(wholedocumenttindex);
+					line.setText("line number: "+getLineNumber(textarea.getText().substring(0,wholedocumenttindex))+" ");
 				}
 		            }
 			catch (BadLocationException exception) {
@@ -1235,7 +1232,7 @@ edit.add(functionLines);
 				if(methodname != null && !methodname.equals("")) {
 					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
-					int wholedocumentindex = classandmethods.get(methodname);
+					int wholedocumenttindex = classandmethods.get(methodname);
 					
 					JScrollPane scrollpane=
 ((JScrollPane)tabbedpane.getSelectedComponent());
@@ -1247,14 +1244,14 @@ edit.add(functionLines);
 					textarea.setCaretPosition(0);
 					textarea.requestFocus();
 					
-					verticalscrollbar.setValue(wholedocumentindex);
-					textarea.setCaretPosition(wholedocumentindex);
+					verticalscrollbar.setValue(wholedocumenttindex);
+					textarea.setCaretPosition(wholedocumenttindex);
 					//JOptionPane.showMessageDialog(null,"Opened new file.");
 					
-					verticalscrollbar.setValue(wholedocumentindex);
+					verticalscrollbar.setValue(wholedocumenttindex);
 					
 					
-					scrollToCaretPosition(wholedocumentindex);
+					scrollToCaretPosition(wholedocumenttindex);
 				}
 			}
 		}
@@ -1269,7 +1266,7 @@ edit.add(functionLines);
 					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 			
 					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
-					int wholedocumentindex = classandmethods.get(methodname);
+					int wholedocumenttindex = classandmethods.get(methodname);
 					
 					JScrollPane scrollpane=
 ((JScrollPane)tabbedpane.getSelectedComponent());
@@ -1279,15 +1276,15 @@ edit.add(functionLines);
 					textarea.setCaretPosition(0);
 					textarea.requestFocus();
 					
-					verticalscrollbar.setValue(wholedocumentindex);
-					textarea.setCaretPosition(wholedocumentindex);
+					verticalscrollbar.setValue(wholedocumenttindex);
+					textarea.setCaretPosition(wholedocumenttindex);
 					
-					verticalscrollbar.setValue(wholedocumentindex);
+					verticalscrollbar.setValue(wholedocumenttindex);
 					
 					
 StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					if(storeselectedfile.getCaretPosition(fileName) != 0)
- scrollToCaretPosition(wholedocumentindex);
+ scrollToCaretPosition(wholedocumenttindex);
 				}
 			}
 		}
@@ -1591,17 +1588,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			this.fileName=fileName;
 		});		
 		closetab.addActionListener((ev) -> {					
-			int tabindex=tabbedpane.getSelectedIndex();
-			//if(fileNames.size() != 0 && tabindex != 0)
-				//tabbedpane.setSelectedIndex((tabindex-1));
-			//else if(fileNames.size() > 1 && tabindex == 0)
+			int tabtindex=tabbedpane.getSelectedIndex();
+			//if(fileNames.size() != 0 && tabtindex != 0)
+				//tabbedpane.setSelectedIndex((tabtindex-1));
+			//else if(fileNames.size() > 1 && tabtindex == 0)
 				// tabbedpane.setSelectedIndex(1);
-			if(tabindex == (tabbedpane.getTabCount()-2)) {
-				tabbedpane.setSelectedIndex((tabindex-1));
+			if(tabtindex == (tabbedpane.getTabCount()-2)) {
+				tabbedpane.setSelectedIndex((tabtindex-1));
 			}
 			
-			fileNames.remove(tabindex);
-			tabbedpane.remove(tabindex);
+			fileNames.remove(tabtindex);
+			tabbedpane.remove(tabtindex);
 			
 			/*
 			System.out.println("fileNames:");
@@ -1634,6 +1631,40 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 			}
 		});	
+		tabbedpane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent me) {
+				int tab_index=tabbedpane.getUI().tabForCoordinate(tabbedpane,me.getX(),me.getY());
+				if(tab_index >= 0) {
+					tabbedpane.setSelectedIndex(tab_index);
+					
+					Main.this.fileName = fileNames.get(tab_index);
+					//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+					
+					git.Change(fileName);
+					expandable.open();
+					
+					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					storeselectedfile.set(fileName);
+					startercombobox.Change(fileName);
+				
+					threecomboboxes.load(fileName);
+					expandable.open();
+					git.Change(fileName);
+						
+					//loadComboboxes(filelistmodifier);
+					//filenamescombobox.setSelectedItem(getFileName(fileName));
+					
+					StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
+					storeselectedfile4.set(fileName);
+					
+					allclassesinfile.ChangeFile(textarea,fileName);
+					maven.Change(fileName);
+				}								
+			}
+		});
 		
 		generatejar.addActionListener((ev) -> {
 			int caretposition=textarea.getCaretPosition();
@@ -2412,7 +2443,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									int startOfLine = -1;
 									while((startOfLine = wholetext.indexOf(line,++startOfLine)) != -1) {
-										//int startOfLine=wholetext.indexOf(line);
+										//int startOfLine=wholetext.tindexOf(line);
 										String firsthalf=wholetext.substring(0,startOfLine+1);
 										if(getLineNumber(firsthalf) == line_number) {
 											textarea.grabFocus();
@@ -2517,7 +2548,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										}
 										int startOfLine = -1;
 										while((startOfLine = wholetext.indexOf(line,++startOfLine)) != -1) {
-											//int startOfLine=wholetext.indexOf(line);
+											//int startOfLine=wholetext.tindexOf(line);
 											String firsthalf=wholetext.substring(0,startOfLine+1);
 											if(getLineNumber(firsthalf) == line_number) {
 												textarea.grabFocus();
@@ -2757,7 +2788,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					int startOfLine = -1;
 					while((startOfLine = wholetext.indexOf(line,++startOfLine)) != -1) {
-						//int startOfLine=wholetext.indexOf(line);
+						//int startOfLine=wholetext.tindexOf(line);
 						String firsthalf=wholetext.substring(0,startOfLine+1);
 						if(getLineNumber(firsthalf) == line_number) {
 							textarea.grabFocus();
@@ -2784,10 +2815,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		return filename;
 	}
 	public void OpenNewTab(String filename) {
-		int index=tabbedpane.getSelectedIndex();
-		if(index != -1) {
+		int tindex=tabbedpane.getSelectedIndex();
+		if(tindex != -1) {
 			try {			
-				//Component plustab = tabbedpane.getComponentAt(index);
+				//Component plustab = tabbedpane.getComponentAt(tindex);
 				String dir = filename;
 				if(!dir.equals("")) {
 					dir = dir.replaceAll("[^\\\\]+\\.java","");
@@ -2924,15 +2955,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	}
 	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
-		int index=tabbedpane.getSelectedIndex();
-		if(index != -1) {
+		int tindex=tabbedpane.getSelectedIndex();
+		if(tindex != -1) {
 			try {
-				String title=tabbedpane.getTitleAt(index);
+				String title=tabbedpane.getTitleAt(tindex);
 				if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {
 					title="+";
 				}
 				if(title.equals("+")) {
-					//Component plustab = tabbedpane.getComponentAt(index);
+					//Component plustab = tabbedpane.getComponentAt(tindex);
 					String dir = Main.this.fileName;
 					if(!dir.equals("")) {
 						dir = dir.replaceAll("[^\\\\]+\\.java","");
@@ -3035,12 +3066,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					else if(result == JFileChooser.CANCEL_OPTION) {
 						return;
 					}	
-					System.out.println("tab: "+eventobject.getSource().getClass());
 						
-					if(git != null)
-						git.Change(fileName);
-					if(expandable != null)
-						expandable.open();
+					git.Change(fileName);
+					expandable.open();
 					
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					storeselectedfile.set(fileName);
@@ -3060,23 +3088,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					allclassesinfile.ChangeFile(textarea,fileName);
 					maven.Change(fileName);
 				}
+				/*
 				fileName=fileNames.get(tabbedpane.getSelectedIndex());
 				//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+				*/
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
-		}
-		try {
-			if(fileName != null && !fileName.equals("")) {
-				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-				if(filename2.startsWith("/"))
-					filename2=filename2.substring(1,filename2.length());
-				frame.setTitle(filename2 +" "+fileName);
-			}
-		} catch(URISyntaxException ex) {
-			ex.printStackTrace();
 		}
 	}
 	public int getLineNumber(String stringuptocaretposition) {
@@ -3781,19 +3801,19 @@ class AutoKeyListener {
 					if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 						List<JLabel> labels=getLabels();
 						JLabel selected_label=getSelected();
-						int selected_index = 0;
+						int selected_tindex = 0;
 						for(int i = 0; i < labels.size(); i++) {
 							if(selected_label.hashCode() == labels.get(i).hashCode()) {
-								selected_index = i;
+								selected_tindex = i;
 								break;
 							}
 						}
-						selected_index++;
-						if(selected_index < labels.size()) {
+						selected_tindex++;
+						if(selected_tindex < labels.size()) {
 							// Turn off highlighted
 							selected_label.setOpaque(false);
 							selected_label.setBackground(new JLabel().getBackground());
-							selected_label=labels.get(selected_index);
+							selected_label=labels.get(selected_tindex);
 							// Make highlighted
 							selected_label.setOpaque(true);
 							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
@@ -3802,19 +3822,19 @@ class AutoKeyListener {
 					else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
 						List<JLabel> labels=getLabels();
 						JLabel selected_label=getSelected();
-						int selected_index = 0;
+						int selected_tindex = 0;
 						for(int i = 0; i < labels.size(); i++) {
 							if(selected_label.hashCode() == labels.get(i).hashCode()) {
-								selected_index = i;
+								selected_tindex = i;
 								break;
 							}
 						}
-						selected_index--;
-						if(selected_index > -1) {
+						selected_tindex--;
+						if(selected_tindex > -1) {
 							// Turn off highlighted
 							selected_label.setOpaque(false);
 							selected_label.setBackground(new JLabel().getBackground());
-							selected_label=labels.get(selected_index);
+							selected_label=labels.get(selected_tindex);
 							// Make highlighted
 							selected_label.setOpaque(true);
 							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
@@ -4079,12 +4099,12 @@ class AutoKeyListener {
 			String extra = getExtra();
 			
 			String afterextra = "";
-			int lastindexof = 0;
+			int lasttindexof = 0;
 			if(extra.contains(".")) {
-				lastindexof = extra.lastIndexOf(".");
+				lasttindexof = extra.lastIndexOf(".");
 				if(!extra.endsWith("."))		
-				afterextra=extra.substring(lastindexof+1,extra.length());
-				extra=extra.substring(0,lastindexof+1);
+				afterextra=extra.substring(lasttindexof+1,extra.length());
+				extra=extra.substring(0,lasttindexof+1);
 				//JOptionPane.showMessageDialog(null,extra);
 				//JOptionPane.showMessageDialog(null,afterextra);
 			}
@@ -4780,7 +4800,7 @@ class MethodSuggestionBox {
 				String ifdotbefore = "";
 				JLabel[] labels2=labels;	
 				LiveIterator<JLabel> liveiterator = new LiveIterator<JLabel>(labels2);
-				int selected_index = 0;
+				int selected_tindex = 0;
 				@Override
 				public void keyPressed(KeyEvent keyevent) {
 					System.out.println("F: "+keyevent.getKeyChar());		
@@ -4792,14 +4812,14 @@ class MethodSuggestionBox {
 							suggestionbox.dispose();
 						}
 						else if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
-							labels2[selected_index].setOpaque(false);
-							labels2[selected_index].setBackground(new JLabel().getBackground());
+							labels2[selected_tindex].setOpaque(false);
+							labels2[selected_tindex].setBackground(new JLabel().getBackground());
 							panelgridlayout.validate();
 							panelgridlayout.repaint();
-							int live_index = liveiterator.indexOf(labels2[selected_index]);						
-							if( live_index < (liveiterator.list.size()-1) ) {
-								live_index++;
-								JLabel selected_label=liveiterator.list.get(live_index);
+							int live_tindex = liveiterator.indexOf(labels2[selected_tindex]);						
+							if( live_tindex < (liveiterator.list.size()-1) ) {
+								live_tindex++;
+								JLabel selected_label=liveiterator.list.get(live_tindex);
 								selected_label.setOpaque(true);
 								selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 								panelgridlayout.validate();
@@ -4807,21 +4827,21 @@ class MethodSuggestionBox {
 								
 								label3:for(int i = 0; i < labels2.length; i++) {
 									if(selected_label.equals(labels2[i])) {
-										selected_index = i;
+										selected_tindex = i;
 										break label3;
 									}
 								}
 							}
 						}
 						else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
-							labels2[selected_index].setOpaque(false);
-							labels2[selected_index].setBackground(new JLabel().getBackground());
+							labels2[selected_tindex].setOpaque(false);
+							labels2[selected_tindex].setBackground(new JLabel().getBackground());
 							panelgridlayout.validate();
 							panelgridlayout.repaint();
-							int live_index = liveiterator.indexOf(labels2[selected_index]);
-							if(live_index > 0) {
-								live_index--;
-								JLabel selected_label=liveiterator.list.get(live_index);
+							int live_tindex = liveiterator.indexOf(labels2[selected_tindex]);
+							if(live_tindex > 0) {
+								live_tindex--;
+								JLabel selected_label=liveiterator.list.get(live_tindex);
 								selected_label.setOpaque(true);
 								selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 								panelgridlayout.validate();
@@ -4829,7 +4849,7 @@ class MethodSuggestionBox {
 								
 								label4:for(int i = 0; i < labels2.length; i++) {
 									if(selected_label.equals(labels2[i])) {
-										selected_index = i;
+										selected_tindex = i;
 										break label4;
 									}
 								}
@@ -4849,7 +4869,7 @@ class MethodSuggestionBox {
 							suggestionbox.setVisible(false);
 							String text = main.textarea.getText();
 							// String selected = search_textfield.getText().trim();
-							JLabel selected_label2 =labels2[selected_index];
+							JLabel selected_label2 =labels2[selected_tindex];
 							String selected = selected_label2.getText();
 							CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
 							
@@ -4917,7 +4937,7 @@ class MethodSuggestionBox {
 									
 								methods2=allobjects2;
 								labels2=getLabels(allobjects2);
-								selected_index = 0;
+								selected_tindex = 0;
 							}
 					
 							liveiterator = new LiveIterator<JLabel>(labels2);	
@@ -4934,7 +4954,7 @@ class MethodSuggestionBox {
 									}
 								}
 								labels2=liveiterator.list.toArray(new JLabel[liveiterator.list.size()]);
-								selected_index = 0;
+								selected_tindex = 0;
 							}
 							if(labels2.length == 0) {
 								//String selected = keys_typed;
@@ -4960,8 +4980,8 @@ class MethodSuggestionBox {
 								panelgridlayout.add(label);
 							}
 							if(!isSelected()) {
-								selected_index = 0;
-								JLabel label5 = labels2[selected_index];	
+								selected_tindex = 0;
+								JLabel label5 = labels2[selected_tindex];	
 								label5.setOpaque(true);
 								label5.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
 							}
@@ -4973,10 +4993,10 @@ class MethodSuggestionBox {
 					}
 				}
 				public boolean isSelected() {
-					if(selected_index > labels2.length) {
+					if(selected_tindex > labels2.length) {
 						return false;
 					}
-					JLabel selected_label=labels2[selected_index];	
+					JLabel selected_label=labels2[selected_tindex];	
 					return !selected_label.getBackground().equals(new JLabel().getBackground());
 				}	
 				@Override
