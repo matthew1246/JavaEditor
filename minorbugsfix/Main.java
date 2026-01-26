@@ -272,17 +272,17 @@ public class Main {
 		setAllClassesInFolder();
 	}
 	public int tabs_selected = -1;
-	public FileListModifier filelistmodifier = new FileListModifier();
-	public Git git = new Git();
+	public FileListModifier filelistmodifier=new FileListModifier();
+	public Git git;
+	public boolean isStartup = false;
 	/*
 	** If have default content for window
 	*/
 	public Main(OpenDefaultContent odc) 
 	{
+		msdos = new MSDOS(this);
+		isStartup = true;
 		fileName = odc.getFileName();
-		threecomboboxes = new ThreeComboboxes(this);
-		expandable=new Expandable(this);
-		startercombobox = new StarterJComboBox(this);
 		
 		setLayout();
 		
@@ -504,13 +504,18 @@ public class Main {
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
+				git = new Git();
+				threecomboboxes = new ThreeComboboxes(Main.this);
+				expandable=new Expandable(Main.this);
+				startercombobox = new StarterJComboBox(Main.this);
+				maven = new Maven();
+		
 				threecomboboxes.BackgroundThreadfromScratch(Main.this.fileName);
 				setAllClassesInFolder();
 				startercombobox.BackgroundThread(fileName);
 				if(fileName != null && !fileName.equals("")) {
 					git.ChangeBackgroundThread(fileName);
 				}
-				Main.this.msdos = new MSDOS(Main.this);	
 				maven.ChangeBackgroundThread(fileName);
 				
 				return null;
@@ -531,12 +536,7 @@ public class Main {
 			}
 		};
 		swingworker4.execute();
-		
-		try {
-			
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}		
+				
 		SwingWorker<Links,Void> swingworker10 = new SwingWorker<>() {
 			@Override
 			protected Links doInBackground() {
@@ -558,6 +558,7 @@ public class Main {
 			}
 		};
 		swingworker10.execute();
+		isStartup = false;
 	}
 	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
 		if(filename != null && !filename.equals("")) {
@@ -3030,33 +3031,36 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					else if(result == JFileChooser.CANCEL_OPTION) {
 						return;
-					}		
+					}	
+					System.out.println("tab: "+eventobject.getSource().getClass());
+						
+					if(git != null)
+						git.Change(fileName);
+					if(expandable != null)
+						expandable.open();
+					
+					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					storeselectedfile.set(fileName);
+					startercombobox.Change(fileName);
+				
+					threecomboboxes.load(fileName);
+					expandable.open();
+					this.fileName=fileName;
+					git.Change(fileName);
+						
+					//loadComboboxes(filelistmodifier);
+					//filenamescombobox.setSelectedItem(getFileName(fileName));
+					
+					StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
+					storeselectedfile4.set(fileName);
+					
+					allclassesinfile.ChangeFile(textarea,fileName);
+					maven.Change(fileName);
 				}
 				fileName=fileNames.get(tabbedpane.getSelectedIndex());
 				//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
-				
-				git.Change(fileName);
-				expandable.open();
-				
-				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-				storeselectedfile.set(fileName);
-				startercombobox.Change(fileName);
-			
-				threecomboboxes.load(fileName);
-				expandable.open();
-				this.fileName=fileName;
-				git.Change(fileName);
-					
-				//loadComboboxes(filelistmodifier);
-				//filenamescombobox.setSelectedItem(getFileName(fileName));
-				
-				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
-				storeselectedfile4.set(fileName);
-				
-				allclassesinfile.ChangeFile(textarea,fileName);
-				maven.Change(fileName);
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -3258,15 +3262,15 @@ class Expandable {
 		main.open(main.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null) {
-			if(main.frame != null) {
+		if(frame != null && frame.isVisible()) {
+			if(main.frame != null && frame != null) {
 				frame.setSize(200,main.frame.getHeight());
 			}
 				
 			jtree = new JTree(main.filelistmodifier.original.toArray(new Object[main.filelistmodifier.original.size()]));
 			jscrollpane.setViewportView(jtree);
 			setListener();
-		//}
+		}
 	}
 	public void setListener() {
 		MouseListener ml = new MouseAdapter() {
