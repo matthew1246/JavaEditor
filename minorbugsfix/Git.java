@@ -58,6 +58,53 @@ public class Git {
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 		return false;		
 	}
+	public boolean setWhereIsGitBashDotExeBackgroundThread() {
+		String[] commonPaths = {
+		    "C:\\Program Files\\Git\\git-bash.exe",
+		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
+		};
+		
+		for(String path : commonPaths) {
+			File file = new File(path);
+		    	if (file.exists()) {
+		        		gitbashdotexe=file.getAbsolutePath();
+		    		return true;		
+		    	}
+	    	}
+	    	return false;
+    	}
+    	public boolean setWhereIsGitBashDotExeEDT() {
+    		String[] options={"Yes","No"};
+		int option=JOptionPane.showOptionDialog(null,"Do you want to set where git-bash.exe is?","Where is git-bash.exe installed?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		switch(option) {
+			case JOptionPane.YES_OPTION:
+				String dir =  System.getenv("ProgramFiles");
+				JFileChooser filechooser = new JFileChooser(new File(dir));
+				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open git-bash.exe","exe");
+				filechooser.setFileFilter(filenameextensionfilter);
+				int result = filechooser.showOpenDialog(null);
+		                       if(result == JFileChooser.APPROVE_OPTION) {
+                       			File selectedFile = filechooser.getSelectedFile();
+                       			gitbashdotexe = selectedFile.getAbsolutePath();
+					if(gitbashdotexe.endsWith("git-bash.exe")) {
+						return true;
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
+						return false;
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
+					return false;
+				}
+			case JOptionPane.NO_OPTION:
+				JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
+				return false;
+		}
+		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
+		return false;	
+	}
 	public boolean isFileInsideGitRepository(String fileName) {
 		if(fileName.equals(""))
 			return false;	
@@ -103,18 +150,36 @@ public class Git {
 		      	}
 	      	}
       	}
-      	public void setDirectoryAndRootDirectory(String fileName) {
-		if(isGitInstalled) {
-			if( new File(fileName).exists() ) {
-				if(isFileInsideGitRepository(fileName)) {
-					directory=fileName.replaceAll("[^\\\\]+\\.java","");
-					CommandLine commandline = new CommandLine();
-					Process process=commandline.run("git rev-parse --show-toplevel",directory);
-					DisplayOutput displayoutput = new DisplayOutput();
-					root_directory = displayoutput.OneLine(process);
-				}
-		      	}
+      	public boolean isGitBashDotExeFoundByBackgroundThread = false;
+      	public String whichbranchopened="";
+      	public void ChangeBackgroundThread(String fileName) {
+     		isGitInstalled = isGitInstalled();
+     		if(isGitInstalled) {
+     			if(isFileInsideGitRepository(fileName)) {
+     				isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
+     				setDirectoryAndRootDirectory(fileName);
+     				whichbranchopened=whichBranchOpened();	
+     			}
+     		}
+     	}
+      	public void ChangeEDT(String fileName) {
+      		if(!isGitBashDotExeFoundByBackgroundThread) {
+      			isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
+      		}
+      		if(isGitBashDotExeFoundByBackgroundThread) {
+      			if(!frame.isVisible()) {
+				setLayout();
+		      		setListeners();
+	      		}
+		      	frame.setTitle(whichbranchopened);
 	      	}
+      	}
+      	public void setDirectoryAndRootDirectory(String fileName) {
+		directory=fileName.replaceAll("[^\\\\]+\\.java","");
+		CommandLine commandline = new CommandLine();
+		Process process=commandline.run("git rev-parse --show-toplevel",directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		root_directory = displayoutput.OneLine(process);
       	}
       	
 	public JButton everythingbutthekitchensink;
@@ -416,4 +481,4 @@ public class Git {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}

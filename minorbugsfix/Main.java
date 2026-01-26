@@ -282,9 +282,7 @@ public class Main {
 		fileName = odc.getFileName();
 		threecomboboxes = new ThreeComboboxes(this);
 		startercombobox = new StarterJComboBox(this);
-		if(fileName != null && !fileName.equals("")) {
-			git.Change(fileName);
-		}
+		
 		setLayout();
 		
 		if(fileName.equals("")) {
@@ -508,6 +506,10 @@ public class Main {
 				threecomboboxes.BackgroundThreadfromScratch(Main.this.fileName);
 				setAllClassesInFolder();
 				startercombobox.BackgroundThread(fileName);
+				if(fileName != null && !fileName.equals("")) {
+					git.ChangeBackgroundThread(fileName);
+				}
+
 				return null;
 			}
 			@Override
@@ -518,6 +520,9 @@ public class Main {
 				expandable = new Expandable(Main.this);
 				setAllClassesInFile();	
 				startercombobox.EDT();
+				if(fileName != null && !fileName.equals("")) {
+					git.ChangeEDT(fileName);
+				}
 				openLastSelectedLine();
 			}
 		};
