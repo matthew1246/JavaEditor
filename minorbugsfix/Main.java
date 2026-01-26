@@ -281,6 +281,7 @@ public class Main {
 	{
 		fileName = odc.getFileName();
 		threecomboboxes = new ThreeComboboxes(this);
+		expandable=new Expandable(this);
 		startercombobox = new StarterJComboBox(this);
 		
 		setLayout();
@@ -509,6 +510,7 @@ public class Main {
 				if(fileName != null && !fileName.equals("")) {
 					git.ChangeBackgroundThread(fileName);
 				}
+				Main.this.msdos = new MSDOS(Main.this);	
 				maven.ChangeBackgroundThread(fileName);
 				
 				return null;
@@ -516,14 +518,14 @@ public class Main {
 			@Override
 			protected void done() {
 				threecomboboxes.EDTfromScratch(Main.this.fileName);
-				Main.this.msdos = new MSDOS(Main.this);	
+				expandable.setLayout();
 				setKeywords();
-				expandable = new Expandable(Main.this);
 				setAllClassesInFile();	
 				startercombobox.EDT();
 				if(fileName != null && !fileName.equals("")) {
 					git.ChangeEDT(fileName);
 				}
+				msdos.setLayout();
 				maven.ChangeEDT();
 				openLastSelectedLine();
 			}
@@ -3234,6 +3236,8 @@ class Expandable {
 	public JTree jtree = new JTree();
 	Expandable(Main main) {
 		this.main = main;
+	}
+	public void setLayout() {
 		frame = new JFrame();
 		if(main.frame != null)
 		frame.setSize(200,main.frame.getHeight());
