@@ -510,7 +510,7 @@ public class Main {
 				startercombobox = new StarterJComboBox(Main.this);
 				maven = new Maven();
 		
-				threecomboboxes.BackgroundThreadfromScratch(Main.this.fileName);
+				threecomboboxes.BackgroundThreadfromScratch(fileName);
 				setAllClassesInFolder();
 				startercombobox.BackgroundThread(fileName);
 				if(fileName != null && !fileName.equals("")) {
@@ -522,7 +522,7 @@ public class Main {
 			}
 			@Override
 			protected void done() {
-				threecomboboxes.EDTfromScratch(Main.this.fileName);
+				threecomboboxes.EDTfromScratch(fileName);
 				expandable.setLayout();
 				setKeywords();
 				setAllClassesInFile();	

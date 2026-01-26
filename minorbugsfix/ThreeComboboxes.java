@@ -70,16 +70,16 @@ public class ThreeComboboxes {
 	public void BackgroundThreadfromScratch(String fileName) {
 		this.fileName = fileName;
 		BackgroundThreadfileCombobox(fileName);
-		classComboboxBackgroundThread();
-		setMainClass();
-		methodComboboxBackgroundThread(mainclass);
 	}
 	public void EDTfromScratch(String fileName) {
 		setGetClassName();
 		setGetClassMethods();
 		setClassNames();
+		BackgroundThreadfileCombobox(fileName);
 		EDTfileCombobox();
-		classComboboxEDT();
+		classCombobox();
+		setMainClass();
+		methodComboboxBackgroundThread(mainclass);
 		methodComboboxEDT();
 		Select(fileName,mainclass);
 	}
