@@ -509,7 +509,8 @@ public class Main {
 				if(fileName != null && !fileName.equals("")) {
 					git.ChangeBackgroundThread(fileName);
 				}
-
+				maven.ChangeBackgroundThread(fileName);
+				
 				return null;
 			}
 			@Override
@@ -523,12 +524,12 @@ public class Main {
 				if(fileName != null && !fileName.equals("")) {
 					git.ChangeEDT(fileName);
 				}
+				maven.ChangeEDT();
 				openLastSelectedLine();
 			}
 		};
 		swingworker4.execute();
 		
-		maven.Change(fileName);
 		try {
 			
 		} catch(Exception ex) {
