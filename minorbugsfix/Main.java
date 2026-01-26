@@ -3149,7 +3149,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	}
 	public List<String> keywords= new ArrayList<String>();
 	public void setKeywords() {
-		if(Main.muck != null && keywords.size() == 0) {
+		if(keywords.size() == 0) {
 			/*keywords=new ArrayList<String>();
 			SourceVersion sourceversion=SourceVersion.latest();
 			Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)");
