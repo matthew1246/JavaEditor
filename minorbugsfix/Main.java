@@ -529,7 +529,6 @@ public class Main {
 		swingworker4.execute();
 		
 		maven.Change(fileName);
-		git.Change(fileName);	
 		try {
 			
 		} catch(Exception ex) {

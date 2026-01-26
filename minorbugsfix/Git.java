@@ -5,8 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
-	public boolean isVisible = false;
-	public boolean isGitInstalled = false;
 	public String root_directory;
 	public String directory;
 	public JFrame frame=new JFrame();
@@ -139,8 +137,6 @@ public class Git {
 	public void Change(String fileName) {
 		if(isGitInstalled()) {
 			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
-				isGitInstalled = true;
-				isVisible = true;
 				setDirectoryAndRootDirectory(fileName);
 				if(!frame.isVisible()) {
 					setLayout();
@@ -153,8 +149,7 @@ public class Git {
       	public boolean isGitBashDotExeFoundByBackgroundThread = false;
       	public String whichbranchopened="";
       	public void ChangeBackgroundThread(String fileName) {
-     		isGitInstalled = isGitInstalled();
-     		if(isGitInstalled) {
+     		if(isGitInstalled()) {
      			if(isFileInsideGitRepository(fileName)) {
      				isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
      				setDirectoryAndRootDirectory(fileName);
