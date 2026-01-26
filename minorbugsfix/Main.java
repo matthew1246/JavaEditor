@@ -530,7 +530,7 @@ public class Main {
 				if(fileName != null && !fileName.equals("")) {
 					git.ChangeEDT(fileName);
 				}
-				msdos.setLayout();
+				msdos.EDT();
 				maven.ChangeEDT();
 				openLastSelectedLine();
 			}
