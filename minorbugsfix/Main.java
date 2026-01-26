@@ -3249,11 +3249,11 @@ class Expandable {
 		frame.setLocation(0,0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jscrollpane = new JScrollPane();
+		frame.add(jscrollpane);
+		frame.setVisible(true);
 		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null &&  !main.threecomboboxes.filelistmodifier.isEmpty()) {
 			open();
 		//}
-		frame.add(jscrollpane);
-		frame.setVisible(true);
 	}
 	public void mySingleClick(int selRow,TreePath selPath) {
 		main.open(main.filelistmodifier.original.get(selRow));	
