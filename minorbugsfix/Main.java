@@ -286,25 +286,31 @@ public class Main {
 		
 		setLayout();
 		
-		if(fileName.equals("")) {
+		if(fileName.equals("")) {	
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
+			this.textarea = textarea2;
 			Font originalFont = textarea.getFont();
 			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-
+	
 			JScrollPane scrollpane2 = new JScrollPane(textarea2);
+			
 			textarea2.setTabSize(4);
 			
-			this.textarea=textarea2;
+			tabbedpane.addTab("",scrollpane2);
 			
-			CurlyBraceKeyListener curlybracekeylistener =new CurlyBraceKeyListener(this);
+			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+			fileNames.add("");
 			
+			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);				
 			textarea2.addKeyListener(curlybracekeylistener);
-			
+			//positiontrackers.add(new PositionTracker(textarea2));
+
 			addCaretListener(textarea2);
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-					try {
+				try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = curlybracekeylistener.autokeylistener.position;
 						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
@@ -356,11 +362,6 @@ public class Main {
 				}
 			});
 			textarea2.addMouseListener(rightclick);
-			
-			tabbedpane.addTab(fileName,scrollpane2);
-			tabbedpane.addTab("+",pluspanel);
-			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
-			fileNames.add("");
 		}
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
