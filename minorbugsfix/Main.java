@@ -304,7 +304,7 @@ public class Main {
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
 			
-			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);				
+			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);	
 			textarea2.addKeyListener(curlybracekeylistener);
 			//positiontrackers.add(new PositionTracker(textarea2));
 
