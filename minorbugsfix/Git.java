@@ -7,10 +7,7 @@ import java.util.regex.*;
 public class Git {
 	public String root_directory;
 	public String directory;
-	public JFrame frame=new JFrame();
-	public Git() {
-		// Change(fileName);	
-	}
+	public JFrame frame=new JFrame();
 	public String gitbashdotexe = "";
 	public boolean setWhereIsGitBashDotExe(String fileName) {
 		String[] commonPaths = {
@@ -123,11 +120,7 @@ public class Git {
 		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		
 		            String output;
-		            if ((output = reader.readLine()) != null) {
-		            	return true;
-		            } else {
-		            	return false;
-		            }
+		            return reader.readLine() != null;
 	            } catch(IOException ex) {
 	            	ex.printStackTrace();
 	            	return false;
