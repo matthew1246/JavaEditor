@@ -508,12 +508,12 @@ public class Main {
 				// git = new Git();
 				// threecomboboxes = new ThreeComboboxes(Main.this);
 				// expandable=new Expandable(Main.this);
-				// startercombobox = new StarterJComboBox(Main.this);
+				//startercombobox = new StarterJComboBox(Main.this);
 				maven = new Maven();
 		
 				// threecomboboxes.BackgroundThreadfromScratch(fileName);
 				// setAllClassesInFolder();
-				startercombobox.BackgroundThread(fileName);
+				// startercombobox.BackgroundThread(fileName);
 				/* if(fileName != null && !fileName.equals("")) {
 					git.ChangeBackgroundThread(fileName);
 				} */
@@ -549,10 +549,11 @@ public class Main {
 				try {
 					Links links = get();
 					Main.muck = new Muck(links);
-					setFullPackageNames(links);
+					/*setFullPackageNames(links);
 					setSubpackages(links);
 					setPackages(links);
 					setApiClasses(links);
+					*/
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
