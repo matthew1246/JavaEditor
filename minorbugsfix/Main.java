@@ -513,6 +513,10 @@ public class Main {
 			@Override
 			protected Links doInBackground() {
 				Links links= new Links();
+				setFullPackageNames(links);
+				setSubpackages(links);
+				setPackages(links);
+				setApiClasses(links);
 				return links;
 			}
 			@Override
@@ -520,18 +524,12 @@ public class Main {
 				try {
 					Links links = get();
 					Main.muck = new Muck(links);
-					/*setFullPackageNames(links);
-					setSubpackages(links);
-					setPackages(links);
-					setApiClasses(links);
-					*/
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
 			}
 		};
 		swingworker10.execute();
-		openLastSelectedLine();
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
@@ -552,6 +550,8 @@ public class Main {
 				
 				msdos.EDT();
 				maven.ChangeEDT();
+				
+				openLastSelectedLine();
 			}
 		};
 		swingworker4.execute();
@@ -570,7 +570,6 @@ public class Main {
 			}
 		}
 	}
-
 	public void openLastSelectedLine(JTextArea textarea3,String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		int caretposition=storeselectedfile.getCaretPosition(filename);
@@ -587,24 +586,24 @@ public class Main {
 		}
 	}
 	public void openLastSelectedLine() {
-		SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
+		/*SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
 			@Override
 			protected Integer doInBackground() {
-		
+		*/
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				int caretposition=storeselectedfile.getCaretPosition(fileName);
-				return caretposition;
+		/*		return caretposition;
 			}
 			@Override
 			protected void done() {
 				try {
 				int caretposition=get();
-				if(fileName != null && !fileName.equals("")) {
+		*/		if(fileName != null && !fileName.equals("")) {
 					if(caretposition <= textarea.getDocument().getLength()) {
 						scrollToCaretPosition(caretposition);
 					}
 				}
-				} catch (ExecutionException ex) {
+		/*		} catch (ExecutionException ex) {
 					ex.printStackTrace();
 				} catch(InterruptedException ex){
 					ex.printStackTrace();
@@ -612,6 +611,7 @@ public class Main {
 			}
 		};
 		swingworker.execute();
+		*/	
 	}
 	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
