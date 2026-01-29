@@ -505,32 +505,32 @@ public class Main {
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
-				git = new Git();
-				threecomboboxes = new ThreeComboboxes(Main.this);
-				expandable=new Expandable(Main.this);
-				startercombobox = new StarterJComboBox(Main.this);
+				// git = new Git();
+				// threecomboboxes = new ThreeComboboxes(Main.this);
+				// expandable=new Expandable(Main.this);
+				// startercombobox = new StarterJComboBox(Main.this);
 				maven = new Maven();
 		
-				threecomboboxes.BackgroundThreadfromScratch(fileName);
-				setAllClassesInFolder();
+				// threecomboboxes.BackgroundThreadfromScratch(fileName);
+				// setAllClassesInFolder();
 				startercombobox.BackgroundThread(fileName);
-				if(fileName != null && !fileName.equals("")) {
+				/* if(fileName != null && !fileName.equals("")) {
 					git.ChangeBackgroundThread(fileName);
-				}
+				} */
 				maven.ChangeBackgroundThread(fileName);
 				
 				return null;
 			}
 			@Override
 			protected void done() {
-				threecomboboxes.EDTfromScratch(fileName);
-				expandable.setLayout();
+				// threecomboboxes.EDTfromScratch(fileName);
+				// expandable.setLayout();
 				setKeywords();
-				setAllClassesInFile();	
-				startercombobox.EDT();
-				if(fileName != null && !fileName.equals("")) {
+				// setAllClassesInFile();	
+				// startercombobox.EDT();
+				/* if(fileName != null && !fileName.equals("")) {
 					git.ChangeEDT(fileName);
-				}
+				} */
 				msdos.EDT();
 				maven.ChangeEDT();
 				openLastSelectedLine();
