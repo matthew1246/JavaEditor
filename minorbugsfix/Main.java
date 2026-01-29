@@ -505,36 +505,6 @@ public class Main {
  	 	 	swingworker.execute();
 		}
 		setListeners();									
-		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
-			@Override
-			protected Void doInBackground() {
-						threecomboboxes.BackgroundThreadfromScratch(fileName);			
-		
-				// setAllClassesInFolder();
-				// startercombobox.BackgroundThread(fileName);
-				/* if(fileName != null && !fileName.equals("")) {
-					git.ChangeBackgroundThread(fileName);
-				} */
-				maven.ChangeBackgroundThread(fileName);
-				
-				return null;
-			}
-			@Override
-			protected void done() {
-				threecomboboxes.EDTfromScratch(fileName);
-				// expandable.setLayout();
-				setKeywords();
-				// setAllClassesInFile();	
-				// startercombobox.EDT();
-				/* if(fileName != null && !fileName.equals("")) {
-					git.ChangeEDT(fileName);
-				} */
-				//msdos.EDT();
-				maven.ChangeEDT();
-				// openLastSelectedLine();
-			}
-		};
-		swingworker4.execute();
 				
 		SwingWorker<Links,Void> swingworker10 = new SwingWorker<>() {
 			@Override
@@ -558,6 +528,36 @@ public class Main {
 			}
 		};
 		swingworker10.execute();
+		openLastSelectedLine();
+		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
+			@Override
+			protected Void doInBackground() {
+				threecomboboxes.BackgroundThreadfromScratch(fileName);			
+		
+				setAllClassesInFolder();
+				startercombobox.BackgroundThread(fileName);
+				/* if(fileName != null && !fileName.equals("")) {
+					git.ChangeBackgroundThread(fileName);
+				} */
+				maven.ChangeBackgroundThread(fileName);
+				
+				return null;
+			}
+			@Override
+			protected void done() {
+				threecomboboxes.EDTfromScratch(fileName);
+				expandable.setLayout();
+				setKeywords();
+				setAllClassesInFile();	
+				startercombobox.EDT();
+				/* if(fileName != null && !fileName.equals("")) {
+					git.ChangeEDT(fileName);
+				} */
+				msdos.EDT();
+				maven.ChangeEDT();
+			}
+		};
+		swingworker4.execute();
 	}
 	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
 		if(filename != null && !filename.equals("")) {
@@ -590,24 +590,23 @@ public class Main {
 		}
 	}
 	public void openLastSelectedLine() {
-		/*SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
+		SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
 			@Override
 			protected Integer doInBackground() {
-		*/
+		
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				int caretposition=storeselectedfile.getCaretPosition(fileName);
-				/*return caretposition;
+				return caretposition;
 			}
 			@Override
 			protected void done() {
 				try {
 				int caretposition=get();
 				if(fileName != null && !fileName.equals("")) {
-					*/
 					if(caretposition <= textarea.getDocument().getLength()) {
 						scrollToCaretPosition(caretposition);
 					}
-				/*}
+				}
 				} catch (ExecutionException ex) {
 					ex.printStackTrace();
 				} catch(InterruptedException ex){
@@ -616,7 +615,6 @@ public class Main {
 			}
 		};
 		swingworker.execute();
-		*/
 	}
 	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
