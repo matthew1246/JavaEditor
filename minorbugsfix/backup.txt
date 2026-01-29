@@ -546,7 +546,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6076
+    "caretposition": 1904
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java": {
     "startupcombobox": [
