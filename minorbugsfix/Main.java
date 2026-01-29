@@ -533,12 +533,8 @@ public class Main {
 			@Override
 			protected Void doInBackground() {
 				threecomboboxes.BackgroundThreadfromScratch(fileName);			
-		
 				setAllClassesInFolder();
 				startercombobox.BackgroundThread(fileName);
-				/* if(fileName != null && !fileName.equals("")) {
-					git.ChangeBackgroundThread(fileName);
-				} */
 				maven.ChangeBackgroundThread(fileName);
 				
 				return null;
@@ -550,14 +546,30 @@ public class Main {
 				setKeywords();
 				setAllClassesInFile();	
 				startercombobox.EDT();
-				/* if(fileName != null && !fileName.equals("")) {
-					git.ChangeEDT(fileName);
-				} */
+				
 				msdos.EDT();
 				maven.ChangeEDT();
 			}
 		};
 		swingworker4.execute();
+		/*
+		SwingWorker<Void,Void> swingworker14=new SwingWorker<Void,Void>() {
+			@Override
+			protected Void doInBackground() {
+				if(fileName != null && !fileName.equals("")) {
+					git.ChangeBackgroundThread(fileName);
+				}
+				return null;
+			}
+			@Override
+			protected void done() {
+				if(fileName != null && !fileName.equals("")) {
+					git.ChangeEDT(fileName);
+				}
+			}
+		};
+		swingworker14.execute();
+		*/
 	}
 	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
 		if(filename != null && !filename.equals("")) {
@@ -1658,6 +1670,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					
 					allclassesinfile.ChangeFile(textarea,fileName);
 					maven.Change(fileName);
+					
+					if(fileName != null && !fileName.equals("")) {
+						try {
+							String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+							if(filename2.startsWith("/"))
+								filename2=filename2.substring(1,filename2.length());
+							frame.setTitle(filename2 +" "+fileName);
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					}
 				}								
 			}
 		});
