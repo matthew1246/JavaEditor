@@ -275,7 +275,7 @@ public class Main {
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier=new FileListModifier();
-	public Git git;
+	public Git git = new Git();
 	/*
 	** If have default content for window
 	*/
@@ -283,6 +283,9 @@ public class Main {
 	{
 		msdos = new MSDOS(this);
 		fileName = odc.getFileName();
+		threecomboboxes = new ThreeComboboxes(this);
+		expandable=new Expandable(this);
+		startercombobox = new StarterJComboBox(this);
 		
 		setLayout();
 		
@@ -505,24 +508,20 @@ public class Main {
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
-				// git = new Git();
-				// threecomboboxes = new ThreeComboboxes(Main.this);
-				// expandable=new Expandable(Main.this);
-				//startercombobox = new StarterJComboBox(Main.this);
+						threecomboboxes.BackgroundThreadfromScratch(fileName);			
 		
-				// threecomboboxes.BackgroundThreadfromScratch(fileName);
 				// setAllClassesInFolder();
 				// startercombobox.BackgroundThread(fileName);
 				/* if(fileName != null && !fileName.equals("")) {
 					git.ChangeBackgroundThread(fileName);
 				} */
-				//maven.ChangeBackgroundThread(fileName);
+				maven.ChangeBackgroundThread(fileName);
 				
 				return null;
 			}
 			@Override
 			protected void done() {
-				// threecomboboxes.EDTfromScratch(fileName);
+				threecomboboxes.EDTfromScratch(fileName);
 				// expandable.setLayout();
 				setKeywords();
 				// setAllClassesInFile();	
@@ -531,7 +530,7 @@ public class Main {
 					git.ChangeEDT(fileName);
 				} */
 				//msdos.EDT();
-				//maven.ChangeEDT();
+				maven.ChangeEDT();
 				// openLastSelectedLine();
 			}
 		};
