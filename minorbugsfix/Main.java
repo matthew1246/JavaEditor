@@ -509,7 +509,6 @@ public class Main {
 				// threecomboboxes = new ThreeComboboxes(Main.this);
 				// expandable=new Expandable(Main.this);
 				//startercombobox = new StarterJComboBox(Main.this);
-				maven = new Maven();
 		
 				// threecomboboxes.BackgroundThreadfromScratch(fileName);
 				// setAllClassesInFolder();
@@ -517,7 +516,7 @@ public class Main {
 				/* if(fileName != null && !fileName.equals("")) {
 					git.ChangeBackgroundThread(fileName);
 				} */
-				maven.ChangeBackgroundThread(fileName);
+				//maven.ChangeBackgroundThread(fileName);
 				
 				return null;
 			}
@@ -531,9 +530,9 @@ public class Main {
 				/* if(fileName != null && !fileName.equals("")) {
 					git.ChangeEDT(fileName);
 				} */
-				msdos.EDT();
-				maven.ChangeEDT();
-				openLastSelectedLine();
+				//msdos.EDT();
+				//maven.ChangeEDT();
+				// openLastSelectedLine();
 			}
 		};
 		swingworker4.execute();
