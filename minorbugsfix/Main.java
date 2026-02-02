@@ -287,7 +287,7 @@ public class Main {
 		expandable=new Expandable(this);
 		startercombobox = new StarterJComboBox(this);
 		
-		git.Change(fileName);
+		// git.Change(fileName);
 		
 										
 		setLayout();
@@ -532,8 +532,8 @@ public class Main {
 		swingworker10.execute();
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
-			protected Void doInBackground() {
-				threecomboboxes.BackgroundThreadfromScratch(fileName);			
+			protected Void doInBackground() {				
+				// threecomboboxes.BackgroundThreadfromScratch(fileName);			
 				setAllClassesInFolder();
 				startercombobox.BackgroundThread(fileName);
 				maven.ChangeBackgroundThread(fileName);
@@ -542,7 +542,7 @@ public class Main {
 			}
 			@Override
 			protected void done() {
-				threecomboboxes.EDTfromScratch(fileName);
+				// threecomboboxes.EDTfromScratch(fileName);
 				expandable.setLayout();
 				setKeywords();
 				setAllClassesInFile();	
