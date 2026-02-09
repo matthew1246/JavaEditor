@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 /*
 ** This is load all JComboBoxes fields, 
 ** so load all file names, class names and Method names.
@@ -75,7 +76,6 @@ public class ThreeComboboxes {
 		setGetClassName();
 		setGetClassMethods();
 		setClassNames();
-		BackgroundThreadfileCombobox(fileName);
 		EDTfileCombobox();
 		classCombobox();
 		setMainClass();
@@ -107,23 +107,29 @@ public class ThreeComboboxes {
 		main.filelistmodifier = new FileListModifier(fileName);
 	}
 	public void EDTfileCombobox() {
-		RemoveFilecombo();
+		// RemoveFilecombo();
 		List<String> filenames=main.filelistmodifier.getFileList();
-		for(String filename:filenames) {
+		/*for(String filename:filenames) {
 			main.filenamescombobox.addItem(filename);
-		}
+		}*/
+		DefaultComboBoxModel<String> model=new DefaultComboBoxModel<String>(filenames.toArray(new String[filenames.size()]));
+		main.filenamescombobox.setModel(model);
 	}
 	public void classCombobox() {
 		try {
-			RemoveClasscombo();			
+			// RemoveClasscombo();			
 			if(classnames == null) JOptionPane.showMessageDialog(null,"classnames 1 is null.");
 			// if(classnames.keySet().size() == 0) JOptionPane.showMessageDialog(null,"Classes is empty.");
+			List<String> modeldata = new ArrayList<String>();
 			LinkedHashMapInterface<String,Integer> iterator2=new LinkedHashMapInterface<String,Integer>(classnames) {
 				public void KeyAndValue(String key,Integer integer) {
-					main.classnamescombobox.addItem(key);
+					modeldata.add(key);
 				}
 			};						
 			iterator2.iterate();
+			DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(modeldata.toArray(new String[modeldata.size()]));
+			main.classnamescombobox.setModel(model);
+
 		} catch(NullPointerException ex) {
 			ex.printStackTrace();
 		}
@@ -212,10 +218,12 @@ public class ThreeComboboxes {
 		iterator.iterate();
 	}
 	public void methodComboboxEDT() {
-		RemoveMethodcombo();
-		for(String method:methods) {
+		// RemoveMethodcombo();
+		/*for(String method:methods) {
 			main.combobox.addItem(method);
-		}
+		}*/
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(methods.toArray(new String[methods.size()]));
+		main.combobox.setModel(model);
 	}		
 	public void Select(String fileName,String mainclass) {
 		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
