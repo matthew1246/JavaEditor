@@ -530,10 +530,33 @@ public class Main {
 			}
 		};
 		swingworker10.execute();
+		SwingWorker<Void,Void> swingworker20=new SwingWorker<>() {
+			@Override
+			protected Void doInBackground() {
+				threecomboboxes.BackgroundThreadfromScratch(fileName);
+				return null;
+			}
+			@Override
+			protected void done() {
+				threecomboboxes.EDTfromScratch(fileName);
+			}
+		};
+		swingworker20.execute();	
+		SwingWorker<Void,Void> swingworker23 = new SwingWorker<>() {
+			@Override
+			protected Void doInBackground() {
+				git.ChangeBackgroundThread(fileName);
+				return null;
+			}
+			@Override
+			protected void done() {
+				git.ChangeEDT(fileName);
+			}
+		};
+		swingworker23.execute();
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {				
-				// threecomboboxes.BackgroundThreadfromScratch(fileName);			
 				setAllClassesInFolder();
 				startercombobox.BackgroundThread(fileName);
 				maven.ChangeBackgroundThread(fileName);
@@ -542,7 +565,6 @@ public class Main {
 			}
 			@Override
 			protected void done() {
-				// threecomboboxes.EDTfromScratch(fileName);
 				expandable.setLayout();
 				setKeywords();
 				setAllClassesInFile();	

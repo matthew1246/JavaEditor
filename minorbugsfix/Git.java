@@ -7,7 +7,7 @@ import java.util.regex.*;
 public class Git {
 	public String root_directory;
 	public String directory;
-	public JFrame frame=new JFrame();
+	public JFrame frame;
 	public String gitbashdotexe = "";
 	public boolean setWhereIsGitBashDotExe(String fileName) {
 		String[] commonPaths = {
@@ -158,7 +158,7 @@ public class Git {
 	      			isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
 	      		}
 	      		if(isGitBashDotExeFoundByBackgroundThread) {
-	      			if(!frame.isVisible()) {
+	      			if(frame == null) {
 					setLayout();
 			      		setListeners();
 		      		}
@@ -184,6 +184,7 @@ public class Git {
 	
 	public JButton reset;
 	public void setLayout() {
+		frame=new JFrame();
 		frame.setSize(500,100);
  // previously 400,100
 		frame.setLocation(980,0);
