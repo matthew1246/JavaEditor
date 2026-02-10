@@ -131,7 +131,7 @@ public class Git {
 		if(isGitInstalled()) {
 			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
 				setDirectoryAndRootDirectory(fileName);
-				if(!frame.isVisible()) {
+				if(frame == null) {
 					setLayout();
 			      		setListeners();
 		      		}
