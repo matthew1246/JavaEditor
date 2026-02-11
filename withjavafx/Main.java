@@ -3615,7 +3615,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	}
 	public List<String> keywords=new ArrayList<String>();
 	public void setKeywords() {
-		if(Main.muck != null && keywords.size() == 0) {
 			/*keywords=new ArrayList<String>();
 			SourceVersion sourceversion=SourceVersion.latest();
 			Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)");
@@ -3634,7 +3633,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			"switch","case","default","break","throw","return",
 			"this","instanceof","goto","const",
 			"null","super","new","import","true","false"));
-		}
 	}
 	public List<String> packages=new ArrayList<String>();
 	public void setPackages(LinksFX links) {
