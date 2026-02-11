@@ -262,14 +262,8 @@ public class Main {
 			fileNames.add("");
 			allclassesinfile.ChangeFile(textarea2,"");
 		}
-		setListeners();
-		setFullPackageNames();		
-		setSubpackages();
-		setPackages();
-		setApiClasses();				
-		setKeywords();
-		setAllClassesInFile();
-		setAllClassesInFolder();	
+		setListeners();				
+		setKeywords();	
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
@@ -278,38 +272,44 @@ public class Main {
 	** If have default content for window
 	*/
 	public Main(OpenDefaultContent odc) {
-		try {
 		msdos = new MSDOS(this);
+		fileName = odc.getFileName();
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
-		fileName = odc.getFileName();
-		if(fileName != null && !fileName.equals("")) {
-			git.Change(fileName);
-		}
+		startercombobox = new StarterJComboBox(this);
+		
 		setLayout();
 		if(fileName.equals("")) {
+	
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
+			this.textarea = textarea2;
 			Font originalFont = textarea.getFont();
 			textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-
+	
 			JScrollPane scrollpane2 = new JScrollPane(textarea2);
+			
 			textarea2.setTabSize(4);
 			
-			this.textarea=textarea2;
+			tabbedpane.addTab("",scrollpane2);
 			
-			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
+			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+			fileNames.add("");
+			
+			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);	
 			textarea2.addKeyListener(curlybracekeylistener);
-			
+			//positiontrackers.add(new PositionTracker(textarea2));
+
 			addCaretListener(textarea2);
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-					try {
+				try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = curlybracekeylistener.autokeylistener.position;
-						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
 						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
 						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
 					}
 				} catch (BadLocationException ex) {
@@ -320,9 +320,9 @@ public class Main {
 				try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = curlybracekeylistener.autokeylistener.position;
-						Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
+						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
 						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-						SwingUtilities.convertPointToScreen(screencoordinates,textarea);
+						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
 						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
 					}
 				} catch (BadLocationException ex) {
@@ -356,17 +356,10 @@ public class Main {
 				}
 			});
 			textarea2.addMouseListener(rightclick);
-			
-			
-			tabbedpane.addTab(fileName,scrollpane2);
-			tabbedpane.addTab("+",pluspanel);
-			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
-			fileNames.add("");
 		}
-
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
-			SwingWorker<Void,TabFileNameAndContent> swingworker =new SwingWorker<>() {
+			SwingWorker<Void,TabFileNameAndContent> swingworker =new SwingWorker<>() {
 				@Override
 				protected Void doInBackground() {
 					StoreSelectedFile storeselectedfile=new StoreSelectedFile();
@@ -385,14 +378,12 @@ public class Main {
 							}	
 						} catch (IOException ex) {
 							ex.printStackTrace();
-						}         						         						         						         						
+						}
        					}
        					return null;
     				}
     				@Override
     				protected void process(List<TabFileNameAndContent> list) {
-  	 	 	 	 	System.out.println("process()");
-  	 	 	 	 	
   	 	 	 	 	int count = -1;
   	 	 	 	 	for(TabFileNameAndContent tabfilenameandcontent:list) {
       	 	 	 	 	 	Main.this.fileNames.add(tabfilenameandcontent.fileName);
@@ -418,65 +409,6 @@ public class Main {
 							
 							textarea2.setTabSize(4);
 							
-							CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);
-							textarea2.addKeyListener(curlybracekeylistener);
-							//positiontrackers.add(new PositionTracker(textarea2));
-							
-							addCaretListener(textarea2);
-							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-							try {
-									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-										int caretposition = curlybracekeylistener.autokeylistener.position;
-										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
-									}
-								} catch (BadLocationException ex) {
-									ex.printStackTrace();
-								}
-							});
-							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-							try {
-									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-										int caretposition = curlybracekeylistener.autokeylistener.position;
-										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-										curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
-									}
-								} catch (BadLocationException ex) {
-									ex.printStackTrace();
-								}
-							});
-							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-								try {
-									if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
-										int caretposition = curlybracekeylistener.methodsuggestionbox.position;
-										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-										curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
-									}
-								} catch (BadLocationException ex) {
-									ex.printStackTrace();
-								}
-							});
-							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-								try {
-									if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
-										int caretposition = curlybracekeylistener.methodsuggestionbox.position;
-										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-										Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-										SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-										curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
-									}
-								} catch (BadLocationException ex) {
-									ex.printStackTrace();
-								}
-							});
-							textarea2.addMouseListener(rightclick);
-							
 							tabbedpane.addTab(filename,scrollpane2);
 							openLastSelectedLine(tabfilenameandcontent.lastcaretposition,textarea2,tabfilenameandcontent.fileName);
 						//}
@@ -491,125 +423,21 @@ public class Main {
 					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
  	 	 	 	}
-   	 	 	};
- 	 	 	swingworker.execute();
 
-			/*
-			StoreSelectedFile storeselectedfile = new StoreSelectedFile();	
-			List<String> tabs=storeselectedfile.getTabs();
-			if(tabs.size() <= 1) {
-				fileNames.add(fileName);
-				
-				JTextArea textarea2 = new JTextAreaGroup();
-				textarea2.setLineWrap(true);
-				textarea2.setWrapStyleWord(true);
-				Font originalFont = textarea.getFont();
-				textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-	
-				JScrollPane scrollpane2 = new JScrollPane(textarea2);
-				textarea2.setTabSize(4);
-				
-				this.textarea=textarea2;
-				
-				CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
-				textarea2.addKeyListener(curlybracekeylistener);
-				//positiontrackers.add(new PositionTracker(textarea2));
-				
-				addCaretListener(textarea2);
-				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				try {
-						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-							int caretposition = curlybracekeylistener.autokeylistener.position;
-							Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
-							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-							SwingUtilities.convertPointToScreen(screencoordinates,textarea);
-							curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
-						}
-					} catch (BadLocationException ex) {
-						ex.printStackTrace();
-					}
-				});
-				scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-				try {
-						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-							int caretposition = curlybracekeylistener.autokeylistener.position;
-							Rectangle2D rectanglecoords=textarea.modelToView2D(caretposition);
-							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-							SwingUtilities.convertPointToScreen(screencoordinates,textarea);
-							curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
-						}
-					} catch (BadLocationException ex) {
-						ex.printStackTrace();
-					}
-				});
-				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-					try {
-						if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
-							int caretposition = curlybracekeylistener.methodsuggestionbox.position;
-							Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-							SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-							curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
-						}
-					} catch (BadLocationException ex) {
-						ex.printStackTrace();
-					}
-				});
-				scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-					try {
-						if(curlybracekeylistener.methodsuggestionbox != null && curlybracekeylistener.methodsuggestionbox.isVisible()) {
-							int caretposition = curlybracekeylistener.methodsuggestionbox.position;
-							Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-							Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-							SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-							curlybracekeylistener.methodsuggestionbox.suggestionbox.setLocation(screencoordinates);
-						}
-					} catch (BadLocationException ex) {
-						ex.printStackTrace();
-					}
-				});
-				textarea2.addMouseListener(rightclick);
-				
-				tabbedpane.addTab(fileName,scrollpane2);
-				tabbedpane.addTab("+",pluspanel);
-				tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
-				open(getFileName(fileName));
-		
-			}
-			else { // if(tabs.size() > 1) {
-				SwingUtilities.invokeAndWait(() -> {
-					int count = -1;
-					for(String directoryandfilename:tabs) {
-						try {
-							if(tabs_selected == -1) {
-								count++;
-								if(fileName.equals(directoryandfilename))
-									tabs_selected = count;
-							}
-							JTextArea textarea2 = new JTextAreaGroup();
-							textarea2.setLineWrap(true);
-							textarea2.setWrapStyleWord(true);
-							Main.this.textarea = textarea2;
-							Font originalFont = textarea.getFont();
-							textarea2.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
-		
-							JScrollPane scrollpane2 = new JScrollPane(textarea2);
-							String filename = Main.this.getFileName(directoryandfilename);
-							
-							if(!filename.equals("")) {
-								Path path = Paths.get(directoryandfilename);
-								String lines2= Files.readString(path,StandardCharsets.UTF_8);
-								textarea2.setText(lines2);
-							}
-							textarea2.setTabSize(4);
-							
-							CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(Main.this);
+				@Override
+				protected void done() {
+					for(int i = 0; i < tabbedpane.getTabCount(); i++) {
+						Component component=tabbedpane.getComponentAt(i);
+						if(component instanceof JScrollPane) {
+							JScrollPane scrollpane2 =(JScrollPane)component;
+							JTextArea textarea2=(JTextArea)scrollpane2.getViewport().getView();	
+							CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);
 							textarea2.addKeyListener(curlybracekeylistener);
 							//positiontrackers.add(new PositionTracker(textarea2));
-							
+				
 							addCaretListener(textarea2);
 							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-							try {
+								try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
 										int caretposition = curlybracekeylistener.autokeylistener.position;
 										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
@@ -622,7 +450,7 @@ public class Main {
 								}
 							});
 							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-							try {
+								try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
 										int caretposition = curlybracekeylistener.autokeylistener.position;
 										Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
@@ -661,63 +489,82 @@ public class Main {
 								}
 							});
 							textarea2.addMouseListener(rightclick);
-							
-							tabbedpane.addTab(filename,scrollpane2);
-							openLastSelectedLine(textarea2,directoryandfilename);
-						}
-						catch (IOException ex) {
-							ex.printStackTrace();
 						}
 					}
-				});
-				fileNames = tabs;
-				tabbedpane.addTab("+",pluspanel);
-				
-				if(tabs_selected != -1) {
-					fileName = tabs.get(tabs_selected);
-					tabbedpane.setSelectedIndex(tabs_selected);
-				}
-				
-				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
-				textarea=(JTextArea)jscrollpane5.getViewport().getView();
-			}
-			*/	
+				}	
+   	 	 	};
+ 	 	 	swingworker.execute();
 		}
+
 		setListeners();								
-		}catch(ArrayIndexOutOfBoundsException ex) {
-			ex.printStackTrace();
-		}
-		try {
-			new Thread(() -> {
-				Main.muck = new MuckFX();
-			
-				SwingUtilities.invokeLater(() -> {
-					setFullPackageNames();		
-					setSubpackages();
-					setPackages();
-					setApiClasses();
-					setKeywords();
-					setAllClassesInFile();
-					setAllClassesInFolder();
-				});
-			}).start();
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		try {
-			openLastSelectedLine();
-			setStarterClassBoxes(fileName);
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		try {
-			threecomboboxes.load(fileName);
-			expandable.open();
-			maven.Change(fileName);
-			git.Change(fileName);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		SwingWorker<LinksFX,Void> swingworker10 = new SwingWorker<>() {
+			@Override
+			protected LinksFX doInBackground() {
+				LinksFX links= new LinksFX();
+				setFullPackageNames(links);
+				setSubpackages(links);
+				setPackages(links);
+				setApiClasses(links);
+				return links;
+			}
+			@Override
+			protected void done() {
+				try {
+					LinksFX links = get();
+					Main.muck = new MuckFX(links);
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		};
+		swingworker10.execute();
+		SwingWorker<Void,Void> swingworker20=new SwingWorker<>() {
+			@Override
+			protected Void doInBackground() {
+				threecomboboxes.BackgroundThreadfromScratch(fileName);
+				return null;
+			}
+			@Override
+			protected void done() {
+				threecomboboxes.EDTfromScratch(fileName);
+			}
+		};
+		swingworker20.execute();	
+		SwingWorker<Void,Void> swingworker23 = new SwingWorker<>() {
+			@Override
+			protected Void doInBackground() {
+				git.ChangeBackgroundThread(fileName);
+				return null;
+			}
+			@Override
+			protected void done() {
+				git.ChangeEDT(fileName);
+			}
+		};
+		swingworker23.execute();
+		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
+			@Override
+			protected Void doInBackground() {				
+				setAllClassesInFolder();
+				startercombobox.BackgroundThread(fileName);
+				maven.ChangeBackgroundThread(fileName);
+				
+				return null;
+			}
+			@Override
+			protected void done() {
+				expandable.setLayout();
+				setKeywords();
+				setAllClassesInFile();	
+				startercombobox.EDT();				
+				
+				msdos.EDT();
+				maven.ChangeEDT();
+				
+				openLastSelectedLine();
+			}
+		};
+		swingworker4.execute();
 	}
 	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
 		if(filename != null && !filename.equals("")) {
@@ -1488,12 +1335,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		return filename;
 	}
 	public StarterJComboBox startercombobox;
-	public void setStarterClassBoxes(String filename) {
-		if(startercombobox == null)
-			startercombobox = new StarterJComboBox(filename,this);
-		else
-			startercombobox.Change(filename);
-	}
 	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
 			return filename.replaceAll("[^\\\\]+\\.java","");
@@ -1536,7 +1377,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			storeselectedfile.set(fileName);
-			setStarterClassBoxes(fileName);
 		
 			if(fileName != null && !fileName.equals("")) {
 				try {
@@ -1585,6 +1425,51 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		tabbedpane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent me) {
+				int tab_index=tabbedpane.getUI().tabForCoordinate(tabbedpane,me.getX(),me.getY());
+				if(tab_index >= 0) {
+					tabbedpane.setSelectedIndex(tab_index);
+					
+					Main.this.fileName = fileNames.get(tab_index);
+					//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
+					
+					git.Change(fileName);
+					expandable.open();
+					
+					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					storeselectedfile.set(fileName);
+					startercombobox.Change(fileName);
+				
+					threecomboboxes.load(fileName);
+					expandable.open();
+					git.Change(fileName);
+						
+					//loadComboboxes(filelistmodifier);
+					//filenamescombobox.setSelectedItem(getFileName(fileName));
+					
+					StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
+					storeselectedfile4.set(fileName);
+					
+					allclassesinfile.ChangeFile(textarea,fileName);
+					maven.Change(fileName);
+					
+					if(fileName != null && !fileName.equals("")) {
+						try {
+							String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+							if(filename2.startsWith("/"))
+								filename2=filename2.substring(1,filename2.length());
+							frame.setTitle(filename2 +" "+fileName);
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}								
+			}
+		});
 		saveall.addActionListener((ev) -> {
 			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
 				String title=tabbedpane.getTitleAt(i);
@@ -2495,7 +2380,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				deselected = (String)ev.getItem(); 
 			}
 		});
-		setStarterClassBoxes(fileName); // Might need uncomment this in future.
 		filenamescombobox.addActionListener((ev) -> {
 			if(filenamescombobox.hasFocus()) {
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -3495,7 +3379,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
-				setStarterClassBoxes(fileName);
 			
 				if(fileName != null && !fileName.equals("")) {
 					try {
@@ -3527,15 +3410,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	}
 	//public List<PositionTracker> positiontrackers = new ArrayList<PositionTracker>();	
 	public void addOrUpdateTab(EventObject eventobject) {
-		int index=tabbedpane.getSelectedIndex();
-		if(index != -1) {
+		int tindex=tabbedpane.getSelectedIndex();
+		if(tindex != -1) {
 			try {
-				String title=tabbedpane.getTitleAt(index);
+				String title=tabbedpane.getTitleAt(tindex);
 				if(opennewtab.hashCode()==eventobject.getSource().hashCode()) {
 					title="+";
 				}
 				if(title.equals("+")) {
-					//Component plustab = tabbedpane.getComponentAt(index);
+					//Component plustab = tabbedpane.getComponentAt(tindex);
 					String dir = Main.this.fileName;
 					if(!dir.equals("")) {
 						dir = dir.replaceAll("[^\\\\]+\\.java","");
@@ -3572,7 +3455,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						textarea2.setTabSize(4);
 						textarea2.setText(lines);
 						
-						CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);
+						CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
 						textarea2.addKeyListener(curlybracekeylistener);
 						//positiontrackers.add(new PositionTracker(textarea2));
 						
@@ -3638,51 +3521,35 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					else if(result == JFileChooser.CANCEL_OPTION) {
 						return;
 					}	
+						
+					git.Change(fileName);
+					expandable.open();
+					
+					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					storeselectedfile.set(fileName);
+					startercombobox.Change(fileName);
+				
+					threecomboboxes.load(fileName);
+					expandable.open();
+					this.fileName=fileName;
+					git.Change(fileName);
+						
+					//loadComboboxes(filelistmodifier);
+					//filenamescombobox.setSelectedItem(getFileName(fileName));
+					
+					StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
+					storeselectedfile4.set(fileName);
+					
+					allclassesinfile.ChangeFile(textarea,fileName);
+					maven.Change(fileName);
 				}
+				/*
 				fileName=fileNames.get(tabbedpane.getSelectedIndex());
 				//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
-				
-				git.Change(fileName);
-				
-				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-				storeselectedfile.set(fileName);
-				setStarterClassBoxes(fileName);
-				
-				if(fileName != null && !fileName.equals("")) {
-					try {
-						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-						if(filename2.startsWith("/"))
-							filename2=filename2.substring(1,filename2.length());
-						frame.setTitle(filename2 +" "+fileName);
-					} catch(Exception ex) {
-						ex.printStackTrace();
-					}
-				}
-					
-				threecomboboxes.load(fileName);
-				expandable.open();
-
-				this.fileName=fileName;
-				
-				StoreSelectedFile storeselectedfile4=new StoreSelectedFile();
-				storeselectedfile4.set(fileName);
-				
-				maven.Change(fileName);
-				git.Change(fileName);
+				*/
 			} catch(IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-		allclassesinfile.ChangeFile(textarea,fileName);
-		if(fileName != null && !fileName.equals("")) {
-			try {
-				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-				if(filename2.startsWith("/"))
-					filename2=filename2.substring(1,filename2.length());
-				frame.setTitle(filename2 +" "+fileName);
-			} catch(Exception ex) {
 				ex.printStackTrace();
 			}
 		}
@@ -3743,10 +3610,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		}
 	}
 	public List<String> apiclasses=new ArrayList<String>();
-	public void setApiClasses() {
-		if(Main.muck != null && apiclasses.size() == 0) {	
-			apiclasses=muck.links.getAPIClasses();
-		}
+	public void setApiClasses(LinksFX links) {
+		apiclasses=links.getAPIClasses();
 	}
 	public List<String> keywords=new ArrayList<String>();
 	public void setKeywords() {
@@ -3772,22 +3637,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		}
 	}
 	public List<String> packages=new ArrayList<String>();
-	public void setPackages() {
-		if(Main.muck != null && packages.size() == 0) {
-			packages = muck.links.getPackages();
-		}
+	public void setPackages(LinksFX links) {
+		packages = links.getPackages();
 	}
 	public List<String> subpackages=new ArrayList<String>();
-	public void setSubpackages() {
-		if(Main.muck != null && subpackages.size() == 0) {
-			subpackages = muck.links.getSubpackages();
-		}
+	public void setSubpackages(LinksFX links) {
+		subpackages = links.getSubpackages();
 	}
 	public List<String> fullpackagenames=new ArrayList<String>();
-	public void setFullPackageNames() {
-		if(Main.muck != null && fullpackagenames.size() == 0) {
-			fullpackagenames = muck.links.getFullPackageNames();
-		}
+	public void setFullPackageNames(LinksFX links) {
+		fullpackagenames = links.getFullPackageNames();
 	}
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public void setAllClassesInFile() {
@@ -3843,6 +3702,8 @@ class Expandable {
 	public JTree jtree = new JTree();
 	Expandable(Main main) {
 		this.main = main;
+	}
+	public void setLayout() {
 		frame = new JFrame();
 		if(main.frame != null)
 		frame.setSize(200,main.frame.getHeight());
@@ -3850,11 +3711,11 @@ class Expandable {
 		frame.setLocation(0,0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jscrollpane = new JScrollPane();
+		frame.add(jscrollpane);
+		frame.setVisible(true);
 		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null &&  !main.threecomboboxes.filelistmodifier.isEmpty()) {
 			open();
 		//}
-		frame.add(jscrollpane);
-		frame.setVisible(true);
 	}
 	public void mySingleClick(int selRow,TreePath selPath) {
 		main.open(main.filelistmodifier.original.get(selRow));	
@@ -3863,15 +3724,15 @@ class Expandable {
 		main.open(main.filelistmodifier.original.get(selRow));	
 	}
 	public void open() {
-		//if(main.threecomboboxes != null && main.threecomboboxes.filelistmodifier != null) {
-			if(main.frame != null) {
+		if(frame != null && frame.isVisible()) {
+			if(main.frame != null && frame != null) {
 				frame.setSize(200,main.frame.getHeight());
 			}
 				
 			jtree = new JTree(main.filelistmodifier.original.toArray(new Object[main.filelistmodifier.original.size()]));
 			jscrollpane.setViewportView(jtree);
 			setListener();
-		//}
+		}
 
 	}
 	public void setListener() {

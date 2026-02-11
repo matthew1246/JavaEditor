@@ -17,7 +17,17 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\TabFileNameAndContent.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\FileListModifier.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\Links.java",
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java",
+      "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddPlugin.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AddPlugin.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
     ],
     "caretposition": 0
   },
@@ -33,7 +43,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 30899
+    "caretposition": 24049
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -82,7 +92,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 3759
+    "caretposition": 17361
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
     "startupcombobox": [
@@ -359,7 +369,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 4131
+    "caretposition": 6281
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java": {
     "startupcombobox": [],
@@ -400,7 +410,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 3901
+    "caretposition": 8742
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java": {
     "startupcombobox": [
@@ -426,7 +436,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 426
+    "caretposition": 1017
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java": {
     "startupcombobox": [
@@ -449,7 +459,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 31540
+    "caretposition": 32065
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java": {
     "startupcombobox": [
@@ -504,7 +514,7 @@
     "starterclass": "MuckFX",
     "jars": [],
     "fileNames": [],
-    "caretposition": 727
+    "caretposition": 230
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TabFileNameAndContent.java": {
     "startupcombobox": [
@@ -528,5 +538,60 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 184
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Links.java": {
+    "startupcombobox": [
+      "Links"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\Links.java": {
+    "startupcombobox": [
+      "Links"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 2870
+  },
+  "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java": {
+    "startupcombobox": [
+      "LinksFX"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 5371
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddPlugin.java": {
+    "startupcombobox": [
+      "AddPlugin"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AddPlugin.java": {
+    "startupcombobox": [
+      "AddPlugin"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 10776
   }
 }

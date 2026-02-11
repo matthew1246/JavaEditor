@@ -1,14 +1,12 @@
 import javax.swing.*;
 import java.awt.event.*;
 public class MuckFX {
-	public LinksFX links = new LinksFX();
+	public LinksFX links;;
 	public JFrame frame;
 	public JButton button;
 	public JTextField textfield;
-	public static void main(String[] args) 	{
-		MuckFX main = new MuckFX();
-	}
-	public MuckFX() {
+	public MuckFX(LinksFX links) {
+		this.links = links;
 		setLayout();
 		setListeners();
 	}

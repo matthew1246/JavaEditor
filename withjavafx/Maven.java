@@ -28,11 +28,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonArray;
 public class Maven {
 	public String fileName;
-	public Maven() {
-		setLayout();
-		setListeners();
-		showAllNotInitialised();
-	}
 	public void Change(String fileName) {
 		if(fileName != null && !fileName.equals("")) {
 			this.fileName = fileName;
@@ -46,6 +41,28 @@ public class Maven {
 		else if(fileName != null && fileName.equals("")) {
 			showAllNotInitialised();
 		}
+	}
+	public boolean pomxmlexists = false;
+	public void ChangeBackgroundThread(String fileName) {
+		this.fileName = fileName;
+		if(fileName != null && !fileName.equals("")) {
+			pomxmlexists=pomxmlExists();
+		}
+	}
+	public void ChangeEDT() {
+		setLayout();
+		if(fileName != null && !fileName.equals("")) {
+			if(pomxmlexists) {
+				showMavenAlreadyInitialised();
+			}
+			else {
+				showNotInitialised();
+			}	
+		}
+		else if(fileName != null && fileName.equals("")) {
+			showAllNotInitialised();
+		}
+		setListeners();
 	}
 	public boolean pomxmlExists() {
 		File dir = new File(Main.getDirectory(fileName));
@@ -202,6 +219,9 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		addplugin.addActionListener((ev) -> {
+			AddPlugin addplugin = new AddPlugin(this);
+		});
 		jarinsidejar.addActionListener(ev -> {
 			JFileChooser chooser = new JFileChooser();
         			chooser.setDialogTitle("Select a file to copy");

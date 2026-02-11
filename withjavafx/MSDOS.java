@@ -6,9 +6,12 @@ public class MSDOS {
 	private Main main;
 	public MSDOS(Main main) {
 		this.main =main;
+	}
+	public void EDT() {
 		setLayout();
 		setListeners();
 	}
+
 	public void setLayout() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Run MSDOS");
@@ -38,3 +41,5 @@ public class MSDOS {
 		input.addActionListener(actionlistener);
 	}
 }
+
+			

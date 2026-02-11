@@ -3,16 +3,6 @@ import java.util.regex.*;
 import javax.swing.*;
 import java.util.*;
 public class Links {
-	public static void main(String[] args) {
-		Links links = new Links();
-		for(String package0:links.innerpackages.keySet()) {
-			System.out.println(package0+":");
-			for(String innerpackage:links.innerpackages.get(package0)) {
-				System.out.println(innerpackage);
-			}
-			System.out.println();
-		}
-	}
 	public HashMap<String,HashSet<String>> whichurl = new HashMap<String,HashSet<String>>();
 	public HashMap<String,HashSet<String>> innerpackages;
 	public HashSet<String> fullpackagenames;
@@ -81,6 +71,12 @@ public class Links {
 				String class_one=getClass(sublink);
 				list.add(sublink);
 			}
+			*/
+			/* 
+			setFullPackageNames();
+			setSubpackages();
+			setPackages();
+			setAPIClasses();
 			*/
 		} 
 		catch(FileNotFoundException ex) {
@@ -157,39 +153,49 @@ public class Links {
 		}
 		return classes2;
 	}
+	List<String> apiclasses=new ArrayList<String>();
 	public List<String> getAPIClasses() {
-		List<String> apiclasses=new ArrayList<String>();
+		return apiclasses;
+	}
+	public void setAPIClasses() {
 		for(HashMap<String,String> innerhashmap:hashmap.values()) {
 			for(String classname:innerhashmap.keySet()) { // Only one value
 				apiclasses.add(classname);
 			}
 		}
-		return apiclasses;
-	}
+	}
+	List<String> packages = new ArrayList<String>();	
 	public List<String> getPackages() {
-		List<String> packages = new ArrayList<String>();	
+		return packages;
+	}
+	public void setPackages() {
 		for(String package0:packagesandclasses.keySet()) {
 			packages.add(package0);
 		}
-		return packages;
-	}
+	}
 	public List<String> getClassFrom(String package0) {
 		return packagesandclasses.get(package0);
 	}
+	List<String> subpackages=new ArrayList<String>();
 	public List<String> getSubpackages() {
-		List<String> subpackages=new ArrayList<String>();
+		return subpackages;
+	}
+	public void setSubpackages() {
 		for(String package0:subpackage) {
 			subpackages.add(package0);
 		}
-		return subpackages;
-	}
+	}
+	/*
+	List<String> packages2 = new ArrayList<String>();
 	public List<String> getFullPackageNames() {
-		List<String> packages=new ArrayList<String>();
-		for(String package0:fullpackagenames) {
-			packages.add(package0);
-		}
-		return packages;
+		return packages2;
 	}
+	public void setFullPackageNames() {
+		for(String package0:fullpackagenames) {
+			packages2.add(package0);
+		}
+	}
+	*/
 	public void createInnerPackages() {
 		for(String package0:subpackage) {
 			String[] packages=package0.split("\\.");
