@@ -71,6 +71,7 @@ public class LinksFX extends Links {
 			setFullPackageNames();
 			setSubpackages();
 			setPackages();
+			setAPIClasses();
 		} 
 		catch(FileNotFoundException ex) {
 			ex.printStackTrace();
