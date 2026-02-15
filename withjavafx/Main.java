@@ -5537,12 +5537,14 @@ class MethodSuggestionBox {
 }
 class RightClick extends MouseAdapter {
 	@Override
-	public void mousePressed(MouseEvent me) {
-		if(SwingUtilities.isRightMouseButton(me)) {
-			RightClickJFrame rightclickjframe = new RightClickJFrame(me);
-		}				
+	public void mouseReleased(MouseEvent me) {
+		show(me);			
 	}
-	
+	public void show(MouseEvent me) {
+		if(me.isPopupTrigger()) {
+			RightClickJFrame rightclickjframe = new RightClickJFrame(me);
+		}
+	}
 }
 class RightClickJFrame {
 	public int caretposition;	
