@@ -1690,6 +1690,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			maven.Change(fileName);
 			git.Change(fileName);
+			
+			try {
+				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+				if(filename2.startsWith("/"))
+					filename2=filename2.substring(1,filename2.length());
+				frame.setTitle(filename2 +" \"\"");
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 		});			
 		
 		compileforjavafx.addActionListener( e -> {
