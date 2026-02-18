@@ -3470,6 +3470,7 @@ class OpenActionListener implements ActionListener {
 			int selectedtab = main.tabbedpane.getSelectedIndex();
 			main.fileNames.set(selectedtab,main.fileName);
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			storeselectedfile.set(main.fileName);
 			storeselectedfile.setTabs(main.fileNames);
 			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));
 			main.git.Change(main.fileName);
