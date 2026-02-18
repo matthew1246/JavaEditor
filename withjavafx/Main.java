@@ -1415,6 +1415,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			expandable.open();
 			maven.Change(fileName);
 			git.Change(fileName);
+			
+			storeselectedfile3.setTabs(fileNames);
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
@@ -3913,6 +3915,9 @@ class OpenActionListener implements ActionListener {
 			}
 			int selectedtab = main.tabbedpane.getSelectedIndex();
 			main.fileNames.set(selectedtab,main.fileName);
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			storeselectedfile.set(main.fileName);
+			storeselectedfile.setTabs(main.fileNames);
 			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));
 			main.git.Change(main.fileName);
 			main.open(main.getFileName(main.fileName));
