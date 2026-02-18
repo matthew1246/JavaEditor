@@ -1377,6 +1377,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 			tabbedpane.setTitleAt(selectedtab,getFileName(fileName));
 			tabbedpane.repaint();
+			
+			storeselectedfile3.setTabs(fileNames);
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
