@@ -2566,7 +2566,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								lines = lines+"\n"+line;
 							}
 							JOptionPane.showMessageDialog(null,lines);
-							GoToLineNumber gotolinenumber = new GoToLineNumber(Main.this,lines);		
+							CompileErrors compileerrors= new CompileErrors(Main.this,lines);
 						}
 					}
 					else {
