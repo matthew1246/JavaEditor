@@ -5,15 +5,13 @@ import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 public class CompileErrors {		
 	private Main main;
-	private List<String> classes = new ArrayList<>();
-	public List<Integer> line_numbers = new ArrayList<Integer>();
+	private List<Data> datas = new List<Data>();
 	public CompileErrors(Main main,String lines) {
 		this.main = main;
 				
@@ -26,6 +24,8 @@ public class CompileErrors {
 				JOptionPane.showMessageDialog(null,"Could not find line number.");
 				return;	
 			}
+			// PatternPattern.compile("([a-zA-Z0-9]+):0-9]+):.+);
+			
 			String[] lines2 = lines.split("\\n");
 			for(int i = 0; i < lines2.length; i++) {
 				String line = lines2[i];
@@ -35,47 +35,53 @@ public class CompileErrors {
 					while(matcher.find()) {
 						String classname = matcher.group(1);
 						int line_number=Integer.parseInt(matcher.group(2));
-					
-						classes.add(classname);
-						line_numbers.add(line_number);
+						Data data = new Data();	
+						data.classname = classname;
+						data.line_number=line_number;
 					}
-				}
+				}
+
 			}
 			setLayout();
 			setListeners();
 		}	
 	}
-	private JButton[] buttons;
+	private JButton[] gotocompilelineerrorbuttons;
 	public void setLayout() {
 		JFrame frame = new JFrame();
-		buttons = new JButton[line_numbers.size()];
-		for(int i = 0; i < buttons.length; i++) {
-			buttons[i] = new JButton("Show Error");
+		gotocompilelineerrorbuttons = new JButton[line_numbers.size()];
+		for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
+			gotocompilelineerrorbuttons[i] = new JButton("Show Error");
 		}
 	}
 	public void setListeners() {
-		for(int i = 0; i < buttons.length; i++) {
-			JButton button = buttons[i];
-			button.addActionListener(new GoToButton(this,i));
+		for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
+			JButton button = gotocompilelineerrorbuttons[i];
+			button.addActionListener(new GoToLineCompileError(this,i));
 		}
-	}		
-	class GoToButton implements ActionListener {
+	}		
+
+	class GoToLineCompileError implements ActionListener {
 		int i;
 		CompileErrors ce;
-		GoToButton(CompileErrors ce,int i) {
+		GoToLineCompileError(CompileErrors ce,int i) {
 			this.ce = ce;
 			this.i = i;
 		}		
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			int line_number=ce.line_numbers.get(i);
-			ce.showError(ce.getCaretPosition(line_number));	
+			ce.showError(ce.getCaretPosition(line_number));	
+
 		}
 	}
 	public boolean ContainsLineError(String line) {
 		Pattern pattern=Pattern.compile("([a-zA-Z0-9]+):([0-9]+):");
 		Matcher matcher=pattern.matcher(line);
 		return matcher.find();
+	}
+	public boolean ContainsSymbol(String line) {
+		return line.contains("cannot find symbol");
 	}
 	public void addLine(String line) {
 			
@@ -118,4 +124,9 @@ public class CompileErrors {
 		main.textarea.grabFocus();
 		main.textarea.setCaretPosition(caretposition);
 	}
-}
+}
+class Data {
+	public String classname = "";
+	public int line_number = 0;
+	public String apiclass = "";
+}

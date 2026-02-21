@@ -808,6 +808,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 2142
+    "caretposition": 959
   }
 }
