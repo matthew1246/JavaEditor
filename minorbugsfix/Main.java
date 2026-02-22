@@ -2567,7 +2567,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							JOptionPane.showMessageDialog(null,lines);
 							CompileErrors compileerrors= new CompileErrors(Main.this,lines);
-						}
+						}						
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"No filename saved.");

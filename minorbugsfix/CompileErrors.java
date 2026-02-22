@@ -4,28 +4,33 @@ import java.util.regex.Matcher;
 import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+// import java.util.*;
 public class CompileErrors {		
 	private Main main;
-	private List<Data> datas = new List<Data>();
+	private List<Data> data = new ArrayList<Data>();
 	public CompileErrors(Main main,String lines) {
 		this.main = main;
 				
 		String[] options=new String[2];
 		options[0] = "Yes";
 		options[1] = "No";
-		int option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		int option2=JOptionPane.showOptionDialog(null,"Go to line number of error(s)?","Which you like to go to line number of error(s)?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 		if(option2 == JOptionPane.YES_OPTION) {
 			if(!ContainsLineError(lines)) {
 				JOptionPane.showMessageDialog(null,"Could not find line number.");
 				return;	
 			}
-			// PatternPattern.compile("([a-zA-Z0-9]+):0-9]+):.+);
+			Pattern pattern2= Pattern.compile("([a-zA-Z0-9.]+:\\d+:.*?)(?=\\n[a-zA-Z0-9.]+:\\d+:|\\z)",Pattern.DOTALL);
+			Matcher matcher=pattern2.matcher(lines);
+			while(matcher.find()) {
+				JOptionPane.showMessageDialog(null,matcher.group(1));
+			}
 			
+			/*
 			String[] lines2 = lines.split("\\n");
 			for(int i = 0; i < lines2.length; i++) {
 				String line = lines2[i];
@@ -42,6 +47,8 @@ public class CompileErrors {
 				}
 
 			}
+			*/
+			
 			setLayout();
 			setListeners();
 		}	
@@ -49,7 +56,7 @@ public class CompileErrors {
 	private JButton[] gotocompilelineerrorbuttons;
 	public void setLayout() {
 		JFrame frame = new JFrame();
-		gotocompilelineerrorbuttons = new JButton[line_numbers.size()];
+		gotocompilelineerrorbuttons = new JButton[data.size()];
 		for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
 			gotocompilelineerrorbuttons[i] = new JButton("Show Error");
 		}
@@ -70,9 +77,8 @@ public class CompileErrors {
 		}		
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			int line_number=ce.line_numbers.get(i);
+			int line_number=ce.data.get(i).line_number;
 			ce.showError(ce.getCaretPosition(line_number));	
-
 		}
 	}
 	public boolean ContainsLineError(String line) {
