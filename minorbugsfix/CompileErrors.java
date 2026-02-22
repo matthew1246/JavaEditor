@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.*;
 public class CompileErrors {		
 	private Main main;
 	private List<Data> data = new ArrayList<Data>();
