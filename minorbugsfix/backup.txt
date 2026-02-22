@@ -799,6 +799,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CompileErrors.java": {
     "startupcombobox": [
+      "Main",
       "CompileErrors"
     ],
     "starterclass": "",
@@ -809,6 +810,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 317
+    "caretposition": 313
   }
 }

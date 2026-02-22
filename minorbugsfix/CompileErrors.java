@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-// import java.util.*;
 public class CompileErrors {		
 	private Main main;
 	private List<Data> data = new ArrayList<Data>();
@@ -24,10 +23,22 @@ public class CompileErrors {
 				JOptionPane.showMessageDialog(null,"Could not find line number.");
 				return;	
 			}
-			Pattern pattern2= Pattern.compile("([a-zA-Z0-9.]+:\\d+:.*?)(?=\\n[a-zA-Z0-9.]+:\\d+:|\\z)",Pattern.DOTALL);
+			Pattern pattern2= Pattern.compile("(([a-zA-Z0-9.]+):(\\d+):.*?)(?=\\n[a-zA-Z0-9.]+:\\d+:|\\z)",Pattern.DOTALL);
 			Matcher matcher=pattern2.matcher(lines);
 			while(matcher.find()) {
-				JOptionPane.showMessageDialog(null,matcher.group(1));
+				String wholematch = matcher.group(1);
+				JOptionPane.showMessageDialog(null,wholematch);
+				JOptionPane.showMessageDialog(null,matcher.group(2));
+				JOptionPane.showMessageDialog(null,matcher.group(3));
+			
+					
+				if(wholematch.contains("cannot find symbol")) {
+					Pattern pattern3=Pattern.compile("symbol:\\s*class\\s*([a-zA-Z0-9.]+)",Pattern.DOTALL);
+					Matcher matcher3=pattern3.matcher(wholematch);
+					if(matcher3.find()) {
+						JOptionPane.showMessageDialog(null,matcher3.group(1));
+					}
+				}						
 			}
 			
 			/*
