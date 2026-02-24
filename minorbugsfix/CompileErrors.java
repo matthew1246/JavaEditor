@@ -13,8 +13,8 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-public class CompileErrors {		
+
+public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
 	public CompileErrors(Main main,String lines) {
@@ -52,11 +52,10 @@ public class CompileErrors {
 			Generate();
 		}	
 	}
-	private JButton[] gotocompilelineerrorbuttons;
 	public void Generate() {
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
-		
+		panel.setLayout(new GridLayout(datas.size(),1));
 		for(int i = 0; i < datas.size(); i++) {	
 			JPanel row = new JPanel();
 			Data data=datas.get(i);
@@ -72,19 +71,26 @@ public class CompileErrors {
 				row.add(label3);
 				JButton importbutton = new JButton("import class");
 				row.add(importbutton);
-				importbutton.addActionListener(new ImportAPIClassActionListener(this));
+				importbutton.addActionListener(new ImportAPIClassActionListener(this,i));
 			}
+			panel.add(row);
 		}
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
 	}		
 	class ImportAPIClassActionListener implements ActionListener {
 		int i;
 		CompileErrors ce;
 		ImportAPIClassActionListener(CompileErrors ce,int i) {
 			this.ce = ce;
+			this.i = i;
 		}
 		@Override
 		public void actionPerformed(ActionEvent actionevent) {
-			
+			JOptionPane.showMessageDialog(null,ce.datas.get(i).apiclass);
+			String line=ce.main.muck.links.getSublink(ce.datas.get(i).apiclass);
+			JOptionPane.showMessageDialog(null,line);		
 		}				
 	}
 	class GoToLineCompileError implements ActionListener {
