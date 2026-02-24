@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import javax.swing.JLabel;
 public class CompileErrors {		
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
@@ -66,16 +67,24 @@ public class CompileErrors {
 			JButton button = new JButton("Show Error Line");
 			row.add(button);
 			button.addActionListener(new GoToLineCompileError(this,i));
-			data.apiclass
+			if(!data.apiclass.equals("")) {
+				JLabel label3 = new JLabel("import missing:");
+				row.add(label3);
+				JButton importbutton = new JButton("import class");
+				row.add(importbutton);
+				importbutton.addActionListener(new ImportAPIClassActionListener(this));
+			}
 		}
-	}
-	public void setListeners() {
-		for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
-			JButton button = gotocompilelineerrorbuttons[i];
-
+	}		
+	class ImportAPIClassActionListener implements ActionListener {
+		CompileErrors ce;
+		ImportAPIClassActionListener(CompileErrors ce) {
+			this.ce = ce;
 		}
-	}		
-
+		@Override
+		public void actionPerformed(ActionEvent actionevent) {
+		}				
+	}
 	class GoToLineCompileError implements ActionListener {
 		int i;
 		CompileErrors ce;
