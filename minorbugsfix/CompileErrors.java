@@ -37,7 +37,7 @@ public class CompileErrors {
 				String wholematch = matcher.group(1);
 				//JOptionPane.showMessageDialog(null,wholematch);
 				data.classname=matcher.group(2);
-				data.line_number=matcher.group(3);
+				data.line_number=Integer.parseInt(matcher.group(3));
 					
 				if(wholematch.contains("cannot find symbol")) {
 					Pattern pattern3=Pattern.compile("symbol:\\s*class\\s*([a-zA-Z0-9.]+)",Pattern.DOTALL);
@@ -77,12 +77,14 @@ public class CompileErrors {
 		}
 	}		
 	class ImportAPIClassActionListener implements ActionListener {
+		int i;
 		CompileErrors ce;
-		ImportAPIClassActionListener(CompileErrors ce) {
+		ImportAPIClassActionListener(CompileErrors ce,int i) {
 			this.ce = ce;
 		}
 		@Override
 		public void actionPerformed(ActionEvent actionevent) {
+			
 		}				
 	}
 	class GoToLineCompileError implements ActionListener {
@@ -94,7 +96,7 @@ public class CompileErrors {
 		}		
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			int line_number=ce.data.get(i).line_number;
+			int line_number=ce.datas.get(i).line_number;			
 			ce.showError(ce.getCaretPosition(line_number));	
 		}
 	}
@@ -105,9 +107,6 @@ public class CompileErrors {
 	}
 	public boolean ContainsSymbol(String line) {
 		return line.contains("cannot find symbol");
-	}
-	public void addLine(String line) {
-			
 	}
 	public int getLineNumber(String stringuptocaretposition) {
 		int linenumber2=0;
@@ -144,8 +143,7 @@ public class CompileErrors {
 		return 0;
 	}
 	public void showError(int caretposition) {
-		main.textarea.grabFocus();
-		main.textarea.setCaretPosition(caretposition);
+		main.scrollToCaretPositionWithoutFocus(caretposition);
 	}
 }
 class Data {
