@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.util.*;
 public class CompileErrors {		
 	private Main main;
-	private List<Data> data = new ArrayList<Data>();
+	private List<Data> datas = new ArrayList<Data>();
 	public CompileErrors(Main main,String lines) {
 		this.main = main;
 				
@@ -27,51 +27,37 @@ public class CompileErrors {
 			Pattern pattern2= Pattern.compile("(([a-zA-Z0-9.]+):(\\d+):.*?)(?=\\n[a-zA-Z0-9.]+:\\d+:|\\z)",Pattern.DOTALL);
 			Matcher matcher=pattern2.matcher(lines);
 			while(matcher.find()) {
+				Data data = new Data();
+				
 				String wholematch = matcher.group(1);
-				JOptionPane.showMessageDialog(null,wholematch);
-				JOptionPane.showMessageDialog(null,matcher.group(2));
-				JOptionPane.showMessageDialog(null,matcher.group(3));
-			
+				//JOptionPane.showMessageDialog(null,wholematch);
+				data.classname=matcher.group(2);
+				data.line_number=matcher.group(3);
 					
 				if(wholematch.contains("cannot find symbol")) {
 					Pattern pattern3=Pattern.compile("symbol:\\s*class\\s*([a-zA-Z0-9.]+)",Pattern.DOTALL);
 					Matcher matcher3=pattern3.matcher(wholematch);
 					if(matcher3.find()) {
-						JOptionPane.showMessageDialog(null,matcher3.group(1));
-					}
-				}						
-			}
-			
-			/*
-			String[] lines2 = lines.split("\\n");
-			for(int i = 0; i < lines2.length; i++) {
-				String line = lines2[i];
-				if(ContainsLineError(line)) {
-					Pattern pattern=Pattern.compile("([a-zA-Z0-9]+):([0-9]+):");
-					Matcher matcher=pattern.matcher(line);
-					while(matcher.find()) {
-						String classname = matcher.group(1);
-						int line_number=Integer.parseInt(matcher.group(2));
-						Data data = new Data();	
-						data.classname = classname;
-						data.line_number=line_number;
+						data.apiclass=matcher3.group(1);
 					}
 				}
-
+				datas.add(data);					
 			}
-			*/
 			
-			setLayout();
-			setListeners();
+			Generate();
 		}	
 	}
 	private JButton[] gotocompilelineerrorbuttons;
-	public void setLayout() {
+	public void Generate() {
 		JFrame frame = new JFrame();
-		gotocompilelineerrorbuttons = new JButton[data.size()];
-		for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
-			gotocompilelineerrorbuttons[i] = new JButton("Show Error");
-		}
+		JPanel panel = new JPanel();
+		
+		for(int i = 0; i < datas.size(); i++) {	
+			gotocompilelineerrorbuttons = new JButton[datas.size()];
+			for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
+				gotocompilelineerrorbuttons[i] = new JButton("Show Error");
+			}
+		}
 	}
 	public void setListeners() {
 		for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
