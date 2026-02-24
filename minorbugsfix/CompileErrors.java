@@ -8,7 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.awt.GridLayout;
 public class CompileErrors {		
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
@@ -53,16 +57,22 @@ public class CompileErrors {
 		JPanel panel = new JPanel();
 		
 		for(int i = 0; i < datas.size(); i++) {	
-			gotocompilelineerrorbuttons = new JButton[datas.size()];
-			for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
-				gotocompilelineerrorbuttons[i] = new JButton("Show Error");
-			}
+			JPanel row = new JPanel();
+			Data data=datas.get(i);
+			JLabel label = new JLabel("Class of error: "+data.classname);
+			row.add(label);
+			JLabel label2 = new JLabel("Line number: "+data.line_number);
+			row.add(label2);
+			JButton button = new JButton("Show Error Line");
+			row.add(button);
+			button.addActionListener(new GoToLineCompileError(this,i));
+			data.apiclass
 		}
 	}
 	public void setListeners() {
 		for(int i = 0; i < gotocompilelineerrorbuttons.length; i++) {
 			JButton button = gotocompilelineerrorbuttons[i];
-			button.addActionListener(new GoToLineCompileError(this,i));
+
 		}
 	}		
 
