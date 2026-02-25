@@ -1,3 +1,5 @@
+import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JOptionPane;
@@ -11,9 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JPanel;
-import javax.swing.JButton;
+
 public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
@@ -97,6 +97,7 @@ public class CompileErrors {
 				String importtwo = imports.get(0);
 				main.textarea.setText("import "+importtwo+";\n"+text);
 				RemoveClass(apiclass);
+				AddOneLine();
 			}
 			else if(imports.size() > 1) {
 				JFrame frame2 = new JFrame();
@@ -111,6 +112,7 @@ public class CompileErrors {
 						main.textarea.setText("import "+importtwo+";\n"+text);
 						frame2.dispose();
 						RemoveClass(apiclass);
+						AddOneLine();
 					});
 					panel2.add(row);
 				}
@@ -123,6 +125,11 @@ public class CompileErrors {
 			main.scrollToCaretPositionWithoutFocus(0);
 		}				
 	}
+	public void AddOneLine() {
+		for(Data data:datas) {
+			data.l_number=data.l_number+1;
+		}
+	}
 	public void RemoveClass(String classname) {
 		for(int i = 0, j = 0; i < datas.size(); i++) {
 			Data data = datas.get(i);
