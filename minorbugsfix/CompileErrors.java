@@ -1,3 +1,5 @@
+import javax.swing.JLabel;
+import java.awt.GridLayout;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
@@ -51,7 +52,6 @@ public class CompileErrors {
 			Generate();
 		}	
 	}
-	private List<JButton> buttons = new ArrayList<JButton>();
 	public void Generate() {
 		JFrame frame = new JFrame();
 		frame.setLocationRelativeTo(main.tabbedpane.getSelectedComponent());
@@ -71,7 +71,7 @@ public class CompileErrors {
 				JLabel label3 = new JLabel("import missing:");
 				row.add(label3);
 				JButton importbutton = new JButton("import class");
-				buttons.add(importbutton);
+				data.button=importbutton;
 				row.add(importbutton);
 				importbutton.addActionListener(new ImportAPIClassActionListener(this,i));
 			}
@@ -128,7 +128,7 @@ public class CompileErrors {
 			Data data = datas.get(i);
 			if(classname.equals(data.apiclass)) {
 				data.apiclass = "";
-				buttons.get(j).setEnabled(false);
+				data.button.setEnabled(false);
 				j++;
 			}
 		}
@@ -206,6 +206,7 @@ public class CompileErrors {
 	}
 }
 class Data {
+	public JButton button;
 	public String classname = "";
 	public int l_number = 0;
 	public String apiclass = "";
