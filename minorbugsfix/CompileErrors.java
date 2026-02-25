@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.GridLayout;
 public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
