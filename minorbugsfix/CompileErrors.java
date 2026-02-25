@@ -1,4 +1,3 @@
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import java.awt.GridLayout;
 public class CompileErrors {			
 	private Main main;
@@ -55,7 +55,7 @@ public class CompileErrors {
 	private List<JButton> buttons = new ArrayList<JButton>();
 	public void Generate() {
 		JFrame frame = new JFrame();
-		frame.setLocation(null);
+		frame.setLocationRelativeTo(main.tabbedpane.getSelectedComponent());
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(datas.size(),1));
 		for(int i = 0; i < datas.size(); i++) {	
@@ -153,6 +153,7 @@ public class CompileErrors {
 				for(String fileName2:main.filelistmodifier.getFileList()) {
 					if(fileName.equals(ce.main.getFileName(fileName2))) {
 						ce.main.open(fileName2);
+						ce.main.scrollToCaretPositionWithoutFocus(ce.getCaretPosition(l_number));
 						return;
 					}
 				}
