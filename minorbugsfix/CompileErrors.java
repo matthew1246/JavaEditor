@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
 public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
@@ -52,6 +51,7 @@ public class CompileErrors {
 			Generate();
 		}	
 	}
+	private List<JButton> buttons = new ArrayList<JButton>();
 	public void Generate() {
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
@@ -70,6 +70,7 @@ public class CompileErrors {
 				JLabel label3 = new JLabel("import missing:");
 				row.add(label3);
 				JButton importbutton = new JButton("import class");
+				buttons.add(importbutton);
 				row.add(importbutton);
 				importbutton.addActionListener(new ImportAPIClassActionListener(this,i));
 			}
@@ -94,12 +95,26 @@ public class CompileErrors {
 			if(imports.size() == 1) {
 				String importtwo = imports.get(0);
 				main.textarea.setText("import "+importtwo+"\n"+text);
+				RemoveClass(apiclass);
 			}
 			else if(imports.size() > 1) {
+				JFrame frame2 = new JFrame();
+				JPanel panel2 = new JPanel();
+				panel2.setLayout(new GridLayout(1,imports.size()));
 				for(int i = 0; i < imports.size(); i++) {
+					JPanel row = new JPanel();
 					String importtwo = imports.get(i);
-					main.textarea.setText("import "+importtwo+"\n"+text);
+					JButton addimport2 = new JButton("Add importtwo");
+					row.add(addimport2);
+					addimport2.addActionListener((ev) -> {
+						main.textarea.setText("import "+importtwo+"\n"+text);
+						frame2.dispose();
+						RemoveClass(apiclass);
+					});
+					panel2.add(row);
 				}
+				frame2.add(panel2);
+				frame2.setVisible(true);
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"datas.size() is "+datas.size());	
@@ -107,6 +122,16 @@ public class CompileErrors {
 			main.scrollToCaretPositionWithoutFocus(0);
 		}				
 	}
+	public void RemoveClass(String classname) {
+		for(int i = 0, j = 0; i < datas.size(); i++) {
+			Data data = datas.get(i);
+			if(classname.equals(data.apiclass)) {
+				data.apiclass = "";
+				buttons.get(j).setEnabled(false);
+				j++;
+			}
+		}
+	}
 	class GoToLineCompileError implements ActionListener {
 		int i;
 		CompileErrors ce;
