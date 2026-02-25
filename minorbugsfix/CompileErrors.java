@@ -1,3 +1,4 @@
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -54,6 +55,7 @@ public class CompileErrors {
 	private List<JButton> buttons = new ArrayList<JButton>();
 	public void Generate() {
 		JFrame frame = new JFrame();
+		frame.setLocation(null);
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(datas.size(),1));
 		for(int i = 0; i < datas.size(); i++) {	
@@ -94,7 +96,7 @@ public class CompileErrors {
 			String text=main.textarea.getText();
 			if(imports.size() == 1) {
 				String importtwo = imports.get(0);
-				main.textarea.setText("import "+importtwo+"\n"+text);
+				main.textarea.setText("import "+importtwo+";\n"+text);
 				RemoveClass(apiclass);
 			}
 			else if(imports.size() > 1) {
@@ -107,7 +109,7 @@ public class CompileErrors {
 					JButton addimport2 = new JButton("Add importtwo");
 					row.add(addimport2);
 					addimport2.addActionListener((ev) -> {
-						main.textarea.setText("import "+importtwo+"\n"+text);
+						main.textarea.setText("import "+importtwo+";\n"+text);
 						frame2.dispose();
 						RemoveClass(apiclass);
 					});
@@ -141,8 +143,20 @@ public class CompileErrors {
 		}		
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			int l_number=ce.datas.get(i).l_number;			
-			ce.showError(ce.getCaretPosition(l_number));	
+			Data data = datas.get(i);
+			String fileName = data.classname;
+			int l_number=ce.datas.get(i).l_number;
+			if(fileName.equals(main.getFileName(main.fileName))) {	
+				ce.showError(ce.getCaretPosition(l_number));	
+			}
+			else {
+				for(String fileName2:main.filelistmodifier.getFileList()) {
+					if(fileName.equals(ce.main.getFileName(fileName2))) {
+						ce.main.open(fileName2);
+						return;
+					}
+				}
+			}				
 		}
 	}
 	public boolean ContainsLineError(String l) {
