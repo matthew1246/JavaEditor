@@ -720,7 +720,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 2806
+    "caretposition": 3181
   },
   "C:\\Users\\Owner\\Documents\\git\\muck\\Links.java": {
     "startupcombobox": [
@@ -809,6 +809,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 458
+    "caretposition": 457
   }
 }

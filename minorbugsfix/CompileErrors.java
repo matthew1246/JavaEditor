@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
-
 public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
@@ -66,7 +65,7 @@ public class CompileErrors {
 			JButton button = new JButton("Show Error Line");
 			row.add(button);
 			button.addActionListener(new GoToLineCompileError(this,i));
-			if(!data.apiclass.equals("")) {
+			if(data.hasAPIClass()) {
 				JLabel label3 = new JLabel("import missing:");
 				row.add(label3);
 				JButton importbutton = new JButton("import class");
@@ -88,8 +87,7 @@ public class CompileErrors {
 		}
 		@Override
 		public void actionPerformed(ActionEvent actionevent) {
-			JOptionPane.showMessageDialog(null,ce.datas.get(i).apiclass);
-			String line=ce.main.muck.links.getSublink(ce.datas.get(i).apiclass);
+			String line=ce.main.muck.links.getImport(ce.datas.get(i).apiclass).toString();
 			JOptionPane.showMessageDialog(null,line);		
 		}				
 	}
@@ -156,4 +154,7 @@ class Data {
 	public String classname = "";
 	public int line_number = 0;
 	public String apiclass = "";
+	public boolean hasAPIClass() {
+		return !apiclass.equals("");
+	}
 }
