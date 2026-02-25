@@ -1,7 +1,8 @@
+import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import java.awt.GridLayout;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -12,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
 public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
@@ -23,10 +22,10 @@ public class CompileErrors {
 		String[] options=new String[2];
 		options[0] = "Yes";
 		options[1] = "No";
-		int option2=JOptionPane.showOptionDialog(null,"Go to l number of error(s)?","Which you like to go to l number of error(s)?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		int option2=JOptionPane.showOptionDialog(null,"Go to line number of error(s)?","Which you like to go to line number of error(s)?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 		if(option2 == JOptionPane.YES_OPTION) {
 			if(!ContainsLineError(ls)) {
-				JOptionPane.showMessageDialog(null,"Could not find l number.");
+				JOptionPane.showMessageDialog(null,"Could not find line number.");
 				return;	
 			}
 			Pattern pattern2= Pattern.compile("(([a-zA-Z0-9.]+):(\\d+):.*?)(?=\\n[a-zA-Z0-9.]+:\\d+:|\\z)",Pattern.DOTALL);
