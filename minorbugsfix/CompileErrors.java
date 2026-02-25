@@ -13,30 +13,31 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import javax.swing.JLabel;
 public class CompileErrors {			
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
-	public CompileErrors(Main main,String lines) {
+	public CompileErrors(Main main,String ls) {
 		this.main = main;
 				
 		String[] options=new String[2];
 		options[0] = "Yes";
 		options[1] = "No";
-		int option2=JOptionPane.showOptionDialog(null,"Go to line number of error(s)?","Which you like to go to line number of error(s)?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		int option2=JOptionPane.showOptionDialog(null,"Go to l number of error(s)?","Which you like to go to l number of error(s)?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 		if(option2 == JOptionPane.YES_OPTION) {
-			if(!ContainsLineError(lines)) {
-				JOptionPane.showMessageDialog(null,"Could not find line number.");
+			if(!ContainsLineError(ls)) {
+				JOptionPane.showMessageDialog(null,"Could not find l number.");
 				return;	
 			}
 			Pattern pattern2= Pattern.compile("(([a-zA-Z0-9.]+):(\\d+):.*?)(?=\\n[a-zA-Z0-9.]+:\\d+:|\\z)",Pattern.DOTALL);
-			Matcher matcher=pattern2.matcher(lines);
+			Matcher matcher=pattern2.matcher(ls);
 			while(matcher.find()) {
 				Data data = new Data();
 				
 				String wholematch = matcher.group(1);
 				//JOptionPane.showMessageDialog(null,wholematch);
 				data.classname=matcher.group(2);
-				data.line_number=Integer.parseInt(matcher.group(3));
+				data.l_number=Integer.parseInt(matcher.group(3));
 					
 				if(wholematch.contains("cannot find symbol")) {
 					Pattern pattern3=Pattern.compile("symbol:\\s*class\\s*([a-zA-Z0-9.]+)",Pattern.DOTALL);
@@ -60,7 +61,7 @@ public class CompileErrors {
 			Data data=datas.get(i);
 			JLabel label = new JLabel("Class of error: "+data.classname);
 			row.add(label);
-			JLabel label2 = new JLabel("Line number: "+data.line_number);
+			JLabel label2 = new JLabel("Line number: "+data.l_number);
 			row.add(label2);
 			JButton button = new JButton("Show Error Line");
 			row.add(button);
@@ -87,8 +88,23 @@ public class CompileErrors {
 		}
 		@Override
 		public void actionPerformed(ActionEvent actionevent) {
-			String line=ce.main.muck.links.getImport(ce.datas.get(i).apiclass).toString();
-			JOptionPane.showMessageDialog(null,line);		
+			String apiclass = ce.datas.get(i).apiclass;
+			List<String> imports=ce.main.muck.links.getImport(apiclass);
+			String text=main.textarea.getText();
+			if(imports.size() == 1) {
+				String importtwo = imports.get(0);
+				main.textarea.setText("import "+importtwo+"\n"+text);
+			}
+			else if(imports.size() > 1) {
+				for(int i = 0; i < imports.size(); i++) {
+					String importtwo = imports.get(i);
+					main.textarea.setText("import "+importtwo+"\n"+text);
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(null,"datas.size() is "+datas.size());	
+			}						
+			main.scrollToCaretPositionWithoutFocus(0);
 		}				
 	}
 	class GoToLineCompileError implements ActionListener {
@@ -100,44 +116,44 @@ public class CompileErrors {
 		}		
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			int line_number=ce.datas.get(i).line_number;			
-			ce.showError(ce.getCaretPosition(line_number));	
+			int l_number=ce.datas.get(i).l_number;			
+			ce.showError(ce.getCaretPosition(l_number));	
 		}
 	}
-	public boolean ContainsLineError(String line) {
+	public boolean ContainsLineError(String l) {
 		Pattern pattern=Pattern.compile("([a-zA-Z0-9]+):([0-9]+):");
-		Matcher matcher=pattern.matcher(line);
+		Matcher matcher=pattern.matcher(l);
 		return matcher.find();
 	}
-	public boolean ContainsSymbol(String line) {
-		return line.contains("cannot find symbol");
+	public boolean ContainsSymbol(String l) {
+		return l.contains("cannot find symbol");
 	}
 	public int getLineNumber(String stringuptocaretposition) {
-		int linenumber2=0;
+		int lnumber2=0;
 		try {
-			LineNumberReader linenumberreader=new LineNumberReader(new StringReader(stringuptocaretposition));
-			while(linenumberreader.readLine() != null) {
-				linenumber2=linenumberreader.getLineNumber();
+			LineNumberReader lnumberreader=new LineNumberReader(new StringReader(stringuptocaretposition));
+			while(lnumberreader.readLine() != null) {
+				lnumber2=lnumberreader.getLineNumber();
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		return linenumber2;
+		return lnumber2;
 	}
-	public int getCaretPosition(int line_number) {
+	public int getCaretPosition(int l_number) {
 		try {
 			String wholetext=main.textarea.getText();
-			LineNumberReader linenumberreader=new LineNumberReader(new StringReader(wholetext));
-			String line = "";
-			while((line = linenumberreader.readLine()) != null) {
-				int linenumber2=linenumberreader.getLineNumber();
-				if(line_number == linenumber2) break;
+			LineNumberReader lnumberreader=new LineNumberReader(new StringReader(wholetext));
+			String l = "";
+			while((l = lnumberreader.readLine()) != null) {
+				int lnumber2=lnumberreader.getLineNumber();
+				if(l_number == lnumber2) break;
 			}
 			int startOfLine = -1;
-			while((startOfLine = wholetext.indexOf(line,++startOfLine)) != -1) {
-				//int startOfLine=wholetext.tindexOf(line);
+			while((startOfLine = wholetext.indexOf(l,++startOfLine)) != -1) {
+				//int startOfLine=wholetext.tindexOf(l);
 				String firsthalf=wholetext.substring(0,startOfLine+1);
-				if(getLineNumber(firsthalf) == line_number) {
+				if(getLineNumber(firsthalf) == l_number) {
 					return startOfLine;
 				}
 			}
@@ -152,7 +168,7 @@ public class CompileErrors {
 }
 class Data {
 	public String classname = "";
-	public int line_number = 0;
+	public int l_number = 0;
 	public String apiclass = "";
 	public boolean hasAPIClass() {
 		return !apiclass.equals("");
