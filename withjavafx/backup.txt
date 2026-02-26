@@ -20,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 199623
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -600,6 +600,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 446
+    "caretposition": 3714
   }
 }

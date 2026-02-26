@@ -1,3 +1,4 @@
+import javax.swing.JLabel;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
@@ -67,7 +68,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
@@ -2288,6 +2288,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				ex.printStackTrace();
 			}
 		});
+		
 		reload.addActionListener( (ev) -> {
 			try {
 				if(!fileName.equals("")) {
@@ -2898,7 +2899,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				thread.start();
 			}
 		});
-		Label labea;
+			
 		run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -5449,6 +5450,7 @@ class MethodSuggestionBox {
 		methodorproperty+=")";
 		return methodorproperty;
 	}
+	Label skjkjs;
 	public JLabel[] getLabels(Object[] methods) {
 		JLabel[] labels = new JLabel[methods.length];
 		for(int i = 0; i < methods.length; i++) {

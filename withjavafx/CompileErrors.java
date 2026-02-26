@@ -106,33 +106,35 @@ public class CompileErrors {
 			if(imports.size() == 1) {
 				String importtwo = imports.get(0);
 				main.textarea.setText("import "+importtwo+";\n"+text);
+				main.scrollToCaretPositionWithoutFocus(0);
 				RemoveClass(apiclass);
 				AddOneLine();
 			}
 			else if(imports.size() > 1) {
 				JFrame frame2 = new JFrame();
+				frame2.setLocationRelativeTo(main.tabbedpane.getSelectedComponent());
 				JPanel panel2 = new JPanel();
 				panel2.setLayout(new GridLayout(1,imports.size()));
 				for(int i = 0; i < imports.size(); i++) {
 					JPanel row = new JPanel();
 					String importtwo = imports.get(i);
-					JButton addimport2 = new JButton("Add importtwo");
+					JButton addimport2 = new JButton("Add "+importtwo);
 					row.add(addimport2);
 					addimport2.addActionListener((ev) -> {
 						main.textarea.setText("import "+importtwo+";\n"+text);
-						frame2.dispose();
+						main.scrollToCaretPositionWithoutFocus(0);
 						RemoveClass(apiclass);
 						AddOneLine();
 					});
 					panel2.add(row);
 				}
 				frame2.add(panel2);
+				frame2.pack();
 				frame2.setVisible(true);
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"datas.size() is "+datas.size());	
 			}						
-			main.scrollToCaretPositionWithoutFocus(0);
 		}				
 	}
 
