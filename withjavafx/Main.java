@@ -5450,7 +5450,6 @@ class MethodSuggestionBox {
 		methodorproperty+=")";
 		return methodorproperty;
 	}
-	Label skjkjs;
 	public JLabel[] getLabels(Object[] methods) {
 		JLabel[] labels = new JLabel[methods.length];
 		for(int i = 0; i < methods.length; i++) {

@@ -125,6 +125,7 @@ public class CompileErrors {
 						main.scrollToCaretPositionWithoutFocus(0);
 						RemoveClass(apiclass);
 						AddOneLine();
+						frame2.dispose();
 					});
 					panel2.add(row);
 				}
