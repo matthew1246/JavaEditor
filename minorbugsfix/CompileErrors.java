@@ -2,7 +2,6 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -13,7 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-public class CompileErrors {			
+import javax.swing.JLabel;
+public class CompileErrors {		
+	
 	private Main main;
 	private List<Data> datas = new ArrayList<Data>();
 	public CompileErrors(Main main,String ls) {
@@ -75,11 +76,13 @@ public class CompileErrors {
 				importbutton.addActionListener(new ImportAPIClassActionListener(this,i));
 			}
 			panel.add(row);
-		}
+		}
+
 		frame.add(panel);
 		frame.pack();
 		frame.setVisible(true);
-	}		
+	}
+		
 	class ImportAPIClassActionListener implements ActionListener {
 		int i;
 		CompileErrors ce;
@@ -89,41 +92,53 @@ public class CompileErrors {
 		}
 		@Override
 		public void actionPerformed(ActionEvent actionevent) {
+			List<String> imports = new ArrayList<String>();
 			String apiclass = ce.datas.get(i).apiclass;
-			List<String> imports=ce.main.muck.links.getImport(apiclass);
+			System.out.println("Execute 2.");
+			System.out.println(apiclass);
+			for(String apiclass2:ce.main.muck.links.getFullPackageNames()) {
+				if(apiclass2.endsWith("."+apiclass)) {
+					imports.add(apiclass2);
+				}
+			}				
+			
 			String text=main.textarea.getText();
 			if(imports.size() == 1) {
 				String importtwo = imports.get(0);
 				main.textarea.setText("import "+importtwo+";\n"+text);
+				main.scrollToCaretPositionWithoutFocus(0);
 				RemoveClass(apiclass);
 				AddOneLine();
 			}
 			else if(imports.size() > 1) {
 				JFrame frame2 = new JFrame();
+				frame2.setLocationRelativeTo(main.tabbedpane.getSelectedComponent());
 				JPanel panel2 = new JPanel();
 				panel2.setLayout(new GridLayout(1,imports.size()));
 				for(int i = 0; i < imports.size(); i++) {
 					JPanel row = new JPanel();
 					String importtwo = imports.get(i);
-					JButton addimport2 = new JButton("Add importtwo");
+					JButton addimport2 = new JButton("Add "+importtwo);
 					row.add(addimport2);
 					addimport2.addActionListener((ev) -> {
 						main.textarea.setText("import "+importtwo+";\n"+text);
-						frame2.dispose();
+						main.scrollToCaretPositionWithoutFocus(0);
 						RemoveClass(apiclass);
 						AddOneLine();
+						frame2.dispose();
 					});
 					panel2.add(row);
 				}
 				frame2.add(panel2);
+				frame2.pack();
 				frame2.setVisible(true);
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"datas.size() is "+datas.size());	
 			}						
-			main.scrollToCaretPositionWithoutFocus(0);
 		}				
-	}
+	}
+
 	public void AddOneLine() {
 		for(Data data:datas) {
 			data.l_number=data.l_number+1;

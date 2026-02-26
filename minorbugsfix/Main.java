@@ -1214,8 +1214,7 @@ edit.add(functionLines);
 
 		        }
 		    });
-	}
-
+	}	
 	public void scrollToCaretPosition(int wholedocumenttindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
