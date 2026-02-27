@@ -1613,7 +1613,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				ex.printStackTrace();
 			}
 		});		
-		closetab.addActionListener((ev) -> {					
+		closetab.addActionListener((ev) -> {							
 			int tabtindex=tabbedpane.getSelectedIndex();
 			//if(fileNames.size() != 0 && tabtindex != 0)
 				//tabbedpane.setSelectedIndex((tabtindex-1));
@@ -1626,24 +1626,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			fileNames.remove(tabtindex);
 			tabbedpane.remove(tabtindex);
 			
-			/*
-			System.out.println("fileNames:");
-			for(String filename:fileNames){
-				System.out.println(filename);
-			}
-			System.out.println();
-			*/
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
-			/*
-			StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
-			System.out.println("Tabs:");
-			List<String> tabs2=storeselectedfile2.getTabs();
-			for(String tab:tabs2){
-				System.out.println(tab);
-			}
-			System.out.println();
-			*/
+		
+			fileName = fileNames.get(tabbedpane.getSelectedIndex());
+			storeselectedfile.set(fileName);
+			
+			updateJFrameTitle();
 		});
 				
 				
@@ -2809,6 +2798,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});		
 		frame.getRootPane().setDefaultButton(go_to_line_number);
 		
+	}
+	public void updateJFrameTitle() {
+		if(fileName != null && !fileName.equals("")) {
+			try {
+				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+				if(filename2.startsWith("/"))
+					filename2=filename2.substring(1,filename2.length());
+				frame.setTitle(filename2 +" "+fileName);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 	public static String addDotJava(String filename) {	
 		if(!(filename.endsWith(".java"))) {
