@@ -1626,25 +1626,26 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			fileNames.remove(tabtindex);
 			tabbedpane.remove(tabtindex);
 			
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			textarea=(JTextArea)jscrollpane5.getViewport().getView();
+			
+			String fileName2 = fileNames.get(tabbedpane.getSelectedIndex());
+		
+			git.Change(fileName2);
+			threecomboboxes.load(fileName2);
+			expandable.open();
+		
+			expandable.open();
+			git.Change(fileName2);
+			
+			allclassesinfile.ChangeFile(textarea,fileName2);
+			maven.Change(fileName2);
+			
+			startercombobox.Change(fileName2);		
+			
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
-		
-			fileName = fileNames.get(tabbedpane.getSelectedIndex());
-			storeselectedfile.set(fileName);
-			
-		
-			git.Change(fileName);
-			threecomboboxes.load(fileName);
-			expandable.open();
-		
-			expandable.open();
-			this.fileName=fileName;
-			git.Change(fileName);
-			
-			allclassesinfile.ChangeFile(textarea,fileName);
-			maven.Change(fileName);
-			
-			startercombobox.Change(fileName);		
+			storeselectedfile.set(fileName2);	
 			
 			updateJFrameTitle();
 		});
