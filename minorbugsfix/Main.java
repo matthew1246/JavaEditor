@@ -1632,6 +1632,20 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			fileName = fileNames.get(tabbedpane.getSelectedIndex());
 			storeselectedfile.set(fileName);
 			
+		
+			git.Change(fileName);
+			threecomboboxes.load(fileName);
+			expandable.open();
+		
+			expandable.open();
+			this.fileName=fileName;
+			git.Change(fileName);
+			
+			allclassesinfile.ChangeFile(textarea,fileName);
+			maven.Change(fileName);
+			
+			startercombobox.Change(fileName);		
+			
 			updateJFrameTitle();
 		});
 				
