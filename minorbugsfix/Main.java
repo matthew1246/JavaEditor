@@ -5179,6 +5179,8 @@ class RightClickJFrame {
 	}
 	public void setLocation() {
 		try {
+			if(caretposition == -1)
+				caretposition = 0;	
 			Rectangle2D rectanglecoords=textarea5.modelToView2D(caretposition);
 			Point screencoordinates= new Point((int)Math.round(rectanglecoords.getX()),(int)Math.round(rectanglecoords.getY()));
 			SwingUtilities.convertPointToScreen(screencoordinates,textarea5);
