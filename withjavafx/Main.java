@@ -1422,6 +1422,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			ex.printStackTrace();
 		}
 	}
+	public void updateJFrameTitle() {
+		if(fileName != null && !fileName.equals("")) {
+			try {
+				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+				if(filename2.startsWith("/"))
+					filename2=filename2.substring(1,filename2.length());
+				frame.setTitle(filename2 +" "+fileName);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 	public javax.swing.text.JTextComponent targetArea = textarea;
 	public CurlyBraceKeyListener curlybracekeylistener;
 	public boolean go_to_line_is_executed = false;
@@ -1811,36 +1823,40 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			thread.start();
 		});
 		closetab.addActionListener((ev) -> {	
-			int tabindex=tabbedpane.getSelectedIndex();
-			//if(fileNames.size() != 0 && tabindex != 0)
-				//tabbedpane.setSelectedIndex((tabindex-1));
-			//else if(fileNames.size() > 1 && tabindex == 0)
+			int tabtindex=tabbedpane.getSelectedIndex();
+			//if(fileNames.size() != 0 && tabtindex != 0)
+				//tabbedpane.setSelectedIndex((tabtindex-1));
+			//else if(fileNames.size() > 1 && tabtindex == 0)
 				// tabbedpane.setSelectedIndex(1);
-			if(tabindex == (tabbedpane.getTabCount()-2)) {
-				tabbedpane.setSelectedIndex((tabindex-1));
+			if(tabtindex == (tabbedpane.getTabCount()-2)) {
+				tabbedpane.setSelectedIndex((tabtindex-1));
 			}
 			
-			fileNames.remove(tabindex);
-			tabbedpane.remove(tabindex);
+			fileNames.remove(tabtindex);
+			tabbedpane.remove(tabtindex);
 			
-			/*
-			System.out.println("fileNames:");
-			for(String filename:fileNames){
-				System.out.println(filename);
-			}
-			System.out.println();
-			*/
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			textarea=(JTextArea)jscrollpane5.getViewport().getView();
+			
+			String fileName2 = fileNames.get(tabbedpane.getSelectedIndex());
+		
+			git.Change(fileName2);
+			threecomboboxes.load(fileName2);
+			expandable.open();
+		
+			expandable.open();
+			git.Change(fileName2);
+			
+			allclassesinfile.ChangeFile(textarea,fileName2);
+			maven.Change(fileName2);
+			
+			startercombobox.Change(fileName2);		
+			
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 			storeselectedfile.setTabs(fileNames);
-			/*
-			StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
-			System.out.println("Tabs:");
-			List<String> tabs2=storeselectedfile2.getTabs();
-			for(String tab:tabs2){
-				System.out.println(tab);
-			}
-			System.out.println();
-			*/
+			storeselectedfile.set(fileName2);	
+			
+			updateJFrameTitle();	
 		});
 	
 		opennewtab.addActionListener((ev) -> {
