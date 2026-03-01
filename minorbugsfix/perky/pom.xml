@@ -103,6 +103,7 @@
         <mainClass>com.amazinggoods.App</mainClass>
         <type>EXE</type>
         <destination>${project.build.directory}/dist</destination>
+        <winConsole>true</winConsole>
     </configuration>
         </plugin>
       </plugins>
