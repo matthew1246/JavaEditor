@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.Console;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -6,8 +7,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
-
-import javax.swing.JButton;
+import javax.swing.JButton;
 import java.io.File;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
@@ -98,6 +98,8 @@ public class Maven {
 	public JButton makeJarsForAllVersionsOfJava;
 	public JButton addHTML;
 	public JButton jarinsidejar;
+	public JButton updatePOMMakeEXE;
+	public JButton makeEXE;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -142,6 +144,12 @@ public class Maven {
 		
 		jarinsidejar = new JButton("Add jar within jar");
 		panel.add(jarinsidejar);
+		
+		updatePOMMakeEXE = new JButton("update pom.xml with make exe settings");
+		panel.add(updatePOMMakeEXE);
+		
+		makeEXE=new JButton("Make exe, remember to click \"update pom.xml with make exe settings first\" button first");
+		panel.add(makeEXE);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -219,6 +227,176 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		makeEXE.addActionListener(ev -> {
+			updatecode();
+			String cmd = "mvn clean package && mvn clean package jpackage:jpackage";
+			CommandLine commandline = new CommandLine();
+			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
+		});
+		updatePOMMakeEXE.addActionListener(ev -> {
+			String pomxml = getPOMXMLs();
+			XML xml = new XML(pomxml);
+			
+			Node node=xml.getNode("groupId");
+			if(node == null)
+				JOptionPane.showMessageDialog(null,"xml.getNode(\"groupId\") returns null");
+					
+			String groupId=node.getTextContent();
+			
+			node=xml.getNode("artifactId");
+			String artifactId=node.getTextContent();
+			
+			node=xml.getNode("version");
+			String version = node.getTextContent();
+			
+			node=xml.getNode("name");
+			String name = node.getTextContent();
+			
+			JOptionPane.showMessageDialog(null,"groupId: "+groupId);
+			JOptionPane.showMessageDialog(null,"artifactId: "+artifactId);
+			JOptionPane.showMessageDialog(null,"version: "+version);
+			JOptionPane.showMessageDialog(null,"name: "+name);
+			
+			String mainclass = groupId+".App";
+			String[] options = {"App.java","Main.java"};
+			int choice=JOptionPane.showOptionDialog(null,"Do you want the starter class to be App.java or Main.java?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+			if(choice == 1) {
+				mainclass=groupId+".Main";
+			}
+			JOptionPane.showMessageDialog(null,"mainclass: "+mainclass);
+			
+			
+			String isconsole="<winConsole>true</winConsole>";
+			String[] options2 = {"Console","GUI"};
+			choice=JOptionPane.showOptionDialog(null,"Do you want the starter class to be Console or GUI?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options2,options2[0]);
+			if(choice == 1) {
+				isconsole="";
+			}
+			
+			String newpomxml = """
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>%s</groupId>
+  <artifactId>%s</artifactId>
+  <version>%s</version>
+
+  <name>%s</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.11.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Optionally: parameterized tests support -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+          <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.4.2</version>
+          <configuration>
+              <archive>
+                  <manifest>
+                      <mainClass>%s</mainClass>
+                  </manifest>
+              </archive>
+           </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.12.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.6.1</version>
+        </plugin>
+        <plugin>
+         <groupId>org.panteleyev</groupId>
+    <artifactId>jpackage-maven-plugin</artifactId>
+    <version>1.6.0</version>
+    <configuration>
+        <name>YourApp</name>
+        <appVersion>1.0</appVersion>
+        <input>${project.build.directory}</input>
+        <mainJar>${project.build.finalName}.jar</mainJar>
+        <mainClass>%s</mainClass>
+        <type>EXE</type>
+        <destination>${project.build.directory}/dist</destination>
+        %s
+        <winShortcut>true</winShortcut>
+        <winMenu>true</winMenu>
+    </configuration>
+        </plugin>
+      </plugins>
+  </build>
+</project>
+
+""".formatted(groupId,artifactId,version,name,mainclass,mainclass,isconsole);
+			try {
+				PrintWriter printwriter = new PrintWriter(pomxml);
+				printwriter.println(newpomxml);
+				printwriter.close();
+			} catch (java.io.FileNotFoundException ex) {
+				ex.printStackTrace();
+			}	
+		});
 		addplugin.addActionListener((ev) -> {
 			AddPlugin addplugin = new AddPlugin(this);
 		});
@@ -309,39 +487,7 @@ public class Maven {
 			showNotInitialised();
 		});
 		updatecode.addActionListener(ev -> {
-			Path sourceDir = Path.of(Main.getDirectory(fileName));
-			String pomxml = getPOMXMLs();
-			
-			String packagePath = getPackageName(); // e.g. com/perky
-		    	String packageLine = "package " + packagePath.replace("/", ".") + ";";
-			
-	    		Path targetDir = Path.of(
-		       	Main.getDirectory(pomxml) + "src/main/java/" + packagePath);
-		
-		   	try {
-	        			//Files.createDirectories(targetDir);
-		
-			       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir, "*.java")) {
-				          	for (Path entry : stream) {
-				
-						// Read file
-						String content = Files.readString(entry);
-					
-						// Remove existing package if present
-						//content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-					
-						// Prepend correct package
-						content = packageLine + "\n\n" + content;
-					
-						// Write to target
-						Path targetFile = targetDir.resolve(entry.getFileName());
-						Files.writeString(targetFile, content);
-				            }
-				}
-				JOptionPane.showMessageDialog(null,"Code Updated");
-			} catch (Exception ex) {
-		        		ex.printStackTrace();
-		    	}
+			updatecode();
 		});
 		code.addActionListener((ev) -> {
 			CommandLine commandline = new CommandLine();
@@ -368,6 +514,41 @@ public class Maven {
 			DependencyRemover dependencyremover=new DependencyRemover(getPOMXMLs());
 		});		
 	}	
+	public void updatecode() {
+		Path sourceDir = Path.of(Main.getDirectory(fileName));
+		String pomxml = getPOMXMLs();
+		
+		String packagePath = getPackageName(); // e.g. com/perky
+	    	String packageLine = "package " + packagePath.replace("/", ".") + ";";
+		
+    		Path targetDir = Path.of(
+	       	Main.getDirectory(pomxml) + "src/main/java/" + packagePath);
+	
+	   	try {
+        			//Files.createDirectories(targetDir);
+	
+		       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir, "*.java")) {
+			          	for (Path entry : stream) {
+			
+					// Read file
+					String content = Files.readString(entry);
+				
+					// Remove existing package if present
+					//content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+				
+					// Prepend correct package
+					content = packageLine + "\n\n" + content;
+				
+					// Write to target
+					Path targetFile = targetDir.resolve(entry.getFileName());
+					Files.writeString(targetFile, content);
+			            }
+			}
+			JOptionPane.showMessageDialog(null,"Code Updated");
+		} catch (Exception ex) {
+	        		ex.printStackTrace();
+	    	}
+    	}
 	public String getPOMXMLs() {
 		File dir = new File(Main.getDirectory(fileName));
 		File[] folders = dir.listFiles(File::isDirectory);
@@ -402,6 +583,8 @@ public class Maven {
 		makeJarsForAllVersionsOfJava.setEnabled(false);
 		addHTML.setEnabled(false);
 		jarinsidejar.setEnabled(false);
+		updatePOMMakeEXE.setEnabled(false);
+		makeEXE.setEnabled(false);
 	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
@@ -418,6 +601,8 @@ public class Maven {
 		makeJarsForAllVersionsOfJava.setEnabled(false);
 		addHTML.setEnabled(false);
 		jarinsidejar.setEnabled(false);
+		updatePOMMakeEXE.setEnabled(false);
+		makeEXE.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -434,6 +619,8 @@ public class Maven {
 		makeJarsForAllVersionsOfJava.setEnabled(true);
 		addHTML.setEnabled(true);
 		jarinsidejar.setEnabled(true);
+		updatePOMMakeEXE.setEnabled(true);
+		makeEXE.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
@@ -700,7 +887,7 @@ public class Maven {
 				PrintWriter printwriter = new PrintWriter(getPOMXMLs());
 				printwriter.println(fileString);
 				printwriter.close();
-			} catch (java.io.FileNotFoundException ex) {
+			} catch (FileNotFoundException ex) {
 				ex.printStackTrace();
 			}	
 		}
@@ -918,8 +1105,7 @@ public class Maven {
 		
 		String responseJson=Search(rows,input);
 	
-		
-Parse(responseJson);
+		Parse(responseJson);
 		*/
 	}
 		

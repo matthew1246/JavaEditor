@@ -5,7 +5,7 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java"
     ],
     "caretposition": 0
   },
@@ -437,7 +437,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 32065
+    "caretposition": 38524
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java": {
     "startupcombobox": [
@@ -602,5 +602,26 @@
     ],
     "fileNames": [],
     "caretposition": 4443
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XML.java": {
+    "startupcombobox": [
+      "XML"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\XML.java": {
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 1991
   }
 }
