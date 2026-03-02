@@ -218,6 +218,21 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		updatePOMMakeEXE.addActionListener(ev -> {
+			String pomxml = getPOMXMLs();
+			XML xml = new XML(pomxl);
+			
+			Node node=xml.getNode("groupId");
+			String groupId=node.getNodeValue();
+			
+			node=xml.getNode("artifactId");
+			String artifactId=node.getNodeValue();
+			
+			JOptionPane.showMessageDialog(null,"groupId: "+groupId);
+			JOptionPane.showMessageDialog(null,"artifactId: "+artifactId);
+			
+			// node.setNodeValue(
+		});
 		addplugin.addActionListener((ev) -> {
 			AddPlugin addplugin = new AddPlugin(this);
 		});
