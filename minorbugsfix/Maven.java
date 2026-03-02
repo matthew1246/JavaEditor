@@ -264,6 +264,14 @@ public class Maven {
 			}
 			JOptionPane.showMessageDialog(null,"mainclass: "+mainclass);
 			
+			
+			String isconsole="<winConsole>true</winConsole>";
+			String[] options2 = {"Console","GUI"};
+			choice=JOptionPane.showOptionDialog(null,"Do you want the starter class to be Console or GUI?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options2,options2[0]);
+			if(choice == 1) {
+				isconsole="";
+			}
+			
 			String newpomxml = """
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -370,14 +378,16 @@ public class Maven {
         <mainClass>%s</mainClass>
         <type>EXE</type>
         <destination>${project.build.directory}/dist</destination>
-        <winConsole>true</winConsole>
+        %s
+        <winShortcut>true</winShortcut>
+        <winMenu>true</winMenu>
     </configuration>
         </plugin>
       </plugins>
   </build>
 </project>
 
-""".formatted(groupId,artifactId,version,name,mainclass,mainclass);
+""".formatted(groupId,artifactId,version,name,mainclass,mainclass,isconsole);
 			try {
 				PrintWriter printwriter = new PrintWriter(pomxml);
 				printwriter.println(newpomxml);
