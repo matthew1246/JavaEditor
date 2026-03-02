@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.Console;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -360,7 +361,13 @@ public class Maven {
 </project>
 
 """.formatted(groupId,artifactId,version,name);
-			JOptionPane.showMessageDialog(null,newpomxml);
+			try {
+				PrintWriter printwriter = new PrintWriter(pomxml);
+				printwriter.println(newpomxml);
+				printwriter.close();
+			} catch (java.io.FileNotFoundException ex) {
+				ex.printStackTrace();
+			}	
 		});
 		addplugin.addActionListener((ev) -> {
 			AddPlugin addplugin = new AddPlugin(this);
@@ -846,7 +853,7 @@ public class Maven {
 				PrintWriter printwriter = new PrintWriter(getPOMXMLs());
 				printwriter.println(fileString);
 				printwriter.close();
-			} catch (java.io.FileNotFoundException ex) {
+			} catch (FileNotFoundException ex) {
 				ex.printStackTrace();
 			}	
 		}
