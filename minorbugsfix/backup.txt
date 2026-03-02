@@ -543,7 +543,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 4298
+    "caretposition": 14459
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyManager.java": {
     "startupcombobox": [
@@ -861,6 +861,6 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1132
+    "caretposition": 0
   }
 }

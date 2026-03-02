@@ -97,6 +97,7 @@ public class Maven {
 	public JButton makeJarsForAllVersionsOfJava;
 	public JButton addHTML;
 	public JButton jarinsidejar;
+	public JButton updatePOMMakeEXE;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -141,6 +142,9 @@ public class Maven {
 		
 		jarinsidejar = new JButton("Add jar within jar");
 		panel.add(jarinsidejar);
+		
+		updatePOMMakeEXE = new JButton("update pom.xml with make exe settings");
+		panel.add(updatePOMMakeEXE);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -220,7 +224,7 @@ public class Maven {
 	public void setListeners() {
 		updatePOMMakeEXE.addActionListener(ev -> {
 			String pomxml = getPOMXMLs();
-			XML xml = new XML(pomxl);
+			XML xml = new XML(pomxml);
 			
 			Node node=xml.getNode("groupId");
 			String groupId=node.getNodeValue();
@@ -416,6 +420,7 @@ public class Maven {
 		makeJarsForAllVersionsOfJava.setEnabled(false);
 		addHTML.setEnabled(false);
 		jarinsidejar.setEnabled(false);
+		updatePOMMakeEXE.setEnabled(false);
 	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
@@ -432,6 +437,7 @@ public class Maven {
 		makeJarsForAllVersionsOfJava.setEnabled(false);
 		addHTML.setEnabled(false);
 		jarinsidejar.setEnabled(false);
+		updatePOMMakeEXE.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -448,6 +454,7 @@ public class Maven {
 		makeJarsForAllVersionsOfJava.setEnabled(true);
 		addHTML.setEnabled(true);
 		jarinsidejar.setEnabled(true);
+		updatePOMMakeEXE.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
