@@ -53,12 +53,14 @@ public class XML {
 		for(Node childnode:nodechildren) {
 			if(childnode == null)
 				continue;	
-			String value=childnode.getTextContent();
+			String value=childnode.getNodeName();
 			if(value != null && value.equals(tagName)) {
 				return childnode;
 			}
-			else {
-				return getNode(childnode,tagName);
+			else if(value != null) {
+				Node return_node= getNode(childnode,tagName);
+				if(return_node != null)
+					return return_node;	
 			}
 		}
 		return null;

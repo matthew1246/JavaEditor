@@ -227,10 +227,13 @@ public class Maven {
 			XML xml = new XML(pomxml);
 			
 			Node node=xml.getNode("groupId");
-			String groupId=node.getNodeValue();
+			if(node == null)
+				JOptionPane.showMessageDialog(null,"xml.getNode(\"groupId\") returns null");
+					
+			String groupId=node.getTextContent();
 			
 			node=xml.getNode("artifactId");
-			String artifactId=node.getNodeValue();
+			String artifactId=node.getTextContent();
 			
 			JOptionPane.showMessageDialog(null,"groupId: "+groupId);
 			JOptionPane.showMessageDialog(null,"artifactId: "+artifactId);
