@@ -228,6 +228,7 @@ public class Maven {
 				
 	public void setListeners() {
 		makeEXE.addActionListener(ev -> {
+			updatecode();
 			String cmd = "mvn clean package && mvn clean package jpackage:jpackage";
 			CommandLine commandline = new CommandLine();
 			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
@@ -486,39 +487,7 @@ public class Maven {
 			showNotInitialised();
 		});
 		updatecode.addActionListener(ev -> {
-			Path sourceDir = Path.of(Main.getDirectory(fileName));
-			String pomxml = getPOMXMLs();
-			
-			String packagePath = getPackageName(); // e.g. com/perky
-		    	String packageLine = "package " + packagePath.replace("/", ".") + ";";
-			
-	    		Path targetDir = Path.of(
-		       	Main.getDirectory(pomxml) + "src/main/java/" + packagePath);
-		
-		   	try {
-	        			//Files.createDirectories(targetDir);
-		
-			       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir, "*.java")) {
-				          	for (Path entry : stream) {
-				
-						// Read file
-						String content = Files.readString(entry);
-					
-						// Remove existing package if present
-						//content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-					
-						// Prepend correct package
-						content = packageLine + "\n\n" + content;
-					
-						// Write to target
-						Path targetFile = targetDir.resolve(entry.getFileName());
-						Files.writeString(targetFile, content);
-				            }
-				}
-				JOptionPane.showMessageDialog(null,"Code Updated");
-			} catch (Exception ex) {
-		        		ex.printStackTrace();
-		    	}
+			updatecode();
 		});
 		code.addActionListener((ev) -> {
 			CommandLine commandline = new CommandLine();
@@ -545,6 +514,41 @@ public class Maven {
 			DependencyRemover dependencyremover=new DependencyRemover(getPOMXMLs());
 		});		
 	}	
+	public void updatecode() {
+		Path sourceDir = Path.of(Main.getDirectory(fileName));
+		String pomxml = getPOMXMLs();
+		
+		String packagePath = getPackageName(); // e.g. com/perky
+	    	String packageLine = "package " + packagePath.replace("/", ".") + ";";
+		
+    		Path targetDir = Path.of(
+	       	Main.getDirectory(pomxml) + "src/main/java/" + packagePath);
+	
+	   	try {
+        			//Files.createDirectories(targetDir);
+	
+		       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(sourceDir, "*.java")) {
+			          	for (Path entry : stream) {
+			
+					// Read file
+					String content = Files.readString(entry);
+				
+					// Remove existing package if present
+					//content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+				
+					// Prepend correct package
+					content = packageLine + "\n\n" + content;
+				
+					// Write to target
+					Path targetFile = targetDir.resolve(entry.getFileName());
+					Files.writeString(targetFile, content);
+			            }
+			}
+			JOptionPane.showMessageDialog(null,"Code Updated");
+		} catch (Exception ex) {
+	        		ex.printStackTrace();
+	    	}
+    	}
 	public String getPOMXMLs() {
 		File dir = new File(Main.getDirectory(fileName));
 		File[] folders = dir.listFiles(File::isDirectory);
