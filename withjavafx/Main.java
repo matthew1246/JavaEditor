@@ -1765,6 +1765,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						String line = bufferedreader.readLine();
 						if(line == null) {
 							JOptionPane.showMessageDialog(null,"compiled");
+							maven.Change(fileName);
 						}
 						else {
 							String lines = line;
@@ -2903,6 +2904,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								JOptionPane.showMessageDialog(null,lines);
 								CompileErrors compileerrors = new CompileErrors(Main.this,lines);		
 							}
+							maven.Change(fileName);
 						}
 						else {
 							JOptionPane.showMessageDialog(null,"No filename saved.");
