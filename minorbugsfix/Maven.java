@@ -99,6 +99,7 @@ public class Maven {
 	public JButton addHTML;
 	public JButton jarinsidejar;
 	public JButton updatePOMMakeEXE;
+	public JButton makeEXE;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -146,6 +147,9 @@ public class Maven {
 		
 		updatePOMMakeEXE = new JButton("update pom.xml with make exe settings");
 		panel.add(updatePOMMakeEXE);
+		
+		makeEXE=new JButton("Make exe, remember to click \"update pom.xml with make exe settings first\" button first");
+		panel.add(makeEXE);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -223,6 +227,11 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		makeEXE.addActionListener(ev -> {
+			String cmd = "mvn clean package && mvn clean package jpackage:jpackage";
+			CommandLine commandline = new CommandLine();
+			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
+		});
 		updatePOMMakeEXE.addActionListener(ev -> {
 			String pomxml = getPOMXMLs();
 			XML xml = new XML(pomxml);
@@ -553,6 +562,7 @@ public class Maven {
 		addHTML.setEnabled(false);
 		jarinsidejar.setEnabled(false);
 		updatePOMMakeEXE.setEnabled(false);
+		makeEXE.setEnabled(false);
 	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
@@ -570,6 +580,7 @@ public class Maven {
 		addHTML.setEnabled(false);
 		jarinsidejar.setEnabled(false);
 		updatePOMMakeEXE.setEnabled(false);
+		makeEXE.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -587,6 +598,7 @@ public class Maven {
 		addHTML.setEnabled(true);
 		jarinsidejar.setEnabled(true);
 		updatePOMMakeEXE.setEnabled(true);
+		makeEXE.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
