@@ -256,6 +256,14 @@ public class Maven {
 			JOptionPane.showMessageDialog(null,"version: "+version);
 			JOptionPane.showMessageDialog(null,"name: "+name);
 			
+			String mainclass = groupId+".App";
+			String[] options = {"App.java","Main.java"};
+			int choice=JOptionPane.showOptionDialog(null,"Do you want the starter class to be App.java or Main.java?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+			if(choice == 1) {
+				mainclass=groupId+".Main";
+			}
+			JOptionPane.showMessageDialog(null,"mainclass: "+mainclass);
+			
 			String newpomxml = """
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -328,7 +336,7 @@ public class Maven {
           <configuration>
               <archive>
                   <manifest>
-                      <mainClass>com.amazinggoods.App</mainClass>
+                      <mainClass>%s</mainClass>
                   </manifest>
               </archive>
            </configuration>
@@ -359,7 +367,7 @@ public class Maven {
         <appVersion>1.0</appVersion>
         <input>${project.build.directory}</input>
         <mainJar>${project.build.finalName}.jar</mainJar>
-        <mainClass>com.amazinggoods.App</mainClass>
+        <mainClass>%s</mainClass>
         <type>EXE</type>
         <destination>${project.build.directory}/dist</destination>
         <winConsole>true</winConsole>
@@ -369,7 +377,7 @@ public class Maven {
   </build>
 </project>
 
-""".formatted(groupId,artifactId,version,name);
+""".formatted(groupId,artifactId,version,name,mainclass,mainclass);
 			try {
 				PrintWriter printwriter = new PrintWriter(pomxml);
 				printwriter.println(newpomxml);
