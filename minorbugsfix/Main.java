@@ -2511,7 +2511,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});
 			
 		compile.addActionListener(new ActionListener() {
-																
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);	
@@ -2570,7 +2569,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							JOptionPane.showMessageDialog(null,lines);
 							CompileErrors compileerrors= new CompileErrors(Main.this,lines);
-						}						
+						}
+						maven.Change(fileName);						
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"No filename saved.");

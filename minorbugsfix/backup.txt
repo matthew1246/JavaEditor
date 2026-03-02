@@ -14,7 +14,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XML.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
-      "C:\\Users\\Owner\\Documents\\makeexe6\\Main.java"
+      "C:\\Users\\Owner\\Documents\\makeexe6\\Main.java",
+      "C:\\Users\\Owner\\Documents\\makeexe0\\Main.java"
     ],
     "caretposition": 0
   },
@@ -50,7 +51,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 57878
+    "caretposition": 92973
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "startupcombobox": [],
@@ -893,10 +894,19 @@
     "caretposition": 144
   },
   "C:\\Users\\Owner\\Documents\\makeexe6\\Main.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 323
+  },
+  "C:\\Users\\Owner\\Documents\\makeexe0\\Main.java": {
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 105
   }
 }
