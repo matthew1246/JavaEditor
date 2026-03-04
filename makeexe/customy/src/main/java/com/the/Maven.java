@@ -318,6 +318,17 @@ public class Maven {
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+    </dependency>
+
+   <dependency>
+    <groupId>com.squareup.okhttp3</groupId>
+    <artifactId>okhttp</artifactId>
+    <version>4.12.0</version>
+   </dependency>
   </dependencies>
 
   <build>
@@ -348,9 +359,36 @@ public class Maven {
               <archive>
                   <manifest>
                       <mainClass>%s</mainClass>
+                      <addClasspath>true</addClasspath>
+                      <classpathPrefix>lib/</classpathPrefix>
                   </manifest>
               </archive>
            </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.6.0</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+              <configuration>
+                <archive>
+                  <manifest>
+                    <mainClass>%s</mainClass>
+                  </manifest>
+                </archive>
+                <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <finalName>${project.build.finalName}</finalName>
+                <appendAssemblyId>false</appendAssemblyId>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -374,7 +412,7 @@ public class Maven {
     <artifactId>jpackage-maven-plugin</artifactId>
     <version>1.6.0</version>
     <configuration>
-        <name>YourApp</name>
+        <name>MatthewJavaEditor</name>
         <appVersion>1.0</appVersion>
         <input>${project.build.directory}</input>
         <mainJar>${project.build.finalName}.jar</mainJar>
@@ -384,13 +422,15 @@ public class Maven {
         %s
         <winShortcut>true</winShortcut>
         <winMenu>true</winMenu>
+        <javaOptions>
+          <option>-Xmx2g</option>
+        </javaOptions>
     </configuration>
         </plugin>
       </plugins>
   </build>
 </project>
-
-""".formatted(groupId,artifactId,version,name,mainclass,mainclass,isconsole);
+""".formatted(groupId,artifactId,version,name,mainclass,mainclass,mainclass,isconsole);
 			try {
 				PrintWriter printwriter = new PrintWriter(pomxml);
 				printwriter.println(newpomxml);

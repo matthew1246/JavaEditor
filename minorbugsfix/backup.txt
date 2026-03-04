@@ -8,10 +8,10 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\SuggestionBoxSelected.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Maven.java"
