@@ -89,7 +89,7 @@ public class StoreSelectedFile {
 		if(linkedhashmap.containsKey("lastopened")) {
 			preferences=linkedhashmap.get("lastopened");
 			if(!preferences.starterclass.equals(filenameandpath)) {	
-				if( !(new File("original.txt").exists()) ) {
+				if( !(new File(System.getProperty("user.home"),"original.txt").exists()) ) {
 					noduplicate.CreateOriginal();
 				}		
 			}	

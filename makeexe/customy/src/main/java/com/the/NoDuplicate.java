@@ -37,11 +37,11 @@ public class NoDuplicate {
 	*/
 	public void ReplaceWithOriginal() {
 		try {
-			File file = new File("original.txt");
+			File file = new File(System.getProperty("user.home"), "original.txt");
 			if(file.exists()) {
 				String path = file.getPath();
 				Path originalpath=Paths.get(path);
-				Path copypath=Paths.get("backup.txt");
+				Path copypath=new File(System.getProperty("user.home"), "backup.txt").toPath();
 				Files.copy(originalpath,copypath,StandardCopyOption.REPLACE_EXISTING);
 				file.delete();
 			}
@@ -51,11 +51,11 @@ public class NoDuplicate {
 	}
 	public void CreateOriginal() {
 		try {
-			File file = new File("backup.txt");
+			File file = new File(System.getProperty("user.home"), "backup.txt");
 			if(file.exists()) {
 				String path = file.getPath();
 				Path originalpath=Paths.get(path);
-				Path copypath=Paths.get("original.txt");
+				Path copypath=new File(System.getProperty("user.home"), "original.txt").toPath();
 				Files.copy(originalpath,copypath,StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch(IOException ex) {

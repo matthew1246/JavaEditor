@@ -13,7 +13,7 @@ public class VariableSuggestionBoxSelected {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
-		File backup = new File("autosuggestionbox.txt");
+		File backup = new File(System.getProperty("user.home"), "autosuggestionbox.txt");
 		if(!backup.exists()) {
 			this.linkedhashmap= new LinkedHashMap<String,ArrayList<String>>();
 		}
@@ -120,7 +120,7 @@ public class VariableSuggestionBoxSelected {
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();
 			String contents = gson.toJson(linkedhashmap);
-			PrintWriter printwriter=new PrintWriter(new File("autosuggestionbox.txt"));
+			PrintWriter printwriter=new PrintWriter(new File(System.getProperty("user.home"), "autosuggestionbox.txt"));
 			printwriter.print(contents);		
 			printwriter.close();
 		}
