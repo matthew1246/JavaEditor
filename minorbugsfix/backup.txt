@@ -8,11 +8,12 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Links.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\customy\\src\\main\\java\\com\\the\\Links.java"
     ],
     "caretposition": 0
   },
@@ -922,8 +923,72 @@
       "Main"
     ],
     "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 64
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
+    "startupcombobox": [
+      "Links"
+    ],
+    "starterclass": "Links",
     "jars": [],
     "fileNames": [],
-    "caretposition": 814
+    "caretposition": 1009
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\ExtractJUnit.java": {
+    "startupcombobox": [
+      "ExtractJUnit"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 553
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Muck.java": {
+    "startupcombobox": [
+      "Muck"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 710
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\CompileErrors.java": {
+    "startupcombobox": [
+      "CompileErrors"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\customy\\src\\main\\java\\com\\the\\Links.java": {
+    "startupcombobox": [
+      "Links"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java": {
+    "startupcombobox": [
+      "StoreSelectedFile"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 5579
   }
 }
