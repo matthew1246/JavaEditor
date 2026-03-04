@@ -8,14 +8,11 @@
   },
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XML.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
-      "C:\\Users\\Owner\\Documents\\makeexe6\\Main.java",
-      "C:\\Users\\Owner\\Documents\\makeexe0\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java"
     ],
     "caretposition": 0
   },
@@ -422,7 +419,9 @@
     "caretposition": 297
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "ExtractJUnit"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -903,10 +902,28 @@
     "caretposition": 323
   },
   "C:\\Users\\Owner\\Documents\\makeexe0\\Main.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 105
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\Main.java": {
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 104
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java": {
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 814
   }
 }
