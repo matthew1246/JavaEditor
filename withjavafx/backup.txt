@@ -437,7 +437,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 38524
+    "caretposition": 39896
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java": {
     "startupcombobox": [
@@ -615,13 +615,15 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 3270
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\XML.java": {
-    "startupcombobox": [],
+    "startupcombobox": [
+      "XML"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1991
+    "caretposition": 3773
   }
 }
