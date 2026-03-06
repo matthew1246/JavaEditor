@@ -236,7 +236,7 @@ public class Maven {
 		});
 		updatePOMMakeEXE.addActionListener(ev -> {
 			String pomxml = getPOMXMLs();
-			XML xml = new XML(pomxml);
+			XML xml = new XML(new File(pomxml));
 			
 			Node node=xml.getNode("groupId");
 			if(node == null)

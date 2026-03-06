@@ -1,3 +1,4 @@
+import java.io.ByteArrayInputStream;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamResult;
@@ -17,13 +18,25 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 import javax.xml.transform.OutputKeys;
-
+import java.nio.charset.StandardCharsets;
 public class XML {
 	private File xmlFile;
-	public XML(String xmlfile) {
-		 xmlFile = new File(xmlfile);
+	public XML(File xmlfile) {
+		 xmlFile = xmlfile;
 		 Setup();
 	}
+	public XML(String contents) {
+		try {
+			DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+			factory.setNamespaceAware(true);
+			DocumentBuilder builder=factory.newDocumentBuilder();
+			ByteArrayInputStream inputstream=new ByteArrayInputStream(contents.getBytes(StandardCharsets.UTF_8));
+			doc=builder.parse(inputstream);
+			doc.getDocumentElement().normalize();
+		} catch(ParserConfigurationException | SAXException | IOException ex) {
+			ex.printStackTrace();
+		}
+	}	
 	private Document doc;
 	private void Setup() {
 		try {	
@@ -77,7 +90,7 @@ public class XML {
 		Node root = getRootNode();
 		return getNode(root,tagName);
 	}
-	private void updateFile() {
+	public void updateFile() {
 		try {
 			TransformerFactory tf = TransformerFactory.newInstance();
 	       		Transformer transformer = tf.newTransformer();
@@ -96,5 +109,9 @@ public class XML {
         		} catch(TransformerException ex) {
         			ex.printStackTrace();
         		}
+        	}
+        	public void updateFile(String xmlfile) {
+        		xmlFile = new File(xmlfile);
+        		updateFile();
         	}
 }
