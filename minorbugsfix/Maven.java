@@ -493,16 +493,19 @@ public class Maven {
 		});
 			
 		makeJarsForAllVersionsOfJava.addActionListener(ev -> {
+			XML xml = new XML(new File(getPOMXMLs()));
+			String artifactId = xml.getNode("artifactId").getTextContent();
+			String version = xml.getNode("version").getTextContent();
 			CommandLine commandline = new CommandLine();
 			String cmd =
     "(if exist jars rmdir /s /q jars || echo no jars folder) && " +
     "mkdir jars && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
     "  mvn clean package -Pjava%v && " +
-    "  copy /Y target\\projecttwo-1.0-SNAPSHOT-java%v.jar jars\\ " +
+    "  copy /Y target\\"+artifactId+"-"+version+"-java%v.jar jars\\ " +
     ") && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
-    "  copy /Y jars\\projecttwo-1.0-SNAPSHOT-java%v.jar target\\ " +
+    "  copy /Y jars\\"+artifactId+"-"+version+"-java%v.jar target\\ " +
     ")";
 			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
 		});
@@ -843,7 +846,7 @@ public class Maven {
    <dependency>
      <groupId>com.squareup.okhttp3</groupId>
      <artifactId>okhttp</artifactId>
-     <version>3.0.0-RC1</version>
+     <version>4.10.0</version>
    </dependency>
   </dependencies>
 
@@ -927,7 +930,6 @@ public class Maven {
 		XML xml = new XML(new File(xmlFile));
 		Node node=xml.getNode("groupId");
 		String groupId = node.getTextContent();
-		JOptionPane.showMessageDialog(null,"groupId: "+groupId);
 		node=xml.getNode("artifactId");
 		String artifactId = node.getTextContent();
 		node=xml.getNode("version");
@@ -1080,4 +1082,4 @@ Parse(responseJson);
 		
 		return totalnumber;
 	}
-}
+}
