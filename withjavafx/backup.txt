@@ -428,7 +428,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 36366
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Maven.java": {
     "startupcombobox": [
@@ -437,7 +437,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 39896
+    "caretposition": 13617
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java": {
     "startupcombobox": [

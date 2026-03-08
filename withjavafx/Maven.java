@@ -418,6 +418,7 @@ public class Maven {
         <mainClass>%s</mainClass>
         <type>EXE</type>
         <destination>${project.build.directory}/dist</destination>
+        <runtimeImage>${JAVA_HOME}</runtimeImage>
         %s
         <winShortcut>true</winShortcut>
         <winMenu>true</winMenu>
