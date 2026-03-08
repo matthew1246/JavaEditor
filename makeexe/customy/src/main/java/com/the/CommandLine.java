@@ -118,7 +118,9 @@ public boolean isdeprecated = false;
 	}
 	
 	public String javac() {
-		String str = "javac";
+		String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
+		
+		// String str = "javac";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
 		}
@@ -131,7 +133,9 @@ public boolean isdeprecated = false;
 	}
 	
 	public String java() {
-		String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
+		String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
+		
+		// String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
 		JOptionPane.showMessageDialog(null,command);
 		return command;
 	}	
