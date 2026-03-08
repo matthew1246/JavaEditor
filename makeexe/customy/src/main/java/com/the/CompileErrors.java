@@ -37,7 +37,6 @@ public class CompileErrors {
 				Data data = new Data();
 				
 				String wholematch = matcher.group(1);
-				//JOptionPane.showMessageDialog(null,wholematch);
 				data.classname=matcher.group(2);
 				data.l_number=Integer.parseInt(matcher.group(3));
 					
@@ -47,6 +46,14 @@ public class CompileErrors {
 					if(matcher3.find()) {
 						data.apiclass=matcher3.group(1);
 					}
+					else {
+	
+					pattern3=Pattern.compile("symbol:\\s*variable\\s*([a-zA-Z0-9.]+)",Pattern.DOTALL);
+						matcher3=pattern3.matcher(wholematch);
+						if(matcher3.find()) {
+							data.apiclass = matcher3.group(1);
+						}
+					}																												
 				}
 				datas.add(data);					
 			}
