@@ -1,3 +1,4 @@
+import java.awt.KeyboardFocusManager;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import java.awt.Toolkit;
@@ -96,7 +97,6 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-import java.awt.KeyboardFocusManager;
 public class Main {
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public Maven maven = new Maven();
