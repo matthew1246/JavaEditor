@@ -96,6 +96,7 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.KeyboardFocusManager;
 public class Main {
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public Maven maven = new Maven();
@@ -1397,7 +1398,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 			}
 		});		
-		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {		
 	          		if (event.getID() == KeyEvent.KEY_TYPED) {
 	                    		Component component=(Component)event.getSource();
 	                    		if(component == targetArea) {
