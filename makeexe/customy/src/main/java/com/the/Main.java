@@ -1,5 +1,6 @@
 package com.the;
 
+import java.awt.KeyboardFocusManager;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import java.awt.Toolkit;
@@ -1398,7 +1399,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 			}
 		});		
-		java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(event -> {		
 	          		if (event.getID() == KeyEvent.KEY_TYPED) {
 	                    		Component component=(Component)event.getSource();
 	                    		if(component == targetArea) {
