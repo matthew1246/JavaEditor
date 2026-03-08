@@ -12,7 +12,7 @@ public class NoDuplicate {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
-		File backup = new File("original.txt");
+		File backup = new File(System.getProperty("user.home"), "original.txt");
 		try {
 			TypeToken<LinkedHashMap<String,Preferences>> typetoken = new TypeToken<LinkedHashMap<String,Preferences>>(){};
 			FileReader filereader = new FileReader(backup);
