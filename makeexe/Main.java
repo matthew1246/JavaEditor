@@ -1378,6 +1378,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			tabbedpane.repaint();
 			
 			storeselectedfile3.setTabs(fileNames);
+			maven.Change(fileName);
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
