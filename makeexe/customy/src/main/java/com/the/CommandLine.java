@@ -72,10 +72,12 @@ public boolean isdeprecated = false;
 	** This adds all jars in public static void main(String[] args) directory.
 	*/
 	public void addClasspathCheckboxFeature() {
-		javac_star_nor_dot.setStarNorDot("*");
+		// javac_star_nor_dot.setStarNorDot("*");
+		javac_star_nor_dot.setStarNorDot(".;*");
 		javac_star_nor_dot.lock();
 		
-		java_star_nor_dot.setStarNorDot("*;.");
+		// java_star_nor_dot.setStarNorDot("*;.");
+		java_star_nor_dot.setStarNorDot(".;*");
 		java_star_nor_dot.lock();
 	}
 	
