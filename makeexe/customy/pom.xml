@@ -64,6 +64,24 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.3.1</version>
+          <executions>
+            <execution>
+            <id>copy-extra-files</id>
+            <phase>prepare-package</phase>
+            <goals>
+                <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>${project.build.directory}/extra-files</outputDirectory>
+                <resources>
+                    <resource>
+                        <directory>${project.basedir}/extra-files</directory>
+                        <filtering>false</filtering>
+                    </resource>
+                </resources>
+            </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -148,6 +166,7 @@
         <javaOptions>
           <option>-Xmx2g</option>
         </javaOptions>
+        <resourceDir>${project.build.directory}/extra-files</resourceDir>
     </configuration>
         </plugin>
       </plugins>
