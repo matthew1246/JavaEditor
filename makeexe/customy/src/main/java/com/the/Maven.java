@@ -247,7 +247,7 @@ public class Maven {
 "mvn.cmd clean package jpackage:jpackage"; */
 			String cmd =
 "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
-"set \"PATH=%JAVA_HOME%\\bin;" + maven + "\\bin;%PATH%\" && " +
+"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +
 "mvn.cmd clean package && " +
 "mvn.cmd clean package jpackage:jpackage";			
 			
