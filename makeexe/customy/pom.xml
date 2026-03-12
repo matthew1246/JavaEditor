@@ -160,7 +160,7 @@
         <type>EXE</type>
         <destination>${project.build.directory}/dist</destination>
         <runtimeImage>${JAVA_HOME}</runtimeImage>
-        
+
         <winShortcut>true</winShortcut>
         <winMenu>true</winMenu>
         <javaOptions>
@@ -172,4 +172,5 @@
       </plugins>
   </build>
 </project>
+
 

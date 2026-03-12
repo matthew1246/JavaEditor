@@ -232,7 +232,26 @@ public class Maven {
 	public void setListeners() {
 		makeEXE.addActionListener(ev -> {
 			updatecode();
-			String cmd = "mvn clean package && mvn clean package jpackage:jpackage";
+			File javahome=new File(System.getProperty("java.home"));
+			File base=new File(javahome.getParent());
+			File app = new File(base,"app");
+			File extrafiles = new File(app,"extra-files");
+			File mavenfolder = new File(extrafiles,"maven");
+			String maven = mavenfolder.getAbsolutePath();
+			
+			/* String cmd =
+"@echo off && " +
+"set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
+"set \"PATH=%JAVA_HOME%\\bin;" + maven + "\\bin;%PATH%\" && " +
+"mvn.cmd clean package && " +
+"mvn.cmd clean package jpackage:jpackage"; */
+			String cmd =
+"set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
+"set \"PATH=%JAVA_HOME%\\bin;" + maven + "\\bin;%PATH%\" && " +
+"mvn.cmd clean package && " +
+"mvn.cmd clean package jpackage:jpackage";			
+			
+			// String cmd = "mvn clean package && mvn clean package jpackage:jpackage";
 			CommandLine commandline = new CommandLine();
 			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
 		});
@@ -277,6 +296,187 @@ public class Maven {
 			}
 			
 			String newpomxml = """
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.the</groupId>
+  <artifactId>customy</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>customy</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.11.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Optionally: parameterized tests support -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+    </dependency>
+
+   <dependency>
+    <groupId>com.squareup.okhttp3</groupId>
+    <artifactId>okhttp</artifactId>
+    <version>4.12.0</version>
+   </dependency>
+  </dependencies>
+
+  <build>
+          <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+          <executions>
+            <execution>
+            <id>copy-extra-files</id>
+            <phase>prepare-package</phase>
+            <goals>
+                <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>${project.build.directory}/extra-files</outputDirectory>
+                <resources>
+                    <resource>
+                        <directory>${project.basedir}/extra-files</directory>
+                        <filtering>false</filtering>
+                    </resource>
+                </resources>
+            </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.4.2</version>
+          <configuration>
+              <archive>
+                  <manifest>
+                      <mainClass>com.the.Main</mainClass>
+                      <addClasspath>true</addClasspath>
+                      <classpathPrefix>lib/</classpathPrefix>
+                  </manifest>
+              </archive>
+           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.6.0</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+              <configuration>
+                <archive>
+                  <manifest>
+                    <mainClass>com.the.Main</mainClass>
+                  </manifest>
+                </archive>
+                <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <finalName>${project.build.finalName}</finalName>
+                <appendAssemblyId>false</appendAssemblyId>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.12.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.6.1</version>
+        </plugin>
+        <plugin>
+         <groupId>org.panteleyev</groupId>
+    <artifactId>jpackage-maven-plugin</artifactId>
+    <version>1.6.0</version>
+    <configuration>
+        <name>MatthewJavaEditor</name>
+        <appVersion>1.0</appVersion>
+        <input>${project.build.directory}</input>
+        <mainJar>${project.build.finalName}.jar</mainJar>
+        <mainClass>com.the.Main</mainClass>
+        <type>EXE</type>
+        <destination>${project.build.directory}/dist</destination>
+        <runtimeImage>${JAVA_HOME}</runtimeImage>
+        """;
+        newpomxml+=isconsole;
+        newpomxml+="""	
+        
+        <winShortcut>true</winShortcut>
+        <winMenu>true</winMenu>
+        <javaOptions>
+          <option>-Xmx2g</option>
+        </javaOptions>
+        <resourceDir>${project.build.directory}/extra-files</resourceDir>
+    </configuration>
+        </plugin>
+      </plugins>
+  </build>
+</project>
+
+""";
+			
+			/*String newpomxml = """
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -433,6 +633,21 @@ public class Maven {
   </build>
 </project>
 """.formatted(groupId,artifactId,version,name,mainclass,mainclass,mainclass,isconsole);
+*/
+			XML xml3=  new XML(newpomxml);
+			node=xml3.getNode("groupId");
+			node.setTextContent(groupId);
+			node=xml3.getNode("artifactId");
+			node.setTextContent(artifactId);
+			node=xml3.getNode("version");
+			node.setTextContent(version);
+			node=xml3.getNode("name");
+			node.setTextContent(name);
+			Node[] nodes = xml3.getNodes("mainClass");
+			for(Node node2:nodes) {
+				node2.setTextContent("mainclass");
+			}								
+			xml3.updateFile(pomxml);
 			try {
 				PrintWriter printwriter = new PrintWriter(pomxml);
 				printwriter.println(newpomxml);
@@ -1085,4 +1300,4 @@ Parse(responseJson);
 		
 		return totalnumber;
 	}
-}
+}
