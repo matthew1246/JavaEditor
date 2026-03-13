@@ -101,7 +101,7 @@ public class Maven {
 	public JButton makeJarsForAllVersionsOfJava;
 	public JButton addHTML;
 	public JButton jarinsidejar;
-	public JButton updatePOMMakeEXE;
+	public JButton updatePOMMakeEXE;	
 	public JButton makeEXE;
 	public JButton runanycommand;
 	public void setLayout() {
@@ -301,6 +301,9 @@ public class Maven {
 			int choice=JOptionPane.showOptionDialog(null,"Do you want the starter class to be App.java or Main.java?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 			if(choice == 1) {
 				mainclass=groupId+".Main";
+			}
+			else {
+				mainclass=groupId+".App";
 			}
 			JOptionPane.showMessageDialog(null,"mainclass: "+mainclass);
 			
@@ -782,8 +785,17 @@ public class Maven {
 		initialise.addActionListener( ev -> {
 			showMavenAlreadyInitialised();
 			// Generatepomxml();
+			File javahome=new File(System.getProperty("java.home"));
+			File base=new File(javahome.getParent());
+			File app = new File(base,"app");
+			File extrafiles = new File(app,"extra-files");
+			File mavenfolder = new File(extrafiles,"maven");
+			String maven = mavenfolder.getAbsolutePath();
+			String cmd =
+"set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
+"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +"echo mvn archetype:generate && mvn archetype:generate";
 			CommandLine commandline = new CommandLine();
-			commandline.runWithMSDOS("echo mvn archetype:generate && mvn archetype:generate",Main.getDirectory(fileName));	
+			commandline.runWithMSDOS(cmd,Main.getDirectory(fileName));	
 		});
 		pomxml.addActionListener( ev -> {
 			CommandLine commandline = new CommandLine();
