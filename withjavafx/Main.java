@@ -5591,6 +5591,7 @@ class RightClickJFrame {
 		});
 		paste.addActionListener((ev) -> {
 			textarea5.dispatchEvent(new KeyEvent(textarea5,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),InputEvent.CTRL_DOWN_MASK,KeyEvent.VK_V,'V'));
+			
 			frame.dispose();	
 		});
 	}
