@@ -93,7 +93,7 @@ public class Maven {
 	public JButton add_dependencyorplugin;	
 	public JButton removedependency;
 	public JButton code;
-	public JButton updatecode;
+	public JButton updatecode;	
 	public JButton deletecode;
 	public JButton makeJarButton;
 	public JButton makeJarsForAllVersionsOfJava;
@@ -816,6 +816,12 @@ public class Maven {
 		
 		String packagePath = getPackageName(); // e.g. com/perky
 	    	String packageLine = "package " + packagePath.replace("/", ".") + ";";
+		if(packageLine.endsWith(".")) {	
+			packageLine=packageLine.substring(0,packageLine.length()-1);
+			while(packageLine.endsWith(".")) {
+				packageLine=packageLine.substring(0,packageLine.length()-1);
+			}		
+		}
 		
     		Path targetDir = Path.of(
 	       	Main.getDirectory(pomxml) + "src/main/java/" + packagePath);
