@@ -817,13 +817,14 @@ public class Maven {
 		String pomxml = getPOMXMLs();
 		
 		String packagePath = getPackageName(); // e.g. com/perky
-	    	String packageLine = "package " + packagePath.replace("/", ".") + ";";
-		if(packageLine.endsWith(".")) {	
+	    	String packageLine=packagePath.replace("/", ".");
+	    	if(packageLine.endsWith(".")) {	
 			packageLine=packageLine.substring(0,packageLine.length()-1);
 			while(packageLine.endsWith(".")) {
 				packageLine=packageLine.substring(0,packageLine.length()-1);
 			}		
 		}
+	    	packageLine = "package " + packageLine + ";";
 		
     		Path targetDir = Path.of(
 	       	Main.getDirectory(pomxml) + "src/main/java/" + packagePath);
