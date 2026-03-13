@@ -683,7 +683,7 @@ public class Maven {
 			node.setTextContent(name);
 			Node[] nodes = xml3.getNodes("mainClass");
 			for(Node node2:nodes) {
-				node2.setTextContent("mainclass");
+				node2.setTextContent(mainclass);
 			}								
 			xml3.updateFile(pomxml);	
 		});

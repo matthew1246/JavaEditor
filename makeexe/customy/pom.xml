@@ -99,7 +99,7 @@
           <configuration>
               <archive>
                   <manifest>
-                      <mainClass>mainclass</mainClass>
+                      <mainClass>com.the.Main</mainClass>
                       <addClasspath>true</addClasspath>
                       <classpathPrefix>lib/</classpathPrefix>
                   </manifest>
@@ -119,7 +119,7 @@
               <configuration>
                 <archive>
                   <manifest>
-                    <mainClass>mainclass</mainClass>
+                    <mainClass>com.the.Main</mainClass>
                   </manifest>
                 </archive>
                 <descriptorRefs>
@@ -174,7 +174,7 @@
         <appVersion>1.0</appVersion>
         <input>${project.build.directory}</input>
         <mainJar>${project.build.finalName}.jar</mainJar>
-        <mainClass>mainclass</mainClass>
+        <mainClass>com.the.Main</mainClass>
         <type>EXE</type>
         <destination>${project.build.directory}/dist</destination>
         <runtimeImage>${JAVA_HOME}</runtimeImage>
