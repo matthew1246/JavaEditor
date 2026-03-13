@@ -101,6 +101,7 @@ public class Maven {
 	public JButton jarinsidejar;
 	public JButton updatePOMMakeEXE;
 	public JButton makeEXE;
+	public JButton runanycommand;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setTitle("Maven");
@@ -151,6 +152,9 @@ public class Maven {
 		
 		makeEXE=new JButton("Make exe, remember to click \"update pom.xml with make exe settings first\" button first");
 		panel.add(makeEXE);
+		
+		runanycommand=new JButton("run any Maven command");
+		panel.add(runanycommand);
 				
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -228,6 +232,19 @@ public class Maven {
 	}												
 				
 	public void setListeners() {
+		runanycommand.addActionListener(ev -> {
+			File javahome=new File(System.getProperty("java.home"));
+			File base=new File(javahome.getParent());
+			File app = new File(base,"app");
+			File extrafiles = new File(app,"extra-files");
+			File mavenfolder = new File(extrafiles,"maven");
+			String maven = mavenfolder.getAbsolutePath();
+			String cmd =
+"set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
+"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +"mvn --version";
+			CommandLine commandline = new CommandLine();
+			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
+		});
 		makeEXE.addActionListener(ev -> {
 			updatecode();
 			File javahome=new File(System.getProperty("java.home"));
@@ -713,7 +730,14 @@ public class Maven {
 			String artifactId = xml.getNode("artifactId").getTextContent();
 			String version = xml.getNode("version").getTextContent();
 			CommandLine commandline = new CommandLine();
-			String cmd =
+			File javahome=new File(System.getProperty("java.home"));
+			File base=new File(javahome.getParent());
+			File app = new File(base,"app");
+			File extrafiles = new File(app,"extra-files");
+			File mavenfolder = new File(extrafiles,"maven");
+			String maven = mavenfolder.getAbsolutePath();
+			String cmd = "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
+"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +
     "(if exist jars rmdir /s /q jars || echo no jars folder) && " +
     "mkdir jars && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
@@ -845,6 +869,7 @@ public class Maven {
 		jarinsidejar.setEnabled(false);
 		updatePOMMakeEXE.setEnabled(false);
 		makeEXE.setEnabled(false);
+		runanycommand.setEnabled(false);
 	}
 	public void showNotInitialised() {
 		initialise.setEnabled(true);
@@ -863,6 +888,7 @@ public class Maven {
 		jarinsidejar.setEnabled(false);
 		updatePOMMakeEXE.setEnabled(false);
 		makeEXE.setEnabled(false);
+		runanycommand.setEnabled(false);
 	}
 	public void showMavenAlreadyInitialised() {
 		initialise.setEnabled(false);
@@ -881,6 +907,7 @@ public class Maven {
 		jarinsidejar.setEnabled(true);
 		updatePOMMakeEXE.setEnabled(true);
 		makeEXE.setEnabled(true);
+		runanycommand.setEnabled(true);
 	}
 	public void Generatepomxml() {
 		String filestring = """
