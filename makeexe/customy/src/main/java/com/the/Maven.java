@@ -687,14 +687,7 @@ public class Maven {
 			for(Node node2:nodes) {
 				node2.setTextContent("mainclass");
 			}								
-			xml3.updateFile(pomxml);
-			try {
-				PrintWriter printwriter = new PrintWriter(pomxml);
-				printwriter.println(newpomxml);
-				printwriter.close();
-			} catch (java.io.FileNotFoundException ex) {
-				ex.printStackTrace();
-			}	
+			xml3.updateFile(pomxml);	
 		});
 		addplugin.addActionListener((ev) -> {
 			AddPlugin addplugin = new AddPlugin(this);
