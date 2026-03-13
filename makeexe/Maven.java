@@ -388,10 +388,13 @@ public class Maven {
                 <goal>copy-resources</goal>
             </goals>
             <configuration>
-                <outputDirectory>${project.build.directory}/extra-files</outputDirectory>
+                <outputDirectory>${project.build.directory}</outputDirectory>
                 <resources>
                     <resource>
-                        <directory>${project.basedir}/extra-files</directory>
+                        <directory>${project.basedir}</directory>
+                        <includes>
+                           <include>extra-files/**</include>
+                        </includes>
                         <filtering>false</filtering>
                     </resource>
                 </resources>
