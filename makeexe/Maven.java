@@ -467,6 +467,23 @@ public class Maven {
           <version>3.6.1</version>
         </plugin>
         <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+  	<version>3.1.0</version>
+  	  <executions>
+    	    <execution>
+      		<phase>prepare-package</phase>
+      		  <goals>
+        			<goal>run</goal>
+      		</goals>
+      		<configuration>
+        		   <target>
+          			<mkdir dir="${project.build.directory}/extra-files"/>
+        		   </target>
+      		</configuration>
+    	</execution>
+  	</executions>
+        </plugin>
+        <plugin>
          <groupId>org.panteleyev</groupId>
     <artifactId>jpackage-maven-plugin</artifactId>
     <version>1.6.0</version>
