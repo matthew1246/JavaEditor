@@ -90,6 +90,27 @@ public class XML {
 		Node root = getRootNode();
 		return getNode(root,tagName);
 	}
+	private List<Node> nodes;
+	public Node[] getNodes(String tagName) {
+		nodes = new ArrayList<Node>();
+		Node root=getRootNode();
+		getNodes(root,tagName);
+		return nodes.toArray(new Node[nodes.size()]);
+	}
+	private void getNodes(Node node,String tagName) {
+		Node[] nodechildren=getNodeChildren(node);
+		if(nodechildren == null)
+			return;	
+		for(Node childnode:nodechildren) {
+			if(childnode == null)
+				continue;	
+			String value=childnode.getNodeName();
+			if(value != null && value.equals(tagName)) {
+				nodes.add(childnode);
+			}
+			getNodes(childnode,tagName);	
+		}
+	}	
 	public void updateFile() {
 		try {
 			TransformerFactory tf = TransformerFactory.newInstance();
