@@ -742,6 +742,7 @@ public class Maven {
 		});
 			
 		makeJarsForAllVersionsOfJava.addActionListener(ev -> {
+			updatecode();
 			XML xml = new XML(new File(getPOMXMLs()));
 			String artifactId = xml.getNode("artifactId").getTextContent();
 			String version = xml.getNode("version").getTextContent();
