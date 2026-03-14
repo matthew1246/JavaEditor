@@ -1,11 +1,12 @@
 {
   "lastopened": {
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java"
     ],
     "caretposition": 0
   },
@@ -625,5 +626,14 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 3773
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java": {
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
