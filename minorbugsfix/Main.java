@@ -2671,6 +2671,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								command[3] = "cmd";
 								command[4]= "/k";
 								command[5] = commandline.java();
+								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
 							}
@@ -2757,9 +2758,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									command[5] = commandline.java();
 									
 									// setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
-									
+									startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
-									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);																
+									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);				
 								}
 								else {
 									String lines = line;
@@ -2769,6 +2770,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											break;
 										lines = lines+"\n"+line;
 									}
+									startercombobox.Change(fileName);
 									JOptionPane.showMessageDialog(null,lines);
 								}
 							}

@@ -46,10 +46,52 @@ public class StoreSelectedFile {
 	public void setStartupComboBox(String fileName,List<String> startups) {
 		LinkedHashMap<String,Preferences> hashmap = getBackup();
 		Preferences preferences=hashmap.get(fileName);
-		if(preferences != null) {
-			preferences.startupcombobox = startups;
+		if(preferences == null) {
+			preferences=new Preferences();
+			hashmap.put(fileName,preferences);
+		}
+		preferences.startupcombobox = startups;
+		setBackup(hashmap);
+	}
+	public void setStartupLockedClass(String fileName,String lockedClass) {
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		Preferences preferences=hashmap.get(fileName);
+		if(preferences == null) {
+			preferences = new Preferences();
+			hashmap.put(fileName,preferences);	
+		}
+		preferences.lockedStartupClass=lockedClass;
+		setBackup(hashmap);
+	}
+	public String getStartupLockedClass(String fileName) {
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		Preferences preferences=hashmap.get(fileName);
+		if(preferences == null) {
+			preferences = new Preferences();
+			hashmap.put(fileName,preferences);	
 			setBackup(hashmap);
 		}
+		return preferences.lockedStartupClass;
+	}
+	public void setLocked(String fileName,boolean setLocked) {
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		Preferences preferences=hashmap.get(fileName);
+		if(preferences == null) {
+			preferences = new Preferences();
+			hashmap.put(fileName,preferences);	
+		}
+		preferences.isLocked = setLocked;
+		setBackup(hashmap);
+	}
+	public boolean getLocked(String fileName) {
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		Preferences preferences=hashmap.get(fileName);
+		if(preferences == null) {
+			preferences = new Preferences();
+			hashmap.put(fileName,preferences);	
+			setBackup(hashmap);	
+		}
+		return preferences.isLocked;
 	}
 	public int getCaretPosition(String filename) {
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
@@ -324,4 +366,4 @@ public class StoreSelectedFile {
 		setBackup(linkedhashmap);
 		noduplicate.Delete();
 	}
-}
+}
