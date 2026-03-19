@@ -1615,7 +1615,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				ex.printStackTrace();
 			}
 		});		
-		closetab.addActionListener((ev) -> {							
+		closetab.addActionListener((ev) -> {									
 			int tabtindex=tabbedpane.getSelectedIndex();
 			//if(fileNames.size() != 0 && tabtindex != 0)
 				//tabbedpane.setSelectedIndex((tabtindex-1));
@@ -1633,6 +1633,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			String fileName2 = fileNames.get(tabbedpane.getSelectedIndex());
 		
+				
 			git.Change(fileName2);
 			threecomboboxes.load(fileName2);
 			expandable.open();
@@ -1646,8 +1647,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			startercombobox.Change(fileName2);		
 			
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+			storeselectedfile.set(fileName2);
 			storeselectedfile.setTabs(fileNames);
-			storeselectedfile.set(fileName2);	
 			
 			updateJFrameTitle();
 		});
