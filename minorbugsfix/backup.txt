@@ -12,16 +12,17 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Preferences.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java",
+      "C:\\Users\\Owner\\Documents\\dynamic\\StoreSelectedFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java"
     ],
     "caretposition": 0
   },
@@ -1444,6 +1445,17 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\dynamic\\StoreSelectedFile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "StoreSelectedFile"
+    ],
+    "starterclass": "",
+    "jars": [],
     "fileNames": [],
     "caretposition": 0
   }

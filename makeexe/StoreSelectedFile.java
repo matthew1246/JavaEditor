@@ -131,7 +131,7 @@ public class StoreSelectedFile {
 		if(linkedhashmap.containsKey("lastopened")) {
 			preferences=linkedhashmap.get("lastopened");
 			if(!preferences.starterclass.equals(filenameandpath)) {	
-				if( !(new File("original.txt").exists()) ) {
+				if( !(new File(System.getProperty("user.home"),"original.txt").exists()) ) {
 					noduplicate.CreateOriginal();
 				}		
 			}	
@@ -172,7 +172,7 @@ public class StoreSelectedFile {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
-		File backup = new File("backup.txt");
+		File backup = new File(System.getProperty("user.home"), "backup.txt");
 		if(!backup.exists()) {
 			return new LinkedHashMap<String,Preferences>();
 		}
@@ -214,7 +214,7 @@ public class StoreSelectedFile {
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();
 			String contents = gson.toJson(hashmap);
-			PrintWriter printwriter=new PrintWriter(new File("backup.txt"));
+			PrintWriter printwriter=new PrintWriter(new File(System.getProperty("user.home"), "backup.txt"));
 			printwriter.print(contents);		
 			printwriter.close();
 		}
