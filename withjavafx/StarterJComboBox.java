@@ -12,12 +12,13 @@ public class StarterJComboBox {
 	public List<String> starterclasses = new ArrayList<String>();
 	public List<String> displays = new ArrayList<String>();
 	public String starterclass = "";
+	public String startupLockedUpClass = "";
 	public void BackgroundThread(String fileName) {
 		this.fileName = fileName;
 		if(!fileName.equals("")) {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			starterclasses=storeselectedfile.getStartupComboBox(fileName);
-				for(String starterclass2:starterclasses) {			
+			for(String starterclass2:starterclasses) {			
 				String display = starterclass2;
 				if(display != null && (display.contains("\\") || display.contains("/") || display.endsWith(".java"))) {
 					display = main.getFileName(display);
@@ -30,6 +31,9 @@ public class StarterJComboBox {
 			starterclass = storeselectedfile.getStarterClass(fileName);
 			if(starterclass.equals(""))
 				starterclass=Main.getClassName(fileName);	
+			if(storeselectedfile.getLocked(fileName)) {
+				startupLockedUpClass = storeselectedfile.getStartupLockedClass(fileName);
+			}
 		}
 	}
 	public void EDT() {
@@ -41,7 +45,20 @@ public class StarterJComboBox {
 		if(!Contains(starterclass)) {
 			Add(starterclass);
 		}
-		main.startupcombobox.setSelectedItem(starterclass);
+		if(fileName != null && !fileName.equals("")) {	
+			if(!startupLockedUpClass.equals("")) {
+				if(!Contains(startupLockedUpClass)) {
+					main.startupcombobox.addItem(startupLockedUpClass);
+					main.startupcombobox.validate();
+					main.startupcombobox.repaint();
+				}
+				main.startupcombobox.setSelectedItem(startupLockedUpClass);
+				main.lock.setSelected(true);
+			}
+			else {
+				main.startupcombobox.setSelectedItem(starterclass);
+			}
+		}
 	}				
 	public StarterJComboBox(String fileName,Main main) {
 		this.fileName = fileName;
@@ -71,45 +88,66 @@ public class StarterJComboBox {
 		}
 	}
 	public void Change(String filename) {
-		
-if(!fileName.equals(filename)) {
+		//if(!fileName.equals(filename)) {
 			if(!filename.equals("")) {
 				if( !Main.getDirectory(filename).equals(Main.getDirectory(fileName)) ) { // Not same folder
-					main.lock.setSelected(false);	
+	
 					Remove();
-					getCacheAndAddToComboBox(filename);
+					StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+					if(!storeselectedfile.getLocked(filename)) { // is not locked
+						main.lock.setSelected(false);		
+						getCacheAndAddToComboBox(filename);
+					}
+					else { // is locked
+						setLockFromStoreSelectedFile(filename);
+					}
 				}
 				else { // same folder
 					if(main.lock.isSelected()) {
 						String selected=(String)main.startupcombobox.getSelectedItem();
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
-						System.out.println("starter:");
-						for(String starter:starterclasses) {
-							System.out.println(starter);
-						}
-						System.out.println();
 						if(!starterclasses.contains(selected)) {
 							Remove();
 							starterclasses.add(0,selected);
-							AddAll(starterclasses);
-							main.startupcombobox.setSelectedItem(selected);
-							storeselectedfile.setStartupComboBox(filename,starterclasses);
 						}
-						else {
-							Remove();
-							getCacheAndAddToComboBox(filename);
-							main.startupcombobox.setSelectedItem(selected);	
-						}
+						AddAll(starterclasses);
+						main.startupcombobox.setSelectedItem(selected);
+						storeselectedfile.setStartupComboBox(filename,starterclasses);
+						storeselectedfile.setLocked(filename,true);
+						storeselectedfile.setStartupLockedClass(filename,selected);	
+						main.startupcombobox.setSelectedItem(selected);	
 					}
 					else {
-						Remove();			
-						getCacheAndAddToComboBox(filename);
+						/*StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						if(storeselectedfile.getLocked(filename)) {
+							Remove();
+							setLockFromStoreSelectedFile(filename);
+						}
+						else {*/
+							Remove();			
+							getCacheAndAddToComboBox(filename);
+						//}
 					}
 				}
 				this.fileName = filename;	
 			}
-		}								
+		// }								
 	}	
+	public void setLockFromStoreSelectedFile(String filename) {
+		StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+		List<String> startupcomboboxes=storeselectedfile.getStartupComboBox(filename);
+		for(String startup:startupcomboboxes) {
+			main.startupcombobox.addItem(startup);
+		}
+		String startupLockedUpClass = storeselectedfile.getStartupLockedClass(filename);
+		if(!Contains(startupLockedUpClass)) {
+			main.startupcombobox.addItem(startupLockedUpClass);
+			main.startupcombobox.validate();
+			main.startupcombobox.repaint();
+		}
+		main.startupcombobox.setSelectedItem(startupLockedUpClass);
+		main.lock.setSelected(true);
+	}
 	public void getCacheAndAddToComboBox(String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);
 		RemoveNulls(starterclasses);		

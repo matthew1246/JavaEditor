@@ -1,16 +1,26 @@
 {
   "lastopened": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Preferences.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java"
     ],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "Main"
     ],
@@ -22,9 +32,11 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 62757
+    "caretposition": 92244
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -35,6 +47,8 @@
     "caretposition": 2525
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [],
@@ -42,6 +56,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "StoreSelectedFile"
     ],
@@ -51,16 +67,22 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 7279
+    "caretposition": 11728
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
-    "startupcombobox": [],
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "StoreSelectedFile"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Git",
       "Main"
@@ -74,6 +96,8 @@
     "caretposition": 17361
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Git"
     ],
@@ -83,6 +107,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "StarterJComboBox",
       "Main"
@@ -95,9 +121,11 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 46487
+    "caretposition": 98154
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "FileListModifier"
     ],
@@ -110,6 +138,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\FileListModifier.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "FileListModifier"
     ],
@@ -122,6 +152,8 @@
     "caretposition": 3361
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SuggestionBoxSelected.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -132,6 +164,8 @@
     "caretposition": 2129
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -142,6 +176,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Control_F"
     ],
@@ -154,6 +190,8 @@
     "caretposition": 12076
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Control_F"
     ],
@@ -166,6 +204,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -176,6 +216,8 @@
     "caretposition": 6118
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\JTextAreaGroup.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -186,6 +228,8 @@
     "caretposition": 9670
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -196,6 +240,8 @@
     "caretposition": 2212
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -206,6 +252,8 @@
     "caretposition": 4808
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -216,6 +264,8 @@
     "caretposition": 2534
   },
   "": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java",
     "jars": [],
@@ -223,6 +273,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [],
@@ -230,6 +282,8 @@
     "caretposition": 2971
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -240,6 +294,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MinorCompile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -250,6 +306,8 @@
     "caretposition": 96
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -260,6 +318,8 @@
     "caretposition": 1038
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -270,6 +330,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\RenameVariable.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -280,6 +342,8 @@
     "caretposition": 4680
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllClassesInFile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "AllClassesInFile"
     ],
@@ -292,6 +356,8 @@
     "caretposition": 1470
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllClassesInFile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "AllClassesInFile"
     ],
@@ -304,6 +370,8 @@
     "caretposition": 891
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJUnit.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -314,6 +382,8 @@
     "caretposition": 748
   },
   "C:\\Users\\Owner\\Documents\\git\\music\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "Main",
     "jars": [],
@@ -321,6 +391,8 @@
     "caretposition": 894
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\TestSaveTab.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [],
@@ -328,6 +400,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "StarterJComboBox",
       "Main"
@@ -341,6 +415,8 @@
     "caretposition": 3616
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "StarterJComboBox",
       "Main"
@@ -348,10 +424,14 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6281
+    "caretposition": 3083
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java": {
-    "startupcombobox": [],
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Preferences"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -361,16 +441,23 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Preferences.java": {
-    "startupcombobox": [],
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main",
+      "Preferences"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 336
+    "caretposition": 410
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "ThreeComboboxes"
     ],
@@ -383,6 +470,8 @@
     "caretposition": 1285
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ThreeComboboxes.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "ThreeComboboxes"
     ],
@@ -392,6 +481,8 @@
     "caretposition": 8742
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MSDOS.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "MSDOS"
     ],
@@ -406,6 +497,8 @@
     "caretposition": 950
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MSDOS.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "MSDOS"
     ],
@@ -418,6 +511,8 @@
     "caretposition": 1017
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Maven"
     ],
@@ -432,6 +527,8 @@
     "caretposition": 36366
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Maven.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Maven"
     ],
@@ -441,6 +538,8 @@
     "caretposition": 13617
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddDependency.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "AddDependency"
     ],
@@ -455,6 +554,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AddDependency.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "AddDependency"
     ],
@@ -464,6 +565,8 @@
     "caretposition": 10634
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyRemover.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "DependencyRemover"
     ],
@@ -478,6 +581,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\DependencyRemover.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "DependencyRemover"
     ],
@@ -487,6 +592,8 @@
     "caretposition": 6342
   },
   "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\MuckFX.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "MuckFX"
     ],
@@ -496,6 +603,8 @@
     "caretposition": 230
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TabFileNameAndContent.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "TabFileNameAndContent"
     ],
@@ -510,6 +619,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\TabFileNameAndContent.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "TabFileNameAndContent"
     ],
@@ -519,6 +630,8 @@
     "caretposition": 184
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Links.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Links"
     ],
@@ -533,6 +646,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\Links.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Links"
     ],
@@ -542,6 +657,8 @@
     "caretposition": 2870
   },
   "C:\\Users\\Owner\\Documents\\git\\muckjavafx\\LinksFX.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "LinksFX"
     ],
@@ -551,6 +668,8 @@
     "caretposition": 5371
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AddPlugin.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "AddPlugin"
     ],
@@ -565,6 +684,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AddPlugin.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "AddPlugin"
     ],
@@ -574,6 +695,8 @@
     "caretposition": 10776
   },
   "C:\\Users\\Owner\\Documents\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [],
@@ -581,6 +704,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CompileErrors.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -593,6 +718,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CompileErrors.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [],
     "starterclass": "",
     "jars": [
@@ -605,6 +732,8 @@
     "caretposition": 4443
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XML.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "XML"
     ],
@@ -619,6 +748,8 @@
     "caretposition": 3270
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\XML.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "XML"
     ],
@@ -628,6 +759,8 @@
     "caretposition": 3773
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "Main"
     ],

@@ -2585,7 +2585,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		run.addActionListener(new ActionListener() {
+		run.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);	
@@ -2705,6 +2705,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								command[2] = commandline.javac();
 								runtime = Runtime.getRuntime();
 								classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
+								startercombobox.Change(fileName);
 								Process process = runtime.exec(command,null,new File(classpath1));
 								// process=Main.this.compileFromMSDOS(fileName,classpath1);
 								
