@@ -57,6 +57,7 @@ public class ThreeComboboxes {
 		}
 		if(fileName != null)	
 		this.fileName = fileName;
+		main.fileName = fileName;
 	}
 	public void FromScratch(String fileName) {
 		setGetClassName();
@@ -70,6 +71,7 @@ public class ThreeComboboxes {
 	}
 	public void BackgroundThreadfromScratch(String fileName) {
 		this.fileName = fileName;
+		main.fileName = fileName;
 		BackgroundThreadfileCombobox(fileName);
 	}
 	public void EDTfromScratch(String fileName) {
