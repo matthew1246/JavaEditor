@@ -1854,8 +1854,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			startercombobox.Change(fileName2);		
 			
 			StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+			storeselectedfile.set(fileName2);
 			storeselectedfile.setTabs(fileNames);
-			storeselectedfile.set(fileName2);	
 			
 			updateJFrameTitle();	
 		});
