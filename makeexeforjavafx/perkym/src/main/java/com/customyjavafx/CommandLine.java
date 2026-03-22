@@ -9,9 +9,10 @@ public class CommandLine {
  	public StarNorDot javac_star_nor_dot = new StarNorDot();
  	public StarNorDot java_star_nor_dot= new StarNorDot();
 	private String junitmain_class = "";
-	private String main_class;
+	public String main_class;
 	private List<String> jars = new ArrayList<String>();
-	public boolean isdeprecated = false;
+	
+public boolean isdeprecated = false;
 	public boolean isearlierversion = false;
 	public int javaversion;
 	public void earlierjavaversion(int javaversion) {
@@ -71,10 +72,12 @@ public class CommandLine {
 	** This adds all jars in public static void main(String[] args) directory.
 	*/
 	public void addClasspathCheckboxFeature() {
-		javac_star_nor_dot.setStarNorDot("*");
+		// javac_star_nor_dot.setStarNorDot("*");
+		javac_star_nor_dot.setStarNorDot(".;*");
 		javac_star_nor_dot.lock();
 		
-		java_star_nor_dot.setStarNorDot("*;.");
+		// java_star_nor_dot.setStarNorDot("*;.");
+		java_star_nor_dot.setStarNorDot(".;*");
 		java_star_nor_dot.lock();
 	}
 	
@@ -117,7 +120,9 @@ public class CommandLine {
 	}
 	
 	public String javac() {
-		String str = "javac";
+		String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
+		
+		// String str = "javac";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
 		}
@@ -130,7 +135,9 @@ public class CommandLine {
 	}
 	
 	public String java() {
-		String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
+		String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
+		
+		// String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
 		JOptionPane.showMessageDialog(null,command);
 		return command;
 	}	
@@ -141,7 +148,8 @@ public class CommandLine {
 	*/
 	public Process run(String command,String dir) {
 		try {
-			String[] command2 =new String[3];
+			
+String[] command2 =new String[3];
 			command2[0] = "cmd.exe";
 			command2[1] = "/c";
 			command2[2] = command;

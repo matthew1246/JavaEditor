@@ -12,7 +12,7 @@ public class NoDuplicate {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
-		File backup = new File("original.txt");
+		File backup = new File(System.getProperty("user.home"), "original.txt");
 		try {
 			TypeToken<LinkedHashMap<String,Preferences>> typetoken = new TypeToken<LinkedHashMap<String,Preferences>>(){};
 			FileReader filereader = new FileReader(backup);
@@ -35,11 +35,11 @@ public class NoDuplicate {
 	*/
 	public void ReplaceWithOriginal() {
 		try {
-			File file = new File("original.txt");
+			File file = new File(System.getProperty("user.home"), "original.txt");
 			if(file.exists()) {
 				String path = file.getPath();
 				Path originalpath=Paths.get(path);
-				Path copypath=Paths.get("backup.txt");
+				Path copypath=new File(System.getProperty("user.home"), "backup.txt").toPath();
 				Files.copy(originalpath,copypath,StandardCopyOption.REPLACE_EXISTING);
 				file.delete();
 			}
@@ -49,11 +49,11 @@ public class NoDuplicate {
 	}
 	public void CreateOriginal() {
 		try {
-			File file = new File("backup.txt");
+			File file = new File(System.getProperty("user.home"), "backup.txt");
 			if(file.exists()) {
 				String path = file.getPath();
 				Path originalpath=Paths.get(path);
-				Path copypath=Paths.get("original.txt");
+				Path copypath=new File(System.getProperty("user.home"), "original.txt").toPath();
 				Files.copy(originalpath,copypath,StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch(IOException ex) {
@@ -61,7 +61,7 @@ public class NoDuplicate {
 		}
 	}
 	public void Delete() {
-		File file = new File("original.txt");
+		File file = new File(System.getProperty("user.home"), "original.txt");	
 		if(file.exists())
 		file.delete();
 	}

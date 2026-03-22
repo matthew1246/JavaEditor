@@ -18,7 +18,7 @@ public class LinksFX extends Links {
 	}
 	private void run() {
 		try {
-			BufferedReader input = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream("javafx.html")));
+			BufferedReader input = new BufferedReader(new InputStreamReader(Links.class.getResourceAsStream("/javafx.html")));
 			while(true) {
 				String line=input.readLine();
 				if(line == null) break;

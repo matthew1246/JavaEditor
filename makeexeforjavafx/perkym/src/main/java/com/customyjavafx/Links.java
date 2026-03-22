@@ -23,7 +23,7 @@ public class Links {
 		hashmap = new HashMap<String,HashMap<String,String>>();
 			
 		try {
-			BufferedReader input = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream("links.html")));
+			BufferedReader input = new BufferedReader(new InputStreamReader(Links.class.getResourceAsStream("/links.html")));
 			while(true) {
 				String line=input.readLine();
 				if(line == null) break;

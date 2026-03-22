@@ -14,7 +14,7 @@ public class SuggestionBoxSelected {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
-		File backup = new File("suggestionbox.txt");
+		File backup = new File(System.getProperty("user.home"),"suggestionbox.txt");
 		if(!backup.exists()) {
 			this.linkedhashmap= new LinkedHashMap<String,ArrayList<String>>();
 		}
@@ -126,7 +126,7 @@ public String[] Reordered(String[] members,String classname) {
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();
 			String contents = gson.toJson(linkedhashmap);
-			PrintWriter printwriter=new PrintWriter(new File("suggestionbox.txt"));
+			PrintWriter printwriter=new PrintWriter(new File(System.getProperty("user.home"),"suggestionbox.txt"));
 			printwriter.print(contents);		
 			printwriter.close();
 		}
