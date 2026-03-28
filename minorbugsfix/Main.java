@@ -3496,6 +3496,7 @@ class OpenActionListener implements ActionListener {
 			main.tabbedpane.setTitleAt(selectedtab,main.getFileName(main.fileName));
 			main.git.Change(main.fileName);
 			main.open(main.getFileName(main.fileName));
+			main.scrollToCaretPosition(storeselectedfile.getCaretPosition(main.fileName));
 		}
 	}
 }
