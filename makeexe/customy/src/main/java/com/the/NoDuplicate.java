@@ -63,7 +63,7 @@ public class NoDuplicate {
 		}
 	}
 	public void Delete() {
-		File file = new File("original.txt");
+		File file = new File(System.getProperty("user.home"), "original.txt");
 		if(file.exists())
 		file.delete();
 	}
