@@ -12,18 +12,14 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Preferences.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java",
-      "C:\\Users\\Owner\\Documents\\dynamic\\StoreSelectedFile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java"
     ],
     "caretposition": 0
   },
@@ -93,7 +89,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 65823
+    "caretposition": 100894
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": false,
@@ -1466,6 +1462,15 @@
     "startupcombobox": [
       "Main"
     ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
