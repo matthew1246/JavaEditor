@@ -3361,10 +3361,14 @@ class SaveActionListener implements ActionListener {
 		try {
 			String text = main.textarea.getText();
 			if(!main.fileName.equals("")) {
-						
+				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+				storeselectedfile.setCaretPosition(main.fileName,main.textarea.getCaretPosition());
+				boolean isSet=(new File(main.fileName)).exists();
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
 				output.close();
+				if(!isSet) 
+					main.setAllClassesInFolder();
 				if(main.fileName != null && !main.fileName.equals("")) {
 					try {
 						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
