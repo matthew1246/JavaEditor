@@ -1,3 +1,4 @@
+import java.net.URISyntaxException;
 import javax.swing.JLabel;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
@@ -3780,21 +3781,24 @@ class SaveActionListener implements ActionListener {
 		try {
 			String text = main.textarea.getText();
 			if(!main.fileName.equals("")) {
-						
+				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+				storeselectedfile.setCaretPosition(main.fileName,main.textarea.getCaretPosition());
+				boolean isSet=(new File(main.fileName)).exists();
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
 				output.close();
-			
+				if(!isSet) 
+					main.setAllClassesInFolder();
 				if(main.fileName != null && !main.fileName.equals("")) {
 					try {
 						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 						if(filename2.startsWith("/"))
 							filename2=filename2.substring(1,filename2.length());
 						main.frame.setTitle(filename2 +" "+main.fileName);
-					} catch(Exception ex) {
+					} catch (URISyntaxException ex) {
 						ex.printStackTrace();
 					}
-				}	
+				}
 			}
 			else {
 				JFileChooser fileChooser = new JFileChooser(".");
@@ -3817,12 +3821,12 @@ class SaveActionListener implements ActionListener {
 							if(filename2.startsWith("/"))
 								filename2=filename2.substring(1,filename2.length());
 							main.frame.setTitle(filename2 +" "+main.fileName);
-						} catch(Exception ex) {
+						} catch (URISyntaxException ex) {
 							ex.printStackTrace();
 						}
 					}
 					
-					main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),main.fileName.replaceAll(".+\\\\",""));
+	main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),main.fileName.replaceAll(".+\\\\",""));
 					List<String> tabs=main.fileNames;
 					int tabsize = main.tabbedpane.getSelectedIndex();
 
@@ -3837,11 +3841,15 @@ class SaveActionListener implements ActionListener {
 			               	storeselectedfile.setStarterClass(main.fileName);
 				}
 			}
+			if(main.fileName != null && !main.fileName.equals("")) {
+				main.maven.Change(main.fileName);
+			}
 		}catch (FileNotFoundException ex) {
 			System.out.println(ex);
 		}
 	}
 }
+
 class OpenActionListener implements ActionListener {
 	private Main main;
 	public OpenActionListener(Main main) {

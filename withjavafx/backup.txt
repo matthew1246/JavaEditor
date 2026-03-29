@@ -8,7 +8,9 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\ajz\\Main.java"
+      "C:\\Users\\Owner\\Documents\\ajz\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SubZeroXX.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ManterX.java"
     ],
     "caretposition": 0
   },
@@ -26,7 +28,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 92244
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -264,7 +266,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 108
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java": {
     "isLocked": false,
@@ -771,5 +773,27 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SubZeroXX.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 110
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ManterX.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "ManterX"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 108
   }
 }
