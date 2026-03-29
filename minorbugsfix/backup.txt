@@ -12,18 +12,14 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NewtonFirsty.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SteveJobsNot.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\BillyGA.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChuckyN.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java"
     ],
     "caretposition": 0
   },
@@ -1475,7 +1471,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main"
+      "Main",
+      "Packager"
     ],
     "starterclass": "",
     "jars": [],
@@ -1519,7 +1516,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main"
+      "Main",
+      "BillyGA"
     ],
     "starterclass": "",
     "jars": [],
