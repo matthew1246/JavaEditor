@@ -2475,8 +2475,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				ex.printStackTrace();
 			}		
 		});
-			
-		compile.addActionListener(new ActionListener() {
+		compile.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);	
@@ -2488,6 +2487,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					sal.actionPerformed(e);
 					if(!fileName.equals("")) {
+						Packager packager = new Packager(Main.this);
+						JOptionPane.showMessageDialog(null,packager.containsPackage()+"");
+						JOptionPane.showMessageDialog(null,packager.getPackageName());
+						JOptionPane.showMessageDialog(null,""+packager.isInRightFolders());
+						
 						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 	
 						CommandLine commandline = new CommandLine();
