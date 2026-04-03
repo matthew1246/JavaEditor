@@ -81,10 +81,10 @@ public class CommandLine {
 	public void addClasspathCheckboxFeature() {
 		String default0 = ".;*";
 		if(isPackage && !isPackageWithMinusD) {
-			default0="*";
+			default0=".;*";
 		}
 		else if(isPackageWithMinusD) {
-			default0="*";
+			default0=".;*";
 		}
 		javac_star_nor_dot.setStarNorDot(default0);
 		javac_star_nor_dot.lock();
