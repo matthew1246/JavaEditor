@@ -154,7 +154,7 @@ public class CommandLine {
 			str+=" --release "+javaversion;
 		}
 		if(isPackageWithMinusD)
-			str+=" -d .";	
+			str+=" -d . -sourcepath .";	
 		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+package1+main_class+".java";
 		JOptionPane.showMessageDialog(null,str);
 		return str;
