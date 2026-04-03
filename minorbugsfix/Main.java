@@ -2500,7 +2500,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								commandline.addPackageWithMinusD();	
 							}
 						}
-						
+						JOptionPane.showMessageDialog(null,classpath);
 					
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
