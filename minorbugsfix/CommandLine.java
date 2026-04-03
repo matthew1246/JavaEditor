@@ -74,6 +74,10 @@ public class CommandLine {
 	private boolean isPackageWithMinusD=false;
 	public void addPackageWithMinusD() {
 		isPackageWithMinusD = true;
+		javac_star_nor_dot.setStarNorDot(".;*");
+		java_star_nor_dot.setStarNorDot(".;*");
+		javac_star_nor_dot.lock();
+		java_star_nor_dot.lock();
 	}
 	/*
 	** This adds all jars in public static void main(String[] args) directory.
