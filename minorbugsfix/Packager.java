@@ -23,6 +23,7 @@ public class Packager {
 			return "Could not find package name.";
 		}									
 	}
+	public String classpath = "";
 	public boolean isInRightFolders() {
 		if(!containsPackage())
 			return false;	
@@ -34,11 +35,11 @@ public class Packager {
 			String foldername = folders[i];
 			String folder = file.getParent();
 			file = new File(folder);
-			JOptionPane.showMessageDialog(null,foldername+":"+file.getName());
 			
 			if(!foldername.equals(file.getName()))
 				return false;		
 		}
+		classpath=file.getParentFile().getAbsolutePath();
 		return true;
 	}
 }

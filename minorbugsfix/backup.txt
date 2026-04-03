@@ -12,14 +12,16 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java"
     ],
     "caretposition": 0
   },
@@ -61,7 +63,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 89645
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": false,
@@ -144,8 +146,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "CommandLine",
       "Main"
@@ -156,7 +158,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 329
+    "caretposition": 3634
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
     "isLocked": false,
@@ -256,14 +258,16 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "CommandLine"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 1631
+    "caretposition": 2054
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
     "isLocked": false,
@@ -1477,7 +1481,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 977
+    "caretposition": 1080
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\LastKJsjkkjskjs.java": {
     "isLocked": true,

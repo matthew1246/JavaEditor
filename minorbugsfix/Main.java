@@ -2487,14 +2487,21 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					sal.actionPerformed(e);
 					if(!fileName.equals("")) {
-						Packager packager = new Packager(Main.this);
-						JOptionPane.showMessageDialog(null,packager.containsPackage()+"");
-						JOptionPane.showMessageDialog(null,packager.getPackageName());
-						JOptionPane.showMessageDialog(null,""+packager.isInRightFolders());
-						
-						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
-	
 						CommandLine commandline = new CommandLine();
+						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+						
+						Packager packager = new Packager(Main.this);
+						if(packager.containsPackage()) {		
+							if(packager.isInRightFolders()) {
+								commandline.addPackage(packager.getPackageName());
+								classpath=packager.classpath;
+							}
+							else {
+								commandline.addPackageWithMinusD();	
+							}
+						}
+						
+					
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
 						

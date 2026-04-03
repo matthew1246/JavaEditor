@@ -10,7 +10,7 @@ public class CommandLine {
 	public String main_class;
 	private List<String> jars = new ArrayList<String>();
 	
-public boolean isdeprecated = false;
+	public boolean isdeprecated = false;
 	public boolean isearlierversion = false;
 	public int javaversion;
 	public void earlierjavaversion(int javaversion) {
@@ -65,15 +65,37 @@ public boolean isdeprecated = false;
 		
 		java_star_nor_dot.setStarNorDot(".");
 	}
-	
+	private String packagename;
+	private boolean isPackage = false;
+	public void addPackage(String packagename) {
+		isPackage = true;	
+		this.packagename=packagename;
+	}
+	private boolean isPackageWithMinusD=false;
+	public void addPackageWithMinusD() {
+		isPackageWithMinusD = true;
+	}
 	/*
 	** This adds all jars in public static void main(String[] args) directory.
 	*/
 	public void addClasspathCheckboxFeature() {
-		javac_star_nor_dot.setStarNorDot("*");
+		String default0 = ".;*";
+		if(isPackage && !isPackageWithMinusD) {
+			default0="*";
+		}
+		else if(isPackageWithMinusD) {
+			default0="*";
+		}
+		javac_star_nor_dot.setStarNorDot(default0);
 		javac_star_nor_dot.lock();
 		
-		java_star_nor_dot.setStarNorDot("*;.");
+		if(isPackage && !isPackageWithMinusD) {
+			default0=".;*";
+		}
+		else if(isPackageWithMinusD) {
+			default0=".;*";
+		}
+		java_star_nor_dot.setStarNorDot(default0);
 		java_star_nor_dot.lock();
 	}
 	
@@ -116,6 +138,10 @@ public boolean isdeprecated = false;
 	}
 	
 	public String javac() {
+		String package1 = "";
+		if(isPackage && !isPackageWithMinusD) {
+			package1=packagename.replace(".","\\")+"\\";
+		}						
 		String str = "javac";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
@@ -123,13 +149,20 @@ public boolean isdeprecated = false;
 		if(isearlierversion) {
 			str+=" --release "+javaversion;
 		}
-		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+main_class+".java";
+		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+package1+main_class+".java";
 		JOptionPane.showMessageDialog(null,str);
 		return str;
 	}
 	
 	public String java() {
-		String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
+		String package2="";
+		if(isPackage && !isPackageWithMinusD) {
+			package2=packagename+".";
+		}			
+		else if(isPackageWithMinusD) {
+			package2=packagename+".";
+		}		
+		String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
 		JOptionPane.showMessageDialog(null,command);
 		return command;
 	}	
