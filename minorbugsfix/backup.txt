@@ -153,12 +153,9 @@
       "Main"
     ],
     "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
+    "jars": [],
     "fileNames": [],
-    "caretposition": 3964
+    "caretposition": 405
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
     "isLocked": false,
@@ -1553,6 +1550,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 212
   }
 }

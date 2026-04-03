@@ -73,11 +73,7 @@ public class CommandLine {
 	}
 	private boolean isPackageWithMinusD=false;
 	public void addPackageWithMinusD() {
-		isPackageWithMinusD = true;
-		javac_star_nor_dot.setStarNorDot(".;*");
-		java_star_nor_dot.setStarNorDot(".;*");
-		javac_star_nor_dot.lock();
-		java_star_nor_dot.lock();
+		isPackageWithMinusD = true;		
 	}
 	/*
 	** This adds all jars in public static void main(String[] args) directory.
@@ -154,7 +150,7 @@ public class CommandLine {
 			str+=" --release "+javaversion;
 		}
 		if(isPackageWithMinusD)
-			str+=" -d . -sourcepath .";	
+			str+=" -d . -sourcepath . ";	
 		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+package1+main_class+".java";
 		JOptionPane.showMessageDialog(null,str);
 		return str;
