@@ -2498,8 +2498,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else {
 								commandline.addPackageWithMinusD();
-								File file2 = new File(classpath);
-								classpath=file2.getParent();	
 							}
 						}
 						JOptionPane.showMessageDialog(null,classpath);

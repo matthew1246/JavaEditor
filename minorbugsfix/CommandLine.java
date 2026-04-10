@@ -150,8 +150,7 @@ public class CommandLine {
 			str+=" --release "+javaversion;
 		}
 		if(isPackageWithMinusD) {
-			str+=" -sourcepath minorbugsfix -d . ";
-			package1="minorbugsfix\\";
+			str+=" -d bin ";
 		}		
 		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+package1+main_class+".java";
 		JOptionPane.showMessageDialog(null,str);
