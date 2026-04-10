@@ -21,7 +21,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarNorDot.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarNorDot.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java"
     ],
     "caretposition": 0
   },
@@ -63,7 +64,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 89729
+    "caretposition": 89968
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": false,
@@ -94,10 +95,11 @@
     "caretposition": 143826
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
-      "FileListModifier"
+      "FileListModifier",
+      "Main"
     ],
     "starterclass": "",
     "jars": [
@@ -642,8 +644,8 @@
     "caretposition": 1838
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Maven.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "Maven",
       "Main"
@@ -655,7 +657,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 13617
+    "caretposition": 24025
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\DependencyManager.java": {
     "isLocked": false,
@@ -1478,7 +1480,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1080
+    "caretposition": 952
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\LastKJsjkkjskjs.java": {
     "isLocked": true,

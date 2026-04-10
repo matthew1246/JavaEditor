@@ -1,3 +1,4 @@
+import java.nio.file.StandardCopyOption;
 import java.awt.KeyboardFocusManager;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
@@ -2475,7 +2476,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				ex.printStackTrace();
 			}		
 		});
-		compile.addActionListener(new ActionListener() {		
+		compile.addActionListener(new ActionListener() {						
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);	
@@ -2498,6 +2499,31 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else {
 								commandline.addPackageWithMinusD();
+								filelistmodifier=new FileListModifier(fileName);
+								String packagename=packager.getPackageName();
+								File targetDir = new File(classpath+packagename);   
+								// destination folder
+								targetDir.mkdirs();
+								for(String file:filelistmodifier.filelist) {
+									Packager packagerCustomFile=new Packager(file);
+									if(packagerCustomFile.containsPackage()) {
+										if(packagename.equals(packagerCustomFile.getPackageName())) {
+											File selectedFile=new File(file);	
+										            File targetFile = new File(targetDir, selectedFile.getName());
+										            try {
+										                Files.copy(
+										                        selectedFile.toPath(),
+										                        targetFile.toPath(),
+										                        StandardCopyOption.REPLACE_EXISTING
+										                );
+										                System.out.println("File copied successfully!");
+										            } catch (IOException ex) {
+										                JOptionPane.showMessageDialog(null, "Copy failed: " + ex.getMessage());
+										            }
+	
+										}
+									}
+								}
 							}
 						}
 						JOptionPane.showMessageDialog(null,classpath);
