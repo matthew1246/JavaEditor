@@ -2501,7 +2501,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								commandline.addPackageWithMinusD();
 								filelistmodifier=new FileListModifier(fileName);
 								String packagename=packager.getPackageName();
-								File targetDir = new File(classpath+packagename);   
+								File targetDir = new File(classpath+packagename.replace(".","\\"));   
 								// destination folder
 								targetDir.mkdirs();
 								for(String file:filelistmodifier.filelist) {
@@ -2526,7 +2526,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 						}
-						JOptionPane.showMessageDialog(null,classpath);
+						JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 					
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
