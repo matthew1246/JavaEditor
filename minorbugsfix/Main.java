@@ -2505,7 +2505,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 										switch(option) {
 											case JOptionPane.YES_OPTION:
-												Path targetDir = Path.of(Main.getDirectory(fileName) + packagename);
+												Path targetDir = Path.of(Main.getDirectory(fileName) + packagename.replace(".","\\"));
 											   	try {
 										        			//Files.createDirectories(targetDir);
 											
