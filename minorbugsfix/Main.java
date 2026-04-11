@@ -2519,7 +2519,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 															content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
 														
 															// Prepend correct package
-															content = packagename + "\n\n" + content;
+															content = "package "+packagename + ";\n\n" + content;
 														
 															// Write to target
 															Path targetFile = targetDir.resolve(entry.getFileName());
