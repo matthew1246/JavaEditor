@@ -1,3 +1,4 @@
+import java.nio.file.DirectoryStream;
 import java.nio.file.StandardCopyOption;
 import java.awt.KeyboardFocusManager;
 import java.util.concurrent.ExecutionException;
@@ -2496,6 +2497,46 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(packager.isInRightFolders()) {
 								commandline.addPackage(packager.getPackageName());
 								classpath=packager.classpath;
+								String packagename=packager.getPackageName();
+								labely: for(String file:filelistmodifier.filelist) {
+									Packager packagerCustomFile=new Packager(file);
+									if(!packagename.equals(packagerCustomFile.getPackageName())) {
+										String[] options={"Yes","No"};
+										int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										switch(option) {
+											case JOptionPane.YES_OPTION:
+												Path targetDir = Path.of(Main.getDirectory(fileName) + packagename);
+											   	try {
+										        			//Files.createDirectories(targetDir);
+											
+												       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
+													          	for (Path entry : stream) {
+													
+															// Read file
+															String content = Files.readString(entry);
+														
+															// Remove existing package if present
+															content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+														
+															// Prepend correct package
+															content = packagename + "\n\n" + content;
+														
+															// Write to target
+															Path targetFile = targetDir.resolve(entry.getFileName());
+															Files.writeString(targetFile, content);
+													            }
+													}
+													JOptionPane.showMessageDialog(null,"Code Updated");
+												} catch (Exception ex) {
+											        		ex.printStackTrace();
+											    	}
+												break;
+											case JOptionPane.NO_OPTION:
+												break;
+										}
+										break labely;				
+									}
+								}
 							}
 							else {
 								commandline.addPackageWithMinusD();
