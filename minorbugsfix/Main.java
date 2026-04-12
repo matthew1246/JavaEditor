@@ -2794,12 +2794,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									commandline.addClasspathCheckboxFeature();
 								}	
 						
-								// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
-								String[] command = new String[3];
-								command[0] = "cmd.exe";
-								command[1] = "/c";
-								command[2] = commandline.javac();
-								runtime = Runtime.getRuntime();
 								classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
 								
 								Packager packager = new Packager(Main.this);
@@ -2923,6 +2917,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
 								
 								startercombobox.Change(fileName);
+								// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
+								String[] command = new String[3];
+								command[0] = "cmd.exe";
+								command[1] = "/c";
+								command[2] = commandline.javac();
+								runtime = Runtime.getRuntime();
 								Process process = runtime.exec(command,null,new File(classpath1));
 								// process=Main.this.compileFromMSDOS(fileName,classpath1);
 								
