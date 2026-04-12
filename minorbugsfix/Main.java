@@ -2936,6 +2936,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	 								String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 
 									commandline = new CommandLine();
+									
+									if(packager.containsPackage()) {		
+										if(packager.isInRightFolders()) {
+											commandline.addPackage(packager.getPackageName());
+											classpath1=packager.classpath;
+										}
+										else { // package name is not in right folder
+											commandline.addPackageWithMinusD();
+										}
+									}
+									
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
 										storeselectedfile = new StoreSelectedFile();
