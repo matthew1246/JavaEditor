@@ -72,6 +72,10 @@ public class CommandLine {
 		this.packagename=packagename;
 	}
 	private boolean isPackageWithMinusD=false;
+	public void addPackageWithMinusD(String packagename) {
+		isPackageWithMinusD = true;	
+		this.packagename=packagename;			
+	}	
 	public void addPackageWithMinusD() {
 		isPackageWithMinusD = true;		
 	}

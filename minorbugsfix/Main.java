@@ -2726,7 +2726,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										classpath1=packager.classpath;
 									}
 									else { // package name is not in right folder
-										commandline.addPackageWithMinusD();
+										commandline.addPackageWithMinusD(packager.getPackageName());
 									}
 								}
 								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
@@ -2943,7 +2943,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											classpath1=packager.classpath;
 										}
 										else { // package name is not in right folder
-											commandline.addPackageWithMinusD();
+											commandline.addPackageWithMinusD(packager.getPackageName());
 										}
 									}
 									
