@@ -1948,7 +1948,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-							output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+							Packager packager= new Packager(Main.this);
+							if(!packager.containsPackage()) { // Doesn't contain package.
+								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+							}
+							else { // Contains package
+								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt "+packager.getPackageName().replace(".","\\"));
+							}
 							output2.write("\n");
 							
 							commandline = new CommandLine();

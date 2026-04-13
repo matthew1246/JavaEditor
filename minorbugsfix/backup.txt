@@ -22,7 +22,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarNorDot.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java"
     ],
     "caretposition": 0
   },
@@ -64,7 +65,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 109331
+    "caretposition": 70932
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": false,
@@ -283,10 +284,11 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Compile"
+      "Compile",
+      "Main"
     ],
     "starterclass": "",
     "jars": [
