@@ -1923,7 +1923,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							output.write(main);
 						}
 						else { // Contains package name
-							output.write(packager.getPackageName()+"\\"+main);
+							output.write(packager.getPackageName()+"."+main);
 						}
 						output.write("\n");
 						//output.write("Class-Path: ");
