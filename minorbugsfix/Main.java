@@ -2956,7 +2956,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName.replaceAll("[^\\\\]+\\.java","")+selected+".java");
 										for(String jar:preferences.jars) {
-											JOptionPane.showMessageDialog(null,"lock: "+jar);
 											commandline.addExternalJar(jar);
 										}
 										commandline.setMainClass(save);
@@ -2968,7 +2967,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName);
 										for(String jar:preferences.jars) {									
-											JOptionPane.showMessageDialog(null,"no lock: "+jar);
 											commandline.addExternalJar(jar);
 										}
 									}
