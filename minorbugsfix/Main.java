@@ -1893,14 +1893,27 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
 						String main=preferences.starterclass;
 						String dir = fileName.replaceAll("[^\\\\]+\\.java","");
+						Packager packager = new Packager(this);
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
-							for(String jar:jars) {
-								jar = getFileName(jar);
-								Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-								process.waitFor();
-								//output.write(" "+jar);
+							if(!packager.containsPackage()) { // Contains no package
+								for(String jar:jars) {
+									jar = getFileName(jar);
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+									process.waitFor();
+									//output.write(" "+jar);
+								}
 							}
+							else { // Doesn't contain package
+								String dir2 = dir+packager.getPackageName().replace(".","\\");
+								JOptionPane.showMessageDialog(null,"dir2:"+dir2);
+								for(String jar:jars) {
+									jar = getFileName(jar);
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir2);
+									process.waitFor();
+									//output.write(" "+jar);
+								}
+							}				
 						}
 						if(!fileName.equals("")) {
 							if(main.equals("")) {
@@ -1918,7 +1931,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						output.write("Manifest-Version: 1.0");
 						output.write("\n");
 						output.write("Main-Class: ");
-						Packager packager = new Packager(this);
 						if(!packager.containsPackage()) {
 							output.write(main);
 						}
