@@ -1711,7 +1711,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {
+		generatejar.addActionListener((ev) -> {		
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
@@ -1894,26 +1894,28 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						String main=preferences.starterclass;
 						String dir = fileName.replaceAll("[^\\\\]+\\.java","");
 						Packager packager = new Packager(this);
+						if(packager.containsPackage()) {		
+							commandline.addPackageWithMinusD();
+						}
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
-							if(!packager.containsPackage()) { // Contains no package
+							//if(!packager.containsPackage()) { // Contains no package
 								for(String jar:jars) {
 									jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
-							}
+							/*}
 							else { // Doesn't contain package
-								String dir2 = dir+packager.getPackageName().replace(".","\\");
-								JOptionPane.showMessageDialog(null,"dir2:"+dir2);
+								String dir2=dir;
 								for(String jar:jars) {
 									jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir2);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
-							}				
+							}*/				
 						}
 						if(!fileName.equals("")) {
 							if(main.equals("")) {
@@ -1967,12 +1969,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 							Packager packager2 = new Packager(this);
-							if(!packager2.containsPackage()) { // Doesn't contain package.
+							//if(!packager2.containsPackage()) { // Doesn't contain package.
 								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
-							}
+							/*}
 							else { // Contains package
 								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt "+packager2.getPackageName().replace(".","\\"));
-							}
+							}*/
 							output2.write("\n");
 							
 							commandline = new CommandLine();
