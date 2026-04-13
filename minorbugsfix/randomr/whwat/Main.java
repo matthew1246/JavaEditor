@@ -1,3 +1,5 @@
+package randomr.whwat;
+
 import java.nio.file.DirectoryStream;
 import java.nio.file.StandardCopyOption;
 import java.awt.KeyboardFocusManager;
@@ -2954,7 +2956,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										storeselectedfile.setStarterClass(fileName);
 										
 										storeselectedfile = new StoreSelectedFile();
-										preferences=storeselectedfile.get(fileName.replaceAll("[^\\\\]+\\.java","")+selected+".java");
+										preferences=storeselectedfile.get(classpath1+selected+".java");
 										for(String jar:preferences.jars) {
 											JOptionPane.showMessageDialog(null,"lock: "+jar);
 											commandline.addExternalJar(jar);
