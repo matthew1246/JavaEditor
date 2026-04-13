@@ -2752,7 +2752,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									
 									StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									Preferences preferences=storeselectedfile.get(fileName);
-									for(String jar:preferences.jars) {																		
+									for(String jar:preferences.jars) {										
 										commandline.addExternalJar(jar);
 									}
 								}																												
@@ -2956,6 +2956,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(classpath1+selected+".java");
 										for(String jar:preferences.jars) {
+											JOptionPane.showMessageDialog(null,"lock: "+jar);
 											commandline.addExternalJar(jar);
 										}
 										commandline.setMainClass(save);
@@ -2966,7 +2967,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName);
-										for(String jar:preferences.jars) {										
+										for(String jar:preferences.jars) {									
+											JOptionPane.showMessageDialog(null,"no lock: "+jar);
 											commandline.addExternalJar(jar);
 										}
 									}
