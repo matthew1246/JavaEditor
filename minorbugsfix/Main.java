@@ -1918,7 +1918,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						output.write("Manifest-Version: 1.0");
 						output.write("\n");
 						output.write("Main-Class: ");
-						output.write(main);
+						Packager packager = new Packager(this);
+						if(!packager.containsPackage()) {
+							output.write(main);
+						}
+						else { // Contains package name
+							output.write(packager.getPackageName()+"\\"+main);
+						}
 						output.write("\n");
 						//output.write("Class-Path: ");
 						//output.write("javafx/lib/");
@@ -1948,12 +1954,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-							Packager packager= new Packager(Main.this);
-							if(!packager.containsPackage()) { // Doesn't contain package.
+							Packager packager2 = new Packager(this);
+							if(!packager2.containsPackage()) { // Doesn't contain package.
 								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
 							}
 							else { // Contains package
-								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt "+packager.getPackageName().replace(".","\\"));
+								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt "+packager2.getPackageName().replace(".","\\"));
 							}
 							output2.write("\n");
 							
