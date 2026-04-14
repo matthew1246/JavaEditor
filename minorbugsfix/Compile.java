@@ -68,7 +68,7 @@ public class Compile {
 					
 					// Make all classes in same folder have same package name
 					labely: for(String file:main.filelistmodifier.filelist) {
-						JOptionPane.showMessageDialog(null,file);
+						JOptionPane.showMessageDialog(null,"filelistmodifier.filelist:"+file);
 						
 						Packager packagerCustomFile=new Packager(file);
 						if(!packagename.equals(packagerCustomFile.getPackageName())) {
