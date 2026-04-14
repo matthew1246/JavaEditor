@@ -1998,6 +1998,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						}
 						else { 
 							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+							if(packager3.containsPackage()) {
+								if(!packager3.isInRightFolders()) { // javac.exe used -d option
+									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+								}
+								else { // packager2.isInRightFolders()
+									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+								}
+							}
 							JOptionPane.showMessageDialog(null,input);
 							Process process=commandline.run(input,dir);
 							
