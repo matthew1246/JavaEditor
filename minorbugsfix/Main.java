@@ -2547,7 +2547,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								commandline.addPackage(packager.getPackageName());
 								classpath=packager.classpath;
 								String packagename=packager.getPackageName();
-								labely: for(String file:filelistmodifier.filelist) {
+								labely: for(String file:filelistmodifier.fullpath) {
 									Packager packagerCustomFile=new Packager(file);
 									if(!packagename.equals(packagerCustomFile.getPackageName())) {
 										String[] options={"Yes","No"};
@@ -2593,7 +2593,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								String packagename=packager.getPackageName();
 								
 								// Make all classes in same folder have same package name
-								labely: for(String file:filelistmodifier.filelist) {
+								labely: for(String file:filelistmodifier.fullpath) {
 									Packager packagerCustomFile=new Packager(file);
 									if(!packagename.equals(packagerCustomFile.getPackageName())) {
 										String[] options={"Yes","No"};
@@ -2637,7 +2637,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								File targetDir = new File(classpath+packagename.replace(".","\\"));   
 								// destination folder
 								targetDir.mkdirs();
-								for(String file:filelistmodifier.filelist) {
+								for(String file:filelistmodifier.fullpath) {
 									Packager packagerCustomFile=new Packager(file);
 									if(file.equals(filename) || packagerCustomFile.containsPackage()) {
 										if(packagename.equals(packagerCustomFile.getPackageName())) {
@@ -2852,7 +2852,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										commandline.addPackage(packager.getPackageName());
 										classpath1=packager.classpath;
 										String packagename=packager.getPackageName();
-										labely: for(String file:filelistmodifier.filelist) {
+										labely: for(String file:filelistmodifier.fullpath) {
 											Packager packagerCustomFile=new Packager(file);
 											if(!packagename.equals(packagerCustomFile.getPackageName())) {
 												String[] options={"Yes","No"};
@@ -2898,7 +2898,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										String packagename=packager.getPackageName();
 										
 										// Make all classes in same folder have same package name
-										labely: for(String file:filelistmodifier.filelist) {
+										labely: for(String file:filelistmodifier.fullpath) {
 											Packager packagerCustomFile=new Packager(file);
 											if(!packagename.equals(packagerCustomFile.getPackageName())) {
 												String[] options={"Yes","No"};
@@ -2942,7 +2942,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										File targetDir = new File(classpath1+packagename.replace(".","\\"));   
 										// destination folder
 										targetDir.mkdirs();
-										for(String file:filelistmodifier.filelist) {
+										for(String file:filelistmodifier.fullpath) {
 											Packager packagerCustomFile=new Packager(file);
 											if(filename.equals(file) || packagerCustomFile.containsPackage()) {
 												if(packagename.equals(packagerCustomFile.getPackageName())) {

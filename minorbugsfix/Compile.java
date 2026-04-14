@@ -21,7 +21,7 @@ public class Compile {
 					commandline.addPackage(packager.getPackageName());
 					classpath=packager.classpath;
 					String packagename=packager.getPackageName();
-					labely: for(String file:main.filelistmodifier.filelist) {
+					labely: for(String file:main.filelistmodifier.fullpath) {
 						Packager packagerCustomFile=new Packager(file);
 						if(!packagename.equals(packagerCustomFile.getPackageName())) {
 							String[] options={"Yes","No"};
@@ -68,7 +68,7 @@ public class Compile {
 					
 					String filename = main.getFileName(main.fileName);
 					// Make all classes in same folder have same package name
-					labely: for(String file:main.filelistmodifier.filelist) {
+					labely: for(String file:main.filelistmodifier.fullpath) {
 						Packager packagerCustomFile=new Packager(file);
 						if(!packagename.equals(packagerCustomFile.getPackageName())) {
 							String[] options={"Yes","No"};
@@ -111,7 +111,7 @@ public class Compile {
 					File targetDir = new File(classpath+packagename.replace(".","\\"));   
 					// destination folder
 					targetDir.mkdirs();
-					for(String file:main.filelistmodifier.filelist) {
+					for(String file:main.filelistmodifier.fullpath) {
 						Packager packagerCustomFile=new Packager(file);
 						if(packagerCustomFile.containsPackage()) {
 							if(filename.equals(file) || packagename.equals(packagerCustomFile.getPackageName())) {
