@@ -1910,10 +1910,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							else { // Package used javac.exe didn't used -d option
-								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"\\jars");
 								for(String jar:jars) {
 									jar = getFileName(jar);
-									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"\\jars");
 									process.waitFor();
 									//output.write(" "+jar);
 								}
