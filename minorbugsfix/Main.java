@@ -1900,7 +1900,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						}
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
-							if(!packager3.containsPackage() && !packager3.isInRightFolders()) { // Contains no package
+							if(!packager3.containsPackage() || !packager3.isInRightFolders()) { // Contains no package
 								for(String jar:jars) {
 									// jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
