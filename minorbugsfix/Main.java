@@ -653,8 +653,7 @@ public class Main {
 	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
 	}
-	
-public static String getClassName(String filename) {
+	public static String getClassName(String filename) {
 		filename=getFileName(filename);
 		if(filename.endsWith(".java")) {
 			return filename.substring(0,filename.length()-".java".length());
@@ -1711,7 +1710,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {								
+		generatejar.addActionListener((ev) -> {												
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
@@ -1903,7 +1902,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							List<String> jars = preferences.jars;
 							if(!packager3.containsPackage() && !packager3.isInRightFolders()) { // Contains no package
 								for(String jar:jars) {
-									jar = getFileName(jar);
+									// jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
@@ -1916,7 +1915,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									createdir.mkdir();
 								}
 								for(String jar:jars) {
-									jar = getFileName(jar);
+									// jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"\\jars");
 									process.waitFor();
 									//output.write(" "+jar);
