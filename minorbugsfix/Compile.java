@@ -66,10 +66,11 @@ public class Compile {
 					main.filelistmodifier=new FileListModifier(fileName);
 					String packagename=packager.getPackageName();
 					
+					String filename = main.getFileName(main.fileName);
 					// Make all classes in same folder have same package name
 					labely: for(String file:main.filelistmodifier.filelist) {
 						Packager packagerCustomFile=new Packager(file);
-						if((new File(file)).exists() && !packagename.equals(packagerCustomFile.getPackageName())) {
+						if(!packagename.equals(packagerCustomFile.getPackageName())) {
 							String[] options={"Yes","No"};
 							int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							switch(option) {
@@ -106,15 +107,14 @@ public class Compile {
 							break labely;				
 						}
 					}
-					
 					// Copy all classes with the same package name to new folder
 					File targetDir = new File(classpath+packagename.replace(".","\\"));   
 					// destination folder
 					targetDir.mkdirs();
 					for(String file:main.filelistmodifier.filelist) {
 						Packager packagerCustomFile=new Packager(file);
-						if((new File(file)).exists() && packagerCustomFile.containsPackage()) {
-							if(packagename.equals(packagerCustomFile.getPackageName())) {
+						if(packagerCustomFile.containsPackage()) {
+							if(filename.equals(file) || packagename.equals(packagerCustomFile.getPackageName())) {
 								File selectedFile=new File(file);	
 							            File targetFile = new File(targetDir, selectedFile.getName());
 							            try {

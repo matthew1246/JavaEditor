@@ -2540,6 +2540,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						CommandLine commandline = new CommandLine();
 						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 						
+						String filename = getFileName(fileName);
 						Packager packager = new Packager(Main.this);
 						if(packager.containsPackage()) {		
 							if(packager.isInRightFolders()) {							
@@ -2594,7 +2595,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								// Make all classes in same folder have same package name
 								labely: for(String file:filelistmodifier.filelist) {
 									Packager packagerCustomFile=new Packager(file);
-									if((new File(file)).exists() && !packagename.equals(packagerCustomFile.getPackageName())) {
+									if(!packagename.equals(packagerCustomFile.getPackageName())) {
 										String[] options={"Yes","No"};
 										int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 										switch(option) {
@@ -2638,7 +2639,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								targetDir.mkdirs();
 								for(String file:filelistmodifier.filelist) {
 									Packager packagerCustomFile=new Packager(file);
-									if(packagerCustomFile.containsPackage()) {
+									if(file.equals(filename) || packagerCustomFile.containsPackage()) {
 										if(packagename.equals(packagerCustomFile.getPackageName())) {
 											File selectedFile=new File(file);	
 										            File targetFile = new File(targetDir, selectedFile.getName());
@@ -2844,6 +2845,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						
 								classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
 								
+								String filename = getFileName(fileName);
 								Packager packager = new Packager(Main.this);
 								if(packager.containsPackage()) {		
 									if(packager.isInRightFolders()) {
@@ -2898,7 +2900,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										// Make all classes in same folder have same package name
 										labely: for(String file:filelistmodifier.filelist) {
 											Packager packagerCustomFile=new Packager(file);
-											if((new File(file)).exists() && !packagename.equals(packagerCustomFile.getPackageName())) {
+											if(!packagename.equals(packagerCustomFile.getPackageName())) {
 												String[] options={"Yes","No"};
 												int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 												switch(option) {
@@ -2942,7 +2944,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										targetDir.mkdirs();
 										for(String file:filelistmodifier.filelist) {
 											Packager packagerCustomFile=new Packager(file);
-											if(packagerCustomFile.containsPackage()) {
+											if(filename.equals(file) || packagerCustomFile.containsPackage()) {
 												if(packagename.equals(packagerCustomFile.getPackageName())) {
 													File selectedFile=new File(file);	
 												            File targetFile = new File(targetDir, selectedFile.getName());
