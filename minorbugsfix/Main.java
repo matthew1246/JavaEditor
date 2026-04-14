@@ -1934,8 +1934,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						}
 						
 						JOptionPane.showMessageDialog(null,dir+"\\mf.txt");
-						
-						FileWriter filewriter = new FileWriter( dir+"\\mf.txt",StandardCharsets.UTF_8);
+						if(!dir.endsWith("\\"))
+							dir = dir+"\\";
+						FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
 						BufferedWriter output = new BufferedWriter(filewriter);
 						output.write("Manifest-Version: 1.0");
 						output.write("\n");
