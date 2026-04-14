@@ -71,7 +71,7 @@ public class Compile {
 						JOptionPane.showMessageDialog(null,"filelistmodifier.filelist:"+file);
 						
 						Packager packagerCustomFile=new Packager(file);
-						if(!packagename.equals(packagerCustomFile.getPackageName())) {
+						if((new File(file)).exists() && !packagename.equals(packagerCustomFile.getPackageName())) {
 							String[] options={"Yes","No"};
 							int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							switch(option) {

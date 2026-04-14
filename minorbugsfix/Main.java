@@ -2462,7 +2462,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				t.start();
 			}
 		});
-		compile_all.addActionListener((ev) -> {
+		compile_all.addActionListener((ev) -> {		
 		
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);	
@@ -2594,7 +2594,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								// Make all classes in same folder have same package name
 								labely: for(String file:filelistmodifier.filelist) {
 									Packager packagerCustomFile=new Packager(file);
-									if(!packagename.equals(packagerCustomFile.getPackageName())) {
+									if((new File(file)).exists() && !packagename.equals(packagerCustomFile.getPackageName())) {
 										String[] options={"Yes","No"};
 										int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 										switch(option) {
@@ -2898,7 +2898,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										// Make all classes in same folder have same package name
 										labely: for(String file:filelistmodifier.filelist) {
 											Packager packagerCustomFile=new Packager(file);
-											if(!packagename.equals(packagerCustomFile.getPackageName())) {
+											if((new File(file)).exists() && !packagename.equals(packagerCustomFile.getPackageName())) {
 												String[] options={"Yes","No"};
 												int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 												switch(option) {
