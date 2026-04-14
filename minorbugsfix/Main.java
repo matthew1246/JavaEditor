@@ -1909,7 +1909,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							else { // Package used javac.exe didn't used -d option
-								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"\\jars");
+								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
 								File createdir = new File(dir+"jars");
 								if(!createdir.exists()) {
 									createdir.mkdir();
