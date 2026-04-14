@@ -1933,7 +1933,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							storeselectedfile.setBackup(linkedhashmap);
 						}
 						
-						JOptionPane.showMessageDialog(null,dir+"\\mf.txt");
+						JOptionPane.showMessageDialog(null,dir+"mf.txt");
 						if(!dir.endsWith("\\"))
 							dir = dir+"\\";
 						FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
