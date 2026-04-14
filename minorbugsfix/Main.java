@@ -1710,7 +1710,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {												
+		generatejar.addActionListener((ev) -> {														
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
@@ -1933,9 +1933,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							storeselectedfile.setBackup(linkedhashmap);
 						}
 						
-						JOptionPane.showMessageDialog(null,dir+"mf.txt");
+						JOptionPane.showMessageDialog(null,dir+"\\mf.txt");
 						
-						FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
+						FileWriter filewriter = new FileWriter( dir+"\\mf.txt",StandardCharsets.UTF_8);
 						BufferedWriter output = new BufferedWriter(filewriter);
 						output.write("Manifest-Version: 1.0");
 						output.write("\n");
