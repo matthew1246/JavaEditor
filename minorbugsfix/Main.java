@@ -1933,6 +1933,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							storeselectedfile.setBackup(linkedhashmap);
 						}
 						
+						JOptionPane.showMessageDialog(null,dir+"mf.txt");
+						
 						FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
 						BufferedWriter output = new BufferedWriter(filewriter);
 						output.write("Manifest-Version: 1.0");
@@ -2007,6 +2009,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							JOptionPane.showMessageDialog(null,input);
+							JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
 							Process process=commandline.run(input,dir);
 							
 							InputStream inputstream = process.getErrorStream();
