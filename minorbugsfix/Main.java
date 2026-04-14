@@ -1898,6 +1898,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								dir=packager3.classpath;	
 							}							
 						}
+						if(!dir.endsWith("\\"))
+							dir = dir+"\\";
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
 							if(!packager3.containsPackage() || !packager3.isInRightFolders()) { // Contains no package
@@ -1934,8 +1936,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						}
 						
 						JOptionPane.showMessageDialog(null,dir+"mf.txt");
-						if(!dir.endsWith("\\"))
-							dir = dir+"\\";
 						FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
 						BufferedWriter output = new BufferedWriter(filewriter);
 						output.write("Manifest-Version: 1.0");
