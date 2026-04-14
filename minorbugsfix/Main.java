@@ -1711,7 +1711,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {		
+		generatejar.addActionListener((ev) -> {								
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
@@ -1893,29 +1893,31 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
 						String main=preferences.starterclass;
 						String dir = fileName.replaceAll("[^\\\\]+\\.java","");
-						Packager packager = new Packager(this);
-						if(packager.containsPackage()) {		
-							commandline.addPackageWithMinusD();
+						Packager packager3=new Packager(this);
+						if(packager3.containsPackage()) {		
+							if(packager3.isInRightFolders()) {
+								dir=packager3.classpath;	
+							}							
 						}
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
-							//if(!packager.containsPackage()) { // Contains no package
+							if(!packager3.containsPackage() && !packager3.isInRightFolders()) { // Contains no package
 								for(String jar:jars) {
 									jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
-							/*}
-							else { // Doesn't contain package
-								String dir2=dir;
+							}
+							else { // Package used javac.exe didn't used -d option
+								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
 								for(String jar:jars) {
 									jar = getFileName(jar);
-									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir2);
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
 									process.waitFor();
 									//output.write(" "+jar);
 								}
-							}*/				
+							}				
 						}
 						if(!fileName.equals("")) {
 							if(main.equals("")) {
@@ -1933,11 +1935,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						output.write("Manifest-Version: 1.0");
 						output.write("\n");
 						output.write("Main-Class: ");
-						if(!packager.containsPackage()) {
+						if(!packager3.containsPackage()) {
 							output.write(main);
 						}
 						else { // Contains package name
-							output.write(packager.getPackageName()+"."+main);
+							output.write(packager3.getPackageName()+"."+main);
 						}
 						output.write("\n");
 						//output.write("Class-Path: ");
@@ -1969,12 +1971,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 							Packager packager2 = new Packager(this);
-							//if(!packager2.containsPackage()) { // Doesn't contain package.
+							if(!packager2.containsPackage()) { // Doesn't contain package.
 								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
-							/*}
+							}
 							else { // Contains package
-								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt "+packager2.getPackageName().replace(".","\\"));
-							}*/
+								if(!packager2.isInRightFolders()) { // javac.exe used -d option
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+								}
+								else { // packager2.isInRightFolders()
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+								}
+							}
 							output2.write("\n");
 							
 							commandline = new CommandLine();
@@ -2520,7 +2527,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						
 						Packager packager = new Packager(Main.this);
 						if(packager.containsPackage()) {		
-							if(packager.isInRightFolders()) {
+							if(packager.isInRightFolders()) {							
 								commandline.addPackage(packager.getPackageName());
 								classpath=packager.classpath;
 								String packagename=packager.getPackageName();
