@@ -1785,7 +1785,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=storeselectedfile.get(fileName);
 							String main=preferences.starterclass;
 							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
-							
+							Packager packager2 = new Packager(this);
+							if(packager2.containsPackage()) {
+								if(packager2.isInRightFolders()) {
+									dir=packager2.classpath;
+								}
+							}
+							if(!dir.endsWith("\\"))
+								dir=dir+"\\";
 							if(!fileName.equals("")) {
 								List<String> jars = preferences.jars;
 								for(String jar:jars) {
@@ -1843,7 +1850,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 								}
 								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+								if(!packager2.containsPackage()) {
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+								}
+								else {
+									if(packager2.isInRightFolders()) {
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+									}
+									else {
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");	
+									}
+								}
 								output2.write("\n");
 								
 								commandline = new CommandLine();
@@ -1858,7 +1875,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else {
 								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+								if(packager2.containsPackage()) {
+									if(!packager2.isInRightFolders()) { // javac.exe used -d option
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+									}
+									else { // packager2.isInRightFolders()
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+									}
+								}
 								JOptionPane.showMessageDialog(null,input);
+								JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
 								Process process=commandline.run(input,dir);
 								
 								InputStream inputstream = process.getErrorStream();
