@@ -1789,7 +1789,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(!fileName.equals("")) {
 								List<String> jars = preferences.jars;
 								for(String jar:jars) {
-									jar = getFileName(jar);
+									// jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
@@ -1810,7 +1810,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							output.write("Manifest-Version: 1.0");
 							output.write("\n");
 							output.write("Main-Class: ");
-							output.write(main);
+							Packager packager = new Packager(this);
+							if(!packager.containsPackage()) {
+								output.write(main);
+							}
+							else {
+								output.write(packager.getPackageName()+"."+main);
+							}
 							output.write("\n");
 							//output.write("Class-Path:");
 							//output.write(" *");
