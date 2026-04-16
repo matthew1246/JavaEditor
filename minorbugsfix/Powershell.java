@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.IOException;
 public class Powershell {
+	protected Packager packager;
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
@@ -12,6 +13,9 @@ public class Powershell {
 		this.dir = dir;
 		this.main_class = main_class;
 		try {
+			packager=new Packager(main);
+			if(packager.containsPackage() && packager.isInRightFolders()) dir = packager.classpath;
+			
 			String filename=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			filename = main.getFileName(filename);
 			if(filename.startsWith("/"))
@@ -46,6 +50,15 @@ public class Powershell {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Preferences preferences=storeselectedfile.get(fileName);
 			
+			if(packager.containsPackage()) {
+				if(packager.isInRightFolders()) {
+					commandline.addPackage(packager.getPackageName());
+				}
+				else {
+					commandline.addPackageWithMinusD();
+				}
+			}
+			
 			for(String jar:preferences.jars) {
 				commandline.addExternalJar(jar);
 			}
@@ -64,15 +77,31 @@ public class Powershell {
 		try {
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-			if(javaversionnumber != 23) {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
+			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory);
+			if(!packager.containsPackage()) {
+				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
+				if(javaversionnumber != 23) {
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
+				}
+				else {
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar mf.txt .");
+					output2.write("\n");
+					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar");
+				}
 			}
-			else {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar mf.txt .");
+			else { // Code is a packgage com.whatever
+				String[] splited=  main_class.split("\\.");
+				String main_class2 = splited[splited.length-1];
+				
+				if(javaversionnumber != 23) {
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+				}
+				else {
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .");
+				}
 				output2.write("\n");
-				output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar");
-			}				
+				output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");	
+			}						
 			output2.write("\n");
 			// output2.close();
 		} catch (IOException ex) {
