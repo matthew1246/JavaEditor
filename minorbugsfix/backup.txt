@@ -23,7 +23,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarNorDot.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarNorDot.java"
     ],
     "caretposition": 0
   },
@@ -158,7 +160,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2101
+    "caretposition": 3364
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
     "isLocked": false,
@@ -299,9 +301,10 @@
     "caretposition": 12235
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -310,7 +313,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 4373
+    "caretposition": 767
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java": {
     "isLocked": false,

@@ -122,7 +122,7 @@ public class CommandLine {
 			classpath=classpath+";";
 		}
 		if(!isjavaorjavac.isEmpty()) {
-			classpath=classpath+isjavaorjavac.getStarNorDot();
+			classpath=isjavaorjavac.getStarNorDot()+classpath;
 		}
 		
 		return classpath;

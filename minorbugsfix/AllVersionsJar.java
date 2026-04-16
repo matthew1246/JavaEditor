@@ -10,6 +10,7 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public class AllVersionsJar {
+	private Packager packager;
 	private String dir;
 	private Main main;
 	private String fileName;
@@ -20,7 +21,13 @@ public class AllVersionsJar {
 		this.fileName = fileName;
 		this.sal = sal;
 		this.ev4 = ev4;
-		dir = fileName.replaceAll("[^\\\\]+\\.java","");
+		packager=new Packager(main);
+		if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			dir = fileName.replaceAll("[^\\\\]+\\.java","");
+		}
+		else {
+			dir=packager.classpath;
+		}	
 	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
