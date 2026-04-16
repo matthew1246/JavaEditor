@@ -111,7 +111,7 @@ public class CommandLine {
 		if(isjavaorjavac.isEmpty() && jars.size() == 0) {
 			return "";
 		}
-		String classpath = "-cp ";
+		String classpath = "";
 		if(jars.size() > 0) { 
 			classpath= classpath+jars.get(0);
 			for(int i = 1; i < jars.size(); i++) {
@@ -119,12 +119,12 @@ public class CommandLine {
 			}
 		}
 		if(!isjavaorjavac.isEmpty() && jars.size() > 0) {
-			classpath=classpath+";";
+			classpath=";"+classpath;
 		}
 		if(!isjavaorjavac.isEmpty()) {
 			classpath=isjavaorjavac.getStarNorDot()+classpath;
 		}
-		
+		classpath = "-cp "+classpath;
 		return classpath;
 	}
 	

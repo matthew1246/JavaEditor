@@ -27,7 +27,9 @@ public class AllVersionsJar {
 		}
 		else {
 			dir=packager.classpath;
-		}	
+		}
+		if(!dir.endsWith("\\"))
+			dir=dir+"\\";
 	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
@@ -38,16 +40,21 @@ public class AllVersionsJar {
 		Preferences preferences=storeselectedfile.get(fileName);
 		if(!fileName.equals("")) {
 			java.util.List<String> jars = preferences.jars;
-			for(String jar:jars) {
-				try {
-					jar = main.getFileName(jar);
-					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-					process.waitFor();
-					//output.write(" "+jar);
-				} catch (InterruptedException ex) {
-					ex.printStackTrace();
-				}				
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				for(String jar:jars) {
+					try {
+						jar = main.getFileName(jar);
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+						process.waitFor();
+						//output.write(" "+jar);
+					} catch (InterruptedException ex) {
+						ex.printStackTrace();
+					}				
+				}
 			}
+			else {
+				
+			}	
 		}
 		return preferences;
 	}		
