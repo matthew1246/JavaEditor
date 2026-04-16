@@ -116,7 +116,10 @@ public class AllVersionsJar {
 			String main_class2 = splited[splited.length-1];
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory);
+			if(packager.containsPackage() && packager.isInRightFolders()) {
+				parentdirectory=file;	
+			}
+			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			
 			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 			if(javaversionnumber == 23) {

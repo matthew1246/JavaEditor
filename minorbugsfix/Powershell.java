@@ -77,7 +77,10 @@ public class Powershell {
 		try {
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory);
+			if(packager.containsPackage() && packager.isInRightFolders()) {	
+				parentdirectory=file;	
+			}
+			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			if(!packager.containsPackage()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 				if(javaversionnumber != 23) {
