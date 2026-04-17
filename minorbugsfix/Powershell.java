@@ -75,13 +75,18 @@ public class Powershell {
 	}
 	public void makeJar(int javaversionnumber) {
 		try {
+			String main_class2 = main_class;
+			if(packager.containsPackage()) {
+				String[] splited=  main_class.split("\\.");
+				main_class2 = splited[splited.length-1];
+			}
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
 			if(packager.containsPackage() && packager.isInRightFolders()) {	
 				parentdirectory=file;	
 			}
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
-			if(!packager.containsPackage()) {
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 				if(javaversionnumber != 23) {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
@@ -92,19 +97,16 @@ public class Powershell {
 					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class+".jar");
 				}
 			}
-			else { // Code is a packgage com.whatever
-				String[] splited=  main_class.split("\\.");
-				String main_class2 = splited[splited.length-1];
-				
+			else { // Code is a package and package.isInRightFolder() == true
 				if(javaversionnumber != 23) {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
 				}
 				else {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .");
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
 				}
-				output2.write("\n");
-				output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");	
-			}						
+			}
+			output2.write("\n");
+			output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");						
 			output2.write("\n");
 			// output2.close();
 		} catch (IOException ex) {
