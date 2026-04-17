@@ -2570,7 +2570,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				ex.printStackTrace();
 			}		
 		});
-		compile.addActionListener(new ActionListener() {						
+		compile.addActionListener(new ActionListener() {								
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);	
