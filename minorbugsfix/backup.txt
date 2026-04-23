@@ -27,7 +27,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\FileListModifier.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\CommandLine.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\CommandLine.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\StoreSelectedFile.java"
     ],
     "caretposition": 0
   },
@@ -1123,7 +1124,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 94563
+    "caretposition": 114572
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
     "isLocked": false,

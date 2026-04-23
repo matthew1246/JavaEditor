@@ -3063,9 +3063,10 @@ CommandLine commandline = new CommandLine();
 									
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
-										storeselectedfile = new StoreSelectedFile();
+										/*storeselectedfile = new StoreSelectedFile();
 										storeselectedfile.set(fileName);
 										storeselectedfile.setStarterClass(fileName);
+										*/
 										
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(classpath1+selected+".java");
