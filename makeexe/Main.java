@@ -3059,7 +3059,7 @@ CommandLine commandline = new CommandLine();
 										}
 									}
 									if(!classpath1.endsWith("\\"))
-										classpath1+="\\";
+										classpath1=classpath1+"\\";
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
 										/*storeselectedfile = new StoreSelectedFile();
