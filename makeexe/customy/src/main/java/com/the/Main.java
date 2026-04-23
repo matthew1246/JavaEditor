@@ -3070,7 +3070,10 @@ CommandLine commandline = new CommandLine();
 										*/
 										
 										storeselectedfile = new StoreSelectedFile();
-										preferences=storeselectedfile.get(classpath1+selected+".java");
+										String rightfolder=Main.getDirectory(fileName);
+										if(!rightfolder.endsWith("\\"))
+											rightfolder=rightfolder+"\\";
+										preferences=storeselectedfile.get(rightfolder+selected+".java");
 										for(String jar:preferences.jars) {
 											commandline.addExternalJar(jar);
 										}
