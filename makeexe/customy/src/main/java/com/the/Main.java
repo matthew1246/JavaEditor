@@ -3060,7 +3060,8 @@ CommandLine commandline = new CommandLine();
 											commandline.addPackageWithMinusD(packager.getPackageName());
 										}
 									}
-									
+									if(!classpath1.endsWith("\\"))
+										classpath1+="\\";
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
 										/*storeselectedfile = new StoreSelectedFile();
@@ -5544,4 +5545,4 @@ class RightClickJFrame {
 			ex.printStackTrace();
 		}
 	}
-}
+}
