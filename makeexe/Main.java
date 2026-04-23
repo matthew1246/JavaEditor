@@ -3034,7 +3034,7 @@ CommandLine commandline = new CommandLine();
 								command[1] = "/c";
 								command[2] = commandline.javac();
 								runtime = Runtime.getRuntime();
-								classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
+								// classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
 								Process process = runtime.exec(command,null,new File(classpath1));
 								// process=Main.this.compileFromMSDOS(fileName,classpath1);
 								

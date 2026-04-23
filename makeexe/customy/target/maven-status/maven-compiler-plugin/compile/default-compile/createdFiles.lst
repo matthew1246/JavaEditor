@@ -111,6 +111,7 @@ com\the\Git$2.class
 com\the\Main$13.class
 com\the\AddDependency.class
 com\the\MethodSuggestionBox.class
+com\the\Packager.class
 com\the\CompileErrors$GoToLineCompileError.class
 com\the\IsVariableSelected.class
 com\the\StoreSelectedFile.class

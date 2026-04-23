@@ -12,7 +12,7 @@ public class CommandLine {
 	public String main_class;
 	private List<String> jars = new ArrayList<String>();
 	
-public boolean isdeprecated = false;
+	public boolean isdeprecated = false;
 	public boolean isearlierversion = false;
 	public int javaversion;
 	public void earlierjavaversion(int javaversion) {
@@ -67,17 +67,42 @@ public boolean isdeprecated = false;
 		
 		java_star_nor_dot.setStarNorDot(".");
 	}
+	private String packagename;
 	
+private boolean isPackage = false;
+	public void addPackage(String packagename) {
+		isPackage = true;	
+		this.packagename=packagename;
+	}
+	private boolean isPackageWithMinusD=false;
+	public void addPackageWithMinusD(String packagename) {
+		isPackageWithMinusD = true;	
+		this.packagename=packagename;			
+	}	
+	public void addPackageWithMinusD() {
+		isPackageWithMinusD = true;		
+	}
 	/*
 	** This adds all jars in public static void main(String[] args) directory.
 	*/
 	public void addClasspathCheckboxFeature() {
-		// javac_star_nor_dot.setStarNorDot("*");
-		javac_star_nor_dot.setStarNorDot(".;*");
+		String default0 = ".;*";
+		if(isPackage && !isPackageWithMinusD) {
+			default0=".;*";
+		}
+		else if(isPackageWithMinusD) {
+			default0=".;*";
+		}
+		javac_star_nor_dot.setStarNorDot(default0);
 		javac_star_nor_dot.lock();
 		
-		// java_star_nor_dot.setStarNorDot("*;.");
-		java_star_nor_dot.setStarNorDot(".;*");
+		if(isPackage && !isPackageWithMinusD) {
+			default0=".;*";
+		}
+		else if(isPackageWithMinusD) {
+			default0=".;*";
+		}
+		java_star_nor_dot.setStarNorDot(default0);
 		java_star_nor_dot.lock();
 	}
 	
@@ -89,7 +114,7 @@ public boolean isdeprecated = false;
 		if(isjavaorjavac.isEmpty() && jars.size() == 0) {
 			return "";
 		}
-		String classpath = "-cp ";
+		String classpath = "";
 		if(jars.size() > 0) { 
 			classpath= classpath+jars.get(0);
 			for(int i = 1; i < jars.size(); i++) {
@@ -97,12 +122,13 @@ public boolean isdeprecated = false;
 			}
 		}
 		if(!isjavaorjavac.isEmpty() && jars.size() > 0) {
-			classpath=classpath+";";
+			classpath=";"+classpath;
 		}
 		if(!isjavaorjavac.isEmpty()) {
-			classpath=classpath+isjavaorjavac.getStarNorDot();
+			classpath=isjavaorjavac.getStarNorDot()+classpath;
 		}
 		
+classpath = "-cp "+classpath;
 		return classpath;
 	}
 	
@@ -120,24 +146,35 @@ public boolean isdeprecated = false;
 	}
 	
 	public String javac() {
+		String package1 = "";
+		if(isPackage && !isPackageWithMinusD) {
+			package1=packagename.replace(".","\\")+"\\";
+		}						
 		String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
-		
-		// String str = "javac";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
 		}
 		if(isearlierversion) {
 			str+=" --release "+javaversion;
 		}
-		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+main_class+".java";
+		if(isPackageWithMinusD) {
+			str+=" -d . ";			
+		}		
+		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+package1+main_class+".java";
 		JOptionPane.showMessageDialog(null,str);
 		return str;
 	}
 	
 	public String java() {
-		String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
-		
-		// String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+main_class;
+		String package2="";
+		if(isPackage && !isPackageWithMinusD) {
+			package2=packagename+".";
+		}			
+		else if(isPackageWithMinusD) {
+			package2=packagename+".";
+		}		
+		//String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
 		JOptionPane.showMessageDialog(null,command);
 		return command;
 	}	

@@ -224,3 +224,4 @@ public class StarterJComboBox {
 		main.startupcombobox.repaint();
 	}
 }
+
