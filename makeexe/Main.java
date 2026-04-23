@@ -1,3 +1,5 @@
+import java.nio.file.StandardCopyOption;
+import java.nio.file.DirectoryStream;
 import java.awt.KeyboardFocusManager;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
@@ -171,7 +173,10 @@ public class Main {
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
-				}
+				}
+
+
+
 			};
 			swingworker.execute();
 		});
@@ -181,7 +186,8 @@ public class Main {
 	
 	*/
 	public Main() {
-		msdos = new MSDOS(this);
+	
+	msdos = new MSDOS(this);
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
 		fileName = "";
@@ -293,7 +299,8 @@ public class Main {
 										
 		setLayout();
 		
-		if(fileName.equals("")) {	
+		if(fileName.equals("")) {
+	
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
@@ -508,7 +515,8 @@ public class Main {
    	 	 	};
  	 	 	swingworker.execute();
 		}
-		setListeners();								
+		setListeners();	
+							
 		SwingWorker<Links,Void> swingworker10 = new SwingWorker<>() {
 			@Override
 			protected Links doInBackground() {
@@ -631,7 +639,8 @@ public class Main {
 					ex.printStackTrace();
 				}
 			}
-		};
+		}
+;
 		swingworker.execute();
 		*/	
 	}
@@ -1160,7 +1169,8 @@ edit.add(functionLines);
 		textarea.requestFocus();
 		textarea.setTabSize(4);
 		
-	}
+	}
+
 			
 	public void updateMethodComboBox(ItemEvent ie) {
 		final String classname = (String)classnamescombobox.getSelectedItem();						
@@ -1214,7 +1224,8 @@ edit.add(functionLines);
 
 		        }
 		    });
-	}	
+	}
+	
 	public void scrollToCaretPosition(int wholedocumenttindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
@@ -1304,7 +1315,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		}
 	}
-	public StarterJComboBox startercombobox;		
+	public StarterJComboBox startercombobox;
+		
 	public MSDOS msdos;
 	public void open(String selected2) {
 		try {
@@ -1614,7 +1626,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				ex.printStackTrace();
 			}
 		});		
-		closetab.addActionListener((ev) -> {							
+		closetab.addActionListener((ev) -> {					
+		
 			int tabtindex=tabbedpane.getSelectedIndex();
 			//if(fileNames.size() != 0 && tabtindex != 0)
 				//tabbedpane.setSelectedIndex((tabtindex-1));
@@ -1708,6 +1721,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});
 		
 		generatejar.addActionListener((ev) -> {
+		
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
@@ -1783,13 +1797,36 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							String main=preferences.starterclass;
 							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
 							
+Packager packager2 = new Packager(this);
+							if(packager2.containsPackage()) {
+								if(packager2.isInRightFolders()) {
+									dir=packager2.classpath;
+								}
+							}
+							if(!dir.endsWith("\\"))
+								dir=dir+"\\";
 							if(!fileName.equals("")) {
 								List<String> jars = preferences.jars;
-								for(String jar:jars) {
-									jar = getFileName(jar);
-									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-									process.waitFor();
-									//output.write(" "+jar);
+								if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
+									for(String jar:jars) {
+										// jar = getFileName(jar);
+										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+										process.waitFor();
+										//output.write(" "+jar);
+									}		
+								}
+								else { // Package used javac.exe didn't used -d option
+									JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+									File createdir = new File(dir+"jars");
+									if(!createdir.exists()) {
+										createdir.mkdir();
+									}
+									for(String jar:jars) {
+										// jar = getFileName(jar);
+										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+										process.waitFor();
+										//output.write(" "+jar);
+									}
 								}
 							}
 							if(!fileName.equals("")) {
@@ -1807,7 +1844,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							output.write("Manifest-Version: 1.0");
 							output.write("\n");
 							output.write("Main-Class: ");
-							output.write(main);
+							Packager packager = new Packager(this);
+							if(!packager.containsPackage()) {
+								output.write(main);
+							}
+							else {
+								output.write(packager.getPackageName()+"."+main);
+							}
+
 							output.write("\n");
 							//output.write("Class-Path:");
 							//output.write(" *");
@@ -1834,7 +1878,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 								}
 								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+								if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+								}
+								else {
+									if(packager2.isInRightFolders()) {
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+									}
+								}
 								output2.write("\n");
 								
 								commandline = new CommandLine();
@@ -1849,7 +1900,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else {
 								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+								if(packager2.containsPackage()) {
+									if(!packager2.isInRightFolders()) { // javac.exe used -d option
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+									}
+									else { // packager2.isInRightFolders()
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+									}
+								}
 								JOptionPane.showMessageDialog(null,input);
+								JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
 								Process process=commandline.run(input,dir);
 								
 								InputStream inputstream = process.getErrorStream();
@@ -1889,14 +1949,37 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=storeselectedfile.get(fileName);
 						String main=preferences.starterclass;
 						String dir = fileName.replaceAll("[^\\\\]+\\.java","");
+						Packager packager3=new Packager(this);
+						if(packager3.containsPackage()) {		
+							if(packager3.isInRightFolders()) {
+								dir=packager3.classpath;	
+							}							
+						}
+						if(!dir.endsWith("\\"))
+							dir = dir+"\\";
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
-							for(String jar:jars) {
-								jar = getFileName(jar);
-								Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-								process.waitFor();
-								//output.write(" "+jar);
+							if(!packager3.containsPackage() || !packager3.isInRightFolders()) { // Contains no package
+								for(String jar:jars) {
+									// jar = getFileName(jar);
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+									process.waitFor();
+									//output.write(" "+jar);
+								}
 							}
+							else { // Package used javac.exe didn't used -d option
+								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+								File createdir = new File(dir+"jars");
+								if(!createdir.exists()) {
+									createdir.mkdir();
+								}
+								for(String jar:jars) {
+									// jar = getFileName(jar);
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+									process.waitFor();
+									//output.write(" "+jar);
+								}
+							}		
 						}
 						if(!fileName.equals("")) {
 							if(main.equals("")) {
@@ -1914,7 +1997,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						output.write("Manifest-Version: 1.0");
 						output.write("\n");
 						output.write("Main-Class: ");
-						output.write(main);
+						if(!packager3.containsPackage()) {
+							output.write(main);
+						}
+						else { // Contains package name
+							output.write(packager3.getPackageName()+"."+main);
+						}
 						output.write("\n");
 						//output.write("Class-Path: ");
 						//output.write("javafx/lib/");
@@ -1944,7 +2032,20 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-							output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+							Packager packager2 = new Packager(this);
+							if(!packager2.containsPackage()) { // Doesn't contain package.
+								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+							}
+							else { // Contains package
+								if(!packager2.isInRightFolders()) { // javac.exe used -d option
+								
+	
+output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+								}
+								else { // packager2.isInRightFolders()
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+								}
+							}
 							output2.write("\n");
 							
 							commandline = new CommandLine();
@@ -1958,7 +2059,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						}
 						else { 
 							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+							if(packager3.containsPackage()) {
+								if(!packager3.isInRightFolders()) { // javac.exe used -d option
+									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+								}
+								else { // packager2.isInRightFolders()
+									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+								}
+							}
 							JOptionPane.showMessageDialog(null,input);
+							JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
 							Process process=commandline.run(input,dir);
 							
 							InputStream inputstream = process.getErrorStream();
@@ -2172,7 +2282,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				panel0.validate();
 				panel0.repaint();
 		
-				JCheckBox searchall = new JCheckBox("all");
+				JCheckBox searchall = new JCheckBox("all");
+
 				searchall.setMargin(new Insets(0,0,0,0));
 				panel0.add(searchall);
 				
@@ -2487,9 +2598,130 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					sal.actionPerformed(e);
 					if(!fileName.equals("")) {
-						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
-	
 						CommandLine commandline = new CommandLine();
+						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+						
+						String filename = getFileName(fileName);
+						Packager packager = new Packager(Main.this);
+						if(packager.containsPackage()) {		
+							if(packager.isInRightFolders()) {							
+								commandline.addPackage(packager.getPackageName());
+								classpath=packager.classpath;
+								String packagename=packager.getPackageName();
+								labely: for(String file:filelistmodifier.fullpath) {
+									Packager packagerCustomFile=new Packager(file);
+									if(!packagename.equals(packagerCustomFile.getPackageName())) {
+										String[] options={"Yes","No"};
+										int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										switch(option) {
+											case JOptionPane.YES_OPTION:
+												Path targetDir = Path.of(Main.getDirectory(fileName));
+											   	try {
+										        			//Files.createDirectories(targetDir);
+											
+												       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
+													          	for (Path entry : stream) {
+													
+															// Read file
+															String content = Files.readString(entry);
+														
+															// Remove existing package if present
+															content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+														
+															// Prepend correct package
+															content = "package "+packagename + ";\n\n" + content;
+														
+															// Write to target
+															Path targetFile = targetDir.resolve(entry.getFileName());
+															Files.writeString(targetFile, content);
+													            }
+													}
+													JOptionPane.showMessageDialog(null,"Code Updated");
+												} catch (Exception ex) {
+											        		ex.printStackTrace();
+											    	}
+												break;
+											case JOptionPane.NO_OPTION:
+												break;
+										}
+										break labely;				
+									}
+								}
+							}
+							else { // package name is not in right folder
+								commandline.addPackageWithMinusD();
+								filelistmodifier=new FileListModifier(fileName);
+								String packagename=packager.getPackageName();
+								
+								// Make all classes in same folder have same package name
+								labely: for(String file:filelistmodifier.fullpath) {
+									Packager packagerCustomFile=new Packager(file);
+									if(!packagename.equals(packagerCustomFile.getPackageName())) {
+										String[] options={"Yes","No"};
+										int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										switch(option) {
+											case JOptionPane.YES_OPTION:
+												Path targetDir = Path.of(Main.getDirectory(fileName));
+											   	try {
+										        			//Files.createDirectories(targetDir);
+											
+												       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
+													          	for (Path entry : stream) {
+													
+															// Read file
+															String content = Files.readString(entry);
+														
+															// Remove existing package if present
+															content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+														
+															// Prepend correct package
+															content = "package "+packagename + ";\n\n" + content;
+														
+															// Write to target
+															Path targetFile = targetDir.resolve(entry.getFileName());
+															Files.writeString(targetFile, content);
+													            }
+													}
+													JOptionPane.showMessageDialog(null,"Code Updated");
+												} catch (Exception ex) {
+											        		ex.printStackTrace();
+											    	}
+												break;
+											case JOptionPane.NO_OPTION:
+												break;
+										}
+										break labely;				
+									}
+								}
+								
+								// Copy all classes with the same package name to new folder
+								File targetDir = new File(classpath+packagename.replace(".","\\"));   
+								// destination folder
+								targetDir.mkdirs();
+								for(String file:filelistmodifier.fullpath) {
+									Packager packagerCustomFile=new Packager(file);
+									if(file.equals(filename) || packagerCustomFile.containsPackage()) {
+										if(packagename.equals(packagerCustomFile.getPackageName())) {
+											File selectedFile=new File(file);	
+										            File targetFile = new File(targetDir, selectedFile.getName());
+										            try {
+										                Files.copy(
+										                        selectedFile.toPath(),
+										                        targetFile.toPath(),
+										                        StandardCopyOption.REPLACE_EXISTING
+										                );
+										                System.out.println("File copied successfully!");
+										            } catch (IOException ex) {
+										                JOptionPane.showMessageDialog(null, "Copy failed: " + ex.getMessage());
+										            }
+	
+										}
+									}
+								}
+							}
+						}
+						JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
+
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
 						
@@ -2548,6 +2780,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});
 		
 		run.addActionListener(new ActionListener() {
+		
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);	
@@ -2597,7 +2830,20 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(isCompiled && string.equals(lines2)) { // End check if already saved
 								System.out.println("Is equal.");
 								
-								CommandLine commandline = new CommandLine();
+CommandLine commandline = new CommandLine();
+								
+								Packager packager = new Packager(Main.this);
+								if(packager.containsPackage()) {		
+									if(packager.isInRightFolders()) {
+										commandline.addPackage(packager.getPackageName());
+										classpath1=packager.classpath;
+									}
+									else { // package name is not in right folder
+										commandline.addPackageWithMinusD(packager.getPackageName());
+									}
+								}
+								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
+								
 								if(jarcheckbox.isSelected()) {
 									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 									commandline.addJunit();
@@ -2658,8 +2904,130 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								commandline.setMainClass(main_class);
 								if(checkbox.isSelected()) {
 									commandline.addClasspathCheckboxFeature();
-								}	
-						
+								}
+								
+								String filename = getFileName(fileName);
+								Packager packager = new Packager(Main.this);
+								if(packager.containsPackage()) {		
+									if(packager.isInRightFolders()) {
+										commandline.addPackage(packager.getPackageName());
+										classpath1=packager.classpath;
+										String packagename=packager.getPackageName();
+										labely: for(String file:filelistmodifier.fullpath) {
+											Packager packagerCustomFile=new Packager(file);
+											if(!packagename.equals(packagerCustomFile.getPackageName())) {
+												String[] options={"Yes","No"};
+												int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+												switch(option) {
+													case JOptionPane.YES_OPTION:
+														Path targetDir = Path.of(Main.getDirectory(fileName));
+													   	try {
+												        			//Files.createDirectories(targetDir);
+													
+														       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
+															          	for (Path entry : stream) {
+															
+																	// Read file
+																	String content = Files.readString(entry);
+																
+																	// Remove existing package if present
+																	content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+																
+																	// Prepend correct package
+																	content = "package "+packagename + ";\n\n" + content;
+																
+																	// Write to target
+																	Path targetFile = targetDir.resolve(entry.getFileName());
+																	Files.writeString(targetFile, content);
+															            }
+															}
+															JOptionPane.showMessageDialog(null,"Code Updated");
+														} catch (Exception ex) {
+													        		ex.printStackTrace();
+													    	}
+														break;
+													case JOptionPane.NO_OPTION:
+														break;
+												}
+												break labely;				
+											}
+										}
+									}
+									else { // package name is not in right folder
+										commandline.addPackageWithMinusD();
+										filelistmodifier=new FileListModifier(fileName);
+										String packagename=packager.getPackageName();
+										
+										// Make all classes in same folder have same package name
+										labely: for(String file:filelistmodifier.fullpath) {
+											Packager packagerCustomFile=new Packager(file);
+											if(!packagename.equals(packagerCustomFile.getPackageName())) {
+												String[] options={"Yes","No"};
+												int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+												switch(option) {
+													case JOptionPane.YES_OPTION:
+														Path targetDir = Path.of(Main.getDirectory(fileName));
+													   	try {
+												        			//Files.createDirectories(targetDir);
+													
+														       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
+															          	for (Path entry : stream) {
+															
+																	// Read file
+																	String content = Files.readString(entry);
+																
+																	// Remove existing package if present
+																	content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+																
+																	// Prepend correct package
+																	content = "package "+packagename + ";\n\n" + content;
+																
+																	// Write to target
+																	Path targetFile = targetDir.resolve(entry.getFileName());
+																	Files.writeString(targetFile, content);
+															            }
+															}
+															JOptionPane.showMessageDialog(null,"Code Updated");
+														} catch (Exception ex) {
+													        		ex.printStackTrace();
+													    	}
+														break;
+													case JOptionPane.NO_OPTION:
+														break;
+												}
+												break labely;				
+											}
+										}
+										
+										// Copy all classes with the same package name to new folder
+										File targetDir = new File(classpath1+packagename.replace(".","\\"));   
+										// destination folder
+										targetDir.mkdirs();
+										for(String file:filelistmodifier.fullpath) {
+											Packager packagerCustomFile=new Packager(file);
+											if(filename.equals(file) || packagerCustomFile.containsPackage()) {
+												if(packagename.equals(packagerCustomFile.getPackageName())) {
+													File selectedFile=new File(file);	
+												            File targetFile = new File(targetDir, selectedFile.getName());
+												            try {
+												                Files.copy(
+												                        selectedFile.toPath(),
+												                        targetFile.toPath(),
+												                        StandardCopyOption.REPLACE_EXISTING
+												                );
+												                System.out.println("File copied successfully!");
+												            } catch (IOException ex) {
+												                JOptionPane.showMessageDialog(null, "Copy failed: " + ex.getMessage());
+												            }
+			
+												}
+											}
+										}
+									}
+								}
+								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
+								
+								startercombobox.Change(fileName);	
 								// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
 								String[] command = new String[3];
 								command[0] = "cmd.exe";
@@ -2667,7 +3035,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								command[2] = commandline.javac();
 								runtime = Runtime.getRuntime();
 								classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
-								startercombobox.Change(fileName);
 								Process process = runtime.exec(command,null,new File(classpath1));
 								// process=Main.this.compileFromMSDOS(fileName,classpath1);
 								
@@ -2681,6 +3048,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	 								String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 
 									commandline = new CommandLine();
+									
+									if(packager.containsPackage()) {		
+										if(packager.isInRightFolders()) {
+											commandline.addPackage(packager.getPackageName());
+											classpath1=packager.classpath;
+										}
+										else { // package name is not in right folder
+											commandline.addPackageWithMinusD(packager.getPackageName());
+										}
+									}
+									
 									if(lock.isSelected()) {
 										String save = selected.replace(".java","");
 										storeselectedfile = new StoreSelectedFile();
@@ -2721,7 +3099,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									command[5] = commandline.java();
 									
 									// setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
-									startercombobox.Change(fileName);
+									
+startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
 									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);																
 								}
@@ -2919,7 +3298,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
-				}*/
+				}*/
+
 				
 				this.fileName=fileName;
 					
@@ -3278,7 +3658,8 @@ class Expandable {
 			jtree = new JTree(main.filelistmodifier.original.toArray(new Object[main.filelistmodifier.original.size()]));
 			jscrollpane.setViewportView(jtree);
 			setListener();
-		}
+		}
+
 	}
 	public void setListener() {
 		MouseListener ml = new MouseAdapter() {
@@ -5160,4 +5541,4 @@ class RightClickJFrame {
 			ex.printStackTrace();
 		}
 	}
-}
+}
