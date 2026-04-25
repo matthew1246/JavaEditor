@@ -2965,7 +2965,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									
 									commandline.setMainClass(save);
-									Preferences preferences=storeselectedfile.get(classpath1+selected+".java");
+									String rightfolder=Main.getDirectory(fileName);
+									if(!rightfolder.endsWith("\\"))
+										rightfolder=rightfolder+"\\";
+									Preferences preferences=storeselectedfile.get(rightfolder+selected+".java");
 									for(String jar:preferences.jars) {
 										commandline.addExternalJar(jar);
 									}
@@ -3079,7 +3082,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										storeselectedfile.setStarterClass(classpath1+selected+".java");
 										
 										storeselectedfile = new StoreSelectedFile();
-										preferences=storeselectedfile.get(classpath1+selected+".java");
+										String rightfolder=Main.getDirectory(fileName);
+										if(!rightfolder.endsWith("\\"))
+											rightfolder=rightfolder+"\\";
+										preferences=storeselectedfile.get(rightfolder+selected+".java");
 										for(String jar:preferences.jars) {
 											commandline.addExternalJar(jar);
 										}

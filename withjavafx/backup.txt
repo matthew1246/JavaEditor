@@ -3,14 +3,11 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\ajz\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SubZeroXX.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ManterX.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -768,7 +765,9 @@
   "C:\\Users\\Owner\\Documents\\ajz\\Main.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
@@ -786,9 +785,10 @@
     "caretposition": 110
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ManterX.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "ManterX"
     ],
     "starterclass": "",
