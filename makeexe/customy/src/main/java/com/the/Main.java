@@ -2853,11 +2853,15 @@ CommandLine commandline = new CommandLine();
 								if(lock.isSelected()) {
 									String save = selected.replace(".java","");
 									StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-									storeselectedfile.set(fileName);
+									/*storeselectedfile.set(fileName);
 									storeselectedfile.setStarterClass(fileName);
+									*/
 									commandline.setMainClass(save);
 									
-									Preferences preferences=storeselectedfile.get(classpath1+selected+".java");
+									String rightfolder=Main.getDirectory(fileName);
+									if(!rightfolder.endsWith("\\"))
+										rightfolder=rightfolder+"\\";
+									Preferences preferences=storeselectedfile.get(rightfolder+selected+".java");
 									for(String jar:preferences.jars) {
 										commandline.addExternalJar(jar);
 									}
