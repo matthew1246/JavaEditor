@@ -3782,6 +3782,7 @@ class SaveActionListener implements ActionListener {
 			String text = main.textarea.getText();
 			if(!main.fileName.equals("")) {
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+				storeselectedfile.set(main.fileName);
 				storeselectedfile.setCaretPosition(main.fileName,main.textarea.getCaretPosition());
 				boolean isSet=(new File(main.fileName)).exists();
 				PrintWriter output = new PrintWriter(main.fileName);
@@ -3826,7 +3827,7 @@ class SaveActionListener implements ActionListener {
 						}
 					}
 					
-	main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),main.fileName.replaceAll(".+\\\\",""));
+					main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),main.fileName.replaceAll(".+\\\\",""));
 					List<String> tabs=main.fileNames;
 					int tabsize = main.tabbedpane.getSelectedIndex();
 
@@ -3837,6 +3838,7 @@ class SaveActionListener implements ActionListener {
 			                       	tabs.set(tabsize,main.fileName);
 			               	}
 			               	StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			               	storeselectedfile.set(main.fileName);
 			               	storeselectedfile.setTabs(tabs);
 			               	storeselectedfile.setStarterClass(main.fileName);
 				}
