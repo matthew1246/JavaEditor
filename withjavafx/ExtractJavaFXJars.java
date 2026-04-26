@@ -48,10 +48,22 @@ public class ExtractJavaFXJars {
 	public String starter;
 	public void createStarter() {
 		try {
-			String dir = main.getDirectory(main.fileName);	
+			Packager packager = new Packager(main);
+			String dir = "";
+			if(!packager.containsPackage()) { // Not in package
+				dir=main.getDirectory(main.fileName);
+			}
+			else { // In package
+				packager.isInRightFolders(); // sets on next line: packager.classpath
+				dir=packager.classpath;
+			}
+			if(!dir.endsWith("\\"))
+				dir=dir+"\\";
 			String normalmain=main.getFileName(main.fileName).replace(".java","");
 			this.starter = normalmain+"two";
 			PrintWriter printwriter = new PrintWriter(dir+this.starter+".java");
+			if(packager.containsPackage())
+				printwriter.println("package "+packager.getPackageName()+";");
 			printwriter.println("public class "+starter+" {");
 			printwriter.println("\tpublic static void main(String[] args) {");
 			printwriter.println("\t\t"+normalmain+".launch("+normalmain+".class,args);");
