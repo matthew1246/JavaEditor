@@ -28,7 +28,7 @@ public class ExtractJavaFXJars {
 			this.dir = Main.getDirectory(main.fileName);
 		}
 		else {
-			dir=packager.classpath;
+			this.dir=packager.classpath;
 		}
 		if(!isAlreadyExtracted()) {
 			extractJars();
