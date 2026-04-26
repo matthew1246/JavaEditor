@@ -302,9 +302,10 @@
     "caretposition": 96
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "ExtractJavaFXJars"
     ],
     "starterclass": "",
@@ -313,7 +314,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 1599
+    "caretposition": 1888
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
     "isLocked": false,
