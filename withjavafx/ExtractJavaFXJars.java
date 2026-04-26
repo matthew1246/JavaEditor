@@ -20,9 +20,16 @@ import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 public class ExtractJavaFXJars {
 	public Main main;
+	public Packager packager;
 	public ExtractJavaFXJars(Main main) {	
 		this.main = main;
-		
+		packager = new Packager(main);
+		if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			this.dir = Main.getDirectory(main.fileName);
+		}
+		else {
+			dir=packager.classpath;
+		}
 		if(!isAlreadyExtracted()) {
 			extractJars();
 			unzipJars();
@@ -37,7 +44,14 @@ public class ExtractJavaFXJars {
 		createStarter();
 	}
 	public void delete_moduleinfo() {
-		File file = new File(main.getDirectory(main.fileName),"module-info.class");
+		String dir = "";
+		if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			dir=main.getDirectory(main.fileName);
+		}
+		else { // packager.isInRightFolders() == true
+			dir=packager.classpath;
+		}
+		File file = new File(dir,"module-info.class");
 		System.out.println("ExtractJavaFXJars.delete_moduleinfo() is being executed!");
 		if(file.exists()) {
 			System.out.println("module-info.class exists");
@@ -48,7 +62,6 @@ public class ExtractJavaFXJars {
 	public String starter;
 	public void createStarter() {
 		try {
-			Packager packager = new Packager(main);
 			String dir = main.getDirectory(main.fileName);
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
@@ -128,11 +141,10 @@ public class ExtractJavaFXJars {
         	ex.printStackTrace();
         }
     }
-	
+	public final String dir;
 	public void unzipJars() {
 		CommandLine commandline = new CommandLine();	
 		String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
-		String dir = main.getDirectory(main.fileName);
 		
 		for(String jar:commandline.getJavaFX()) {
 			           		/*ProcessBuilder pb = new ProcessBuilder(
@@ -204,7 +216,13 @@ public class ExtractJavaFXJars {
 	}
 	public void extractDLLFiles() {
 		try {
-			String dir=main.getDirectory(main.fileName);	
+			String dir = "";
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+			}
 			for(String dll:getDLLFiles()) {
 				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(dll);	
 				InputStream inputstream=url.openStream();
@@ -462,13 +480,25 @@ public class ExtractJavaFXJars {
 		return true;
 	}
 	public boolean fileExists(String dll) {
-		String dir=main.getDirectory(main.fileName);		
+		String dir = "";
+		if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			dir=main.getDirectory(main.fileName);
+		}
+		else { // packager.isInRightFolders() == true
+			dir=packager.classpath;
+		}	
 		File file = new File(dir+dll);
 		return file.exists();
 	}
 	public void extractStrangeFiles() {
 		try {	
-			String dir=main.getDirectory(main.fileName);	
+			String dir = "";
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+			}
 			URL url=ExtractJavaFXJars.class.getClassLoader().getResource("javafx.properties");	
 			InputStream inputstream=url.openStream();
 			Path outputpath=Paths.get(dir+"javafx.properties");
@@ -479,7 +509,13 @@ public class ExtractJavaFXJars {
 		}
 	}
 	public boolean strangeFilesExtracted() {
-		String dir=main.getDirectory(main.fileName);		
+		String dir = "";
+		if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			dir=main.getDirectory(main.fileName);
+		}
+		else { // packager.isInRightFolders() == true
+			dir=packager.classpath;
+		}	
 		File file = new File(dir+"javafx.properties");
 		return file.exists();
 	}
@@ -487,7 +523,13 @@ public class ExtractJavaFXJars {
 		try {
 			CommandLine commandline = new CommandLine();
 			List<String> jars=commandline.getJavaFX();
-			String dir=main.getDirectory(main.fileName);	
+			String dir = "";
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+			}
 			for(String jar:jars) {
 				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(jar);	
 				InputStream inputstream=url.openStream();
@@ -502,7 +544,13 @@ public class ExtractJavaFXJars {
 	public boolean isAlreadyExtracted() {
 		CommandLine commandline = new CommandLine();
 		List<String> jars=commandline.getJavaFX();
-		String dir=main.getDirectory(main.fileName);	
+		String dir = "";
+		if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			dir=main.getDirectory(main.fileName);
+		}
+		else { // packager.isInRightFolders() == true
+			dir=packager.classpath;
+		}
 		for(String jar:jars) {
 			File file = new File(dir+jar);
 			if(!file.exists())
