@@ -50,12 +50,14 @@ public class ExtractJavaFXJars {
 		try {
 			Packager packager = new Packager(main);
 			String dir = "";
-			if(!packager.containsPackage()) { // Not in package
+			if(!packager.containsPackage() || packager.isInRightFolders()) {
 				dir=main.getDirectory(main.fileName);
 			}
-			else { // In package
-				packager.isInRightFolders(); // sets on next line: packager.classpath
-				dir=packager.classpath;
+			else { // !packager.isInRightFolders()
+				dir=main.getDirectory(main.fileName);
+				if(!dir.endsWith("\\"))
+					dir=dir+"\\";
+				dir=dir+packager.getPackageName().replace(".","\\");	
 			}
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";

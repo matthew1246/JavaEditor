@@ -27,7 +27,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 101800
+    "caretposition": 102115
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -314,7 +314,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 1888
+    "caretposition": 1541
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
     "isLocked": false,
@@ -835,9 +835,10 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Packager.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Packager"
     ],
     "starterclass": "",
