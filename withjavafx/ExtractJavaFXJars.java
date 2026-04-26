@@ -24,12 +24,6 @@ public class ExtractJavaFXJars {
 	public ExtractJavaFXJars(Main main) {	
 		this.main = main;
 		packager = new Packager(main);
-		if(!packager.containsPackage() || !packager.isInRightFolders()) {
-			this.dir = Main.getDirectory(main.fileName);
-		}
-		else {
-			this.dir=packager.classpath;
-		}
 		if(!isAlreadyExtracted()) {
 			extractJars();
 			unzipJars();
@@ -85,63 +79,7 @@ public class ExtractJavaFXJars {
 			ex.printStackTrace();
 		}
 	}
-	private static void runProcessAndStreamOutput(File dir,JFrame extractframe,JTextArea textArea, String... command) {
-        SwingWorker<Void, String> worker = new SwingWorker<>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                ProcessBuilder builder = new ProcessBuilder(command);
-                builder.directory(dir);
-                builder.redirectErrorStream(true);
-                Process process = builder.start();
-
-                /*Thread thread=new Thread(new Runnable() {
-                	public void run() {
-                */
-                		try {
-		           		BufferedReader reader = new BufferedReader(
-		                        new InputStreamReader(process.getInputStream()));
-		                    String line;
-		                    while ((line = reader.readLine()) != null) {
-		                        publish(line);
-		                    }
-	                    } catch(IOException ex) {
-	                    	ex.printStackTrace();
-                    	         }
-	   /*        }
-               });
-               thread.start();
-               */
-
-                int exitCode = process.waitFor();
-  	    if(exitCode == 0) {
-  	            JOptionPane.showMessageDialog(null,"Extraction of "+command+" was a success.");
-              	extractframe.dispose();
-                }
-	     else
-	            JOptionPane.showMessageDialog(null,"Could not extract "+command+"!");
-				            	
-                return null;
-            }
-
-            @Override
-            protected void process(List<String> chunks) {
-                for (String line : chunks) {
-                    textArea.append(line + "\n");
-                }
-            }
-        };
-        worker.execute();
-         try {
-          worker.get();
-        }
-        catch(java.util.concurrent.ExecutionException ex){
-        	ex.printStackTrace();
-        }
-        catch(InterruptedException ex) {
-        	ex.printStackTrace();
-        }
-    }
-	public final String dir;
+	
 	public void unzipJars() {
 		CommandLine commandline = new CommandLine();	
 		String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
@@ -165,12 +103,20 @@ public class ExtractJavaFXJars {
 					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					extractframe.setVisible(true);		
 			                    	
+			                    	String dir = "";
+        					if(!packager.containsPackage() || !packager.isInRightFolders()) {
+						dir = Main.getDirectory(main.fileName);
+					}
+					else {
+						dir=packager.classpath;
+					}
+					final String dir2 = dir;
 			                    	SwingWorker<Void, String> worker = new SwingWorker<>() {
 						   @Override
 						    protected Void doInBackground() throws Exception {
 						    	
 						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar);
-						        pb.directory(new File(dir));
+						        pb.directory(new File(dir2));
 						        pb.redirectErrorStream(true); // Merge stderr with stdout
 						        Process process = pb.start();
 						
