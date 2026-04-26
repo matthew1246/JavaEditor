@@ -49,16 +49,7 @@ public class ExtractJavaFXJars {
 	public void createStarter() {
 		try {
 			Packager packager = new Packager(main);
-			String dir = "";
-			if(!packager.containsPackage() || packager.isInRightFolders()) {
-				dir=main.getDirectory(main.fileName);
-			}
-			else { // !packager.isInRightFolders()
-				dir=main.getDirectory(main.fileName);
-				if(!dir.endsWith("\\"))
-					dir=dir+"\\";
-				dir=dir+packager.getPackageName().replace(".","\\");	
-			}
+			String dir = main.getDirectory(main.fileName);
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
 			String normalmain=main.getFileName(main.fileName).replace(".java","");

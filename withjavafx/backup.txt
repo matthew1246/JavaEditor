@@ -9,7 +9,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Packager.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Packager.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java"
     ],
     "caretposition": 0
   },
@@ -27,7 +28,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 102115
+    "caretposition": 105397
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -314,7 +315,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 1541
+    "caretposition": 1448
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
     "isLocked": false,
@@ -855,8 +856,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
-      "CommandLine"
+      "CommandLine",
+      "Main"
     ],
     "starterclass": "",
     "jars": [

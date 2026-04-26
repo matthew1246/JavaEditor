@@ -2813,6 +2813,24 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 							CommandLine commandline = new CommandLine();
 					
+							String main_class = fileName.replaceAll(".+\\\\","");						
+							main_class =main_class.replaceAll("\\.java","");
+					
+							String[] options={"Yes","No"};
+							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+							if(option2 ==JOptionPane.YES_OPTION) {
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+								commandline.addJavaFX();
+								main_class=extractjavafxjars.starter;
+							}
+							else if(option2 == JOptionPane.NO_OPTION) {
+								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+								File javafxlauncher=new File(maintwo);
+								if(javafxlauncher.exists()) {
+									javafxlauncher.delete();
+								}
+							}
+					
 							String filename = getFileName(fileName);
 							Packager packager = new Packager(Main.this);
 							if(packager.containsPackage()) {		
@@ -2823,7 +2841,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									labely: for(String file:filelistmodifier.fullpath) {
 										Packager packagerCustomFile=new Packager(file);
 										if(!packagename.equals(packagerCustomFile.getPackageName())) {
-											String[] options={"Yes","No"};
+											// String[] options={"Yes","No"};
 											int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 											switch(option) {
 												case JOptionPane.YES_OPTION:
@@ -2869,7 +2887,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									labely: for(String file:filelistmodifier.fullpath) {
 										Packager packagerCustomFile=new Packager(file);
 										if(!packagename.equals(packagerCustomFile.getPackageName())) {
-											String[] options={"Yes","No"};
+											// String[] options={"Yes","No"};
 											int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 											switch(option) {
 												case JOptionPane.YES_OPTION:
@@ -2945,24 +2963,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 								commandline.addJunit();
 							}
-							String main_class = fileName.replaceAll(".+\\\\","");						
-							main_class =main_class.replaceAll("\\.java","");
-							
-							String[] options={"Yes","No"};
-							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-							if(option2 ==JOptionPane.YES_OPTION) {
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
-								commandline.addJavaFX();
-								main_class=extractjavafxjars.starter;
-							}
-							else if(option2 == JOptionPane.NO_OPTION) {
-								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
-								File javafxlauncher=new File(maintwo);
-								if(javafxlauncher.exists()) {
-									javafxlauncher.delete();
-								}
-							}
-							
+						
 							commandline.setMainClass(main_class);
 							if(checkbox.isSelected()) {
 								commandline.addClasspathCheckboxFeature();
