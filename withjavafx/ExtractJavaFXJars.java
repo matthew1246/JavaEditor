@@ -476,6 +476,8 @@ public class ExtractJavaFXJars {
 			else { // packager.isInRightFolders() == true
 				dir=packager.classpath;
 			}
+			if(!dir.endsWith("\\"))
+				dir=dir+"\\";
 			for(String jar:jars) {
 				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(jar);	
 				InputStream inputstream=url.openStream();
