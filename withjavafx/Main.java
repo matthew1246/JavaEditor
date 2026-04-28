@@ -3010,7 +3010,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 			
-		run.addActionListener(new ActionListener() {
+		run.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);		
