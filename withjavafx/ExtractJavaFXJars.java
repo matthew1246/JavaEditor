@@ -74,7 +74,13 @@ public class ExtractJavaFXJars {
 		try {
 			String normalmain=main.getFileName(main.fileName).replace(".java","");
 			this.starter = normalmain+"two";
-			String dir3 = dir+packager.getPackageName().replace(".","\\")+"\\";
+			String dir3 = "";
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir3=dir;
+			}
+			else { // packager.isInRightFolders() == true
+				dir3=dir+packager.getPackageName().replace(".","\\")+"\\";
+			}
 			File ifexists=new File(dir3);
 			if(!ifexists.exists())
 				ifexists.mkdirs();	
