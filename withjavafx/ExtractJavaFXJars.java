@@ -74,10 +74,11 @@ public class ExtractJavaFXJars {
 		try {
 			String normalmain=main.getFileName(main.fileName).replace(".java","");
 			this.starter = normalmain+"two";
-			File ifexists=new File(dir);
+			String dir3 = dir+packager.getPackageName().replace(".","\\")+"\\";
+			File ifexists=new File(dir3);
 			if(!ifexists.exists())
 				ifexists.mkdirs();	
-			PrintWriter printwriter = new PrintWriter(dir+this.starter+".java");
+			PrintWriter printwriter = new PrintWriter(dir3+this.starter+".java");
 			if(packager.containsPackage())
 				printwriter.println("package "+packager.getPackageName()+";");
 			printwriter.println("public class "+starter+" {");
