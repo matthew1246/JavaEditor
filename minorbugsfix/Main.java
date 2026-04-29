@@ -3104,6 +3104,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									startercombobox.Change(fileName);
 									JOptionPane.showMessageDialog(null,lines);
+									CompileErrors compileerrors=new CompileErrors(Main.this,lines);
 								}
 							}
 						} catch(IOException ex) {
