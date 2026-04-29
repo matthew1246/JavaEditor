@@ -3318,7 +3318,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								command[2] = commandline.javac();
 								runtime = Runtime.getRuntime();
 								startercombobox.Change(fileName);
-								classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
+								// classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
 								Process process = runtime.exec(command,null,new File(classpath1));
 								// process=Main.this.compileFromMSDOS(fileName,classpath1);
 								
