@@ -12,7 +12,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Packager.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CommandLine.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJUnit.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CompileErrors.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CompileErrors.java"
     ],
     "caretposition": 0
   },
@@ -30,7 +32,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 112873
+    "caretposition": 128710
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -710,7 +712,9 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CompileErrors.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "CompileErrors"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -722,9 +726,11 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CompileErrors.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
-    "startupcombobox": [],
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
@@ -733,7 +739,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 4443
+    "caretposition": 7442
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XML.java": {
     "isLocked": false,

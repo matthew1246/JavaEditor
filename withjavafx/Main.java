@@ -3153,8 +3153,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								System.out.println("save new code first.");
 								sal.actionPerformed(e);
 								
-										
 								CommandLine commandline = new CommandLine();
+								
 								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								Preferences preferences=storeselectedfile.get(fileName);
 								for(String jar:preferences.jars) {
@@ -3185,6 +3185,127 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									commandline.setMainClass(main_class);
 
 								}	
+								
+								String filename = getFileName(fileName);
+								Packager packager = new Packager(Main.this);
+								if(packager.containsPackage()) {		
+									if(packager.isInRightFolders()) {
+										commandline.addPackage(packager.getPackageName());
+										classpath1=packager.classpath;
+										String packagename=packager.getPackageName();
+										labely: for(String file:filelistmodifier.fullpath) {
+											Packager packagerCustomFile=new Packager(file);
+											if(!packagename.equals(packagerCustomFile.getPackageName())) {
+												// String[] options={"Yes","No"};
+												int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+												switch(option) {
+													case JOptionPane.YES_OPTION:
+														Path targetDir = Path.of(Main.getDirectory(fileName));
+													   	try {
+												        			//Files.createDirectories(targetDir);
+													
+														       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
+															          	for (Path entry : stream) {
+															
+																	// Read file
+																	String content = Files.readString(entry);
+																
+																	// Remove existing package if present
+																	content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+																
+																	// Prepend correct package
+																	content = "package "+packagename + ";\n\n" + content;
+																
+																	// Write to target
+																	Path targetFile = targetDir.resolve(entry.getFileName());
+																	Files.writeString(targetFile, content);
+															            }
+															}
+															JOptionPane.showMessageDialog(null,"Code Updated");
+														} catch (Exception ex) {
+													        		ex.printStackTrace();
+													    	}
+														break;
+													case JOptionPane.NO_OPTION:
+														break;
+												}
+												break labely;				
+											}
+										}
+									}
+									else { // package name is not in right folder
+										commandline.addPackageWithMinusD();
+										filelistmodifier=new FileListModifier(fileName);
+										String packagename=packager.getPackageName();
+										
+										// Make all classes in same folder have same package name
+										labely: for(String file:filelistmodifier.fullpath) {
+											Packager packagerCustomFile=new Packager(file);
+											if(!packagename.equals(packagerCustomFile.getPackageName())) {
+												// String[] options={"Yes","No"};
+												int option=JOptionPane.showOptionDialog(null,"Make all classes in same folder have same package name?","All same package?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+												switch(option) {
+													case JOptionPane.YES_OPTION:
+														Path targetDir = Path.of(Main.getDirectory(fileName));
+													   	try {
+												        			//Files.createDirectories(targetDir);
+													
+														       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
+															          	for (Path entry : stream) {
+															
+																	// Read file
+																	String content = Files.readString(entry);
+																
+																	// Remove existing package if present
+																	content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+																
+																	// Prepend correct package
+																	content = "package "+packagename + ";\n\n" + content;
+																
+																	// Write to target
+																	Path targetFile = targetDir.resolve(entry.getFileName());
+																	Files.writeString(targetFile, content);
+															            }
+															}
+															JOptionPane.showMessageDialog(null,"Code Updated");
+														} catch (Exception ex) {
+													        		ex.printStackTrace();
+													    	}
+														break;
+													case JOptionPane.NO_OPTION:
+														break;
+												}
+												break labely;				
+											}
+										}
+										
+										// Copy all classes with the same package name to new folder
+										File targetDir = new File(classpath1+packagename.replace(".","\\"));   
+										// destination folder
+										targetDir.mkdirs();
+										for(String file:filelistmodifier.fullpath) {
+											Packager packagerCustomFile=new Packager(file);
+											if(filename.equals(file) || packagerCustomFile.containsPackage()) {
+												if(packagename.equals(packagerCustomFile.getPackageName())) {
+													File selectedFile=new File(file);	
+												            File targetFile = new File(targetDir, selectedFile.getName());
+												            try {
+												                Files.copy(
+												                        selectedFile.toPath(),
+												                        targetFile.toPath(),
+												                        StandardCopyOption.REPLACE_EXISTING
+												                );
+												                System.out.println("File copied successfully!");
+												            } catch (IOException ex) {
+												                JOptionPane.showMessageDialog(null, "Copy failed: " + ex.getMessage());
+												            }
+			
+												}
+											}
+										}
+									}
+								}
+								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
 								
 								if(checkbox.isSelected()) {
 									commandline.addClasspathCheckboxFeature();
@@ -3285,7 +3406,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									command[5] = commandline.java();
 									startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
-									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);																
+									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);				
 								}
 								else {
 									String lines = line;
@@ -3296,41 +3417,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										lines = lines+"\n"+line;
 									}
 									JOptionPane.showMessageDialog(null,lines);
-									options=new String[2];
-									options[0] = "Yes";
-									options[1] = "No";
-									//option2=JOptionPane.showOptionDialog(null,"Go to line number of error?","Which you like to go to line number?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-									if(option2 == JOptionPane.YES_OPTION) {
-										Pattern pattern=Pattern.compile(getFileName(fileName)+":([0-9]+):");
-										Matcher matcher=pattern.matcher(lines);
-										if(matcher.find()) {
-											int line_number=Integer.parseInt(matcher.group(1));
-											
-											try {
-												String wholetext=textarea.getText();
-												LineNumberReader linenumberreader=new LineNumberReader(new StringReader(wholetext));
-												while((line = linenumberreader.readLine()) != null) {
-													int linenumber2=linenumberreader.getLineNumber();
-													if(line_number == linenumber2) break;
-												}
-												int startOfLine = -1;
-												while((startOfLine = wholetext.indexOf(line,++startOfLine)) != -1) {
-													//int startOfLine=wholetext.indexOf(line);
-													String firsthalf=wholetext.substring(0,startOfLine+1);
-													if(getLineNumber(firsthalf) == line_number) {
-														textarea.grabFocus();
-														textarea.setCaretPosition(startOfLine);
-														break;
-													}
-												}
-											} catch(IOException ex) {
-												ex.printStackTrace();
-											}
-										}
-										else {
-											JOptionPane.showMessageDialog(null,"Could not find line number.");
-										}
-									}		
+									CompileErrors compileerrors = new CompileErrors(Main.this,lines);		
 								}
 							}
 						} catch(IOException ex) {
