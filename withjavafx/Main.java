@@ -2795,7 +2795,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			thread4.start();
 		});
 			
-		compile.addActionListener(new ActionListener() {
+		compile.addActionListener(new ActionListener() {		
 										
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -3010,7 +3010,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 			
-		run.addActionListener(new ActionListener() {		
+		run.addActionListener(new ActionListener() {								
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);		
@@ -3051,17 +3051,29 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
+							}
 							
-}
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
 							String fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
 							if(isCompiled && string.equals(lines2)) { // End check if already saved
 								System.out.println("Is equal.");
+								CommandLine commandline = new CommandLine();
 								
-								CommandLine commandline = new CommandLine();
+								Packager packager = new Packager(Main.this);
+								if(packager.containsPackage()) {		
+									if(packager.isInRightFolders()) {
+										commandline.addPackage(packager.getPackageName());
+										classpath1=packager.classpath;
+									}
+									else { // package name is not in right folder
+										commandline.addPackageWithMinusD(packager.getPackageName());
+									}
+								}
+								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
+								
 								if(jarcheckbox.isSelected()) {
-									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);												commandline.addJunit();
+									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);																	commandline.addJunit();
 								}
 								if(lock.isSelected()) {
 									String save = selected.replace(".java","");
@@ -3069,7 +3081,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									storeselectedfile.set(fileName);
 									// Store the full filename/path as the "lastopened" starter reference
 									storeselectedfile.setStarterClass(classpath1+selected+".java");
-									
+									storeselectedfile.setTabs(fileNames);
 									
 									String[] options={"Yes","No"};
 									int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
