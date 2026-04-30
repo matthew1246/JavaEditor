@@ -319,7 +319,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 847
+    "caretposition": 2296
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
     "isLocked": false,

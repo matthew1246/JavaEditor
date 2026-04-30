@@ -80,7 +80,7 @@ public class ExtractJavaFXJars {
 				dir3=dir;
 			}
 			else { // packager.isInRightFolders() == true
-				dir3=dir+packager.getPackageName().replace(".","\\")+"\\";
+				dir3=dir.substring(0,dir.length()-5)+packager.getPackageName().replace(".","\\")+"\\";
 			}
 			File ifexists=new File(dir3);
 			if(!ifexists.exists())
