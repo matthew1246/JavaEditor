@@ -76,11 +76,8 @@ public class ExtractJavaFXJars {
 			String normalmain=main.getFileName(main.fileName).replace(".java","");
 			this.starter = normalmain+"two";
 			String dir3 = "";
-			if(!packager.containsPackage()) {
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				dir3=dir;
-			}
-			else if(!packager.isInRightFolders()) { // -d option
-				dir3=dir+packager.getPackageName().replace(".","\\")+"\\";	
 			}
 			else { // packager.isInRightFolders() == true
 				dir3=dir.substring(0,dir.length()-5)+packager.getPackageName().replace(".","\\")+"\\";
