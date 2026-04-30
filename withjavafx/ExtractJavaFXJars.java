@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 public class ExtractJavaFXJars {
+	public boolean makejarwithpackagesandjavafx = false;
 	public String dir;
 	public Main main;
 	public Packager packager;
@@ -38,9 +39,33 @@ public class ExtractJavaFXJars {
 	/**
 	** This is for making a Jar for making packages!
 	*/
-	public ExtractJavaFXJars(Main main,String dir) {
+	public ExtractJavaFXJars(Main main,boolean makejarwithpackagesandjavafx) {
+		this.makejarwithpackagesandjavafx = makejarwithpackagesandjavafx;
 		this.main = main;
-		packager = new Packager(main);
+		this.packager = new Packager(main);
+		if(!makejarwithpackagesandjavafx) {
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+			}
+		}
+		else { // makejarwithpackagesandjavafx == true
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+				makejarwithpackagesandjavafx=false;
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+				if(!dir.endsWith("\\"))
+					dir=dir+"\\";
+				dir=dir+"jars";	
+			}	
+		}
+		if(!dir.endsWith("\\"))
+			dir=dir+"\\";
+		
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 		this.dir = dir;
@@ -59,9 +84,10 @@ public class ExtractJavaFXJars {
 		}
 		delete_moduleinfo();
 		createStarter();
+		
 	}
 	public void delete_moduleinfo() {
-		File file = new File(dir,"module-info.class");
+		File file = new File(dir+"module-info.class");
 		System.out.println("ExtractJavaFXJars.delete_moduleinfo() is being executed!");
 		if(file.exists()) {
 			System.out.println("module-info.class exists");
@@ -123,12 +149,22 @@ public class ExtractJavaFXJars {
 					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					extractframe.setVisible(true);		
 			                    	
+			                    	if(!makejarwithpackagesandjavafx) {
+			                    		jar=dir+jar;
+		                    		}
+		                    		else { // makejarwithpackagesandjavafx == true
+			                    		jar=dir.substring(0,dir.length()-5)+jar;
+		                    		}
+		                    		File file = new File(dir);
+		                    		if(!file.exists())
+		                    			file.mkdirs();	
 					final String dir2 = dir;
+					final String jar2 = jar;
 			                    	SwingWorker<Void, String> worker = new SwingWorker<>() {
 						   @Override
 						    protected Void doInBackground() throws Exception {
 						    	
-						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar);
+						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar2);
 						        pb.directory(new File(dir2));
 						        pb.redirectErrorStream(true); // Merge stderr with stdout
 						        Process process = pb.start();
@@ -440,7 +476,6 @@ public class ExtractJavaFXJars {
 			URL url=ExtractJavaFXJars.class.getClassLoader().getResource("javafx.properties");	
 			InputStream inputstream=url.openStream();
 			Path outputpath=Paths.get(dir+"javafx.properties");
-			
 			Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -457,8 +492,13 @@ public class ExtractJavaFXJars {
 			for(String jar:jars) {
 				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(jar);	
 				InputStream inputstream=url.openStream();
-				Path outputpath=Paths.get(dir+jar);
-						
+				Path outputpath;
+				if(!makejarwithpackagesandjavafx) {
+					outputpath=Paths.get(dir+jar);
+				}
+				else { // makejarwithpackagesandjavafx == true
+					outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
+				}								
 				Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch(IOException ex) {
@@ -469,7 +509,13 @@ public class ExtractJavaFXJars {
 		CommandLine commandline = new CommandLine();
 		List<String> jars=commandline.getJavaFX();
 		for(String jar:jars) {
-			File file = new File(dir+jar);
+			File file;
+			if(!makejarwithpackagesandjavafx) {
+				file=new File(dir+jar);
+			}				
+			else {
+				file=new File(dir.substring(0,dir.length()-5)+jar); // remove "jars/ from C:\\documents\jars
+			}		
 			if(!file.exists())
 				return false;
 		}
