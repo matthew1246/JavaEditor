@@ -9,7 +9,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java"
     ],
     "caretposition": 0
   },
@@ -27,7 +28,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 213452
+    "caretposition": 77106
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -235,7 +236,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 2212
+    "caretposition": 12415
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java": {
     "isLocked": false,
@@ -282,7 +283,9 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Compile"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -316,7 +319,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 2102
+    "caretposition": 2377
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
     "isLocked": false,

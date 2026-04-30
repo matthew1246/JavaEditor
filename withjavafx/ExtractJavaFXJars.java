@@ -76,15 +76,16 @@ public class ExtractJavaFXJars {
 			extractJars();
 			unzipJars();
 		}
+		else return;
 		if(!strangeFilesExtracted()) {
 			extractStrangeFiles();
 		}
+		else return;
 		if(!dllFilesExtracted()) {
 			extractDLLFiles();
-		}
+		} else return;
 		delete_moduleinfo();
 		createStarter();
-		
 	}
 	public void delete_moduleinfo() {
 		File file = new File(dir+"module-info.class");
