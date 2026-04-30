@@ -25,44 +25,18 @@ public class ExtractJavaFXJars {
 	public Packager packager;
 	public ExtractJavaFXJars(Main main) {	
 		this.main = main;
-		packager = new Packager(main);
+		this.packager = new Packager(main);	
 		if(!packager.containsPackage() || !packager.isInRightFolders()) {
 			dir=main.getDirectory(main.fileName);
+			makejarwithpackagesandjavafx=false;
 		}
 		else { // packager.isInRightFolders() == true
 			dir=packager.classpath;
-		}
-		if(!dir.endsWith("\\"))
-			dir=dir+"\\";
-		process();
-	}
-	/**
-	** This is for making a Jar for making packages!
-	*/
-	public ExtractJavaFXJars(Main main,boolean makejarwithpackagesandjavafx) {
-		this.makejarwithpackagesandjavafx = makejarwithpackagesandjavafx;
-		this.main = main;
-		this.packager = new Packager(main);
-		if(!makejarwithpackagesandjavafx) {
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				dir=main.getDirectory(main.fileName);
-			}
-			else { // packager.isInRightFolders() == true
-				dir=packager.classpath;
-			}
-		}
-		else { // makejarwithpackagesandjavafx == true
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				dir=main.getDirectory(main.fileName);
-				makejarwithpackagesandjavafx=false;
-			}
-			else { // packager.isInRightFolders() == true
-				dir=packager.classpath;
-				if(!dir.endsWith("\\"))
-					dir=dir+"\\";
-				dir=dir+"jars";	
-			}	
-		}
+			if(!dir.endsWith("\\"))
+				dir=dir+"\\";
+			dir=dir+"jars";	
+			makejarwithpackagesandjavafx = true;
+		}	
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 		
