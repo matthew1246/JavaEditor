@@ -110,7 +110,12 @@ public class ExtractJavaFXJars {
 				}
 			}
 			else {
-				 dir3 = dir;
+				 if(!packager.containsPackage() || !packager.isInRightFolders()) {
+					dir3=dir;
+				}
+				else {
+					dir3=dir+packager.getPackageName().replace(".","\\")+"\\";
+				}
 			 }
 			File ifexists=new File(dir3);
 			if(!ifexists.exists())
