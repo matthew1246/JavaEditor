@@ -71,6 +71,8 @@ public class ExtractJavaFXJars {
 		process();
 	}
 	public void process() {
+		String normalmain=main.getFileName(main.fileName).replace(".java","");
+		this.starter = normalmain+"two";
 		if(!isAlreadyExtracted()) {
 			extractJars();
 			unzipJars();
@@ -99,7 +101,6 @@ public class ExtractJavaFXJars {
 	public void createStarter() {
 		try {
 			String normalmain=main.getFileName(main.fileName).replace(".java","");
-			this.starter = normalmain+"two";
 			String dir3 = "";
 			if(makejar) {
 				if(!packager.containsPackage() || !packager.isInRightFolders()) {
