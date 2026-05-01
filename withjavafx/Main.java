@@ -187,7 +187,8 @@ public class Main {
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
 		fileName = "";
-		setLayout();	
+		setLayout();
+	
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
 			textarea2.setLineWrap(true);
@@ -265,8 +266,10 @@ public class Main {
 			fileNames.add("");
 			allclassesinfile.ChangeFile(textarea2,"");
 		}
-		setListeners();				
-		setKeywords();	
+		setListeners();
+				
+		setKeywords();
+	
 	}
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier = new FileListModifier();
@@ -499,7 +502,8 @@ public class Main {
  	 	 	swingworker.execute();
 		}
 
-		setListeners();								
+		setListeners();	
+							
 		SwingWorker<LinksFX,Void> swingworker10 = new SwingWorker<>() {
 			@Override
 			protected LinksFX doInBackground() {
@@ -602,7 +606,8 @@ public class Main {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null,filename+ " "+caretposition);
-		}
+		}
+
 	}
 	public void openLastSelectedLine() {
 		SwingWorker<Integer,Void> swingworker = new SwingWorker<>() {
@@ -628,7 +633,8 @@ public class Main {
 				}
 			}
 		};
-		swingworker.execute();	
+		swingworker.execute();	
+
 	}
 	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
@@ -1873,7 +1879,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});	
 		
-		generatejar.addActionListener((ev) -> {				
+		generatejar.addActionListener((ev) -> {
+				
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
@@ -2138,15 +2145,36 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=storeselectedfile.get(fileName);
 							String main=preferences.starterclass;
 							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
-							if(!fileName.equals("")) {
-								List<String> jars = preferences.jars;
+							Packager packager3=new Packager(this);
+							if(packager3.containsPackage()) {		
+								if(packager3.isInRightFolders()) {
+									dir=packager3.classpath;	
+								}							
+							}
+							if(!dir.endsWith("\\"))
+								dir = dir+"\\";
+							List<String> jars = preferences.jars;
+							if(!packager3.containsPackage() || !packager3.isInRightFolders()) { // Contains no package
 								for(String jar:jars) {
-									jar = getFileName(jar);
+									// jar = getFileName(jar);
 									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
 							}
+							else { // Package used javac.exe didn't used -d option
+								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+								File createdir = new File(dir+"jars");
+								if(!createdir.exists()) {
+									createdir.mkdir();
+								}
+								for(String jar:jars) {
+									// jar = getFileName(jar);
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+									process.waitFor();
+									//output.write(" "+jar);
+								}
+							}	
 							if(!fileName.equals("")) {
 								if(main.equals("")) {
 									main=fileName.replaceAll(".+\\\\","");
@@ -2158,18 +2186,27 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								storeselectedfile.setBackup(linkedhashmap);
 							}
 							
+	
+						JOptionPane.showMessageDialog(null,dir+"mf.txt");
 							FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
 							BufferedWriter output = new BufferedWriter(filewriter);
 							output.write("Manifest-Version: 1.0");
 							output.write("\n");
 							output.write("Main-Class: ");
+							String outputmainclass= "";
 							
-							if(!isJavaFX) {
-								output.write(main);
+if(!isJavaFX) {
+								outputmainclass=main;	
 							}
 							else { // isJavaFX == true
 								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
-								output.write(extractjavafxjars.starter);
+								outputmainclass=extractjavafxjars.starter;
+							}
+							if(!packager3.containsPackage()) {
+								output.write(outputmainclass);
+							}
+							else { // Contains package name
+								output.write(packager3.getPackageName()+"."+outputmainclass);
 							}
 							
 							output.write("\n");
@@ -2205,7 +2242,20 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 								}
 								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-								output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+								Packager packager2 = new Packager(this);
+								if(!packager2.containsPackage()) { // Doesn't contain package.
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+								}
+								else { // Contains package
+									if(!packager2.isInRightFolders()) { // javac.exe used -d option
+									
+		
+	output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+									}
+									else { // packager2.isInRightFolders()
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+									}
+								}
 								output2.write("\n");
 								
 								commandline = new CommandLine();
@@ -2219,7 +2269,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else { 
 								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+								if(packager3.containsPackage()) {
+									if(!packager3.isInRightFolders()) { // javac.exe used -d option
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+									}
+									else { // packager2.isInRightFolders()
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+									}
+								}
 								JOptionPane.showMessageDialog(null,input);
+								JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
 								Process process=commandline.run(input,dir);
 								
 								InputStream inputstream = process.getErrorStream();
@@ -2800,7 +2859,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			thread4.start();
 		});
 			
-		compile.addActionListener(new ActionListener() {		
+		compile.addActionListener(new ActionListener() {
+		
 										
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -2816,7 +2876,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						sal.actionPerformed(e);
 						if(!fileName.equals("")) {
 							String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
-							CommandLine commandline = new CommandLine();
+		
+					CommandLine commandline = new CommandLine();
 					
 							String main_class = fileName.replaceAll(".+\\\\","");						
 							main_class =main_class.replaceAll("\\.java","");
@@ -3015,7 +3076,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 			
-		run.addActionListener(new ActionListener() {												
+		run.addActionListener(new ActionListener() {
+												
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);		
@@ -3056,14 +3118,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
-							}
+							
+}
 							
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
 							String fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
 							if(isCompiled && string.equals(lines2)) { // End check if already saved
 								System.out.println("Is equal.");
-								CommandLine commandline = new CommandLine();
+								
+CommandLine commandline = new CommandLine();
 								
 								Packager packager = new Packager(Main.this);
 								if(packager.containsPackage()) {		
@@ -3855,8 +3919,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		subpackages = links.getSubpackages();
 	}
 	public List<String> fullpackagenames=new ArrayList<String>();
-	public void setFullPackageNames(LinksFX links) {
-		fullpackagenames = links.getFullPackageNames();
+	public void setFullPackageNames(LinksFX links) {
+
+		fullpackagenames = links.getFullPackageNames();
+
 	}
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public void setAllClassesInFile() {
