@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 public class ExtractJavaFXJars {
-	public boolean makejarwithpackagesandjavafx = false;
+	public boolean makejar = false;
 	public String dir;
 	public Main main;
 	public Packager packager;
@@ -28,18 +28,43 @@ public class ExtractJavaFXJars {
 		this.packager = new Packager(main);	
 		if(!packager.containsPackage() || !packager.isInRightFolders()) {
 			dir=main.getDirectory(main.fileName);
-			makejarwithpackagesandjavafx=false;
+			makejar=false;
 		}
 		else { // packager.isInRightFolders() == true
 			dir=packager.classpath;
-			if(!dir.endsWith("\\"))
-				dir=dir+"\\";
-			dir=dir+"jars";	
-			makejarwithpackagesandjavafx = true;
+			makejar = false;
 		}	
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
-		
+		this.dir = dir;
+		process();
+	}
+	public ExtractJavaFXJars(Main main,boolean makejar) {
+		this.main = main;
+		this.packager = new Packager(main);	
+		if(makejar) {
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+				this.makejar=false;
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+				if(!dir.endsWith("\\"))
+					dir=dir+"\\";
+				dir=dir+"jars";	
+				this.makejar = true;
+			}	
+		}
+		else { // makejar == false
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+				this.makejar = false;
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+				this.makejar = false;
+			}
+		}		
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 		this.dir = dir;
@@ -76,12 +101,17 @@ public class ExtractJavaFXJars {
 			String normalmain=main.getFileName(main.fileName).replace(".java","");
 			this.starter = normalmain+"two";
 			String dir3 = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				dir3=dir;
+			if(makejar) {
+				if(!packager.containsPackage() || !packager.isInRightFolders()) {
+					dir3=dir;
+				}
+				else { // packager.isInRightFolders() == true
+					dir3=dir.substring(0,dir.length()-5)+packager.getPackageName().replace(".","\\")+"\\";
+				}
 			}
-			else { // packager.isInRightFolders() == true
-				dir3=dir.substring(0,dir.length()-5)+packager.getPackageName().replace(".","\\")+"\\";
-			}
+			else {
+				 dir3 = dir;
+			 }
 			File ifexists=new File(dir3);
 			if(!ifexists.exists())
 				ifexists.mkdirs();	
@@ -124,10 +154,10 @@ public class ExtractJavaFXJars {
 					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					extractframe.setVisible(true);		
 			                    	
-			                    	if(!makejarwithpackagesandjavafx) {
+			                    	if(!makejar) {
 			                    		jar=dir+jar;
 		                    		}
-		                    		else { // makejarwithpackagesandjavafx == true
+		                    		else { // makejar == true
 			                    		jar=dir.substring(0,dir.length()-5)+jar;
 		                    		}
 		                    		File file = new File(dir);
@@ -468,10 +498,10 @@ public class ExtractJavaFXJars {
 				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(jar);	
 				InputStream inputstream=url.openStream();
 				Path outputpath;
-				if(!makejarwithpackagesandjavafx) {
+				if(!makejar) {
 					outputpath=Paths.get(dir+jar);
 				}
-				else { // makejarwithpackagesandjavafx == true
+				else { // makejar == true
 					outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
 				}								
 				Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
@@ -485,7 +515,7 @@ public class ExtractJavaFXJars {
 		List<String> jars=commandline.getJavaFX();
 		for(String jar:jars) {
 			File file;
-			if(!makejarwithpackagesandjavafx) {
+			if(!makejar) {
 				file=new File(dir+jar);
 			}				
 			else {
