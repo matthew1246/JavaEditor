@@ -164,8 +164,9 @@ public class ExtractJavaFXJars {
 			                    		jar=dir+jar;
 		                    		}
 		                    		else { // makejar == true
-			                    		jar=dir.substring(0,dir.length()-5)+jar;
+			                    		jar=dir.substring(0,dir.length()-5)+"\\"+jar;
 		                    		}
+		    
 		                    		File file = new File(dir);
 		                    		if(!file.exists())
 		                    			file.mkdirs();	
@@ -496,7 +497,8 @@ public class ExtractJavaFXJars {
 		File file = new File(dir+"javafx.properties");
 		return file.exists();
 	}
-	public void extractJars() {	
+	public void extractJars() {
+	
 		try {
 			CommandLine commandline = new CommandLine();
 			List<String> jars=commandline.getJavaFX();
@@ -507,9 +509,9 @@ public class ExtractJavaFXJars {
 				if(!makejar) {
 					outputpath=Paths.get(dir+jar);
 				}
-				else { // makejar == true
-					outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
-				}								
+				else { //makejar == true
+					outputpath=Paths.get(dir.substring(0,dir.length()-5)+"\\"+jar);
+				}
 				Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch(IOException ex) {
@@ -525,7 +527,7 @@ public class ExtractJavaFXJars {
 				file=new File(dir+jar);
 			}				
 			else {
-				file=new File(dir.substring(0,dir.length()-5)+jar); // remove "jars/ from C:\\documents\jars
+				file=new File(dir.substring(0,dir.length()-5)+"\\"+jars); // remove "jars/ from C:\\documents\jars
 			}		
 			if(!file.exists())
 				return false;
