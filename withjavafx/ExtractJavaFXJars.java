@@ -164,7 +164,7 @@ public class ExtractJavaFXJars {
 			                    		jar=dir+jar;
 		                    		}
 		                    		else { // makejar == true
-			                    		jar=dir.substring(0,dir.length()-5)+"\\"+jar;
+			                    		jar=dir.substring(0,dir.length()-5)+jar;
 		                    		}
 		    
 		                    		File file = new File(dir);
@@ -510,7 +510,7 @@ public class ExtractJavaFXJars {
 					outputpath=Paths.get(dir+jar);
 				}
 				else { //makejar == true
-					outputpath=Paths.get(dir.substring(0,dir.length()-5)+"\\"+jar);
+					outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
 				}
 				Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 			}
@@ -527,7 +527,7 @@ public class ExtractJavaFXJars {
 				file=new File(dir+jar);
 			}				
 			else {
-				file=new File(dir.substring(0,dir.length()-5)+"\\"+jars); // remove "jars/ from C:\\documents\jars
+				file=new File(dir.substring(0,dir.length()-5)); // remove "jars/ from C:\\documents\jars
 			}		
 			if(!file.exists())
 				return false;
