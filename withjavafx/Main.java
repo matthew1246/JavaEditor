@@ -2187,7 +2187,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							
 	
-						JOptionPane.showMessageDialog(null,dir+"mf.txt");
+							JOptionPane.showMessageDialog(null,dir+"mf.txt");
 							FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
 							BufferedWriter output = new BufferedWriter(filewriter);
 							output.write("Manifest-Version: 1.0");
@@ -2195,11 +2195,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							output.write("Main-Class: ");
 							String outputmainclass= "";
 							
-if(!isJavaFX) {
+							if(!isJavaFX) {
 								outputmainclass=main;	
 							}
 							else { // isJavaFX == true
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
 								outputmainclass=extractjavafxjars.starter;
 							}
 							if(!packager3.containsPackage()) {
@@ -2221,7 +2221,7 @@ if(!isJavaFX) {
 							AllFiles allfiles = new AllFiles(main,dir);
 							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
 									extractjavafxjars.unzipJars();
 								}		
 								commandline = new CommandLine();
