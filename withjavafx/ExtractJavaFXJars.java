@@ -527,7 +527,7 @@ public class ExtractJavaFXJars {
 				file=new File(dir+jar);
 			}				
 			else {
-				file=new File(dir.substring(0,dir.length()-5)); // remove "jars/ from C:\\documents\jars
+				file=new File(dir.substring(0,dir.length()-5)+jar); // remove "jars/ from C:\\documents\jars
 			}		
 			if(!file.exists())
 				return false;
