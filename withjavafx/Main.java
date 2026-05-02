@@ -2222,7 +2222,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
 								if(isJavaFX) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
-									// extractjavafxjars.unzipJars();
+									extractjavafxjars.unzipJars();
 								}		
 								commandline = new CommandLine();
 								JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
