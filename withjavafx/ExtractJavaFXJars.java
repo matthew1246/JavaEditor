@@ -77,14 +77,12 @@ public class ExtractJavaFXJars {
 			extractJars();
 			unzipJars();
 		}
-		else return;
 		if(!strangeFilesExtracted()) {
 			extractStrangeFiles();
 		}
-		else return;
 		if(!dllFilesExtracted()) {
 			extractDLLFiles();
-		} else return;
+		}
 		delete_moduleinfo();
 		createStarter();
 	}
@@ -534,4 +532,4 @@ public class ExtractJavaFXJars {
 		}
 		return true;
 	}
-}
+}
