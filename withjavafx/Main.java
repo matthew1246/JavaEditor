@@ -2278,7 +2278,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
 									extractjavafxjars.unzipJars();
 								}		
-								commandline = new CommandLine();
 								JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
 								FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 								BufferedWriter output2 = new BufferedWriter(filewriter2);
@@ -2312,7 +2311,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								output2.write("\n");
 								
-								commandline = new CommandLine();
 								output2.write("java -jar "+main+".jar");
 								output2.write("\n");
 								output2.write("\n");
