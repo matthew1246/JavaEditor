@@ -1999,22 +1999,51 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									
 									isJavaFX = false;
 								}
-								compile.compileall(fileName,javaversionnumber,sal,ev4,isJavaFX,this);
+								if(!isJavaFX) {
+									compile.compileall(fileName,javaversionnumber,sal,ev4,isJavaFX,this);
+								}
+								else {
+									compile.compileall(fileName,javaversionnumber,sal,ev4,isJavaFX,this,true);
+								}				
 								
 								CommandLine commandline = new CommandLine();
 								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								Preferences preferences=storeselectedfile.get(fileName);
 								String main=preferences.starterclass;
 								String dir = fileName.replaceAll("[^\\\\]+\\.java","");
-								if(!fileName.equals("")) {
-									List<String> jars = preferences.jars;
-									for(String jar:jars) {
-										jar = getFileName(jar);
-										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-										process.waitFor();
-										//output.write(" "+jar);
+								Packager packager2 = new Packager(this);
+								if(packager2.containsPackage()) {
+									if(packager2.isInRightFolders()) {
+										dir=packager2.classpath;
 									}
 								}
+								if(!dir.endsWith("\\"))
+									dir=dir+"\\";
+								if(!fileName.equals("")) {
+									List<String> jars = preferences.jars;
+									if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
+										for(String jar:jars) {
+											// jar = getFileName(jar);
+											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+											process.waitFor();
+											//output.write(" "+jar);
+										}		
+									}
+									else { // Package used javac.exe didn't used -d option
+										JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+										File createdir = new File(dir+"jars");
+										if(!createdir.exists()) {
+											createdir.mkdir();
+										}
+										for(String jar:jars) {
+											// jar = getFileName(jar);
+											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+											process.waitFor();
+											//output.write(" "+jar);
+										}
+									}	
+								}
+								
 								if(!fileName.equals("")) {
 									if(main.equals("")) {
 										main=fileName.replaceAll(".+\\\\","");
@@ -2030,13 +2059,23 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								output.write("Manifest-Version: 1.0");
 								output.write("\n");
 								output.write("Main-Class: ");
+								
+								String main_outputy = "";
 								if(!isJavaFX) {
-									output.write(main);
+									main_outputy=main;
 								}
 								else { // isJavaFX == true
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);								
-									output.write(extractjavafxjars.starter);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
+									main_outputy=extractjavafxjars.starter;
 								}
+								Packager packager = new Packager(this);
+								if(!packager.containsPackage()) {
+									output.write(main_outputy);
+								}
+								else {
+									output.write(packager.getPackageName()+"."+main_outputy);
+								}
+								
 								output.write("\n");
 								//output.write("Class-Path:");
 								//output.write(" *");
@@ -2046,9 +2085,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								AllFiles allfiles = new AllFiles(main,dir);
 								if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
 									commandline = new CommandLine();
-									
 									if(isJavaFX) {
-										ExtractJavaFXJars extractjavafxjars2 = new ExtractJavaFXJars(this);
+										ExtractJavaFXJars extractjavafxjars2 = new ExtractJavaFXJars(this,true);
 										extractjavafxjars2.unzipJars();
 									}
 									JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
@@ -2068,7 +2106,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										}
 									}
 									// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+									if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+									}
+									else {
+										if(packager2.isInRightFolders()) {
+											output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+										}
+									}
 									output2.write("\n");
 									
 									commandline = new CommandLine();
@@ -2083,7 +2128,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								else {
 									String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+									if(packager2.containsPackage()) {
+										if(!packager2.isInRightFolders()) { // javac.exe used -d option
+											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+										}
+										else { // packager2.isInRightFolders()
+											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+										}
+									}
 									JOptionPane.showMessageDialog(null,input);
+									JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
 									Process process=commandline.run(input,dir);
 									
 									InputStream inputstream = process.getErrorStream();
@@ -5898,4 +5952,4 @@ class RightClickJFrame {
 			ex.printStackTrace();
 		}
 	}
-}
+}
