@@ -1581,7 +1581,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					
 					output2.write("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " "+renamedfile);
 					output2.write("\n");
-					output2.write("java -jar "+renamedfile);
+					output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+renamedfile);
 					output2.write("\n");
 					output2.write("\n");
 					output2.close();
@@ -2117,7 +2117,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									output2.write("\n");
 									
 									commandline = new CommandLine();
-									output2.write("java -jar ForJava"+javaversionnumber+"_"+main+".jar");
+									output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar ForJava"+javaversionnumber+"_"+main+".jar");
 									output2.write("\n");
 									output2.write("\n");
 									output2.close();
@@ -2311,7 +2311,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								output2.write("\n");
 								
-								output2.write("java -jar "+main+".jar");
+								output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+main+".jar");
 								output2.write("\n");
 								output2.write("\n");
 								output2.close();
