@@ -32,13 +32,16 @@ public class AllVersionsJar {
 			dir=dir+"\\";
 	}
 	public void Compile(boolean isJavaFX,int javaversionnumber) {
-		if(!isJavaFX) {
-			MinorCompile compile = new MinorCompile();
+		if(!isJavaFX) { // No JavaFX!
+			/*MinorCompile compile = new MinorCompile();
 			compile.compileall(main,fileName,javaversionnumber,sal,ev4);
-		} 
-		else { // isJavaFX is false so not with JavaFX.
+			*/
 			Compile compile = new Compile();
-			compile.compileall(fileName,javaversionnumber,sal,ev4,isJavaFX,main);
+			compile.compileall(fileName,javaversionnumber,sal,ev4,false,main,true);
+		} 
+		else { // isJavaFX is true so with JavaFX.
+			Compile compile=new Compile();
+			compile.compileall(fileName,javaversionnumber,sal,ev4,true,main,true);
 		}
 	}
 	public Preferences extractJars(StoreSelectedFile storeselectedfile) {		
@@ -121,9 +124,29 @@ public class AllVersionsJar {
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
+			String[] splited=  main_class.split("\\.");
+			String main_class2 = splited[splited.length-1];
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .";
+			if(packager.containsPackage() && packager.isInRightFolders()) {
+				parentdirectory=file;	
+			}
+			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			
+			String input = "";
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				if(javaversionnumber == 23) {
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+				}
+			}
+			else { // packager.isInRightFolders() == true
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+				if(javaversionnumber == 23) {
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+				}	
+			}		
+			
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
 			Process process=commandline.run(input,dir);
