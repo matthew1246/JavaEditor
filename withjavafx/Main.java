@@ -1954,7 +1954,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									extractjavafxjars.unzipJars();
 								}		
 								allversionsjar.Powershell(isJavaFX,main);

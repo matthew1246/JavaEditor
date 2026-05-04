@@ -46,37 +46,56 @@ public class AllVersionsJar {
 		Preferences preferences=storeselectedfile.get(fileName);
 		if(!fileName.equals("")) {
 			java.util.List<String> jars = preferences.jars;
-			for(String jar:jars) {
-				try {
-					jar = main.getFileName(jar);
-					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-					process.waitFor();
-					//output.write(" "+jar);
-				} catch (InterruptedException ex) {
-					ex.printStackTrace();
-				}				
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				for(String jar:jars) {
+					try {
+						// jar = main.getFileName(jar);
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+						process.waitFor();
+						//output.write(" "+jar);
+					} catch (InterruptedException ex) {
+						ex.printStackTrace();
+					}				
+				}
 			}
+			else { // package.isInRightFolders() is true
+				File createdir = new File(dir+"jars");
+				if(!createdir.exists()) {
+					createdir.mkdir();
+				}
+				for(String jar:jars) {
+					try {
+						// jar = getFileName(jar);
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+						process.waitFor();
+						//output.write(" "+jar);
+					} catch(InterruptedException ex) {
+						ex.printStackTrace();
+					}
+				}
+			}	
 		}
 		return preferences;
 	}		
 	public String getMain(boolean isJavaFX,StoreSelectedFile storeselectedfile,Preferences preferences) {
-		if(isJavaFX) {
-			return main.getFileName(fileName).replace(".java","two");	
-		}		
-		else {
-			String main_string=preferences.starterclass;
-			if(!fileName.equals("")) {
-				if(main_string.equals("")) {
-					main_string=fileName.replaceAll(".+\\\\","");
-					main_string = main_string.replaceAll("\\.java","");
-				}
-				storeselectedfile.set(fileName);
-				java.util.LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
-				linkedhashmap.get(fileName).starterclass=main_string;
-				storeselectedfile.setBackup(linkedhashmap);
+		String main_string=preferences.starterclass;
+		if(!fileName.equals("")) {
+			if(main_string.equals("")) {
+				main_string=fileName.replaceAll(".+\\\\","");
+				main_string = main_string.replaceAll("\\.java","");
 			}
-			return main_string;
-		}
+			storeselectedfile.set(fileName);
+			java.util.LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
+			linkedhashmap.get(fileName).starterclass=main_string;
+			storeselectedfile.setBackup(linkedhashmap);
+			
+			if(isJavaFX) {
+				main_string=main.getFileName(fileName).replace(".java","two");	
+			}		
+			if(packager.containsPackage())
+				main_string=packager.getPackageName()+"."+main_string;
+		}
+		return main_string;
 	}
 	public void WriteManifest(String main_class) {
 		try {
@@ -145,57 +164,5 @@ public class AllVersionsJar {
 			}
 		// }
 		powershell.Finish();
-
-		/*
-		try {
-			JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main_class+".jar is already open. Run script to close "+main_class+".jar");
-			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
-			BufferedWriter output2 = new BufferedWriter(filewriter2);
-			output2.write("cd "+dir);
-			output2.write("\n");
-			output2.write("START /B /WAIT taskkill /F /im java.exe");
-			output2.write("\n");
-			output2.write("START /B /WAIT taskkill /F /im javaw.exe");
-			output2.write("\n");
-			for(int i = 0; i < allfiles.files.size(); i++) {
-				File file2 = new File(allfiles.files.get(i));
-				if(file2.exists()) {
-					output2.write("del "+allfiles.files.get(i));
-					output2.write("\n");
-				}
-			}
-			
-			CommandLine commandline = new CommandLine();
-			commandline.compileAll();
-			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-			Preferences preferences=storeselectedfile.get(fileName);
-			
-			for(String jar:preferences.jars) {
-				commandline.addExternalJar(jar);
-			}
-			
-			commandline.earlierjavaversion(javaversionnumber);
-			
-			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
-			
-			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
-			output2.write("\n");
-			
-			commandline = new CommandLine();
-			output2.write("java -jar ForJava"+javaversionnumber+"_"+main_class+".jar");
-			output2.write("\n");
-			output2.write("\n");
-			output2.close();
-			commandline = new CommandLine();
-			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
-		
-			commandline.runWithMSDOS(liney,dir);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		*/
 	}
 }
