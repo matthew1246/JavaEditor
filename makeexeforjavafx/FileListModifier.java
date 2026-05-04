@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class FileListModifier implements Cloneable {
+    public List<String> fullpath = new ArrayList<String>();
     public List<String> original = new ArrayList<String>();
     public boolean isEmpty = true;
     public List<String> filelist = new ArrayList<String>();
@@ -94,6 +95,19 @@ if(!filenameanddirectory.equals("")) {
 				original.add(file.getName());
 			}			
 			isEmpty = false;
+		}
+		if(!filenameanddirectory.equals("")) {
+			String current_editorfilename =filenameanddirectory.replaceAll(".+\\\\","");		
+			File currentdirectory = new File(filenameanddirectory.replaceAll("[^\\\\]+\\.java",""));
+			
+			File[] files=currentdirectory.listFiles();
+
+			for(File file:files) {
+				String filename=file.getName();
+				if(filename.contains(".java") ) {
+					fullpath.add(file.getAbsolutePath());
+				}						
+			}
 		}
 	}
 	

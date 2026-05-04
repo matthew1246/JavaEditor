@@ -11,7 +11,6 @@ com\customyjavafx\MuckFX$GooeyActionListener.class
 com\customyjavafx\AutoKeyListener$6.class
 com\customyjavafx\Main$17.class
 com\customyjavafx\Main$26$1.class
-com\customyjavafx\ExtractJavaFXJars$2$1.class
 com\customyjavafx\AutoKeyListener$1.class
 com\customyjavafx\InnerGridBagLayout.class
 com\customyjavafx\FindMethodNameString.class
@@ -43,6 +42,7 @@ com\customyjavafx\AddPlugin.class
 com\customyjavafx\AutoKeyListener.class
 com\customyjavafx\RemoveAll.class
 com\customyjavafx\BackupFileOpenFilesList.class
+com\customyjavafx\Packager.class
 com\customyjavafx\CompileErrors.class
 com\customyjavafx\OpenDefaultContent.class
 com\customyjavafx\Main$25.class
@@ -52,7 +52,6 @@ com\customyjavafx\StoreSelectedFile$2.class
 com\customyjavafx\Main$13.class
 com\customyjavafx\Main$7.class
 com\customyjavafx\AutoKeyListener$2.class
-com\customyjavafx\ExtractJavaFXJars$2.class
 com\customyjavafx\Main$26.class
 com\customyjavafx\TestSaveTab.class
 com\customyjavafx\Middle.class
@@ -105,6 +104,7 @@ com\customyjavafx\Dates.class
 com\customyjavafx\SelectedLines.class
 com\customyjavafx\Git.class
 com\customyjavafx\Expandable$1.class
+com\customyjavafx\ExtractJavaFXJars$1$1.class
 com\customyjavafx\MSDOS$1.class
 com\customyjavafx\Main$14.class
 com\customyjavafx\Maven.class

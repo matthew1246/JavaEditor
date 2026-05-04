@@ -21,10 +21,60 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 public class ExtractJavaFXJars {
+	public boolean makejar = false;
+	public String dir;
 	public Main main;
+	public Packager packager;
 	public ExtractJavaFXJars(Main main) {	
 		this.main = main;
-		
+		this.packager = new Packager(main);	
+		if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			dir=main.getDirectory(main.fileName);
+			makejar=false;
+		}
+		else { // packager.isInRightFolders() == true
+			dir=packager.classpath;
+			makejar = false;
+		}	
+		if(!dir.endsWith("\\"))
+			dir=dir+"\\";
+		this.dir = dir;
+		process();
+	}
+	public ExtractJavaFXJars(Main main,boolean makejar) {
+		this.main = main;
+		this.packager = new Packager(main);	
+		if(makejar) {
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+				this.makejar=false;
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+				if(!dir.endsWith("\\"))
+					dir=dir+"\\";
+				dir=dir+"jars";	
+				this.makejar = true;
+			}	
+		}
+		else { // makejar == false
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				dir=main.getDirectory(main.fileName);
+				this.makejar = false;
+			}
+			else { // packager.isInRightFolders() == true
+				dir=packager.classpath;
+				this.makejar = false;
+			}
+		}		
+		if(!dir.endsWith("\\"))
+			dir=dir+"\\";
+		this.dir = dir;
+		process();
+	}
+	public void process() {
+		String normalmain=main.getFileName(main.fileName).replace(".java","");
+		this.starter = normalmain+"two";
 		if(!isAlreadyExtracted()) {
 			extractJars();
 			unzipJars();
@@ -39,7 +89,7 @@ public class ExtractJavaFXJars {
 		createStarter();
 	}
 	public void delete_moduleinfo() {
-		File file = new File(main.getDirectory(main.fileName),"module-info.class");
+		File file = new File(dir+"module-info.class");
 		System.out.println("ExtractJavaFXJars.delete_moduleinfo() is being executed!");
 		if(file.exists()) {
 			System.out.println("module-info.class exists");
@@ -50,10 +100,30 @@ public class ExtractJavaFXJars {
 	public String starter;
 	public void createStarter() {
 		try {
-			String dir = main.getDirectory(main.fileName);	
 			String normalmain=main.getFileName(main.fileName).replace(".java","");
-			this.starter = normalmain+"two";
-			PrintWriter printwriter = new PrintWriter(dir+this.starter+".java");
+			String dir3 = "";
+			if(makejar) {
+				if(!packager.containsPackage() || !packager.isInRightFolders()) {
+					dir3=dir;
+				}
+				else { // packager.isInRightFolders() == true
+					dir3=dir.substring(0,dir.length()-5)+packager.getPackageName().replace(".","\\")+"\\";
+				}
+			}
+			else {
+				 if(!packager.containsPackage() || !packager.isInRightFolders()) {
+					dir3=dir;
+				}
+				else {
+					dir3=dir+packager.getPackageName().replace(".","\\")+"\\";
+				}
+			 }
+			File ifexists=new File(dir3);
+			if(!ifexists.exists())
+				ifexists.mkdirs();	
+			PrintWriter printwriter = new PrintWriter(dir3+this.starter+".java");
+			if(packager.containsPackage())
+				printwriter.println("package "+packager.getPackageName()+";");
 			printwriter.println("public class "+starter+" {");
 			printwriter.println("\tpublic static void main(String[] args) {");
 			printwriter.println("\t\t"+normalmain+".launch("+normalmain+".class,args);");
@@ -66,67 +136,10 @@ public class ExtractJavaFXJars {
 			ex.printStackTrace();
 		}
 	}
-	private static void runProcessAndStreamOutput(File dir,JFrame extractframe,JTextArea textArea, String... command) {
-        SwingWorker<Void, String> worker = new SwingWorker<>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                ProcessBuilder builder = new ProcessBuilder(command);
-                builder.directory(dir);
-                builder.redirectErrorStream(true);
-                Process process = builder.start();
-
-                /*Thread thread=new Thread(new Runnable() {
-                	public void run() {
-                */
-                		try {
-		           		BufferedReader reader = new BufferedReader(
-		                        new InputStreamReader(process.getInputStream()));
-		                    String line;
-		                    while ((line = reader.readLine()) != null) {
-		                        publish(line);
-		                    }
-	                    } catch(IOException ex) {
-	                    	ex.printStackTrace();
-                    	         }
-	   /*        }
-               });
-               thread.start();
-               */
-
-                int exitCode = process.waitFor();
-  	    if(exitCode == 0) {
-  	            JOptionPane.showMessageDialog(null,"Extraction of "+command+" was a success.");
-              	extractframe.dispose();
-                }
-	     else
-	            JOptionPane.showMessageDialog(null,"Could not extract "+command+"!");
-				            	
-                return null;
-            }
-
-            @Override
-            protected void process(List<String> chunks) {
-                for (String line : chunks) {
-                    textArea.append(line + "\n");
-                }
-            }
-        };
-        worker.execute();
-         try {
-          worker.get();
-        }
-        catch(java.util.concurrent.ExecutionException ex){
-        	ex.printStackTrace();
-        }
-        catch(InterruptedException ex) {
-        	ex.printStackTrace();
-        }
-    }
 	
 	public void unzipJars() {
 		CommandLine commandline = new CommandLine();	
 		String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
-		String dir = main.getDirectory(main.fileName);
 		
 		for(String jar:commandline.getJavaFX()) {
 			           		/*ProcessBuilder pb = new ProcessBuilder(
@@ -147,12 +160,24 @@ public class ExtractJavaFXJars {
 					extractframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					extractframe.setVisible(true);		
 			                    	
+			                    	if(!makejar) {
+			                    		jar=dir+jar;
+		                    		}
+		                    		else { // makejar == true
+			                    		jar=dir.substring(0,dir.length()-5)+jar;
+		                    		}
+		    
+		                    		File file = new File(dir);
+		                    		if(!file.exists())
+		                    			file.mkdirs();	
+					final String dir2 = dir;
+					final String jar2 = jar;
 			                    	SwingWorker<Void, String> worker = new SwingWorker<>() {
 						   @Override
 						    protected Void doInBackground() throws Exception {
 						    	
-						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar);
-						        pb.directory(new File(dir));
+						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar2);
+						        pb.directory(new File(dir2));
 						        pb.redirectErrorStream(true); // Merge stderr with stdout
 						        Process process = pb.start();
 						
@@ -198,7 +223,6 @@ public class ExtractJavaFXJars {
 	}
 	public void extractDLLFiles() {
 		try {
-			String dir=main.getDirectory(main.fileName);	
 			for(String dll:getDLLFiles()) {
 				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(dll);	
 				InputStream inputstream=url.openStream();
@@ -456,37 +480,38 @@ public class ExtractJavaFXJars {
 		return true;
 	}
 	public boolean fileExists(String dll) {
-		String dir=main.getDirectory(main.fileName);		
 		File file = new File(dir+dll);
 		return file.exists();
 	}
 	public void extractStrangeFiles() {
 		try {	
-			String dir=main.getDirectory(main.fileName);	
 			URL url=ExtractJavaFXJars.class.getClassLoader().getResource("javafx.properties");	
 			InputStream inputstream=url.openStream();
 			Path outputpath=Paths.get(dir+"javafx.properties");
-			
 			Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 	public boolean strangeFilesExtracted() {
-		String dir=main.getDirectory(main.fileName);		
 		File file = new File(dir+"javafx.properties");
 		return file.exists();
 	}
-	public void extractJars() {	
+	public void extractJars() {
+	
 		try {
 			CommandLine commandline = new CommandLine();
 			List<String> jars=commandline.getJavaFX();
-			String dir=main.getDirectory(main.fileName);	
 			for(String jar:jars) {
 				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(jar);	
 				InputStream inputstream=url.openStream();
-				Path outputpath=Paths.get(dir+jar);
-						
+				Path outputpath;
+				if(!makejar) {
+					outputpath=Paths.get(dir+jar);
+				}
+				else { //makejar == true
+					outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
+				}
 				Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch(IOException ex) {
@@ -496,9 +521,14 @@ public class ExtractJavaFXJars {
 	public boolean isAlreadyExtracted() {
 		CommandLine commandline = new CommandLine();
 		List<String> jars=commandline.getJavaFX();
-		String dir=main.getDirectory(main.fileName);	
 		for(String jar:jars) {
-			File file = new File(dir+jar);
+			File file;
+			if(!makejar) {
+				file=new File(dir+jar);
+			}				
+			else {
+				file=new File(dir.substring(0,dir.length()-5)+jar); // remove "jars/ from C:\\documents\jars
+			}		
 			if(!file.exists())
 				return false;
 		}
