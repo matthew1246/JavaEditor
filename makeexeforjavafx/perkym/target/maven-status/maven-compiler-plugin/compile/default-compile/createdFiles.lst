@@ -10,7 +10,6 @@ com\customyjavafx\JTextAreaGroup.class
 com\customyjavafx\MuckFX$GooeyActionListener.class
 com\customyjavafx\AutoKeyListener$6.class
 com\customyjavafx\Main$17.class
-com\customyjavafx\Main$26$1.class
 com\customyjavafx\AutoKeyListener$1.class
 com\customyjavafx\InnerGridBagLayout.class
 com\customyjavafx\FindMethodNameString.class
@@ -21,13 +20,13 @@ com\customyjavafx\RightClick.class
 com\customyjavafx\CompileErrors$GoToLineCompileError.class
 com\customyjavafx\Maven$1.class
 com\customyjavafx\AllVersionsJar.class
-com\customyjavafx\Main$17$1.class
 com\customyjavafx\IfCompile.class
 com\customyjavafx\Main$6.class
 com\customyjavafx\TestNesting3.class
 com\customyjavafx\Content.class
 com\customyjavafx\Main$18.class
 com\customyjavafx\Auto.class
+com\customyjavafx\Main$21$1.class
 com\customyjavafx\TestNesting.class
 com\customyjavafx\Main$5.class
 com\customyjavafx\Main.class
@@ -59,6 +58,7 @@ com\customyjavafx\MSDOS.class
 com\customyjavafx\VariableSuggestionBoxSelected.class
 com\customyjavafx\LiveIterator.class
 com\customyjavafx\CurlyBraceKeyListener.class
+com\customyjavafx\Main$29.class
 com\customyjavafx\StoreSelectedFile$1.class
 com\customyjavafx\ThreeComboboxes$4.class
 com\customyjavafx\SuggestionBoxSelected$1.class
@@ -66,10 +66,8 @@ com\customyjavafx\AllFiles.class
 com\customyjavafx\ThreeComboboxes$1.class
 com\customyjavafx\IsEqual.class
 com\customyjavafx\ExtractJUnit.class
-com\customyjavafx\Main$20$1.class
 com\customyjavafx\RenameVariable.class
 com\customyjavafx\AutoKeyListener$5.class
-com\customyjavafx\Main$23$1.class
 com\customyjavafx\Main$28.class
 com\customyjavafx\Group.class
 com\customyjavafx\Main$11.class
@@ -107,6 +105,7 @@ com\customyjavafx\Expandable$1.class
 com\customyjavafx\ExtractJavaFXJars$1$1.class
 com\customyjavafx\MSDOS$1.class
 com\customyjavafx\Main$14.class
+com\customyjavafx\Main$25$1.class
 com\customyjavafx\Maven.class
 com\customyjavafx\TestEnum$Size.class
 com\customyjavafx\JTextAreaGroup$1.class
@@ -146,6 +145,7 @@ com\customyjavafx\Main$21.class
 com\customyjavafx\Git$1.class
 com\customyjavafx\NoFileOpen.class
 com\customyjavafx\DisplayOutput.class
+com\customyjavafx\Main$27$1.class
 com\customyjavafx\Main$2.class
 com\customyjavafx\NoDuplicate$1.class
 com\customyjavafx\TestNesting4.class
@@ -159,3 +159,4 @@ com\customyjavafx\Data.class
 com\customyjavafx\MinorCompile.class
 com\customyjavafx\StarterJComboBox.class
 com\customyjavafx\SaveActionListener.class
+com\customyjavafx\Main$18$1.class
