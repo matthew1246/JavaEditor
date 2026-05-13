@@ -3923,7 +3923,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				Matcher matcher=pattern.matcher(line);
 				if(matcher.find()) {
 					String variablename = matcher.group(1);
-					if(autokeylistener.search(variablename)) { // if Variable name exists in this opened file
+					if(autokeylistener.search(variablename,caretposition)) { // if Variable name exists in this opened file
 						autokeylistener.open(variablename,caretposition);
 					}
 				}
@@ -4560,7 +4560,11 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 		return methods;
-	}				
+	}
+	public boolean search(String input,int caretposition) {
+		this.caretposition=caretposition;
+		return search(input);
+	}								
 	public boolean search(String input) {
 		fillData();
 		List<String> methods=getMethods();
