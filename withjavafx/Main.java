@@ -4677,27 +4677,30 @@ class AutoKeyListener {
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
-				if(!isFinished) {
-						extra=extra+keyevent.getKeyChar();
+				if(isFinished) {
+					extra = extra+keyevent.getKeyChar();	
+				}
+				else { // if(!isFinished)
+					extra=extra+keyevent.getKeyChar();
 					count=count+1;
 					System.out.println("A "+keyevent.getKeyChar());
 					//two_keys_code = keyevent.getKeyCode();
 					if(keyevent.getKeyCode() == KeyEvent.VK_DOWN) {
 						List<JLabel> labels=getLabels();
 						JLabel selected_label=getSelected();
-						int selected_index = 0;
+						int selected_tindex = 0;
 						for(int i = 0; i < labels.size(); i++) {
 							if(selected_label.hashCode() == labels.get(i).hashCode()) {
-								selected_index = i;
+								selected_tindex = i;
 								break;
 							}
 						}
-						selected_index++;
-						if(selected_index < labels.size()) {
+						selected_tindex++;
+						if(selected_tindex < labels.size()) {
 							// Turn off highlighted
 							selected_label.setOpaque(false);
 							selected_label.setBackground(new JLabel().getBackground());
-							selected_label=labels.get(selected_index);
+							selected_label=labels.get(selected_tindex);
 							// Make highlighted
 							selected_label.setOpaque(true);
 							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
@@ -4706,19 +4709,19 @@ class AutoKeyListener {
 					else if(keyevent.getKeyCode() == KeyEvent.VK_UP) {
 						List<JLabel> labels=getLabels();
 						JLabel selected_label=getSelected();
-						int selected_index = 0;
+						int selected_tindex = 0;
 						for(int i = 0; i < labels.size(); i++) {
 							if(selected_label.hashCode() == labels.get(i).hashCode()) {
-								selected_index = i;
+								selected_tindex = i;
 								break;
 							}
 						}
-						selected_index--;
-						if(selected_index > -1) {
+						selected_tindex--;
+						if(selected_tindex > -1) {
 							// Turn off highlighted
 							selected_label.setOpaque(false);
 							selected_label.setBackground(new JLabel().getBackground());
-							selected_label=labels.get(selected_index);
+							selected_label=labels.get(selected_tindex);
 							// Make highlighted
 							selected_label.setOpaque(true);
 							selected_label.setBackground(new Color(CurlyBraceKeyListener.red,CurlyBraceKeyListener.green,CurlyBraceKeyListener.blue));
@@ -4779,11 +4782,6 @@ class AutoKeyListener {
 								EnterTextPlusExtra();
 							}
 						}
-						/*else {
-							//main.targetArea = main.textarea;
-							//JOptionPane.showMessageDialog(null,input);
-							main.targetArea.dispatchEvent(keyevent);
-						}*/
 					});
 					timer.setRepeats(false);
 					timer.start();
@@ -4983,12 +4981,12 @@ class AutoKeyListener {
 			String extra = getExtra();
 			
 			String afterextra = "";
-			int lastindexof = 0;
+			int lasttindexof = 0;
 			if(extra.contains(".")) {
-				lastindexof = extra.lastIndexOf(".");
+				lasttindexof = extra.lastIndexOf(".");
 				if(!extra.endsWith("."))		
-				afterextra=extra.substring(lastindexof+1,extra.length());
-				extra=extra.substring(0,lastindexof+1);
+				afterextra=extra.substring(lasttindexof+1,extra.length());
+				extra=extra.substring(0,lasttindexof+1);
 				//JOptionPane.showMessageDialog(null,extra);
 				//JOptionPane.showMessageDialog(null,afterextra);
 			}
@@ -5023,12 +5021,6 @@ class AutoKeyListener {
 					}
 				}
 			}
-			/*if(extra.charAt((extra.length()-1)) == '.') {
-				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-				//main.curlybracekeylistener.keyPressed(keyevent);
-				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
-				main.textarea.dispatchEvent(keyevent2);
-			}*/
 		});
 	}
 
@@ -5088,7 +5080,11 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 		return methods;
-	}				
+	}
+	public boolean search(String input,int caretposition) {
+		this.caretposition=caretposition;
+		return search(input);
+	}								
 	public boolean search(String input) {
 		fillData();
 		List<String> methods=getMethods();
