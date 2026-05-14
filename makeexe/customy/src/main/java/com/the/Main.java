@@ -4178,8 +4178,11 @@ class AutoKeyListener {
 			String two_keys = "";
 			@Override
 			public void keyPressed(KeyEvent keyevent) {
-				if(!isFinished) {
-						extra=extra+keyevent.getKeyChar();
+				if(isFinished) {
+					extra = extra+keyevent.getKeyChar();	
+				}
+				else { // if(!isFinished)
+					extra=extra+keyevent.getKeyChar();
 					count=count+1;
 					System.out.println("A "+keyevent.getKeyChar());
 					//two_keys_code = keyevent.getKeyCode();
@@ -4280,11 +4283,6 @@ class AutoKeyListener {
 								EnterTextPlusExtra();
 							}
 						}
-						/*else {
-							//main.targetArea = main.textarea;
-							//JOptionPane.showMessageDialog(null,input);
-							main.targetArea.dispatchEvent(keyevent);
-						}*/
 					});
 					timer.setRepeats(false);
 					timer.start();
@@ -4524,12 +4522,6 @@ class AutoKeyListener {
 					}
 				}
 			}
-			/*if(extra.charAt((extra.length()-1)) == '.') {
-				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-				//main.curlybracekeylistener.keyPressed(keyevent);
-				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
-				main.textarea.dispatchEvent(keyevent2);
-			}*/
 		});
 	}
 
@@ -4589,7 +4581,11 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 		return methods;
-	}				
+	}
+	public boolean search(String input,int caretposition) {
+		this.caretposition=caretposition;
+		return search(input);
+	}								
 	public boolean search(String input) {
 		fillData();
 		List<String> methods=getMethods();
@@ -4718,6 +4714,7 @@ class AutoKeyListener {
 	}
 
 }
+
 class MethodSuggestionBox {
 	public int replacelength = 1;
 	public int position;
