@@ -3917,6 +3917,11 @@ class CurlyBraceKeyListener implements KeyListener {
 				autokeylistener.position = autokeylistener.position+1;
 				autokeylistener.setLocation(autokeylistener.position);
 				autokeylistener.search_textfield.setText(oldplusnew);
+				Component msb2=(Component)autokeylistener.search_textfield;
+				KeyEvent keyevent4=  new KeyEvent(msb2,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(ev.getKeyChar()),ev.getKeyChar());
+				autokeylistener.search_textfield.dispatchEvent(keyevent4);
+				KeyEvent keyevent3= new KeyEvent(msb2,KeyEvent.KEY_RELEASED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar(ev.getKeyChar()),ev.getKeyChar());
+				autokeylistener.search_textfield.dispatchEvent(keyevent3);	
 			}
 			else {
 				Pattern pattern=Pattern.compile("([a-z0-9A-Z]+)\\z");
