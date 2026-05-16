@@ -47,6 +47,7 @@ com\the\StoreSelectedFile$1.class
 com\the\Main$16.class
 com\the\Main$4.class
 com\the\SuggestionBoxSelected$1.class
+com\the\MethodSuggestionBox$MethodSuggestionBoxKeyListener.class
 com\the\SaveActionListener.class
 com\the\Main$17.class
 com\the\Main$10.class
