@@ -141,6 +141,7 @@ com\customyjavafx\SuggestionBoxSelected.class
 com\customyjavafx\XYWidthHeight.class
 com\customyjavafx\OpenNewWindowOpenFilesList.class
 com\customyjavafx\FindMethodName.class
+com\customyjavafx\MethodSuggestionBox$MethodSuggestionBoxKeyListener.class
 com\customyjavafx\Main$21.class
 com\customyjavafx\Git$1.class
 com\customyjavafx\NoFileOpen.class
