@@ -54,19 +54,47 @@ public class Git {
 		return false;		
 	}
 	public boolean setWhereIsGitBashDotExeBackgroundThread() {
-		String[] commonPaths = {
-		    "C:\\Program Files\\Git\\git-bash.exe",
-		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
-		};
-		
-		for(String path : commonPaths) {
-			File file = new File(path);
-		    	if (file.exists()) {
-		        		gitbashdotexe=file.getAbsolutePath();
-		    		return true;		
+		if(isGitInstalled) {
+			String[] commonPaths = {
+			    "C:\\Program Files\\Git\\git-bash.exe",
+			    "C:\\Program Files (x86)\\Git\\git-bash.exe"
+			};
+			
+			for(String path : commonPaths) {
+				File file = new File(path);
+			    	if (file.exists()) {
+			        		gitbashdotexe=file.getAbsolutePath();
+			    		return true;		
+			    	}
 		    	}
+		    	return false;
 	    	}
-	    	return false;
+	    	else { // Use portable Git
+	    		// Check if git-bash.exe is inside portable Git
+	    		File javahome=new File(System.getProperty("java.home"));
+			File base=new File(javahome.getParent());
+			File app = new File(base,"app");
+			File extrafiles = new File(app,"extra-files");
+			File gitfolder = new File(extrafiles,"PortableGit");
+			String git=  gitfolder.getAbsolutePath();
+			/* String cmd = "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " 
+			+"set \"PATH="+System.getProperty("java.home")+"\\bin;" + git +"\\bin;%PATH%\" && "
+			 +"giv --version";
+			 */
+			if(!git.endsWith("\\"))
+				git+="\\";
+			git+="git-bash.exe";
+			File file = new File(git);
+			if(file.exists()) {
+				gitbashdotexe=file.getAbsolutePath();
+				return true;
+			}
+			return false;
+			/*
+			CommandLine commandline = new CommandLine();
+			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
+			*/
+		}
     	}
     	public boolean setWhereIsGitBashDotExeEDT() {
     		String[] options={"Yes","No"};
@@ -102,13 +130,23 @@ public class Git {
 	}
 	public boolean isFileInsideGitRepository(String fileName) {
 		if(fileName.equals(""))
-			return false;	
+			return false;
+				
 		directory=fileName.replaceAll("[^\\\\]+\\.java","");
-		CommandLine commandline = new CommandLine();
-		Process process=commandline.run("git rev-parse --show-toplevel",directory);
-		DisplayOutput displayoutput = new DisplayOutput();
-		String oneline=displayoutput.OneLine(process);
-		return !(oneline.equals("line is null"));
+		if(isGitInstalled) { // Not use Portable Git.
+			CommandLine commandline = new CommandLine();
+			Process process=commandline.run("git rev-parse --show-toplevel",directory);
+			DisplayOutput displayoutput = new DisplayOutput();
+			String oneline=displayoutput.OneLine(process);
+			return !(oneline.equals("line is null"));
+		}
+		else { // Use Portable Git.
+			CommandLine commandLine = new CommandLine();
+			Process process=commandLine.run("\""+getGitDotExe()+"\" rev-parse --show-toplevel",directory);
+			DisplayOutput displayoutput = new DisplayOutput();
+			String oneline=displayoutput.OneLine(process);
+			return !(oneline.equals("line is null"));
+		}
 	}
 	public boolean isGitInstalled() {
 		try {
@@ -128,50 +166,77 @@ public class Git {
             }
 
 	public void Change(String fileName) {
-		if(isGitInstalled()) {
-			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
-				setDirectoryAndRootDirectory(fileName);
-				if(frame == null) {
-					setLayout();
-			      		setListeners();
-		      		}
-			      	frame.setTitle(whichBranchOpened());
-		      	}
+		isFileInsideGitRepository=isFileInsideGitRepository(fileName);
+		if(isFileInsideGitRepository) {
+			setDirectoryAndRootDirectory(fileName);
+			if(frame == null) {
+				setLayout();
+		      		setListeners();
+	      		}
+		      	frame.setTitle(whichBranchOpened());
 	      	}
       	}
-      	public boolean isFileInsideGitRepository = false;
-      	public boolean isGitBashDotExeFoundByBackgroundThread = false;
+      	private boolean isGitInstalled;
+      	public boolean isFileInsideGitRepository;
+      	public boolean isGitBashDotExeFoundByBackgroundThread;
       	public String whichbranchopened="";
       	public void ChangeBackgroundThread(String fileName) {
-     		if(isGitInstalled()) {
-     			if(isFileInsideGitRepository(fileName)) {
-     				isFileInsideGitRepository = true;
-     				isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
-     				setDirectoryAndRootDirectory(fileName);
-     				whichbranchopened=whichBranchOpened();	
+     		isGitInstalled=isGitInstalled();
+     		isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
+               	if(isGitBashDotExeFoundByBackgroundThread) {
+     			isFileInsideGitRepository=isFileInsideGitRepository(fileName);
+     			if(isFileInsideGitRepository) {
+	     			setDirectoryAndRootDirectory(fileName);
+	     			JOptionPane.showMessageDialog(null,"directory is "+directory);
+	     			JOptionPane.showMessageDialog(null,"root_directory is "+root_directory);
+	     			whichbranchopened=whichBranchOpened();
      			}
-     		}
+     		}		
      	}
       	public void ChangeEDT(String fileName) {
-      		if(isFileInsideGitRepository) {
-	      		if(!isGitBashDotExeFoundByBackgroundThread) {
-	      			isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
+	      	if(!isGitBashDotExeFoundByBackgroundThread) {
+	      		isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
+	      	}
+	      	if(isGitBashDotExeFoundByBackgroundThread) {
+      			if(frame == null) {
+				setLayout();
+		      		setListeners();
 	      		}
-	      		if(isGitBashDotExeFoundByBackgroundThread) {
-	      			if(frame == null) {
-					setLayout();
-			      		setListeners();
-		      		}
-			      	frame.setTitle(whichbranchopened);
-		      	}
+		      	frame.setTitle(whichbranchopened);
 	      	}
       	}
+      	public String getGitDotExe() {
+      		File javahome=new File(System.getProperty("java.home"));
+		File base=new File(javahome.getParent());
+		File app = new File(base,"app");
+		File extrafiles = new File(app,"extra-files");
+		File gitfolder = new File(extrafiles,"PortableGit");
+		String git=  gitfolder.getAbsolutePath();
+		/* String cmd = "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " 
+		+"set \"PATH="+System.getProperty("java.home")+"\\bin;" + git +"\\bin;%PATH%\" && "
+		 +"giv --version";
+		 */
+		if(!git.endsWith("\\"))
+			git+="\\";
+		git+="bin\\";
+		git+="git.exe";
+		return git;
+	}
       	public void setDirectoryAndRootDirectory(String fileName) {
 		directory=fileName.replaceAll("[^\\\\]+\\.java","");
-		CommandLine commandline = new CommandLine();
-		Process process=commandline.run("git rev-parse --show-toplevel",directory);
-		DisplayOutput displayoutput = new DisplayOutput();
-		root_directory = displayoutput.OneLine(process);
+		if(isGitInstalled) { // Doesn't use Portable Git.
+			CommandLine commandline = new CommandLine();
+			Process process=commandline.run("git rev-parse --show-toplevel",directory);
+			DisplayOutput displayoutput = new DisplayOutput();
+			root_directory = displayoutput.OneLine(process);
+		}
+		else { // Uses Portable Git
+			CommandLine commandline = new CommandLine();
+			
+			Process process=commandline.run("\""+getGitDotExe()+"\" rev-parse --show-toplevel",directory);
+			DisplayOutput displayoutput = new DisplayOutput();
+			root_directory = displayoutput.OneLine(process);
+		}
       	}
       	
 	public JButton everythingbutthekitchensink;
@@ -246,13 +311,13 @@ public class Git {
 			commit.setVisible(true);
 		});
 		reset.addActionListener((ev) -> {
-			git("git reset --hard HEAD",root_directory);
+			git("git reset --hard HEAD");
 		});
 		run.addActionListener( (ev) -> {
-			git(input.getText(),root_directory);
+			git(input.getText());
 		});
 		input.addActionListener((ev) -> {
-			git(input.getText(),root_directory);
+			git(input.getText());
 		});
 		switch2_branch.addActionListener( (ev) -> {
 			Thread thread = new Thread( () -> {
@@ -261,12 +326,12 @@ public class Git {
 				String whichfolderopened=whichFolderOpened();
 				if(whichbranch.equals(whichfolderopened)) {
 					//substring = "master";
-					gitWaitUntilFinish("git switch "+mainbranch,root_directory);
+					gitWaitUntilFinish("git switch "+mainbranch);
 					//getBranchAndSetTitle();
 				}
 				else {
 					if(isBranch(whichfolderopened)) {
-						gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
+						gitWaitUntilFinish("git switch "+whichfolderopened);
 						//getBranchAndSetTitle();
 					}
 					else
@@ -287,7 +352,7 @@ public class Git {
 						openbranch.addActionListener( (ev2) -> {
 							String selectedbranch = (String)combobox.getSelectedItem();
 							
-							gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
+							gitWaitUntilFinish("git switch "+selectedbranch);
 							//getBranchAndSetTitle();
 							selectbranch.dispose();
 						});
@@ -306,7 +371,12 @@ public class Git {
 		});
 	}
 	public void gitWaitUntilFinish(String command) {
-		git(command,root_directory);
+		if(isFileInsideGitRepository) {
+			git(command,root_directory);
+		}
+		else {
+			git(command,System.getProperty("user.home"));
+		}
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
@@ -388,7 +458,13 @@ public class Git {
 	}
 	public String[] getAllBranches() {
 		CommandLine commandline = new CommandLine();
-		Process process=commandline.run("git for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/",root_directory);
+		Process process = null;
+		if(isGitInstalled) {
+			process=commandline.run("git for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/",root_directory);
+		}
+		else { // Use Git Portable
+			process=commandline.run("\""+getGitDotExe()+"\" for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/",root_directory);		
+		}
 		DisplayOutput displayoutput = new DisplayOutput();
 		String substring = displayoutput.Multiline(process);
 		String[] allbranches= substring.split("\\r?\\n|\\r");
@@ -401,7 +477,13 @@ public class Git {
 	}
 	public String getMainBranch() {
 		CommandLine commandline = new CommandLine();
-		Process process=commandline.run("git ls-remote --symref origin HEAD",root_directory);
+		Process process= null;
+		if(isGitInstalled) {
+			process=commandline.run("git ls-remote --symref origin HEAD",root_directory);
+		}
+		else {
+			process=commandline.run("\"+getGitDotExe()+\" ls-remote --symref origin HEAD",root_directory);
+		}
 		DisplayOutput displayoutput = new DisplayOutput();
 		String substring = displayoutput.Multiline(process);
 		substring=substring.split("\\r?\\n|\\r")[0];
@@ -414,7 +496,12 @@ public class Git {
 		return substring;
 	}
 	public void git(String command) {
-		git(command,root_directory);
+		if(isFileInsideGitRepository) {
+			git(command,root_directory);
+		}
+		else {
+			git(command,System.getProperty("user.home"));
+		}
 	}
 	public void git(String command,String directory) {
 		Thread thread = new Thread() {
@@ -467,7 +554,13 @@ public class Git {
 		}
 */
 		CommandLine commandline = new CommandLine();
-		Process process=commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
+		Process process = null;
+		if(isGitInstalled) {
+			process=commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
+		}
+		else { // Use git portable
+			process=commandline.run("\""+getGitDotExe()+"\" rev-parse --abbrev-ref HEAD",root_directory);
+		}
 		DisplayOutput displayoutput = new DisplayOutput();
 		String substring = displayoutput.OneLine(process);
 		substring=substring.replaceAll("\\r?\\n|\\r","");
