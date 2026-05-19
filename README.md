@@ -5,7 +5,7 @@ for Java 22 and ForJava21_Main.jar for Java 21.<br>
 Newly created For Java20_Main.jar for Java 20.<br>
 <br>
 To compile from source code use these parameters: <br>
-javac -cp gson-2.10.1;Muck.jar;. Main.java <br>
+javac -cp gson-2.10.1;Muck.jar;okhttp-3.0.0-RC1.jar;okio-1.6.0.jar;. Main.java <br>
 To run compiled code: <br>
 java -cp gson-2.10.1;Muck.jar;. Main <br>
 
