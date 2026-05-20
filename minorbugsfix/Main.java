@@ -2607,7 +2607,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				ex.printStackTrace();
 			}		
 		});
-		compile.addActionListener(new ActionListener() {
+		compile.addActionListener(new ActionListener() {				
 								
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -2791,7 +2791,9 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 							JOptionPane.showMessageDialog(null,lines);
 							CompileErrors compileerrors= new CompileErrors(Main.this,lines);
 						}
-						maven.Change(fileName);						
+						maven.Change(fileName);
+						threecomboboxes.load(fileName);
+						expandable.open();
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"No filename saved.");
