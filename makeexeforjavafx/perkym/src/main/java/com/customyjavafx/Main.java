@@ -364,6 +364,24 @@ public class Main {
 				}
 			});
 			textarea2.addMouseListener(rightclick);
+			SwingUtilities.invokeLater(() -> {
+				textarea.setText(
+				"""
+				import javafx.application.Application;
+				import javafx.stage.Stage;
+				import javafx.scene.control.Label;
+				import javafx.scene.Scene;
+				public class Main extends Application {
+					@Override
+					public void start(Stage stage) {
+						Scene scene = new Scene(new Label("Hello World!"),800,600);
+						stage.setScene(scene);
+						stage.show();
+					}
+				}
+				"""
+				);
+			});
 		}
 		else { //if(!fileName.equals("")) {
 			String lines = odc.getString();
