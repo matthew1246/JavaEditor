@@ -2795,6 +2795,7 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 						threecomboboxes.load(fileName);
 						expandable.open();
 						startercombobox.Change(fileName);
+						git.Change(fileName);
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"No filename saved.");
