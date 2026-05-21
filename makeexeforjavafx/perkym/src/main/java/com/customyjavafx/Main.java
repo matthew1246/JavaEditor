@@ -3039,7 +3039,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			thread4.start();
 		});
 			
-		compile.addActionListener(new ActionListener() {
+		compile.addActionListener(new ActionListener() {		
 		
 										
 			public void actionPerformed(ActionEvent e) {
@@ -3243,6 +3243,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								CompileErrors compileerrors = new CompileErrors(Main.this,lines);		
 							}
 							maven.Change(fileName);
+							threecomboboxes.load(fileName);
+							expandable.open();
+							startercombobox.Change(fileName);
+							git.Change(fileName);
 						}
 						else {
 							JOptionPane.showMessageDialog(null,"No filename saved.");
@@ -3256,7 +3260,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 			
-		run.addActionListener(new ActionListener() {
+		run.addActionListener(new ActionListener() {		
 												
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -3394,9 +3398,14 @@ CommandLine commandline = new CommandLine();
 								command[3] = "cmd";
 								command[4]= "/k";
 								command[5] = commandline.java();
-								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
+								
+								maven.Change(fileName);
+								threecomboboxes.load(fileName);
+								expandable.open();
+								startercombobox.Change(fileName);
+								git.Change(fileName);
 							}
  							else { // compile because not latest code.
 								System.out.println("save new code first.");
@@ -3664,9 +3673,14 @@ CommandLine commandline = new CommandLine();
 									command[3] = "cmd";									
 									command[4]= "/k";
 									command[5] = commandline.java();
-									startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
-									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);				
+									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);
+									
+									maven.Change(fileName);
+									threecomboboxes.load(fileName);
+									expandable.open();
+									startercombobox.Change(fileName);
+									git.Change(fileName);				
 								}
 								else {
 									String lines = line;
@@ -4332,6 +4346,12 @@ class SaveActionListener implements ActionListener {
 			               	storeselectedfile.set(main.fileName);
 			               	storeselectedfile.setTabs(tabs);
 			               	storeselectedfile.setStarterClass(main.fileName);
+			               	
+			               	main.maven.Change(main.fileName);
+					main.threecomboboxes.load(main.fileName);
+					main.expandable.open();
+					main.startercombobox.Change(main.fileName);
+					main.git.Change(main.fileName);
 				}
 			}
 			if(main.fileName != null && !main.fileName.equals("")) {
