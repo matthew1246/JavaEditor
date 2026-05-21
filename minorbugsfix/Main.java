@@ -2794,6 +2794,7 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 						maven.Change(fileName);
 						threecomboboxes.load(fileName);
 						expandable.open();
+						startercombobox.Change(fileName);
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"No filename saved.");
