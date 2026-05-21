@@ -2914,6 +2914,12 @@ CommandLine commandline = new CommandLine();
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
+								
+								maven.Change(fileName);
+								threecomboboxes.load(fileName);
+								expandable.open();
+								startercombobox.Change(fileName);
+								git.Change(fileName);
 							}
  							else { // compile because not latest code.
 								System.out.println("save new code first.");
@@ -3140,7 +3146,13 @@ CommandLine commandline = new CommandLine();
 									
 startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
-									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);				
+									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);
+									
+									maven.Change(fileName);
+									threecomboboxes.load(fileName);
+									expandable.open();
+									startercombobox.Change(fileName);
+									git.Change(fileName);				
 								}
 								else {
 									String lines = line;
@@ -3150,7 +3162,13 @@ startercombobox.Change(fileName);
 											break;
 										lines = lines+"\n"+line;
 									}
+									
+									maven.Change(fileName);
+									threecomboboxes.load(fileName);
+									expandable.open();
 									startercombobox.Change(fileName);
+									git.Change(fileName);
+									
 									JOptionPane.showMessageDialog(null,lines);
 									CompileErrors compileerrors=new CompileErrors(Main.this,lines);
 								}
