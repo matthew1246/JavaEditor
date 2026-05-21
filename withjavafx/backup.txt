@@ -7,18 +7,7 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\ExtractJavaFXJars.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\AllVersionsJar.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Packager.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Packager.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Compile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\CommandLine.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\FileListModifier.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\FileListModifier.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\FileListModifier.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Powershell.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\ExtractJUnit.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -36,7 +25,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 170340
+    "caretposition": 166175
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
