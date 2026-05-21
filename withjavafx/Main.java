@@ -3238,6 +3238,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								CompileErrors compileerrors = new CompileErrors(Main.this,lines);		
 							}
 							maven.Change(fileName);
+							threecomboboxes.load(fileName);
+							expandable.open();
+							startercombobox.Change(fileName);
+							git.Change(fileName);
 						}
 						else {
 							JOptionPane.showMessageDialog(null,"No filename saved.");
