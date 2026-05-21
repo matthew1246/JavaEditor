@@ -18,8 +18,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ExtractJUnit.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -61,12 +60,14 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 102283
+    "caretposition": 144270
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
-    "startupcombobox": [],
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -515,8 +516,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
-      "ExtractJUnit"
+      "ExtractJUnit",
+      "Main"
     ],
     "starterclass": "",
     "jars": [

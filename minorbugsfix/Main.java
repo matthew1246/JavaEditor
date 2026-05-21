@@ -3840,6 +3840,12 @@ class SaveActionListener implements ActionListener {
 			               	storeselectedfile.set(main.fileName);
 			               	storeselectedfile.setTabs(tabs);
 			               	storeselectedfile.setStarterClass(main.fileName);
+			               	
+			               	main.maven.Change(main.fileName);
+					main.threecomboboxes.load(main.fileName);
+					main.expandable.open();
+					main.startercombobox.Change(main.fileName);
+					main.git.Change(main.fileName);
 				}
 			}
 			if(main.fileName != null && !main.fileName.equals("")) {
