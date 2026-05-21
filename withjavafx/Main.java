@@ -3034,7 +3034,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			thread4.start();
 		});
 			
-		compile.addActionListener(new ActionListener() {
+		compile.addActionListener(new ActionListener() {		
 		
 										
 			public void actionPerformed(ActionEvent e) {
@@ -3255,7 +3255,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 			
-		run.addActionListener(new ActionListener() {
+		run.addActionListener(new ActionListener() {		
 												
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -3396,6 +3396,12 @@ CommandLine commandline = new CommandLine();
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
+								
+								maven.Change(fileName);
+								threecomboboxes.load(fileName);
+								expandable.open();
+								startercombobox.Change(fileName);
+								git.Change(fileName);
 							}
  							else { // compile because not latest code.
 								System.out.println("save new code first.");
@@ -3663,9 +3669,14 @@ CommandLine commandline = new CommandLine();
 									command[3] = "cmd";									
 									command[4]= "/k";
 									command[5] = commandline.java();
-									startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
-									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);				
+									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);	
+									
+									maven.Change(fileName);
+									threecomboboxes.load(fileName);
+									expandable.open();
+									startercombobox.Change(fileName);
+									git.Change(fileName);		
 								}
 								else {
 									String lines = line;
@@ -3676,7 +3687,13 @@ CommandLine commandline = new CommandLine();
 										lines = lines+"\n"+line;
 									}
 									JOptionPane.showMessageDialog(null,lines);
-									CompileErrors compileerrors = new CompileErrors(Main.this,lines);		
+									CompileErrors compileerrors = new CompileErrors(Main.this,lines);	
+									
+									maven.Change(fileName);
+									threecomboboxes.load(fileName);
+									expandable.open();
+									startercombobox.Change(fileName);
+									git.Change(fileName);		
 								}
 							}
 						} catch(IOException ex) {
