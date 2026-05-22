@@ -2542,7 +2542,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				t.start();
 			}
 		});
-		compile_all.addActionListener((ev) -> {
+		compile_all.addActionListener((ev) -> {		
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);	
 			if(fileName.equals("")) {
@@ -2552,6 +2552,11 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			}
 			Compile compile = new Compile();
 			compile.compileall(this,fileName,sal,ev);
+			maven.Change(fileName);
+			threecomboboxes.load(fileName);
+			expandable.open();
+			startercombobox.Change(fileName);
+			git.Change(fileName);
 			/* try {
 				sal.actionPerformed(ev);
 				if(!fileName.equals("")) {
