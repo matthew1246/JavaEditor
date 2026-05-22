@@ -2962,12 +2962,33 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);		
 			Thread thread4=new Thread(() -> {
-					try {
-					if(fileName.equals("")) {
-						NoFileOpen nofileopen=new NoFileOpen(this,textarea,tabbedpane);
-						fileName=nofileopen.getFileName();
-						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
+				if(fileName.equals("")) {
+					NoFileOpen nofileopen=new NoFileOpen(this,textarea,tabbedpane);
+					fileName=nofileopen.getFileName();
+					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
+				}
+				Compile compile = new Compile();
+				String[] options={"Yes","No"};
+				int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+				boolean withJavaFX = false;
+				if(option2 ==JOptionPane.YES_OPTION) {
+					withJavaFX = true;
+				}
+				else if(option2 == JOptionPane.NO_OPTION) {
+					String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+					File javafxlauncher=new File(maintwo);
+					if(javafxlauncher.exists()) {
+						javafxlauncher.delete();
 					}
+					withJavaFX = false;
+				}
+				compile.compileall(fileName,sal,ev,withJavaFX,this);
+				maven.Change(fileName);
+				threecomboboxes.load(fileName);
+				expandable.open();
+				startercombobox.Change(fileName);
+				git.Change(fileName);
+				/* try {
 					sal.actionPerformed(ev);
 					if(!fileName.equals("")) {
 						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -3033,6 +3054,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
+				*/
 			});
 			thread4.start();
 		});
