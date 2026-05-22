@@ -2543,16 +2543,16 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			}
 		});
 		compile_all.addActionListener((ev) -> {
-		
-		
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);	
-			try {
-				if(fileName.equals("")) {
-					NoFileOpen nofileopen=new NoFileOpen(this,textarea,tabbedpane);
-					fileName=nofileopen.getFileName();
-					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
-				}
+			if(fileName.equals("")) {
+				NoFileOpen nofileopen=new NoFileOpen(this,textarea,tabbedpane);
+				fileName=nofileopen.getFileName();
+				tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
+			}
+			Compile compile = new Compile();
+			compile.compileall(this,fileName,sal,ev);
+			/* try {
 				sal.actionPerformed(ev);
 				if(!fileName.equals("")) {
 					String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -2605,7 +2605,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
-			}		
+			} */		
 		});
 		compile.addActionListener(new ActionListener() {				
 								
