@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -20,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Control_F.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Control_F.java"
     ],
     "caretposition": 0
   },
@@ -1475,9 +1475,14 @@
       "Main"
     ],
     "starterclass": "",
-    "jars": [],
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+    ],
     "fileNames": [],
-    "caretposition": 139982
+    "caretposition": 103160
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java": {
     "isLocked": true,
@@ -1624,6 +1629,26 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
+    "fileNames": [],
+    "caretposition": 12446
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Cursor.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Control_F.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Control_F"
+    ],
+    "starterclass": "",
+    "jars": [],
     "fileNames": [],
     "caretposition": 12446
   }

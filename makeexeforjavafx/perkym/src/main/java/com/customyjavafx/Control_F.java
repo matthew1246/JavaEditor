@@ -21,7 +21,8 @@ public class Control_F {
 	private JTextField replaceinput;
 	private JCheckBox casey;
 	private JCheckBox regex_checkbox;
-	public Control_F(Main main,JCheckBox searchall,JTextArea textarea,JCheckBox replace,JCheckBox selection,JTextField replaceinput,JCheckBox casey,JCheckBox  regex_checkbox) {
+	private JCheckBox cursor;
+	public Control_F(Main main,JCheckBox searchall,JTextArea textarea,JCheckBox replace,JCheckBox selection,JTextField replaceinput,JCheckBox casey,JCheckBox  regex_checkbox,JCheckBox cursor) {
 		liveiterator= new LiveIterator<String>(main.filelistmodifier.original,true);
 		this.main = main;	
 		this.searchall = searchall;	
@@ -31,6 +32,7 @@ public class Control_F {
 		this.replaceinput = replaceinput;
 		this.casey = casey;
 		this.regex_checkbox = regex_checkbox;
+		this.cursor=cursor;
 	}
 	public void FindWithoutFocus(String find) {
 		if(!searchall.isSelected()) {
@@ -42,6 +44,10 @@ public class Control_F {
 				selectionstart=textarea.getSelectionStart();
 				selectionend = textarea.getSelectionEnd();
 				text=textarea.getText().substring(selectionstart,selectionend);
+			}
+			if(cursor.isSelected()) {
+				selectionstart=textarea.getSelectionStart();
+				text=text.substring(selectionstart,selectionend);
 			}
 			String find2 = find;
 			if(!casey.isSelected())
@@ -68,7 +74,7 @@ public class Control_F {
 					}
 				}
 				x--;
-				if(selection.isSelected()) {
+				if(selection.isSelected() || cursor.isSelected()) {
 					x=x+selectionstart;
 				}
 				if(replace.isSelected()) {
@@ -249,6 +255,10 @@ public class Control_F {
 				selectionend = textarea.getSelectionEnd();
 				text=textarea.getText().substring(selectionstart,selectionend);
 			}
+			if(cursor.isSelected()) {
+				selectionstart=textarea.getSelectionStart();
+				text=text.substring(selectionstart,selectionend);
+			}
 			String find2 = find;
 			if(!casey.isSelected())
 				find = find.toLowerCase();
@@ -274,7 +284,7 @@ public class Control_F {
 					}
 				}
 				x--;
-				if(selection.isSelected()) {
+				if(selection.isSelected() || cursor.isSelected()) {
 					x=x+selectionstart;
 				}
 				if(replace.isSelected()) {
