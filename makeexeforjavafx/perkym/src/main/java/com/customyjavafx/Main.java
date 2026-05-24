@@ -2703,14 +2703,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-				frame2.setSize(325,110);
+				frame2.setSize(400,110);
 				
 				JPanel panel0 = new JPanel();
 				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 				
 				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				
-				JTextField input = new JTextField(20);
+				JTextField input = new JTextField(30);
 				panel0.add(input);
 				
 				panel0.validate();
