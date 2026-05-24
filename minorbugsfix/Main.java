@@ -2274,14 +2274,14 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-				frame2.setSize(325,110);
+				frame2.setSize(400,110);
 				
 				JPanel panel0 = new JPanel();
 				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 				
 				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				
-				JTextField input = new JTextField(20);
+				JTextField input = new JTextField(30);
 				panel0.add(input);
 				
 				panel0.validate();
@@ -2349,13 +2349,20 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				
 				panel0.validate();
 				panel0.repaint();
+				
+				JCheckBox cursor= new JCheckBox("cursor");
+				cursor.setMargin(new Insets(0,0,0,0));
+				panel0.add(cursor);
+				
+				panel0.validate();
+				panel0.repaint();
 
 				frame2.getContentPane().add(panel0);
 				
 				//frame2.pack();
 				//frame2.setResizable(false);
 				frame2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey,regex_checkbox);
+				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey,regex_checkbox,cursor);
 				upArrow.addActionListener( (ev3) -> {
 					control_f.z = control_f.z-2;
 					control_f.FindWithoutFocus(input.getText());
