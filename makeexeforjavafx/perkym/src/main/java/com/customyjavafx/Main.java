@@ -2967,7 +2967,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				t.start();
 			}
 		});
-		compile_all.addActionListener((ev) -> {
+		compile_all.addActionListener((ev) -> {		
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);		
 			Thread thread4=new Thread(() -> {
@@ -2991,7 +2991,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					withJavaFX = false;
 				}
-				compile.compileall(fileName,sal,ev,withJavaFX,this);
+				compile.compileallbutton(fileName,sal,ev,withJavaFX,this);
 				maven.Change(fileName);
 				threecomboboxes.load(fileName);
 				expandable.open();
