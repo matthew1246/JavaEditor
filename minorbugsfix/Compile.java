@@ -478,6 +478,9 @@ public class Compile {
 				ExtractJUnit extractjunit = new ExtractJUnit(main);
 				commandline.addJunit();
 			}
+			if(main.checkbox.isSelected()) {
+				commandline.addClasspathCheckboxFeature();
+			}
 			
 			//Process process = compileFromMSDOS("*.java",classpath);
 			String[] command = new String[3];
