@@ -20,7 +20,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Compile.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Compile.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\MSDOS.java"
     ],
     "caretposition": 0
   },
@@ -1254,7 +1255,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 1144
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\NoDuplicate.java": {
     "isLocked": false,

@@ -19,7 +19,10 @@ public class MSDOS {
 		
 		JPanel panel = new JPanel();
 		input =	new JTextField(17);
-		input.setText("del backup.txt");
+		String home=System.getProperty("user.home");
+		if(!home.endsWith("\\"))
+			home=home+"\\";
+		input.setText("del "+home+"backup.txt");
 		
 		panel.add(input);
 		run = new JButton("run");
