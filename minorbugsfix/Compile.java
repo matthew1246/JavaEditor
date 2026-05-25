@@ -474,6 +474,11 @@ public class Compile {
 				commandline.addExternalJar(jar);
 			}
 			
+			if(main.jarcheckbox.isSelected()) {					
+				ExtractJUnit extractjunit = new ExtractJUnit(main);
+				commandline.addJunit();
+			}
+			
 			//Process process = compileFromMSDOS("*.java",classpath);
 			String[] command = new String[3];
 			command[0] = "cmd.exe";
