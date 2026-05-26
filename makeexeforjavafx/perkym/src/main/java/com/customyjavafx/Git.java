@@ -189,8 +189,6 @@ public class Git {
      			isFileInsideGitRepository=isFileInsideGitRepository(fileName);
      			if(isFileInsideGitRepository) {
 	     			setDirectoryAndRootDirectory(fileName);
-	     			JOptionPane.showMessageDialog(null,"directory is "+directory);
-	     			JOptionPane.showMessageDialog(null,"root_directory is "+root_directory);
 	     			whichbranchopened=whichBranchOpened();
      			}
      		}		
