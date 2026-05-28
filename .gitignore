@@ -1,3 +1,9 @@
 original.txt
 autosuggestionbox.txt
 suggestionbox.txt
+
+# Ignore target build artifacts but keep dist deliverables
+makeexe/**/target/*
+!makeexe/**/target/dist/
+makeexeforjavafx/**/target/*
+!makeexeforjavafx/**/target/dist/
