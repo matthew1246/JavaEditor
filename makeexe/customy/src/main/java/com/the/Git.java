@@ -24,34 +24,6 @@ public class Git {
 		    		return true;		
 		    	}
 	    	}
-		String[] options={"Yes","No"};
-		int option=JOptionPane.showOptionDialog(null,"Do you want to set where git-bash.exe is?","Where is git-bash.exe installed?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-		switch(option) {
-			case JOptionPane.YES_OPTION:
-				String dir =  System.getenv("ProgramFiles");
-				JFileChooser filechooser = new JFileChooser(new File(dir));
-				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open git-bash.exe","exe");
-				filechooser.setFileFilter(filenameextensionfilter);
-				int result = filechooser.showOpenDialog(null);
-		                       if(result == JFileChooser.APPROVE_OPTION) {
-                       			File selectedFile = filechooser.getSelectedFile();
-                       			gitbashdotexe = selectedFile.getAbsolutePath();
-					if(gitbashdotexe.endsWith("git-bash.exe")) {
-						return true;
-					}
-					else {
-						JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
-						return false;
-					}
-				}
-				else {
-					JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
-					return false;
-				}
-			case JOptionPane.NO_OPTION:
-				JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
-				return false;
-		}
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 		return false;		
 	}
@@ -99,34 +71,6 @@ public class Git {
 		}
     	}
     	public boolean setWhereIsGitBashDotExeEDT() {
-    		String[] options={"Yes","No"};
-		int option=JOptionPane.showOptionDialog(null,"Do you want to set where git-bash.exe is?","Where is git-bash.exe installed?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-		switch(option) {
-			case JOptionPane.YES_OPTION:
-				String dir =  System.getenv("ProgramFiles");
-				JFileChooser filechooser = new JFileChooser(new File(dir));
-				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open git-bash.exe","exe");
-				filechooser.setFileFilter(filenameextensionfilter);
-				int result = filechooser.showOpenDialog(null);
-		                       if(result == JFileChooser.APPROVE_OPTION) {
-                       			File selectedFile = filechooser.getSelectedFile();
-                       			gitbashdotexe = selectedFile.getAbsolutePath();
-					if(gitbashdotexe.endsWith("git-bash.exe")) {
-						return true;
-					}
-					else {
-						JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
-						return false;
-					}
-				}
-				else {
-					JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
-					return false;
-				}
-			case JOptionPane.NO_OPTION:
-				JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
-				return false;
-		}
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 		return false;	
 	}
