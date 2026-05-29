@@ -1690,6 +1690,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			public void mousePressed(MouseEvent me) {
 				int tab_index=tabbedpane.getUI().tabForCoordinate(tabbedpane,me.getX(),me.getY());
 				if(tab_index >= 0) {
+					String title=tabbedpane.getTitleAt(tab_index);
+					if(title.equals("+")) {
+						return;
+					}
 					tabbedpane.setSelectedIndex(tab_index);
 					
 					Main.this.fileName = fileNames.get(tab_index);
