@@ -3392,14 +3392,16 @@ CommandLine commandline = new CommandLine();
 									commandline.setMainClass(save);
 									StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
 									Preferences preferences=storeselectedfile2.get(fileName);
-									if(preferences.jars.isEmpty()) {
-										String rightfolder=Main.getDirectory(fileName);
-										if(!rightfolder.endsWith("\\"))
-											rightfolder=rightfolder+"\\";
-										preferences=storeselectedfile2.get(rightfolder+selected+".java");
-									}
+									String rightfolder=Main.getDirectory(fileName);
+									if(!rightfolder.endsWith("\\"))
+										rightfolder=rightfolder+"\\";
+									Preferences lockedPrefs=storeselectedfile2.get(rightfolder+selected+".java");
 									for(String jar:preferences.jars) {
 										commandline.addExternalJar(jar);
+									}
+									for(String jar:lockedPrefs.jars) {
+										if(!preferences.jars.contains(jar))
+											commandline.addExternalJar(jar);
 									}
 								}
 								else {
@@ -3649,14 +3651,16 @@ CommandLine commandline = new CommandLine();
 										
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName);
-										if(preferences.jars.isEmpty()) {
-											String rightfolder=Main.getDirectory(fileName);
-											if(!rightfolder.endsWith("\\"))
-												rightfolder=rightfolder+"\\";
-											preferences=storeselectedfile.get(rightfolder+selected+".java");
-										}
+										String rightfolder=Main.getDirectory(fileName);
+										if(!rightfolder.endsWith("\\"))
+											rightfolder=rightfolder+"\\";
+										Preferences lockedPrefs=storeselectedfile.get(rightfolder+selected+".java");
 										for(String jar:preferences.jars) {
 											commandline.addExternalJar(jar);
+										}
+										for(String jar:lockedPrefs.jars) {
+											if(!preferences.jars.contains(jar))
+												commandline.addExternalJar(jar);
 										}
 										
 										//option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
