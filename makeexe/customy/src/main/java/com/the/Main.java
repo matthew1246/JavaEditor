@@ -1646,7 +1646,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				//tabbedpane.setSelectedIndex((tabtindex-1));
 			//else if(fileNames.size() > 1 && tabtindex == 0)
 				// tabbedpane.setSelectedIndex(1);
-			if(tabtindex == (tabbedpane.getTabCount()-2)) {
+			if(tabtindex == (tabbedpane.getTabCount()-2) && tabtindex > 0) {
 				tabbedpane.setSelectedIndex((tabtindex-1));
 			}
 			
@@ -1657,6 +1657,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			textarea=(JTextArea)jscrollpane5.getViewport().getView();
 			
 			String fileName2 = fileNames.get(tabbedpane.getSelectedIndex());
+			Main.this.fileName = fileName2;
 		
 			git.Change(fileName2);
 			threecomboboxes.load(fileName2);

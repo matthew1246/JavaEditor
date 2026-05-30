@@ -33,7 +33,7 @@ public class ThreeComboboxes {
 			FromScratch(fileName);
 		}
 		else if(fileName != null && Main.isSameDirectory(this.fileName,fileName)) {
-			if(main.filelistmodifier == null) {
+			if(main.filelistmodifier == null || main.filelistmodifier.isEmpty) {
 				FromScratch(fileName);
 			}	
 			else if( main.filelistmodifier.getFileList().contains(Main.getFileName(fileName)) )	{
