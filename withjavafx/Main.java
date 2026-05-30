@@ -3387,10 +3387,14 @@ CommandLine commandline = new CommandLine();
 									}
 									
 									commandline.setMainClass(save);
-									String rightfolder=Main.getDirectory(fileName);
-									if(!rightfolder.endsWith("\\"))
-										rightfolder=rightfolder+"\\";
-									Preferences preferences=storeselectedfile.get(rightfolder+selected+".java");
+									StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
+									Preferences preferences=storeselectedfile2.get(fileName);
+									if(preferences.jars.isEmpty()) {
+										String rightfolder=Main.getDirectory(fileName);
+										if(!rightfolder.endsWith("\\"))
+											rightfolder=rightfolder+"\\";
+										preferences=storeselectedfile2.get(rightfolder+selected+".java");
+									}
 									for(String jar:preferences.jars) {
 										commandline.addExternalJar(jar);
 									}
@@ -3642,10 +3646,13 @@ CommandLine commandline = new CommandLine();
 										storeselectedfile.setStarterClass(classpath1+selected+".java");
 										
 										storeselectedfile = new StoreSelectedFile();
-										String rightfolder=Main.getDirectory(fileName);
-										if(!rightfolder.endsWith("\\"))
-											rightfolder=rightfolder+"\\";
-										preferences=storeselectedfile.get(rightfolder+selected+".java");
+										preferences=storeselectedfile.get(fileName);
+										if(preferences.jars.isEmpty()) {
+											String rightfolder=Main.getDirectory(fileName);
+											if(!rightfolder.endsWith("\\"))
+												rightfolder=rightfolder+"\\";
+											preferences=storeselectedfile.get(rightfolder+selected+".java");
+										}
 										for(String jar:preferences.jars) {
 											commandline.addExternalJar(jar);
 										}
