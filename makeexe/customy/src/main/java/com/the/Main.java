@@ -2476,9 +2476,13 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 							}
 						}
 						
-						String selected=Main.this.getFileName(fileName);
-						
-						Main.this.open(selected);
+				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+				storeselectedfile.set(fileName);
+				storeselectedfile.setCaretPosition(fileName, textarea.getCaretPosition());
+
+				String selected=Main.this.getFileName(fileName);
+				
+				Main.this.open(selected);
 					}
 				}catch (FileNotFoundException ex) {
 					System.out.println(ex);

@@ -2897,6 +2897,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 						}	
 					
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						storeselectedfile.set(fileName);
+						storeselectedfile.setCaretPosition(fileName, textarea.getCaretPosition());
+
 						String selected=Main.this.getFileName(fileName);
 						
 						Main.this.open(selected);
