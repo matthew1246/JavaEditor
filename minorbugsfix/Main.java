@@ -462,7 +462,7 @@ public class Main {
 							JTextArea textarea2=(JTextArea)scrollpane2.getViewport().getView();	
 							//positiontrackers.add(new PositionTracker(textarea2));
 				
-							textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+							textarea2.addKeyListener(new CurlyBraceKeyListener(Main.this));
 							addCaretListener(textarea2);
 							CurlyBraceKeyListener curlybracekeylistener=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
 							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
