@@ -180,7 +180,7 @@ public class CompileErrors {
 				for(String fileName2:main.filelistmodifier.getFileList()) {
 					if(fileName.equals(ce.main.getFileName(fileName2))) {
 						ce.main.open(fileName2);
-						ce.main.scrollToCaretPositionWithoutFocus(ce.getCaretPosition(l_number));
+						ce.showError(ce.getCaretPosition(l_number));
 						return;
 					}
 				}
