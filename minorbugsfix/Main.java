@@ -204,11 +204,9 @@ public class Main {
 			
 			this.textarea=textarea2;
 			
-			CurlyBraceKeyListener curlybracekeylistener =new CurlyBraceKeyListener(this);
-			
-			textarea2.addKeyListener(curlybracekeylistener);
-			
+			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
 			addCaretListener(textarea2);
+			CurlyBraceKeyListener curlybracekeylistener=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 					try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -318,11 +316,11 @@ public class Main {
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
 			
-			CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(this);	
-			textarea2.addKeyListener(curlybracekeylistener);
 			//positiontrackers.add(new PositionTracker(textarea2));
 
+			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
 			addCaretListener(textarea2);
+			CurlyBraceKeyListener curlybracekeylistener=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 				try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -462,11 +460,11 @@ public class Main {
 						if(component instanceof JScrollPane) {
 							JScrollPane scrollpane2 =(JScrollPane)component;
 							JTextArea textarea2=(JTextArea)scrollpane2.getViewport().getView();	
-							CurlyBraceKeyListener curlybracekeylistener = new CurlyBraceKeyListener(Main.this);
-							textarea2.addKeyListener(curlybracekeylistener);
 							//positiontrackers.add(new PositionTracker(textarea2));
 				
+							textarea2.addKeyListener(new CurlyBraceKeyListener(this));
 							addCaretListener(textarea2);
+							CurlyBraceKeyListener curlybracekeylistener=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
 							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 								try {
 									if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -523,8 +521,8 @@ public class Main {
 						}
 					}
 				}	
-   	 	 	};
- 	 	 	swingworker.execute();
+    	 	 	};
+  	 	 	swingworker.execute();
 		}
 		setListeners();	
 								
@@ -1409,7 +1407,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		}
 	}
 	public javax.swing.text.JTextComponent targetArea = textarea;
-	//public CurlyBraceKeyListener curlybracekeylistener;
+	
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
@@ -1552,11 +1550,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			textarea2.setTabSize(4);
 			
-			CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
-			textarea2.addKeyListener(curlybracekeylistener);
 			//positiontrackers.add(new PositionTracker(textarea2));
 			
+			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
 			addCaretListener(textarea2);
+			CurlyBraceKeyListener curlybracekeylistener=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 				try {
 					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -1696,7 +1694,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					tabbedpane.setSelectedIndex(tab_index);
 					
 					Main.this.fileName = fileNames.get(tab_index);
-					//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+					//((CurlyBraceKeyListener)textarea.getKeyListeners()[0]).positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 					
@@ -2267,9 +2265,9 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			selectCode(ev);
 		});
 */
-		//curlybracekeylistener = new CurlyBraceKeyListener(this);
+		//textarea.addKeyListener(new CurlyBraceKeyListener(this));
 				
-		//positiontrackers.add(curlybracekeylistener.positiontracker);
+		//positiontrackers.add(((CurlyBraceKeyListener)textarea.getKeyListeners()[0]).positiontracker);
  		//textarea.addKeyListener(curlybracekeylistener);
  		
 		control_f.addActionListener(new ActionListener() {
@@ -3295,11 +3293,11 @@ startercombobox.Change(fileName);
 				textarea2.setTabSize(4);
 				textarea2.setText(lines);
 				
-				CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
-				textarea2.addKeyListener(curlybracekeylistener);
 				//positiontrackers.add(new PositionTracker(textarea2));
 				
+				textarea2.addKeyListener(new CurlyBraceKeyListener(this));
 				addCaretListener(textarea2);
+				CurlyBraceKeyListener curlybracekeylistener=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
 				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 					try {
 						if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -3352,6 +3350,7 @@ startercombobox.Change(fileName);
 						ex.printStackTrace();
 					}
 				});
+				
 				textarea2.addMouseListener(rightclick);
 				
 				tabbedpane.addTab(getFileName(filename),scrollpane2);
@@ -3451,11 +3450,11 @@ startercombobox.Change(fileName);
 						textarea2.setTabSize(4);
 						textarea2.setText(lines);
 						
-						CurlyBraceKeyListener curlybracekeylistener=new CurlyBraceKeyListener(this);
-						textarea2.addKeyListener(curlybracekeylistener);
 						//positiontrackers.add(new PositionTracker(textarea2));
 						
+						textarea2.addKeyListener(new CurlyBraceKeyListener(this));
 						addCaretListener(textarea2);
+						CurlyBraceKeyListener curlybracekeylistener=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
 						scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
 							try {
 								if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
@@ -3541,7 +3540,7 @@ startercombobox.Change(fileName);
 				}
 				/*
 				fileName=fileNames.get(tabbedpane.getSelectedIndex());
-				//curlybracekeylistener.positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
+				//((CurlyBraceKeyListener)textarea.getKeyListeners()[0]).positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				*/
@@ -4585,7 +4584,7 @@ class AutoKeyListener {
 			
 			if(extra.contains(".")) {
 				main.textarea.setCaretPosition(main.textarea.getCaretPosition()-1);
-				//main.curlybracekeylistener.keyPressed(keyevent);
+				//((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).keyPressed(keyevent);
 				KeyEvent keyevent2 = new KeyEvent(main.textarea,KeyEvent.KEY_PRESSED,System.currentTimeMillis(),0,KeyEvent.getExtendedKeyCodeForChar('.'),'.');
 				
 				main.textarea.dispatchEvent(keyevent2);
