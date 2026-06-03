@@ -253,8 +253,7 @@ public class Git {
 			commit.setVisible(true);
 		});
 		reset.addActionListener((ev) -> {
-			git("git reset --hard HEAD");
-			git("git clean -fd");
+			git("git reset --hard HEAD; git clean -fd");
 		});
 		run.addActionListener( (ev) -> {
 			git(input.getText());

@@ -190,8 +190,7 @@ public class Git {
 			commit.setVisible(true);
 		});
 		reset.addActionListener((ev) -> {
-			git("git reset --hard HEAD",root_directory);
-			git("git clean -fd",root_directory);
+			git("git reset --hard HEAD; git clean -fd",root_directory);
 		});
 		run.addActionListener( (ev) -> {
 			git(input.getText(),root_directory);
