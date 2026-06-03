@@ -2916,6 +2916,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						storeselectedfile.set(fileName);
 						storeselectedfile.setCaretPosition(fileName, textarea.getCaretPosition());
 
+						int selectedtab = tabbedpane.getSelectedIndex();
+						if(selectedtab >= 0 && selectedtab < fileNames.size()) {
+							fileNames.set(selectedtab, fileName);
+						} else if(selectedtab == fileNames.size()) {
+							fileNames.add(fileName);
+						}
+						storeselectedfile.setTabs(fileNames);
+
 						String selected=Main.this.getFileName(fileName);
 						
 						Main.this.open(selected);
