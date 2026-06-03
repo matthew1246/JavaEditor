@@ -191,6 +191,7 @@ public class Git {
 		});
 		reset.addActionListener((ev) -> {
 			git("git reset --hard HEAD",root_directory);
+			git("git clean -fd",root_directory);
 		});
 		run.addActionListener( (ev) -> {
 			git(input.getText(),root_directory);

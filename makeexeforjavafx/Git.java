@@ -254,6 +254,7 @@ public class Git {
 		});
 		reset.addActionListener((ev) -> {
 			git("git reset --hard HEAD");
+			git("git clean -fd");
 		});
 		run.addActionListener( (ev) -> {
 			git(input.getText());
