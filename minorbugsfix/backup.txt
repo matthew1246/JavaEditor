@@ -60,7 +60,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 90110
+    "caretposition": 308
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -970,8 +970,8 @@
     "caretposition": 2680
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CompileErrors.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "Main",
       "CompileErrors"
@@ -984,7 +984,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 1975
+    "caretposition": 2017
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\CompileErrors.java": {
     "isLocked": false,

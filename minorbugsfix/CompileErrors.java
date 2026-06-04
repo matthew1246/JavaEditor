@@ -52,6 +52,13 @@ public class CompileErrors {
 						}
 					}																												
 				}
+				if(data.apiclass.equals("")) {
+					Pattern pattern3 = Pattern.compile("location: variable ([a-zA-Z0-9.]+) of type ([A-Za-z0-9]+)",Pattern.DOTALL);
+					Matcher matcher3=pattern3.matcher(wholematch);
+					if(matcher3.find()) {
+						data.apiclass=matcher3.group(1);
+					}
+				}
 				datas.add(data);					
 			}
 			
@@ -240,4 +247,4 @@ class Data {
 	public boolean hasAPIClass() {
 		return !apiclass.equals("");
 	}
-}
+}
