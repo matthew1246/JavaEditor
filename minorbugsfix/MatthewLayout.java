@@ -364,7 +364,7 @@ public boolean isOn = false;
 					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
 					Component component4 = components.get(j);
 					if(!xywidthheight2.equals(xywidthheight)) {
-						if(xywidthheight2.x == xywidthheight.x) {							
+						if(xywidthheight2.x == xywidthheight.x || isInclusiveY(xywidthheight,xywidthheight2.x)) {						
 							ySum+= xywidthheight2.height;
 						}
 					}
@@ -388,7 +388,7 @@ public boolean isOn = false;
 					button.setMargin(insets2);
 				}
 				
-				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xSum+ " " + xsize);
+				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
 				component.setLocation(insets.left+insets.right+(int)(xSum*xsize),insets.bottom+insets.top+(int)(ySum*ysize));
 				// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
 				component.setMinimumSize(new Dimension(xywidthheight.width*((int)xsize),xywidthheight.height*((int)ysize)));
@@ -403,6 +403,22 @@ public boolean isOn = false;
 					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
 				}
 			}
+			for(XYWidthHeight xywidthheight:xywidthheights) {
+				System.out.println(xywidthheight);
+			}		
 		}
+	}
+	public boolean isInclusiveY(XYWidthHeight xywidthheight2,int x) {
+		if(xywidthheight.x < x) {
+			double totalSumx=0;
+			for(XYWidthHeight xywidthheight3:xywidthheights) {
+				if(!xywidthheight.equals(xywidthheight3)) {
+					totalSumx+=xywidthheight2.width;
+				}
+				else {
+					break;
+				}
+			}
+			if(totalSumx
 	}
 }
