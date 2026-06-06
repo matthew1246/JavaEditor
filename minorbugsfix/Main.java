@@ -2273,13 +2273,14 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-				
+				//frame2.setSize(400,110);
+				frame2.setSize(425,110);
+					
 				JPanel panel0 = new JPanel();
 				panel0.setLayout(new MatthewLayout(true));
-				frame2.setSize(400,110);
 				
 				JTextField input = new JTextField();
-				panel0.add(input,new XYWidthHeight(0,0,25,1));
+				panel0.add(input,new XYWidthHeight(0,0,24,1));
 				
 				JPanel arrowspanel = new JPanel();
 				arrowspanel.setLayout(new GridLayout(2,1));
@@ -2292,16 +2293,16 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
             			panel0.add(arrowspanel,new XYWidthHeight(1,0,1,1));
 				
 				JButton click = new JButton("Find");
-				panel0.add(click,new XYWidthHeight(2,0,2,1));
+				panel0.add(click,new XYWidthHeight(2,0,5,1));
 		
 				JCheckBox searchall = new JCheckBox("all");
-				panel0.add(searchall,new XYWidthHeight(0,1,3,1));
+				panel0.add(searchall,new XYWidthHeight(0,1,2,1));
 		
 				JCheckBox casey=new JCheckBox("case");
-				panel0.add(casey,new XYWidthHeight(1,1,4,1));
+				panel0.add(casey,new XYWidthHeight(1,1,3,1));
 		
 				JTextField replaceinput = new JTextField();
-				panel0.add(replaceinput,new XYWidthHeight(2,1,4,1));
+				panel0.add(replaceinput,new XYWidthHeight(2,1,5,1));
 				replaceinput.setEditable(false);
 				
 				JCheckBox replace = new JCheckBox("replace");
@@ -2315,10 +2316,10 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 					
 				
 				JCheckBox regex_checkbox = new JCheckBox("regex");
-				panel0.add(regex_checkbox,new XYWidthHeight(5,1,4,1));
+				panel0.add(regex_checkbox,new XYWidthHeight(5,1,5,1));
 				
 				JCheckBox cursor= new JCheckBox("cursor");
-				panel0.add(cursor,new XYWidthHeight(6,1,3,1));
+				panel0.add(cursor,new XYWidthHeight(6,1,5,1));
 				
 				frame2.getContentPane().add(panel0);
 				
