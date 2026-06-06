@@ -421,4 +421,16 @@ public boolean isOn = false;
 			}
 			if(totalSumx
 	}
+	public double getWeightx(XYWidthHeight xywidthheight) {
+		int x = 0;
+		for(XYWidthHeight xywidthheight2:xywidthheights) {
+			if(xywidthheight.equals(xywidthheight))
+				break;
+			}
+			else if(xywidthheight.y ==xywidthheight2.y) {
+				x+=xywidthheight.width;
+			}		
+		}
+		return x;
+	}
 }
