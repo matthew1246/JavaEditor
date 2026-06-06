@@ -364,7 +364,7 @@ public boolean isOn = false;
 					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
 					Component component4 = components.get(j);
 					if(!xywidthheight2.equals(xywidthheight)) {
-						if((xywidthheight2.x == xywidthheight.x) || isInclusiveY(xywidthheight,xywidthheight2)) {						
+						if((getWeightx(xywidthheight2) == getWeightx(xywidthheight)) || isInclusiveY(xywidthheight,xywidthheight2)) {			
 							ySum+= xywidthheight2.height;
 						}
 					}
