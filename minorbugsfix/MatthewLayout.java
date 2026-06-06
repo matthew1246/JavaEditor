@@ -66,11 +66,13 @@ public class MatthewLayout implements LayoutManager2 {
 	public boolean showBorders = false;
 	private int minimumWidth;
 	private int minimumHeight;
+	private Insets padding = new Insets(0,0,0,0);
 	public MatthewLayout(boolean isFill) {
 		if(!isFill) {
 			throw new RuntimeException("Need isFill to be true to use this constructor.");
 		}
 		this.isFill = isFill;
+		padding = new Insets(3,3,3,3);
 	}
 	public MatthewLayout(int minimumWidth, int minimumHeight) {
 		this.minimumWidth = minimumWidth;
@@ -78,6 +80,9 @@ public class MatthewLayout implements LayoutManager2 {
 	}
 	public void setShowBorders(boolean isBorders) {
 		showBorders = isBorders;
+	}
+	public void setPadding(int top, int left, int bottom, int right) {
+		padding = new Insets(top, left, bottom, right);
 	}
 	private List<Component> components = new ArrayList<Component>();
 	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();
@@ -286,7 +291,7 @@ public boolean isOn = false;
 				}
 			
 				Insets insets = container.getInsets();
-				component.setBounds(insets.left+xSum+insets.right,insets.top+ySum+insets.bottom,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
+				component.setBounds(insets.left+padding.left+xSum,insets.top+padding.top+ySum,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
 				if(showBorders) {
 					JComponent jcomponent = (JComponent)component;
 					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -371,12 +376,12 @@ public boolean isOn = false;
 					else break;
 				}
 				Insets insets = container.getInsets();
-				System.out.println("Insets "+insets);
-				double xsize = ((double)container.getWidth()) / ((double)highestXSumFraction);
-				// xsize=(int)(xsize+0.5);
-				// JOptionPane.showMessageDialog(null,""+xsize);
-				// System.out.println("xsize is "+xsize);
-				double ysize = ((double)container.getHeight()) / ((double)highestYSumFraction);
+				int padL = insets.left + padding.left;
+				int padR = insets.right + padding.right;
+				int padT = insets.top + padding.top;
+				int padB = insets.bottom + padding.bottom;
+				double xsize = ((double)(container.getWidth()-padL-padR)) / ((double)highestXSumFraction);
+				double ysize = ((double)(container.getHeight()-padT-padB)) / ((double)highestYSumFraction);
 				// System.out.println("ysize is " +  ysize);
 				// container.setWidth(800);
 				
@@ -389,7 +394,7 @@ public boolean isOn = false;
 				}
 				
 				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xywidthheight.width +" "+xywidthheight.height+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
-				component.setLocation(insets.left+insets.right+(int)(xSum*xsize),insets.bottom+insets.top+(int)(ySum*ysize));
+				component.setLocation(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize));
 				// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
 				component.setMinimumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
 				component.setMaximumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
