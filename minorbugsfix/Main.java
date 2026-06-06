@@ -2278,10 +2278,10 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				panel0.setLayout(new MatthewLayout(true));
 				frame2.setSize(400,110);
 				
-				JTextField input = new JTextField();
+				JTextField input = new JTextField(5);
 				panel0.add(input,new XYWidthHeight(0,0,25,2));
 				
-				/*JPanel arrowspanel = new JPanel();
+				JPanel arrowspanel = new JPanel();
 				arrowspanel.setLayout(new GridLayout(2,1));
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
@@ -2290,8 +2290,6 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
             			arrowspanel.add(upArrow);
             			arrowspanel.add(downArrow);
             			panel0.add(arrowspanel,new XYWidthHeight(1,0,1,2));
-            			*/
-            			panel0.add(new JButton("KJjk"),new XYWidthHeight(1,0,1,2));
 				
 				JButton click = new JButton("Find");
 				panel0.add(click,new XYWidthHeight(2,0,2,2));
@@ -2328,14 +2326,13 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				//frame2.setResizable(false);
 				frame2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 				Control_F control_f = new Control_F(Main.this,searchall,textarea,replace,selection,replaceinput,casey,regex_checkbox,cursor);
-				/*upArrow.addActionListener( (ev3) -> {
+				upArrow.addActionListener( (ev3) -> {
 					control_f.z = control_f.z-2;
 					control_f.FindWithoutFocus(input.getText());
 				});
 				downArrow.addActionListener((ev2) -> {
 					control_f.FindWithoutFocus(input.getText());
 				});
-				*/
 				ActionListener clicky=new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						control_f.Find(input.getText());

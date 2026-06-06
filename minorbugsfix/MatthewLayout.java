@@ -388,7 +388,7 @@ public boolean isOn = false;
 					button.setMargin(insets2);
 				}
 				
-				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
+				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xywidthheight.width +" "+xywidthheight.height+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
 				component.setLocation(insets.left+insets.right+(int)(xSum*xsize),insets.bottom+insets.top+(int)(ySum*ysize));
 				// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
 				component.setMinimumSize(new Dimension(xywidthheight.width*((int)xsize),xywidthheight.height*((int)ysize)));
