@@ -364,7 +364,7 @@ public boolean isOn = false;
 					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
 					Component component4 = components.get(j);
 					if(!xywidthheight2.equals(xywidthheight)) {
-						if(xywidthheight2.x == xywidthheight.x || isInclusiveY(xywidthheight,xywidthheight2.x)) {						
+						if((xywidthheight2.x == xywidthheight.x) || isInclusiveY(xywidthheight,xywidthheight2)) {						
 							ySum+= xywidthheight2.height;
 						}
 					}
@@ -408,27 +408,18 @@ public boolean isOn = false;
 			}		
 		}
 	}
-	public boolean isInclusiveY(XYWidthHeight xywidthheight2,int x) {
-		if(xywidthheight.x < x) {
-			double totalSumx=0;
-			for(XYWidthHeight xywidthheight3:xywidthheights) {
-				if(!xywidthheight.equals(xywidthheight3)) {
-					totalSumx+=xywidthheight2.width;
-				}
-				else {
-					break;
-				}
-			}
-			if(totalSumx
+	public boolean isInclusiveY(XYWidthHeight xywidthheight,XYWidthHeight xywidthheight2) {
+		int weightx2= getWeightx(xywidthheight2);
+		int weightx = getWeightx(xywidthheight);
+		return ((weightx2 < weightx) && ((weightx2+xywidthheight2.width) > weightx) );
 	}
-	public double getWeightx(XYWidthHeight xywidthheight) {
+	public int getWeightx(XYWidthHeight xywidthheight) {
 		int x = 0;
 		for(XYWidthHeight xywidthheight2:xywidthheights) {
-			if(xywidthheight.equals(xywidthheight))
-				break;
-			}
-			else if(xywidthheight.y ==xywidthheight2.y) {
-				x+=xywidthheight.width;
+			if(xywidthheight.equals(xywidthheight2))
+					return x;
+			if(xywidthheight.y ==xywidthheight2.y) {
+				x+=xywidthheight2.width;
 			}		
 		}
 		return x;
