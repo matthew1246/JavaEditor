@@ -2281,7 +2281,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				panel0.setLayout(new MatthewLayout(true));
 				
 				JTextField input = new JTextField();
-				panel0.add(input,new XYWidthHeight(0,0,27,1));
+				panel0.add(input,new XYWidthHeight(0,0,26,1));
 				
 				JPanel arrowspanel = new JPanel();
 				arrowspanel.setLayout(new GridLayout(2,1));
@@ -2307,7 +2307,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				replaceinput.setEditable(false);
 				
 				JCheckBox replace = new JCheckBox("replace");
-				panel0.add(replace,new XYWidthHeight(3,1,6,1));
+				panel0.add(replace,new XYWidthHeight(3,1,5,1));
 				replace.addActionListener( (ev3) -> {
 					replaceinput.setEditable(true);
 				});
