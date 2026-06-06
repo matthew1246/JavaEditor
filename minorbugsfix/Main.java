@@ -2296,10 +2296,10 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				panel0.add(click,new XYWidthHeight(2,0,5,1));
 		
 				JCheckBox searchall = new JCheckBox("all");
-				panel0.add(searchall,new XYWidthHeight(0,1,2,1));
+				panel0.add(searchall,new XYWidthHeight(0,1,3,1));
 		
 				JCheckBox casey=new JCheckBox("case");
-				panel0.add(casey,new XYWidthHeight(1,1,3,1));
+				panel0.add(casey,new XYWidthHeight(1,1,4,1));
 		
 				JTextField replaceinput = new JTextField();
 				panel0.add(replaceinput,new XYWidthHeight(2,1,5,1));
