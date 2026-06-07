@@ -66,11 +66,15 @@ public class MatthewLayout implements LayoutManager2 {
 	public boolean showBorders = false;
 	private int minimumWidth;
 	private int minimumHeight;
+	private Insets padding = new Insets(0,0,0,0);
+	private int vGap = 0;
 	public MatthewLayout(boolean isFill) {
 		if(!isFill) {
 			throw new RuntimeException("Need isFill to be true to use this constructor.");
 		}
 		this.isFill = isFill;
+		padding = new Insets(3,3,3,3);
+		vGap = 3;
 	}
 	public MatthewLayout(int minimumWidth, int minimumHeight) {
 		this.minimumWidth = minimumWidth;
@@ -78,6 +82,12 @@ public class MatthewLayout implements LayoutManager2 {
 	}
 	public void setShowBorders(boolean isBorders) {
 		showBorders = isBorders;
+	}
+	public void setPadding(int top, int left, int bottom, int right) {
+		padding = new Insets(top, left, bottom, right);
+	}
+	public void setGap(int vGap) {
+		this.vGap = vGap;
 	}
 	private List<Component> components = new ArrayList<Component>();
 	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();
@@ -286,7 +296,7 @@ public boolean isOn = false;
 				}
 			
 				Insets insets = container.getInsets();
-				component.setBounds(insets.left+xSum+insets.right,insets.top+ySum+insets.bottom,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
+				component.setBounds(insets.left+padding.left+xSum,insets.top+padding.top+ySum,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
 				if(showBorders) {
 					JComponent jcomponent = (JComponent)component;
 					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -364,19 +374,23 @@ public boolean isOn = false;
 					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
 					Component component4 = components.get(j);
 					if(!xywidthheight2.equals(xywidthheight)) {
-						if(xywidthheight2.x == xywidthheight.x) {							
+						if((getWeightx(xywidthheight2) == getWeightx(xywidthheight)) || isInclusiveY(xywidthheight,xywidthheight2)) {			
 							ySum+= xywidthheight2.height;
 						}
 					}
 					else break;
 				}
 				Insets insets = container.getInsets();
-				System.out.println("Insets "+insets);
-				double xsize = ((double)container.getWidth()) / ((double)highestXSumFraction);
-				// xsize=(int)(xsize+0.5);
-				// JOptionPane.showMessageDialog(null,""+xsize);
-				// System.out.println("xsize is "+xsize);
-				double ysize = ((double)container.getHeight()) / ((double)highestYSumFraction);
+				int padL = insets.left + padding.left;
+				int padR = insets.right + padding.right;
+				int padT = insets.top + padding.top;
+				int padB = insets.bottom + padding.bottom;
+				double xsize = ((double)(container.getWidth()-padL-padR)) / ((double)highestXSumFraction);
+				int maxRow = 0;
+				for(XYWidthHeight xw : xywidthheights) {
+					if(xw.y >= maxRow) maxRow = xw.y + 1;
+				}
+				double ysize = ((double)(container.getHeight()-padT-padB-(maxRow-1)*vGap)) / ((double)highestYSumFraction);
 				// System.out.println("ysize is " +  ysize);
 				// container.setWidth(800);
 				
@@ -388,13 +402,13 @@ public boolean isOn = false;
 					button.setMargin(insets2);
 				}
 				
-				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xSum+ " " + xsize);
-				component.setLocation(insets.left+insets.right+(int)(xSum*xsize),insets.bottom+insets.top+(int)(ySum*ysize));
+				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xywidthheight.width +" "+xywidthheight.height+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
+				component.setLocation(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize)+xywidthheight.y*vGap);
 				// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
-				component.setMinimumSize(new Dimension(xywidthheight.width*((int)xsize),xywidthheight.height*((int)ysize)));
-				component.setMaximumSize(new Dimension(xywidthheight.width*((int)xsize),xywidthheight.height*((int)ysize)));
-				component.setSize(new Dimension(xywidthheight.width*((int)xsize),xywidthheight.height*((int)ysize)));
-				component.setPreferredSize(new Dimension(xywidthheight.width*((int)xsize),xywidthheight.height*((int)ysize)));
+				component.setMinimumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
+				component.setMaximumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
+				component.setSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
+				component.setPreferredSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
 				// System.out.println(container.getWidth()+" "+(int)(((double)xywidthheight.x)*xsize)+" "+(xywidthheight.width*((int)xsize))+" "+(xywidthheight.height*((int)ysize))+" "+(int)xsize+" "+(int)ysize);
 				component.validate();
 				component.repaint();
@@ -403,6 +417,25 @@ public boolean isOn = false;
 					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
 				}
 			}
+			for(XYWidthHeight xywidthheight:xywidthheights) {
+				System.out.println(xywidthheight);
+			}		
 		}
+	}
+	public boolean isInclusiveY(XYWidthHeight xywidthheight,XYWidthHeight xywidthheight2) {
+		int weightx2= getWeightx(xywidthheight2);
+		int weightx = getWeightx(xywidthheight);
+		return ((weightx2 < weightx) && ((weightx2+xywidthheight2.width) > weightx) );
+	}
+	public int getWeightx(XYWidthHeight xywidthheight) {
+		int x = 0;
+		for(XYWidthHeight xywidthheight2:xywidthheights) {
+			if(xywidthheight.equals(xywidthheight2))
+					return x;
+			if(xywidthheight.y ==xywidthheight2.y) {
+				x+=xywidthheight2.width;
+			}		
+		}
+		return x;
 	}
 }

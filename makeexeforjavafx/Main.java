@@ -2717,18 +2717,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		control_f.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				JFrame frame2 = new JFrame();
-				frame2.setSize(400,110);
-				
+				//frame2.setSize(400,110);
+				//frame2.setSize(425,110);
+				frame2.setSize(450,110);
+					
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+				panel0.setLayout(new MatthewLayout(true));
 				
-				 panel0.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-				
-				JTextField input = new JTextField(30);
-				panel0.add(input);
-				
-				panel0.validate();
-				panel0.repaint();
+				JTextField input = new JTextField();
+				panel0.add(input,new XYWidthHeight(0,0,26,1));
 				
 				JPanel arrowspanel = new JPanel();
 				arrowspanel.setLayout(new GridLayout(2,1));
@@ -2738,68 +2735,37 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
             			downArrow.setMargin(new Insets(0,2,0,2));
             			arrowspanel.add(upArrow);
             			arrowspanel.add(downArrow);
-            			panel0.add(arrowspanel);
+            			panel0.add(arrowspanel,new XYWidthHeight(1,0,2,1));
 				
 				JButton click = new JButton("Find");
-				panel0.add(click);
-
-				panel0.validate();
-				panel0.repaint();
+				panel0.add(click,new XYWidthHeight(2,0,4,1));
 		
 				JCheckBox searchall = new JCheckBox("all");
-
-				searchall.setMargin(new Insets(0,0,0,0));
-				panel0.add(searchall);
-				
-				panel0.validate();
-				panel0.repaint();
+				panel0.add(searchall,new XYWidthHeight(0,1,3,1));
 		
 				JCheckBox casey=new JCheckBox("case");
-				casey.setMargin(new Insets(0,0,0,0));
-				panel0.add(casey);
+				panel0.add(casey,new XYWidthHeight(1,1,4,1));
 		
-				panel0.validate();
-				panel0.repaint();
-		
-				JTextField replaceinput = new JTextField(5);
+				JTextField replaceinput = new JTextField();
+				panel0.add(replaceinput,new XYWidthHeight(2,1,5,1));
 				replaceinput.setEditable(false);
-				replaceinput.setMargin(new Insets(0,0,0,0));
-				panel0.add(replaceinput);
-				
-				panel0.validate();
-				panel0.repaint();
 				
 				JCheckBox replace = new JCheckBox("replace");
-				replace.setMargin(new Insets(0,0,0,0));
-				panel0.add(replace);
+				panel0.add(replace,new XYWidthHeight(3,1,5,1));
 				replace.addActionListener( (ev3) -> {
 					replaceinput.setEditable(true);
 				});
-				
-				panel0.validate();
-				panel0.repaint();
 		
 				JCheckBox selection = new JCheckBox("Select");
-				selection.setMargin(new Insets(0,0,0,0));
-				panel0.add(selection);
+				panel0.add(selection,new XYWidthHeight(4,1,5,1));
 					
-				panel0.validate();
-				panel0.repaint();
 				
 				JCheckBox regex_checkbox = new JCheckBox("regex");
-				regex_checkbox.setMargin(new Insets(0,0,0,0));
-				panel0.add(regex_checkbox);
+				panel0.add(regex_checkbox,new XYWidthHeight(5,1,5,1));
 				
-				panel0.validate();
-				panel0.repaint();
+				JCheckBox cursor= new JCheckBox("cursor");
+				panel0.add(cursor,new XYWidthHeight(6,1,5,1));
 				
-				JCheckBox cursor=new JCheckBox("cursor");
-				cursor.setMargin(new Insets(0,0,0,0));
-				panel0.add(cursor);
-				
-				panel0.validate();
-				panel0.repaint();
-
 				frame2.getContentPane().add(panel0);
 				
 				//frame2.pack();
