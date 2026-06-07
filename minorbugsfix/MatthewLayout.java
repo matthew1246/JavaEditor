@@ -67,12 +67,14 @@ public class MatthewLayout implements LayoutManager2 {
 	private int minimumWidth;
 	private int minimumHeight;
 	private Insets padding = new Insets(0,0,0,0);
+	private int vGap = 0;
 	public MatthewLayout(boolean isFill) {
 		if(!isFill) {
 			throw new RuntimeException("Need isFill to be true to use this constructor.");
 		}
 		this.isFill = isFill;
 		padding = new Insets(3,3,3,3);
+		vGap = 3;
 	}
 	public MatthewLayout(int minimumWidth, int minimumHeight) {
 		this.minimumWidth = minimumWidth;
@@ -83,6 +85,9 @@ public class MatthewLayout implements LayoutManager2 {
 	}
 	public void setPadding(int top, int left, int bottom, int right) {
 		padding = new Insets(top, left, bottom, right);
+	}
+	public void setGap(int vGap) {
+		this.vGap = vGap;
 	}
 	private List<Component> components = new ArrayList<Component>();
 	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();
@@ -381,7 +386,11 @@ public boolean isOn = false;
 				int padT = insets.top + padding.top;
 				int padB = insets.bottom + padding.bottom;
 				double xsize = ((double)(container.getWidth()-padL-padR)) / ((double)highestXSumFraction);
-				double ysize = ((double)(container.getHeight()-padT-padB)) / ((double)highestYSumFraction);
+				int maxRow = 0;
+				for(XYWidthHeight xw : xywidthheights) {
+					if(xw.y >= maxRow) maxRow = xw.y + 1;
+				}
+				double ysize = ((double)(container.getHeight()-padT-padB-(maxRow-1)*vGap)) / ((double)highestYSumFraction);
 				// System.out.println("ysize is " +  ysize);
 				// container.setWidth(800);
 				
@@ -394,7 +403,7 @@ public boolean isOn = false;
 				}
 				
 				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xywidthheight.width +" "+xywidthheight.height+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
-				component.setLocation(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize));
+				component.setLocation(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize)+xywidthheight.y*vGap);
 				// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
 				component.setMinimumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
 				component.setMaximumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
