@@ -5315,7 +5315,7 @@ class MethodSuggestionBox {
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
 		if(currentline2.length() > 0) {
-			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z0-9\\.]+)\\z");
+			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z0-9\\.\\(\\)]+)\\z");
 			Matcher matcher0=pattern.matcher(currentline2);	
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
@@ -5551,6 +5551,9 @@ class MethodSuggestionBox {
 	}
 	
 	public Object[] getNotJavaAPIPackages(String text,String currentline) {
+		if(currentline.endsWith("()")) {
+			currentline = currentline.substring(0, currentline.length() - 2);
+		}
 		Pattern pattern3=Pattern.compile("\\s*([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$");
 		Matcher matcher=pattern3.matcher(currentline);
 		if(matcher.find()) {
@@ -5576,6 +5579,10 @@ class MethodSuggestionBox {
 				//Member[] methodsandproperties=getAllPropertyAndMethods(property);
 				Object[] methodsandproperties=getAllPropertyAndMethodsAndEnums(property);
 				String last=properties[i];
+				if(last.isEmpty()) continue;
+				if(last.endsWith("()")) {
+					last = last.substring(0, last.length() - 2);
+				}
 				//JOptionPane.showMessageDialog(null,"*"+last+"*");
 				escapey:for(Object member:methodsandproperties) {
 					if(member instanceof Method) {
@@ -5587,7 +5594,7 @@ class MethodSuggestionBox {
 							name=name.replaceAll(".+\\$","");
 						}
 						if(last.equals(name)) {
-							property=(Class<?>)member;
+							property = ((Method)member).getReturnType();
 							break escapey;
 						}
 					}
@@ -5962,6 +5969,9 @@ class MethodSuggestionBox {
 						if(methodname.contains(".")) {
 							String[] properties=searchy.split("\\.");
 							searchy = properties[(properties.length-1)];
+						}
+						if(searchy.endsWith("()")) {
+							searchy = searchy.substring(0, searchy.length() - 2);
 						}
 						for(JLabel label:labels2) {	
 							if( ! (label.getText().toLowerCase().startsWith(searchy)) ) {
