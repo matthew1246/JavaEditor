@@ -5359,7 +5359,7 @@ class MethodSuggestionBox {
 					//setExtra(methodname0);
 					//String methodname = getExtra();
 					String methodname = search_textfield.getText();
-					if(!methodname.endsWith(".") && !methodname.endsWith(keyevent.getKeyChar()+"")) {
+					if(keyevent.getKeyChar() != KeyEvent.CHAR_UNDEFINED && !methodname.endsWith(".") && !methodname.endsWith(keyevent.getKeyChar()+"")) {
 						methodname+=keyevent.getKeyChar()+"";
 						search_textfield.setText(methodname);
 					}
