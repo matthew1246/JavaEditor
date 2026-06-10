@@ -137,16 +137,16 @@ public class ExtractJavaFXJars {
 	
 	public void unzipJars() {
 		CommandLine commandline = new CommandLine();	
-		String jarExe = System.getProperty("java.home")+"\\bin\\jar.exe";
+		String jarExe = "jar";
 		
 		for(String jar:commandline.getJavaFX()) {
 			           		/*ProcessBuilder pb = new ProcessBuilder(
-			                    	System.getProperty("java.home") + "\\bin\\jar.exe",
+			                    	"jar",
 			                    	"-xvf", jar
 			                	);*/
 			                	/*
 			                	"cmd.exe", "/c",
-			                    	System.getProperty("java.home") + "\\bin\\jar.exe",
+			                    	"jar",
 			                    	"-xvf", jar
 			                    	*/
 			                    	JFrame extractframe = new JFrame();
@@ -174,7 +174,7 @@ public class ExtractJavaFXJars {
 						   @Override
 						    protected Void doInBackground() throws Exception {
 						    	
-						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c",System.getProperty("java.home") + "\\bin\\jar.exe", "-xvf", jar2);
+						        ProcessBuilder pb = new ProcessBuilder("cmd.exe","/c","jar", "-xvf", jar2);
 						        pb.directory(new File(dir2));
 						        pb.redirectErrorStream(true); // Merge stderr with stdout
 						        Process process = pb.start();

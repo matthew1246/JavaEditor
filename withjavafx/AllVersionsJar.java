@@ -53,7 +53,7 @@ public class AllVersionsJar {
 				for(String jar:jars) {
 					try {
 						// jar = main.getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+						Process process=commandline.run("jar xf "+jar,dir);
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch (InterruptedException ex) {
@@ -69,7 +69,7 @@ public class AllVersionsJar {
 				for(String jar:jars) {
 					try {
 						// jar = getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+						Process process=commandline.run("jar xf "+jar,dir+"jars");
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch(InterruptedException ex) {
@@ -135,15 +135,15 @@ public class AllVersionsJar {
 			
 			String input = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+					input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
 				}
 			}
 			else { // packager.isInRightFolders() == true
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+				input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
 				if(javaversionnumber == 23) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+					input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
 				}	
 			}		
 			

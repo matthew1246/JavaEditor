@@ -209,17 +209,17 @@ public class Powershell {
 				main_class2=main_class2.substring(0,(main_class2.length()-3));
 			}
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
+				output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
 				if(javaversionnumber == 23) {	
 					output2.write("\n");
-					output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
+					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+				output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
 				if(javaversionnumber == 23) {
 					output2.write("\n");
-					output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
+					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
 				}
 			}	
 			output2.write("\n");

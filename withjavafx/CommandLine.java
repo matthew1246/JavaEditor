@@ -149,7 +149,7 @@ classpath = "-cp "+classpath;
 			package1=packagename.replace(".","\\")+"\\";
 		}						
 		//String str = "javac";
-		String str= "\""+System.getProperty("java.home") + "\\bin\\javac.exe\"";
+		String str= "javac";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
 		}
@@ -173,7 +173,7 @@ classpath = "-cp "+classpath;
 			package2=packagename+".";
 		}		
 		// String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
-		String command="\""+System.getProperty("java.home") + "\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		String command="java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
 		JOptionPane.showMessageDialog(null,command);
 		return command;
 	}	

@@ -1611,7 +1611,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					
 					output2.write("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " "+renamedfile);
 					output2.write("\n");
-					output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+renamedfile);
+					output2.write("java -jar "+renamedfile);
 					output2.write("\n");
 					output2.write("\n");
 					output2.close();
@@ -2159,7 +2159,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
 										for(String jar:jars) {
 											// jar = getFileName(jar);
-											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+											Process process=commandline.run("jar xf "+jar,dir);
 											process.waitFor();
 											//output.write(" "+jar);
 										}		
@@ -2172,7 +2172,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										}
 										for(String jar:jars) {
 											// jar = getFileName(jar);
-											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+											Process process=commandline.run("jar xf "+jar,dir+"jars");
 											process.waitFor();
 											//output.write(" "+jar);
 										}
@@ -2242,17 +2242,17 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 									if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
-										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+										output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 									}
 									else {
 										if(packager2.isInRightFolders()) {
-											output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+											output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
 										}
 									}
 									output2.write("\n");
 									
 									commandline = new CommandLine();
-									output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar ForJava"+javaversionnumber+"_"+main+".jar");
+									output2.write("java -jar ForJava"+javaversionnumber+"_"+main+".jar");
 									output2.write("\n");
 									output2.write("\n");
 									output2.close();
@@ -2262,13 +2262,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									commandline.runWithMSDOS(liney,dir);
 								}
 								else {
-									String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+									String input = "jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 									if(packager2.containsPackage()) {
 										if(!packager2.isInRightFolders()) { // javac.exe used -d option
-											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+											input="START /B /WAIT cmd.exe /c jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 										}
 										else { // packager2.isInRightFolders()
-											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+											input="START /B /WAIT cmd.exe /c jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
 										}
 									}
 									JOptionPane.showMessageDialog(null,input);
@@ -2346,7 +2346,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(!packager3.containsPackage() || !packager3.isInRightFolders()) { // Contains no package
 								for(String jar:jars) {
 									// jar = getFileName(jar);
-									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+									Process process=commandline.run("jar xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
@@ -2359,7 +2359,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								for(String jar:jars) {
 									// jar = getFileName(jar);
-									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+									Process process=commandline.run("jar xf "+jar,dir+"jars");
 									process.waitFor();
 									//output.write(" "+jar);
 								}
@@ -2432,21 +2432,21 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 								Packager packager2 = new Packager(this);
 								if(!packager2.containsPackage()) { // Doesn't contain package.
-									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+									output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
 								}
 								else { // Contains package
 									if(!packager2.isInRightFolders()) { // javac.exe used -d option
 									
 		
-	output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+	output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
 									}
 									else { // packager2.isInRightFolders()
-										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+										output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
 									}
 								}
 								output2.write("\n");
 								
-								output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+main+".jar");
+								output2.write("java -jar "+main+".jar");
 								output2.write("\n");
 								output2.write("\n");
 								output2.close();
@@ -2455,13 +2455,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								commandline.runWithMSDOS(liney,dir);
 							}
 							else { 
-								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+								String input = "jar cfm "+main+".jar mf.txt .";
 								if(packager3.containsPackage()) {
 									if(!packager3.isInRightFolders()) { // javac.exe used -d option
-										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .";
 									}
 									else { // packager2.isInRightFolders()
-										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
 									}
 								}
 								JOptionPane.showMessageDialog(null,input);
