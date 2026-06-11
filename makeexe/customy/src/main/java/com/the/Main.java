@@ -2752,6 +2752,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 						JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						storeselectedfile.set(fileName);
 						storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
 						
 						Preferences preferences=storeselectedfile.get(fileName);
@@ -2856,7 +2857,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 							
 }
-							
+							storeselectedfile10.set(fileName);
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
 							String fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
