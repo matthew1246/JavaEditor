@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -11,7 +11,7 @@ public class GuaranteedLayout {
         // Completely block OS scaling distortions
         System.setProperty("sun.java2d.uiScale", "1.0");
 
-        JFrame frame = new JFrame("Strict 1:2:1 Window Tracking");
+        JFrame frame = new JFrame("Strict 1:2:1 Layout");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel1 = new JPanel();
@@ -23,42 +23,35 @@ public class GuaranteedLayout {
         JPanel panel3 = new JPanel();
         panel3.setBackground(Color.GREEN);
 
-        // Use a null layout container so we have absolute control over pixels
-        JPanel mainContainer = new JPanel(null);
-        mainContainer.add(panel1);
-        mainContainer.add(panel2);
-        mainContainer.add(panel3);
+        // SECRET SAUCE: Force the components' preferred sizes to 0.
+        // This tells Java to completely ignore internal content sizes
+        // and rely strictly on the mathematical weights.
+        panel1.setPreferredSize(new Dimension(0, 0));
+        panel2.setPreferredSize(new Dimension(0, 0));
+        panel3.setPreferredSize(new Dimension(0, 0));
 
-        // =====================================================================
-        // THE FIX: Direct Window Resize Listener
-        // This forces Java to actively detect the frame's true, bigger size
-        // =====================================================================
-        frame.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                // Read the freshly updated frame dimensions directly
-                int frameWidth = frame.getContentPane().getWidth();
-                int frameHeight = frame.getContentPane().getHeight();
+        // Use GridBagLayout instead of a null layout
+        JPanel mainContainer = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        // Force components to stretch completely to fill the space
+        c.fill = GridBagConstraints.BOTH;
+        c.weighty = 1.0; // Fill 100% of vertical height
 
-                if (frameWidth <= 0 || frameHeight <= 0) return;
+        // Column 1: Left (Weight = 0.25)
+        c.gridx = 0;
+        c.weightx = 2.0;
+        mainContainer.add(panel1, c);
 
-                // Divide the detected window size into strict 25% / 50% / 25% pieces
-                int unit = frameWidth / 4;
-                
-                int w1 = unit;
-                int w2 = unit * 2; // Mathematically guaranteed to be exactly double w1
-                int w3 = frameWidth - (w1 + w2); // Safely absorbs any rounding pixels
+        // Column 2: Middle (Weight = 0.50 - Exactly twice the sides)
+        c.gridx = 1;
+        c.weightx = 3.0;
+        mainContainer.add(panel2, c);
 
-                // Forcefully pin the panels down to these exact pixel dimensions
-                panel1.setBounds(0, 0, w1, frameHeight);
-                panel2.setBounds(w1, 0, w2, frameHeight);
-                panel3.setBounds(w1 + w2, 0, w3, frameHeight);
-
-                // Force a structural refresh of the UI components
-                mainContainer.revalidate();
-                mainContainer.repaint();
-            }
-        });
+        // Column 3: Right (Weight = 0.25)
+        c.gridx = 2;
+        c.weightx = 2.0;
+        mainContainer.add(panel3, c);
 
         mainContainer.setPreferredSize(new Dimension(800, 600));
         frame.setContentPane(mainContainer);
