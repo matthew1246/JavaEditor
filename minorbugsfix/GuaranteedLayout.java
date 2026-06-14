@@ -9,7 +9,7 @@ public class GuaranteedLayout {
 
     public static void main(String[] args) {
         // Completely block OS scaling distortions
-        System.setProperty("sun.java2d.uiScale", "1.0");
+        // System.setProperty("sun.java2d.uiScale", "1.0");
 
         JFrame frame = new JFrame("Strict 1:2:1 Layout");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
