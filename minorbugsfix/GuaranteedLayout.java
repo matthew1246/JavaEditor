@@ -37,7 +37,36 @@ public class GuaranteedLayout {
         // Force components to stretch completely to fill the space
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 1.0; // Fill 100% of vertical height
+        
+        /* Old values
+        c.gridx = 0;
+        c.weightx = 2.0;
+        mainContainer.add(panel1, c);
 
+        c.gridx = 1;
+        c.weightx = 3.0;
+        mainContainer.add(panel2, c);
+
+        c.gridx = 2;
+        c.weightx = 2.0;
+        mainContainer.add(panel3, c);
+        */
+        
+          /*
+        6x=1/2
+        x=1/12
+        3-1/12
+        3/1-1/12
+        36/12-1/12
+        35/12
+        
+        x=1/6
+        3-1/6
+        3/1-1/6
+        18/6-1/6
+        17/6
+        */
+        
         // Column 1: Left (Weight = 0.25)
         c.gridx = 0;
         c.weightx = 2.0;
@@ -47,10 +76,12 @@ public class GuaranteedLayout {
         c.gridx = 1;
         c.weightx = 3.0;
         mainContainer.add(panel2, c);
-
+        
+        // 2/3 / 2 (2/6)x=1/2 x=6*1/(2*2) x = 3/2
+        
         // Column 3: Right (Weight = 0.25)
         c.gridx = 2;
-        c.weightx = 2.0;
+        c.weightx = 4.5; // 24.0/3.0; // (2/3)x =1/2 x=4/3 (4/3)*6=24/3
         mainContainer.add(panel3, c);
 
         mainContainer.setPreferredSize(new Dimension(800, 600));
@@ -58,5 +89,9 @@ public class GuaranteedLayout {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        
+        System.out.println(panel1.getWidth());
+System.out.println(panel2.getWidth());
+System.out.println(panel3.getWidth());
     }
 }
