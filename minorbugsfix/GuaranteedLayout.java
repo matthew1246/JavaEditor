@@ -79,6 +79,17 @@ public class GuaranteedLayout {
         
         // 2/3 / 2 (2/6)x=1/2 x=6*1/(2*2) x = 3/2
         
+        /*
+        2/3 is second column when full screen is only two columns
+        (2/3) / 2 is amount of padding in second column that can go to new third column
+        (2/3) / 2 = 2/6
+        2/6x=1/2 equals half because third column is half the screen.
+        1/3x=1/2
+        x = 3/2
+        x = 1.5 
+        3 + 1.5 = 4.5
+        */
+        
         // Column 3: Right (Weight = 0.25)
         c.gridx = 2;
         c.weightx = 4.5; // 24.0/3.0; // (2/3)x =1/2 x=4/3 (4/3)*6=24/3
