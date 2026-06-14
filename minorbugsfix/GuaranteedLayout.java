@@ -47,6 +47,15 @@ public class GuaranteedLayout {
         2:3 is the bug ratio of first and second column
         */
         
+        /*
+        1:2:1 is maths ratio of three columns. How to make bug ratio for three columns?
+        2:3 is bug ratio for first two columns
+        Third column is same bug ratio as first column
+        Therefore third column is same weightx number as third column
+        Thus no need to calculate weightx for third column
+        Hence third column = 2 because first column = 2 so no calculation required.
+        */
+        
         /* Old values
         c.gridx = 0;
         c.weightx = 2.0;
@@ -89,7 +98,8 @@ public class GuaranteedLayout {
         // 2/3 / 2 (2/6)x=1/2 x=6*1/(2*2) x = 3/2
         
         /*
-        2:3 is bug ratio of second column
+        Calculate bug ratio for 1:2:3
+        2:3 is bug ratio of first and second column
         2/3 is second column when full screen is only two columns
         (2/3) / 2 is amount of padding in second column that can go to new third column
         (2/3) / 2 = 2/6
@@ -97,7 +107,7 @@ public class GuaranteedLayout {
         1/3x=1/2
         x = 3/2
         x = 1.5 
-        3 + 1.5 = 4.5
+        3 + 1.5 = 4.5 or 3*1.5=4.5
         */
         
         // Column 3: Right (Weight = 0.25)
