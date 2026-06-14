@@ -38,6 +38,15 @@ public class GuaranteedLayout {
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 1.0; // Fill 100% of vertical height
         
+        /*
+        1:2 is maths ratio of two columns. How to make bug ratio for two columns?
+        1 is first column is whole screen area.
+        1*(1/2) is amount of padding that can go to second column to make first column
+        1/2x=1/3 or 1/2x=2/3
+        x=2/3   or x=4/3
+        2:3 is the bug ratio of first and second column
+        */
+        
         /* Old values
         c.gridx = 0;
         c.weightx = 2.0;
@@ -80,6 +89,7 @@ public class GuaranteedLayout {
         // 2/3 / 2 (2/6)x=1/2 x=6*1/(2*2) x = 3/2
         
         /*
+        2:3 is bug ratio of second column
         2/3 is second column when full screen is only two columns
         (2/3) / 2 is amount of padding in second column that can go to new third column
         (2/3) / 2 = 2/6
