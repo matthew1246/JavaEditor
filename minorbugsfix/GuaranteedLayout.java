@@ -157,9 +157,16 @@ System.out.println(panel3.getWidth());
             	3*(3/2)                                   (2/2)*2
             	9/2				2				
             	
-            	
-            	3(3/2*1)           2
-            	9/2                
+            	Second number when only two numbers? For eg) 1:2
+            	1:2		2:1		
+            	2:3		3:2	
+            	1*2:2*mean     2*(1/2):1*mean
+            	1*2:2*(1+2)/2    2/2:1*(2+1)/2
+            	 1*2:2*(3/2)	  1:3/2
+            	 2:3                    3:2
+            	 				
+            	 						 			
+            	 2:(3)
             	
             	First ration * middle number * Last ratio
             	1:2:3 1:2:1
