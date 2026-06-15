@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.Component;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -5,7 +8,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GuaranteedLayout {
+public class GuaranteedLayout extends GridBagLayout {
 
     public static void main(String[] args) {
         // Completely block OS scaling distortions
@@ -125,4 +128,87 @@ public class GuaranteedLayout {
 System.out.println(panel2.getWidth());
 System.out.println(panel3.getWidth());
     }
+    
+    public GuaranteedLayout() {
+    	super();
+    }
+    	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();	
+    	private List<GridBagConstraints> gbcs = new ArrayList<GridBagConstraints>();
+    	@Override
+    	public void addLayoutComponent(Component panel,Object xywidthheight1) {
+           		xywidthheights.add(((XYWidthHeight)xywidthheight1));
+           		
+           		panel.setPreferredSize(new Dimension(0, 0));
+            	GridBagConstraints c = new GridBagConstraints();
+        
+        		// Force components to stretch completely to fill the space
+  		c.fill = GridBagConstraints.BOTH;
+            	XYWidthHeight xywidthheight=(XYWidthHeight)xywidthheight1;
+            	c.gridx = xywidthheight.x;
+            	c.gridy = xywidthheight.y;
+            	
+            	Last number:First ratio * middle number * Last ratio
+            	1:2:3                                      1:2:1				
+            	2:3:9/2  			2:3:2					
+            	(1:2):(2:3)*(1:2:3)		(1:2):(2:1):(1:2:1)
+            	(2)*(3/2)*(3/2)			(2/1)*(1/2)*(2/1*1)			
+            	ratio is 2:ratio is 3:		ratio is 2: ratio is 2			
+            	2*3/2*(1:2:3)			2*1/2*2			
+            	3*(3/2)                                   4/2
+            	9/2				2				
+            	
+            	
+            	3(3/2*1)           2
+            	9/2                
+            	
+            	First ration * middle number * Last ratio
+            	1:2:3 1:2:1
+            	         2:3*2*3:2
+            	
+            	Sort(xywidthheight);
+            	
+            	for(int i = 0; i < xywidthheights.size(); i++) {
+            		XYWidthHeight xywidthheight2=xywidthheights.get(i);
+            		if(!xywidthheight.equals(xywidthheight2)) {
+            				
+            		}
+           }
+           public void Sort(XYWidthHeight xywidthheight) {
+           		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
+		if(xywidthheights.size() > 0) { // normal
+			/*if(dimension.width < minimumWidth) {
+				minimumWidth = dimension.width;
+				minimumHeight = dimension.height;
+			}*/
+			for(int i = xywidthheights.size()-1; i >= 0; i--) {
+				XYWidthHeight xywidthheight2 = xywidthheights.get(i);
+				if(xywidthheight.y > xywidthheight2.y) {
+					// components.add(i+1,component);
+					xywidthheights.add(i+1,xywidthheight);					
+					break;
+				}
+				else if(xywidthheight.y == xywidthheight2.y) {
+					if(xywidthheight.x > xywidthheight2.x) {
+						// components.add(i+1,component);
+						xywidthheights.add(i+1,xywidthheight);
+						break;
+					}
+					else if(i == 0) {
+						// components.add(0,component);
+						xywidthheights.add(0,xywidthheight);
+					}
+				}
+				else if(i == 0) {
+					// components.add(0,component);
+					xywidthheights.add(0,xywidthheight);
+				}
+			}
+		}
+		else {
+			/*minimumWidth = dimension.width;
+			minimumHeight = dimension.height;*/
+			// components.add(component);
+			xywidthheights.add(xywidthheight);
+		}		
+           }
 }
