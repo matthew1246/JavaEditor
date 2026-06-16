@@ -174,11 +174,19 @@ System.out.println(panel3.getWidth());
             	
             	Sort(xywidthheight);
             	
-            	for(int i = 0; i < xywidthheights.size(); i++) {
-            		XYWidthHeight xywidthheight2=xywidthheights.get(i);
-            		if(!xywidthheight.equals(xywidthheight2)) {
-            				
-            		}
+            	if(xywidthheights.size() == 1) {
+            		c.weightx=xywidthheight.width;
+            	}
+            	else if(xywidthheights.size() = 2) {
+            		XYWidthHeight xywidthheight2=xywidthheights.get(0);
+            		double two=xywidthheight2.width/xywidthheight.width;
+            		Fraction mean=new Fraction();
+            		mean.numerator=xywidthheight.width+xywidthheight2.width;
+            		mean.denominator=2;
+            		
+            		double thirdrowpartone=xywidthheight.width*two;
+            		double thirdrowparttwo=two*mean;
+            	}
            }
            public void Sort(XYWidthHeight xywidthheight) {
            		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
