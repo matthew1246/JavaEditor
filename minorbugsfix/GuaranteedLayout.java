@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,11 @@ public class GuaranteedLayout extends GridBagLayout {
     	panel.add(new JButton("Hello World!"),xywidthheight2);
     	
     	XYWidthHeight xywidthheight3=new XYWidthHeight();
-    	
+    	xywidthheight3.x=2;
+    	xywidthheight3.y =0;
+    	xywidthheight3.width=3;
+    	xywidthheight3.height=1;
+    	panel.add(new JButton("Hello World!"),xywidthheight3);
     	
     	frame.add(panel);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -160,6 +165,43 @@ public class GuaranteedLayout extends GridBagLayout {
               		components.get(1).repaint();
             	}
             	else if(components.size() == 3) {
+            		XYWidthHeight xywidthheight1=xywidthheights.get(0);
+            		XYWidthHeight xywidthheight2=xywidthheights.get(1);
+            		
+            		Fraction mean=new Fraction();
+            		mean.numerator=xywidthheight1.width+xywidthheight2.width;
+            		mean.denominator=xywidthheights.size();
+            		
+            		mean.Flip(); // coz ratio=1/(mean)
+            		if(xywidthheight1.width > xywidthheight2.width) { 
+            			mean.Flip();
+            		}
+            		
+            		GridBagConstraints gbc1 = new GridBagConstraints();
+            		gbc1.gridx=xywidthheight1.x;
+            		gbc1.gridy=xywidthheight1.y;
+            		gbc1.weightx=mean.numerator;
+            		gbc1.weighty=1.0;
+              		gbc1.fill = GridBagConstraints.BOTH;
+                         	components.get(0).setPreferredSize(new Dimension(0, 0));
+              		// super.setConstraints(components.get(0),gbc1);
+              		super.addLayoutComponent(components.get(0),gbc1);
+              		components.get(0).revalidate();
+              		components.get(0).repaint();
+            	
+            		// Force components to stretch completely to fill the space
+	  		GridBagConstraints gbc2=new GridBagConstraints();
+	  		gbc2.fill = GridBagConstraints.BOTH;
+	            	gbc2.gridx = xywidthheight2.x;
+	            	gbc2.gridy = xywidthheight2.y;
+            		gbc2.weightx=mean.denominator;
+                        	gbc2.weighty=1.0;
+                                	components.get(1).setPreferredSize(new Dimension(0, 0));
+            		//super.setConstraints(components.get(1),gbc2);
+            		super.addLayoutComponent(components.get(1),gbc2);
+            		components.get(1).revalidate();
+              		components.get(1).repaint();
+            		
             		/*1:2:3                                      1:2:1				
 	            	2:3:9/2  			2:3:2					
 	            	(1:2):(2:3)*(1:2:3)		(1:2):(2:1):(1:2:1)
@@ -170,14 +212,13 @@ public class GuaranteedLayout extends GridBagLayout {
 	            	9/2				2
 	            	*/
 	            	
+	            	// Find 9/2 from 1:2:3 for 2:3:4.5
 	            	Fraction firstratio= new Fraction();
-	            	XYWidthHeight xywidthheight1=xywidthheight.get(0);
-	            	XYWidthHeight xywidthheight2=xywidthheight.get(1);
 	            	firstratio.numerator=xywidthheight2.width;
 	            	firstratio.denominator=xywidthheight.width;
 	            	
 	            	Fraction secondratio=new Fraction();
-	            	XYWidthHeight xywidthheight3=xywidthheight.get(2);
+	            	XYWidthHeight xywidthheight3=xywidthheights.get(2);
 	            	secondratio.numerator=xywidthheight3.width;
 	            	secondratio.denominator=xywidthheight2.width;
 	            	
@@ -196,13 +237,26 @@ public class GuaranteedLayout extends GridBagLayout {
 		            	thirdratio.numerator=xywidthheight2.width;
 		            	thirdratio.denominator=xywidthheight1.width;
 		            	
-		           		double temporary = threeratio.numerator;
+		           		double temporary = thirdratio.numerator;
 		           		thirdratio.numerator=xywidthheight3.width*xywidthheight1.width;
 		           		thirdratio.denominator=temporary;
 	           		}
 	           		double firstrow=firstratio.numerator*secondratio.numerator*thirdratio.numerator;
 	           		double secondrow=firstratio.denominator*secondratio.denominator*thirdratio.denominator;
 	           		double thirdnumber=firstrow/secondrow;
+	           		
+	           		GridBagConstraints gbc3=new GridBagConstraints();
+	  		gbc3.fill = GridBagConstraints.BOTH;
+	            	gbc3.gridx = xywidthheight3.x;
+	            	gbc3.gridy = xywidthheight3.y;
+            		gbc3.weightx=thirdnumber;
+                        	gbc3.weighty=1.0;
+                                	components.get(2).setPreferredSize(new Dimension(0, 0));
+            		//super.setConstraints(components.get(2),gbc3);
+            		super.addLayoutComponent(components.get(2),gbc3);
+            		components.get(2).revalidate();
+              		components.get(2).repaint();
+           		}
            }
            public void Sort(XYWidthHeight xywidthheight,Component component) {
            		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
