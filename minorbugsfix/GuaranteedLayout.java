@@ -170,7 +170,7 @@ public class GuaranteedLayout extends GridBagLayout {
             		
             		Fraction mean=new Fraction();
             		mean.numerator=xywidthheight1.width+xywidthheight2.width;
-            		mean.denominator=xywidthheights.size();
+            		mean.denominator=2; // for first two ratios
             		
             		mean.Flip(); // coz ratio=1/(mean)
             		if(xywidthheight1.width > xywidthheight2.width) { 
@@ -215,7 +215,7 @@ public class GuaranteedLayout extends GridBagLayout {
 	            	// Find 9/2 from 1:2:3 for 2:3:4.5
 	            	Fraction firstratio= new Fraction();
 	            	firstratio.numerator=xywidthheight2.width;
-	            	firstratio.denominator=xywidthheight.width;
+	            	firstratio.denominator=xywidthheight1.width;
 	            	
 	            	Fraction secondratio=new Fraction();
 	            	XYWidthHeight xywidthheight3=xywidthheights.get(2);
