@@ -22,21 +22,21 @@ public class GuaranteedLayout extends GridBagLayout {
     	XYWidthHeight xywidthheight=new XYWidthHeight();
     	xywidthheight.x=0;
     	xywidthheight.y=0;
-    	xywidthheight.width=1;
+    	xywidthheight.width=2;
     	xywidthheight.height=1;
     	panel.add(new JButton("Hello World!"),xywidthheight);
     
     	XYWidthHeight xywidthheight2=new XYWidthHeight();
     	xywidthheight2.x=1;
     	xywidthheight2.y =0;
-    	xywidthheight2.width=2;
+    	xywidthheight2.width=3;
     	xywidthheight2.height=1;
     	panel.add(new JButton("Hello World!"),xywidthheight2);
     	
     	XYWidthHeight xywidthheight3=new XYWidthHeight();
     	xywidthheight3.x=2;
     	xywidthheight3.y =0;
-    	xywidthheight3.width=3;
+    	xywidthheight3.width=2;
     	xywidthheight3.height=1;
     	panel.add(new JButton("Hello World!"),xywidthheight3);
     	
@@ -222,16 +222,10 @@ public class GuaranteedLayout extends GridBagLayout {
 	            	secondratio.numerator=xywidthheight3.width;
 	            	secondratio.denominator=xywidthheight2.width;
 	            	
+	            	double thirdnumber = 0;
 	            	Fraction thirdratio=new Fraction();
 	            	if(xywidthheight1.width == xywidthheight3.width) { // For 1:2:1
-	            		if(xywidthheight1.width < xywidthheight2.width) {
-	            			thirdratio.numerator=xywidthheight2.width;
-	            			thirdratio.denominator=xywidthheight1.width;
-            			}
-            			else { // xywidthheight1.width > xywidthheight2.width
-            				thirdratio.numerator=xywidthheight1.width;
-	            			thirdratio.denominator=xywidthheight2.width;
-            			}
+	            		thirdnumber=mean.numerator;
             		}
 	            	else { // For 1:2:3 to get third digit
 		            	thirdratio.numerator=xywidthheight2.width;
@@ -240,10 +234,11 @@ public class GuaranteedLayout extends GridBagLayout {
 		           		double temporary = thirdratio.numerator;
 		           		thirdratio.numerator=xywidthheight3.width*xywidthheight1.width;
 		           		thirdratio.denominator=temporary;
+		           		
+		           		double firstrow=firstratio.numerator*secondratio.numerator*thirdratio.numerator;
+		           		double secondrow=firstratio.denominator*secondratio.denominator*thirdratio.denominator;
+		           		thirdnumber=firstrow/secondrow;
 	           		}
-	           		double firstrow=firstratio.numerator*secondratio.numerator*thirdratio.numerator;
-	           		double secondrow=firstratio.denominator*secondratio.denominator*thirdratio.denominator;
-	           		double thirdnumber=firstrow/secondrow;
 	           		
 	           		GridBagConstraints gbc3=new GridBagConstraints();
 	  		gbc3.fill = GridBagConstraints.BOTH;
