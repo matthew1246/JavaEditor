@@ -158,16 +158,28 @@ System.out.println(panel3.getWidth());
             	9/2				2				
             	
             	Second number when only two numbers? For eg) 1:2
-            	1:2		                      	            2:1		
-            	2:3             	                                   3:2
-            	2:2*mean            	          	       (1/2):1/2*mean
-            	2:2*((1+2)/2)    4:1*(2+1)/2               1/2:(1/2)*(2+1)/2
-            	2:2(3/2)				 1:((1/2)((2+1)/2))*2 // times coz eg) 1/2=4 1=4*2	 			
-            	2:3					 1:3/2
-            						 3:2					 				
-            	 				        	
-            	Sort(xywidthheight);
             	
+            	Formula for two digits: y=1/mean
+            	1:2		                      	            1:2		
+            	2:3             	                                   First digit=(second digit/first digit)
+            	2:2*mean            	          	       	second digit=(1:2):(mean)	
+            	2:2*((1+2)/2)    	                       second digit=(2):((1+2)/2)
+            	2:2(3/2)				second digit=3
+            	2:3
+            	
+            	1:2
+            	3:2
+            	y=1/mean
+            	y=1/[(1+2)/2]
+            	y=1/(3/2)
+            	y=2/3				
+            	
+            	Formula for ratio of two numbers:mean				        	
+            	2:1
+            	Formula when second digit smaller than first digit: y=1/(1/mean) Note 1/(1/mean)=mean
+            	y=1/(1/3/2)
+            	y=1/(2/3)
+            	y=3/2
             	if(xywidthheights.size() == 1) {
             		c.weightx=xywidthheight.width;
             	}
