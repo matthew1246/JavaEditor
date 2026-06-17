@@ -176,7 +176,7 @@ System.out.println(panel3.getWidth());
             	
             	Formula for ratio of two numbers:mean				        	
             	2:1
-            	Formula when second digit smaller than first digit: y=1/(1/mean) Note 1/(1/mean)=mean
+            	Formula when second digit smaller than first digit: y=1/(1/mean)                                       Note 1/(1/mean)=mean
             	y=1/(1/3/2)
             	y=1/(2/3)
             	y=3/2
