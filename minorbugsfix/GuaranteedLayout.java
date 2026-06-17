@@ -24,13 +24,16 @@ public class GuaranteedLayout extends GridBagLayout {
     	xywidthheight.width=1;
     	xywidthheight.height=1;
     	panel.add(new JButton("Hello World!"),xywidthheight);
-    	
+    
     	XYWidthHeight xywidthheight2=new XYWidthHeight();
     	xywidthheight2.x=1;
     	xywidthheight2.y =0;
     	xywidthheight2.width=2;
     	xywidthheight2.height=1;
     	panel.add(new JButton("Hello World!"),xywidthheight2);
+    	
+    	XYWidthHeight xywidthheight3=new XYWidthHeight();
+    	
     	
     	frame.add(panel);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,6 +159,50 @@ public class GuaranteedLayout extends GridBagLayout {
             		components.get(1).revalidate();
               		components.get(1).repaint();
             	}
+            	else if(components.size() == 3) {
+            		/*1:2:3                                      1:2:1				
+	            	2:3:9/2  			2:3:2					
+	            	(1:2):(2:3)*(1:2:3)		(1:2):(2:1):(1:2:1)
+	            	(2/1)*(3/2)*(2:3)		(2/1)*(1/2)*(2/1)
+	            	ratio is 2:ratio is 3:		ratio is 2: ratio is 2			
+	            	2*3/2*(1:2:3)			2*1/2*2			
+	            	3*(3/2)                                   (2/2)*2
+	            	9/2				2
+	            	*/
+	            	
+	            	Fraction firstratio= new Fraction();
+	            	XYWidthHeight xywidthheight1=xywidthheight.get(0);
+	            	XYWidthHeight xywidthheight2=xywidthheight.get(1);
+	            	firstratio.numerator=xywidthheight2.width;
+	            	firstratio.denominator=xywidthheight.width;
+	            	
+	            	Fraction secondratio=new Fraction();
+	            	XYWidthHeight xywidthheight3=xywidthheight.get(2);
+	            	secondratio.numerator=xywidthheight3.width;
+	            	secondratio.denominator=xywidthheight2.width;
+	            	
+	            	Fraction thirdratio=new Fraction();
+	            	if(xywidthheight1.width == xywidthheight3.width) { // For 1:2:1
+	            		if(xywidthheight1.width < xywidthheight2.width) {
+	            			thirdratio.numerator=xywidthheight2.width;
+	            			thirdratio.denominator=xywidthheight1.width;
+            			}
+            			else { // xywidthheight1.width > xywidthheight2.width
+            				thirdratio.numerator=xywidthheight1.width;
+	            			thirdratio.denominator=xywidthheight2.width;
+            			}
+            		}
+	            	else { // For 1:2:3 to get third digit
+		            	thirdratio.numerator=xywidthheight2.width;
+		            	thirdratio.denominator=xywidthheight1.width;
+		            	
+		           		double temporary = threeratio.numerator;
+		           		thirdratio.numerator=xywidthheight3.width*xywidthheight1.width;
+		           		thirdratio.denominator=temporary;
+	           		}
+	           		double firstrow=firstratio.numerator*secondratio.numerator*thirdratio.numerator;
+	           		double secondrow=firstratio.denominator*secondratio.denominator*thirdratio.denominator;
+	           		double thirdnumber=firstrow/secondrow;
            }
            public void Sort(XYWidthHeight xywidthheight,Component component) {
            		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
