@@ -19,7 +19,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GuaranteedLayout.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GuaranteedLayout.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Fraction.java"
     ],
     "caretposition": 0
   },
@@ -1714,7 +1715,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main"
+      "Main",
+      "MatthewLayout"
     ],
     "starterclass": "",
     "jars": [
@@ -1783,7 +1785,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 5693
+    "caretposition": 6533
   },
   "C:\\Users\\Owner\\Documents\\git\\photoshop\\Main.java": {
     "isLocked": false,
@@ -1795,5 +1797,21 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 3246
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Fraction.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Fraction"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 184
   }
 }

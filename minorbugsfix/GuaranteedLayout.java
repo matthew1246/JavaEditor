@@ -132,21 +132,23 @@ System.out.println(panel3.getWidth());
     public GuaranteedLayout() {
     	super();
     }
-    	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();	
-    	private List<GridBagConstraints> gbcs = new ArrayList<GridBagConstraints>();
+    	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();
+    	private List<Component> components=  new ArrayList<Component>();
     	@Override
     	public void addLayoutComponent(Component panel,Object xywidthheight1) {
            		xywidthheights.add(((XYWidthHeight)xywidthheight1));
+           		components.add(panel);
            		
            		panel.setPreferredSize(new Dimension(0, 0));
-            	GridBagConstraints c = new GridBagConstraints();
+            	GridBagConstraints gbc = new GridBagConstraints();
         
         		// Force components to stretch completely to fill the space
-  		c.fill = GridBagConstraints.BOTH;
+  		gbc.fill = GridBagConstraints.BOTH;
             	XYWidthHeight xywidthheight=(XYWidthHeight)xywidthheight1;
-            	c.gridx = xywidthheight.x;
-            	c.gridy = xywidthheight.y;
+            	gbc.gridx = xywidthheight.x;
+            	gbc.gridy = xywidthheight.y;
             	
+            	/*
             	Last number:First ratio * middle number * Last ratio
             	1:2:3                                      1:2:1				
             	2:3:9/2  			2:3:2					
@@ -180,18 +182,23 @@ System.out.println(panel3.getWidth());
             	y=1/(1/3/2)
             	y=1/(2/3)
             	y=3/2
+            	
+            	*/
             	if(xywidthheights.size() == 1) {
-            		c.weightx=xywidthheight.width;
+            		gbc.weightx=xywidthheight.width;
             	}
-            	else if(xywidthheights.size() = 2) {
+            	else if (xywidthheights.size() == 2) {
             		XYWidthHeight xywidthheight2=xywidthheights.get(0);
             		double two=xywidthheight2.width/xywidthheight.width;
             		Fraction mean=new Fraction();
             		mean.numerator=xywidthheight.width+xywidthheight2.width;
-            		mean.denominator=2;
+            		mean.denominator=xywidthheights.size();
             		
-            		double thirdrowpartone=xywidthheight.width*two;
-            		double thirdrowparttwo=two*mean;
+            		mean.Flip();
+            		
+            		for(int i = 0; i < components.size(); i++) {
+            			removeLayoutComponent(components.get(i));
+            		}
             	}
            }
            public void Sort(XYWidthHeight xywidthheight) {
