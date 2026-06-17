@@ -1,3 +1,4 @@
+import javax.swing.JButton;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Component;
@@ -11,125 +12,32 @@ import javax.swing.JPanel;
 public class GuaranteedLayout extends GridBagLayout {
 
     public static void main(String[] args) {
-        // Completely block OS scaling distortions
-        // System.setProperty("sun.java2d.uiScale", "1.0");
-
-        JFrame frame = new JFrame("Strict 1:2:1 Layout");
-        frame.setSize(800,600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel1 = new JPanel();
-        panel1.setBackground(Color.YELLOW);
-
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(Color.CYAN);
-
-        JPanel panel3 = new JPanel();
-        panel3.setBackground(Color.GREEN);
-
-        // SECRET SAUCE: Force the components' preferred sizes to 0.
-        // This tells Java to completely ignore internal content sizes
-        // and rely strictly on the mathematical weights.
-        panel1.setPreferredSize(new Dimension(0, 0));
-        panel2.setPreferredSize(new Dimension(0, 0));
-        panel3.setPreferredSize(new Dimension(0, 0));
-
-        // Use GridBagLayout instead of a null layout
-        JPanel mainContainer = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        
-        // Force components to stretch completely to fill the space
-        c.fill = GridBagConstraints.BOTH;
-        c.weighty = 1.0; // Fill 100% of vertical height
-        
-        /*
-        1:2 is maths ratio of two columns. How to make bug ratio for two columns?
-        1 is first column is whole screen area.
-        1*(1/2) is amount of padding that can go to second column to make first column
-        1/2x=1/3 or 1/2x=2/3
-        x=2/3   or x=4/3
-        2:3 is the bug ratio of first and second column
-        */
-        
-        /*
-        1:2:1 is maths ratio of three columns. How to make bug ratio for three columns?
-        2:3 is bug ratio for first two columns
-        Third column is same bug ratio as first column
-        Therefore third column is same weightx number as third column
-        Thus no need to calculate weightx for third column
-        Hence third column = 2 because first column = 2 so no calculation required.
-        */
-        
-        /* Old values
-        c.gridx = 0;
-        c.weightx = 2.0;
-        mainContainer.add(panel1, c);
-
-        c.gridx = 1;
-        c.weightx = 3.0;
-        mainContainer.add(panel2, c);
-
-        c.gridx = 2;
-        c.weightx = 2.0;
-        mainContainer.add(panel3, c);
-        */
-        
-          /*
-        6x=1/2
-        x=1/12
-        3-1/12
-        3/1-1/12
-        36/12-1/12
-        35/12
-        
-        x=1/6
-        3-1/6
-        3/1-1/6
-        18/6-1/6
-        17/6
-        */
-        
-        // Column 1: Left (Weight = 0.25)
-        c.gridx = 0;
-        c.weightx = 2.0;
-        mainContainer.add(panel1, c);
-
-        // Column 2: Middle (Weight = 0.50 - Exactly twice the sides)
-        c.gridx = 1;
-        c.weightx = 3.0;
-        mainContainer.add(panel2, c);
-        
-        // 2/3 / 2 (2/6)x=1/2 x=6*1/(2*2) x = 3/2
-        
-        /*
-        Calculate bug ratio for 1:2:3
-        2:3 is bug ratio of first and second column
-        2/3 is second column when full screen is only two columns
-        (2/3) / 2 is amount of padding in second column that can go to new third column
-        (2/3) / 2 = 2/6
-        2/6x=1/2 equals half because third column is half the screen.
-        1/3x=1/2
-        x = 3/2
-        x = 1.5 
-        3 + 1.5 = 4.5 or 3*1.5=4.5
-        */
-        
-        // Column 3: Right (Weight = 0.25)
-        c.gridx = 2;
-        c.weightx = 4.5; // 24.0/3.0; // (2/3)x =1/2 x=4/3 (4/3)*6=24/3
-        mainContainer.add(panel3, c);
-
-        // mainContainer.setPreferredSize(new Dimension(800, 600));
-        frame.setContentPane(mainContainer);
-        // frame.pack();
-        //frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        
-        System.out.println(panel1.getWidth());
-System.out.println(panel2.getWidth());
-System.out.println(panel3.getWidth());
-    }
-    
+    	JFrame frame = new JFrame();
+    	frame.setSize(800,600);
+    	JPanel panel = new JPanel();
+    	GuaranteedLayout guaranteedlayout = new GuaranteedLayout();
+    	panel.setLayout(guaranteedlayout);
+    	
+    	XYWidthHeight xywidthheight=new XYWidthHeight();
+    	xywidthheight.x=0;
+    	xywidthheight.y=0;
+    	xywidthheight.width=1;
+    	xywidthheight.height=1;
+    	panel.add(new JButton("Hello World!"),xywidthheight);
+    	
+    	XYWidthHeight xywidthheight2=new XYWidthHeight();
+    	xywidthheight2.x=1;
+    	xywidthheight2.y =0;
+    	xywidthheight2.width=2;
+    	xywidthheight2.height=1;
+    	panel.add(new JButton("Hello World!"),xywidthheight2);
+    	
+    	frame.add(panel);
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setVisible(true);	
+    	
+    	System.out.println(guaranteedlayout);
+    }						
     public GuaranteedLayout() {
     	super();
     }
@@ -217,8 +125,8 @@ System.out.println(panel3.getWidth());
             		gbc1.weighty=1.0;
               		gbc1.fill = GridBagConstraints.BOTH;
                          	components.get(0).setPreferredSize(new Dimension(0, 0));
-              		super.setConstraints(components.get(0),gbc1);
-              		// super.add(components.get(0),gbc1);
+              		// super.setConstraints(components.get(0),gbc1);
+              		super.addLayoutComponent(components.get(0),gbc1);
               		components.get(0).revalidate();
               		components.get(0).repaint();
             	
@@ -230,8 +138,8 @@ System.out.println(panel3.getWidth());
             		gbc2.weightx=mean.denominator;
                         	gbc2.weighty=1.0;
                                 	components.get(1).setPreferredSize(new Dimension(0, 0));
-            		super.setConstraints(components.get(1),gbc2);
-            		// super.add(components.get(1),gbc2);
+            		//super.setConstraints(components.get(1),gbc2);
+            		super.addLayoutComponent(components.get(1),gbc2);
             		components.get(1).revalidate();
               		components.get(1).repaint();
             	}
@@ -274,4 +182,12 @@ System.out.println(panel3.getWidth());
 			xywidthheights.add(xywidthheight);
 		}		
            }
+           @Override
+           public String toString() {
+           		String debug = "";
+           		for(XYWidthHeight xywidthheight:xywidthheights) {
+           			debug+=xywidthheight.toString()+"\n";
+           		}
+           		return debug;
+           	}				
 }

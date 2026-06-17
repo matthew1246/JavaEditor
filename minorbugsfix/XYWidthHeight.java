@@ -15,6 +15,8 @@ public class XYWidthHeight {
 		this.width = width;
 		this.height = height;
 	}
+	public XYWidthHeight() {
+	}
 	public void setx(int x) {
 		this.x = x;
 	}
