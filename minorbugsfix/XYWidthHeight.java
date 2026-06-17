@@ -42,6 +42,16 @@ public class XYWidthHeight {
 		return height;
 	}
 	@Override
+	public boolean equals(Object object) {
+		if(object instanceof XYWidthHeight) {
+			XYWidthHeight xywidthheight=(XYWidthHeight)object;
+			return (xywidthheight.x == this.x) && (xywidthheight.y == this.y) && (xywidthheight.width == this.width) && (xywidthheight.height == this.height);
+		}
+		else {
+			return false;
+		}
+	}
+	@Override
 	public String toString() {
 		return x+" "+y+" "+width+" "+height;
 	}

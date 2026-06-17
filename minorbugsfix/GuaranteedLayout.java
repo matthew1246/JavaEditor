@@ -46,8 +46,20 @@ public class GuaranteedLayout extends GridBagLayout {
     	@Override
     	public void addLayoutComponent(Component panel,Object constraint) {
            		XYWidthHeight xywidthheight=(XYWidthHeight)constraint;
-           		xywidthheights.add(xywidthheight);
-           		components.add(panel);
+           	
+           		boolean contains = false;
+           		for(XYWidthHeight xywidthheight2:xywidthheights) {
+           			if((xywidthheight.x==xywidthheight2.x) && (xywidthheight.y == xywidthheight2.y) && 
+           			(xywidthheight.width == xywidthheight2.width) && (xywidthheight.height == xywidthheight2.height)) {
+           				contains=true;
+           			}
+           		}
+           		/*
+           		if(!contains) {
+           			xywidthheights.add(xywidthheight);
+           			components.add(panel);
+           		}
+           		*/
            		
            		panel.setPreferredSize(new Dimension(0, 0));
         
@@ -87,6 +99,11 @@ public class GuaranteedLayout extends GridBagLayout {
             	y=3/2
             	
             	*/
+            	
+            	for(int i = 0; i < components.size(); i++) {
+            		super.removeLayoutComponent(components.get(i));
+            	}
+            	
             	Sort(xywidthheight,panel);
             	
             	if(xywidthheights.size() == 1) {
@@ -112,10 +129,6 @@ public class GuaranteedLayout extends GridBagLayout {
             		mean.Flip(); // coz ratio=1/(mean)
             		if(xywidthheight1.width > xywidthheight2.width) { 
             			mean.Flip();
-            		}
-            		
-            		for(int i = 0; i < components.size(); i++) {
-            			removeLayoutComponent(components.get(i));
             		}
             		
             		GridBagConstraints gbc1 = new GridBagConstraints();
