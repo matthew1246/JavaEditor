@@ -15,6 +15,7 @@ public class GuaranteedLayout extends GridBagLayout {
         // System.setProperty("sun.java2d.uiScale", "1.0");
 
         JFrame frame = new JFrame("Strict 1:2:1 Layout");
+        frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel1 = new JPanel();
@@ -118,10 +119,10 @@ public class GuaranteedLayout extends GridBagLayout {
         c.weightx = 4.5; // 24.0/3.0; // (2/3)x =1/2 x=4/3 (4/3)*6=24/3
         mainContainer.add(panel3, c);
 
-        mainContainer.setPreferredSize(new Dimension(800, 600));
+        // mainContainer.setPreferredSize(new Dimension(800, 600));
         frame.setContentPane(mainContainer);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
+        // frame.pack();
+        //frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         
         System.out.println(panel1.getWidth());
@@ -135,19 +136,13 @@ System.out.println(panel3.getWidth());
     	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();
     	private List<Component> components=  new ArrayList<Component>();
     	@Override
-    	public void addLayoutComponent(Component panel,Object xywidthheight1) {
-           		xywidthheights.add(((XYWidthHeight)xywidthheight1));
+    	public void addLayoutComponent(Component panel,Object constraint) {
+           		XYWidthHeight xywidthheight=(XYWidthHeight)constraint;
+           		xywidthheights.add(xywidthheight);
            		components.add(panel);
            		
            		panel.setPreferredSize(new Dimension(0, 0));
-            	GridBagConstraints gbc = new GridBagConstraints();
         
-        		// Force components to stretch completely to fill the space
-  		gbc.fill = GridBagConstraints.BOTH;
-            	XYWidthHeight xywidthheight=(XYWidthHeight)xywidthheight1;
-            	gbc.gridx = xywidthheight.x;
-            	gbc.gridy = xywidthheight.y;
-            	
             	/*
             	Last number:First ratio * middle number * Last ratio
             	1:2:3                                      1:2:1				
@@ -184,24 +179,64 @@ System.out.println(panel3.getWidth());
             	y=3/2
             	
             	*/
+            	Sort(xywidthheight,panel);
+            	
             	if(xywidthheights.size() == 1) {
+            		GridBagConstraints gbc = new GridBagConstraints();
+            		gbc.gridx=xywidthheight.x;
+            		gbc.gridy=xywidthheight.y;
             		gbc.weightx=xywidthheight.width;
+            		gbc.weighty=xywidthheight.height;
+            		gbc.fill=GridBagConstraints.BOTH;	
+                       	panel.setPreferredSize(new Dimension(0, 0));
+                       	super.setConstraints(panel,gbc);
+                       	panel.revalidate();
+                       	panel.repaint();
             	}
             	else if (xywidthheights.size() == 2) {
-            		XYWidthHeight xywidthheight2=xywidthheights.get(0);
-            		double two=xywidthheight2.width/xywidthheight.width;
+            		XYWidthHeight xywidthheight1=xywidthheights.get(0);
+            		XYWidthHeight xywidthheight2=xywidthheights.get(1);
+            		
             		Fraction mean=new Fraction();
-            		mean.numerator=xywidthheight.width+xywidthheight2.width;
+            		mean.numerator=xywidthheight1.width+xywidthheight2.width;
             		mean.denominator=xywidthheights.size();
             		
-            		mean.Flip();
+            		mean.Flip(); // coz ratio=1/(mean)
+            		if(xywidthheight1.width > xywidthheight2.width) { 
+            			mean.Flip();
+            		}
             		
             		for(int i = 0; i < components.size(); i++) {
             			removeLayoutComponent(components.get(i));
             		}
+            		
+            		GridBagConstraints gbc1 = new GridBagConstraints();
+            		gbc1.gridx=xywidthheight1.x;
+            		gbc1.gridy=xywidthheight1.y;
+            		gbc1.weightx=mean.numerator;
+            		gbc1.weighty=1.0;
+              		gbc1.fill = GridBagConstraints.BOTH;
+                         	components.get(0).setPreferredSize(new Dimension(0, 0));
+              		super.setConstraints(components.get(0),gbc1);
+              		// super.add(components.get(0),gbc1);
+              		components.get(0).revalidate();
+              		components.get(0).repaint();
+            	
+            		// Force components to stretch completely to fill the space
+	  		GridBagConstraints gbc2=new GridBagConstraints();
+	  		gbc2.fill = GridBagConstraints.BOTH;
+	            	gbc2.gridx = xywidthheight2.x;
+	            	gbc2.gridy = xywidthheight2.y;
+            		gbc2.weightx=mean.denominator;
+                        	gbc2.weighty=1.0;
+                                	components.get(1).setPreferredSize(new Dimension(0, 0));
+            		super.setConstraints(components.get(1),gbc2);
+            		// super.add(components.get(1),gbc2);
+            		components.get(1).revalidate();
+              		components.get(1).repaint();
             	}
            }
-           public void Sort(XYWidthHeight xywidthheight) {
+           public void Sort(XYWidthHeight xywidthheight,Component component) {
            		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
 		if(xywidthheights.size() > 0) { // normal
 			/*if(dimension.width < minimumWidth) {
@@ -211,23 +246,23 @@ System.out.println(panel3.getWidth());
 			for(int i = xywidthheights.size()-1; i >= 0; i--) {
 				XYWidthHeight xywidthheight2 = xywidthheights.get(i);
 				if(xywidthheight.y > xywidthheight2.y) {
-					// components.add(i+1,component);
+					components.add(i+1,component);
 					xywidthheights.add(i+1,xywidthheight);					
 					break;
 				}
 				else if(xywidthheight.y == xywidthheight2.y) {
 					if(xywidthheight.x > xywidthheight2.x) {
-						// components.add(i+1,component);
+						components.add(i+1,component);
 						xywidthheights.add(i+1,xywidthheight);
 						break;
 					}
 					else if(i == 0) {
-						// components.add(0,component);
+						components.add(0,component);
 						xywidthheights.add(0,xywidthheight);
 					}
 				}
 				else if(i == 0) {
-					// components.add(0,component);
+					components.add(0,component);
 					xywidthheights.add(0,xywidthheight);
 				}
 			}
@@ -235,7 +270,7 @@ System.out.println(panel3.getWidth());
 		else {
 			/*minimumWidth = dimension.width;
 			minimumHeight = dimension.height;*/
-			// components.add(component);
+			components.add(component);
 			xywidthheights.add(xywidthheight);
 		}		
            }
