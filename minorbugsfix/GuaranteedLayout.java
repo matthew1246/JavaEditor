@@ -354,10 +354,14 @@ public class GuaranteedLayout extends GridBagLayout {
            @Override
             public String toString() {
             	String debug = "";
-            	for(int i = 0; i < gridbagconstraintsX.size(); i++) {
+            	for(int i = 0; i < componentsX.size(); i++) {
             		GridBagConstraints gbc = gridbagconstraintsX.get(i);
-            		debug += "Component: " + componentsX.get(i).getClass().getSimpleName()
+            		/*debug += "Component: " + componentsX.get(i).getClass().getSimpleName()
             			+ " gridx=" + gbc.gridx + " gridy=" + gbc.gridy
+            			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
+            			+ " fill=" + gbc.fill + "\n";
+            		*/
+            		debug+=" gridx=" + gbc.gridx + " gridy=" + gbc.gridy
             			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
             			+ " fill=" + gbc.fill + "\n";
             	}
