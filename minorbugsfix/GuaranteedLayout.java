@@ -67,7 +67,7 @@ public class GuaranteedLayout extends GridBagLayout {
     	public void addLayoutComponent(Component panel,Object constraint) {
            		XYWidthHeight xywidthheight=(XYWidthHeight)constraint;
            	
-           		/*boolean contains = false;
+           		boolean contains = false;
            		for(XYWidthHeight xywidthheight2:xywidthheightsX) {
            			if((xywidthheight.x==xywidthheight2.x) && (xywidthheight.y == xywidthheight2.y) && 
            			(xywidthheight.width == xywidthheight2.width) && (xywidthheight.height == xywidthheight2.height)) {
@@ -75,10 +75,9 @@ public class GuaranteedLayout extends GridBagLayout {
            			}
            		}
            		if(!contains) {
-           			xywidthheights.add(xywidthheight);
+           			// xywidthheights.add(xywidthheight);
            			componentsX.add(panel);
            		}
-           		*/
            		
            		panel.setPreferredSize(new Dimension(0, 0));
         
@@ -123,7 +122,8 @@ public class GuaranteedLayout extends GridBagLayout {
             		super.removeLayoutComponent(componentsX.get(i));
             	}
             	
-            	SortX(xywidthheight,panel,new GridBagConstraints());
+            	GridBagConstraints newgbc = new GridBagConstraints();
+            	SortX(xywidthheight,panel,newgbc);
             	
                   	ArrayList<ArrayList<Component>> componentrows=new ArrayList<ArrayList<Component>>();
             	ArrayList<ArrayList<GridBagConstraints>> rowsgbc = new ArrayList<ArrayList<GridBagConstraints>>();
@@ -194,7 +194,7 @@ public class GuaranteedLayout extends GridBagLayout {
 	           		}
            		}
            		
-           		SortY(xywidthheight,panel,new GridBagConstraints());
+           		SortY(xywidthheight,panel,newgbc);
             	
                   	ArrayList<ArrayList<Component>> componentcolumns=new ArrayList<ArrayList<Component>>();
             	ArrayList<ArrayList<GridBagConstraints>> columnsgbc = new ArrayList<ArrayList<GridBagConstraints>>();
@@ -236,6 +236,46 @@ public class GuaranteedLayout extends GridBagLayout {
             		columnsgbc.add(columngbc);
             		componentcolumns.add(componentcolumn);
             	}
+            	for(int i = 0; i < columns.size(); i++) {
+            		List<XYWidthHeight> xywidthheightsX1=columns.get(i);
+
+            		List<GridBagConstraints> gridbagconstraintsX1=columnsgbc.get(i);
+            		List<Component> componentsX1=componentcolumns.get(i);
+	            	if(xywidthheightsX1.size() == 1) {
+	            		GridBagConstraints gbc = gridbagconstraintsX1.get(0);
+	            		gbc.gridx=xywidthheight.x;
+	            		gbc.gridy=xywidthheight.y;
+	            		gbc.weightx=xywidthheight.width;
+	            		gbc.weighty=xywidthheight.height;
+                        		// gbc.weighty=1.0;
+	            		gbc.fill=GridBagConstraints.BOTH;	
+	                       	panel.setPreferredSize(new Dimension(0, 0));
+	                       	super.setConstraints(panel,gbc);
+	                  		// gridbagconstraintsX.add(gbc);
+	                       	panel.revalidate();
+	                       	panel.repaint();
+	            	}
+	            	else if (xywidthheightsX1.size() == 2) {
+	            		Weight weight = new Weighty();
+	            		addTwo(xywidthheightsX1,gridbagconstraintsX1,componentsX1,weight);
+	            	}
+	            	else if(componentsX.size() == 3) {
+	            		Weight weight = new Weighty();
+	            		addThree(xywidthheightsX1,gridbagconstraintsX1,componentsX1,weight);
+	           		}
+           		}
+           		
+                       for(int i = 0; i < componentrows.size(); i++) {
+            		List<GridBagConstraints> gridbagconstraintsX1=rowsgbc.get(i);
+            		List<Component> componentsX1=componentrows.get(i);
+           		
+           			for(int j = 0; j < componentsX1.size(); j++) {
+		       		super.addLayoutComponent(componentsX1.get(j),gridbagconstraintsX1.get(j));
+	                                	// gridbagconstraintsX.add(gbc1);
+		              	componentsX1.get(j).revalidate();
+		              	componentsX1.get(j).repaint();
+	              	}
+              	}
            }
            public void SortX(XYWidthHeight xywidthheight,Component component,GridBagConstraints gbc) {
            		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
@@ -340,12 +380,8 @@ public class GuaranteedLayout extends GridBagLayout {
                        //gbc1.weighty=1.0;
             	weight.setWeightxorWeighty(gbc1,mean.numerator);
               	gbc1.fill = GridBagConstraints.BOTH;
-                         componentsX1.get(0).setPreferredSize(new Dimension(0, 0));
+                       componentsX1.get(0).setPreferredSize(new Dimension(0, 0));
               	// super.setConstraints(componentsX1.get(0),gbc1);
-              	super.addLayoutComponent(componentsX1.get(0),gbc1);
-                                // gridbagconstraintsX.add(gbc1);
-              	componentsX1.get(0).revalidate();
-              	componentsX1.get(0).repaint();
             
             	// Force componentsX to stretch completely to fill the space
   		GridBagConstraints gbc2=gridbagconstraintsX1.get(1);
