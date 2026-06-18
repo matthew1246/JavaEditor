@@ -51,7 +51,14 @@ public class GuaranteedLayout extends GridBagLayout {
     private ArrayList<ArrayList<XYWidthHeight>> rowsextra;
     private ArrayList<ArrayList<GridBagConstraints>> rowsgbcextra;
     private ArrayList<ArrayList<Component>> rowscomponentextra;
+    private ArrayList<ArrayList<XYWidthHeight>> columnsextra;
+    private ArrayList<ArrayList<GridBagConstraints>> columnsgbcextra;
+    private ArrayList<ArrayList<Component>> columnscomponentextra;
     
+        	private List<XYWidthHeight> xywidthheightsY=  new ArrayList<XYWidthHeight>();
+        	private List<Component> componentsY=  new ArrayList<Component>();
+        	private List<GridBagConstraints> gridbagconstraintsY=new ArrayList<GridBagConstraints>();
+        	
     	// This is for GuaranteedLayout.toString()
     	private List<XYWidthHeight> xywidthheightsX=  new ArrayList<XYWidthHeight>();
     	private List<Component> componentsX=  new ArrayList<Component>();
@@ -186,6 +193,49 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		addThree(xywidthheightsX1,gridbagconstraintsX1,componentsX1,weight);
 	           		}
            		}
+           		
+           		SortY(xywidthheight,panel,new GridBagConstraints());
+            	
+                  	ArrayList<ArrayList<Component>> componentcolumns=new ArrayList<ArrayList<Component>>();
+            	ArrayList<ArrayList<GridBagConstraints>> columnsgbc = new ArrayList<ArrayList<GridBagConstraints>>();
+            	ArrayList<ArrayList<XYWidthHeight>> columns=  new ArrayList<ArrayList<XYWidthHeight>>();
+            	columnsextra=columns;
+            	columnsgbcextra=columnsgbc;
+            	columnscomponentextra=componentcolumns;
+            	for(int i = 0; i < xywidthheightsY.size(); i++) {
+            		ArrayList<Component> componentcolumn= new ArrayList<Component>();
+            		Component component1=componentsY.get(i);
+            		componentcolumn.add(component1);
+            		         
+            		ArrayList<GridBagConstraints> columngbc =new ArrayList<GridBagConstraints>();
+            		GridBagConstraints gridbagconstraints1=gridbagconstraintsY.get(i);
+            		columngbc.add(gridbagconstraints1);
+            		
+            		ArrayList<XYWidthHeight> column=new ArrayList<XYWidthHeight>();
+                        	XYWidthHeight xywidthheight1=xywidthheightsY.get(i);
+            		column.add(xywidthheight1);
+            		for(int j = i+1; j < xywidthheightsY.size(); j++) {
+            			GridBagConstraints gridbagconstraints2=gridbagconstraintsY.get(j);
+            			Component component2 = componentsY.get(j);
+            			
+            			XYWidthHeight xywidthheight2=xywidthheightsY.get(j);
+            			if(xywidthheight1.x == xywidthheight2.x) {
+            				column.add(xywidthheight2);
+            				
+            				columngbc.add(gridbagconstraints2);
+            				componentcolumn.add(component2);
+            			}
+            			else {
+            				i=j-1;
+            				break;
+            			}
+            			i=j;
+            		}
+            		columns.add(column);
+            		
+            		columnsgbc.add(columngbc);
+            		componentcolumns.add(componentcolumn);
+            	}
            }
            public void SortX(XYWidthHeight xywidthheight,Component component,GridBagConstraints gbc) {
            		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
@@ -430,5 +480,48 @@ public class GuaranteedLayout extends GridBagLayout {
            		public double getWidthOrHeight(XYWidthHeight xywidthheight) {
            			return xywidthheight.height;
            		}	
-           	}								
+           	}	
+           	public void SortY(XYWidthHeight xywidthheight,Component component,GridBagConstraints gbc) {
+           		// XYWidthHeight xywidthheight = (XYWidthHeight)object;
+		if(xywidthheightsY.size() > 0) { // normal
+			/*if(dimension.width < minimumWidth) {
+				minimumWidth = dimension.width;
+				minimumHeight = dimension.height;
+			}*/
+			for(int i = xywidthheightsY.size()-1; i >= 0; i--) {
+				XYWidthHeight xywidthheight2 = xywidthheightsX.get(i);
+				if(xywidthheight.x > xywidthheight2.x) {
+					componentsY.add(i+1,component);
+					xywidthheightsY.add(i+1,xywidthheight);
+					gridbagconstraintsY.add(i+1,gbc);			
+					break;
+				}
+				else if(xywidthheight.x == xywidthheight2.x) {
+					if(xywidthheight.y > xywidthheight2.y) {
+						componentsY.add(i+1,component);
+						xywidthheightsY.add(i+1,xywidthheight);
+						gridbagconstraintsY.add(i+1,gbc);
+						break;
+					}
+					else if(i == 0) {
+						componentsY.add(0,component);
+						xywidthheightsY.add(0,xywidthheight);
+						gridbagconstraintsY.add(0,gbc);
+					}
+				}
+				else if(i == 0) {
+					componentsY.add(0,component);
+					xywidthheightsY.add(0,xywidthheight);
+					gridbagconstraintsY.add(0,gbc);
+				}
+			}
+		}
+		else {
+			/*minimumWidth = dimension.width;
+			minimumHeight = dimension.height;*/
+			componentsY.add(component);
+			xywidthheightsY.add(xywidthheight);
+			gridbagconstraintsY.add(gbc);
+		}		
+           }							
 }
