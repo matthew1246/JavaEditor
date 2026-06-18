@@ -117,7 +117,7 @@ public class GuaranteedLayout extends GridBagLayout {
                   	ArrayList<ArrayList<Component>> componentrows=new ArrayList<ArrayList<Component>>();
             	ArrayList<ArrayList<GridBagConstraints>> rowsgbc = new ArrayList<ArrayList<GridBagConstraints>>();
             	ArrayList<ArrayList<XYWidthHeight>> rows = new ArrayList<ArrayList<XYWidthHeight>>();
-            	for(int i = 0; i < (xywidthheightsX.size()-1); i++) {
+            	for(int i = 0; i < xywidthheightsX.size(); i++) {
             		ArrayList<Component> componentrow = new ArrayList<Component>();
             		Component component1=componentsX.get(i);
             		componentrow.add(component1);
@@ -159,7 +159,8 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		gbc.gridx=xywidthheight.x;
 	            		gbc.gridy=xywidthheight.y;
 	            		gbc.weightx=xywidthheight.width;
-	            		// gbc.weighty=xywidthheight.height;
+	            		//gbc.weighty=xywidthheight.height;
+                        		gbc.weighty=1.0;
 	            		gbc.fill=GridBagConstraints.BOTH;	
 	                       	panel.setPreferredSize(new Dimension(0, 0));
 	                       	super.setConstraints(panel,gbc);
@@ -178,7 +179,8 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		gbc1.gridx=xywidthheight1.x;
 	            		gbc1.gridy=xywidthheight1.y;
 	            		gbc1.weightx=mean.numerator;
-	            		gbc1.weighty=mean2.numerator;
+	            		//gbc1.weighty=mean2.numerator;
+                                    	gbc1.weighty=1.0;
 	              		gbc1.fill = GridBagConstraints.BOTH;
 	                         	componentsX.get(0).setPreferredSize(new Dimension(0, 0));
 	              		// super.setConstraints(componentsX.get(0),gbc1);
@@ -193,7 +195,8 @@ public class GuaranteedLayout extends GridBagLayout {
 		            	gbc2.gridx = xywidthheight2.x;
 		            	gbc2.gridy = xywidthheight2.y;
 	            		gbc2.weightx=mean.denominator;
-	                        	gbc2.weighty=mean2.denominator;
+	                        	//gbc2.weighty=mean2.denominator;
+                                          	gbc2.weighty=1.0;
 	                                	componentsX.get(1).setPreferredSize(new Dimension(0, 0));
 	            		//super.setConstraints(componentsX.get(1),gbc2);
 	            		super.addLayoutComponent(componentsX.get(1),gbc2);
@@ -212,7 +215,8 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		gbc1.gridx=xywidthheight1.x;
 	            		gbc1.gridy=xywidthheight1.y;
 	            		gbc1.weightx=mean.numerator;
-	            		gbc1.weighty=mean2.numerator;
+	            		//gbc1.weighty=mean2.numerator;
+                                    	gbc1.weighty=1.0;
 	              		gbc1.fill = GridBagConstraints.BOTH;
 	                         	componentsX.get(0).setPreferredSize(new Dimension(0, 0));
 	              		// super.setConstraints(componentsX.get(0),gbc1);
@@ -227,7 +231,8 @@ public class GuaranteedLayout extends GridBagLayout {
 		            	gbc2.gridx = xywidthheight2.x;
 		            	gbc2.gridy = xywidthheight2.y;
 	            		gbc2.weightx=mean.denominator;
-	                        	gbc2.weighty=mean2.denominator;
+	                        	//gbc2.weighty=mean2.denominator;
+                                     	gbc2.weighty=1.0;
 	                                	componentsX.get(1).setPreferredSize(new Dimension(0, 0));
 	            		//super.setConstraints(componentsX.get(1),gbc2);
 	            		super.addLayoutComponent(componentsX.get(1),gbc2);
@@ -255,7 +260,8 @@ public class GuaranteedLayout extends GridBagLayout {
 		            	gbc3.gridx = xywidthheight3.x;
 		            	gbc3.gridy = xywidthheight3.y;
 	            		gbc3.weightx=thirdnumber;
-	                        	gbc3.weighty=thirdnumber2;
+	                        	//gbc3.weighty=thirdnumber2;
+                                       	gbc2.weighty=1.0;
 	                                	componentsX.get(2).setPreferredSize(new Dimension(0, 0));
 	            		//super.setConstraints(componentsX.get(2),gbc3);
 	            		super.addLayoutComponent(componentsX.get(2),gbc3);
