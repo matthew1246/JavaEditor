@@ -427,40 +427,6 @@ public class GuaranteedLayout extends GridBagLayout {
             	componentsX1.get(2).revalidate();
               	componentsX1.get(2).repaint();
            }
-           @Override
-           public String toString() {
-           		String debug = "";
-            	for(int i = 0; i < rowsextra.size(); i++) {
-            		List<XYWidthHeight> row=rowsextra.get(i);
-            		debug+="row:\n";
-            		for(int j = 0; j < row.size(); j++) {
-            			XYWidthHeight xywidthheight=row.get(j);
-            			debug+=xywidthheight.toString()+"\n";
-            		}
-            	/*for(int i = 0; i <xywidthheightsX.size(); i++) {
-            		XYWidthHeight xywidthheight=xywidthheightsX.get(i);
-            		debug+=xywidthheight.toString()+"\n";	
-            	*/
-            	
-            		
-            		
-            		/*debug+=" gridx=" + gbc.gridx + " gridy=" + gbc.gridy
-            			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
-            			+ " fill=" + gbc.fill + "\n";
-            		*/
-            	}
-            	for(int i = 0; i <rowsgbcextra.size(); i++) {
-            		List<GridBagConstraints> gbcrow=  rowsgbcextra.get(i);
-            		for(int j = 0; j < gbcrow.size(); j++) {
-            			GridBagConstraints gbc = gbcrow.get(j);
-            			debug += "Component: " + componentsX.get(i).getClass().getSimpleName()
-            			+ " gridx=" + gbc.gridx + " gridy=" + gbc.gridy
-            			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
-            			+ " fill=" + gbc.fill + "\n";
-            		}
-            	}
-            	return debug;
-           	}
            	public interface Weight {
            		public void setWeightxorWeighty(GridBagConstraints gbc,double xory);
            		public double getWidthOrHeight(XYWidthHeight xywidthheight);
@@ -523,5 +489,47 @@ public class GuaranteedLayout extends GridBagLayout {
 			xywidthheightsY.add(xywidthheight);
 			gridbagconstraintsY.add(gbc);
 		}		
-           }							
+           }	
+           @Override
+           public String toString() {
+           		String debug = "";
+            	for(int i = 0; i < rowsextra.size(); i++) {
+            		List<XYWidthHeight> row=rowsextra.get(i);
+            		debug+="row:\n";
+            		for(int j = 0; j < row.size(); j++) {
+            			XYWidthHeight xywidthheight=row.get(j);
+            			debug+=xywidthheight.toString()+"\n";
+            		}
+            	/*for(int i = 0; i <xywidthheightsX.size(); i++) {
+            		XYWidthHeight xywidthheight=xywidthheightsX.get(i);
+            		debug+=xywidthheight.toString()+"\n";	
+            	*/
+            	
+            		
+            		
+            		/*debug+=" gridx=" + gbc.gridx + " gridy=" + gbc.gridy
+            			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
+            			+ " fill=" + gbc.fill + "\n";
+            		*/
+            	}
+            	for(int i = 0; i <rowsgbcextra.size(); i++) {
+            		List<GridBagConstraints> gbcrow=  rowsgbcextra.get(i);
+            		for(int j = 0; j < gbcrow.size(); j++) {
+            			GridBagConstraints gbc = gbcrow.get(j);
+            			debug += "Component: " + componentsX.get(i).getClass().getSimpleName()
+            			+ " gridx=" + gbc.gridx + " gridy=" + gbc.gridy
+            			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
+            			+ " fill=" + gbc.fill + "\n";
+            		}
+            	}
+            	for(int i = 0; i < columnsextra.size(); i++) {
+            		List<XYWidthHeight> column=columnsextra.get(i);
+            		debug+="column:\n";
+            		for(int j = 0; j < column.size(); j++) {
+            			XYWidthHeight xywidthheight=column.get(j);
+            			debug+=xywidthheight.toString()+"\n";
+            		}
+            	}
+            	return debug;
+           	}						
 }
