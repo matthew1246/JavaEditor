@@ -1786,7 +1786,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 10045
+    "caretposition": 5375
   },
   "C:\\Users\\Owner\\Documents\\git\\photoshop\\Main.java": {
     "isLocked": false,
@@ -1830,5 +1830,21 @@
     ],
     "fileNames": [],
     "caretposition": 969
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XYWidthHeightGridBagConstraints.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "XYWidthHeightGridBagConstraints"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 35
   }
 }
