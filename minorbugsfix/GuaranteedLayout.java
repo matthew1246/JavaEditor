@@ -146,9 +146,13 @@ public class GuaranteedLayout extends GridBagLayout {
             			}
             		}
             		rows.add(row);
+            		
+            		rowsgbc.add(rowgbc);
+            		componentrows.add(componentrow);
             	}
             	for(int i = 0; i < rows.size(); i++) {
             		List<XYWidthHeight> xywidthheightsX1=rows.get(i);
+
             		List<GridBagConstraints> gridbagconstraintsX1=rowsgbc.get(i);
 	            	if(xywidthheightsX1.size() == 1) {
 	            		GridBagConstraints gbc = gridbagconstraintsX1.get(0);
