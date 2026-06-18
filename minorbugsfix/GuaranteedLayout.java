@@ -48,6 +48,8 @@ public class GuaranteedLayout extends GridBagLayout {
     public GuaranteedLayout() {
     	super();
     }
+    private ArrayList<ArrayList<XYWidthHeight>> rowsextra;
+    
     	// This is for GuaranteedLayout.toString()
     	private List<XYWidthHeight> xywidthheightsX=  new ArrayList<XYWidthHeight>();
     	private List<Component> componentsX=  new ArrayList<Component>();
@@ -117,6 +119,7 @@ public class GuaranteedLayout extends GridBagLayout {
                   	ArrayList<ArrayList<Component>> componentrows=new ArrayList<ArrayList<Component>>();
             	ArrayList<ArrayList<GridBagConstraints>> rowsgbc = new ArrayList<ArrayList<GridBagConstraints>>();
             	ArrayList<ArrayList<XYWidthHeight>> rows = new ArrayList<ArrayList<XYWidthHeight>>();
+            	rowsextra=rows;
             	for(int i = 0; i < xywidthheightsX.size(); i++) {
             		ArrayList<Component> componentrow = new ArrayList<Component>();
             		Component component1=componentsX.get(i);
@@ -144,6 +147,7 @@ public class GuaranteedLayout extends GridBagLayout {
             				i=j-1;
             				break;
             			}
+            			i=j;
             		}
             		rows.add(row);
             		
@@ -261,7 +265,7 @@ public class GuaranteedLayout extends GridBagLayout {
 		            	gbc3.gridy = xywidthheight3.y;
 	            		gbc3.weightx=thirdnumber;
 	                        	//gbc3.weighty=thirdnumber2;
-                                       	gbc2.weighty=1.0;
+                                       	gbc3.weighty=1.0;
 	                                	componentsX.get(2).setPreferredSize(new Dimension(0, 0));
 	            		//super.setConstraints(componentsX.get(2),gbc3);
 	            		super.addLayoutComponent(componentsX.get(2),gbc3);
@@ -360,12 +364,25 @@ public class GuaranteedLayout extends GridBagLayout {
            @Override
             public String toString() {
             	String debug = "";
-            	for(int i = 0; i < gridbagconstraintsX.size(); i++) {
-            		GridBagConstraints gbc = gridbagconstraintsX.get(i);
+            	for(int i = 0; i < rowsextra.size(); i++) {
+            		List<XYWidthHeight> row=rowsextra.get(i);
+            		debug+="row:\n";
+            		for(int j = 0; j < row.size(); j++) {
+            			XYWidthHeight xywidthheight=row.get(j);
+            			debug+=xywidthheight.toString()+"\n";
+            		}
+            	/*	
+            	for(int i = 0; i <xywidthheightsX.size(); i++) {
+            		XYWidthHeight xywidthheight=xywidthheightsX.get(i);
+            		debug+=xywidthheight.toString()+"\n";	
+            	*/
+            	
+            		/*GridBagConstraints gbc = gridbagconstraintsX.get(i);
             		debug += "Component: " + componentsX.get(i).getClass().getSimpleName()
             			+ " gridx=" + gbc.gridx + " gridy=" + gbc.gridy
             			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
             			+ " fill=" + gbc.fill + "\n";
+            		*/
             		/*debug+=" gridx=" + gbc.gridx + " gridy=" + gbc.gridy
             			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
             			+ " fill=" + gbc.fill + "\n";
