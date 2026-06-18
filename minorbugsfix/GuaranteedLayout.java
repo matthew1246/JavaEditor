@@ -217,7 +217,7 @@ public class GuaranteedLayout extends GridBagLayout {
 	                         	componentsX.get(0).setPreferredSize(new Dimension(0, 0));
 	              		// super.setConstraints(componentsX.get(0),gbc1);
 	              		super.addLayoutComponent(componentsX.get(0),gbc1);
-	                                	gridbagconstraintsX.add(gbc1);
+	                                	// gridbagconstraintsX.add(gbc1);
 	              		componentsX.get(0).revalidate();
 	              		componentsX.get(0).repaint();
 	            	
@@ -231,7 +231,7 @@ public class GuaranteedLayout extends GridBagLayout {
 	                                	componentsX.get(1).setPreferredSize(new Dimension(0, 0));
 	            		//super.setConstraints(componentsX.get(1),gbc2);
 	            		super.addLayoutComponent(componentsX.get(1),gbc2);
-	                              	gridbagconstraintsX.add(gbc2);
+	                              	// gridbagconstraintsX.add(gbc2);
 	            		componentsX.get(1).revalidate();
 	              		componentsX.get(1).repaint();
 	            		
@@ -259,7 +259,7 @@ public class GuaranteedLayout extends GridBagLayout {
 	                                	componentsX.get(2).setPreferredSize(new Dimension(0, 0));
 	            		//super.setConstraints(componentsX.get(2),gbc3);
 	            		super.addLayoutComponent(componentsX.get(2),gbc3);
-	                              	gridbagconstraintsX.add(gbc3);
+	                              	// gridbagconstraintsX.add(gbc3);
 	            		componentsX.get(2).revalidate();
 	              		componentsX.get(2).repaint();
 	           		}
