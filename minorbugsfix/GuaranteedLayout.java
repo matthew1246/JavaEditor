@@ -388,10 +388,11 @@ public class GuaranteedLayout extends GridBagLayout {
   		gbc2.fill = GridBagConstraints.BOTH;
             	gbc2.gridx = xywidthheight2.x;
             	gbc2.gridy = xywidthheight2.y;
-            	gbc2.weightx=mean.denominator;
-                        //gbc2.weighty=mean2.denominator;
-                                          gbc2.weighty=1.0;
-                                componentsX1.get(1).setPreferredSize(new Dimension(0, 0));
+      		weight.setWeightxorWeighty(gbc2,mean.denominator);
+            	//gbc2.weightx=mean.denominator;
+                     	//gbc2.weighty=mean2.denominator;
+                   	//gbc2.weighty=1.0;
+                  	componentsX1.get(1).setPreferredSize(new Dimension(0, 0));
             	//super.setConstraints(componentsX1.get(1),gbc2);
             	super.addLayoutComponent(componentsX1.get(1),gbc2);
                               // gridbagconstraintsX1.add(gbc2);
@@ -402,37 +403,26 @@ public class GuaranteedLayout extends GridBagLayout {
            		XYWidthHeight xywidthheight1=xywidthheightsX1.get(0);
             	XYWidthHeight xywidthheight2=xywidthheightsX1.get(1);
             	
-            	Fraction mean=getMean(xywidthheight1.width,xywidthheight2.width);
-            	Fraction mean2=getMean(xywidthheight1.height,xywidthheight2.height);
+            	Fraction mean=getMean(weight.getWidthOrHeight(xywidthheight1),weight.getWidthOrHeight(xywidthheight2));
             	
             	GridBagConstraints gbc1 = gridbagconstraintsX1.get(0);
             	gbc1.gridx=xywidthheight1.x;
             	gbc1.gridy=xywidthheight1.y;
-            	gbc1.weightx=mean.numerator;
+            	weight.setWeightxorWeighty(gbc1,mean.numerator);
             	//gbc1.weighty=mean2.numerator;
-                                    gbc1.weighty=1.0;
+                     	// gbc1.weighty=1.0;
               	gbc1.fill = GridBagConstraints.BOTH;
-                         componentsX1.get(0).setPreferredSize(new Dimension(0, 0));
-              	// super.setConstraints(componentsX1.get(0),gbc1);
-              	super.addLayoutComponent(componentsX1.get(0),gbc1);
-                                // gridbagconstraintsX.add(gbc1);
-              	componentsX1.get(0).revalidate();
-              	componentsX1.get(0).repaint();
+                	componentsX1.get(0).setPreferredSize(new Dimension(0, 0));
             
             	// Force componentsX to stretch completely to fill the space
   		GridBagConstraints gbc2=gridbagconstraintsX1.get(1);
   		gbc2.fill = GridBagConstraints.BOTH;
             	gbc2.gridx = xywidthheight2.x;
             	gbc2.gridy = xywidthheight2.y;
-            	gbc2.weightx=mean.denominator;
+            	weight.setWeightxorWeighty(gbc2,mean.denominator);
                   	//gbc2.weighty=mean2.denominator;
-                   	gbc2.weighty=1.0;
+                   	// gbc2.weighty=1.0;
                    	componentsX1.get(1).setPreferredSize(new Dimension(0, 0));
-           		//super.setConstraints(componentsX1.get(1),gbc2);
-            	super.addLayoutComponent(componentsX1.get(1),gbc2);
-       		// gridbagconstraintsX1.add(gbc2);
-            	componentsX1.get(1).revalidate();
-              	componentsX1.get(1).repaint();
             	
             	/*1:2:3                                      1:2:1				
             	2:3:9/2  			2:3:2					
@@ -453,15 +443,11 @@ public class GuaranteedLayout extends GridBagLayout {
   		gbc3.fill = GridBagConstraints.BOTH;
             	gbc3.gridx = xywidthheight3.x;
             	gbc3.gridy = xywidthheight3.y;
-            	gbc3.weightx=thirdnumber;
+            	//gbc3.weightx=thirdnumber;
+            	weight.setWeightxorWeighty(gbc3,thirdnumber);
             	//gbc3.weighty=thirdnumber2;
-                	gbc3.weighty=1.0;
+                	// gbc3.weighty=1.0;
                	componentsX1.get(2).setPreferredSize(new Dimension(0, 0));
-            	//super.setConstraints(componentsX1.get(2),gbc3);
-            	super.addLayoutComponent(componentsX1.get(2),gbc3);
-       		// gridbagconstraintsX1.add(gbc3);
-            	componentsX1.get(2).revalidate();
-              	componentsX1.get(2).repaint();
            }
            	public interface Weight {
            		public void setWeightxorWeighty(GridBagConstraints gbc,double xory);
