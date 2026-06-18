@@ -1786,7 +1786,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6034
+    "caretposition": 16885
   },
   "C:\\Users\\Owner\\Documents\\git\\photoshop\\Main.java": {
     "isLocked": false,
