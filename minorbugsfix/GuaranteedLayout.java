@@ -436,8 +436,8 @@ public class GuaranteedLayout extends GridBagLayout {
             	
             	XYWidthHeight xywidthheight3=xywidthheightsY1.get(2);
             	// Find 9/2 from 1:2:3 for 2:3:4.5
-            	double thirdnumber=getThirdNumber(xywidthheight1.width,xywidthheight2.width,xywidthheight3.width);
-           		double thirdnumber2=getThirdNumber(xywidthheight1.height,xywidthheight2.height,xywidthheight3.height);
+            	double thirdnumber=getThirdNumber(weight.getWidthOrHeight(xywidthheight1),weight.getWidthOrHeight(xywidthheight2),
+            		weight.getWidthOrHeight(xywidthheight3));
            		
            		GridBagConstraints gbc3=gridbagconstraintsY1.get(2);
   		gbc3.fill = GridBagConstraints.BOTH;
@@ -515,6 +515,9 @@ public class GuaranteedLayout extends GridBagLayout {
            public class Contains {	
            		List<Component> components=new ArrayList<Component>();
            		public void addLayoutComponent(Component component,GridBagConstraints gbc) {
+           			System.out.println("Contains: gridx=" + gbc.gridx + " gridy=" + gbc.gridy
+            			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
+            			+ " fill=" + gbc.fill + "\n");
            			if(!Contains(component)) {
            				GuaranteedLayout.super.addLayoutComponent(component,gbc);
            				components.add(component);
