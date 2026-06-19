@@ -583,10 +583,8 @@ public class GuaranteedLayout extends GridBagLayout {
            		}				
            		public int getGridWidth(XYWidthHeight xywidthheight) {
            			int Sum = 0;
-           			int xaxis = 0;
            			int x=xywidthheight.x;
            			int y = xywidthheight.width;
-           			int xtracker = 0;
            			outer: for(int i = 0; i < rowsextra.size(); i++) {           				
            				List<XYWidthHeight> row=rowsextra.get(i);
            				for(int j = 0; j < row.size(); j++) {
@@ -594,25 +592,19 @@ public class GuaranteedLayout extends GridBagLayout {
            					if(xywidthheight2.y != xywidthheight.y) {
 	           					if( (getxaxis(xywidthheight)<=getxaxis(xywidthheight2)) && ((getxaxis(xywidthheight)+y)>= (getxaxis(xywidthheight2) +xywidthheight2.width))) {
 	           						Sum++;
-	           						xtracker+=(getxaxis(xywidthheight2)+xywidthheight2.width);
 	           						for(int k = j+1; k < row.size(); k++) {
 	           							XYWidthHeight xywidthheight3=row.get(k);
-	           							if(xtracker < (getxaxis(xywidthheight3)+xywidthheight3.width) ) {
+	           							if( (getxaxis(xywidthheight)<=getxaxis(xywidthheight3)) && ((getxaxis(xywidthheight)+y)>= (getxaxis(xywidthheight3) +xywidthheight3.width))) {
 	           								Sum++;
-	           								xtracker+=(getxaxis(xywidthheight3)+xywidthheight3.width);
+	           								if((getxaxis(xywidthheight)+y) == (getxaxis(xywidthheight3) +xywidthheight3.width) )
+	           									return Sum;	
 	           							}
-	           							else if(xtracker == (getxaxis(xywidthheight3)+xywidthheight3.width) ) {
-	           								Sum++;
-	           								return Sum;
-	           							}
-	           							else { // xtracker > (getxaxis(xywidthheight3)+xywidthheight3.width)
+	           							else {
 	           								Sum = 0;
-	           								xaxis = 0;
-	           								xtracker = 0;
 	           								continue outer;
-	           							}		
+           								}				
 	           						}												
-	           					}
+	           					}	
            					}
            				}
            			}
