@@ -286,12 +286,18 @@ public class GuaranteedLayout extends GridBagLayout {
                        for(int i = 0; i < componentrows.size(); i++) {
             		List<GridBagConstraints> gridbagconstraintsX1=rowsgbc.get(i);
             		List<Component> componentsX1=componentrows.get(i);
+            		List<XYWidthHeight> xywidthheightsX1=rows.get(i);
            		
+           			CrossCalculator crosscalculator= new CrossCalculator(xywidthheightsX1);
            			for(int j = 0; j < componentsX1.size(); j++) {
-		       		if(gridbagconstraintsX1.get(j).weighty == 6.0)
+		       		/*if(gridbagconstraintsX1.get(j).weighty == 6.0)
 		       			gridbagconstraintsX1.get(j).gridheight=4;	
 		       		if(gridbagconstraintsX1.get(j).weighty == 2.0)
-		       			gridbagconstraintsX1.get(j).gridwidth=2;		contains.addLayoutComponent(componentsX1.get(j),gridbagconstraintsX1.get(j));
+		      	 		gridbagconstraintsX1.get(j).gridwidth=2;
+		      	 	*/	
+		      	 	gridbagconstraintsX1.get(j).gridwidth=crosscalculator.getGridWidth(xywidthheightsX1.get(j));
+       		      	 	gridbagconstraintsX1.get(j).gridheight=crosscalculator.getGridHeight(xywidthheightsX1.get(j));
+		       		contains.addLayoutComponent(componentsX1.get(j),gridbagconstraintsX1.get(j));
 	                                	// gridbagconstraintsX.add(gbc1);
 		              	componentsX1.get(j).revalidate();
 		              	componentsX1.get(j).repaint();
@@ -570,6 +576,68 @@ public class GuaranteedLayout extends GridBagLayout {
            			return false;
            		}
            }
+           public class CrossCalculator {
+           		private List<XYWidthHeight> xywidthheights;
+           		public CrossCalculator(List<XYWidthHeight> xywidthheights) {
+           			this.xywidthheights=xywidthheights;
+           		}				
+           		public int getGridWidth(XYWidthHeight xywidthheight) {
+           			int Sum = 0;
+           			int xaxis = 0;
+           			int x=xywidthheight.x;
+           			int y = xywidthheight.width;
+           			int xtracker = 0;
+           			outer: for(int i = 0; i < rowsextra.size(); i++) {           				
+           				List<XYWidthHeight> row=rowsextra.get(i);
+           				for(int j = 0; j < row.size(); j++) {
+           					XYWidthHeight xywidthheight2=row.get(j);
+           					if(xywidthheight2.y != xywidthheight.y) {
+	           					if( (getxaxis(xywidthheight)<=getxaxis(xywidthheight2)) && ((getxaxis(xywidthheight)+y)>= (getxaxis(xywidthheight2) +xywidthheight2.width))) {
+	           						Sum++;
+	           						xtracker+=(getxaxis(xywidthheight2)+xywidthheight2.width);
+	           						for(int k = j+1; k < row.size(); k++) {
+	           							XYWidthHeight xywidthheight3=row.get(k);
+	           							if(xtracker < (getxaxis(xywidthheight3)+xywidthheight3.width) ) {
+	           								Sum++;
+	           								xtracker+=(getxaxis(xywidthheight3)+xywidthheight3.width);
+	           							}
+	           							else if(xtracker == (getxaxis(xywidthheight3)+xywidthheight3.width) ) {
+	           								Sum++;
+	           								return Sum;
+	           							}
+	           							else { // xtracker > (getxaxis(xywidthheight3)+xywidthheight3.width)
+	           								Sum = 0;
+	           								xaxis = 0;
+	           								xtracker = 0;
+	           								continue outer;
+	           							}		
+	           						}												
+	           					}
+           					}
+           				}
+           			}
+           			return 1;
+           		}
+           		public int getxaxis(XYWidthHeight xywidthheight) {
+           			int xaxis = 0;
+           			for(int i = 0; i < rowsextra.size(); i++) {           				
+           				List<XYWidthHeight> row=rowsextra.get(i);
+           				for(int j = 0; j < row.size(); j++) {
+           					XYWidthHeight xywidthheight2=row.get(j);
+           					if(xywidthheight2.y == xywidthheight.y) {
+           						xaxis+=xywidthheight.width;
+           					}
+           					else if(xywidthheight.equals(xywidthheight2)) {
+           						return xaxis;
+           					}
+           				}
+           			}
+           			return xaxis;
+           		}
+           		public int getGridHeight(XYWidthHeight xywidthheight) {
+           			return 1;
+           		}
+           	}
            @Override
            public String toString() {
            		String debug = "";
