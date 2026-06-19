@@ -193,6 +193,12 @@ public class GuaranteedLayout extends GridBagLayout {
            		}
            		
            		SortY(xywidthheight,panel,newgbc);
+           		System.out.println("SortY:");
+           		for(int i = 0; i < xywidthheightsY.size(); i++) {
+           			System.out.println(xywidthheightsY.get(i));
+           		}
+           		System.out.println();
+           		
                   	ArrayList<ArrayList<Component>> componentcolumns=new ArrayList<ArrayList<Component>>();
             	ArrayList<ArrayList<GridBagConstraints>> columnsgbc = new ArrayList<ArrayList<GridBagConstraints>>();
             	ArrayList<ArrayList<XYWidthHeight>> columns=  new ArrayList<ArrayList<XYWidthHeight>>();
@@ -471,7 +477,7 @@ public class GuaranteedLayout extends GridBagLayout {
 				minimumHeight = dimension.height;
 			}*/
 			for(int i = xywidthheightsY.size()-1; i >= 0; i--) {
-				XYWidthHeight xywidthheight2 = xywidthheightsX.get(i);
+				XYWidthHeight xywidthheight2 = xywidthheightsY.get(i);
 				if(xywidthheight.x > xywidthheight2.x) {
 					componentsY.add(i+1,component);
 					xywidthheightsY.add(i+1,xywidthheight);
