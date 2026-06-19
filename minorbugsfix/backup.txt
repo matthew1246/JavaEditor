@@ -21,7 +21,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GuaranteedLayout.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Fraction.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XYWidthHeight.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XYWidthHeight.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MatthewLayout.java"
     ],
     "caretposition": 0
   },
@@ -1786,7 +1787,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 7251
+    "caretposition": 2109
   },
   "C:\\Users\\Owner\\Documents\\git\\photoshop\\Main.java": {
     "isLocked": false,

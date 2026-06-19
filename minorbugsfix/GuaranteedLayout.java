@@ -1,3 +1,7 @@
+import javax.swing.JCheckBox;
+import javax.swing.JTextArea;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.util.ArrayList;
@@ -13,37 +17,43 @@ public class GuaranteedLayout extends GridBagLayout {
 
     public static void main(String[] args) {
     	JFrame frame = new JFrame();
-    	frame.setSize(800,600);
-    	JPanel panel = new JPanel();
-    	GuaranteedLayout guaranteedlayout = new GuaranteedLayout();
-    	panel.setLayout(guaranteedlayout);
+		JPanel panel = new JPanel();
+		GuaranteedLayout matthewLayout = new GuaranteedLayout(); // new MatthewLayout(true); // or MatthewLayout matthewLayout = new MatthewLayout(60,20);
+		panel.setLayout(matthewLayout);
+		frame.setSize(800,600);
+		
+		JPanel firstLabel = new JPanel(new GridBagLayout());
+		firstLabel.add(new JLabel("Face:"));
+		panel.add(firstLabel,new XYWidthHeight(0,0,1,1));
+		JComboBox<String> combobox = new JComboBox<String>();
+		combobox.addItem("Serif");
+		combobox.addItem("2");
+		panel.add(combobox,new XYWidthHeight(1,0,2,1));
+		
+		JTextArea textArea = new JTextArea("The quick brown fox jumps over the lazy dog");
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		panel.add(textArea,new XYWidthHeight(2,0,3,6));
+		JPanel subzero = new JPanel(new GridBagLayout());
+		subzero.add(new JLabel("Size:"));
+		panel.add(subzero,new XYWidthHeight(0,1,1,1));
+		JComboBox<String> combobox2 = new JComboBox<String>();
+		combobox2.addItem("8");
+		combobox2.addItem("2");
+		panel.add(combobox2,new XYWidthHeight(1,1,2,1));
+		JPanel panel_3 = new JPanel(new GridBagLayout());
+		panel_3.add(new JCheckBox());
+		panel_3.add(new JLabel("Bold"));
+		panel.add(panel_3,new XYWidthHeight(0,2,3,2));
+		JPanel panel_4 = new JPanel(new GridBagLayout());
+		panel_4.add(new JCheckBox());
+		panel_4.add(new JLabel("Italic"));
+		panel.add(panel_4,new XYWidthHeight(0,3,3,2));
+		frame.getContentPane().add(panel);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
     	
-    	XYWidthHeight xywidthheight=new XYWidthHeight();
-    	xywidthheight.x=0;
-    	xywidthheight.y=0;
-    	xywidthheight.width=1;
-    	xywidthheight.height=1;
-    	panel.add(new JButton("Hello World!"),xywidthheight);
-    
-    	XYWidthHeight xywidthheight2=new XYWidthHeight();
-    	xywidthheight2.x=1;
-    	xywidthheight2.y =0;
-    	xywidthheight2.width=2;
-    	xywidthheight2.height=1;
-    	panel.add(new JButton("Hello World!"),xywidthheight2);
-    	
-    	XYWidthHeight xywidthheight3=new XYWidthHeight();
-    	xywidthheight3.x=2;
-    	xywidthheight3.y =0;
-    	xywidthheight3.width=1;
-    	xywidthheight3.height=1;
-    	panel.add(new JButton("Hello World!"),xywidthheight3);
-    	
-    	frame.add(panel);
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	frame.setVisible(true);	
-    	
-    	System.out.println(guaranteedlayout);
+    	System.out.println(matthewLayout);
     }		
     public Contains contains = new Contains();
     public GuaranteedLayout() {
