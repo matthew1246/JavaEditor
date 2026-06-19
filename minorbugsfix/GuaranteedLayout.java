@@ -41,7 +41,7 @@ public class GuaranteedLayout extends GridBagLayout {
 		combobox2.addItem("8");
 		combobox2.addItem("2");
 		panel.add(combobox2,new XYWidthHeight(1,1,2,1));
-		/*
+		
 		JPanel panel_3 = new JPanel(new GridBagLayout());
 		panel_3.add(new JCheckBox());
 		panel_3.add(new JLabel("Bold"));
@@ -50,7 +50,7 @@ public class GuaranteedLayout extends GridBagLayout {
 		panel_4.add(new JCheckBox());
 		panel_4.add(new JLabel("Italic"));
 		panel.add(panel_4,new XYWidthHeight(0,3,3,2));
-		*/
+		
 		frame.getContentPane().add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -271,6 +271,17 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		Weight weight = new Weighty();
 	            		addThree(xywidthheightsY1,gridbagconstraintsY1,componentsY1,weight);
 	           		}
+	           		else if(xywidthheightsY1.size() == 4) {
+	           			for(int j = 0; j < 4; j++) {
+	           				GridBagConstraints gbc = gridbagconstraintsY1.get(j);
+	            			gbc.gridx=xywidthheightsY1.get(j).x;
+	            			gbc.gridy=xywidthheightsY1.get(j).y;
+	            			gbc.weighty=xywidthheightsY1.get(j).height;
+                        			// gbc.weighty=1.0;
+	            			gbc.fill=GridBagConstraints.BOTH;	
+	                       		panel.setPreferredSize(new Dimension(0, 0));
+                       		}
+                       	}
            		}
            		
                        for(int i = 0; i < componentrows.size(); i++) {
