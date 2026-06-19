@@ -118,10 +118,11 @@ public class GuaranteedLayout extends GridBagLayout {
             	
             	*/
             	
-            	for(int i = 0; i < componentsX.size(); i++) {
+          /*  	for(int i = 0; i < componentsX.size(); i++) {
             		super.removeLayoutComponent(componentsX.get(i));
             	}
-            	
+            	*/
+
             	GridBagConstraints newgbc = new GridBagConstraints();
             	SortX(xywidthheight,panel,newgbc);
             	
