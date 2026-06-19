@@ -1779,10 +1779,11 @@
     "caretposition": 15644
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GuaranteedLayout.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
-      "GuaranteedLayout"
+      "GuaranteedLayout",
+      "Main"
     ],
     "starterclass": "",
     "jars": [],

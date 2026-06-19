@@ -581,45 +581,40 @@ public class GuaranteedLayout extends GridBagLayout {
            		public CrossCalculator(List<XYWidthHeight> xywidthheights) {
            			this.xywidthheights=xywidthheights;
            		}				
-           		public int getGridWidth(XYWidthHeight xywidthheight) {
-           			int Sum = 0;
-           			int x=xywidthheight.x;
-           			int y = xywidthheight.width;
-           			outer: for(int i = 0; i < rowsextra.size(); i++) {           				
-           				List<XYWidthHeight> row=rowsextra.get(i);
-           				for(int j = 0; j < row.size(); j++) {
-           					XYWidthHeight xywidthheight2=row.get(j);
-           					if(xywidthheight2.y != xywidthheight.y) {
-	           					if( (getxaxis(xywidthheight)<=getxaxis(xywidthheight2)) && ((getxaxis(xywidthheight)+y)>= (getxaxis(xywidthheight2) +xywidthheight2.width))) {
-	           						Sum++;
-	           						for(int k = j+1; k < row.size(); k++) {
-	           							XYWidthHeight xywidthheight3=row.get(k);
-	           							if( (getxaxis(xywidthheight)<=getxaxis(xywidthheight3)) && ((getxaxis(xywidthheight)+y)>= (getxaxis(xywidthheight3) +xywidthheight3.width))) {
-	           								Sum++;
-	           								if((getxaxis(xywidthheight)+y) == (getxaxis(xywidthheight3) +xywidthheight3.width) )
-	           									return Sum;	
-	           							}
-	           							else {
-	           								Sum = 0;
-	           								continue outer;
-           								}				
-	           						}												
-	           					}	
-           					}
-           				}
-           			}
-           			return 1;
-           		}
+            		public int getGridWidth(XYWidthHeight xywidthheight) {
+            			int startX = getxaxis(xywidthheight);
+            			int endX = startX + xywidthheight.width;
+            			int maxCount = 0;
+            			for(int i = 0; i < rowsextra.size(); i++) {
+            				List<XYWidthHeight> row = rowsextra.get(i);
+            				if(row.size() > 0 && row.get(0).y == xywidthheight.y) {
+            					continue;
+            				}
+            				int count = 0;
+            				for(int j = 0; j < row.size(); j++) {
+            					XYWidthHeight cell = row.get(j);
+            					int cellStart = getxaxis(cell);
+            					int cellEnd = cellStart + cell.width;
+            					if(cellStart >= startX && cellEnd <= endX) {
+            						count++;
+            					}
+            				}
+            				if(count > maxCount) {
+            					maxCount = count;
+            				}
+            			}
+            			return Math.max(maxCount, 1);
+            		}
            		public int getxaxis(XYWidthHeight xywidthheight) {
            			int xaxis = 0;
            			for(int i = 0; i < rowsextra.size(); i++) {           				
            				List<XYWidthHeight> row=rowsextra.get(i);
            				for(int j = 0; j < row.size(); j++) {
            					XYWidthHeight xywidthheight2=row.get(j);
-           					if(xywidthheight2.y == xywidthheight.y) {
-           						xaxis+=xywidthheight.width;
-           					}
-           					else if(xywidthheight.equals(xywidthheight2)) {
+					if(xywidthheight2.y == xywidthheight.y) {
+            						xaxis+=xywidthheight2.width;
+            					}
+            					else if(xywidthheight.equals(xywidthheight2)) {
            						return xaxis;
            					}
            				}
