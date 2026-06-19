@@ -67,16 +67,10 @@ public class GuaranteedLayout extends GridBagLayout {
     	public void addLayoutComponent(Component panel,Object constraint) {
            		XYWidthHeight xywidthheight=(XYWidthHeight)constraint;
            	
-           		boolean contains = false;
-           		for(XYWidthHeight xywidthheight2:xywidthheightsX) {
-           			if((xywidthheight.x==xywidthheight2.x) && (xywidthheight.y == xywidthheight2.y) && 
-           			(xywidthheight.width == xywidthheight2.width) && (xywidthheight.height == xywidthheight2.height)) {
-           				contains=true;
-           			}
-           		}
-           		if(!contains) {
-           			// xywidthheights.add(xywidthheight);
-           			componentsX.add(panel);
+           		
+           		if(!Contains(xywidthheight)) {
+           		  xywidthheights.add(xywidthheight);
+           			components.add(panel);
            		}
            		
            		panel.setPreferredSize(new Dimension(0, 0));
@@ -513,6 +507,16 @@ public class GuaranteedLayout extends GridBagLayout {
 			gridbagconstraintsY.add(gbc);
 		}		
            }	
+           public boolean Contains(XYWidthHeight) {
+               boolean contains = false;
+           		for(XYWidthHeight xywidthheight2:xywidthheightsX) {
+           			if((xywidthheight.x==xywidthheight2.x) && (xywidthheight.y == xywidthheight2.y) && 
+           			(xywidthheight.width == xywidthheight2.width) && (xywidthheight.height == xywidthheight2.height)) {
+           				return true;
+           			}
+           		}
+            return false;
+           }
            @Override
            public String toString() {
            		String debug = "";
