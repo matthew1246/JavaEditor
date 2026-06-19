@@ -288,7 +288,10 @@ public class GuaranteedLayout extends GridBagLayout {
             		List<Component> componentsX1=componentrows.get(i);
            		
            			for(int j = 0; j < componentsX1.size(); j++) {
-		       		contains.addLayoutComponent(componentsX1.get(j),gridbagconstraintsX1.get(j));
+		       		if(gridbagconstraintsX1.get(j).weighty == 6.0)
+		       			gridbagconstraintsX1.get(j).gridheight=4;	
+		       		if(gridbagconstraintsX1.get(j).weighty == 2.0)
+		       			gridbagconstraintsX1.get(j).gridwidth=2;		contains.addLayoutComponent(componentsX1.get(j),gridbagconstraintsX1.get(j));
 	                                	// gridbagconstraintsX.add(gbc1);
 		              	componentsX1.get(j).revalidate();
 		              	componentsX1.get(j).repaint();
