@@ -34,13 +34,14 @@ public class GuaranteedLayout extends GridBagLayout {
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		panel.add(textArea,new XYWidthHeight(2,0,3,6));
-		/*JPanel subzero = new JPanel(new GridBagLayout());
+		JPanel subzero = new JPanel(new GridBagLayout());
 		subzero.add(new JLabel("Size:"));
 		panel.add(subzero,new XYWidthHeight(0,1,1,1));
 		JComboBox<String> combobox2 = new JComboBox<String>();
 		combobox2.addItem("8");
 		combobox2.addItem("2");
 		panel.add(combobox2,new XYWidthHeight(1,1,2,1));
+		/*
 		JPanel panel_3 = new JPanel(new GridBagLayout());
 		panel_3.add(new JCheckBox());
 		panel_3.add(new JLabel("Bold"));
@@ -329,8 +330,14 @@ public class GuaranteedLayout extends GridBagLayout {
            }
            public Fraction getMean(double x,double x2) {
            		Fraction mean=new Fraction();
-            	mean.numerator=x+x2;
-            	mean.denominator=2;
+            	if(x != x2) {
+	           		mean.numerator=x+x2;
+	            	mean.denominator=2;
+            	}
+            	else { // x == 2
+            		mean.numerator=x;
+            		mean.denominator=x2;
+            	}
             	
             	mean.Flip(); // coz ratio=1/(mean)
             	if(x > x2) { 
