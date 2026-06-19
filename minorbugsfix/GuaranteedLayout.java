@@ -573,7 +573,7 @@ public class GuaranteedLayout extends GridBagLayout {
            		for(int i = 0; i < contains.components.size(); i++) {
      			GridBagConstraints gbc=(GridBagConstraints)super.getConstraints(contains.components.get(i));
      			debug+="final gbc: gbc.gridx="+gbc.gridx + " gridy=" + gbc.gridy
-            			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
+            			+" gridwidth="+gbc.gridwidth+ " weightx=" + gbc.weightx +" gridheight="+gbc.gridheight+ " weighty=" + gbc.weighty
             		+ " fill=" + gbc.fill + "\n";			   	 	 	 		}
             	return debug;
            	}						
