@@ -581,30 +581,30 @@ public class GuaranteedLayout extends GridBagLayout {
            		public CrossCalculator(List<XYWidthHeight> xywidthheights) {
            			this.xywidthheights=xywidthheights;
            		}				
-            		public int getGridWidth(XYWidthHeight xywidthheight) {
-            			int startX = getxaxis(xywidthheight);
-            			int endX = startX + xywidthheight.width;
-            			int maxCount = 0;
-            			for(int i = 0; i < rowsextra.size(); i++) {
-            				List<XYWidthHeight> row = rowsextra.get(i);
-            				if(row.size() > 0 && row.get(0).y == xywidthheight.y) {
-            					continue;
-            				}
-            				int count = 0;
-            				for(int j = 0; j < row.size(); j++) {
-            					XYWidthHeight cell = row.get(j);
-            					int cellStart = getxaxis(cell);
-            					int cellEnd = cellStart + cell.width;
-            					if(cellStart >= startX && cellEnd <= endX) {
-            						count++;
-            					}
-            				}
-            				if(count > maxCount) {
-            					maxCount = count;
+            	public int getGridWidth(XYWidthHeight xywidthheight) {
+            		int startX = getxaxis(xywidthheight);
+            		int endX = startX + xywidthheight.width;
+            		int maxCount = 0;
+            		for(int i = 0; i < rowsextra.size(); i++) {
+            			List<XYWidthHeight> row = rowsextra.get(i);
+            			if(row.size() > 0 && row.get(0).y == xywidthheight.y) {
+            				continue;
+            			}
+            			int count = 0;
+            			for(int j = 0; j < row.size(); j++) {
+            				XYWidthHeight cell = row.get(j);
+            				int cellStart = getxaxis(cell);
+            				int cellEnd = cellStart + cell.width;
+            				if(cellStart >= startX && cellEnd <= endX) {
+            					count++;
             				}
             			}
-            			return Math.max(maxCount, 1);
+            			if(count > maxCount) {
+            				maxCount = count;
+            			}
             		}
+            		return Math.max(maxCount, 1);
+            	}
            		public int getxaxis(XYWidthHeight xywidthheight) {
            			int xaxis = 0;
            			for(int i = 0; i < rowsextra.size(); i++) {           				
@@ -622,7 +622,44 @@ public class GuaranteedLayout extends GridBagLayout {
            			return xaxis;
            		}
            		public int getGridHeight(XYWidthHeight xywidthheight) {
-           			return 1;
+           			int startY=  getyaxis(xywidthheight);
+            		int endY=  startY + xywidthheight.width;
+            		int maxCount = 0;
+            		for(int i = 0; i < columnsextra.size(); i++) {
+            			List<XYWidthHeight> column=  columnsextra.get(i);
+            			if(column.size() > 0 && column.get(0).x == xywidthheight.x) {
+            				continue;
+            			}
+            			int count = 0;
+            			for(int j = 0; j < column.size(); j++) {
+            				XYWidthHeight cell = column.get(j);
+            				int cellStart = getyaxis(cell);
+            				int cellEnd = cellStart + cell.height;
+            				if(cellStart >= startY && cellEnd <= endY) {
+            					count++;
+            				}
+            			}
+            			if(count > maxCount) {
+            				maxCount = count;
+            			}
+            		}
+            		return Math.max(maxCount, 1);
+           		}
+           		public int getyaxis(XYWidthHeight xywidthheight) {
+           			int yaxis = 0;
+           			for(int i = 0; i < columnsextra.size(); i++) {           				
+           				List<XYWidthHeight> column=columnsextra.get(i);
+           				for(int j = 0; j < column.size(); j++) {
+           					XYWidthHeight xywidthheight2=column.get(j);
+					if(xywidthheight2.x == xywidthheight.x) {
+            						yaxis+=xywidthheight2.height;
+            				}
+            				else if(xywidthheight.equals(xywidthheight2)) {
+           						return yaxis;
+           					}
+           				}
+           			}
+           			return yaxis;
            		}
            	}
            @Override
