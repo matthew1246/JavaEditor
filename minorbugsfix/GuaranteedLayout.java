@@ -34,7 +34,7 @@ public class GuaranteedLayout extends GridBagLayout {
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		panel.add(textArea,new XYWidthHeight(2,0,3,6));
-		JPanel subzero = new JPanel(new GridBagLayout());
+		/*JPanel subzero = new JPanel(new GridBagLayout());
 		subzero.add(new JLabel("Size:"));
 		panel.add(subzero,new XYWidthHeight(0,1,1,1));
 		JComboBox<String> combobox2 = new JComboBox<String>();
@@ -49,6 +49,7 @@ public class GuaranteedLayout extends GridBagLayout {
 		panel_4.add(new JCheckBox());
 		panel_4.add(new JLabel("Italic"));
 		panel.add(panel_4,new XYWidthHeight(0,3,3,2));
+		*/
 		frame.getContentPane().add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -175,6 +176,7 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		gbc.gridx=xywidthheightsX1.get(0).x;
 	            		gbc.gridy=xywidthheightsX1.get(0).y;
 	            		gbc.weightx=xywidthheightsX1.get(0).width;
+	            		gbc.weighty=xywidthheightsX1.get(0).height;
 	            		gbc.fill=GridBagConstraints.BOTH;	
 	                       	panel.setPreferredSize(new Dimension(0, 0));
 	                       	// super.setConstraints(panel,gbc);
@@ -574,7 +576,7 @@ public class GuaranteedLayout extends GridBagLayout {
             		List<GridBagConstraints> gbcrow=  rowsgbcextra.get(i);
             		for(int j = 0; j < gbcrow.size(); j++) {
             			GridBagConstraints gbc = gbcrow.get(j);
-            			debug += "Component: " + componentsX.get(i).getClass().getSimpleName()
+            			debug += "Component: " + rowscomponentextra.get(i).get(j).getClass().getSimpleName()
             			+ " gridx=" + gbc.gridx + " gridy=" + gbc.gridy
             			+ " weightx=" + gbc.weightx + " weighty=" + gbc.weighty
             			+ " fill=" + gbc.fill + "\n";
