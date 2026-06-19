@@ -44,7 +44,8 @@ public class GuaranteedLayout extends GridBagLayout {
     	frame.setVisible(true);	
     	
     	System.out.println(guaranteedlayout);
-    }						
+    }		
+    public Contains contains = new Contains();
     public GuaranteedLayout() {
     	super();
     }
@@ -66,12 +67,6 @@ public class GuaranteedLayout extends GridBagLayout {
     	@Override
     	public void addLayoutComponent(Component panel,Object constraint) {
            		XYWidthHeight xywidthheight=(XYWidthHeight)constraint;
-           	
-           		
-           		if(!Contains(xywidthheight)) {
-           		  xywidthheights.add(xywidthheight);
-           			components.add(panel);
-           		}
            		
            		panel.setPreferredSize(new Dimension(0, 0));
         
@@ -174,7 +169,8 @@ public class GuaranteedLayout extends GridBagLayout {
                         		gbc.weighty=1.0;
 	            		gbc.fill=GridBagConstraints.BOTH;	
 	                       	panel.setPreferredSize(new Dimension(0, 0));
-	                       	super.setConstraints(panel,gbc);
+	                       	// super.setConstraints(panel,gbc);
+	                       	contains.addLayoutComponent(panel,gbc);
 	                  		// gridbagconstraintsX.add(gbc);
 	                       	panel.revalidate();
 	                       	panel.repaint();
@@ -247,8 +243,6 @@ public class GuaranteedLayout extends GridBagLayout {
 	                       	panel.setPreferredSize(new Dimension(0, 0));
 	                       	super.setConstraints(panel,gbc);
 	                  		// gridbagconstraintsX.add(gbc);
-	                       	panel.revalidate();
-	                       	panel.repaint();
 	            	}
 	            	else if (xywidthheightsX1.size() == 2) {
 	            		Weight weight = new Weighty();
@@ -265,7 +259,7 @@ public class GuaranteedLayout extends GridBagLayout {
             		List<Component> componentsX1=componentrows.get(i);
            		
            			for(int j = 0; j < componentsX1.size(); j++) {
-		       		super.addLayoutComponent(componentsX1.get(j),gridbagconstraintsX1.get(j));
+		       		contains.addLayoutComponent(componentsX1.get(j),gridbagconstraintsX1.get(j));
 	                                	// gridbagconstraintsX.add(gbc1);
 		              	componentsX1.get(j).revalidate();
 		              	componentsX1.get(j).repaint();
@@ -389,10 +383,9 @@ public class GuaranteedLayout extends GridBagLayout {
                    	//gbc2.weighty=1.0;
                   	componentsX1.get(1).setPreferredSize(new Dimension(0, 0));
             	//super.setConstraints(componentsX1.get(1),gbc2);
-            	super.addLayoutComponent(componentsX1.get(1),gbc2);
-                              // gridbagconstraintsX1.add(gbc2);
-            	componentsX1.get(1).revalidate();
-              	componentsX1.get(1).repaint();	
+            	//super.addLayoutComponent(componentsX1.get(1),gbc2);
+                     	// contains.addLayoutComponent(componentsX1.get(1),gbc2);
+                     	// gridbagconstraintsX1.add(gbc2);
            }
            public void addThree(List<XYWidthHeight> xywidthheightsX1,List<GridBagConstraints> gridbagconstraintsX1,List<Component> componentsX1,Weight weight) {
            		XYWidthHeight xywidthheight1=xywidthheightsX1.get(0);
@@ -507,15 +500,25 @@ public class GuaranteedLayout extends GridBagLayout {
 			gridbagconstraintsY.add(gbc);
 		}		
            }	
-           public boolean Contains(XYWidthHeight) {
-               boolean contains = false;
-           		for(XYWidthHeight xywidthheight2:xywidthheightsX) {
-           			if((xywidthheight.x==xywidthheight2.x) && (xywidthheight.y == xywidthheight2.y) && 
-           			(xywidthheight.width == xywidthheight2.width) && (xywidthheight.height == xywidthheight2.height)) {
-           				return true;
+           public class Contains {	
+           		List<Component> components=new ArrayList<Component>();
+           		public void addLayoutComponent(Component component,GridBagConstraints gbc) {
+           			if(!Contains(component)) {
+           				GuaranteedLayout.super.addLayoutComponent(component,gbc);
+           				components.add(component);
+           			}
+           			else {
+           				GuaranteedLayout.super.setConstraints(component,gbc);
            			}
            		}
-            return false;
+           		public boolean Contains(Component component) {
+           			for(Component component2:components) { 	           			
+           				if (component.equals(component2)) {
+           					return true;
+           				}
+           			}
+           			return false;
+           		}
            }
            @Override
            public String toString() {
