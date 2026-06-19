@@ -171,17 +171,19 @@ public class GuaranteedLayout extends GridBagLayout {
 
             		List<GridBagConstraints> gridbagconstraintsX1=rowsgbc.get(i);
             		List<Component> componentsX1=componentrows.get(i);
-	            	if(xywidthheightsX1.size() == 1) {
-	            		GridBagConstraints gbc = gridbagconstraintsX1.get(0);
-	            		gbc.gridx=xywidthheightsX1.get(0).x;
-	            		gbc.gridy=xywidthheightsX1.get(0).y;
-	            		gbc.weightx=xywidthheightsX1.get(0).width;
-	            		gbc.weighty=xywidthheightsX1.get(0).height;
-	            		gbc.fill=GridBagConstraints.BOTH;	
-	                       	panel.setPreferredSize(new Dimension(0, 0));
-	                       	// super.setConstraints(panel,gbc);
-	                       	// contains.addLayoutComponent(panel,gbc);
-	                  		// gridbagconstraintsX.add(gbc);
+	            	if((xywidthheightsX1.size() == 1) || (xywidthheightsX1.size() > 3)) {
+	            		for(int j = 0; j < xywidthheightsX1.size(); j++) {	            		
+		            		GridBagConstraints gbc = gridbagconstraintsX1.get(j);
+		            		gbc.gridx=xywidthheightsX1.get(j).x;
+		            		gbc.gridy=xywidthheightsX1.get(j).y;
+		            		gbc.weightx=xywidthheightsX1.get(j).width;
+		            		gbc.weighty=xywidthheightsX1.get(j).height;
+		            		gbc.fill=GridBagConstraints.BOTH;	
+		                       	panel.setPreferredSize(new Dimension(0, 0));
+		                       	// super.setConstraints(panel,gbc);
+		                       	// contains.addLayoutComponent(panel,gbc);
+		                  		// gridbagconstraintsX.add(gbc);
+	                  		}
 	            	}
 	            	else if (xywidthheightsX1.size() == 2) {
 	            		Weight weight = new Weightx();
@@ -270,8 +272,8 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		Weight weight = new Weighty();
 	            		addThree(xywidthheightsY1,gridbagconstraintsY1,componentsY1,weight);
 	           		}
-	           		else if(xywidthheightsY1.size() == 4) {
-	           			for(int j = 0; j < 4; j++) {
+	           		else if(xywidthheightsY1.size() >= 4) {
+	           			for(int j = 0; j < xywidthheightsY1.size(); j++) {
 	           				GridBagConstraints gbc = gridbagconstraintsY1.get(j);
 	            			gbc.gridx=xywidthheightsY1.get(j).x;
 	            			gbc.gridy=xywidthheightsY1.get(j).y;
