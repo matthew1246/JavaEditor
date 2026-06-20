@@ -2278,7 +2278,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				frame2.setSize(450,110);
 					
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new MatthewLayout(true));
+				panel0.setLayout(new MatthewLayout());
 				
 				JPanel guaranteedlayout=new JPanel(new GuaranteedLayout());
 				JTextField input = new JTextField();

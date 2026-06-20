@@ -65,7 +65,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 83280
+    "caretposition": 83276
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -1716,7 +1716,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MatthewLayout.java": {
     "isLocked": true,
-    "lockedStartupClass": "MatthewLayout",
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "MatthewLayout",
       "Main"
@@ -1729,7 +1729,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 2057
+    "caretposition": 2849
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MatthewLayout.java": {
     "isLocked": false,
@@ -1781,7 +1781,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GuaranteedLayout.java": {
     "isLocked": true,
-    "lockedStartupClass": "GuaranteedLayout",
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "GuaranteedLayout",
       "Main"

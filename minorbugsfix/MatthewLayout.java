@@ -74,6 +74,9 @@ public class MatthewLayout implements LayoutManager2 {
 	private int minimumHeight;
 	private Insets padding = new Insets(0,0,0,0);
 	private int vGap = 0;
+	public MatthewLayout() {
+		this(true);
+	}
 	public MatthewLayout(boolean isFill) {
 		if(!isFill) {
 			throw new RuntimeException("Need isFill to be true to use this constructor.");
