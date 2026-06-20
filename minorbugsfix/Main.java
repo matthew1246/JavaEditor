@@ -2280,9 +2280,9 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				JPanel panel0 = new JPanel();
 				panel0.setLayout(new MatthewLayout(true));
 				
+				JPanel guaranteedlayout=new JPanel(new GuaranteedLayout());
 				JTextField input = new JTextField();
-				panel0.add(input,new XYWidthHeight(0,0,26,1));
-				
+				guaranteedlayout.add(input,new XYWidthHeight(0,0,26,1));
 				JPanel arrowspanel = new JPanel();
 				arrowspanel.setLayout(new GridLayout(2,1));
 				JButton upArrow = new JButton("\u2191");
@@ -2291,10 +2291,10 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
             			downArrow.setMargin(new Insets(0,2,0,2));
             			arrowspanel.add(upArrow);
             			arrowspanel.add(downArrow);
-            			panel0.add(arrowspanel,new XYWidthHeight(1,0,2,1));
-				
+            			guaranteedlayout.add(arrowspanel,new XYWidthHeight(1,0,2,1));
 				JButton click = new JButton("Find");
-				panel0.add(click,new XYWidthHeight(2,0,4,1));
+				guaranteedlayout.add(click,new XYWidthHeight(2,0,4,1));
+				panel0.add(guaranteedlayout,new XYWidthHeight(0,0,32,1));
 		
 				JCheckBox searchall = new JCheckBox("all");
 				panel0.add(searchall,new XYWidthHeight(0,1,3,1));
