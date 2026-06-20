@@ -398,51 +398,100 @@ public class GuaranteedLayout extends GridBagLayout {
            	public void testGetThirdNumber() {
            		// Assert.assertEquals(2.0,getThirdNumber(1,2,1),0.1);
            	}
-            	public void addTwo(List<XYWidthHeight> xywidthheightsY1,List<GridBagConstraints> gridbagconstraintsY1,List<Component> componentsY1,Weight weight) {
-            		XYWidthHeight xywidthheight1=xywidthheightsY1.get(0);
-             	XYWidthHeight xywidthheight2=xywidthheightsY1.get(1);
-             	
-             	GridBagConstraints gbc1 = gridbagconstraintsY1.get(0);
-             	gbc1.gridx=xywidthheight1.x;
-             	gbc1.gridy=xywidthheight1.y;
-             	weight.setWeightxorWeighty(gbc1,weight.getWidthOrHeight(xywidthheight1));
-               	gbc1.fill = GridBagConstraints.BOTH;
-                        componentsY1.get(0).setPreferredSize(new Dimension(0, 0));
-             
-   		GridBagConstraints gbc2=gridbagconstraintsY1.get(1);
-   		gbc2.fill = GridBagConstraints.BOTH;
-             	gbc2.gridx = xywidthheight2.x;
-             	gbc2.gridy = xywidthheight2.y;
-       		weight.setWeightxorWeighty(gbc2,weight.getWidthOrHeight(xywidthheight2));
+           	public void addTwo(List<XYWidthHeight> xywidthheightsY1,List<GridBagConstraints> gridbagconstraintsY1,List<Component> componentsY1,Weight weight) {
+           		XYWidthHeight xywidthheight1=xywidthheightsY1.get(0);
+            	XYWidthHeight xywidthheight2=xywidthheightsY1.get(1);
+            	
+            	//Fraction mean=getMean(xywidthheight1.width,xywidthheight2.width);
+            	//Fraction mean2=getMean(xywidthheight1.height,xywidthheight2.height);
+                        Fraction mean=getMean(weight.getWidthOrHeight(xywidthheight1),weight.getWidthOrHeight(xywidthheight2));
+            	
+            	GridBagConstraints gbc1 = gridbagconstraintsY1.get(0);
+            	gbc1.gridx=xywidthheight1.x;
+            	gbc1.gridy=xywidthheight1.y;
+            	
+            	//gbc1.weightx=mean.numerator;
+            	//gbc1.weighty=mean2.numerator;
+                       //gbc1.weighty=1.0;
+            	weight.setWeightxorWeighty(gbc1,mean.numerator);
+              	gbc1.fill = GridBagConstraints.BOTH;
+                       componentsY1.get(0).setPreferredSize(new Dimension(0, 0));
+              	// super.setConstraints(componentsY1.get(0),gbc1);
+            
+            	// Force componentsX to stretch completely to fill the space
+  		GridBagConstraints gbc2=gridbagconstraintsY1.get(1);
+  		gbc2.fill = GridBagConstraints.BOTH;
+            	gbc2.gridx = xywidthheight2.x;
+            	gbc2.gridy = xywidthheight2.y;
+      		weight.setWeightxorWeighty(gbc2,mean.denominator);
+            	//gbc2.weightx=mean.denominator;
+                     	//gbc2.weighty=mean2.denominator;
+                   	//gbc2.weighty=1.0;
+                  	componentsY1.get(1).setPreferredSize(new Dimension(0, 0));
+            	//super.setConstraints(componentsY1.get(1),gbc2);
+            	//super.addLayoutComponent(componentsY1.get(1),gbc2);
+                     	// contains.addLayoutComponent(componentsY1.get(1),gbc2);
+                     	// gridbagconstraintsY1.add(gbc2);
+           }
+           public void addThree(List<XYWidthHeight> xywidthheightsY1,List<GridBagConstraints> gridbagconstraintsY1,List<Component> componentsY1,Weight weight) {
+           		XYWidthHeight xywidthheight1=xywidthheightsY1.get(0);
+            	XYWidthHeight xywidthheight2=xywidthheightsY1.get(1);
+            	
+            	Fraction mean=getMean(weight.getWidthOrHeight(xywidthheight1),weight.getWidthOrHeight(xywidthheight2));
+            	
+            	GridBagConstraints gbc1 = gridbagconstraintsY1.get(0);
+            	gbc1.gridx=xywidthheight1.x;
+            	gbc1.gridy=xywidthheight1.y;
+            	weight.setWeightxorWeighty(gbc1,mean.numerator);
+            	System.out.println("addThree: gbc1.gridx="+gbc1.gridx + " gridy=" + gbc1.gridy
+            			+ " weightx=" + gbc1.weightx + " weighty=" + gbc1.weighty
+            			+ " fill=" + gbc1.fill + " mean.numerator: "+mean.numerator+"\n");
+            	//gbc1.weighty=mean2.numerator;
+                     	// gbc1.weighty=1.0;
+              	gbc1.fill = GridBagConstraints.BOTH;
+                	componentsY1.get(0).setPreferredSize(new Dimension(0, 0));
+            
+            	// Force componentsX to stretch completely to fill the space
+  		GridBagConstraints gbc2=gridbagconstraintsY1.get(1);
+  		gbc2.fill = GridBagConstraints.BOTH;
+            	gbc2.gridx = xywidthheight2.x;
+            	gbc2.gridy = xywidthheight2.y;
+            	weight.setWeightxorWeighty(gbc2,mean.denominator);
+            	System.out.println("addThree: gbc2.gridx="+gbc2.gridx + " gridy=" + gbc2.gridy
+            			+ " weightx=" + gbc2.weightx + " weighty=" + gbc2.weighty
+            			+ " fill=" + gbc2.fill + " mean.denominator: "+mean.denominator+"\n");
+                  	//gbc2.weighty=mean2.denominator;
+                   	// gbc2.weighty=1.0;
                    	componentsY1.get(1).setPreferredSize(new Dimension(0, 0));
-            }
-            public void addThree(List<XYWidthHeight> xywidthheightsY1,List<GridBagConstraints> gridbagconstraintsY1,List<Component> componentsY1,Weight weight) {
-            		XYWidthHeight xywidthheight1=xywidthheightsY1.get(0);
-             	XYWidthHeight xywidthheight2=xywidthheightsY1.get(1);
-             	
-             	GridBagConstraints gbc1 = gridbagconstraintsY1.get(0);
-             	gbc1.gridx=xywidthheight1.x;
-             	gbc1.gridy=xywidthheight1.y;
-             	weight.setWeightxorWeighty(gbc1,weight.getWidthOrHeight(xywidthheight1));
-               	gbc1.fill = GridBagConstraints.BOTH;
-                 	componentsY1.get(0).setPreferredSize(new Dimension(0, 0));
-             
-   		GridBagConstraints gbc2=gridbagconstraintsY1.get(1);
-   		gbc2.fill = GridBagConstraints.BOTH;
-             	gbc2.gridx = xywidthheight2.x;
-             	gbc2.gridy = xywidthheight2.y;
-             	weight.setWeightxorWeighty(gbc2,weight.getWidthOrHeight(xywidthheight2));
-                    	componentsY1.get(1).setPreferredSize(new Dimension(0, 0));
-             	
-             	XYWidthHeight xywidthheight3=xywidthheightsY1.get(2);
-            		
-            		GridBagConstraints gbc3=gridbagconstraintsY1.get(2);
-   		gbc3.fill = GridBagConstraints.BOTH;
-             	gbc3.gridx = xywidthheight3.x;
-             	gbc3.gridy = xywidthheight3.y;
-             	weight.setWeightxorWeighty(gbc3,weight.getWidthOrHeight(xywidthheight3));
-                	componentsY1.get(2).setPreferredSize(new Dimension(0, 0));
-            }
+            	
+            	/*1:2:3                                      1:2:1				
+            	2:3:9/2  			2:3:2					
+            	(1:2):(2:3)*(1:2:3)		(1:2):(2:1):(1:2:1)
+            	(2/1)*(3/2)*(2:3)		(2/1)*(1/2)*(2/1)
+            	ratio is 2:ratio is 3:		ratio is 2: ratio is 2			
+            	2*3/2*(1:2:3)			2*1/2*2			
+            	3*(3/2)                                   (2/2)*2
+            	9/2				2
+            	*/
+            	
+            	XYWidthHeight xywidthheight3=xywidthheightsY1.get(2);
+            	// Find 9/2 from 1:2:3 for 2:3:4.5
+            	double thirdnumber=getThirdNumber(weight.getWidthOrHeight(xywidthheight1),weight.getWidthOrHeight(xywidthheight2),
+            		weight.getWidthOrHeight(xywidthheight3));
+           		
+           		GridBagConstraints gbc3=gridbagconstraintsY1.get(2);
+  		gbc3.fill = GridBagConstraints.BOTH;
+            	gbc3.gridx = xywidthheight3.x;
+            	gbc3.gridy = xywidthheight3.y;
+            	//gbc3.weightx=thirdnumber;
+            	weight.setWeightxorWeighty(gbc3,thirdnumber);
+            	System.out.println("addThree: gbc3.gridx="+gbc3.gridx + " gridy=" + gbc3.gridy
+            			+ " weightx=" + gbc3.weightx + " weighty=" + gbc3.weighty
+            			+ " fill=" + gbc3.fill + " thirdnumber: "+thirdnumber+"\n");
+            	//gbc3.weighty=thirdnumber2;
+                	// gbc3.weighty=1.0;
+               	componentsY1.get(2).setPreferredSize(new Dimension(0, 0));
+           }
            	public interface Weight {
            		public void setWeightxorWeighty(GridBagConstraints gbc,double weightxorweighty);
            		public double getWidthOrHeight(XYWidthHeight xywidthheight);
@@ -558,22 +607,22 @@ public class GuaranteedLayout extends GridBagLayout {
             		}
             		return Math.max(maxCount, 1);
             	}
-            	public int getxaxis(XYWidthHeight xywidthheight) {
-            			int xaxis = 0;
-            			for(int i = 0; i < rowsextra.size(); i++) {           				
-            				List<XYWidthHeight> row=rowsextra.get(i);
-            				for(int j = 0; j < row.size(); j++) {
-            					XYWidthHeight xywidthheight2=row.get(j);
- 					if(xywidthheight.equals(xywidthheight2)) {
-            						return xaxis;
+           		public int getxaxis(XYWidthHeight xywidthheight) {
+           			int xaxis = 0;
+           			for(int i = 0; i < rowsextra.size(); i++) {           				
+           				List<XYWidthHeight> row=rowsextra.get(i);
+           				for(int j = 0; j < row.size(); j++) {
+           					XYWidthHeight xywidthheight2=row.get(j);
+					if(xywidthheight2.y == xywidthheight.y) {
+            						xaxis+=xywidthheight2.width;
             					}
-             					if(xywidthheight2.y == xywidthheight.y) {
-             						xaxis+=xywidthheight2.width;
-             					}
-            				}
-            			}
-            			return xaxis;
-            		}
+            					else if(xywidthheight.equals(xywidthheight2)) {
+           						return xaxis;
+           					}
+           				}
+           			}
+           			return xaxis;
+           		}
            		public int getGridHeight(XYWidthHeight xywidthheight) {
            			int startY=  getyaxis(xywidthheight);
             		int endY=  startY + xywidthheight.width;
@@ -598,22 +647,22 @@ public class GuaranteedLayout extends GridBagLayout {
             		}
             		return Math.max(maxCount, 1);
            		}
-            		public int getyaxis(XYWidthHeight xywidthheight) {
-            			int yaxis = 0;
-            			for(int i = 0; i < columnsextra.size(); i++) {           				
-            				List<XYWidthHeight> column=columnsextra.get(i);
-            				for(int j = 0; j < column.size(); j++) {
-            					XYWidthHeight xywidthheight2=column.get(j);
- 					if(xywidthheight.equals(xywidthheight2)) {
-            						return yaxis;
-            					}
-             					if(xywidthheight2.x == xywidthheight.x) {
-             						yaxis+=xywidthheight2.height;
-             				}
+           		public int getyaxis(XYWidthHeight xywidthheight) {
+           			int yaxis = 0;
+           			for(int i = 0; i < columnsextra.size(); i++) {           				
+           				List<XYWidthHeight> column=columnsextra.get(i);
+           				for(int j = 0; j < column.size(); j++) {
+           					XYWidthHeight xywidthheight2=column.get(j);
+					if(xywidthheight2.x == xywidthheight.x) {
+            						yaxis+=xywidthheight2.height;
             				}
-            			}
-            			return yaxis;
-            		}
+            				else if(xywidthheight.equals(xywidthheight2)) {
+           						return yaxis;
+           					}
+           				}
+           			}
+           			return yaxis;
+           		}
            	}
            @Override
            public String toString() {
