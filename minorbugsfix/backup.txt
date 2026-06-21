@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\GuaranteedLayout.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -49,9 +49,10 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
-    "lockedStartupClass": "Main",
+    "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
       "StarterJComboBox",
+      "GuaranteedLayout",
       "MatthewLayout",
       "Preferences",
       "StoreSelectedFile",
@@ -65,7 +66,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 83276
+    "caretposition": 83408
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -1789,7 +1790,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 8898
+    "caretposition": 16585
   },
   "C:\\Users\\Owner\\Documents\\git\\photoshop\\Main.java": {
     "isLocked": false,
@@ -1803,9 +1804,10 @@
     "caretposition": 3246
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Fraction.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
+      "GuaranteedLayout",
       "Fraction"
     ],
     "starterclass": "",

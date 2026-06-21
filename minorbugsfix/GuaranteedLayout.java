@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
@@ -273,14 +274,26 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		addThree(xywidthheightsY1,gridbagconstraintsY1,componentsY1,weight);
 	           		}
 	           		else if(xywidthheightsY1.size() >= 4) {
+	           			HashSet<Integer> hashset = new HashSet<Integer>();
 	           			for(int j = 0; j < xywidthheightsY1.size(); j++) {
-	           				GridBagConstraints gbc = gridbagconstraintsY1.get(j);
-	            			gbc.gridx=xywidthheightsY1.get(j).x;
-	            			gbc.gridy=xywidthheightsY1.get(j).y;
-	            			gbc.weighty=xywidthheightsY1.get(j).height;
-                        			// gbc.weighty=1.0;
-	            			gbc.fill=GridBagConstraints.BOTH;	
-	                       		panel.setPreferredSize(new Dimension(0, 0));
+	           				hashset.add(xywidthheightsY1.get(j).height);
+           				}
+           				if(hashset.size() == 2) {
+                    				Object[] twovalues=hashset.toArray();
+                    				double y = (double)twovalues[0];
+                    				double x = (double)twovalues[1];
+           					Fraction ratio = getMean(y,x);
+           				}
+           				else {
+		           			for(int j = 0; j < xywidthheightsY1.size(); j++) {
+		           				GridBagConstraints gbc = gridbagconstraintsY1.get(j);
+		            			gbc.gridx=xywidthheightsY1.get(j).x;
+		            			gbc.gridy=xywidthheightsY1.get(j).y;
+		            			gbc.weighty=xywidthheightsY1.get(j).height;
+	                        			// gbc.weighty=1.0;
+		            			gbc.fill=GridBagConstraints.BOTH;	
+		                       		panel.setPreferredSize(new Dimension(0, 0));
+	                       		}
                        		}
                        	}
            		}
@@ -364,6 +377,8 @@ public class GuaranteedLayout extends GridBagLayout {
             	if(x > x2) { 
             		mean.Flip();
             	}
+            	// mean.Simplify();
+            	
             	return mean;
             }
             public double getThirdNumber(double width1,double width2,double width3) {
