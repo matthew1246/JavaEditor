@@ -49,7 +49,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
-    "lockedStartupClass": "Main",
+    "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
       "StarterJComboBox",
       "GuaranteedLayout",
@@ -1790,7 +1790,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2151
+    "caretposition": 1128
   },
   "C:\\Users\\Owner\\Documents\\git\\photoshop\\Main.java": {
     "isLocked": false,
