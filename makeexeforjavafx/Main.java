@@ -217,6 +217,7 @@ public class Main {
 				} catch (BadLocationException ex) {
 					ex.printStackTrace();
 				}
+				
 			});
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
