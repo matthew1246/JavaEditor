@@ -1433,6 +1433,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+			
 			CurlyBraceKeyListener curlybracekeylistener2=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];	
 			Selection selection=curlybracekeylistener2.positiontracker.next();
 			textarea2.setCaretPosition(selection.cursor);
