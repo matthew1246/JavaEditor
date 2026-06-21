@@ -1433,7 +1433,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() {
+	public void setListeners() {	
+		leftarrow.addActionListener((ev) -> {
+			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+			CurlyBraceKeyListener curlybracekeylistener2=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
+			
+			Selection selection=curlybracekeylistener2.positiontracker.previous();
+			textarea2.setCaretPosition(selection.cursor);
+			textarea2.requestFocusInWindow();
+		});
 		saveall.addActionListener((ev) -> {
 			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
 				String title=tabbedpane.getTitleAt(i);
