@@ -1433,19 +1433,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
-			
-			CurlyBraceKeyListener curlybracekeylistener2=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];	
-			Selection selection=curlybracekeylistener2.positiontracker.next();
-			textarea2.setCaretPosition(selection.cursor);
+		
+			MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+			int selection=mycaretlistener2.caret_tracker.getNext();
+			textarea2.setCaretPosition(selection);
 			textarea2.requestFocusInWindow();
 		});
 		leftarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
-			CurlyBraceKeyListener curlybracekeylistener2=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
-			
-			Selection selection=curlybracekeylistener2.positiontracker.previous();
-			textarea2.setCaretPosition(selection.cursor);
+			MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+			int selection=mycaretlistener2.caret_tracker.getPrevious();
+			textarea2.setCaretPosition(selection);
 			textarea2.requestFocusInWindow();
 		});
 		saveall.addActionListener((ev) -> {
@@ -2380,8 +2379,8 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				});
 			}
 		});		
-		addCaretListener(textarea);
-		newopenwindow.addActionListener(new ActionListener() {
+		// addCaretListener(textarea);
+		newopenwindow.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent ev) {
 				SwingUtilities.invokeLater(() -> {
 					Main main = new Main();
@@ -3668,29 +3667,7 @@ startercombobox.Change(fileName);
 		//}
 	}
 	public void addCaretListener(JTextArea textarea) {
-		textarea.addCaretListener(new CaretListener() {
-			public void caretUpdate(CaretEvent e) {
-				CurlyBraceKeyListener curlybracekeylistener = null;
-				KeyListener[] keylisteners=textarea.getKeyListeners();
-				for(KeyListener keylistener:keylisteners) {
-					if(keylistener instanceof CurlyBraceKeyListener) {
-						if(curlybracekeylistener != null) {
-							JOptionPane.showMessageDialog(null,"Found more than one CurlyBraceKeyListener!");				
-							break;
-						}	
-						curlybracekeylistener = (CurlyBraceKeyListener)keylistener;
-					}
-				}				
-				if(!curlybracekeylistener.is_content_update) {
-					String text = textarea.getText();
-					int position = textarea.getCaretPosition();
-					if(text.length() >= (position+1))
-						line.setText("line number: "+getLineNumber(text.substring(0,position+1))+" ");
-					else
-						line.setText("line number: "+getLineNumber(text.substring(0,position))+" ");
-				}
-			}
-		});
+		textarea.addCaretListener(new MyCaretListener(this,textarea));
 	}
 	public static boolean isSameDirectory(String fileName1,String fileName2) {
 		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
@@ -5673,4 +5650,53 @@ class RightClickJFrame {
 			ex.printStackTrace();
 		}
 	}
-}
+}
+class MyCaretListener implements CaretListener {
+	public Caret_Tracker caret_tracker=new Caret_Tracker();
+	public Main main;
+	public JTextArea textarea;
+	public MyCaretListener(Main main,JTextArea textarea) {
+		this.main = main;
+		this.textarea = textarea;
+	}
+	public void caretUpdate(CaretEvent e) {
+		caret_tracker.add(textarea.getCaretPosition());
+		
+		CurlyBraceKeyListener curlybracekeylistener = null;
+		KeyListener[] keylisteners=textarea.getKeyListeners();
+		for(KeyListener keylistener:keylisteners) {
+			if(keylistener instanceof CurlyBraceKeyListener) {
+				if(curlybracekeylistener != null) {
+					JOptionPane.showMessageDialog(null,"Found more than one CurlyBraceKeyListener!");				
+					break;
+				}	
+				curlybracekeylistener = (CurlyBraceKeyListener)keylistener;
+			}
+		}				
+		if(!curlybracekeylistener.is_content_update) {
+			String text = textarea.getText();
+			int position = textarea.getCaretPosition();
+			if(text.length() >= (position+1))
+				main.line.setText("line number: "+main.getLineNumber(text.substring(0,position+1))+" ");
+			else
+				main.line.setText("line number: "+main.getLineNumber(text.substring(0,position))+" ");
+		}
+	}
+}
+class Caret_Tracker {
+	public List<Integer> caret_tracker=new ArrayList<Integer>();	
+	public int selected = 0;
+	public void add(int caretposition) {
+		caret_tracker.add(caretposition);
+	}
+	public int getPrevious() {
+		if(selected == 0)
+			selected = caret_tracker.size()-1;
+		selected--;
+		return caret_tracker.get(selected);
+	}
+	public int getNext() {
+		selected++;
+		return caret_tracker.get(selected);
+	}
+}
