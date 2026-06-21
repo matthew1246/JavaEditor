@@ -35,7 +35,6 @@ public class GuaranteedLayout extends GridBagLayout {
 		textArea.setWrapStyleWord(true);
 		panel.add(textArea,new XYWidthHeight(2,0,3,6));
 		
-		/*
 		JPanel subzero = new JPanel(new GridBagLayout());
 		subzero.add(new JLabel("Size:"));
 		panel.add(subzero,new XYWidthHeight(0,1,1,1));
@@ -52,7 +51,6 @@ public class GuaranteedLayout extends GridBagLayout {
 		panel_4.add(new JCheckBox());
 		panel_4.add(new JLabel("Italic"));
 		panel.add(panel_4,new XYWidthHeight(0,3,3,2));
-		*/
 		
 		frame.getContentPane().add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -278,7 +276,7 @@ public class GuaranteedLayout extends GridBagLayout {
 	            		addThree(xywidthheightsY1,gridbagconstraintsY1,componentsY1,weight);
 	           		}
 	           		else if(xywidthheightsY1.size() >= 4) {
-	           			HashSet<Integer> hashset = new HashSet<Integer>();
+	           			/*HashSet<Integer> hashset = new HashSet<Integer>();
 	           			for(int j = 0; j < xywidthheightsY1.size(); j++) {
 	           				hashset.add(xywidthheightsY1.get(j).height);
            				}
@@ -289,7 +287,7 @@ public class GuaranteedLayout extends GridBagLayout {
            					Fraction ratio = getMean(y,x);
            				}
            				else {
-		           			for(int j = 0; j < xywidthheightsY1.size(); j++) {
+		           		*/	for(int j = 0; j < xywidthheightsY1.size(); j++) {
 		           				GridBagConstraints gbc = gridbagconstraintsY1.get(j);
 		            			gbc.gridx=xywidthheightsY1.get(j).x;
 		            			gbc.gridy=xywidthheightsY1.get(j).y;
@@ -298,7 +296,7 @@ public class GuaranteedLayout extends GridBagLayout {
 		            			gbc.fill=GridBagConstraints.BOTH;	
 		                       		panel.setPreferredSize(new Dimension(0, 0));
 	                       		}
-                       		}
+                       		// }
                        	}
            		}
            		
