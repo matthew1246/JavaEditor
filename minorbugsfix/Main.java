@@ -100,6 +100,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JButton leftarrowandrightarrow;
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public Maven maven = new Maven();
 	public JMenuItem saveall = new JMenuItem("Save All");
@@ -1152,16 +1153,30 @@ edit.add(functionLines);
 		menubar.validate();
 		menubar.repaint();
 
-		reload = new JButton("reload");
+		reload = new JButton("\u267B");
 		gbc.gridx=24;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx=2.0;
+		gbc.weightx=1.0;
 		gbc.weighty=1.0;
 		gbc.anchor=gbc.CENTER;
-		gbc.gridwidth=2;
+		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(reload,gbc);
+		menubar.add(reload,gbc);		
+
+		menubar.validate();
+		menubar.repaint();
+		
+		leftarrowandrightarrow=new JButton("\u2190");
+		gbc.gridx=25;
+		gbc.gridy=1;
+		gbc.fill=GridBagConstraints.BOTH;
+		gbc.weightx=1.0;
+		gbc.weighty=1.0;
+		gbc.anchor=GridBagConstraints.CENTER;
+		gbc.gridwidth=1;
+		gbc.gridheight=1;
+		menubar.add(leftarrowandrightarrow,gbc);		
 
 		menubar.validate();
 		menubar.repaint();
