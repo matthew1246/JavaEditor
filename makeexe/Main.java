@@ -100,6 +100,8 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JButton leftarrow;
+	public JButton rightarrow;
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
 	public Maven maven = new Maven();
 	public JMenuItem saveall = new JMenuItem("Save All");
@@ -1149,16 +1151,37 @@ edit.add(functionLines);
 		menubar.validate();
 		menubar.repaint();
 
-		reload = new JButton("reload");
+		reload = new JButton("\u267B");
+		reload.setMargin(new Insets(0,0,0,0));
 		gbc.gridx=24;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx=2.0;
+		gbc.weightx=1.0;
 		gbc.weighty=1.0;
 		gbc.anchor=gbc.CENTER;
-		gbc.gridwidth=2;
+		gbc.gridwidth=1;
 		gbc.gridheight=1;
 		menubar.add(reload,gbc);
+
+		menubar.validate();
+		menubar.repaint();
+		
+		JPanel leftarrowandrightarrow=new JPanel(new GridLayout(1,2));
+		leftarrow=new JButton("\u2190");
+		leftarrow.setMargin(new Insets(0,0,0,0));
+		rightarrow=new JButton("\u2192");
+		rightarrow.setMargin(new Insets(0,0,0,0));
+		leftarrowandrightarrow.add(leftarrow);
+		leftarrowandrightarrow.add(rightarrow);
+		gbc.gridx=25;
+		gbc.gridy=1;
+		gbc.fill=GridBagConstraints.BOTH;
+		gbc.weightx=1.0;
+		gbc.weighty=1.0;
+		gbc.anchor=GridBagConstraints.CENTER;
+		gbc.gridwidth=1;
+		gbc.gridheight=1;
+		menubar.add(leftarrowandrightarrow,gbc);	
 
 		menubar.validate();
 		menubar.repaint();
@@ -1407,6 +1430,23 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {
+		rightarrow.addActionListener((ev) -> {
+			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+			CurlyBraceKeyListener curlybracekeylistener2=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];	
+			Selection selection=curlybracekeylistener2.positiontracker.next();
+			textarea2.setCaretPosition(selection.cursor);
+			textarea2.requestFocusInWindow();
+		});
+		leftarrow.addActionListener((ev) -> {
+			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+			CurlyBraceKeyListener curlybracekeylistener2=(CurlyBraceKeyListener)textarea2.getKeyListeners()[0];
+			
+			Selection selection=curlybracekeylistener2.positiontracker.previous();
+			textarea2.setCaretPosition(selection.cursor);
+			textarea2.requestFocusInWindow();
+		});
 		saveall.addActionListener((ev) -> {
 			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
 				String title=tabbedpane.getTitleAt(i);
