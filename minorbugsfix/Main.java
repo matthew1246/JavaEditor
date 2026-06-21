@@ -2277,10 +2277,11 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				//frame2.setSize(425,110);
 				frame2.setSize(450,110);
 					
-				JPanel panel0 = new JPanel();
-				panel0.setLayout(new MatthewLayout());
+				JPanel panelc = new JPanel();
+				panelc.setLayout(new MatthewLayout());
 				
-				JPanel guaranteedlayout=new JPanel(new GuaranteedLayout());
+				GuaranteedLayout gl =new GuaranteedLayout();
+				JPanel guaranteedlayout=new JPanel(gl);
 				JTextField input = new JTextField();
 				guaranteedlayout.add(input,new XYWidthHeight(0,0,26,1));
 				JPanel arrowspanel = new JPanel();
@@ -2293,36 +2294,38 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
             			arrowspanel.add(downArrow);
             			guaranteedlayout.add(arrowspanel,new XYWidthHeight(1,0,2,1));
 				JButton click = new JButton("Find");
+				click.setMargin(new Insets(0,2,0,2));
+
 				guaranteedlayout.add(click,new XYWidthHeight(2,0,4,1));
-				panel0.add(guaranteedlayout,new XYWidthHeight(0,0,32,1));
+				panelc.add(guaranteedlayout,new XYWidthHeight(0,0,32,1));
 		
 				JCheckBox searchall = new JCheckBox("all");
-				panel0.add(searchall,new XYWidthHeight(0,1,3,1));
+				panelc.add(searchall,new XYWidthHeight(0,1,3,1));
 		
 				JCheckBox casey=new JCheckBox("case");
-				panel0.add(casey,new XYWidthHeight(1,1,4,1));
+				panelc.add(casey,new XYWidthHeight(1,1,4,1));
 		
 				JTextField replaceinput = new JTextField();
-				panel0.add(replaceinput,new XYWidthHeight(2,1,5,1));
+				panelc.add(replaceinput,new XYWidthHeight(2,1,5,1));
 				replaceinput.setEditable(false);
 				
 				JCheckBox replace = new JCheckBox("replace");
-				panel0.add(replace,new XYWidthHeight(3,1,5,1));
+				panelc.add(replace,new XYWidthHeight(3,1,5,1));
 				replace.addActionListener( (ev3) -> {
 					replaceinput.setEditable(true);
 				});
 		
 				JCheckBox selection = new JCheckBox("Select");
-				panel0.add(selection,new XYWidthHeight(4,1,5,1));
+				panelc.add(selection,new XYWidthHeight(4,1,5,1));
 					
 				
 				JCheckBox regex_checkbox = new JCheckBox("regex");
-				panel0.add(regex_checkbox,new XYWidthHeight(5,1,5,1));
+				panelc.add(regex_checkbox,new XYWidthHeight(5,1,5,1));
 				
 				JCheckBox cursor= new JCheckBox("cursor");
-				panel0.add(cursor,new XYWidthHeight(6,1,5,1));
+				panelc.add(cursor,new XYWidthHeight(6,1,5,1));
 				
-				frame2.getContentPane().add(panel0);
+				frame2.getContentPane().add(panelc);
 				
 				//frame2.pack();
 				//frame2.setResizable(false);
@@ -2344,6 +2347,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				input.addActionListener(clicky);
 				
 				frame2.setVisible(true);
+				System.out.println(gl);
 				SwingUtilities.invokeLater(() -> {
 					frame2.requestFocus();
 					input.requestFocusInWindow();
