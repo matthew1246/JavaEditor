@@ -147,7 +147,7 @@ public class Main {
 		
 	public JButton run = new JButton("run");
 	public JCheckBox checkbox = new JCheckBox();
-	public JLabel jarlabel = new JLabel("JUnit");
+	public JLabel jarlabel = new JLabel("JUnit");	
 	public JCheckBox jarcheckbox = new JCheckBox();
 	public JButton reload;
 	public JButton addjar=new JButton("jar");
@@ -1139,8 +1139,8 @@ edit.add(functionLines);
 		menubar.validate();
 		menubar.repaint();
 
-		JLabel label4 = new JLabel();
-		label4.setText("lock");
+		JLabel label4 = new JLabel("\uD83D\uDD12");
+		// label4.setMargin(new Insets(0,0,0,0));
 		gbc.gridx=23;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
