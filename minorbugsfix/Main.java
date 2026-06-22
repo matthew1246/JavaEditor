@@ -3765,7 +3765,7 @@ startercombobox.Change(fileName);
 	}
 	class Lock extends JButton {
 		public Lock() {
-			super("\uD83D\uDD12");
+			super("\uD83D\uDD13");
 		}
 		public boolean isSelected() {
 			return super.getText().equals("\uD83D\uDD12");
