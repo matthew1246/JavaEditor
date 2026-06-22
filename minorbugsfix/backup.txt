@@ -49,7 +49,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
-    "lockedStartupClass": "Main",
+    "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
       "StarterJComboBox",
       "GuaranteedLayout",
