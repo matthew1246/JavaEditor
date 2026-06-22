@@ -48,11 +48,10 @@
     "caretposition": 6333
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
-    "isLocked": true,
-    "lockedStartupClass": "GuaranteedLayout",
+    "isLocked": false,
+    "lockedStartupClass": "",
     "startupcombobox": [
       "StarterJComboBox",
-      "GuaranteedLayout",
       "MatthewLayout",
       "Preferences",
       "StoreSelectedFile",
