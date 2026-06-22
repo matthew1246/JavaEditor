@@ -54,6 +54,7 @@ public class StarterJComboBox {
 				}
 				main.startupcombobox.setSelectedItem(startupLockedUpClass);
 				main.lock.setSelected(true);
+				main.label4.setText("\uD83D\uDD12");
 			}
 			else {
 				main.startupcombobox.setSelectedItem(starterclass);
@@ -94,7 +95,8 @@ public class StarterJComboBox {
 					Remove();
 					StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 					if(!storeselectedfile.getLocked(filename)) { // is not locked
-						main.lock.setSelected(false);		
+						main.lock.setSelected(false);	
+						main.label4.setText("\uD83D\uDD13");
 						getCacheAndAddToComboBox(filename);
 					}
 					else { // is locked
@@ -146,6 +148,7 @@ public class StarterJComboBox {
 		}
 		main.startupcombobox.setSelectedItem(startupLockedUpClass);
 		main.lock.setSelected(true);
+		main.label4.setText("\uD83D\uDD12");
 	}
 	public void getCacheAndAddToComboBox(String filename) {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();				List<String> starterclasses= storeselectedfile.getStartupComboBox(filename);

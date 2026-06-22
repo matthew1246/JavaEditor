@@ -100,6 +100,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
+	public JLabel label4;
 	public JButton leftarrow;
 	public JButton rightarrow;
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
@@ -1135,11 +1136,12 @@ edit.add(functionLines);
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
 		menubar.add(lock,gbc);
-
+		
 		menubar.validate();
 		menubar.repaint();
 
-		JLabel label4 = new JLabel("\uD83D\uDD12");
+		//JLabel label4 = new JLabel("\uD83D\uDD12");
+		label4 = new JLabel("\uD83D\uDD13");
 		// label4.setMargin(new Insets(0,0,0,0));
 		gbc.gridx=23;
 		gbc.gridy=1;
@@ -1150,6 +1152,15 @@ edit.add(functionLines);
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
 		menubar.add(label4,gbc);
+		
+		lock.addActionListener((ev) -> {
+			if(lock.isSelected()) {
+				label4.setText("\uD83D\uDD12");
+			}
+			else { //lock.isSelected() == false
+				label4.setText("\uD83D\uDD13");
+			}
+		});
 
 		menubar.validate();
 		menubar.repaint();
