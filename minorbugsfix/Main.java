@@ -100,7 +100,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
-	public JButton label4;	
+	// public JButton label4;	
 	public JButton leftarrow;
 	public JButton rightarrow;
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
@@ -123,7 +123,7 @@ public class Main {
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
-	public JCheckBox lock = new JCheckBox();
+	public Lock lock = new Lock();
 	// public GetClassName getclassname;
 	// public GetClassMethods getclassmethods;
 	JMenu edit = new JMenu("Edit");
@@ -1127,8 +1127,7 @@ edit.add(functionLines);
 		menubar.validate();
 		menubar.repaint();
 
-		label4 = new JButton("\uD83D\uDD13");
-		label4.setMargin(new Insets(0,0,0,0));
+		lock.setMargin(new Insets(0,0,0,0));		
 		gbc.gridx=22;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
@@ -1137,13 +1136,20 @@ edit.add(functionLines);
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(label4,gbc);
+		//menubar.add(label4,gbc);
+		menubar.add(lock,gbc);		
 		
 		menubar.validate();
 		menubar.repaint();
 
 		//JLabel label4 = new JLabel("\uD83D\uDD12");
-		JPanel twopanel = new JPanel();
+		JPanel twopanel = new JPanel(new GridLayout(1,2));
+		JButton uparrow=new JButton("\u2191");
+		uparrow.setMargin(new Insets(0,0,0,0));
+		twopanel.add(uparrow);
+		JButton downarrow=new JButton("\u2193");
+		downarrow.setMargin(new Insets(0,0,0,0));
+		twopanel.add(downarrow);
 		gbc.gridx=23;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
@@ -1157,10 +1163,10 @@ edit.add(functionLines);
 		
 		lock.addActionListener((ev) -> {
 			if(lock.isSelected()) {
-				label4.setText("\uD83D\uDD12");
+				lock.setSelected(false);
 			}
 			else { //lock.isSelected() == false
-				label4.setText("\uD83D\uDD13");
+				lock.setSelected(true);
 			}
 		});
 
@@ -3715,6 +3721,23 @@ startercombobox.Change(fileName);
 	public static boolean isSameDirectory(String fileName1,String fileName2) {
 		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
 	}
+	class Lock extends JButton {
+		public Lock() {
+			super("\uD83D\uDD12");
+		}
+		public boolean isSelected() {
+			return super.getText().equals("\uD83D\uDD13");
+		}
+		public void setSelected(boolean isSelected) {
+			if(isSelected) {
+				super.setText("\uD83D\uDD13");
+			}
+			else
+			{
+				super.setText("\uD83D\uDD12");
+			}
+		}												
+	}	
 }
 class Expandable {
 	public JFrame frame;
