@@ -100,7 +100,7 @@ import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 public class Main {
-	public JLabel label4;
+	public JButton label4;	
 	public JButton leftarrow;
 	public JButton rightarrow;
 	public AllClassesInFile allclassesinfile = new AllClassesInFile();
@@ -1141,8 +1141,8 @@ edit.add(functionLines);
 		menubar.repaint();
 
 		//JLabel label4 = new JLabel("\uD83D\uDD12");
-		label4 = new JLabel("\uD83D\uDD13");
-		// label4.setMargin(new Insets(0,0,0,0));
+		label4 = new JButton("\uD83D\uDD13");
+		label4.setMargin(new Insets(0,0,0,0));
 		gbc.gridx=23;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
