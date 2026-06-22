@@ -57,6 +57,7 @@ public class StarterJComboBox {
 			}
 			else {
 				main.startupcombobox.setSelectedItem(starterclass);
+				main.lock.setSelected(false);
 			}
 		}
 	}				
