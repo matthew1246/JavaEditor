@@ -3737,15 +3737,15 @@ startercombobox.Change(fileName);
 			super("\uD83D\uDD12");
 		}
 		public boolean isSelected() {
-			return super.getText().equals("\uD83D\uDD13");
+			return super.getText().equals("\uD83D\uDD12");
 		}
 		public void setSelected(boolean isSelected) {
 			if(isSelected) {
-				super.setText("\uD83D\uDD13");
+				super.setText("\uD83D\uDD12");
 			}
 			else
 			{
-				super.setText("\uD83D\uDD12");
+				super.setText("\uD83D\uDD13");
 			}
 		}												
 	}	
