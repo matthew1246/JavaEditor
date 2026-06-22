@@ -1127,6 +1127,8 @@ edit.add(functionLines);
 		menubar.validate();
 		menubar.repaint();
 
+		label4 = new JButton("\uD83D\uDD13");
+		label4.setMargin(new Insets(0,0,0,0));
 		gbc.gridx=22;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
@@ -1135,14 +1137,13 @@ edit.add(functionLines);
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(lock,gbc);
+		menubar.add(label4,gbc);
 		
 		menubar.validate();
 		menubar.repaint();
 
 		//JLabel label4 = new JLabel("\uD83D\uDD12");
-		label4 = new JButton("\uD83D\uDD13");
-		label4.setMargin(new Insets(0,0,0,0));
+		JPanel twopanel = new JPanel();
 		gbc.gridx=23;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
@@ -1151,7 +1152,8 @@ edit.add(functionLines);
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(label4,gbc);
+		// menubar.add(label4,gbc);
+		menubar.add(twopanel,gbc);
 		
 		lock.addActionListener((ev) -> {
 			if(lock.isSelected()) {
