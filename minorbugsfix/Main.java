@@ -1161,6 +1161,17 @@ edit.add(functionLines);
 		// menubar.add(label4,gbc);
 		menubar.add(twopanel,gbc);
 		
+		uparrow.addActionListener((ev) -> {
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			JTextArea textarea3=(JTextArea)jscrollpane5.getViewport().getView();
+			scrollToCaretPosition(textarea3,0);
+		});
+		downarrow.addActionListener((ev) -> {
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			JTextArea textarea3=(JTextArea)jscrollpane5.getViewport().getView();
+			scrollToCaretPosition(textarea3,textarea3.getText().length());
+		});
+
 		lock.addActionListener((ev) -> {
 			if(lock.isSelected()) {
 				lock.setSelected(false);
