@@ -2981,6 +2981,22 @@ CommandLine commandline = new CommandLine();
 								command[3] = "cmd";
 								command[4]= "/k";
 								command[5] = commandline.java();
+								StoreSelectedFile ssf = new StoreSelectedFile();
+								if(lock.isSelected()) {
+									ssf.setLocked(fileName, true);
+									String sel = (String)startupcombobox.getSelectedItem();
+									ssf.setStartupLockedClass(fileName, sel);
+									List<String> sc = ssf.getStartupComboBox(fileName);
+									if(!sc.contains(sel)) { sc.add(0, sel); }
+									ssf.setStartupComboBox(fileName, sc);
+								} else {
+									ssf.setLocked(fileName, false);
+									String lc = ssf.getStartupLockedClass(fileName);
+									ssf.setStartupLockedClass(fileName, "");
+									List<String> sc = ssf.getStartupComboBox(fileName);
+									sc.remove(lc);
+									ssf.setStartupComboBox(fileName, sc);
+								}
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -3217,7 +3233,22 @@ CommandLine commandline = new CommandLine();
 									command[4]= "/k";
 									command[5] = commandline.java();
 									
-									// setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
+									StoreSelectedFile ssf = new StoreSelectedFile();
+									if(lock.isSelected()) {
+										ssf.setLocked(fileName, true);
+										String sel = (String)startupcombobox.getSelectedItem();
+										ssf.setStartupLockedClass(fileName, sel);
+										List<String> sc = ssf.getStartupComboBox(fileName);
+										if(!sc.contains(sel)) { sc.add(0, sel); }
+										ssf.setStartupComboBox(fileName, sc);
+									} else {
+										ssf.setLocked(fileName, false);
+										String lc = ssf.getStartupLockedClass(fileName);
+										ssf.setStartupLockedClass(fileName, "");
+										List<String> sc = ssf.getStartupComboBox(fileName);
+										sc.remove(lc);
+										ssf.setStartupComboBox(fileName, sc);
+									}
 									
 startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
