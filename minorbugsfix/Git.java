@@ -158,7 +158,7 @@ public class Git {
 	}
 	public void setListeners() {
 		seeallchanges.addActionListener((ev) -> {
-			SeeAllGitChanges seeallgitchanges=new SeeAllGitChanges();
+			SeeAllGitChanges seeallgitchanges=new SeeAllGitChanges(root_directory);
 		});
 		everythingbutthekitchensink.addActionListener(ev -> {
 			String command = "eval $(";
