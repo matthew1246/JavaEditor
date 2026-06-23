@@ -129,8 +129,8 @@ public class Git {
 	public JButton reset;
 	public void setLayout() {
 		frame=new JFrame();
-		frame.setSize(500,100);
- // previously 400,100
+		frame.setSize(550,100);
+ 		// previously 500,100
 		frame.setLocation(980,0);
 		input.setText("git status");
 		frame.getContentPane().add(input,BorderLayout.CENTER);
@@ -149,6 +149,8 @@ public class Git {
 		east.add(addtoall);
 		everythingbutthekitchensink = new JButton("*");
 		east.add(everythingbutthekitchensink);
+		JButton seeallchanges=new JButton("\uD83D\uDD0D");
+		east.add(seeallchanges);
 		frame.getContentPane().add(east,BorderLayout.EAST);
 		
 		frame.setVisible(true);
