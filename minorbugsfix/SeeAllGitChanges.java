@@ -74,6 +74,7 @@ public class SeeAllGitChanges {
 			} else {
 				fileChanges.setText(files);
 			}
+			fileChanges.setCaretPosition(0);
 		});
 		combobox2.addActionListener((ev) -> {
 			String selected = (String)combobox2.getSelectedItem();
@@ -88,6 +89,7 @@ public class SeeAllGitChanges {
 			} else {
 				appendAnsiColoredText(files);
 			}
+			fileChanges.setCaretPosition(0);
 		});
 	}
 	public void appendAnsiColoredText(String ansiText) {
