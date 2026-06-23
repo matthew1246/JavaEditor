@@ -2,10 +2,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Color;
 public class SeeAllGitChanges {
 	public String directory;
 	public SeeAllGitChanges(String directory) {
@@ -16,7 +20,8 @@ public class SeeAllGitChanges {
 	public JFrame frame;
 	public JComboBox<String> combobox1;
 	public JComboBox<String> combobox2;
-	public JTextArea fileChanges;
+	public JTextPane fileChanges;
+	public Style defaultStyle,bold,red,green,yellow,cyan;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setSize(800,600);
@@ -35,8 +40,19 @@ public class SeeAllGitChanges {
 		north.add(combobox1);
 		north.add(combobox2);
 		frame.add(north,BorderLayout.NORTH);
-		fileChanges = new JTextArea();
+		fileChanges = new JTextPane();
 		fileChanges.setEditable(false);
+		defaultStyle = fileChanges.addStyle("default",null);
+		bold = fileChanges.addStyle("bold",null);
+		StyleConstants.setBold(bold,true);
+		red = fileChanges.addStyle("red",null);
+		StyleConstants.setForeground(red,new Color(255,100,100));
+		green = fileChanges.addStyle("green",null);
+		StyleConstants.setForeground(green,new Color(100,255,100));
+		yellow = fileChanges.addStyle("yellow",null);
+		StyleConstants.setForeground(yellow,new Color(255,255,100));
+		cyan = fileChanges.addStyle("cyan",null);
+		StyleConstants.setForeground(cyan,new Color(100,255,255));
 		frame.add(new JScrollPane(fileChanges),BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true); 
@@ -61,14 +77,44 @@ public class SeeAllGitChanges {
 			if(selected == null || selected.equals("No output.")) return;
 			String hash = selected.split(" ")[0];
 			CommandLine commandline = new CommandLine();
-			Process process = commandline.run("git show " + hash,directory);
+			Process process = commandline.run("git show --color=always " + hash,directory);
 			DisplayOutput displayoutput = new DisplayOutput();
 			String files = displayoutput.Multiline(process);
 			if(files.equals("No output.")) {
 				fileChanges.setText("");
 			} else {
-				fileChanges.setText(files);
+				appendAnsiColoredText(files);
 			}
 		});
+	}
+	public void appendAnsiColoredText(String ansiText) {
+		StyledDocument doc = fileChanges.getStyledDocument();
+		try {
+			doc.remove(0,doc.getLength());
+			Style current=defaultStyle;
+			int i=0,len=ansiText.length();
+			while(i<len) {
+				if(ansiText.charAt(i)=='\u001B' && i+1<len && ansiText.charAt(i+1)=='[') {
+					int j=i+2;
+					while(j<len && ansiText.charAt(j)!='m') j++;
+					if(j<len) {
+						String code=ansiText.substring(i+2,j);
+						if(code.equals("0")) current=defaultStyle;
+						else if(code.equals("1")) current=bold;
+						else if(code.equals("31")) current=red;
+						else if(code.equals("32")) current=green;
+						else if(code.equals("33")) current=yellow;
+						else if(code.equals("36")) current=cyan;
+						i=j+1;
+					} else break;
+				} else {
+					int start=i;
+					while(i<len && !(ansiText.charAt(i)=='\u001B' && i+1<len && ansiText.charAt(i+1)=='[')) i++;
+					doc.insertString(doc.getLength(),ansiText.substring(start,i),current);
+				}
+			}
+		} catch(Exception ex) {
+			fileChanges.setText(ansiText.replaceAll("\u001B\\[[0-9;]*m",""));
+		}
 	}
 }
