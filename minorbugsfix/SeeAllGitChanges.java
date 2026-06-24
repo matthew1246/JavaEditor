@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -23,6 +24,7 @@ public class SeeAllGitChanges {
 	public JComboBox<String> combobox2;
 	public JTextPane fileChanges;
 	public Style bold,red,green,yellow,cyan;
+	public JButton gitStatus;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setSize(800,600);
@@ -40,10 +42,14 @@ public class SeeAllGitChanges {
 		JPanel north = new JPanel(new BorderLayout());
 		JLabel seeAllChanges = new JLabel("See All Changes",JLabel.CENTER);
 		north.add(seeAllChanges,BorderLayout.NORTH);
+		JPanel row = new JPanel(new BorderLayout());
+		gitStatus = new JButton("git status");
+		row.add(gitStatus,BorderLayout.WEST);
 		JPanel comboPanel = new JPanel(new GridLayout(1,2));
 		comboPanel.add(combobox1);
 		comboPanel.add(combobox2);
-		north.add(comboPanel,BorderLayout.CENTER);
+		row.add(comboPanel,BorderLayout.CENTER);
+		north.add(row,BorderLayout.CENTER);
 		frame.add(north,BorderLayout.NORTH);
 		fileChanges = new JTextPane();
 		fileChanges.setEditable(false);
@@ -93,6 +99,18 @@ public class SeeAllGitChanges {
 				fileChanges.setText("");
 			} else {
 				appendAnsiColoredText(files);
+			}
+			fileChanges.setCaretPosition(0);
+		});
+		gitStatus.addActionListener((ev) -> {
+			CommandLine commandline = new CommandLine();
+			Process process = commandline.run("git status",directory);
+			DisplayOutput displayoutput = new DisplayOutput();
+			String output = displayoutput.Multiline(process);
+			if(output.equals("No output.")) {
+				fileChanges.setText("");
+			} else {
+				fileChanges.setText(output);
 			}
 			fileChanges.setCaretPosition(0);
 		});
