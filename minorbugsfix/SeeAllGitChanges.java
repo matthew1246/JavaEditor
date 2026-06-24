@@ -31,6 +31,7 @@ public class SeeAllGitChanges {
 		combobox1=new JComboBox<String>();
 		combobox2=new JComboBox<String>();
 		combobox1.addItem("<<Select which git commit title for file changes>>");
+		combobox2.addItem("<<Select which git commit title for content changes>>");
 		CommandLine commandline = new CommandLine();
 		Process process = commandline.run("git log --format=\"%h %s\"",directory);
 		DisplayOutput displayoutput = new DisplayOutput();
@@ -92,7 +93,7 @@ public class SeeAllGitChanges {
 		});
 		combobox2.addActionListener((ev) -> {
 			String selected = (String)combobox2.getSelectedItem();
-			if(selected == null || selected.equals("No output.")) return;
+			if(selected == null || selected.equals("No output.") || selected.startsWith("<<")) return;
 			String hash = selected.split(" ")[0];
 			CommandLine commandline = new CommandLine();
 			Process process = commandline.run("git show --color=always " + hash,directory);
