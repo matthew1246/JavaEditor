@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -25,7 +25,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MatthewLayout.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SeeAllGitChanges.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
     ],
     "caretposition": 0
   },
@@ -48,7 +48,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6697
+    "caretposition": 13570
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
@@ -601,7 +601,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 7986
+    "caretposition": 423
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java": {
     "isLocked": false,

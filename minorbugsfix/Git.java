@@ -375,9 +375,10 @@ public class Git {
 			public void run() {
 				try {
 					String bashexe = gitbashdotexe.replace("git-bash.exe", "bin\\bash.exe");
-					if(!new File(bashexe).exists()) {
+					/*if(!new File(bashexe).exists()) {
 						bashexe = gitbashdotexe.replace("git-bash.exe", "usr\\bin\\bash.exe");
 					}
+					*/
 					String full = command + "; exec bash";
 					System.out.println(full);
 					ProcessBuilder processBuilder = new ProcessBuilder(bashexe, "-c", full);
