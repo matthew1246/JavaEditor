@@ -3,13 +3,13 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Compile.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SeeAllGitChanges.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -783,7 +783,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 1479
   },
   "C:\\Users\\Owner\\Documents\\ajz\\Main.java": {
     "isLocked": false,
@@ -1116,5 +1116,25 @@
     ],
     "fileNames": [],
     "caretposition": 1070
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\SeeAllGitChanges.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "SeeAllGitChanges"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 7406
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Git.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 17087
   }
 }
