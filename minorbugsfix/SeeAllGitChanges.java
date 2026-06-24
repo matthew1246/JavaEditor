@@ -24,7 +24,7 @@ public class SeeAllGitChanges {
 	public JComboBox<String> combobox2;
 	public JTextPane fileChanges;
 	public Style bold,red,green,yellow,cyan;
-	public JButton gitStatus;
+	public JButton gitStatus,gitDiff;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setSize(800,600);
@@ -49,6 +49,8 @@ public class SeeAllGitChanges {
 		comboPanel.add(combobox1);
 		comboPanel.add(combobox2);
 		row.add(comboPanel,BorderLayout.CENTER);
+		gitDiff = new JButton("git diff");
+		row.add(gitDiff,BorderLayout.EAST);
 		north.add(row,BorderLayout.CENTER);
 		frame.add(north,BorderLayout.NORTH);
 		fileChanges = new JTextPane();
@@ -105,6 +107,18 @@ public class SeeAllGitChanges {
 		gitStatus.addActionListener((ev) -> {
 			CommandLine commandline = new CommandLine();
 			Process process = commandline.run("git status",directory);
+			DisplayOutput displayoutput = new DisplayOutput();
+			String output = displayoutput.Multiline(process);
+			if(output.equals("No output.")) {
+				fileChanges.setText("");
+			} else {
+				fileChanges.setText(output);
+			}
+			fileChanges.setCaretPosition(0);
+		});
+		gitDiff.addActionListener((ev) -> {
+			CommandLine commandline = new CommandLine();
+			Process process = commandline.run("git diff",directory);
 			DisplayOutput displayoutput = new DisplayOutput();
 			String output = displayoutput.Multiline(process);
 			if(output.equals("No output.")) {
