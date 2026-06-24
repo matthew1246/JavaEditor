@@ -264,50 +264,14 @@ public class Git {
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
-			/*	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", echo+command+"; exec bash");
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-			*/
-			
-			//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
-			command="echo '" + command + "'; " + command;
-			System.out.println(command);
-			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-		
-			/*processbuilder.directory(new File(directory));
-			
-			Process process=processbuilder.start();
-			process.waitFor();	
-			
-			// Escape special characters for bash
-        			String escapedCommand = command
-            		.replace("\\", "\\\\")
-            		.replace("\"", "\\\"")
-            		.replace("$", "\\$");
-
-        			// Compose the full bash command:
-		       	 // 1. Echo the command for visibility
-		        	// 2. Run the command
-		        	// 3. Keep the shell open
-		        	String fullCommand = "echo \"" + escapedCommand + "\"; " + command + "; exec bash";
-		
-		        	// Launch git-bash.exe with the full command
-		        	ProcessBuilder processBuilder = new ProcessBuilder(
-		            gitbashdotexe,
-		            "--login", "-i", "-c", fullCommand
-		        	);
-		        	*/
-		        	
-		        	processBuilder.directory(new File(directory));
-		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
-		        	
-		        	process.waitFor();
-		        	getBranchAndSetTitle();
+			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+			processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
+			processBuilder.directory(new File(directory));
+			Process process = processBuilder.start();
+			process.waitFor();
+			getBranchAndSetTitle();
 		} catch (InterruptedException ex) {
-        			ex.printStackTrace();				
+			ex.printStackTrace();				
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
