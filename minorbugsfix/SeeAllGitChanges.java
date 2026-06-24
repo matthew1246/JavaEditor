@@ -22,7 +22,7 @@ public class SeeAllGitChanges {
 	public JComboBox<String> combobox1;
 	public JComboBox<String> combobox2;
 	public JTextPane fileChanges;
-	public Style defaultStyle,bold,red,green,yellow,cyan;
+	public Style bold,red,green,yellow,cyan;
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setSize(800,600);
@@ -48,8 +48,8 @@ public class SeeAllGitChanges {
 		fileChanges = new JTextPane();
 		fileChanges.setEditable(false);
 		fileChanges.setBackground(Color.BLACK);
-		defaultStyle = fileChanges.addStyle("default",null);
-		StyleConstants.setForeground(defaultStyle,Color.LIGHT_GRAY);
+		fileChanges.setForeground(Color.LIGHT_GRAY);
+		fileChanges.setCaretColor(Color.LIGHT_GRAY);
 		bold = fileChanges.addStyle("bold",null);
 		StyleConstants.setBold(bold,true);
 		StyleConstants.setForeground(bold,Color.WHITE);
@@ -101,7 +101,7 @@ public class SeeAllGitChanges {
 		StyledDocument doc = fileChanges.getStyledDocument();
 		try {
 			doc.remove(0,doc.getLength());
-			Style current=defaultStyle;
+			Style current=null;
 			int i=0,len=ansiText.length();
 			while(i<len) {
 				if(ansiText.charAt(i)=='\u001B' && i+1<len && ansiText.charAt(i+1)=='[') {
@@ -109,12 +109,15 @@ public class SeeAllGitChanges {
 					while(j<len && ansiText.charAt(j)!='m') j++;
 					if(j<len) {
 						String code=ansiText.substring(i+2,j);
-						if(code.equals("0")) current=defaultStyle;
-						else if(code.equals("1")) current=bold;
-						else if(code.equals("31")) current=red;
-						else if(code.equals("32")) current=green;
-						else if(code.equals("33")) current=yellow;
-						else if(code.equals("36")) current=cyan;
+						String[] codes=code.split(";");
+						for(String c:codes) {
+							if(c.equals("")||c.equals("0")) current=null;
+							else if(c.equals("1")) current=bold;
+							else if(c.equals("31")) current=red;
+							else if(c.equals("32")) current=green;
+							else if(c.equals("33")) current=yellow;
+							else if(c.equals("36")) current=cyan;
+						}
 						i=j+1;
 					} else break;
 				} else {
