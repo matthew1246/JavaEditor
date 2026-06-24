@@ -118,13 +118,13 @@ public class SeeAllGitChanges {
 		});
 		gitDiff.addActionListener((ev) -> {
 			CommandLine commandline = new CommandLine();
-			Process process = commandline.run("git diff",directory);
+			Process process = commandline.run("git diff --color=always",directory);
 			DisplayOutput displayoutput = new DisplayOutput();
 			String output = displayoutput.Multiline(process);
 			if(output.equals("No output.")) {
 				fileChanges.setText("");
 			} else {
-				fileChanges.setText(output);
+				appendAnsiColoredText(output);
 			}
 			fileChanges.setCaretPosition(0);
 		});
