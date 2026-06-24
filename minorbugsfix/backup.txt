@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -25,7 +25,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MatthewLayout.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SeeAllGitChanges.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SeeAllGitChanges.java"
     ],
     "caretposition": 0
   },
@@ -48,7 +49,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 13570
+    "caretposition": 13707
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
@@ -68,7 +69,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 27116
+    "caretposition": 46754
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -98,7 +99,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 229082
+    "caretposition": 47194
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -287,7 +288,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 6326
+    "caretposition": 13366
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Compile.java": {
     "isLocked": true,
@@ -573,7 +574,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 4400
+    "caretposition": 7980
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
     "isLocked": false,
@@ -1887,5 +1888,37 @@
     ],
     "fileNames": [],
     "caretposition": 17718
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StarterJComboBox.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "StarterJComboBox"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 7842
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\SeeAllGitChanges.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "SeeAllGitChanges"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 6271
   }
 }

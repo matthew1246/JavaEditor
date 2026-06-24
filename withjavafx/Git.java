@@ -118,6 +118,7 @@ public class Git {
 		root_directory = displayoutput.OneLine(process);
       	}
       	
+      	public JButton seeallchanges;
 	public JButton everythingbutthekitchensink;
       	public JButton addtoall;
       	public JButton upload;
@@ -129,8 +130,8 @@ public class Git {
 	public JButton reset;
 	public void setLayout() {
 		frame=new JFrame();
-		frame.setSize(500,100);
- // previously 400,100
+		frame.setSize(550,100);
+ 		// previously 500,100
 		frame.setLocation(980,0);
 		input.setText("git status");
 		frame.getContentPane().add(input,BorderLayout.CENTER);
@@ -149,11 +150,16 @@ public class Git {
 		east.add(addtoall);
 		everythingbutthekitchensink = new JButton("*");
 		east.add(everythingbutthekitchensink);
+		seeallchanges=new JButton("\uD83D\uDD0D");
+		east.add(seeallchanges);
 		frame.getContentPane().add(east,BorderLayout.EAST);
 		
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		seeallchanges.addActionListener((ev) -> {
+			SeeAllGitChanges seeallgitchanges=new SeeAllGitChanges(root_directory);
+		});
 		everythingbutthekitchensink.addActionListener(ev -> {
 			String command = "eval $(";
 			// git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
@@ -179,7 +185,11 @@ public class Git {
 			ActionListener actionlistener = new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
 					commit.dispose();
-					git("git add .; git commit -m \""+commitmessage.getText()+"\"; git push;");
+					String msg = commitmessage.getText()
+						.replace("\\", "\\\\")
+						.replace("\"", "\\\"")
+						.replace("$", "\\$");
+					git("git add .; git commit -m \""+msg+"\"; git push");
 				}
 			};
 			add.addActionListener(actionlistener);
@@ -254,50 +264,14 @@ public class Git {
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
-			/*	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", echo+command+"; exec bash");
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", "sh -c '"+command+"; bash'");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");	
-			//ProcessBuilder processbuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-			*/
-			
-			//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command);
-			command="echo '" + command + "'; " + command;
-			System.out.println(command);
-			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", command+"; exec bash");		
-		
-			/*processbuilder.directory(new File(directory));
-			
-			Process process=processbuilder.start();
-			process.waitFor();	
-			
-			// Escape special characters for bash
-        			String escapedCommand = command
-            		.replace("\\", "\\\\")
-            		.replace("\"", "\\\"")
-            		.replace("$", "\\$");
-
-        			// Compose the full bash command:
-		       	 // 1. Echo the command for visibility
-		        	// 2. Run the command
-		        	// 3. Keep the shell open
-		        	String fullCommand = "echo \"" + escapedCommand + "\"; " + command + "; exec bash";
-		
-		        	// Launch git-bash.exe with the full command
-		        	ProcessBuilder processBuilder = new ProcessBuilder(
-		            gitbashdotexe,
-		            "--login", "-i", "-c", fullCommand
-		        	);
-		        	*/
-		        	
-		        	processBuilder.directory(new File(directory));
-		        	Process process=processBuilder.start(); // Don't wait — let the shell stay open
-		        	
-		        	process.waitFor();
-		        	getBranchAndSetTitle();
+			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+			processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
+			processBuilder.directory(new File(directory));
+			Process process = processBuilder.start();
+			process.waitFor();
+			getBranchAndSetTitle();
 		} catch (InterruptedException ex) {
-        			ex.printStackTrace();				
+			ex.printStackTrace();				
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
@@ -363,14 +337,14 @@ public class Git {
 	public void git(String command,String directory) {
 		Thread thread = new Thread() {
 			public void run() {
-				CommandLine commandline = new CommandLine();
-				// commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'git status; exec bash\'",root_directory);
-				String echo ="echo \""+command.replace("\\", "\\\\").replace("$", "\\$").replace("\"", "\\\"")
-				//.replace("(", "\\(")
-				//.replace(")", "\\)")
-				+"\"; ";	
-				System.out.println(echo);
-				commandline.run("\""+gitbashdotexe+"\" -c \'"+echo+command+"; exec bash\'",directory);
+				try {
+					ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+					processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
+					processBuilder.directory(new File(directory));
+					processBuilder.start();
+				} catch(IOException ex) {
+					ex.printStackTrace();
+				}
 			}
 		};
 		thread.start();

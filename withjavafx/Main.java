@@ -122,7 +122,7 @@ public class Main {
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
-	public JCheckBox lock = new JCheckBox();
+	public Lock lock = new Lock();
 	//public GetClassName getclassname;
 	//public GetClassMethods getclassmethods;
 	JMenu edit = new JMenu("Edit");
@@ -1111,6 +1111,7 @@ edit.add(functionLines);
 		menubar.validate();
 		menubar.repaint();
 
+		lock.setMargin(new Insets(0,0,0,0));		
 		gbc.gridx=22;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
@@ -1119,13 +1120,20 @@ edit.add(functionLines);
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(lock,gbc);
-
+		//menubar.add(label4,gbc);
+		menubar.add(lock,gbc);		
+		
 		menubar.validate();
 		menubar.repaint();
 
-		JLabel label4 = new JLabel();
-		label4.setText("lock");
+		//JLabel label4 = new JLabel("\uD83D\uDD12");
+		JPanel twopanel = new JPanel(new GridLayout(1,2));
+		JButton uparrow=new JButton("\u2191");
+		uparrow.setMargin(new Insets(0,0,0,0));
+		twopanel.add(uparrow);
+		JButton downarrow=new JButton("\u2193");
+		downarrow.setMargin(new Insets(0,0,0,0));
+		twopanel.add(downarrow);
 		gbc.gridx=23;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
@@ -1134,7 +1142,28 @@ edit.add(functionLines);
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(label4,gbc);
+		// menubar.add(label4,gbc);
+		menubar.add(twopanel,gbc);
+		
+		uparrow.addActionListener((ev) -> {
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			JTextArea textarea3=(JTextArea)jscrollpane5.getViewport().getView();
+			scrollToCaretPosition(textarea3,0);
+		});
+		downarrow.addActionListener((ev) -> {
+			JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
+			JTextArea textarea3=(JTextArea)jscrollpane5.getViewport().getView();
+			scrollToCaretPosition(textarea3,textarea3.getText().length());
+		});
+
+		lock.addActionListener((ev) -> {
+			if(lock.isSelected()) {
+				lock.setSelected(false);
+			}
+			else { //lock.isSelected() == false
+				lock.setSelected(true);
+			}
+		});
 
 		menubar.validate();
 		menubar.repaint();
@@ -1373,8 +1402,14 @@ JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 					textarea.requestFocus();
 					
 					verticalscrollbar.setValue(wholedocumentindex);
+					
 					textarea.setCaretPosition(wholedocumentindex);
 					//JOptionPane.showMessageDialog(null,"Opened new file.");
+					
+					JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+					JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+					MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+					mycaretlistener2.caret_tracker.add(wholedocumentindex);
 					
 					verticalscrollbar.setValue(wholedocumentindex);
 					
@@ -2828,7 +2863,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				});
 			}
 		});		
-		addCaretListener(textarea);
+		// addCaretListener(textarea);
 		newopenwindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				SwingUtilities.invokeLater(() -> {
@@ -3459,6 +3494,22 @@ CommandLine commandline = new CommandLine();
 								command[3] = "cmd";
 								command[4]= "/k";
 								command[5] = commandline.java();
+								StoreSelectedFile ssf = new StoreSelectedFile();
+								if(lock.isSelected()) {
+									ssf.setLocked(fileName, true);
+									String sel = (String)startupcombobox.getSelectedItem();
+									ssf.setStartupLockedClass(fileName, sel);
+									List<String> sc = ssf.getStartupComboBox(fileName);
+									if(!sc.contains(sel)) { sc.add(0, sel); }
+									ssf.setStartupComboBox(fileName, sc);
+								} else {
+									ssf.setLocked(fileName, false);
+									String lc = ssf.getStartupLockedClass(fileName);
+									ssf.setStartupLockedClass(fileName, "");
+									List<String> sc = ssf.getStartupComboBox(fileName);
+									sc.remove(lc);
+									ssf.setStartupComboBox(fileName, sc);
+								}
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -3740,6 +3791,24 @@ CommandLine commandline = new CommandLine();
 									command[3] = "cmd";									
 									command[4]= "/k";
 									command[5] = commandline.java();
+									
+									StoreSelectedFile ssf = new StoreSelectedFile();
+									if(lock.isSelected()) {
+										ssf.setLocked(fileName, true);
+										String sel = (String)startupcombobox.getSelectedItem();
+										ssf.setStartupLockedClass(fileName, sel);
+										List<String> sc = ssf.getStartupComboBox(fileName);
+										if(!sc.contains(sel)) { sc.add(0, sel); }
+										ssf.setStartupComboBox(fileName, sc);
+									} else {
+										ssf.setLocked(fileName, false);
+										String lc = ssf.getStartupLockedClass(fileName);
+										ssf.setStartupLockedClass(fileName, "");
+										List<String> sc = ssf.getStartupComboBox(fileName);
+										sc.remove(lc);
+										ssf.setStartupComboBox(fileName, sc);
+									}
+									
 									process=runtime.exec(command,null,new File(classpath1));
 									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);	
 									
@@ -4221,6 +4290,23 @@ CommandLine commandline = new CommandLine();
 	public static boolean isSameDirectory(String fileName1,String fileName2) {
 		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
 	}
+	class Lock extends JButton {
+		public Lock() {
+			super("\uD83D\uDD13");
+		}
+		public boolean isSelected() {
+			return super.getText().equals("\uD83D\uDD12");
+		}
+		public void setSelected(boolean isSelected) {
+			if(isSelected) {
+				super.setText("\uD83D\uDD12");
+			}
+			else
+			{
+				super.setText("\uD83D\uDD13");
+			}
+		}												
+	}	
 }
 class Expandable {
 	public JFrame frame;
