@@ -180,7 +180,7 @@ public class Git {
 			root_directory = displayoutput.OneLine(process);
 		}
       	}
-      	
+      	public JButton seeallchanges;
 	public JButton everythingbutthekitchensink;
       	public JButton addtoall;
       	public JButton upload;
@@ -192,8 +192,8 @@ public class Git {
 	public JButton reset;
 	public void setLayout() {
 		frame=new JFrame();
-		frame.setSize(500,100);
- // previously 400,100
+		frame.setSize(550,100);
+ 		// previously 500,100
 		frame.setLocation(980,0);
 		input.setText("git status");
 		frame.getContentPane().add(input,BorderLayout.CENTER);
@@ -212,11 +212,16 @@ public class Git {
 		east.add(addtoall);
 		everythingbutthekitchensink = new JButton("*");
 		east.add(everythingbutthekitchensink);
+		seeallchanges=new JButton("\uD83D\uDD0D");
+		east.add(seeallchanges);
 		frame.getContentPane().add(east,BorderLayout.EAST);
 		
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		seeallchanges.addActionListener((ev) -> {
+			SeeAllGitChanges seeallgitchanges=new SeeAllGitChanges(root_directory);
+		});
 		everythingbutthekitchensink.addActionListener(ev -> {
 			String command = "eval $(";
 			// git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";

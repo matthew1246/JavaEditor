@@ -57,6 +57,7 @@ public class StarterJComboBox {
 			}
 			else {
 				main.startupcombobox.setSelectedItem(starterclass);
+				main.lock.setSelected(false);
 			}
 		}
 	}				
@@ -95,7 +96,7 @@ public class StarterJComboBox {
 					Remove();
 					StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 					if(!storeselectedfile.getLocked(filename)) { // is not locked
-						main.lock.setSelected(false);		
+						main.lock.setSelected(false);	
 						getCacheAndAddToComboBox(filename);
 					}
 					else { // is locked
@@ -118,15 +119,15 @@ public class StarterJComboBox {
 						main.startupcombobox.setSelectedItem(selected);	
 					}
 					else {
-						/*StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						if(storeselectedfile.getLocked(filename)) {
 							Remove();
 							setLockFromStoreSelectedFile(filename);
 						}
-						else {*/
+						else {
 							Remove();			
 							getCacheAndAddToComboBox(filename);
-						//}
+						}
 					}
 				}
 				this.fileName = filename;	
@@ -222,4 +223,3 @@ public class StarterJComboBox {
 		main.startupcombobox.repaint();
 	}
 }
-
