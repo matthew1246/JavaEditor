@@ -4,6 +4,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -36,9 +37,13 @@ public class SeeAllGitChanges {
 			combobox1.addItem(line);
 			combobox2.addItem(line);
 		}
-		JPanel north = new JPanel(new GridLayout(1,2));
-		north.add(combobox1);
-		north.add(combobox2);
+		JPanel north = new JPanel(new BorderLayout());
+		JLabel seeAllChanges = new JLabel("See All Changes",JLabel.CENTER);
+		north.add(seeAllChanges,BorderLayout.NORTH);
+		JPanel comboPanel = new JPanel(new GridLayout(1,2));
+		comboPanel.add(combobox1);
+		comboPanel.add(combobox2);
+		north.add(comboPanel,BorderLayout.CENTER);
 		frame.add(north,BorderLayout.NORTH);
 		fileChanges = new JTextPane();
 		fileChanges.setEditable(false);
