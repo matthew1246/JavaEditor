@@ -67,6 +67,7 @@ public class MatthewLayout implements LayoutManager2 {
 		frame.getContentPane().add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		
 	}
 	private boolean isFill;
 	public boolean showBorders = false;
