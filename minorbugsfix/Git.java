@@ -185,7 +185,11 @@ public class Git {
 			ActionListener actionlistener = new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
 					commit.dispose();
-					git("git add .; git commit -m \""+commitmessage.getText()+"\"; git push;");
+					String msg = commitmessage.getText()
+						.replace("\\", "\\\\")
+						.replace("\"", "\\\"")
+						.replace("$", "\\$");
+					git("git add .; git commit -m \""+msg+"\"; git push");
 				}
 			};
 			add.addActionListener(actionlistener);
@@ -369,14 +373,15 @@ public class Git {
 	public void git(String command,String directory) {
 		Thread thread = new Thread() {
 			public void run() {
-				CommandLine commandline = new CommandLine();
-				// commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'git status; exec bash\'",root_directory);
-				String echo ="echo \""+command.replace("\\", "\\\\").replace("$", "\\$").replace("\"", "\\\"")
-				//.replace("(", "\\(")
-				//.replace(")", "\\)")
-				+"\"; ";	
-				System.out.println(echo);
-				commandline.run("\""+gitbashdotexe+"\" -c \'"+echo+command+"; exec bash\'",directory);
+				try {
+					String echo="echo '"+command+"'; ";
+					System.out.println(echo+command+"; exec bash");
+					ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe,"-c", echo+command+"; exec bash");
+					processBuilder.directory(new File(directory));
+					processBuilder.start();
+				} catch(IOException ex) {
+					ex.printStackTrace();
+				}
 			}
 		};
 		thread.start();

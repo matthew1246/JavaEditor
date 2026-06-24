@@ -118,15 +118,15 @@ public class StarterJComboBox {
 						main.startupcombobox.setSelectedItem(selected);	
 					}
 					else {
-						/*StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						if(storeselectedfile.getLocked(filename)) {
 							Remove();
 							setLockFromStoreSelectedFile(filename);
 						}
-						else {*/
+						else {
 							Remove();			
 							getCacheAndAddToComboBox(filename);
-						//}
+						}
 					}
 				}
 				this.fileName = filename;	
