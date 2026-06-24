@@ -30,6 +30,7 @@ public class SeeAllGitChanges {
 		frame.setSize(800,600);
 		combobox1=new JComboBox<String>();
 		combobox2=new JComboBox<String>();
+		combobox1.addItem("<<Select which git commit title for file changes>>");
 		CommandLine commandline = new CommandLine();
 		Process process = commandline.run("git log --format=\"%h %s\"",directory);
 		DisplayOutput displayoutput = new DisplayOutput();
@@ -76,7 +77,7 @@ public class SeeAllGitChanges {
 	public void setListeners() {
 		combobox1.addActionListener((ev) -> {
 			String selected = (String)combobox1.getSelectedItem();
-			if(selected == null || selected.equals("No output.")) return;
+			if(selected == null || selected.equals("No output.") || selected.startsWith("<<")) return;
 			String hash = selected.split(" ")[0];
 			CommandLine commandline = new CommandLine();
 			Process process = commandline.run("git diff-tree --no-commit-id -r --name-only " + hash,directory);
