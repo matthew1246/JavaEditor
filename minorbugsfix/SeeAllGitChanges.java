@@ -72,7 +72,7 @@ public class SeeAllGitChanges {
 		cyan = fileChanges.addStyle("cyan",null);
 		StyleConstants.setForeground(cyan,new Color(80,255,255));
 		frame.add(new JScrollPane(fileChanges),BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true); 
 	}
 	public void setListeners() {
