@@ -185,7 +185,7 @@ public class Git {
 			ActionListener actionlistener = new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
 					commit.dispose();
-					git("git add .; git commit -m \""+commitmessage.getText()+"\"; git push");
+					git("git add .; git commit -m \""+commitmessage.getText()+"\"; git push;");
 				}
 			};
 			add.addActionListener(actionlistener);
