@@ -1368,6 +1368,11 @@ edit.add(functionLines);
 					verticalscrollbar.setValue(wholedocumenttindex);
 					textarea.setCaretPosition(wholedocumenttindex);
 					
+					JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+					JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+					MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+					mycaretlistener2.caret_tracker.add(wholedocumenttindex);
+					
 					verticalscrollbar.setValue(wholedocumenttindex);
 					
 					
