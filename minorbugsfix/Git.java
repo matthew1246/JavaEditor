@@ -374,14 +374,8 @@ public class Git {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					String bashexe = gitbashdotexe.replace("git-bash.exe", "bin\\bash.exe");
-					/*if(!new File(bashexe).exists()) {
-						bashexe = gitbashdotexe.replace("git-bash.exe", "usr\\bin\\bash.exe");
-					}
-					*/
-					String full = command + "; exec bash";
-					System.out.println(full);
-					ProcessBuilder processBuilder = new ProcessBuilder(bashexe, "-c", full);
+					ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+					processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
 					processBuilder.directory(new File(directory));
 					processBuilder.start();
 				} catch(IOException ex) {
