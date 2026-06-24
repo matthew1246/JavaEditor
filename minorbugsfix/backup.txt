@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -23,7 +23,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Fraction.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XYWidthHeight.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MatthewLayout.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SeeAllGitChanges.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SeeAllGitChanges.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java"
     ],
     "caretposition": 0
   },
@@ -179,8 +181,8 @@
     "caretposition": 8412
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StoreSelectedFile.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "StarterJComboBox",
       "Preferences",
@@ -557,10 +559,10 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterJComboBox.java": {
     "isLocked": true,
-    "lockedStartupClass": "GuaranteedLayout",
+    "lockedStartupClass": "Main",
     "startupcombobox": [
-      "GuaranteedLayout",
       "StarterJComboBox",
+      "GuaranteedLayout",
       "Preferences",
       "StoreSelectedFile",
       "Main"
@@ -571,7 +573,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 5351
+    "caretposition": 4400
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.java": {
     "isLocked": false,
@@ -586,8 +588,8 @@
     "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Preferences.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "Preferences",
       "StoreSelectedFile",
@@ -599,7 +601,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 144
+    "caretposition": 7986
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Content.java": {
     "isLocked": false,
