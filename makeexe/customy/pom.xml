@@ -152,6 +152,51 @@
           <artifactId>maven-antrun-plugin</artifactId>
   	<version>3.1.0</version>
   	  <executions>
+	    <execution>
+    		<id>copy-old</id>
+    		<goals>
+        	  <goal>run</goal>
+    		</goals>
+    		<configuration>
+        	  <target>
+            	    <mkdir dir="${project.basedir}/previous-build"/>
+
+            	    <copy
+                	file="${project.build.directory}/dist/MatthewJavaEditor-1.0.exe"
+                	tofile="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"
+                	overwrite="true"
+                	failonerror="false"/>
+        	   </target>
+    		</configuration>
+	    </execution>
+	    <execution>
+    		<id>create-xdelta</id>
+    		<goals>
+        		<goal>run</goal>
+    		</goals>
+    		<configuration>
+        	  <target>
+            	  	<available
+                		file="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"
+                		property="oldExeExists"/>
+
+            	  	<exec
+                		executable="${project.build.directory}/extra-files/xdelta3.exe"
+                		failonerror="true"
+                		if="oldExeExists">
+
+                	<arg value="-e"/>
+                	<arg value="-s"/>
+
+                	<arg value="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"/>
+                	<arg value="${project.build.directory}/dist/MatthewJavaEditor-1.0.exe"/>
+                	<arg value="${project.build.directory}/dist/MatthewJavaEditor-1.0.xdelta"/>
+
+            	  </exec>
+
+        	</target>
+    	      </configuration>
+	    </execution>
     	    <execution>
       		<phase>prepare-package</phase>
       		  <goals>

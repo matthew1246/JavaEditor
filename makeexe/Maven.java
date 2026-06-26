@@ -263,8 +263,14 @@ public class Maven {
 			String cmd =
 "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
 "set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +
-"mvn.cmd clean package && " +
-"mvn.cmd clean package jpackage:jpackage";			
+"mvn.cmd antrun:run@copy-old && "+"mvn.cmd clean package && " +
+"mvn.cmd antrun:run@create-xdelta && "+"mvn.cmd clean package jpackage:jpackage";
+
+			/*mvn antrun:run@copy-old
+mvn clean package
+mvn clean package jpackage:jpackage
+mvn antrun:run@create-xdelta
+			*/									
 			
 			// String cmd = "mvn clean package && mvn clean package jpackage:jpackage";
 			CommandLine commandline = new CommandLine();
