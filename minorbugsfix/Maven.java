@@ -265,8 +265,14 @@ public class Maven {
 			String cmd =
 "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
 "set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +
-"mvn.cmd clean package && " +
-"mvn.cmd clean package jpackage:jpackage";			
+"mvn.cmd antrun:run@copy-old && "+"mvn.cmd clean package && " +
+"mvn.cmd clean package jpackage:jpackage && "+"mvn.cmd exec:exec@xdelta";
+
+			/*mvn antrun:run@copy-old
+mvn clean package
+mvn clean package jpackage:jpackage
+mvn exec:exec@xdelta
+			*/									
 			
 			// String cmd = "mvn clean package && mvn clean package jpackage:jpackage";
 			CommandLine commandline = new CommandLine();
@@ -316,9 +322,7 @@ public class Maven {
 			}
 			
 			String newpomxml = """
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.the</groupId>
@@ -472,7 +476,24 @@ public class Maven {
           <artifactId>maven-antrun-plugin</artifactId>
   	<version>3.1.0</version>
   	  <executions>
-    	    <execution>
+	    <execution>
+    		<id>copy-old</id>
+    		<goals>
+        	  <goal>run</goal>
+    		</goals>
+    		<configuration>
+        	  <target>
+            	    <mkdir dir="${project.basedir}/previous-build"/>
+
+            	    <copy
+                	file="${project.build.directory}/dist/MatthewJavaEditor-1.0.exe"
+                	tofile="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"
+                	overwrite="true"
+                	failonerror="false"/>
+        	   </target>
+    		</configuration>
+	    </execution>
+	    <execution>
       		<phase>prepare-package</phase>
       		  <goals>
         			<goal>run</goal>
@@ -485,6 +506,31 @@ public class Maven {
     	</execution>
   	</executions>
         </plugin>
+	<plugin>
+    		<groupId>org.codehaus.mojo</groupId>
+    		<artifactId>exec-maven-plugin</artifactId>
+    		<version>3.5.0</version>
+
+    		<executions>
+       		  <execution>
+            		<id>xdelta</id>
+            		<goals>
+                		<goal>exec</goal>
+            		</goals>
+
+            		<configuration>
+                		<executable>cmd</executable>
+
+                		<arguments>
+                    			<argument>/c</argument>
+
+                    			<argument>if exist "${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe" ("${project.basedir}/extra-files/xdelta3.exe" -e -s "${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe" "${project.build.directory}/dist/MatthewJavaEditor-1.0.exe" "${project.build.directory}/dist/MatthewJavaEditor-1.0.xdelta") else (echo Skipping xdelta - no previous build)</argument>
+
+                		</arguments>
+            		</configuration>
+        	  </execution>
+    		</executions>
+	</plugin>
         <plugin>
          <groupId>org.panteleyev</groupId>
     <artifactId>jpackage-maven-plugin</artifactId>
@@ -513,167 +559,8 @@ public class Maven {
       </plugins>
   </build>
 </project>
-
 """;
 			
-			/*String newpomxml = """
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>%s</groupId>
-  <artifactId>%s</artifactId>
-  <version>%s</version>
-
-  <name>%s</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>5.11.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- Optionally: parameterized tests support -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.10.1</version>
-    </dependency>
-
-   <dependency>
-    <groupId>com.squareup.okhttp3</groupId>
-    <artifactId>okhttp</artifactId>
-    <version>4.12.0</version>
-   </dependency>
-  </dependencies>
-
-  <build>
-          <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.4.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.13.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.3.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
-          <configuration>
-              <archive>
-                  <manifest>
-                      <mainClass>%s</mainClass>
-                      <addClasspath>true</addClasspath>
-                      <classpathPrefix>lib/</classpathPrefix>
-                  </manifest>
-              </archive>
-           </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.6.0</version>
-          <executions>
-            <execution>
-              <phase>package</phase>
-              <goals>
-                <goal>single</goal>
-              </goals>
-              <configuration>
-                <archive>
-                  <manifest>
-                    <mainClass>%s</mainClass>
-                  </manifest>
-                </archive>
-                <descriptorRefs>
-                  <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-                <finalName>${project.build.finalName}</finalName>
-                <appendAssemblyId>false</appendAssemblyId>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>3.1.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.12.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.6.1</version>
-        </plugin>
-        <plugin>
-         <groupId>org.panteleyev</groupId>
-    <artifactId>jpackage-maven-plugin</artifactId>
-    <version>1.6.0</version>
-    <configuration>
-        <name>MatthewJavaEditor</name>
-        <appVersion>1.0</appVersion>
-        <input>${project.build.directory}</input>
-        <mainJar>${project.build.finalName}.jar</mainJar>
-        <mainClass>%s</mainClass>
-        <type>EXE</type>
-        <destination>${project.build.directory}/dist</destination>
-        <runtimeImage>${JAVA_HOME}</runtimeImage>
-        %s
-        <winShortcut>true</winShortcut>
-        <winMenu>true</winMenu>
-        <javaOptions>
-          <option>-Xmx2g</option>
-        </javaOptions>
-    </configuration>
-        </plugin>
-      </plugins>
-  </build>
-</project>
-""".formatted(groupId,artifactId,version,name,mainclass,mainclass,mainclass,isconsole);
-*/
 			XML xml3=  new XML(newpomxml);
 			node=xml3.getNode("groupId");
 			node.setTextContent(groupId);
