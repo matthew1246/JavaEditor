@@ -73,6 +73,7 @@ import java.nio.charset.StandardCharsets;
 import javax.swing.SwingConstants;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
@@ -2834,6 +2835,8 @@ class CurlyBraceKeyListener implements KeyListener {
 		Member[] methods4=classquestionmark.getDeclaredMethods();
 		List<Class<?>> ancestors=getAncestorsForClassQuestionMark(classquestionmark);
 		methods4=addAncestorsToMethods(methods4,ancestors);
+		Member[] constructors = classquestionmark.getDeclaredConstructors();
+		methods4 = addMembersToMembers(methods4, constructors);
 		Member[] properties = classquestionmark.getDeclaredFields();
 		Member[] properties2= classquestionmark.getFields();
 		Member[] members= addMembersToMembers(methods4,properties);

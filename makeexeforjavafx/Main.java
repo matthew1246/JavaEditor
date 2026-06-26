@@ -84,6 +84,7 @@ import java.nio.charset.StandardCharsets;
 import javax.swing.SwingConstants;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
@@ -5275,11 +5276,20 @@ class AutoKeyListener {
 				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods3.getMethods();
 				if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
 				
+				String wholetext = main.textarea.getText();
+				
 				LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
 					public void KeyAndValue(String key,LinkedHashMap<String,Integer> value) {
 						Set<String> method_names=value.keySet();
 						for(String method_name:method_names) {
-							methods.add(method_name+"()");
+							if(method_name.equals(key)) {
+								int position = value.get(method_name);
+								String params = getMethodParamsFromSource(wholetext, position);
+								methods.add(method_name+"("+params+")");
+							}
+							else {
+								methods.add(method_name+"()");
+							}
 						}
 					}
 				};	
@@ -5290,6 +5300,20 @@ class AutoKeyListener {
 			ex.printStackTrace();
 		}
 		return methods;
+	}
+	private String getMethodParamsFromSource(String wholetext, int openingBracePos) {
+		int lineStart = wholetext.lastIndexOf('\n', openingBracePos);
+		if(lineStart < 0) lineStart = 0;
+		int lineEnd = wholetext.indexOf('\n', openingBracePos);
+		if(lineEnd < 0) lineEnd = wholetext.length();
+		String line = wholetext.substring(lineStart, lineEnd);
+		
+		Pattern pattern = Pattern.compile("\\(([^)]*)\\)");
+		Matcher matcher = pattern.matcher(line);
+		if(matcher.find()) {
+			return matcher.group(1).trim();
+		}
+		return "";
 	}
 	public boolean search(String input,int caretposition) {
 		this.caretposition=caretposition;
@@ -5336,11 +5360,61 @@ class AutoKeyListener {
 				if(variablename2.startsWith(input))
 					treeset.add(variablename2);
 			}
-			//System.out.println("start");
 			for(String apiclass:getAPI(input)) {
 				//System.out.println(apiclass);
 				if(apiclass.startsWith(input))
 					treeset.add(apiclass);
+			}
+			// Add reflected constructors for matching API classes
+			for(String apiclass:getAPI(input)) {
+				if(apiclass.startsWith(input)) {
+					try {
+						List<String> imports = main.muck.links.getImport(apiclass);
+						if(imports != null && imports.size() > 0) {
+							Class<?> clazz = Class.forName(imports.get(0));
+							java.lang.reflect.Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+							for(java.lang.reflect.Constructor<?> c : constructors) {
+								String name = c.getName();
+								if(name.contains("$")) {
+									name = name.replaceAll(".+\\$","");
+								}
+								StringBuilder sig = new StringBuilder(name + "(");
+								java.lang.reflect.Parameter[] params = c.getParameters();
+								for(int j = 0; j < params.length; j++) {
+									if(j > 0) sig.append(",");
+									sig.append(params[j].getType().getSimpleName()).append(" ").append(params[j].getName());
+								}
+								sig.append(")");
+								treeset.add(sig.toString());
+							}
+						}
+					} catch(Exception ex) { }
+				}
+			}
+			// Add reflected constructors for matching folder class names
+			for(String filename:main.allclassesinfolder) {
+				if(filename.startsWith(input)) {
+					try {
+						String dir = main.fileName.replaceAll("[^\\\\]+\\.java","");
+						ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);
+						Class<?> clazz = classloader.loadClass(filename);
+						java.lang.reflect.Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+						for(java.lang.reflect.Constructor<?> c : constructors) {
+							String name = c.getName();
+							if(name.contains("$")) {
+								name = name.replaceAll(".+\\$","");
+							}
+							StringBuilder sig = new StringBuilder(name + "(");
+							java.lang.reflect.Parameter[] params = c.getParameters();
+							for(int j = 0; j < params.length; j++) {
+								if(j > 0) sig.append(",");
+								sig.append(params[j].getType().getSimpleName()).append(" ").append(params[j].getName());
+							}
+							sig.append(")");
+							treeset.add(sig.toString());
+						}
+					} catch(Exception ex) { }
+				}
 			}
 			for(String keyword:main.keywords) {
 				if(keyword.startsWith(input)) {
@@ -5491,6 +5565,8 @@ class MethodSuggestionBox {
 		Member[] methods4=classquestionmark.getDeclaredMethods();
 		List<Class<?>> ancestors=getAncestorsForClassQuestionMark(classquestionmark);
 		methods4=addAncestorsToMethods(methods4,ancestors);
+		Member[] constructors = classquestionmark.getDeclaredConstructors();
+		methods4 = addMembersToMembers(methods4, constructors);
 		Member[] properties = classquestionmark.getDeclaredFields();
 		Member[] properties2= classquestionmark.getFields();
 		Member[] members= addMembersToMembers(methods4,properties);
@@ -5809,6 +5885,16 @@ class MethodSuggestionBox {
 			}		
 			else if(methods[i] instanceof Method) {
 				String name=((Method)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				
+				name+=getParanthesesAndParameters(methods[i]);
+				
+				strings[i] = name;
+			}
+			else if(methods[i] instanceof Constructor) {
+				String name=((Constructor)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
@@ -6164,6 +6250,16 @@ class MethodSuggestionBox {
 				methodorproperty+=String.join(",",variabletypes);
 			}
 		}
+		else if(method instanceof Constructor) {
+			if(((Constructor)method).getParameterCount() > 0) {
+				Parameter[] parametertypes=((Constructor)method).getParameters();
+				String[] variabletypes= new String[parametertypes.length];
+				for(int j = 0; j < parametertypes.length; j++) {
+					variabletypes[j]= parametertypes[j].getType()+" "+parametertypes[j].getName();
+				}
+				methodorproperty+=String.join(",",variabletypes);
+			}
+		}
 		methodorproperty+=")";
 		return methodorproperty;
 	}
@@ -6175,6 +6271,13 @@ class MethodSuggestionBox {
 			}		
 			else if(methods[i] instanceof Method) {
 				String name=((Method)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				labels[i] = new JLabel(name);
+			}
+			else if(methods[i] instanceof Constructor) {
+				String name=((Constructor)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
