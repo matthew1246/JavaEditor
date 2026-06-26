@@ -17,7 +17,7 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Maven.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Maven.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SeeAllGitChanges.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\SeeAllGitChanges.java"
@@ -1126,7 +1126,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 41183
+    "caretposition": 6275
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
     "isLocked": false,
@@ -1340,9 +1340,10 @@
     "caretposition": 3830
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Maven.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Maven"
     ],
     "starterclass": "",
@@ -1353,7 +1354,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 8848
+    "caretposition": 42326
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\XML.java": {
     "isLocked": false,
@@ -1949,6 +1950,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 16660
+    "caretposition": 8492
   }
 }
