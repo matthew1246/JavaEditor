@@ -490,7 +490,7 @@ public class Maven {
     <artifactId>jpackage-maven-plugin</artifactId>
     <version>1.6.0</version>
     <configuration>
-        <name>MatthewJavaEditor</name>
+        <name>MatthewJavaEditorJavaFX</name>
         <appVersion>1.0</appVersion>
         <input>${project.build.directory}</input>
         <mainJar>${project.build.finalName}.jar</mainJar>
@@ -653,7 +653,7 @@ public class Maven {
     <artifactId>jpackage-maven-plugin</artifactId>
     <version>1.6.0</version>
     <configuration>
-        <name>MatthewJavaEditor</name>
+        <name>MatthewJavaEditorJavaFX</name>
         <appVersion>1.0</appVersion>
         <input>${project.build.directory}</input>
         <mainJar>${project.build.finalName}.jar</mainJar>
