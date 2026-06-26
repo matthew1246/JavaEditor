@@ -200,7 +200,7 @@
                 		<arguments>
                     			<argument>/c</argument>
 
-                    			<argument>if exist "${project.basedir}\previous-build\MatthewJavaEditor-1.0.exe" "${project.basedir}\extra-files\xdelta3.exe" -e -s "${project.basedir}\previous-build\MatthewJavaEditor-1.0.exe" "${project.build.directory}\dist\MatthewJavaEditor-1.0.exe" "${project.build.directory}\dist\MatthewJavaEditor-1.0.xdelta" else echo Skipping xdelta - no previous build</argument>
+                    			<argument>if exist "${project.basedir}\previous-build\MatthewJavaEditor-1.0.exe" ("${project.basedir}\extra-files\xdelta3.exe" -e -s "${project.basedir}\previous-build\MatthewJavaEditor-1.0.exe" "${project.build.directory}\dist\MatthewJavaEditor-1.0.exe" "${project.build.directory}\dist\MatthewJavaEditor-1.0.xdelta") else (echo Skipping xdelta - no previous build)</argument>
 
                 		</arguments>
             		</configuration>
