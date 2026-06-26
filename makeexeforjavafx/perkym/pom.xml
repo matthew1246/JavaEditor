@@ -152,7 +152,24 @@
           <artifactId>maven-antrun-plugin</artifactId>
   	<version>3.1.0</version>
   	  <executions>
-    	    <execution>
+	    <execution>
+    		<id>copy-old</id>
+    		<goals>
+        	  <goal>run</goal>
+    		</goals>
+    		<configuration>
+        	  <target>
+            	    <mkdir dir="${project.basedir}/previous-build"/>
+
+            	    <copy
+                	file="${project.build.directory}/dist/MatthewJavaEditorJavaFX-1.0.exe"
+                	tofile="${project.basedir}/previous-build/MatthewJavaEditorJavaFX-1.0.exe"
+                	overwrite="true"
+                	failonerror="false"/>
+        	   </target>
+    		</configuration>
+	    </execution>
+	    <execution>
       		<phase>prepare-package</phase>
       		  <goals>
         			<goal>run</goal>
@@ -165,6 +182,31 @@
     	</execution>
   	</executions>
         </plugin>
+	<plugin>
+    		<groupId>org.codehaus.mojo</groupId>
+    		<artifactId>exec-maven-plugin</artifactId>
+    		<version>3.5.0</version>
+
+    		<executions>
+       		  <execution>
+            		<id>xdelta</id>
+            		<goals>
+                		<goal>exec</goal>
+            		</goals>
+
+            		<configuration>
+                		<executable>cmd</executable>
+
+                		<arguments>
+                    			<argument>/c</argument>
+
+                    			<argument>if exist "${project.basedir}\previous-build\MatthewJavaEditorJavaFX-1.0.exe" ("${project.basedir}\extra-files\xdelta3.exe" -e -s "${project.basedir}\previous-build\MatthewJavaEditorJavaFX-1.0.exe" "${project.build.directory}\dist\MatthewJavaEditorJavaFX-1.0.exe" "${project.build.directory}\dist\MatthewJavaEditorJavaFX-1.0.xdelta") else (echo Skipping xdelta - no previous build)</argument>
+
+                		</arguments>
+            		</configuration>
+        	  </execution>
+    		</executions>
+	</plugin>
         <plugin>
          <groupId>org.panteleyev</groupId>
     <artifactId>jpackage-maven-plugin</artifactId>
