@@ -172,32 +172,43 @@
 	    <execution>
     		<id>create-xdelta</id>
     		<goals>
-    			<goal>run</goal>
+        		<goal>run</goal>
     		</goals>
 
     		<configuration>
-            	  <target>
+        	  <target>
 
             		<available
-                          file="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"
+                	  file="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"
                 	  property="oldExeExists"/>
 
-            		<target name="do-xdelta" if="oldExeExists">
+            		<condition property="runXdelta">
+                		<isset property="oldExeExists"/>
+            		</condition>
 
-                		<exec
-                    	  	  executable="${project.build.directory}/extra-files/xdelta3.exe"
-                    	  	  failonerror="true">
+            		<exec
+                	  executable="${project.build.directory}/extra-files/xdelta3.exe"
+                	  failonerror="true"
+                	  unless="runXdelta">
+                	<!-- dummy prevents execution -->
+            		</exec>
 
-                    			<arg value="-e"/>
-                    			<arg value="-s"/>
+            		<!-- REAL execution (safe way) -->
+            		<exec
+                	  executable="${project.build.directory}/extra-files/xdelta3.exe"
+                	  failonerror="true">
 
-                    			<arg value="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"/>
-                    			<arg value="${project.build.directory}/dist/MatthewJavaEditor-1.0.exe"/>
-                    			<arg value="${project.build.directory}/dist/MatthewJavaEditor-1.0.xdelta"/>
+                		<arg value="-e"/>
+                		<arg value="-s"/>
+                		<arg value="${project.basedir}/previous-build/MatthewJavaEditor-1.0.exe"/>
+                		<arg value="${project.build.directory}/dist/MatthewJavaEditor-1.0.exe"/>
+                		<arg value="${project.build.directory}/dist/MatthewJavaEditor-1.0.xdelta"/>
 
-                		</exec>
+                		<condition>
+                    			<isset property="oldExeExists"/>
+                		</condition>
 
-            	  	</target>
+            		</exec>
 
         	  </target>
     		</configuration>
