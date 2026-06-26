@@ -264,7 +264,7 @@ public class Maven {
 "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
 "set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +
 "mvn.cmd antrun:run@copy-old && "+"mvn.cmd clean package && " +
-"mvn.cmd antrun:run@create-xdelta && "+"mvn.cmd clean package jpackage:jpackage";
+"mvn.cmd clean package jpackage:jpackage && "+"mvn.cmd antrun:run@create-xdelta";
 
 			/*mvn antrun:run@copy-old
 mvn clean package
