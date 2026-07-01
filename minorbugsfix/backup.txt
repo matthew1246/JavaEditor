@@ -64,7 +64,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 47462
+    "caretposition": 95635
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -298,7 +298,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 19418
+    "caretposition": 271
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": true,
