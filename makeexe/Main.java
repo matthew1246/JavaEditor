@@ -2590,7 +2590,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				t.start();
 			}
 		});
-		compile_all.addActionListener((ev) -> {
+		compile_all.addActionListener((ev) -> {		
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);	
 			if(fileName.equals("")) {
@@ -2599,7 +2599,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 			}
 			Compile compile = new Compile();
-			compile.compileallbutton(this,fileName,sal,ev);
+			compile.compileallbuttonwitherrors(this,fileName,sal,ev);
 			maven.Change(fileName);
 			threecomboboxes.load(fileName);
 			expandable.open();
