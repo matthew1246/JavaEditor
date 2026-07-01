@@ -3014,6 +3014,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .java","java");
 						filechooser.setFileFilter(filenameextensionfilter);
 						int result = filechooser.showOpenDialog(frame);
+						
 						if(result == JFileChooser.APPROVE_OPTION) {
 							File selectedFile = filechooser.getSelectedFile();
 							String fileName3= selectedFile.getPath();
@@ -3052,7 +3053,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					withJavaFX = false;
 				}
-				compile.compileallbutton(fileName,sal,ev,withJavaFX,this);
+				compile.compileallbuttonwitherrors(fileName,sal,ev,withJavaFX,this);
 				maven.Change(fileName);
 				threecomboboxes.load(fileName);
 				expandable.open();
