@@ -3399,26 +3399,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								File file2 = new File(fileName);
 								Path path = Paths.get(file2.getPath());
 								String lines = Files.readString(path,StandardCharsets.UTF_8);
-								char[] characters = lines.toCharArray();
-					
-								for(int i = 0; i < characters.length-1; i++) {
-									if((int)characters[i] == 13) {
-										if(characters[i+1] == 10) {
-											characters[i] = (char)0; // CRLF: mark CR for removal
-										}
-										else {
-											characters[i] = (char)10; // lone CR: convert to LF
-										}
-									}
-								}
-								if(characters.length > 0 && (int)characters[characters.length-1] == 13) {
-									characters[characters.length-1] = (char)10; // trailing lone CR: convert to LF
-								}
-								for(int i = 0; i < characters.length; i++) {
-									if(characters[i] != 0) {
-										lines2+=characters[i];
-									}
-								}
+								lines2 = lines;
 							}
 							else {
 								NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);
