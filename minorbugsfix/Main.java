@@ -2877,7 +2877,7 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 			}
 		});
 		
-		run.addActionListener(new ActionListener() {
+		run.addActionListener(new ActionListener() {		
 		
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -2905,14 +2905,23 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 					
 								for(int i = 0; i < characters.length-1; i++) {
 									if((int)characters[i] == 13) {
-										if(characters[i+1] != 10) {
-											characters[i] = (char)10;
+										if(characters[i+1] == 10) {
+											characters[i] = (char)0; // CRLF: mark CR for removal
+										}
+										else {
+											characters[i] = (char)10; // lone CR: convert to LF
 										}
 									}
 								}
-								for(int i = 0; i < characters.length; i++) {
-									lines2+=characters[i];
+								if(characters.length > 0 && (int)characters[characters.length-1] == 13) {
+									characters[characters.length-1] = (char)10; // trailing lone CR: convert to LF
 								}
+								for(int i = 0; i < characters.length; i++) {
+									if(characters[i] != 0) {
+										lines2+=characters[i];
+									}
+								}
+
 							}
 							else {
 								NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);

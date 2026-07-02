@@ -2887,13 +2887,21 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 					
 								for(int i = 0; i < characters.length-1; i++) {
 									if((int)characters[i] == 13) {
-										if(characters[i+1] != 10) {
-											characters[i] = (char)10;
+										if(characters[i+1] == 10) {
+											characters[i] = (char)0; // CRLF: mark CR for removal
+										}
+										else {
+											characters[i] = (char)10; // lone CR: convert to LF
 										}
 									}
 								}
+								if(characters.length > 0 && (int)characters[characters.length-1] == 13) {
+									characters[characters.length-1] = (char)10; // trailing lone CR: convert to LF
+								}
 								for(int i = 0; i < characters.length; i++) {
-									lines2+=characters[i];
+									if(characters[i] != 0) {
+										lines2+=characters[i];
+									}
 								}
 							}
 							else {
