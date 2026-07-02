@@ -521,9 +521,11 @@ public class Main {
 							textarea2.addMouseListener(rightclick);
 						}
 					}
+					threecomboboxes.BackgroundThreadfromScratch(fileName);
+					threecomboboxes.EDTfromScratch(fileName);
 				}	
     	 	 	};
- 	 	 	swingworker.execute();
+  	 	 	swingworker.execute();
 		}
 		setListeners();	
 							
@@ -559,7 +561,9 @@ public class Main {
 				threecomboboxes.EDTfromScratch(fileName);
 			}
 		};
-		swingworker20.execute();	
+		if(fileName.equals("")) {
+			swingworker20.execute();
+		}
 		SwingWorker<Void,Void> swingworker23 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
