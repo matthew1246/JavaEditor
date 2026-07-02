@@ -3846,8 +3846,18 @@ class OpenDefaultContent {
 		this.fileName = storeselectedfile.get();
 		File file2 = new File(fileName); 
 		if(!file2.exists()) {
-			JOptionPane.showMessageDialog(null,"No previous file found.");
-			this.fileName = "";
+			this.fileName = System.getProperty("user.dir") + File.separator + "Main.java";
+			File mainFile = new File(this.fileName);
+			if(!mainFile.exists()) {
+				FileWriter filewriter2 = new FileWriter(mainFile);
+				filewriter2.write("public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello World!\");\n\t}\n}\n");
+				filewriter2.close();
+			}
+			FileReader filereader2 = new FileReader(mainFile);
+			char[] chars2 = new char[(int)mainFile.length()];
+			filereader2.read(chars2);
+			filereader2.close();
+			lines = new String(chars2);
 			return;
 		}
 		
