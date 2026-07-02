@@ -3858,6 +3858,11 @@ class OpenDefaultContent {
 			filereader2.read(chars2);
 			filereader2.close();
 			lines = new String(chars2);
+			storeselectedfile.set(this.fileName);
+			List<String> tabs=new ArrayList<String>();
+			tabs.add(this.fileName);
+			storeselectedfile.setTabs(tabs);
+			storeselectedfile.setStarterClass(this.fileName);
 			return;
 		}
 		
