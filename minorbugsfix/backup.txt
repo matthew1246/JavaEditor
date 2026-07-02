@@ -644,9 +644,10 @@
     "caretposition": 5095
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "ThreeComboboxes"
     ],
     "starterclass": "",
