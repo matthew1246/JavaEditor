@@ -42,6 +42,13 @@ public class DisplayOutput {
 				return lines;
 			}
 			else {
+				BufferedReader err =
+    new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+String error;
+while ((error = err.readLine()) != null) {
+    System.out.println("ERROR: " + error);
+}
 				return "No output."; // No output
 			}
 		}
@@ -51,7 +58,8 @@ public class DisplayOutput {
 		}
 	}
 	public String OneLine(Process process) {
-		try {
+		
+try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String line = input.readLine();
 			if(line == null) 
