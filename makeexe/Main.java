@@ -2863,7 +2863,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			}
 		});
 		
-		run.addActionListener(new ActionListener() {
+		run.addActionListener(new ActionListener() {		
 		
 			public void actionPerformed(ActionEvent e) {
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -2899,7 +2899,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
 							String fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
-							if(isCompiled && string.equals(lines2)) { // End check if already saved
+							if(isClassExists(fileName) && isCompiled && string.equals(lines2)) { // End check if already saved
 								System.out.println("Is equal.");
 								
 CommandLine commandline = new CommandLine();
@@ -3733,6 +3733,10 @@ startercombobox.Change(fileName);
 	}
 	public static boolean isSameDirectory(String fileName1,String fileName2) {
 		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
+	}
+	public boolean isClassExists(String fileName2) {
+		File file = new File((fileName2.substring(0,fileName2.length()-5))+".class");
+		return file.exists();
 	}
 	class Lock extends JButton {
 		public Lock() {
