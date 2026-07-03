@@ -1,3 +1,4 @@
+import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
@@ -36,7 +37,9 @@ public class SeeAllGitChanges {
 			command2[2] = "git --version";
 			Process process = Runtime.getRuntime().exec(command2, null);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			return reader.readLine() != null;
+			String line= reader.readLine();
+			reader.close();
+			return line != null;
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return false;
@@ -66,15 +69,24 @@ public class SeeAllGitChanges {
 		combobox2=new JComboBox<String>();
 		combobox1.addItem("<<Select which git commit title for file changes>>");
 		combobox2.addItem("<<Select which git commit title for content changes>>");
-		CommandLine commandline = new CommandLine();
-		Process process = commandline.run(getGitPrefix() + " log --format=\"%h %s\"",directory);
-		DisplayOutput displayoutput = new DisplayOutput();
-		String multiline = displayoutput.Multiline(process);
-		String[] lines = multiline.split("\\r?\\n|\\r");
-		for(String line : lines) {
-			combobox1.addItem(line);
-			combobox2.addItem(line);
+		
+		try {
+			String[] command = new String[3];
+			command[0] = getGitPrefix();
+			command[1] = "log";
+			command[2] =  "--format=\\\"%h %s\\\"";
+			Process process=Runtime.getRuntime().exec(command,null,new File(directory));
+			DisplayOutput displayoutput = new DisplayOutput();
+			String multiline = displayoutput.Multiline(process);
+			String[] lines = multiline.split("\\r?\\n|\\r");
+			for(String line : lines) {
+				combobox1.addItem(line);
+				combobox2.addItem(line);
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
+		
 		JPanel north = new JPanel(new BorderLayout());
 		JLabel seeAllChanges = new JLabel("See All Changes",JLabel.CENTER);
 		north.add(seeAllChanges,BorderLayout.NORTH);
@@ -198,4 +210,4 @@ public class SeeAllGitChanges {
 			fileChanges.setText(ansiText.replaceAll("\u001B\\[[0-9;]*m",""));
 		}
 	}
-}
+}
