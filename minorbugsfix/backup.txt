@@ -1951,10 +1951,23 @@
   "C:\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 219184
+  },
+  "C:\\javaeditor\\minorbugsfix\\FindMethodName.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "FindMethodName"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 1081
   }
 }
