@@ -2257,7 +2257,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				}
 				jarframe.add(jarpanel,BorderLayout.CENTER);
 				JPanel south = new JPanel();
-				JButton add = new JButton("add");
+				JButton add = new JButton("add jar file to classpath");
 				south.add(add);
 				jarframe.add(south,BorderLayout.SOUTH);
 				add.addActionListener( (ev1) -> {
