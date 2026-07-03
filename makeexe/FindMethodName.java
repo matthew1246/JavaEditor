@@ -22,16 +22,28 @@ public class FindMethodName {
 	
 	public boolean StringHasMethodName(String line) {
 		
-		return line.contains("(") && line.contains(")");
+if(line.contains("(") && line.contains(")")) {
+			return true;
+		}
+		else if(line.contains("class")) {
+			return true;
+		}
+			
+		return false;
 	}
 	
 	public String parseMethodName(String subline) {
-		Pattern pattern = Pattern.compile("([a-zA-Z]+)\\(");
+		Pattern pattern = Pattern.compile("(([a-zA-Z]+)\\(.*\\))");
 		Matcher matcher =pattern.matcher(subline);
 		if(matcher.find()) {
 			return matcher.group(1);
 		}
 		else {
+			pattern=Pattern.compile("class ([a-zA-Z]+)");
+			matcher=pattern.matcher(subline);
+			if(matcher.find()) {
+				return matcher.group(1);
+			}
 			return "Couldn't parse method line";
 		}
 	}	
