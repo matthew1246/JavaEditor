@@ -4392,7 +4392,10 @@ class OpenDefaultContent {
 		this.fileName = storeselectedfile.get();
 		File file2 = new File(fileName); 
 		if(!file2.exists()) {
-			this.fileName = System.getProperty("user.dir") + File.separator + "Main.java";
+			String home=System.getProperty("user.home");
+			if(!home.endsWith(File.separator))
+				home=home+File.separator;
+			this.fileName =home + "Main.java";
 			File mainFile = new File(this.fileName);
 			if(!mainFile.exists()) {
 				FileWriter filewriter2 = new FileWriter(mainFile);
