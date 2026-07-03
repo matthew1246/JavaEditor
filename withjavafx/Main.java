@@ -3387,8 +3387,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								fileName=nofileopen.getFileName();
 								isCompiled = false;
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
-							
-}
+							}
 							storeselectedfile10.set(fileName);
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
