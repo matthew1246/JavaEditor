@@ -274,12 +274,12 @@ public class Git {
 				if(whichbranch.equals(whichfolderopened)) {
 					//substring = "master";
 					gitWaitUntilFinish("git switch "+mainbranch);
-					//getBranchAndSetTitle();
+					getBranchAndSetTitle();
 				}
 				else {
 					if(isBranch(whichfolderopened)) {
 						gitWaitUntilFinish("git switch "+whichfolderopened);
-						//getBranchAndSetTitle();
+						getBranchAndSetTitle();
 					}
 					else
 					{
@@ -300,7 +300,7 @@ public class Git {
 							String selectedbranch = (String)combobox.getSelectedItem();
 							
 							gitWaitUntilFinish("git switch "+selectedbranch);
-							//getBranchAndSetTitle();
+							getBranchAndSetTitle();
 							selectbranch.dispose();
 						});
 						selectpanel.add(openbranch);
@@ -376,18 +376,10 @@ public class Git {
 		}
 	}	
 	public void getBranchAndSetTitle() {
-		//try {
-			//thread.wait();
-			//JOptionPane.showMessageDialog(null,"hello");
-			//SwingUtilities.invokeLater( () -> {
-				String branch=whichBranchOpened();
-				
-				frame.setTitle(branch);
-			//});
-		/*}
-		catch(InterruptedException ex) {
-			ex.printStackTrace();
-		}*/
+		String branch=whichBranchOpened();
+		SwingUtilities.invokeLater( () -> {
+			frame.setTitle(branch);
+		});
 	}
 	public String whichFolderOpened() {
 		String substring=directory.replace(root_directory.replace("/","\\"),"");
