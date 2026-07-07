@@ -273,16 +273,19 @@ public class Git {
 				String whichfolderopened=whichFolderOpened();
 				if(whichbranch.equals(whichfolderopened)) {
 					//substring = "master";
+					// JOptionPane.showMessageDialog(null,"1");
 					gitWaitUntilFinish("git switch "+mainbranch);
 					getBranchAndSetTitle();
 				}
 				else {
 					if(isBranch(whichfolderopened)) {
+						// JOptionPane.showMessageDialog(null,"2");
 						gitWaitUntilFinish("git switch "+whichfolderopened);
 						getBranchAndSetTitle();
 					}
 					else
 					{
+						// JOptionPane.showMessageDialog(null,"3");
 						JFrame selectbranch = new JFrame();
 						selectbranch.setSize(400,200);
 						
@@ -421,7 +424,7 @@ public class Git {
 			process=commandline.run("git ls-remote --symref origin HEAD",root_directory);
 		}
 		else {
-			process=commandline.run("\"+getGitDotExe()+\" ls-remote --symref origin HEAD",root_directory);
+			process=commandline.run("\""+getGitDotExe()+"\" ls-remote --symref origin HEAD",root_directory);
 		}
 		DisplayOutput displayoutput = new DisplayOutput();
 		String substring = displayoutput.Multiline(process);
