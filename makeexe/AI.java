@@ -20,9 +20,10 @@ public class AI {
 	private JButton runAI;
 	public void setLayout() {
 		JFrame frame =new JFrame("AI");
-		frame.setSize(200,200);
+		frame.setSize(200,100);
+		frame.setLocation(980,675);
 		JPanel panel = new JPanel();
-		runAI = new JButton("AI");
+		runAI = new JButton("Launch AI");
 		panel.add(runAI);
 		frame.add(panel);
 		frame.setVisible(true);
