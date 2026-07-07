@@ -1,3 +1,5 @@
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -14,6 +16,7 @@ public class AI {
 		File extrafiles = new File(app,"extra-files");
 		File fileopencodefolder = new File(extrafiles,"OpenCode");
 		this.opencodeexe=  fileopencodefolder.getAbsolutePath()+"\\opencode.exe";
+		System.out.println(this.opencodeexe);
 		setLayout();
 		setListeners();
 	}
@@ -34,12 +37,33 @@ public class AI {
 		});
 	}
 	public void Launch() {
-		try {
-			ProcessBuilder pb = new ProcessBuilder(opencodeexe);
-			pb.directory(new File(main.getDirectory(main.fileName)));
-			pb.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+    		new Thread(() -> {
+        			try {
+            			File exe = new File(opencodeexe);
+
+            			System.out.println("Launching: " + exe.getAbsolutePath());
+		           		System.out.println("Exists: " + exe.exists());
+		
+		            	/*ProcessBuilder pb = new ProcessBuilder(exe.getAbsolutePath());
+		           	 	pb.directory(new File(main.getDirectory(main.fileName)));
+		            	pb.redirectErrorStream(true);
+		
+		            	Process process = pb.start();
+		
+		            	try (BufferedReader reader = new BufferedReader(
+		                    		new InputStreamReader(process.getInputStream()))) {
+		
+		                		String line;
+		                		while ((line = reader.readLine()) != null) {
+		                    			System.out.println(line);
+		                		}
+		            	}
+				*/
+				CommandLine commandLine = new CommandLine();
+				commandLine.runWithMSDOS(exe.getAbsolutePath(),main.getDirectory(main.fileName));
+		        	} catch (Exception ex) {
+		           		ex.printStackTrace();
+		        	}
+    		}).start();
 	}
 }
