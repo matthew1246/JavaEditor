@@ -319,10 +319,10 @@ public class Git {
 	}
 	public void gitWaitUntilFinish(String command) {
 		if(isFileInsideGitRepository) {
-			git(command,root_directory);
+			gitWaitUntilFinish(command,root_directory);
 		}
 		else {
-			git(command,System.getProperty("user.home"));
+			gitWaitUntilFinish(command,System.getProperty("user.home"));
 		}
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
