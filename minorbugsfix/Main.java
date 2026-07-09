@@ -1267,7 +1267,7 @@ edit.add(functionLines);
 					combobox.hidePopup();
 					combobox.removeAllItems();
 					for(String methodname : classandmethods.keySet()) {
-						if(searchtext.isEmpty() || methodname.toLowerCase().contains(searchtext)) {
+						if(searchtext.isEmpty() || methodname.toLowerCase().startsWith(searchtext)) {
 							combobox.addItem(methodname);
 						}
 					}
