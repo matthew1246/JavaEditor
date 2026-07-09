@@ -126,6 +126,7 @@ public class Main {
 	public JTextField comboboxeditor;
 	public JButton comboboxsearchbutton;
 	public JPanel comboboxpanel;
+	public boolean searchingMethods = false;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
 	public Lock lock = new Lock();
 	// public GetClassName getclassname;
@@ -761,7 +762,6 @@ public class Main {
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
 		combobox.setEditable(false);
-		comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
 		comboboxsearchbutton.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
 		comboboxsearchbutton.setPreferredSize(new Dimension(28, 24));
@@ -1255,6 +1255,33 @@ edit.add(functionLines);
 			threecomboboxes.methodCombobox(classname);
 		}
 	}	
+	public void searchMethods() {
+		searchingMethods = true;
+		try {
+			String classname = (String)classnamescombobox.getSelectedItem();
+			if(classname != null && !classname.equals("")) {
+				String searchtext = comboboxeditor.getText().trim().toLowerCase();
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+				if(classandmethods != null) {
+					combobox.hidePopup();
+					combobox.removeAllItems();
+					for(String methodname : classandmethods.keySet()) {
+						if(searchtext.isEmpty() || methodname.toLowerCase().contains(searchtext)) {
+							combobox.addItem(methodname);
+						}
+					}
+					if(combobox.getItemCount() > 0) {
+						combobox.setSelectedIndex(0);
+						combobox.showPopup();
+					}
+					comboboxeditor.setText(searchtext);
+				}
+			}
+		} finally {
+			searchingMethods = false;
+		}
+	}
 	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumenttindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
@@ -2346,33 +2373,22 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			}
 		});
 		combobox.addActionListener((ev) -> {
-			if(combobox.hasFocus()) {
+			if(combobox.hasFocus() && !searchingMethods) {
 				selectCode(ev);
 			}
 		});
 		comboboxsearchbutton.addActionListener((ev) -> {
 			if(!combobox.isEditable()) {
 				combobox.setEditable(true);
+				comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
 				comboboxeditor.setText("");
+				comboboxeditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+					public void insertUpdate(javax.swing.event.DocumentEvent e) { if(!searchingMethods) SwingUtilities.invokeLater(() -> searchMethods()); }
+					public void removeUpdate(javax.swing.event.DocumentEvent e) { if(!searchingMethods) SwingUtilities.invokeLater(() -> searchMethods()); }
+					public void changedUpdate(javax.swing.event.DocumentEvent e) { if(!searchingMethods) SwingUtilities.invokeLater(() -> searchMethods()); }
+				});
 				comboboxeditor.requestFocusInWindow();
 				return;
-			}
-			String classname = (String)classnamescombobox.getSelectedItem();
-			if(classname != null && !classname.equals("")) {
-				String searchtext = comboboxeditor.getText().trim().toLowerCase();
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
-				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
-				if(classandmethods != null) {
-					combobox.removeAllItems();
-					for(String methodname : classandmethods.keySet()) {
-						if(searchtext.isEmpty() || methodname.toLowerCase().contains(searchtext)) {
-							combobox.addItem(methodname);
-						}
-					}
-					if(combobox.getItemCount() > 0) {
-						combobox.setSelectedIndex(0);
-					}
-				}
 			}
 		});
 		/*combobox.addItemListener((ev) -> {
