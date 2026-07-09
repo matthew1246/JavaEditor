@@ -1355,37 +1355,35 @@ edit.add(functionLines);
 	}
 
 	public void selectCode(ActionEvent ev) {
-		if(combobox.hasFocus() ) {
-			String classname = (String)classnamescombobox.getSelectedItem();
-			if(classname != null && !classname.equals("")) {
-				String methodname = (String)combobox.getSelectedItem();
-				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
-					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
-					int wholedocumenttindex = classandmethods.get(methodname);
-					
-					JScrollPane scrollpane=
+		String classname = (String)classnamescombobox.getSelectedItem();
+		if(classname != null && !classname.equals("")) {
+			String methodname = (String)combobox.getSelectedItem();
+			if(methodname != null && !methodname.equals("")) {
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+				if(classnamesandmethodnames == null) return;
+				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+				if(classandmethods == null) return;
+				Integer position = classandmethods.get(methodname);
+				if(position == null) return;
+				int wholedocumenttindex = position;
+				
+				JScrollPane scrollpane=
 ((JScrollPane)tabbedpane.getSelectedComponent());
-					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
-					
-					/*verticalscrollbar.setValue(textarea.getText().length()-1);
-					textarea.setCaretPosition(textarea.getText().length()-1);*/
-					verticalscrollbar.setValue(0);
-					textarea.setCaretPosition(0);
-					textarea.requestFocus();
-					
-					verticalscrollbar.setValue(wholedocumenttindex);
-					textarea.setCaretPosition(wholedocumenttindex);
-					//JOptionPane.showMessageDialog(null,"Opened new file.");
-					
-					verticalscrollbar.setValue(wholedocumenttindex);
-					
-					
-					scrollToCaretPosition(wholedocumenttindex);
-				}
+				JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
+				
+				verticalscrollbar.setValue(0);
+				textarea.setCaretPosition(0);
+				textarea.requestFocus();
+				
+				verticalscrollbar.setValue(wholedocumenttindex);
+				textarea.setCaretPosition(wholedocumenttindex);
+				
+				verticalscrollbar.setValue(wholedocumenttindex);
+				
+				
+				scrollToCaretPosition(wholedocumenttindex);
 			}
 		}
-																
 	}
 	public void selectCode(ItemEvent ev) {
 		if(ev.getStateChange() == ItemEvent.SELECTED) {
@@ -2373,7 +2371,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			}
 		});
 		combobox.addActionListener((ev) -> {
-			if(combobox.hasFocus() && !searchingMethods) {
+			if(!searchingMethods) {
 				selectCode(ev);
 			}
 		});
