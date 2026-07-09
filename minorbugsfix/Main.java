@@ -127,6 +127,7 @@ public class Main {
 	public JButton comboboxsearchbutton;
 	public JPanel comboboxpanel;
 	public boolean searchingMethods = false;
+	public String comboboxSavedText = "";
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
 	public Lock lock = new Lock();
 	// public GetClassName getclassname;
@@ -2392,9 +2393,22 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			}
 		});
 		combobox.addActionListener((ev) -> {
-			if(!searchingMethods) {
+			if(!searchingMethods && !combobox.isPopupVisible()) {
 				selectCode(ev);
 			}
+		});
+		combobox.addKeyListener(new java.awt.event.KeyListener() {
+			public void keyPressed(java.awt.event.KeyEvent e) {
+				if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+					comboboxSavedText = comboboxeditor.getText();
+				}
+			}
+			public void keyReleased(java.awt.event.KeyEvent e) {
+				if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+					comboboxeditor.setText(comboboxSavedText);
+				}
+			}
+			public void keyTyped(java.awt.event.KeyEvent e) {}
 		});
 		comboboxsearchbutton.addActionListener((ev) -> {
 			if(!combobox.isEditable()) {
