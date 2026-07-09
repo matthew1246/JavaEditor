@@ -127,7 +127,10 @@ public class Main {
 	public JButton comboboxsearchbutton;
 	public JPanel comboboxpanel;
 	public boolean searchingMethods = false;
+	public boolean comboboxArrowNavigation = false;
 	public String comboboxSavedText = "";
+	public boolean comboboxItemSelectedFromPopup = false;
+	public boolean comboboxPopupHiddenBySearch = false;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
 	public Lock lock = new Lock();
 	// public GetClassName getclassname;
@@ -1257,7 +1260,7 @@ edit.add(functionLines);
 		}
 	}	
 	public void onComboboxEditorChange() {
-		if(searchingMethods) return;
+		if(searchingMethods || comboboxArrowNavigation) return;
 		String text = comboboxeditor.getText().trim().toLowerCase();
 		String selectedText = (String) combobox.getSelectedItem();
 		if(selectedText != null && selectedText.toLowerCase().equals(text)) return;
@@ -1286,6 +1289,7 @@ edit.add(functionLines);
 				if(classandmethods != null) {
 					String savedText = comboboxeditor.getText();
 					int savedCaret = comboboxeditor.getCaretPosition();
+					comboboxPopupHiddenBySearch = true;
 					combobox.hidePopup();
 					combobox.removeAllItems();
 					for(String methodname : classandmethods.keySet()) {
@@ -2393,19 +2397,38 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			}
 		});
 		combobox.addActionListener((ev) -> {
-			if(!searchingMethods && !combobox.isPopupVisible()) {
+			if(!searchingMethods && comboboxItemSelectedFromPopup) {
+				comboboxItemSelectedFromPopup = false;
 				selectCode(ev);
 			}
+		});
+		combobox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+			public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
+				if(comboboxPopupHiddenBySearch) {
+					comboboxPopupHiddenBySearch = false;
+					return;
+				}
+				comboboxItemSelectedFromPopup = true;
+				SwingUtilities.invokeLater(() -> {
+					comboboxItemSelectedFromPopup = false;
+					if(!searchingMethods) {
+						selectCode((ActionEvent)null);
+					}
+				});
+			}
+			public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent e) {}
+			public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
 		});
 		combobox.addKeyListener(new java.awt.event.KeyListener() {
 			public void keyPressed(java.awt.event.KeyEvent e) {
 				if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
-					comboboxSavedText = comboboxeditor.getText();
+					comboboxArrowNavigation = true;
+					comboboxSavedText = comboboxeditor != null ? comboboxeditor.getText() : "";
 				}
 			}
 			public void keyReleased(java.awt.event.KeyEvent e) {
 				if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
-					comboboxeditor.setText(comboboxSavedText);
+					comboboxArrowNavigation = false;
 				}
 			}
 			public void keyTyped(java.awt.event.KeyEvent e) {}
@@ -2415,6 +2438,41 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				combobox.setEditable(true);
 				comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
 				comboboxeditor.setText("");
+				comboboxeditor.addKeyListener(new java.awt.event.KeyListener() {
+					public void keyPressed(java.awt.event.KeyEvent e) {
+						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+							comboboxArrowNavigation = true;
+							comboboxSavedText = comboboxeditor.getText();
+						}
+						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+							e.consume();
+							combobox.hidePopup();
+							SwingUtilities.invokeLater(() -> {
+								if(!searchingMethods) {
+									selectCode((ActionEvent)null);
+								}
+							});
+						}
+					}
+					public void keyReleased(java.awt.event.KeyEvent e) {
+						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+							comboboxArrowNavigation = false;
+						}
+					}
+					public void keyTyped(java.awt.event.KeyEvent e) {}
+				});
+				((javax.swing.text.AbstractDocument)comboboxeditor.getDocument()).setDocumentFilter(new javax.swing.text.DocumentFilter() {
+					public void replace(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+						if(!comboboxArrowNavigation) {
+							super.replace(fb, offset, length, text, attrs);
+						}
+					}
+					public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
+						if(!comboboxArrowNavigation) {
+							super.remove(fb, offset, length);
+						}
+					}
+				});
 				comboboxeditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
 					public void insertUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
 					public void removeUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
