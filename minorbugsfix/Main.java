@@ -1291,6 +1291,8 @@ edit.add(functionLines);
 					int savedCaret = comboboxeditor.getCaretPosition();
 					comboboxPopupHiddenBySearch = true;
 					combobox.hidePopup();
+					comboboxPopupHiddenBySearch = false;
+					combobox.removeAllItems();
 					combobox.removeAllItems();
 					for(String methodname : classandmethods.keySet()) {
 						if(searchtext.isEmpty() || methodname.toLowerCase().startsWith(searchtext)) {
