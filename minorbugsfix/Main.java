@@ -1255,6 +1255,25 @@ edit.add(functionLines);
 			threecomboboxes.methodCombobox(classname);
 		}
 	}	
+	public void onComboboxEditorChange() {
+		if(searchingMethods) return;
+		String text = comboboxeditor.getText().trim().toLowerCase();
+		String selectedText = (String) combobox.getSelectedItem();
+		if(selectedText != null && selectedText.toLowerCase().equals(text)) return;
+		String classname = (String)classnamescombobox.getSelectedItem();
+		if(classname != null && !classname.equals("") && threecomboboxes.getclassmethods != null) {
+			LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+			LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+			if(classandmethods != null) {
+				for(String key : classandmethods.keySet()) {
+					if(key.toLowerCase().equals(text)) {
+						return;
+					}
+				}
+			}
+		}
+		SwingUtilities.invokeLater(() -> searchMethods());
+	}
 	public void searchMethods() {
 		searchingMethods = true;
 		try {
@@ -1264,6 +1283,8 @@ edit.add(functionLines);
 				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
 				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
 				if(classandmethods != null) {
+					String savedText = comboboxeditor.getText();
+					int savedCaret = comboboxeditor.getCaretPosition();
 					combobox.hidePopup();
 					combobox.removeAllItems();
 					for(String methodname : classandmethods.keySet()) {
@@ -1271,11 +1292,11 @@ edit.add(functionLines);
 							combobox.addItem(methodname);
 						}
 					}
+					comboboxeditor.setText(savedText);
+					comboboxeditor.setCaretPosition(savedCaret);
 					if(combobox.getItemCount() > 0) {
-						combobox.setSelectedIndex(0);
 						combobox.showPopup();
 					}
-					comboboxeditor.setText(searchtext);
 				}
 			}
 		} finally {
@@ -2381,9 +2402,9 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
 				comboboxeditor.setText("");
 				comboboxeditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-					public void insertUpdate(javax.swing.event.DocumentEvent e) { if(!searchingMethods) SwingUtilities.invokeLater(() -> searchMethods()); }
-					public void removeUpdate(javax.swing.event.DocumentEvent e) { if(!searchingMethods) SwingUtilities.invokeLater(() -> searchMethods()); }
-					public void changedUpdate(javax.swing.event.DocumentEvent e) { if(!searchingMethods) SwingUtilities.invokeLater(() -> searchMethods()); }
+					public void insertUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
+					public void removeUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
+					public void changedUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
 				});
 				comboboxeditor.requestFocusInWindow();
 				return;
