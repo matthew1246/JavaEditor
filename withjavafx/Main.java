@@ -122,6 +122,14 @@ public class Main {
 	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
+	public JTextField comboboxeditor;
+	public JButton comboboxsearchbutton;
+	public JPanel comboboxpanel;
+	public boolean searchingMethods = false;
+	public boolean comboboxArrowNavigation = false;
+	public String comboboxSavedText = "";
+	public boolean comboboxItemSelectedFromPopup = false;
+	public boolean comboboxPopupHiddenBySearch = false;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
 	public Lock lock = new Lock();
 	//public GetClassName getclassname;
@@ -744,6 +752,17 @@ public class Main {
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
+		combobox.setEditable(false);
+		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
+		comboboxsearchbutton.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
+		comboboxsearchbutton.setPreferredSize(new Dimension(28, 24));
+		comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
+		comboboxpanel = new JPanel(new GridLayout(1, 2, 2, 0));
+		comboboxpanel.add(comboboxsearchbutton);
+		JLabel starterLabel = new JLabel();
+		starterLabel.setText("Starter:");
+		starterLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		comboboxpanel.add(starterLabel);
 		
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
@@ -1083,21 +1102,15 @@ edit.add(functionLines);
 		combobox.setPrototypeDisplayValue("Method");
 		menubar.add(combobox,gbc);
 
-		menubar.validate();
-		menubar.repaint();
-
-		JLabel label = new JLabel();
-		label.setText("Starter:");
-		label.setHorizontalAlignment(SwingConstants.RIGHT);
 		gbc.gridx=19;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx=1.0;
+		gbc.weightx=0.5;
 		gbc.weighty=1.0;
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(label,gbc);
+		menubar.add(comboboxpanel,gbc);
 
 		menubar.validate();
 		menubar.repaint();
@@ -1282,6 +1295,56 @@ edit.add(functionLines);
 			}
 		}
 	}	
+	public void onComboboxEditorChange() {
+		if(searchingMethods || comboboxArrowNavigation) return;
+		String text = comboboxeditor.getText().trim().toLowerCase();
+		String selectedText = (String) combobox.getSelectedItem();
+		if(selectedText != null && selectedText.toLowerCase().equals(text)) return;
+		String classname = (String)classnamescombobox.getSelectedItem();
+		if(classname != null && !classname.equals("") && threecomboboxes.getclassmethods != null) {
+			LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+			LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+			if(classandmethods != null) {
+				for(String key : classandmethods.keySet()) {
+					if(key.toLowerCase().equals(text)) {
+						return;
+					}
+				}
+			}
+		}
+		SwingUtilities.invokeLater(() -> searchMethods());
+	}
+	public void searchMethods() {
+		searchingMethods = true;
+		try {
+			String classname = (String)classnamescombobox.getSelectedItem();
+			if(classname != null && !classname.equals("")) {
+				String searchtext = comboboxeditor.getText().trim().toLowerCase();
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+				if(classandmethods != null) {
+					String savedText = comboboxeditor.getText();
+					int savedCaret = comboboxeditor.getCaretPosition();
+					comboboxPopupHiddenBySearch = true;
+					combobox.hidePopup();
+					comboboxPopupHiddenBySearch = false;
+					combobox.removeAllItems();
+					for(String methodname : classandmethods.keySet()) {
+						if(searchtext.isEmpty() || methodname.toLowerCase().startsWith(searchtext)) {
+							combobox.addItem(methodname);
+						}
+					}
+					comboboxeditor.setText(savedText);
+					comboboxeditor.setCaretPosition(savedCaret);
+					if(combobox.getItemCount() > 0) {
+						combobox.showPopup();
+					}
+				}
+			}
+		} finally {
+			searchingMethods = false;
+		}
+	}
 	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumentindex) {
 		SwingUtilities.invokeLater(new Runnable() {
 		        public void run(){
@@ -1353,37 +1416,38 @@ edit.add(functionLines);
 	}
 
 	public void selectCode(ActionEvent ev) {
-		if(combobox.hasFocus() ) {
-			String classname = (String)classnamescombobox.getSelectedItem();
-			if(classname != null && !classname.equals("")) {
-				String methodname = (String)combobox.getSelectedItem();
-				if(methodname != null && !methodname.equals("")) {
-					LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
-					LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
-					int wholedocumentindex = classandmethods.get(methodname);
-					
-					
+		String classname = (String)classnamescombobox.getSelectedItem();
+		if(classname != null && !classname.equals("")) {
+			String methodname = (String)combobox.getSelectedItem();
+			if(methodname != null && !methodname.equals("")) {
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+				if(classnamesandmethodnames == null) return;
+				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+				if(classandmethods == null) return;
+				Integer position = classandmethods.get(methodname);
+				if(position == null) return;
+				int wholedocumentindex = position;
+				
+				
 JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
-					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
-					
-					/*verticalscrollbar.setValue(textarea.getText().length()-1);
-					textarea.setCaretPosition(textarea.getText().length()-1);*/
-					verticalscrollbar.setValue(0);
-					textarea.setCaretPosition(0);
-					textarea.requestFocus();
-					
-					verticalscrollbar.setValue(wholedocumentindex);
-					textarea.setCaretPosition(wholedocumentindex);
-					//JOptionPane.showMessageDialog(null,"Opened new file.");
-					
-					verticalscrollbar.setValue(wholedocumentindex);
-					
-					
-					scrollToCaretPosition(wholedocumentindex);
-				}
+				JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
+				
+				/*verticalscrollbar.setValue(textarea.getText().length()-1);
+				textarea.setCaretPosition(textarea.getText().length()-1);*/
+				verticalscrollbar.setValue(0);
+				textarea.setCaretPosition(0);
+				textarea.requestFocus();
+				
+				verticalscrollbar.setValue(wholedocumentindex);
+				textarea.setCaretPosition(wholedocumentindex);
+				//JOptionPane.showMessageDialog(null,"Opened new file.");
+				
+				verticalscrollbar.setValue(wholedocumentindex);
+				
+				
+				scrollToCaretPosition(wholedocumentindex);
 			}
 		}
-																
 	}
 	public void selectCode(ItemEvent ev) {
 		if(ev.getStateChange() == ItemEvent.SELECTED) {
@@ -2774,14 +2838,77 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		combobox.addActionListener((ev) -> {
-			if(combobox.hasFocus()) {
+			if(!searchingMethods && comboboxItemSelectedFromPopup) {
+				comboboxItemSelectedFromPopup = false;
 				selectCode(ev);
 			}
 		});
-		/*combobox.addItemListener((ev) -> {
-			selectCode(ev);
+		combobox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+			public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
+				if(comboboxPopupHiddenBySearch) {
+					comboboxPopupHiddenBySearch = false;
+					return;
+				}
+				comboboxItemSelectedFromPopup = true;
+				SwingUtilities.invokeLater(() -> {
+					comboboxItemSelectedFromPopup = false;
+					if(!searchingMethods) {
+						selectCode((ActionEvent)null);
+					}
+				});
+			}
+			public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent e) {}
+			public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
 		});
-		*/
+		comboboxsearchbutton.addActionListener((ev) -> {
+			if(!combobox.isEditable()) {
+				combobox.setEditable(true);
+				comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
+				comboboxeditor.setText("");
+				comboboxeditor.addKeyListener(new java.awt.event.KeyListener() {
+					public void keyPressed(java.awt.event.KeyEvent e) {
+						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+							comboboxArrowNavigation = true;
+							comboboxSavedText = comboboxeditor.getText();
+						}
+						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+							e.consume();
+							combobox.hidePopup();
+							SwingUtilities.invokeLater(() -> {
+								if(!searchingMethods) {
+									selectCode((ActionEvent)null);
+								}
+							});
+						}
+					}
+					public void keyReleased(java.awt.event.KeyEvent e) {
+						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+							comboboxArrowNavigation = false;
+						}
+					}
+					public void keyTyped(java.awt.event.KeyEvent e) {}
+				});
+				((javax.swing.text.AbstractDocument)comboboxeditor.getDocument()).setDocumentFilter(new javax.swing.text.DocumentFilter() {
+					public void replace(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+						if(!comboboxArrowNavigation) {
+							super.replace(fb, offset, length, text, attrs);
+						}
+					}
+					public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
+						if(!comboboxArrowNavigation) {
+							super.remove(fb, offset, length);
+						}
+					}
+				});
+				comboboxeditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+					public void insertUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
+					public void removeUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
+					public void changedUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
+				});
+				comboboxeditor.requestFocusInWindow();
+				return;
+			}
+		});
 		/*textarea.addKeyListener(new CurlyBraceKeyListener(this));
 		autokeylistener = new AutoKeyListener(this);
 		positiontrackers.add(((CurlyBraceKeyListener)textarea.getKeyListeners()[0]).positiontracker);
