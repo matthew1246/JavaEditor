@@ -123,6 +123,9 @@ public class Main {
 	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
+	public JTextField comboboxeditor;
+	public JButton comboboxsearchbutton;
+	public JPanel comboboxpanel;
 	public JComboBox<String> startupcombobox = new JComboBox<String>();
 	public Lock lock = new Lock();
 	// public GetClassName getclassname;
@@ -757,6 +760,18 @@ public class Main {
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
+		combobox.setEditable(false);
+		comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
+		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
+		comboboxsearchbutton.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
+		comboboxsearchbutton.setPreferredSize(new Dimension(28, 24));
+		comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
+		comboboxpanel = new JPanel(new GridLayout(1, 2, 2, 0));
+		comboboxpanel.add(comboboxsearchbutton);
+		JLabel label = new JLabel();
+		label.setText("Starter:");
+		label.setHorizontalAlignment(SwingConstants.RIGHT);
+		comboboxpanel.add(label);
 		
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
@@ -1099,21 +1114,15 @@ edit.add(functionLines);
 		combobox.setPrototypeDisplayValue("Method");
 		menubar.add(combobox,gbc);
 
-		menubar.validate();
-		menubar.repaint();
-
-		JLabel label = new JLabel();
-		label.setText("Starter:");
-		label.setHorizontalAlignment(SwingConstants.RIGHT);
 		gbc.gridx=19;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx=1.0;
+		gbc.weightx=0.5;
 		gbc.weighty=1.0;
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		menubar.add(label,gbc);
+		menubar.add(comboboxpanel,gbc);
 
 		menubar.validate();
 		menubar.repaint();
@@ -2339,6 +2348,31 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 		combobox.addActionListener((ev) -> {
 			if(combobox.hasFocus()) {
 				selectCode(ev);
+			}
+		});
+		comboboxsearchbutton.addActionListener((ev) -> {
+			if(!combobox.isEditable()) {
+				combobox.setEditable(true);
+				comboboxeditor.setText("");
+				comboboxeditor.requestFocusInWindow();
+				return;
+			}
+			String classname = (String)classnamescombobox.getSelectedItem();
+			if(classname != null && !classname.equals("")) {
+				String searchtext = comboboxeditor.getText().trim().toLowerCase();
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+				if(classandmethods != null) {
+					combobox.removeAllItems();
+					for(String methodname : classandmethods.keySet()) {
+						if(searchtext.isEmpty() || methodname.toLowerCase().contains(searchtext)) {
+							combobox.addItem(methodname);
+						}
+					}
+					if(combobox.getItemCount() > 0) {
+						combobox.setSelectedIndex(0);
+					}
+				}
 			}
 		});
 		/*combobox.addItemListener((ev) -> {

@@ -188,7 +188,8 @@ public class ThreeComboboxes {
 	}
 		
 	public void methodCombobox(String selectedclass) {
-		RemoveMethodcombo();	
+		RemoveMethodcombo();
+		main.combobox.setEditable(false);
 		LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = getclassmethods.getMethods();
 		if(classnamesandmethodnames == null) JOptionPane.showMessageDialog(null,"classnamesandmethods is null.");
 		LinkedHashMapInterface<String,LinkedHashMap<String,Integer>> iterator=new LinkedHashMapInterface<String,LinkedHashMap<String,Integer>>(classnamesandmethodnames) {		
@@ -226,11 +227,12 @@ public class ThreeComboboxes {
 		}*/
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(methods.toArray(new String[methods.size()]));
 		main.combobox.setModel(model);
-	}		
+		main.combobox.setEditable(false);
+	}
 	public void Select(String fileName,String mainclass) {
 		main.filenamescombobox.setSelectedItem(Main.getFileName(fileName));
 		main.classnamescombobox.setSelectedItem(mainclass);
-		main.combobox.setSelectedItem(0);
+		main.combobox.setSelectedItem("");
 	}
 	public void RemoveAll() {
 		RemoveFilecombo();
