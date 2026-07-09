@@ -94,6 +94,9 @@ public class StoreSelectedFile {
 		return preferences.isLocked;
 	}
 	public int getCaretPosition(String filename) {
+		if(filename.equals("lastopened")) {
+			return 0;
+		}
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
 		if(linkedhashmap.containsKey(filename)) {
 			return linkedhashmap.get(filename).caretposition;
@@ -107,6 +110,9 @@ public class StoreSelectedFile {
 		}
 	}
 	public void setCaretPosition(String filename,int position) {
+		if(filename.equals("lastopened")) {
+			return;
+		}
 		LinkedHashMap<String,Preferences> linkedhashmap=getBackup();
 		if(linkedhashmap.containsKey(filename)) {
 			Preferences preferences=linkedhashmap.get(filename);
