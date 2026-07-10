@@ -125,7 +125,7 @@ public class Main {
 	public JComboBox<String> combobox;
 	public JTextField comboboxeditor;
 	public JButton comboboxsearchbutton;
-	public JPanel comboboxpanel;
+	public JPanel comboboxpanel;	
 	public boolean searchingMethods = false;
 	public boolean comboboxArrowNavigation = false;
 	public String comboboxSavedText = "";
@@ -767,10 +767,10 @@ public class Main {
 		combobox = new JComboBox<String>();
 		combobox.setEditable(false);
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
-		comboboxsearchbutton.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
-		comboboxsearchbutton.setPreferredSize(new Dimension(28, 24));
+		// comboboxsearchbutton.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
+		// comboboxsearchbutton.setPreferredSize(new Dimension(28, 24));
 		comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
-		comboboxpanel = new JPanel(new GridLayout(1, 2, 2, 0));
+		comboboxpanel = new JPanel(new GridLayout(1, 2));
 		comboboxpanel.add(comboboxsearchbutton);
 		JLabel label = new JLabel();
 		label.setText("Starter:");
@@ -1121,7 +1121,7 @@ edit.add(functionLines);
 		gbc.gridx=19;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx=0.5;
+		gbc.weightx=1.0;
 		gbc.weighty=1.0;
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
