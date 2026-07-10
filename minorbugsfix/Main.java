@@ -767,11 +767,13 @@ public class Main {
 		combobox = new JComboBox<String>();
 		combobox.setEditable(false);
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
-		// comboboxsearchbutton.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
-		// comboboxsearchbutton.setPreferredSize(new Dimension(28, 24));
+		comboboxsearchbutton.setPreferredSize(new Dimension(28, comboboxsearchbutton.getPreferredSize().height));
+		comboboxsearchbutton.setMaximumSize(new Dimension(28, comboboxsearchbutton.getPreferredSize().height));
 		comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
-		comboboxpanel = new JPanel(new GridLayout(1, 2));
+		comboboxpanel = new JPanel();
+		comboboxpanel.setLayout(new BoxLayout(comboboxpanel, BoxLayout.X_AXIS));
 		comboboxpanel.add(comboboxsearchbutton);
+		comboboxpanel.add(Box.createHorizontalStrut(4));
 		JLabel label = new JLabel();
 		label.setText("Starter:");
 		label.setHorizontalAlignment(SwingConstants.RIGHT);
