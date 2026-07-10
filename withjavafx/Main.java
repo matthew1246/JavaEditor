@@ -754,15 +754,22 @@ public class Main {
 		combobox = new JComboBox<String>();
 		combobox.setEditable(false);
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
-		comboboxsearchbutton.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
-		comboboxsearchbutton.setPreferredSize(new Dimension(28, 24));
 		comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
-		comboboxpanel = new JPanel(new GridLayout(1, 2, 2, 0));
-		comboboxpanel.add(comboboxsearchbutton);
+		comboboxpanel = new JPanel(new GridBagLayout());
+		GridBagConstraints cbgbc = new GridBagConstraints();
+		cbgbc.gridx = 0;
+		cbgbc.gridy = 0;
+		cbgbc.weightx = 1.0;
+		cbgbc.weighty = 1.0;
+		cbgbc.fill = GridBagConstraints.BOTH;
+		comboboxpanel.add(comboboxsearchbutton, cbgbc);
 		JLabel starterLabel = new JLabel();
 		starterLabel.setText("Starter:");
 		starterLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		comboboxpanel.add(starterLabel);
+		cbgbc.gridx = 1;
+		cbgbc.weightx = 0;
+		cbgbc.fill = GridBagConstraints.NONE;
+		comboboxpanel.add(starterLabel, cbgbc);
 		
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
