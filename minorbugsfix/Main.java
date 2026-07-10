@@ -767,17 +767,21 @@ public class Main {
 		combobox = new JComboBox<String>();
 		combobox.setEditable(false);
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
-		comboboxsearchbutton.setPreferredSize(new Dimension(28, comboboxsearchbutton.getPreferredSize().height));
-		comboboxsearchbutton.setMaximumSize(new Dimension(28, comboboxsearchbutton.getPreferredSize().height));
 		comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
-		comboboxpanel = new JPanel();
-		comboboxpanel.setLayout(new BoxLayout(comboboxpanel, BoxLayout.X_AXIS));
-		comboboxpanel.add(comboboxsearchbutton);
-		comboboxpanel.add(Box.createHorizontalStrut(4));
+		comboboxpanel = new JPanel(new GridBagLayout());
+		GridBagConstraints cbgbc = new GridBagConstraints();
+		cbgbc.gridx = 0;
+		cbgbc.gridy = 0;
+		cbgbc.weightx = 1.0;
+		cbgbc.fill = GridBagConstraints.HORIZONTAL;
+		comboboxpanel.add(comboboxsearchbutton, cbgbc);
 		JLabel label = new JLabel();
 		label.setText("Starter:");
 		label.setHorizontalAlignment(SwingConstants.RIGHT);
-		comboboxpanel.add(label);
+		cbgbc.gridx = 1;
+		cbgbc.weightx = 0;
+		cbgbc.fill = GridBagConstraints.NONE;
+		comboboxpanel.add(label, cbgbc);
 		
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
