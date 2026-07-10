@@ -773,7 +773,8 @@ public class Main {
 		cbgbc.gridx = 0;
 		cbgbc.gridy = 0;
 		cbgbc.weightx = 1.0;
-		cbgbc.fill = GridBagConstraints.HORIZONTAL;
+		cbgbc.weighty = 1.0;
+		cbgbc.fill = GridBagConstraints.BOTH;
 		comboboxpanel.add(comboboxsearchbutton, cbgbc);
 		JLabel label = new JLabel();
 		label.setText("Starter:");
