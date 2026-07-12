@@ -1,3 +1,9 @@
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.io.InputStream;
+import java.net.URL;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,20 +21,31 @@ public class AI {
 		setListeners();
 	}
 	private void Extract() {
-		URL url=AI.class.getClassLoader().getResource("opencode.exe");	
-		InputStream inputstream=url.openStream();
-		String dir = "";
-		if(!packager.containsPackage() || !packager.isInRightFolders()) {
-			dir=main.getDirectory(main.fileName);
+		try {
+			URL url=AI.class.getClassLoader().getResource("opencode.exe");	
+			InputStream inputstream=url.openStream();
+			String dir = "";
+			try {
+				java.net.URI jarUri = AI.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+				String jarPath = jarUri.getPath();
+				if(jarPath.startsWith("/"))
+					jarPath=jarPath.substring(1,jarPath.length());
+				File jarFile = new File(jarPath);
+				dir = jarFile.getParent();
+			} catch(Exception ex) {
+				dir = System.getProperty("user.dir");
+			}
+			if(dir == null)
+				dir = System.getProperty("user.dir");
+			if(!dir.endsWith("\\"))
+				dir=dir+"\\";
+			opencodeexe=dir+"opencode.exe";
+			Path outputpath=Paths.get(opencodeexe);
+					
+			Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
+		} catch(IOException ex) {
+			ex.printStackTrace();
 		}
-		else { // packager.isInRightFolders() == true
-			dir=packager.classpath;
-		}
-		if(!dir.endsWith("\\"))
-			dir=dir+"\\";
-		Path outputpath=Paths.get(dir+jar);
-				
-		Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 	}
 	private JButton runAI;
 	public void setLayout() {
