@@ -1986,7 +1986,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 52957
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\AI.java": {
     "isLocked": false,
