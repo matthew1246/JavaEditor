@@ -1,0 +1,10 @@
+eval $(git for-each-ref --no-contains=master --shell --format='git switch %(refname:lstrip=3); git merge master; git push;' refs/remotes)
+Note: Don't do these commands in master branch because --no-contains=master will show not many branches.
+eval $(git for-each-ref --no-contains=master --shell --format='git switch %(refname:lstrip=2); git merge master; git push;' refs/heads)
+If last three above don't work:
+eval $(git for-each-ref --shell --format='git switch %(refname:lstrip=3); git merge master; git push;' refs/remotes)
+
+eval $(git for-each-ref --shell --format='git switch %(refname:lstrip=3); git merge master; git push;' refs/remotes)
+eval $(git for-each-ref --shell --format='git switch %(refname:lstrip=3); git merge master; git push;' refs/remotes/)
+Have to use double quotes for git bash on windows. The first line works because copy and paste.
+eval $(git for-each-ref --shell --format="git switch %(refname:lstrip=3); git merge master; git push;" refs/remotes)
