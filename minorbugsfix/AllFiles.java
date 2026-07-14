@@ -44,7 +44,7 @@ public class AllFiles {
 					return true;
 				}
 				else {
-					JOptionPane.showMessageDialog(null,dir+" "+dir2);
+					JOptionPane.showMessageDialog(null,main2.fileName+":"+dir+" "+filename+":"+dir2);
 					return false;	
 				}
 			}				
