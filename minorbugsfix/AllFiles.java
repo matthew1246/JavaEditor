@@ -39,6 +39,9 @@ public class AllFiles {
 			else {
 				JOptionPane.showMessageDialog(null,dir+" "+dir2);
 				dir=Main.getDirectory(main2.fileName);
+				if(filename.startsWith("/"))
+					filename=filename.substring(1,filename.length());
+				filename=filename.replace("/","\\");
 				dir2=Main.getDirectory(filename);
 				if(dir.equals(dir2)) {
 					return true;
