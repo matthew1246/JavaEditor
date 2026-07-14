@@ -32,7 +32,7 @@ public class AllFiles {
 				if(filename.endsWith(".jar") && !files.contains(filename))
 					files.add(filename);
 			}
-			JOptionPane.showMessageDialog(null,main2.fileName+" "+filename);
+			JOptionPane.showMessageDialog(null,dir+" "+dir2);
 			
 			return dir.equals(dir2);
 		} catch (URISyntaxException ex) {
