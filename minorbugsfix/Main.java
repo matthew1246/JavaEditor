@@ -2024,7 +2024,7 @@ Packager packager2 = new Packager(this);
 							output.close();
 							
 							AllFiles allfiles = new AllFiles(main,dir);
-							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+							if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 								commandline = new CommandLine();
 								JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
 								FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
@@ -2187,7 +2187,7 @@ Packager packager2 = new Packager(this);
 						
 						//File file = new File(dir+main+".jar");
 						AllFiles allfiles = new AllFiles(main,dir);
-						if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+						if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 							commandline = new CommandLine();
 							JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
 							FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);

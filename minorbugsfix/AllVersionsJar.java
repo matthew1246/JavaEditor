@@ -108,7 +108,7 @@ public class AllVersionsJar {
 	private AllFiles allfiles;
 	public boolean isMatthewJavaEditor(String main_class) {
 		allfiles = new AllFiles(main_class,dir);
-		return (allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete()));
+		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {

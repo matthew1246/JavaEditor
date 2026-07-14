@@ -18,7 +18,7 @@ public class AllFiles {
 		}
 		files.add(dir+main+".jar");
 	}
-	public boolean isSameDirectory() {
+	public boolean isSameDirectory(Main main2) {
 		try {	
 			String filename=AllFiles.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			String dir2 = filename.replaceAll("[^/]+\\.jar","");
@@ -32,6 +32,8 @@ public class AllFiles {
 				if(filename.endsWith(".jar") && !files.contains(filename))
 					files.add(filename);
 			}
+			JOptionPane.showMessageDialog(null,main2.fileName+" "+filename);
+			
 			return dir.equals(dir2);
 		} catch (URISyntaxException ex) {
 			ex.printStackTrace();
