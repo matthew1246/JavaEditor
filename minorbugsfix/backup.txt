@@ -59,7 +59,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 26390
+    "caretposition": 69863
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -323,7 +323,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 1291
+    "caretposition": 1540
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
     "isLocked": true,

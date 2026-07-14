@@ -44,6 +44,10 @@ public class AllFiles {
 				filename=filename.replace("/","\\");
 				dir2=Main.getDirectory(filename);
 				if(dir.equals(dir2)) {
+					filename2=dir+filename2;	
+					if(filename2.endsWith(".jar") && !files.contains(filename2))
+						files.add(filename2);
+						
 					return true;
 				}
 				else {
