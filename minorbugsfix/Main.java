@@ -2070,11 +2070,11 @@ Packager packager2 = new Packager(this);
 								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 								if(packager2.containsPackage()) {
 									if(!packager2.isInRightFolders()) { // javac.exe used -d option
-										input="START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 									}
 									else { // packager2.isInRightFolders()
 										// input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
-										input="START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 
 									}
 								}
