@@ -2222,7 +2222,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							if(option2 ==JOptionPane.YES_OPTION) {
 								isJavaFX = true;
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 							}
 							else if(option2 == JOptionPane.NO_OPTION) {
 								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
@@ -2241,7 +2241,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									extractjavafxjars.unzipJars();
 								}		
 								allversionsjar.Powershell(isJavaFX,main);
@@ -2352,7 +2352,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									main_outputy=main;
 								}
 								else { // isJavaFX == true
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
 									main_outputy=extractjavafxjars.starter;
 								}
 								Packager packager = new Packager(this);
@@ -2373,7 +2373,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
 									commandline = new CommandLine();
 									if(isJavaFX) {
-										ExtractJavaFXJars extractjavafxjars2 = new ExtractJavaFXJars(this,true);
+										ExtractJavaFXJars extractjavafxjars2 = new ExtractJavaFXJars(this);
 										extractjavafxjars2.unzipJars();
 									}
 									JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
@@ -2540,7 +2540,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								outputmainclass=main;	
 							}
 							else { // isJavaFX == true
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
 								outputmainclass=extractjavafxjars.starter;
 							}
 							if(!packager3.containsPackage()) {
@@ -2562,7 +2562,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							AllFiles allfiles = new AllFiles(main,dir);
 							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
 									extractjavafxjars.unzipJars();
 								}		
 								JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
