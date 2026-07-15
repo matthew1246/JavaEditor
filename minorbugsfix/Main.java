@@ -2580,11 +2580,25 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				filenameseditor.getDocument().addDocumentListener(filterListener);
 				javax.swing.InputMap editorInputMap = filenameseditor.getInputMap(javax.swing.JComponent.WHEN_FOCUSED);
 				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_TAB, 0), "searchNext");
+				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DOWN, 0), "searchNext");
+				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_UP, 0), "searchPrev");
 				filenameseditor.getActionMap().put("searchNext", new javax.swing.AbstractAction() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
 						int count = filenamescombobox.getItemCount();
 						if(count > 0) {
 							searchTabIndex = (searchTabIndex + 1) % count;
+							filteringFilenames = true;
+							filenamescombobox.setSelectedIndex(searchTabIndex);
+							filteringFilenames = false;
+							filenamescombobox.showPopup();
+						}
+					}
+				});
+				filenameseditor.getActionMap().put("searchPrev", new javax.swing.AbstractAction() {
+					public void actionPerformed(java.awt.event.ActionEvent e) {
+						int count = filenamescombobox.getItemCount();
+						if(count > 0) {
+							searchTabIndex = (searchTabIndex - 1 + count) % count;
 							filteringFilenames = true;
 							filenamescombobox.setSelectedIndex(searchTabIndex);
 							filteringFilenames = false;

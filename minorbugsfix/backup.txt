@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\minorbugsfix\\Maven.java",
+    "starterclass": "C:\\javaeditor\\minorbugsfix\\MiddleString.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfix\\Maven.java"
+      "C:\\javaeditor\\minorbugsfix\\MiddleString.java"
     ],
     "caretposition": 0
   },
@@ -1990,7 +1990,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 5950
   },
   "C:\\javaeditor\\minorbugsfix\\MMain.java": {
     "isLocked": false,
@@ -2020,5 +2020,27 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\Middle.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Middle"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\MiddleString.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "MiddleString"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
