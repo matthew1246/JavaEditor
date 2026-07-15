@@ -130,7 +130,6 @@ public class Main {
 	public JPanel comboboxpanel;	
 	public boolean searchingMethods = false;
 	private boolean filteringFilenames = false;
-	private boolean searchTabPressed = false;
 	public boolean comboboxArrowNavigation = false;
 	public String comboboxSavedText = "";
 	public boolean comboboxItemSelectedFromPopup = false;
@@ -1338,9 +1337,11 @@ edit.add(functionLines);
 			searchingMethods = false;
 		}
 	}
+	private int searchTabIndex = -1;
 	public void filterFilenames() {
 		if(filteringFilenames) return;
 		filteringFilenames = true;
+		searchTabIndex = -1;
 		try {
 		JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
 		String searchtext = filenameseditor.getText().trim().toLowerCase();
@@ -2444,7 +2445,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 		filenamescombobox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
 			public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent e) {}
 			public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
-				if(filenamescombobox.isEditable() && !filteringFilenames && !searchTabPressed) {
+				if(filenamescombobox.isEditable() && !filteringFilenames) {
 					String liney = (String)filenamescombobox.getSelectedItem();
 					if(liney != null && !liney.equals("")) {
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2453,9 +2454,11 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 						storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 						open(liney);
 					}
+					searchTabIndex = -1;
 					filenamescombobox.setEditable(false);
+					JTextField fe = (JTextField)filenamescombobox.getEditor().getEditorComponent();
+					fe.setFocusTraversalKeysEnabled(true);
 				}
-				searchTabPressed = false;
 			}
 			public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
 		});
@@ -2581,9 +2584,10 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 					public void actionPerformed(java.awt.event.ActionEvent e) {
 						int count = filenamescombobox.getItemCount();
 						if(count > 0) {
-							int current = filenamescombobox.getSelectedIndex();
-							int next = (current + 1) % count;
-							filenamescombobox.setSelectedIndex(next);
+							searchTabIndex = (searchTabIndex + 1) % count;
+							filteringFilenames = true;
+							filenamescombobox.setSelectedIndex(searchTabIndex);
+							filteringFilenames = false;
 							filenamescombobox.showPopup();
 						}
 					}
@@ -2599,6 +2603,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 								storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 								open(liney);
 							}
+							searchTabIndex = -1;
 							filenamescombobox.setEditable(false);
 							filenameseditor.setFocusTraversalKeysEnabled(true);
 							e.consume();
