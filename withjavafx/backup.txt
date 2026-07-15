@@ -1216,6 +1216,15 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
+    "caretposition": 1107
+  },
+  "C:\\javaeditor\\withjavafx\\Muck.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
     "caretposition": 0
   }
 }
