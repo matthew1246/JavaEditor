@@ -2428,15 +2428,16 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 		});
 		
 		filenamescombobox.addActionListener((ev) -> {
-			if(filenamescombobox.hasFocus()) {
-				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-				int caretposition = textarea.getCaretPosition();
-				String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
-				storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
+			if(filteringFilenames) return;
+			if(filenamescombobox.hasFocus() || filenamescombobox.isEditable()) {
 				String liney = (String)filenamescombobox.getSelectedItem();
 				if(liney != null && !liney.equals("")) {
+					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					int caretposition = textarea.getCaretPosition();
+					String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
+					storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 					open(liney);
-				}  
+				}
 			}
 		});
 

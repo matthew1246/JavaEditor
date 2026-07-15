@@ -1957,7 +1957,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 219184
+    "caretposition": 16433
   },
   "C:\\javaeditor\\minorbugsfix\\FindMethodName.java": {
     "isLocked": false,
@@ -1980,5 +1980,25 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 2009
+  },
+  "C:\\javaeditor\\minorbugsfix\\MatthewLayout.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "MatthewLayout"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\javaeditor\\minorbugsfix\\MMain.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
   }
 }
