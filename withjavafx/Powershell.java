@@ -216,7 +216,9 @@ public class Powershell {
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
-				output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+				//output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+				output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
+
 				if(javaversionnumber == 23) {
 					output2.write("\n");
 					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");

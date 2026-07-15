@@ -2370,7 +2370,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								output.close();
 								
 								AllFiles allfiles = new AllFiles(main,dir);
-								if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+								if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 									commandline = new CommandLine();
 									if(isJavaFX) {
 										ExtractJavaFXJars extractjavafxjars2 = new ExtractJavaFXJars(this);
@@ -2398,7 +2398,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									else {
 										if(packager2.isInRightFolders()) {
-											output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+											// output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+											output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");		
 										}
 									}
 									output2.write("\n");
@@ -2420,7 +2421,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											input="START /B /WAIT cmd.exe /c jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 										}
 										else { // packager2.isInRightFolders()
-											input="START /B /WAIT cmd.exe /c jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+											input="START /B /WAIT cmd.exe /c jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 										}
 									}
 									JOptionPane.showMessageDialog(null,input);
@@ -2504,14 +2505,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							else { // Package used javac.exe didn't used -d option
-								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+								/*JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
 								File createdir = new File(dir+"jars");
 								if(!createdir.exists()) {
 									createdir.mkdir();
-								}
+								}*/
 								for(String jar:jars) {
 									// jar = getFileName(jar);
-									Process process=commandline.run("jar xf "+jar,dir+"jars");
+									Process process=commandline.run("jar xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
@@ -2560,7 +2561,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							
 							//File file = new File(dir+main+".jar");
 							AllFiles allfiles = new AllFiles(main,dir);
-							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+							if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 								if(isJavaFX) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
 									extractjavafxjars.unzipJars();
@@ -2588,12 +2589,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								else { // Contains package
 									if(!packager2.isInRightFolders()) { // javac.exe used -d option
-									
-		
-	output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
+										output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
 									}
 									else { // packager2.isInRightFolders()
-										output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+										output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
 									}
 								}
 								output2.write("\n");
@@ -2613,7 +2612,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .";
 									}
 									else { // packager2.isInRightFolders()
-										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .";
 									}
 								}
 								JOptionPane.showMessageDialog(null,input);
