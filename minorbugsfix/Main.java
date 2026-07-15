@@ -120,6 +120,8 @@ public class Main {
 	public static Muck muck;
 	public Expandable expandable;
 	public JComboBox<String> filenamescombobox = new JComboBox<String>();
+	public JButton filenamessearchbutton;
+	public JPanel filenamespanel;
 	
 	public JComboBox<String> classnamescombobox = new JComboBox<String>();
 	public JComboBox<String> combobox;
@@ -783,7 +785,24 @@ public class Main {
 		cbgbc.weightx = 0;
 		cbgbc.fill = GridBagConstraints.NONE;
 		comboboxpanel.add(label, cbgbc);
-		
+
+		filenamessearchbutton = new JButton("\uD83D\uDD0D");
+		filenamessearchbutton.setMargin(new Insets(0,0,0,0));
+		filenamessearchbutton.setPreferredSize(new Dimension(26, 26));
+		filenamessearchbutton.setMaximumSize(new Dimension(26, 26));
+		filenamespanel = new JPanel(new GridBagLayout());
+		GridBagConstraints fgbc = new GridBagConstraints();
+		fgbc.gridx = 0;
+		fgbc.gridy = 0;
+		fgbc.weightx = 1.0;
+		fgbc.weighty = 1.0;
+		fgbc.fill = GridBagConstraints.BOTH;
+		filenamespanel.add(filenamescombobox, fgbc);
+		fgbc.gridx = 1;
+		fgbc.weightx = 0;
+		fgbc.fill = GridBagConstraints.NONE;
+		filenamespanel.add(filenamessearchbutton, fgbc);
+
 		Font originalFont = textarea.getFont();
 		textarea.setFont(new Font(originalFont.getName(),originalFont.getStyle(),19));
 		//scrollpane = new JScrollPane(textarea);
@@ -1095,7 +1114,7 @@ edit.add(functionLines);
 		gbc.gridwidth=5;
 		gbc.gridheight=1;
 		filenamescombobox.setPrototypeDisplayValue("Filename");
-		menubar.add(filenamescombobox,gbc);
+		menubar.add(filenamespanel,gbc);
 
 		menubar.validate();
 		menubar.repaint();
@@ -1315,6 +1334,27 @@ edit.add(functionLines);
 			}
 		} finally {
 			searchingMethods = false;
+		}
+	}
+	public void filterFilenames() {
+		JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
+		String searchtext = filenameseditor.getText().trim().toLowerCase();
+		String savedText = filenameseditor.getText();
+		int savedCaret = filenameseditor.getCaretPosition();
+		filenamescombobox.hidePopup();
+		filenamescombobox.removeAllItems();
+		if(filelistmodifier != null && !filelistmodifier.isEmpty) {
+			List<String> filenames = filelistmodifier.getFileList();
+			for(String filename : filenames) {
+				if(searchtext.isEmpty() || filename.toLowerCase().contains(searchtext)) {
+					filenamescombobox.addItem(filename);
+				}
+			}
+		}
+		filenameseditor.setText(savedText);
+		filenameseditor.setCaretPosition(savedCaret);
+		if(filenamescombobox.getItemCount() > 0) {
+			filenamescombobox.showPopup();
 		}
 	}
 	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumenttindex) {
@@ -2494,6 +2534,19 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				});
 				comboboxeditor.requestFocusInWindow();
 				return;
+			}
+		});
+		filenamessearchbutton.addActionListener((ev) -> {
+			if(!filenamescombobox.isEditable()) {
+				filenamescombobox.setEditable(true);
+				JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
+				filenameseditor.setText("");
+				filenameseditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+					public void insertUpdate(javax.swing.event.DocumentEvent e) { filterFilenames(); }
+					public void removeUpdate(javax.swing.event.DocumentEvent e) { filterFilenames(); }
+					public void changedUpdate(javax.swing.event.DocumentEvent e) { filterFilenames(); }
+				});
+				filenameseditor.requestFocusInWindow();
 			}
 		});
 		/*combobox.addItemListener((ev) -> {
