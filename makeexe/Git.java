@@ -237,6 +237,7 @@ public class Git {
 			String command = "eval $(git for-each-ref --shell --format=\"git checkout %(refname:lstrip=3); git rebase "+frame.getTitle()+"; git push;\" refs/remotes)";
 			JOptionPane.showMessageDialog(null,command);
 			git(command);
+			
 		});
 		upload.addActionListener( (ev) -> {
 			JFrame commit = new JFrame("Add commit message");
