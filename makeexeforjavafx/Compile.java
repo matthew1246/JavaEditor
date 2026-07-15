@@ -354,7 +354,7 @@ public class Compile {
 			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 			CommandLine commandline = new CommandLine();
 			if(withJavaFX) {
-				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main,true);
+				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main);
 				commandline.addJavaFX();						
 			}
 			commandline.compileAll();
@@ -524,7 +524,7 @@ public class Compile {
 			CommandLine commandline = new CommandLine();
 			Packager packager = new Packager(main);
 			if(withJavaFX) {
-				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main,makejar);
+				ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(main);
 				commandline.addJavaFX();						
 			}
 			commandline.compileAll();

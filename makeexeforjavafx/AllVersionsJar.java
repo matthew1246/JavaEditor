@@ -70,7 +70,7 @@ public class AllVersionsJar {
 				for(String jar:jars) {
 					try {
 						// jar = getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch(InterruptedException ex) {
@@ -122,7 +122,7 @@ public class AllVersionsJar {
 	private AllFiles allfiles;
 	public boolean isMatthewJavaEditor(String main_class) {
 		allfiles = new AllFiles(main_class,dir);
-		return (allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete()));
+		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
@@ -143,9 +143,9 @@ public class AllVersionsJar {
 				}
 			}
 			else { // packager.isInRightFolders() == true
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
 				}	
 			}		
 			

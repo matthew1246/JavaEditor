@@ -2292,7 +2292,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							if(option2 ==JOptionPane.YES_OPTION) {
 								isJavaFX = true;
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 							}
 							else if(option2 == JOptionPane.NO_OPTION) {
 								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
@@ -2311,7 +2311,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									extractjavafxjars.unzipJars();
 								}		
 								allversionsjar.Powershell(isJavaFX,main);
@@ -2390,14 +2390,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										}		
 									}
 									else { // Package used javac.exe didn't used -d option
-										JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
-										File createdir = new File(dir+"jars");
-										if(!createdir.exists()) {
-											createdir.mkdir();
-										}
 										for(String jar:jars) {
 											// jar = getFileName(jar);
-											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 											process.waitFor();
 											//output.write(" "+jar);
 										}
@@ -2425,7 +2420,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									main_outputy=main;
 								}
 								else { // isJavaFX == true
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
 									main_outputy=extractjavafxjars.starter;
 								}
 								Packager packager = new Packager(this);
@@ -2443,10 +2438,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								output.close();
 								
 								AllFiles allfiles = new AllFiles(main,dir);
-								if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+								if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 									commandline = new CommandLine();
 									if(isJavaFX) {
-										ExtractJavaFXJars extractjavafxjars2 = new ExtractJavaFXJars(this,true);
+										ExtractJavaFXJars extractjavafxjars2 = new ExtractJavaFXJars(this);
 										extractjavafxjars2.unzipJars();
 									}
 									JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
@@ -2471,7 +2466,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									else {
 										if(packager2.isInRightFolders()) {
-											output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+											output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 										}
 									}
 									output2.write("\n");
@@ -2493,7 +2488,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 										}
 										else { // packager2.isInRightFolders()
-											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 										}
 									}
 									JOptionPane.showMessageDialog(null,input);
@@ -2577,14 +2572,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							else { // Package used javac.exe didn't used -d option
-								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
-								File createdir = new File(dir+"jars");
-								if(!createdir.exists()) {
-									createdir.mkdir();
-								}
 								for(String jar:jars) {
 									// jar = getFileName(jar);
-									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
@@ -2613,7 +2603,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								outputmainclass=main;	
 							}
 							else { // isJavaFX == true
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
 								outputmainclass=extractjavafxjars.starter;
 							}
 							if(!packager3.containsPackage()) {
@@ -2633,9 +2623,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							
 							//File file = new File(dir+main+".jar");
 							AllFiles allfiles = new AllFiles(main,dir);
-							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+							if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this,true);
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
 									extractjavafxjars.unzipJars();
 								}		
 								JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
@@ -2666,7 +2656,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
 									}
 									else { // packager2.isInRightFolders()
-										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
 									}
 								}
 								output2.write("\n");
@@ -2686,7 +2676,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 									}
 									else { // packager2.isInRightFolders()
-										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 									}
 								}
 								JOptionPane.showMessageDialog(null,input);

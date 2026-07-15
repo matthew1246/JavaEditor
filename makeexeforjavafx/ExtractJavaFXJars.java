@@ -39,7 +39,7 @@ public class ExtractJavaFXJars {
 		this.dir = dir;
 		process();
 	}
-	public ExtractJavaFXJars(Main main,boolean makejar) {
+	/*public ExtractJavaFXJars(Main main,boolean makejar) {
 		this.main = main;
 		this.packager = new Packager(main);	
 		if(makejar) {
@@ -69,7 +69,7 @@ public class ExtractJavaFXJars {
 			dir=dir+"\\";
 		this.dir = dir;
 		process();
-	}
+	}*/
 	public void process() {
 		String normalmain=main.getFileName(main.fileName).replace(".java","");
 		this.starter = normalmain+"two";
