@@ -497,6 +497,7 @@ public class Git {
 */
 		CommandLine commandline = new CommandLine();
 		Process process = null;
+		
 		if(isGitInstalled) {
 			process=commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
 		}
