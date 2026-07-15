@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\javaeditor\\minorbugsfix\\Maven.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\javaeditor\\minorbugsfix\\Maven.java"
     ],
     "caretposition": 0
   },
@@ -1996,6 +1996,26 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\m": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\Maven.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Maven"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],

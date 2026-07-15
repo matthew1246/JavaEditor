@@ -130,6 +130,7 @@ public class Main {
 	public JPanel comboboxpanel;	
 	public boolean searchingMethods = false;
 	private boolean filteringFilenames = false;
+	private boolean searchTabPressed = false;
 	public boolean comboboxArrowNavigation = false;
 	public String comboboxSavedText = "";
 	public boolean comboboxItemSelectedFromPopup = false;
@@ -2429,7 +2430,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 		
 		filenamescombobox.addActionListener((ev) -> {
 			if(filteringFilenames) return;
-			if(filenamescombobox.hasFocus() || filenamescombobox.isEditable()) {
+			if(filenamescombobox.hasFocus()) {
 				String liney = (String)filenamescombobox.getSelectedItem();
 				if(liney != null && !liney.equals("")) {
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2439,6 +2440,24 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 					open(liney);
 				}
 			}
+		});
+		filenamescombobox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+			public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent e) {}
+			public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
+				if(filenamescombobox.isEditable() && !filteringFilenames && !searchTabPressed) {
+					String liney = (String)filenamescombobox.getSelectedItem();
+					if(liney != null && !liney.equals("")) {
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						int caretposition = textarea.getCaretPosition();
+						String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
+						storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
+						open(liney);
+					}
+					filenamescombobox.setEditable(false);
+				}
+				searchTabPressed = false;
+			}
+			public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
 		});
 
 		startupcombobox.addActionListener( (ev) -> {
@@ -2548,6 +2567,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 			if(!filenamescombobox.isEditable()) {
 				filenamescombobox.setEditable(true);
 				JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
+				filenameseditor.setFocusTraversalKeysEnabled(false);
 				filenameseditor.setText("");
 				javax.swing.event.DocumentListener filterListener = new javax.swing.event.DocumentListener() {
 					public void insertUpdate(javax.swing.event.DocumentEvent e) { if(!filteringFilenames) javax.swing.SwingUtilities.invokeLater(() -> filterFilenames()); }
@@ -2555,6 +2575,36 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 					public void changedUpdate(javax.swing.event.DocumentEvent e) { if(!filteringFilenames) javax.swing.SwingUtilities.invokeLater(() -> filterFilenames()); }
 				};
 				filenameseditor.getDocument().addDocumentListener(filterListener);
+				javax.swing.InputMap editorInputMap = filenameseditor.getInputMap(javax.swing.JComponent.WHEN_FOCUSED);
+				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_TAB, 0), "searchNext");
+				filenameseditor.getActionMap().put("searchNext", new javax.swing.AbstractAction() {
+					public void actionPerformed(java.awt.event.ActionEvent e) {
+						int count = filenamescombobox.getItemCount();
+						if(count > 0) {
+							int current = filenamescombobox.getSelectedIndex();
+							int next = (current + 1) % count;
+							filenamescombobox.setSelectedIndex(next);
+							filenamescombobox.showPopup();
+						}
+					}
+				});
+				filenameseditor.addKeyListener(new java.awt.event.KeyAdapter() {
+					public void keyPressed(java.awt.event.KeyEvent e) {
+						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+							String liney = (String)filenamescombobox.getSelectedItem();
+							if(liney != null && !liney.equals("")) {
+								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+								int caretposition = textarea.getCaretPosition();
+								String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
+								storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
+								open(liney);
+							}
+							filenamescombobox.setEditable(false);
+							filenameseditor.setFocusTraversalKeysEnabled(true);
+							e.consume();
+						}
+					}
+				});
 				filenameseditor.requestFocusInWindow();
 			}
 		});
