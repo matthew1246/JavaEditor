@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\minorbugsfixwithai\\Main.java",
+    "starterclass": "C:\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfixwithai\\Main.java"
+      "C:\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -39,7 +39,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 13179
+    "caretposition": 377
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
@@ -59,7 +59,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 39700
+    "caretposition": 69863
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -308,7 +308,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 4931
+    "caretposition": 3703
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java": {
     "isLocked": true,
@@ -323,7 +323,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 380
+    "caretposition": 1540
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
     "isLocked": true,
@@ -1957,7 +1957,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 219184
+    "caretposition": 1044
   },
   "C:\\javaeditor\\minorbugsfix\\FindMethodName.java": {
     "isLocked": false,
@@ -1970,58 +1970,85 @@
     "fileNames": [],
     "caretposition": 1081
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java": {
+  "C:\\harddriveusage\\DriveUsage.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Main"
-    ],
-    "starterclass": "Main",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Muck.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okhttp-3.0.0-RC1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
-    ],
-    "fileNames": [],
-    "caretposition": 52957
-  },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\AI.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
-    "startupcombobox": [
-      "AI"
+      "DriveUsage"
     ],
     "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Muck.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okhttp-3.0.0-RC1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
-    ],
+    "jars": [],
     "fileNames": [],
-    "caretposition": 621
+    "caretposition": 2009
   },
-  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\ExtractJUnit.java": {
+  "C:\\javaeditor\\minorbugsfix\\MatthewLayout.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "ExtractJUnit"
+      "MatthewLayout"
     ],
     "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Muck.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okhttp-3.0.0-RC1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
-    ],
+    "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 5950
   },
-  "C:\\javaeditor\\minorbugsfixwithai\\Main.java": {
+  "C:\\javaeditor\\minorbugsfix\\MMain.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\m": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\Maven.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Maven"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\Middle.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Middle"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 16433
+  },
+  "C:\\javaeditor\\minorbugsfix\\MiddleString.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "MiddleString"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\javaeditor\\minorbugsfix\\MSDOS.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "MSDOS"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],

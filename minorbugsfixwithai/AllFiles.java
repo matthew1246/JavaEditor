@@ -18,7 +18,7 @@ public class AllFiles {
 		}
 		files.add(dir+main+".jar");
 	}
-	public boolean isSameDirectory() {
+	public boolean isSameDirectory(Main main2) {
 		try {	
 			String filename=AllFiles.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			String dir2 = filename.replaceAll("[^/]+\\.jar","");
@@ -26,13 +26,35 @@ public class AllFiles {
 				dir2=dir2.substring(1,dir2.length());
 			dir2=dir2.replace("/","\\");
 		
-			filename=filename.replaceAll(".+/","");
+			String filename2 =filename.replaceAll(".+/","");
 			if(dir.equals(dir2)) {
-				filename=dir+filename;	
-				if(filename.endsWith(".jar") && !files.contains(filename))
-					files.add(filename);
+				filename2=dir+filename2;	
+				if(filename2.endsWith(".jar") && !files.contains(filename2))
+					files.add(filename2);
 			}
-			return dir.equals(dir2);
+			
+			if(dir.equals(dir2)) {
+				return true;
+			}
+			else {
+				JOptionPane.showMessageDialog(null,dir+" "+dir2);
+				dir=Main.getDirectory(main2.fileName);
+				if(filename.startsWith("/"))
+					filename=filename.substring(1,filename.length());
+				filename=filename.replace("/","\\");
+				dir2=Main.getDirectory(filename);
+				if(dir.equals(dir2)) {
+					filename2=dir+filename2;	
+					if(filename2.endsWith(".jar") && !files.contains(filename2))
+						files.add(filename2);
+						
+					return true;
+				}
+				else {
+					JOptionPane.showMessageDialog(null,main2.fileName+":"+dir+" "+filename+":"+dir2);
+					return false;	
+				}
+			}				
 		} catch (URISyntaxException ex) {
 			ex.printStackTrace();
 			return false;
