@@ -1978,14 +1978,15 @@ Packager packager2 = new Packager(this);
 									}		
 								}
 								else { // Package used javac.exe didn't used -d option
-									JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+									/*JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
 									File createdir = new File(dir+"jars");
 									if(!createdir.exists()) {
 										createdir.mkdir();
-									}
+									}*/
 									for(String jar:jars) {
 										// jar = getFileName(jar);
-										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+										// Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 										process.waitFor();
 										//output.write(" "+jar);
 									}
@@ -2021,7 +2022,7 @@ Packager packager2 = new Packager(this);
 							output.close();
 							
 							AllFiles allfiles = new AllFiles(main,dir);
-							if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+							if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 								commandline = new CommandLine();
 								JOptionPane.showMessageDialog(null,dir+"ForJava"+javaversionnumber+"_"+main+".jar is already open. Run script to close "+main+".jar");
 								FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
@@ -2045,7 +2046,8 @@ Packager packager2 = new Packager(this);
 								}
 								else {
 									if(packager2.isInRightFolders()) {
-										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+										// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 									}
 								}
 								output2.write("\n");
@@ -2067,7 +2069,8 @@ Packager packager2 = new Packager(this);
 										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 									}
 									else { // packager2.isInRightFolders()
-										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+										// input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 									}
 								}
 								JOptionPane.showMessageDialog(null,input);
@@ -2130,14 +2133,15 @@ Packager packager2 = new Packager(this);
 								}
 							}
 							else { // Package used javac.exe didn't used -d option
-								JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+								/*JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
 								File createdir = new File(dir+"jars");
 								if(!createdir.exists()) {
 									createdir.mkdir();
-								}
+								}*/
 								for(String jar:jars) {
 									// jar = getFileName(jar);
-									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+									// Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+									Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 									process.waitFor();
 									//output.write(" "+jar);
 								}
@@ -2175,7 +2179,7 @@ Packager packager2 = new Packager(this);
 						
 						//File file = new File(dir+main+".jar");
 						AllFiles allfiles = new AllFiles(main,dir);
-						if(allfiles.isSameDirectory() || (allfiles.exists() && !allfiles.delete())) {
+						if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
 							commandline = new CommandLine();
 							JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
 							FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
@@ -2205,7 +2209,8 @@ Packager packager2 = new Packager(this);
 output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
 								}
 								else { // packager2.isInRightFolders()
-									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+									// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
 								}
 							}
 							output2.write("\n");
@@ -2226,7 +2231,8 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 								}
 								else { // packager2.isInRightFolders()
-									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+									// input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 								}
 							}
 							JOptionPane.showMessageDialog(null,input);

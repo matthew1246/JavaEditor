@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\minorbugsfix\\MiddleString.java",
+    "starterclass": "C:\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfix\\MiddleString.java"
+      "C:\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -1957,7 +1957,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 16433
+    "caretposition": 1044
   },
   "C:\\javaeditor\\minorbugsfix\\FindMethodName.java": {
     "isLocked": false,
@@ -2037,6 +2037,17 @@
     "lockedStartupClass": "",
     "startupcombobox": [
       "MiddleString"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\javaeditor\\minorbugsfix\\MSDOS.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "MSDOS"
     ],
     "starterclass": "",
     "jars": [],
