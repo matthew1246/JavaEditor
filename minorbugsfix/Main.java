@@ -129,6 +129,7 @@ public class Main {
 	public JButton comboboxsearchbutton;
 	public JPanel comboboxpanel;	
 	public boolean searchingMethods = false;
+	private boolean filteringFilenames = false;
 	public boolean comboboxArrowNavigation = false;
 	public String comboboxSavedText = "";
 	public boolean comboboxItemSelectedFromPopup = false;
@@ -1337,6 +1338,9 @@ edit.add(functionLines);
 		}
 	}
 	public void filterFilenames() {
+		if(filteringFilenames) return;
+		filteringFilenames = true;
+		try {
 		JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
 		String searchtext = filenameseditor.getText().trim().toLowerCase();
 		String savedText = filenameseditor.getText();
@@ -1346,7 +1350,7 @@ edit.add(functionLines);
 		if(filelistmodifier != null && !filelistmodifier.isEmpty) {
 			List<String> filenames = filelistmodifier.getFileList();
 			for(String filename : filenames) {
-				if(searchtext.isEmpty() || filename.toLowerCase().contains(searchtext)) {
+				if(searchtext.isEmpty() || filename.toLowerCase().startsWith(searchtext)) {
 					filenamescombobox.addItem(filename);
 				}
 			}
@@ -1355,6 +1359,9 @@ edit.add(functionLines);
 		filenameseditor.setCaretPosition(savedCaret);
 		if(filenamescombobox.getItemCount() > 0) {
 			filenamescombobox.showPopup();
+		}
+		} finally {
+			filteringFilenames = false;
 		}
 	}
 	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumenttindex) {
@@ -2541,11 +2548,12 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 				filenamescombobox.setEditable(true);
 				JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
 				filenameseditor.setText("");
-				filenameseditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-					public void insertUpdate(javax.swing.event.DocumentEvent e) { filterFilenames(); }
-					public void removeUpdate(javax.swing.event.DocumentEvent e) { filterFilenames(); }
-					public void changedUpdate(javax.swing.event.DocumentEvent e) { filterFilenames(); }
-				});
+				javax.swing.event.DocumentListener filterListener = new javax.swing.event.DocumentListener() {
+					public void insertUpdate(javax.swing.event.DocumentEvent e) { if(!filteringFilenames) javax.swing.SwingUtilities.invokeLater(() -> filterFilenames()); }
+					public void removeUpdate(javax.swing.event.DocumentEvent e) { if(!filteringFilenames) javax.swing.SwingUtilities.invokeLater(() -> filterFilenames()); }
+					public void changedUpdate(javax.swing.event.DocumentEvent e) { if(!filteringFilenames) javax.swing.SwingUtilities.invokeLater(() -> filterFilenames()); }
+				};
+				filenameseditor.getDocument().addDocumentListener(filterListener);
 				filenameseditor.requestFocusInWindow();
 			}
 		});
