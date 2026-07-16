@@ -3,10 +3,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\withjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
