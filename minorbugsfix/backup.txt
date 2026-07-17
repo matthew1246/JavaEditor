@@ -15,7 +15,11 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Powershell.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Powershell.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Powershell.java"
     ],
     "caretposition": 0
   },
@@ -1319,7 +1323,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 5847
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\SuggestionBoxSelected.java": {
     "isLocked": false,
@@ -2064,5 +2068,43 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 5750
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Powershell"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 5855
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Powershell.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Powershell"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 5851
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Powershell.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Powershell"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 5843
   }
 }

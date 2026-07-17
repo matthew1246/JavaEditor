@@ -139,6 +139,14 @@ public class Powershell {
 			if(filename.startsWith("/"))
 				filename=filename.substring(1,filename.length());
 			JOptionPane.showMessageDialog(null,filename+" is already open. Run script to close "+filename);
+			if(dir.contains("\\")) {
+				if(!dir.endsWith("\\"))
+					dir=dir+"\\";
+			}
+			else if(dir.contains("/")) {
+				if(!dir.endsWith("/"))
+					dir=dir+"/";
+			}
 			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 			output2 = new BufferedWriter(filewriter2);
 			output2.write("cd "+dir);
