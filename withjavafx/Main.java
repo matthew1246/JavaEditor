@@ -206,6 +206,7 @@ public class Main {
 	
 		if(fileName.equals("")) {
 			JTextArea textarea2 = new JTextAreaGroup();
+			((JTextAreaGroup)textarea2).setMain(this);
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
 			Font originalFont = textarea.getFont();
@@ -220,7 +221,7 @@ public class Main {
 			
 			addCaretListener(textarea2);
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = c.autokeylistener.position;
@@ -234,7 +235,7 @@ public class Main {
 				}
 			});
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = c.autokeylistener.position;
@@ -248,7 +249,7 @@ public class Main {
 				}
 			});
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 						int caretposition = c.methodsuggestionbox.position;
@@ -262,7 +263,7 @@ public class Main {
 				}
 			});
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 						int caretposition = c.methodsuggestionbox.position;
@@ -306,6 +307,7 @@ public class Main {
 		if(fileName.equals("")) {
 	
 			JTextArea textarea2 = new JTextAreaGroup();
+			((JTextAreaGroup)textarea2).setMain(this);
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
 			this.textarea = textarea2;
@@ -327,7 +329,7 @@ public class Main {
 
 			addCaretListener(textarea2);
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = c.autokeylistener.position;
@@ -341,7 +343,7 @@ public class Main {
 				}
 			});
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = c.autokeylistener.position;
@@ -355,7 +357,7 @@ public class Main {
 				}
 			});
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 						int caretposition = c.methodsuggestionbox.position;
@@ -369,7 +371,7 @@ public class Main {
 				}
 			});
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 						int caretposition = c.methodsuggestionbox.position;
@@ -439,6 +441,7 @@ public class Main {
 									tabs_selected = count;
 							}				
 							JTextArea textarea2 = new JTextAreaGroup();
+							((JTextAreaGroup)textarea2).setMain(Main.this);
 							textarea2.setLineWrap(true);
 							textarea2.setWrapStyleWord(true);
 							Main.this.textarea = textarea2;
@@ -481,7 +484,7 @@ public class Main {
 				
 							addCaretListener(textarea2);
 							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-								CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+								CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 								try {
 									if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 										int caretposition = c.autokeylistener.position;
@@ -495,7 +498,7 @@ public class Main {
 								}
 							});
 							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-								CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+								CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 								try {
 									if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 										int caretposition = c.autokeylistener.position;
@@ -509,7 +512,7 @@ public class Main {
 								}
 							});
 							scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-								CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+								CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 								try {
 									if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 										int caretposition = c.methodsuggestionbox.position;
@@ -523,7 +526,7 @@ public class Main {
 								}
 							});
 							scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-								CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+								CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 								try {
 									if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 										int caretposition = c.methodsuggestionbox.position;
@@ -752,6 +755,7 @@ public class Main {
 		frame.setSize(800,600);
 		
 		textarea = new JTextAreaGroup();
+		((JTextAreaGroup)textarea).setMain(this);
 		targetArea = textarea;
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
@@ -1852,6 +1856,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		openemptynewtab.addActionListener( (ev2) -> {
 			tabbedpane.remove(pluspanel);
 			JTextArea textarea2 = new JTextAreaGroup();
+			((JTextAreaGroup)textarea2).setMain(this);
 			textarea2.setLineWrap(true);
 			textarea2.setWrapStyleWord(true);
 			Main.this.textarea = textarea2;
@@ -1871,7 +1876,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			addCaretListener(textarea2);
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = c.autokeylistener.position;
@@ -1885,7 +1890,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 			});
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 						int caretposition = c.autokeylistener.position;
@@ -1899,7 +1904,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 			});
 			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 						int caretposition = c.methodsuggestionbox.position;
@@ -1913,7 +1918,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				}
 			});
 			scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-				CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+				CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 				try {
 					if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 						int caretposition = c.methodsuggestionbox.position;
@@ -3048,7 +3053,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});
 		/*textarea.addKeyListener(new CurlyBraceKeyListener(this));
 		autokeylistener = new AutoKeyListener(this);
-		positiontrackers.add(((CurlyBraceKeyListener)textarea.getKeyListeners()[0]).positiontracker);
+		positiontrackers.add(JTextAreaGroup.findCurlyBraceKeyListener(textarea).positiontracker);
  		
  		*/
 		control_f.addActionListener(new ActionListener() {
@@ -4139,6 +4144,15 @@ CommandLine commandline = new CommandLine();
 		frame.getRootPane().setDefaultButton(go_to_line_number);
 		
 	}
+	public void openClassInNewTab(String className) {
+		if(fileName == null || fileName.equals("")) return;
+		String directory = getDirectory(fileName);
+		String targetFile = directory + className + ".java";
+		File file = new File(targetFile);
+		if(file.exists()) {
+			OpenNewTab(targetFile);
+		}
+	}
 	public static String addDotJava(String filename) {	
 		if(!(filename.endsWith(".java"))) {
 			filename+=".java";
@@ -4160,6 +4174,7 @@ CommandLine commandline = new CommandLine();
 										
 				tabbedpane.remove(pluspanel);
 				JTextArea textarea2 = new JTextAreaGroup();
+				((JTextAreaGroup)textarea2).setMain(this);
 				textarea2.setLineWrap(true);
 				textarea2.setWrapStyleWord(true);
 				Main.this.textarea = textarea2;
@@ -4181,7 +4196,7 @@ CommandLine commandline = new CommandLine();
 				
 				addCaretListener(textarea2);
 				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-					CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+					CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 					try {
 						if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 							int caretposition = c.autokeylistener.position;
@@ -4195,7 +4210,7 @@ CommandLine commandline = new CommandLine();
 					}
 				});
 				scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-					CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+					CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 					try {
 						if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 							int caretposition = c.autokeylistener.position;
@@ -4209,7 +4224,7 @@ CommandLine commandline = new CommandLine();
 					}
 				});
 				scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-					CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+					CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 					try {
 						if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 							int caretposition = c.methodsuggestionbox.position;
@@ -4223,7 +4238,7 @@ CommandLine commandline = new CommandLine();
 					}
 				});
 				scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-					CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+					CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 					try {
 						if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 							int caretposition = c.methodsuggestionbox.position;
@@ -4310,6 +4325,7 @@ CommandLine commandline = new CommandLine();
 						}						
 						tabbedpane.remove(pluspanel);
 						JTextArea textarea2 = new JTextAreaGroup();
+						((JTextAreaGroup)textarea2).setMain(Main.this);
 						textarea2.setLineWrap(true);
 						textarea2.setWrapStyleWord(true);
 						Main.this.textarea = textarea2;
@@ -4333,7 +4349,7 @@ CommandLine commandline = new CommandLine();
 						
 						addCaretListener(textarea2);
 						scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-							CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+							CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 							try {
 								if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 									int caretposition = c.autokeylistener.position;
@@ -4347,7 +4363,7 @@ CommandLine commandline = new CommandLine();
 							}
 						});
 						scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-							CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+							CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 							try {
 								if(c.autokeylistener.suggestionbox != null && c.autokeylistener.suggestionbox.isVisible()) {
 									int caretposition = c.autokeylistener.position;
@@ -4361,7 +4377,7 @@ CommandLine commandline = new CommandLine();
 							}
 						});
 						scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-							CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+							CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 							try {
 								if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 									int caretposition = c.methodsuggestionbox.position;
@@ -4375,7 +4391,7 @@ CommandLine commandline = new CommandLine();
 							}
 						});
 						scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
-							CurlyBraceKeyListener c = (CurlyBraceKeyListener) textarea2.getKeyListeners()[0];
+							CurlyBraceKeyListener c = JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
 							try {
 								if(c.methodsuggestionbox != null && c.methodsuggestionbox.isVisible()) {
 									int caretposition = c.methodsuggestionbox.position;
@@ -5472,7 +5488,7 @@ class AutoKeyListener {
 				
 				main.textarea.dispatchEvent(keyevent2);
 				if(!afterextra.equals("")) {
-					MethodSuggestionBox methodsuggestionbox= ((CurlyBraceKeyListener)main.textarea.getKeyListeners()[0]).methodsuggestionbox;
+					MethodSuggestionBox methodsuggestionbox= JTextAreaGroup.findCurlyBraceKeyListener(main.textarea).methodsuggestionbox;
 					SwingUtilities.invokeLater(() -> methodsuggestionbox.search_textfield.requestFocusInWindow());
 					main.targetArea = methodsuggestionbox.search_textfield;
 					Component msb2=(Component)methodsuggestionbox.search_textfield;
