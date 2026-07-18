@@ -11,6 +11,13 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Cursor;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
@@ -18,26 +25,76 @@ import java.util.regex.Matcher;
 import java.util.TreeMap;		
 public class JTextAreaGroup extends JTextArea {
 	public List<Code> codes = new LinkedList<Code>();
+	private Main main;
+	private int underlineStart = -1;
+	private int underlineEnd = -1;
+	private boolean ctrlDown = false;
 	public JTextAreaGroup() {
 		super();
-		
-		this.addMouseListener(new MouseAdapter() { 
+
+		this.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent ke) {
+				if(ke.getKeyCode() == KeyEvent.VK_CONTROL) {
+					ctrlDown = true;
+				}
+			}
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				if(ke.getKeyCode() == KeyEvent.VK_CONTROL) {
+					ctrlDown = false;
+					underlineStart = -1;
+					underlineEnd = -1;
+					JTextAreaGroup.this.repaint();
+				}
+			}
+		});
+
+		this.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent me) {
+				if(ctrlDown) {
+					int pos = viewToModel2D(me.getPoint());
+					if(pos >= 0 && pos < getText().length()) {
+						int[] bounds = getWordBounds(pos);
+						if(bounds != null) {
+							underlineStart = bounds[0];
+							underlineEnd = bounds[1];
+							setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+						} else {
+							underlineStart = -1;
+							underlineEnd = -1;
+							setCursor(Cursor.getDefaultCursor());
+						}
+					} else {
+						underlineStart = -1;
+						underlineEnd = -1;
+						setCursor(Cursor.getDefaultCursor());
+					}
+					JTextAreaGroup.this.repaint();
+				} else {
+					if(underlineStart != -1 || underlineEnd != -1) {
+						underlineStart = -1;
+						underlineEnd = -1;
+						setCursor(Cursor.getDefaultCursor());
+						JTextAreaGroup.this.repaint();
+					}
+				}
+			}
+		});
+
+		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent me) {
+				if(ctrlDown && underlineStart != -1 && underlineEnd != -1) {
+					String word = getText().substring(underlineStart, underlineEnd);
+					if(main != null) {
+						main.openClassInNewTab(word);
+					}
+					return;
+				}
 				int caretposition=viewToModel2D(me.getPoint());
 				Group group = groups.get(caretposition);
-				// debug click {-
-				/*
-				System.out.println(caretposition);
-				TreeMap<Integer,Group> treemap = new TreeMap<Integer,Group>();
-				for(int b:groups.keySet()) {
-					treemap.put(b,null);
-				}
-				for(int b:treemap.keySet()) {
-					System.out.print(b+",");
-				}
-				System.out.println();
-				*/
 				if(group == null) {  // If expand code
 					Pattern pattern=Pattern.compile("(?<!\")\\{\\+\\}(?!\")");
 					text = JTextAreaGroup.this.getText();
@@ -61,7 +118,8 @@ public class JTextAreaGroup extends JTextArea {
 						}	
 					}																		
 				}
-				else if(group != null) {  // will compress code
+				else if(group != null)
+ {  // will compress code
 					try {
 						String text = getText();
 						String first=text.substring(0,group.start+1);
@@ -93,7 +151,6 @@ public class JTextAreaGroup extends JTextArea {
 		Codes codes2 = new Codes(this);
 		List<Integer> codesindex=codes2.getCodes();
 		int index=codes2.getIndex(codesindex,caretposition);
-		// JOptionPane.showMessageDialog(null,index+"");
 		return index;
 	}
 	public void ExpandAll(Main main) {
@@ -258,7 +315,24 @@ public class JTextAreaGroup extends JTextArea {
 						
 					}*/
 				}
-			//}
+			//}
+
+		}
+
+		if(underlineStart != -1 && underlineEnd != -1) {
+			try {
+				Rectangle2D startRect = modelToView2D(underlineStart);
+				Rectangle2D endRect = modelToView2D(underlineEnd - 1);
+				if(startRect != null && endRect != null) {
+					int x1 = (int)Math.round(startRect.getX());
+					int x2 = (int)Math.round(endRect.getX() + endRect.getWidth());
+					int y = (int)Math.round(endRect.getY() + endRect.getHeight()) + 2;
+					graphics.setColor(Color.BLUE);
+					graphics.drawLine(x1, y, x2, y);
+				}
+			} catch(BadLocationException ex) {
+				// ignore
+			}
 		}
 	}
 	public String getLine(String text,int caretposition) {
@@ -292,5 +366,33 @@ public class JTextAreaGroup extends JTextArea {
 		 	count++;
 	 	}
 	 	return count;
+	}
+
+	public void setMain(Main main) {
+		this.main = main;
+	}
+
+	public static CurlyBraceKeyListener findCurlyBraceKeyListener(javax.swing.JTextArea ta) {
+		for(java.awt.event.KeyListener kl : ta.getKeyListeners()) {
+			if(kl instanceof CurlyBraceKeyListener) return (CurlyBraceKeyListener)kl;
+		}
+		return null;
+	}
+
+	private int[] getWordBounds(int pos) {
+		String text = getText();
+		if(pos < 0 || pos >= text.length()) return null;
+		char ch = text.charAt(pos);
+		if(!Character.isLetterOrDigit(ch) && ch != '_') return null;
+		int start = pos;
+		int end = pos;
+		while(start > 0 && (Character.isLetterOrDigit(text.charAt(start - 1)) || text.charAt(start - 1) == '_')) {
+			start--;
+		}
+		while(end < text.length() && (Character.isLetterOrDigit(text.charAt(end)) || text.charAt(end) == '_')) {
+			end++;
+		}
+		if(end - start < 2) return null;
+		return new int[]{start, end};
 	}
 }
