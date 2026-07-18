@@ -3,10 +3,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
+      "C:\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -1212,13 +1212,24 @@
   "C:\\javaeditor\\withjavafx\\Main.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
     "caretposition": 1107
   },
   "C:\\javaeditor\\withjavafx\\Muck.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\javaeditor\\withjavafx\\threecomboboxes.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
