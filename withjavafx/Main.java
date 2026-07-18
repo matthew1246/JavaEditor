@@ -4661,7 +4661,12 @@ class OpenDefaultContent {
 			File mainFile = new File(this.fileName);
 			if(!mainFile.exists()) {
 				FileWriter filewriter2 = new FileWriter(mainFile);
-				filewriter2.write("public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello World!\");\n\t}\n}\n");
+				filewriter2.write("import javafx.application.Application;\nimport javafx.stage.Stage;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Label;\n");
+				filewriter2.write("public class Main extends Application {\n\t@Override\n\tpublic void start(Stage stage) {\n\t\t");
+				filewriter2.write("Scene scene = new Scene(new Label(\"Hello World!\"),800,600);\n\t\t");
+				filewriter2.write("stage.setScene(scene);\n\t\t");
+				filewriter2.write("stage.show();\n\t}\n}\n");
+				// filewriter2.write("public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello World!\");\n\t}\n}\n");
 				filewriter2.close();
 			}
 			FileReader filereader2 = new FileReader(mainFile);
