@@ -234,9 +234,10 @@ public class Git {
 			git(command);
 		});
 		addtoall.addActionListener( (ev) -> {
-			String command = "eval $(git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
+			String command = "eval $(git for-each-ref --shell --format=\"git checkout %(refname:lstrip=3); git rebase "+frame.getTitle()+"; git push;\" refs/remotes)";
 			JOptionPane.showMessageDialog(null,command);
 			git(command);
+			
 		});
 		upload.addActionListener( (ev) -> {
 			JFrame commit = new JFrame("Add commit message");
@@ -497,6 +498,7 @@ public class Git {
 */
 		CommandLine commandline = new CommandLine();
 		Process process = null;
+		
 		if(isGitInstalled) {
 			process=commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
 		}
@@ -509,4 +511,4 @@ public class Git {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
