@@ -1453,24 +1453,31 @@ edit.add(functionLines);
 				if(position == null) return;
 				int wholedocumentindex = position;
 					
-					JScrollPane scrollpane=
+				JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+				JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+			
+				MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+				mycaretlistener2.caret_tracker.caret_tracker.add(wholedocumentindex);
+					
+					
+				JScrollPane scrollpane=
 ((JScrollPane)tabbedpane.getSelectedComponent());
-					JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
-					
-					/*verticalscrollbar.setValue(textarea.getText().length()-1);
-					textarea.setCaretPosition(textarea.getText().length()-1);*/
-					verticalscrollbar.setValue(0);
-					textarea.setCaretPosition(0);
-					textarea.requestFocus();
-					
-					verticalscrollbar.setValue(wholedocumentindex);
-					textarea.setCaretPosition(wholedocumentindex);
-					//JOptionPane.showMessageDialog(null,"Opened new file.");
-					
-					verticalscrollbar.setValue(wholedocumentindex);
-					
-					
-					scrollToCaretPosition(wholedocumentindex);
+				JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
+				
+				/*verticalscrollbar.setValue(textarea.getText().length()-1);
+				textarea.setCaretPosition(textarea.getText().length()-1);*/
+				verticalscrollbar.setValue(0);
+				textarea.setCaretPosition(0);
+				textarea.requestFocus();
+				
+				verticalscrollbar.setValue(wholedocumentindex);
+				textarea.setCaretPosition(wholedocumentindex);
+				//JOptionPane.showMessageDialog(null,"Opened new file.");
+				
+				verticalscrollbar.setValue(wholedocumentindex);
+				
+				
+				scrollToCaretPosition(wholedocumentindex);
 			}
 		}
 	}

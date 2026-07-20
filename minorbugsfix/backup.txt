@@ -12,12 +12,11 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Powershell.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java"
     ],
@@ -1128,7 +1127,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 109221
+    "caretposition": 49817
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
     "isLocked": false,
