@@ -3661,7 +3661,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
 							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
 							String fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
-							if(isClassExists(fileName) && isCompiled && string.equals(lines2)) { // End check if already saved
+							String maintwo2 = Main.getDirectory(fileName);
+							if(!maintwo2.endsWith("\\"))
+								maintwo2=maintwo2+"\\";
+							maintwo2=maintwo2+"Maintwo.java";	
+							if(isClassExists(fileName) && isClassExists(maintwo2) && isCompiled && string.equals(lines2)) { // End check if already saved
 								System.out.println("Is equal.");
 								
 CommandLine commandline = new CommandLine();
@@ -4564,7 +4568,7 @@ CommandLine commandline = new CommandLine();
 	public static boolean isSameDirectory(String fileName1,String fileName2) {
 		return Main.getDirectory(fileName1).equals(Main.getDirectory(fileName2));
 	}
-	public boolean isClassExists(String fileName2) {
+	public boolean isClassExists(String fileName2) 	{
 		File file = new File((fileName2.substring(0,fileName2.length()-5))+".class");
 		return file.exists();
 	}
