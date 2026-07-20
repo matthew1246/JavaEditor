@@ -1488,6 +1488,11 @@ edit.add(functionLines);
 				if(position == null) return;
 				int wholedocumentindex = position;
 				
+				JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+				JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+			
+				MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+				mycaretlistener2.caret_tracker.caret_tracker.add(wholedocumentindex);
 				
 JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
 				JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
