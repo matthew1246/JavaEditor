@@ -1455,6 +1455,12 @@ edit.add(functionLines);
 				if(position == null) return;
 				int wholedocumenttindex = position;
 				
+				JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+				JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+			
+				MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+				mycaretlistener2.caret_tracker.caret_tracker.add(wholedocumenttindex);
+				
 				JScrollPane scrollpane=
 ((JScrollPane)tabbedpane.getSelectedComponent());
 				JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
@@ -1595,7 +1601,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() {	
+	public void setListeners() 	{	
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
