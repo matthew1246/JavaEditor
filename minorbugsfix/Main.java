@@ -4359,6 +4359,17 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean isEndOfFile() {
 		return main.textarea.getCaretPosition() == main.textarea.getText().length();
 	}
+	public boolean isCaretInsideString() {
+		int caretpos = main.textarea.getCaretPosition();
+		String textBeforeCaret = main.textarea.getText().substring(0, caretpos);
+		int quoteCount = 0;
+		for (int i = 0; i < textBeforeCaret.length(); i++) {
+			if (textBeforeCaret.charAt(i) == '"' && (i == 0 || textBeforeCaret.charAt(i - 1) != '\\')) {
+				quoteCount++;
+			}
+		}
+		return quoteCount % 2 != 0;
+	}
 	public char lastkeycurlybracelistener;
 	public MethodSuggestionBox methodsuggestionbox;
 	private boolean isShift = false;
@@ -4389,7 +4400,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if( (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) && (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+		if( (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) && (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) && !isCaretInsideString() ) {
 			methodsuggestionbox= new MethodSuggestionBox(main);
 			main.targetArea = methodsuggestionbox.search_textfield;
 		}
@@ -4444,7 +4455,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public void keyReleased(KeyEvent ev) {
 		// Add if (!ev.isActionKey()) instead of ev.getKeyCode != 16 
 		if(ev.getKeyCode() != 16 && !ev.isControlDown()) {
-			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) && !isCaretInsideString() ) {
 				if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 					main.targetArea = methodsuggestionbox.search_textfield;
 				}
