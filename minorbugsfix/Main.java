@@ -5317,9 +5317,78 @@ class MethodSuggestionBox {
 			}
 		}
 	}
+	public String findEnclosingClassName(int caretPosition) {
+		String wholeText = text;
+		int braceDepth = 0;
+		String currentClassName = null;
+		LinkedList<String> classNames = new LinkedList<String>();
+		for(int i = 0; i < caretPosition && i < wholeText.length(); i++) {
+			char c = wholeText.charAt(i);
+			if(c == '{') {
+				braceDepth++;
+				if(braceDepth == 1) {
+					int lineStart = wholeText.lastIndexOf('\n', i - 1) + 1;
+					String line = wholeText.substring(lineStart, i + 1);
+					int prevLineStart = wholeText.lastIndexOf('\n', lineStart - 1) + 1;
+					String prevLine = wholeText.substring(prevLineStart, lineStart);
+					String className = null;
+					if(line.contains("class")) {
+						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+						Matcher mt = p.matcher(line);
+						if(mt.find()) className = mt.group(1);
+					}
+					if(className == null && prevLine.contains("class")) {
+						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+						Matcher mt = p.matcher(prevLine);
+						if(mt.find()) className = mt.group(1);
+					}
+					if(className != null) {
+						classNames.add(className);
+						currentClassName = className;
+					}
+				}
+			}
+			else if(c == '}') {
+				braceDepth--;
+				if(braceDepth == 0 && !classNames.isEmpty()) {
+					classNames.removeLast();
+					currentClassName = classNames.isEmpty() ? null : classNames.getLast();
+				}
+			}
+		}
+		return currentClassName;
+	}
+	public Object[] getMethodsOfEnclosingClass() {
+		int caretposition2 = main.textarea.getCaretPosition();
+		String className = findEnclosingClassName(caretposition2);
+		if(className != null) {
+			Class<?> classQ = getClassQuestionMark(className, text);
+			if(classQ != null) {
+				return getAllPropertyAndMethodsAndEnums(classQ);
+			}
+			GetClassMethods gcm = new GetClassMethods(main.textarea);
+			LinkedHashMap<String,LinkedHashMap<String,Integer>> allMethods = gcm.getMethods();
+			LinkedHashMap<String,Integer> classMethods = allMethods.get(className);
+			if(classMethods != null) {
+				Object[] results = new Object[classMethods.size()];
+				int idx = 0;
+				for(String methodName : classMethods.keySet()) {
+					results[idx++] = methodName;
+				}
+				return results;
+			}
+		}
+		return new Object[0];
+	}
 	public Object[] search(String input) {
 		// JOptionPane.showMessageDialog(null,input);
 		
+		String strippedInput = input;
+		if(strippedInput.endsWith(".")) strippedInput = strippedInput.substring(0, strippedInput.length()-1);
+		if(strippedInput.equals("this")) {
+			Object[] thisMethods = getMethodsOfEnclosingClass();
+			if(thisMethods.length > 0) return thisMethods;
+		}
 		Object[] innerpackages=getInnerPackages(input);
 		Object[] classes = getClassesFromPackage(input);
 		Object[] allobjects=addMembersToMembers(innerpackages,classes);
