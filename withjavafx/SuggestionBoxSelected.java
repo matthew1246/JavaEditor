@@ -46,7 +46,12 @@ public String[] Reordered(String[] members,String classname) {
 			for(String methodname:linkedhashmap.get(classname)) {
 				for(int j = 0; j < nameslist.size(); j++) {
 					String member = nameslist.get(j);
-					if(member.equals(methodname)) {
+					String memberName = member;
+					int spIdx = member.indexOf(" ");
+					if(spIdx > 0) {
+						memberName = member.substring(spIdx + 1);
+					}
+					if(memberName.equals(methodname)) {
 						nameslist.remove(member);
 						nameslist.add(0,member);
 					}

@@ -6172,6 +6172,7 @@ class MethodSuggestionBox {
 				strings[i] = (String)methods[i];
 			}		
 			else if(methods[i] instanceof Method) {
+				String returnType=((Method)methods[i]).getReturnType().getSimpleName();
 				String name=((Method)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
@@ -6179,7 +6180,7 @@ class MethodSuggestionBox {
 				
 				name+=getParanthesesAndParameters(methods[i]);
 				
-				strings[i] = name;
+				strings[i] = returnType+" "+name;
 			}
 			else if(methods[i] instanceof Constructor) {
 				String name=((Constructor)methods[i]).getName();
@@ -6206,12 +6207,13 @@ class MethodSuggestionBox {
 				}
 				strings[i] =name;
 			}
-			else if(methods[i] instanceof Member) {
+			else if(methods[i] instanceof Field) {
+				String fieldType=((Field)methods[i]).getType().getSimpleName();
 				String name=((Member)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
-				strings[i] =name;
+				strings[i] =fieldType+" "+name;
 			}
 			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
 				String name= methods[i].toString();
@@ -6380,16 +6382,22 @@ class MethodSuggestionBox {
 			suggestionbox.setVisible(false);
 			String text = main.textarea.getText();
 					
-			CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
+			String insertSelected = selected;
+			int spaceIdx = selected.indexOf(" ");
+			if(spaceIdx > 0) {
+				insertSelected = selected.substring(spaceIdx + 1);
+			}
+
+			CurlyBraceKeyListener.suggestionboxselected.Save(search,insertSelected);
 					
 			if(!ifSearchTwice.equals(""))
-				selected=ifSearchTwice+"."+selected;
-			String firsthalf=text.substring(0,caretposition)+"."+selected;
+				insertSelected=ifSearchTwice+"."+insertSelected;
+			String firsthalf=text.substring(0,caretposition)+"."+insertSelected;
 			//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 			///String second =text.substring(caretposition+1,text.length());
 			String second =text.substring(caretposition+replacelength,text.length());
 			main.textarea.setText(firsthalf+second);
-			main.textarea.setCaretPosition(caretposition+1+selected.length());
+			main.textarea.setCaretPosition(caretposition+1+insertSelected.length());
 		}
 		public boolean isFinished = false;
 		public String ifSearchTwice = "";
@@ -6472,8 +6480,13 @@ class MethodSuggestionBox {
 						if(searchy.endsWith("()")) {
 							searchy = searchy.substring(0, searchy.length() - 2);
 						}
-						for(JLabel label:labels2) {	
-							if( ! (label.getText().toLowerCase().startsWith(searchy)) ) {
+						for(JLabel label:labels2) {
+							String labelText = label.getText().toLowerCase();
+							int spIdx = labelText.indexOf(" ");
+							if(spIdx > 0) {
+								labelText = labelText.substring(spIdx + 1);
+							}
+							if( ! (labelText.startsWith(searchy)) ) {
 								liveiterator.remove(label);
 							}
 						}
@@ -6558,11 +6571,13 @@ class MethodSuggestionBox {
 				labels[i] = new JLabel((String)methods[i]);
 			}		
 			else if(methods[i] instanceof Method) {
+				String returnType=((Method)methods[i]).getReturnType().getSimpleName();
 				String name=((Method)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
-				labels[i] = new JLabel(name);
+				name+=getParanthesesAndParameters(methods[i]);
+				labels[i] = new JLabel(returnType+" "+name);
 			}
 			else if(methods[i] instanceof Constructor) {
 				String name=((Constructor)methods[i]).getName();
@@ -6586,12 +6601,13 @@ class MethodSuggestionBox {
 				}
 				labels[i] = new JLabel(name);
 			}
-			else if(methods[i] instanceof Member) {
+			else if(methods[i] instanceof Field) {
+				String fieldType=((Field)methods[i]).getType().getSimpleName();
 				String name=((Member)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
-				labels[i] = new JLabel(name);
+				labels[i] = new JLabel(fieldType+" "+name);
 			}
 			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
 				String name= methods[i].toString();
