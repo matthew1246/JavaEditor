@@ -4881,6 +4881,35 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean isEndOfFile() {
 		return main.textarea.getCaretPosition() == main.textarea.getText().length();
 	}
+	public boolean isCaretInsideString() {
+		int caretpos = main.textarea.getCaretPosition();
+		String textBeforeCaret = main.textarea.getText().substring(0, caretpos);
+		boolean inString = false;
+		boolean inChar = false;
+		boolean inLineComment = false;
+		boolean inBlockComment = false;
+		for (int i = 0; i < textBeforeCaret.length(); i++) {
+			char c = textBeforeCaret.charAt(i);
+			char next = (i + 1 < textBeforeCaret.length()) ? textBeforeCaret.charAt(i + 1) : 0;
+			if (inLineComment) {
+				if (c == '\n') inLineComment = false;
+			} else if (inBlockComment) {
+				if (c == '*' && next == '/') { inBlockComment = false; i++; }
+			} else if (inString) {
+				if (c == '\\') { i++; }
+				else if (c == '"') inString = false;
+			} else if (inChar) {
+				if (c == '\\') { i++; }
+				else if (c == '\'') inChar = false;
+			} else {
+				if (c == '"') inString = true;
+				else if (c == '\'') inChar = true;
+				else if (c == '/' && next == '/') { inLineComment = true; }
+				else if (c == '/' && next == '*') { inBlockComment = true; i++; }
+			}
+		}
+		return inString;
+	}
 	public char lastkeycurlybracelistener;
 	public MethodSuggestionBox methodsuggestionbox;
 	private boolean isShift = false;
@@ -4911,7 +4940,7 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
-		if( (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) && (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+		if( (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) && (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) && !isCaretInsideString() ) {
 			methodsuggestionbox= new MethodSuggestionBox(main);
 			main.targetArea = methodsuggestionbox.search_textfield;
 		}
@@ -4966,7 +4995,7 @@ class CurlyBraceKeyListener implements KeyListener {
 	public void keyReleased(KeyEvent ev) {
 		// Add if (!ev.isActionKey()) instead of ev.getKeyCode != 16 
 		if(ev.getKeyCode() != 16 && !ev.isControlDown()) {
-			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) ) {
+			if( (ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) && !isCaretInsideString() ) {
 				if(methodsuggestionbox != null && methodsuggestionbox.isVisible()) {
 					main.targetArea = methodsuggestionbox.search_textfield;
 				}
@@ -5830,7 +5859,9 @@ class MethodSuggestionBox {
 	}
 	public Object[] search(String input) {
 		// JOptionPane.showMessageDialog(null,input);
-		
+		if(input.equals("this")) {
+			return getMethodsOfEnclosingClass();
+		}
 		Object[] innerpackages=getInnerPackages(input);
 		Object[] classes = getClassesFromPackage(input);
 		Object[] allobjects=addMembersToMembers(innerpackages,classes);
@@ -5938,12 +5969,13 @@ class MethodSuggestionBox {
 			if(classname.contains("<") && classname.contains(">")) {
 				classname = classname.replaceAll("<.+>","");
 			}
+			if(main.fileName == null) return null;
 			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
 			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);			
 			Class<?> classquestionmark=classloader.loadClass(dir+classname);
 			// Class<?> classquestionmark=Class.forName();
 			return classquestionmark;
-		} catch(ClassNotFoundException ex3) {
+		} catch(Exception ex3) {
 			String[] lines = text.split("\n");
 			try {
 				for(int i = 0; i < lines.length; i++) {
@@ -5957,10 +5989,12 @@ class MethodSuggestionBox {
 				}
 				//JOptionPane.showMessageDialog(null,classname);
 				
+				if(Main.muck == null || Main.muck.links == null)
+					return null;
 				List<String> imports =Main.muck.links.getImport(classname);
 				//JOptionPane.showMessageDialog(null,imports.size()+"");
 				if(imports == null)
-					return Class.forName("java.lang.Object");
+					return null;
 				for(String importy:imports) {
 					String select="import "+importy.replaceAll(classname+"$","")+"*;";
 					if(text.contains(select))
@@ -5973,6 +6007,120 @@ class MethodSuggestionBox {
 				return null;
 			}
 		}
+	}
+	public String findEnclosingClassName() {
+		int caretPos = main.textarea.getCaretPosition();
+		String text = main.textarea.getText();
+		int braceDepth = 0;
+		String foundClassName = null;
+		List<Integer> classDepths = new ArrayList<Integer>();
+		List<String> classNames = new ArrayList<String>();
+		for (int i = 0; i < caretPos && i < text.length(); i++) {
+			char c = text.charAt(i);
+			if (c == '{') {
+				braceDepth++;
+			} else if (c == '}') {
+				braceDepth--;
+				for (int j = classDepths.size() - 1; j >= 0; j--) {
+					if (classDepths.get(j) >= braceDepth) {
+						classDepths.remove(j);
+						classNames.remove(j);
+					}
+				}
+			}
+			if (i < text.length() - 6 && text.substring(i, i + 6).equals("class ")) {
+				int classNameStart = i + 6;
+				int classNameEnd = classNameStart;
+				while (classNameEnd < text.length() && text.charAt(classNameEnd) != ' ' && text.charAt(classNameEnd) != '{' && text.charAt(classNameEnd) != '<' && text.charAt(classNameEnd) != '\n' && text.charAt(classNameEnd) != '\r') {
+					classNameEnd++;
+				}
+				if (classNameEnd > classNameStart) {
+					String className = text.substring(classNameStart, classNameEnd).trim();
+					if (!className.isEmpty() && !className.equals("extends") && !className.equals("implements")) {
+						classDepths.add(braceDepth);
+						classNames.add(className);
+						foundClassName = className;
+					}
+				}
+			}
+		}
+		return foundClassName;
+	}
+	public Object[] getMethodsOfEnclosingClass() {
+		try {
+			String className = findEnclosingClassName();
+			if (className == null) return new Object[0];
+			Class<?> classQ = getClassQuestionMark(className, main.textarea.getText());
+			if (classQ == null || classQ == java.lang.Object.class) return new Object[0];
+			Member[] methods = classQ.getDeclaredMethods();
+			Member[] constructors = classQ.getDeclaredConstructors();
+			Member[] all = addMembersToMembers(methods, constructors);
+			Member[] fields = classQ.getDeclaredFields();
+			all = addMembersToMembers(all, fields);
+			return all;
+		} catch (Exception e) {
+			return new Object[0];
+		}
+	}
+	public Object[] parseFieldsAndMethodsFromText(String text, String className) {
+		List<Object> result = new ArrayList<Object>();
+		int classStart = -1;
+		int classEnd = -1;
+		int depth = 0;
+		boolean inClass = false;
+		for (int i = 0; i < text.length(); i++) {
+			if (!inClass) {
+				if (text.substring(i).startsWith("class " + className)) {
+					classStart = i;
+					inClass = true;
+				}
+			} else {
+				if (text.charAt(i) == '{') {
+					depth++;
+				} else if (text.charAt(i) == '}') {
+					depth--;
+					if (depth == 0) {
+						classEnd = i + 1;
+						break;
+					}
+				}
+			}
+		}
+		if (classStart == -1 || classEnd == -1) return new Object[0];
+		String classBody = text.substring(classStart, classEnd);
+		depth = 0;
+		int methodStart = -1;
+		int methodDepth = 0;
+		for (int i = 0; i < classBody.length(); i++) {
+			if (classBody.charAt(i) == '{') {
+				depth++;
+				if (methodDepth == 0 && depth == 1) {
+					methodStart = i;
+					methodDepth = 1;
+				}
+			} else if (classBody.charAt(i) == '}') {
+				if (methodDepth > 0) {
+					methodDepth--;
+					if (methodDepth == 0 && methodStart != -1) {
+						String methodSig = classBody.substring(0, methodStart).trim();
+						String methodBody = classBody.substring(methodStart + 1, i);
+						int lastSpace = methodSig.lastIndexOf(' ');
+						String methodName = (lastSpace > 0) ? methodSig.substring(lastSpace + 1).trim() : methodSig;
+						int paren = methodName.indexOf('(');
+						if (paren > 0) {
+							methodName = methodName.substring(0, paren);
+						}
+						if (!methodName.isEmpty() && !methodName.equals(className)) {
+							result.add(methodName);
+						}
+						methodStart = -1;
+					}
+				} else {
+					depth--;
+				}
+			}
+		}
+		return result.toArray(new Object[0]);
 	}
 	public Member[] getAllPropertyAndMethods(String classname,String text) {
 		Class<?> members = 	getClassQuestionMark(classname,text);
