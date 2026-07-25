@@ -5875,19 +5875,96 @@ class MethodSuggestionBox {
 			if(classQ != null) {
 				return getAllPropertyAndMethodsAndEnums(classQ);
 			}
-			GetClassMethods gcm = new GetClassMethods(main.textarea);
-			LinkedHashMap<String,LinkedHashMap<String,Integer>> allMethods = gcm.getMethods();
-			LinkedHashMap<String,Integer> classMethods = allMethods.get(className);
-			if(classMethods != null) {
-				Object[] results = new Object[classMethods.size()];
-				int idx = 0;
-				for(String methodName : classMethods.keySet()) {
-					results[idx++] = methodName;
-				}
-				return results;
-			}
+			return parseFieldsAndMethodsFromText(className, text, caretposition2);
 		}
 		return new Object[0];
+	}
+	public Object[] parseFieldsAndMethodsFromText(String className, String wholeText, int caretPosition) {
+		List<Object> results = new ArrayList<>();
+		int braceDepth = 0;
+		int classStart = -1;
+		int classEnd = -1;
+		for(int i = 0; i < caretPosition && i < wholeText.length(); i++) {
+			if(wholeText.charAt(i) == '{') {
+				braceDepth++;
+				if(braceDepth == 1) {
+					int lineStart = wholeText.lastIndexOf('\n', i - 1) + 1;
+					String line = wholeText.substring(lineStart, i + 1);
+					int prevLineStart = wholeText.lastIndexOf('\n', lineStart - 1) + 1;
+					String prevLine = wholeText.substring(prevLineStart, lineStart);
+					String foundClassName = null;
+					if(line.contains("class")) {
+						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+						Matcher mt = p.matcher(line);
+						if(mt.find()) foundClassName = mt.group(1);
+					}
+					if(foundClassName == null && prevLine.contains("class")) {
+						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+						Matcher mt = p.matcher(prevLine);
+						if(mt.find()) foundClassName = mt.group(1);
+					}
+					if(className.equals(foundClassName)) {
+						classStart = i + 1;
+					}
+				}
+			}
+			else if(wholeText.charAt(i) == '}') {
+				braceDepth--;
+				if(braceDepth == 0 && classStart > 0) {
+					classEnd = i;
+					break;
+				}
+			}
+		}
+		if(classStart < 0 || classEnd < 0) return results.toArray();
+		String body = wholeText.substring(classStart, classEnd);
+		String[] lines = body.split("\n");
+		int depth = 0;
+		for(String line : lines) {
+			String t = line.trim();
+			for(int i = 0; i < t.length(); i++) {
+				char c = t.charAt(i);
+				if(c == '{') depth++;
+				else if(c == '}') {
+					depth--;
+					if(depth < 0) depth = 0;
+				}
+			}
+			if(depth > 0) continue;
+			if(t.isEmpty() || t.startsWith("//") || t.startsWith("@") || t.startsWith("/*") || t.startsWith("*")) continue;
+			if(t.equals("{") || t.equals("}")) continue;
+			if(t.contains("(") && t.contains(")")) {
+				int pStart = t.indexOf('(');
+				int pEnd = t.indexOf(')');
+				String before = t.substring(0, pStart).trim();
+				String params = pEnd > pStart ? t.substring(pStart + 1, pEnd).trim() : "";
+				String[] parts = before.split("\\s+");
+				if(parts.length >= 2) {
+					String name = parts[parts.length - 1];
+					if(name.equals(className)) {
+						results.add(name + "(" + params + ")");
+					}
+					else {
+						String retType = parts[parts.length - 2];
+						results.add(retType + " " + name + "(" + params + ")");
+					}
+				}
+			}
+			else if(t.endsWith(";")) {
+				String cleaned = t.replaceAll(";", "").trim();
+				int eqIdx = cleaned.indexOf('=');
+				if(eqIdx > 0) cleaned = cleaned.substring(0, eqIdx).trim();
+				String[] parts = cleaned.split("\\s+");
+				if(parts.length >= 2) {
+					String name = parts[parts.length - 1];
+					String type = parts[parts.length - 2];
+					if(!type.equals("class") && !type.equals("return") && !type.equals("new")) {
+						results.add(type + " " + name);
+					}
+				}
+			}
+		}
+		return results.toArray();
 	}
 	public Object[] search(String input) {
 		// JOptionPane.showMessageDialog(null,input);

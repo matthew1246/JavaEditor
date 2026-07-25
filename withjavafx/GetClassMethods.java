@@ -36,9 +36,11 @@ public class GetClassMethods {
 						}
 					break;
 					case "}":
-						int leftcurlybrace=(Integer)stackleftcurlybrace2.pop();
-						if(stackleftcurlybrace2.size() == 0) {
-							classnames2.put(classname,leftcurlybrace);
+						if(!stackleftcurlybrace2.isEmpty()) {
+							int leftcurlybrace=(Integer)stackleftcurlybrace2.pop();
+							if(stackleftcurlybrace2.size() == 0) {
+								classnames2.put(classname,leftcurlybrace);
+							}
 						}
 					break;
 				}
@@ -72,10 +74,12 @@ public class GetClassMethods {
 						}
 					break;
 					case "}":
-						int leftcurlybrace=(Integer)stackleftcurlybrace.pop();
-						if(stackleftcurlybrace.size() == 1) {
-							String methodname=findmethodname2.getMethodName(leftcurlybrace);
-							classnamesandmethods.get(classname).put(methodname,leftcurlybrace);
+						if(!stackleftcurlybrace.isEmpty()) {
+							int leftcurlybrace=(Integer)stackleftcurlybrace.pop();
+							if(stackleftcurlybrace.size() == 1) {
+								String methodname=findmethodname2.getMethodName(leftcurlybrace);
+								classnamesandmethods.get(classname).put(methodname,leftcurlybrace);
+							}
 						}
 					break;
 				}
