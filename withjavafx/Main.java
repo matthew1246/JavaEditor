@@ -4871,13 +4871,31 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean isCaretInsideString() {
 		int caretpos = main.textarea.getCaretPosition();
 		String textBeforeCaret = main.textarea.getText().substring(0, caretpos);
-		int quoteCount = 0;
+		boolean inString = false;
+		boolean inChar = false;
+		boolean inLineComment = false;
+		boolean inBlockComment = false;
 		for (int i = 0; i < textBeforeCaret.length(); i++) {
-			if (textBeforeCaret.charAt(i) == '"' && (i == 0 || textBeforeCaret.charAt(i - 1) != '\\')) {
-				quoteCount++;
+			char c = textBeforeCaret.charAt(i);
+			char next = (i + 1 < textBeforeCaret.length()) ? textBeforeCaret.charAt(i + 1) : 0;
+			if (inLineComment) {
+				if (c == '\n') inLineComment = false;
+			} else if (inBlockComment) {
+				if (c == '*' && next == '/') { inBlockComment = false; i++; }
+			} else if (inString) {
+				if (c == '\\') { i++; }
+				else if (c == '"') inString = false;
+			} else if (inChar) {
+				if (c == '\\') { i++; }
+				else if (c == '\'') inChar = false;
+			} else {
+				if (c == '"') inString = true;
+				else if (c == '\'') inChar = true;
+				else if (c == '/' && next == '/') { inLineComment = true; }
+				else if (c == '/' && next == '*') { inBlockComment = true; i++; }
 			}
 		}
-		return quoteCount % 2 != 0;
+		return inString;
 	}
 	public char lastkeycurlybracelistener;
 	public MethodSuggestionBox methodsuggestionbox;

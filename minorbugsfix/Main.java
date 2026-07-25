@@ -4362,13 +4362,31 @@ class CurlyBraceKeyListener implements KeyListener {
 	public boolean isCaretInsideString() {
 		int caretpos = main.textarea.getCaretPosition();
 		String textBeforeCaret = main.textarea.getText().substring(0, caretpos);
-		int quoteCount = 0;
+		boolean inString = false;
+		boolean inChar = false;
+		boolean inLineComment = false;
+		boolean inBlockComment = false;
 		for (int i = 0; i < textBeforeCaret.length(); i++) {
-			if (textBeforeCaret.charAt(i) == '"' && (i == 0 || textBeforeCaret.charAt(i - 1) != '\\')) {
-				quoteCount++;
+			char c = textBeforeCaret.charAt(i);
+			char next = (i + 1 < textBeforeCaret.length()) ? textBeforeCaret.charAt(i + 1) : 0;
+			if (inLineComment) {
+				if (c == '\n') inLineComment = false;
+			} else if (inBlockComment) {
+				if (c == '*' && next == '/') { inBlockComment = false; i++; }
+			} else if (inString) {
+				if (c == '\\') { i++; }
+				else if (c == '"') inString = false;
+			} else if (inChar) {
+				if (c == '\\') { i++; }
+				else if (c == '\'') inChar = false;
+			} else {
+				if (c == '"') inString = true;
+				else if (c == '\'') inChar = true;
+				else if (c == '/' && next == '/') { inLineComment = true; }
+				else if (c == '/' && next == '*') { inBlockComment = true; i++; }
 			}
 		}
-		return quoteCount % 2 != 0;
+		return inString;
 	}
 	public char lastkeycurlybracelistener;
 	public MethodSuggestionBox methodsuggestionbox;
@@ -4400,7 +4418,15 @@ class CurlyBraceKeyListener implements KeyListener {
 				renamevariable.track();
 			break;	
 		}		
+		boolean msbNull = methodsuggestionbox == null;
+		boolean msbVisible = methodsuggestionbox != null && methodsuggestionbox.isVisible();
+		boolean autoNull = autokeylistener == null;
+		boolean autoVisible = autokeylistener != null && autokeylistener.isVisible();
+		boolean inString = isCaretInsideString();
+		boolean dotChar = ev.getKeyChar() == '.';
+		System.out.println("KP: char="+ev.getKeyChar()+" msbNull="+msbNull+" msbVis="+msbVisible+" autoNull="+autoNull+" autoVis="+autoVisible+" inStr="+inString+" dot="+dotChar);
 		if( (methodsuggestionbox == null || !methodsuggestionbox.isVisible()) && (ev.getKeyCode() != 16 && ev.getKeyChar() =='.' && !ev.isControlDown()) && (autokeylistener == null || !autokeylistener.isVisible()) && !isCaretInsideString() ) {
+			System.out.println("KP: Creating MethodSuggestionBox");
 			methodsuggestionbox= new MethodSuggestionBox(main);
 			main.targetArea = methodsuggestionbox.search_textfield;
 		}
@@ -5303,18 +5329,26 @@ class MethodSuggestionBox {
 		position = caretposition;
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
+		System.out.println("MSB-CONSTRUCT: currentline2='"+currentline2+"' caretpos="+caretposition);
 		if(currentline2.length() > 0) {
 			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z0-9\\.\\(\\)]+)\\z");
 			Matcher matcher0=pattern.matcher(currentline2);	
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
 				currentline = matcher0.group(2);
-				System.out.println("*"+currentline+"*");
+				System.out.println("MSB-CONSTRUCT: currentline='"+currentline+"'");
 									
 				Object[] allobjects=search(currentline);
+				System.out.println("MSB-CONSTRUCT: search returned "+allobjects.length+" results");
 				if(allobjects.length > 0)
 					show(allobjects,caretposition,currentline);	
+				else
+					System.out.println("MSB-CONSTRUCT: show() NOT called - no results");
+			} else {
+				System.out.println("MSB-CONSTRUCT: regex did not match on '"+currentline2+"'");
 			}
+		} else {
+			System.out.println("MSB-CONSTRUCT: currentline2 is empty");
 		}
 	}
 	public String findEnclosingClassName(int caretPosition) {
@@ -5360,17 +5394,24 @@ class MethodSuggestionBox {
 		try {
 			int caretposition2 = main.textarea.getCaretPosition();
 			String className = findEnclosingClassName(caretposition2);
+			System.out.println("GMOEC: className='"+className+"' caretpos="+caretposition2+" textLen="+text.length());
 			if(className != null) {
 				Class<?> classQ = null;
 				try {
 					classQ = getClassQuestionMark(className, text);
-				} catch(Exception ex) {}
+				} catch(Exception ex) { System.out.println("GMOEC: getClassQuestionMark exception: "+ex); }
+				System.out.println("GMOEC: classQ="+classQ);
 				if(classQ != null && classQ != java.lang.Object.class) {
 					return getAllPropertyAndMethodsAndEnums(classQ);
 				}
-				return parseFieldsAndMethodsFromText(className, text, caretposition2);
+				Object[] result = parseFieldsAndMethodsFromText(className, text, caretposition2);
+				System.out.println("GMOEC: parseFieldsAndMethodsFromText returned "+result.length+" results");
+				return result;
+			} else {
+				System.out.println("GMOEC: className is NULL");
 			}
 		} catch(Exception ex) {
+			System.out.println("GMOEC: EXCEPTION: "+ex);
 			ex.printStackTrace();
 		}
 		return new Object[0];
