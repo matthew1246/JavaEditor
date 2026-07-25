@@ -6333,6 +6333,7 @@ class MethodSuggestionBox {
 				strings[i] = (String)methods[i];
 			}		
 			else if(methods[i] instanceof Method) {
+				String returnType=((Method)methods[i]).getReturnType().getSimpleName();
 				String name=((Method)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
@@ -6340,7 +6341,7 @@ class MethodSuggestionBox {
 				
 				name+=getParanthesesAndParameters(methods[i]);
 				
-				strings[i] = name;
+				strings[i] = returnType+" "+name;
 			}
 			else if(methods[i] instanceof Constructor) {
 				String name=((Constructor)methods[i]).getName();
@@ -6366,6 +6367,14 @@ class MethodSuggestionBox {
 					name=name.replaceAll(".+\\$","");
 				}
 				strings[i] =name;
+			}
+			else if(methods[i] instanceof Field) {
+				String fieldType=((Field)methods[i]).getType().getSimpleName();
+				String name=((Member)methods[i]).getName();
+				if(name.contains("$")) {
+					name=name.replaceAll(".+\\$","");
+				}
+				strings[i] =fieldType+" "+name;
 			}
 			else if(methods[i] instanceof Member) {
 				String name=((Member)methods[i]).getName();
