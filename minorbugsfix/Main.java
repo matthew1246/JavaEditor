@@ -5320,53 +5320,58 @@ class MethodSuggestionBox {
 	public String findEnclosingClassName(int caretPosition) {
 		String wholeText = text;
 		int braceDepth = 0;
-		String currentClassName = null;
 		LinkedList<String> classNames = new LinkedList<String>();
+		LinkedList<Integer> classDepths = new LinkedList<Integer>();
 		for(int i = 0; i < caretPosition && i < wholeText.length(); i++) {
 			char c = wholeText.charAt(i);
 			if(c == '{') {
 				braceDepth++;
-				if(braceDepth == 1) {
-					int lineStart = wholeText.lastIndexOf('\n', i - 1) + 1;
-					String line = wholeText.substring(lineStart, i + 1);
-					int prevLineStart = wholeText.lastIndexOf('\n', lineStart - 1) + 1;
-					String prevLine = wholeText.substring(prevLineStart, lineStart);
-					String className = null;
-					if(line.contains("class")) {
-						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
-						Matcher mt = p.matcher(line);
-						if(mt.find()) className = mt.group(1);
-					}
-					if(className == null && prevLine.contains("class")) {
-						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
-						Matcher mt = p.matcher(prevLine);
-						if(mt.find()) className = mt.group(1);
-					}
-					if(className != null) {
-						classNames.add(className);
-						currentClassName = className;
-					}
+				int lineStart = wholeText.lastIndexOf('\n', i - 1) + 1;
+				String line = wholeText.substring(lineStart, i + 1);
+				int prevLineStart = wholeText.lastIndexOf('\n', lineStart - 1) + 1;
+				String prevLine = wholeText.substring(prevLineStart, lineStart);
+				String className = null;
+				if(line.contains("class")) {
+					Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+					Matcher mt = p.matcher(line);
+					if(mt.find()) className = mt.group(1);
+				}
+				if(className == null && prevLine.contains("class")) {
+					Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+					Matcher mt = p.matcher(prevLine);
+					if(mt.find()) className = mt.group(1);
+				}
+				if(className != null) {
+					classNames.add(className);
+					classDepths.add(braceDepth);
 				}
 			}
 			else if(c == '}') {
-				braceDepth--;
-				if(braceDepth == 0 && !classNames.isEmpty()) {
+				if(!classDepths.isEmpty() && classDepths.getLast() == braceDepth) {
 					classNames.removeLast();
-					currentClassName = classNames.isEmpty() ? null : classNames.getLast();
+					classDepths.removeLast();
 				}
+				braceDepth--;
 			}
 		}
-		return currentClassName;
+		return classNames.isEmpty() ? null : classNames.getLast();
 	}
 	public Object[] getMethodsOfEnclosingClass() {
-		int caretposition2 = main.textarea.getCaretPosition();
-		String className = findEnclosingClassName(caretposition2);
-		if(className != null) {
-			Class<?> classQ = getClassQuestionMark(className, text);
-			if(classQ != null) {
-				return getAllPropertyAndMethodsAndEnums(classQ);
+		try {
+			int caretposition2 = main.textarea.getCaretPosition();
+			String className = findEnclosingClassName(caretposition2);
+			if(className != null) {
+				Class<?> classQ = null;
+				try {
+					classQ = getClassQuestionMark(className, text);
+				} catch(Exception ex) {}
+				if(classQ != null && classQ != java.lang.Object.class) {
+					return getAllPropertyAndMethodsAndEnums(classQ);
+				}
+				return parseFieldsAndMethodsFromText(className, text, caretposition2);
 			}
-			return parseFieldsAndMethodsFromText(className, text, caretposition2);
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
 		return new Object[0];
 	}
@@ -5375,7 +5380,7 @@ class MethodSuggestionBox {
 		int braceDepth = 0;
 		int classStart = -1;
 		int classEnd = -1;
-		for(int i = 0; i < caretPosition && i < wholeText.length(); i++) {
+		for(int i = 0; i < wholeText.length(); i++) {
 			if(wholeText.charAt(i) == '{') {
 				braceDepth++;
 				if(braceDepth == 1) {
@@ -5413,6 +5418,19 @@ class MethodSuggestionBox {
 		int depth = 0;
 		for(String line : lines) {
 			String t = line.trim();
+			if(depth > 0) {
+				for(int i = 0; i < t.length(); i++) {
+					char c = t.charAt(i);
+					if(c == '{') depth++;
+					else if(c == '}') {
+						depth--;
+						if(depth < 0) depth = 0;
+					}
+				}
+				continue;
+			}
+			if(t.isEmpty() || t.startsWith("//") || t.startsWith("@") || t.startsWith("/*") || t.startsWith("*")) continue;
+			if(t.equals("{") || t.equals("}")) continue;
 			for(int i = 0; i < t.length(); i++) {
 				char c = t.charAt(i);
 				if(c == '{') depth++;
@@ -5421,9 +5439,6 @@ class MethodSuggestionBox {
 					if(depth < 0) depth = 0;
 				}
 			}
-			if(depth > 0) continue;
-			if(t.isEmpty() || t.startsWith("//") || t.startsWith("@") || t.startsWith("/*") || t.startsWith("*")) continue;
-			if(t.equals("{") || t.equals("}")) continue;
 			if(t.contains("(") && t.contains(")")) {
 				int pStart = t.indexOf('(');
 				int pEnd = t.indexOf(')');
@@ -5463,8 +5478,7 @@ class MethodSuggestionBox {
 		String strippedInput = input;
 		if(strippedInput.endsWith(".")) strippedInput = strippedInput.substring(0, strippedInput.length()-1);
 		if(strippedInput.equals("this")) {
-			Object[] thisMethods = getMethodsOfEnclosingClass();
-			if(thisMethods.length > 0) return thisMethods;
+			return getMethodsOfEnclosingClass();
 		}
 		Object[] innerpackages=getInnerPackages(input);
 		Object[] classes = getClassesFromPackage(input);
@@ -5573,12 +5587,13 @@ class MethodSuggestionBox {
 			if(classname.contains("<") && classname.contains(">")) {
 				classname = classname.replaceAll("<.+>","");
 			}
+			if(main.fileName == null) return null;
 			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
 			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);			
 			Class<?> classquestionmark=classloader.loadClass(dir+classname);
 			// Class<?> classquestionmark=Class.forName();
 			return classquestionmark;
-		} catch(ClassNotFoundException ex3) {
+		} catch(Exception ex3) {
 			String[] lines = text.split("\n");
 			try {
 				for(int i = 0; i < lines.length; i++) {
@@ -5592,16 +5607,19 @@ class MethodSuggestionBox {
 				}
 				//JOptionPane.showMessageDialog(null,classname);
 				
-				List<String> imports =Main.muck.links.getImport(classname);
-				//JOptionPane.showMessageDialog(null,imports.size()+"");
-				if(imports == null)
-					return Class.forName("java.lang.Object");
-				for(String importy:imports) {
-					String select="import "+importy.replaceAll(classname+"$","")+"*;";
-					if(text.contains(select))
-						return Class.forName(importy);
+				if(Main.muck != null && Main.muck.links != null) {
+					List<String> imports =Main.muck.links.getImport(classname);
+					//JOptionPane.showMessageDialog(null,imports.size()+"");
+					if(imports == null)
+						return null;
+					for(String importy:imports) {
+						String select="import "+importy.replaceAll(classname+"$","")+"*;";
+						if(text.contains(select))
+							return Class.forName(importy);
+					}
+					return Class.forName(imports.get(0));
 				}
-				return Class.forName(imports.get(0));
+				return null;
 			}
 			catch(ClassNotFoundException ex4) {
 				ex4.printStackTrace();
