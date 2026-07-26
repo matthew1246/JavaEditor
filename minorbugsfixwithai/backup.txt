@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -1130,7 +1130,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 49817
+    "caretposition": 49985
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
     "isLocked": false,
@@ -1490,7 +1490,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 51238
+    "caretposition": 51293
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Packager.java": {
     "isLocked": true,

@@ -6550,16 +6550,22 @@ class MethodSuggestionBox {
 			suggestionbox.setVisible(false);
 			String text = main.textarea.getText();
 					
-			CurlyBraceKeyListener.suggestionboxselected.Save(search,selected);
+			String insertSelected = selected;
+			int spaceIdx = selected.indexOf(" ");
+			if(spaceIdx > 0) {
+				insertSelected = selected.substring(spaceIdx + 1);
+			}
+
+			CurlyBraceKeyListener.suggestionboxselected.Save(search,insertSelected);
 					
 			if(!ifSearchTwice.equals(""))
-				selected=ifSearchTwice+"."+selected;
-			String firsthalf=text.substring(0,caretposition)+"."+selected;
+				insertSelected=ifSearchTwice+"."+insertSelected;
+			String firsthalf=text.substring(0,caretposition)+"."+insertSelected;
 			//String firsthalf=text.substring(0,caretposition)+ifdotbefore+"."+selected;
 			///String second =text.substring(caretposition+1,text.length());
 			String second =text.substring(caretposition+replacelength,text.length());
 			main.textarea.setText(firsthalf+second);
-			main.textarea.setCaretPosition(caretposition+1+selected.length());
+			main.textarea.setCaretPosition(caretposition+1+insertSelected.length());
 		}
 		public boolean isFinished = false;
 		public String ifSearchTwice = "";
