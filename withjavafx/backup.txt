@@ -3,11 +3,13 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\jsdfj\\whatever\\Hello\\\\Stringy.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\javaeditor\\withjavafx\\Main.java",
+      "C:\\javaeditor\\withjavafx\\AllVersionsJar.java",
+      "C:\\jsdfj\\testy\\matthew\\Main.java",
+      "C:\\jsdfj\\whatever\\Hello\\\\Stringy.java"
     ],
     "caretposition": 0
   },
@@ -1231,6 +1233,35 @@
     "caretposition": 0
   },
   "C:\\javaeditor\\withjavafx\\threecomboboxes.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\javaeditor\\withjavafx\\AllVersionsJar.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\jsdfj\\testy\\matthew\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\jsdfj\\whatever\\Hello\\\\Stringy.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
