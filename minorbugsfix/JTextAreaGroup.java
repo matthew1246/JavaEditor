@@ -89,7 +89,39 @@ public class JTextAreaGroup extends JTextArea {
 				if(ctrlDown && underlineStart != -1 && underlineEnd != -1) {
 					String word = getText().substring(underlineStart, underlineEnd);
 					if(main != null) {
-						main.openClassInNewTab(word);
+						String fullText = getText();
+						String afterChar = "";
+						if(underlineEnd < fullText.length()) {
+							afterChar = fullText.substring(underlineEnd, underlineEnd + 1);
+						}
+						if(afterChar.equals("(")) {
+							String beforeDot = "";
+							int dotPos = -1;
+							for(int i = underlineStart - 1; i >= 0; i--) {
+								char c = fullText.charAt(i);
+								if(c == '.') {
+									dotPos = i;
+									break;
+								}
+								if(!Character.isLetterOrDigit(c) && c != '_') break;
+							}
+							if(dotPos > 0) {
+								int varEnd = dotPos;
+								int varStart = dotPos - 1;
+								while(varStart >= 0 && (Character.isLetterOrDigit(fullText.charAt(varStart)) || fullText.charAt(varStart) == '_')) {
+									varStart--;
+								}
+								varStart++;
+								beforeDot = fullText.substring(varStart, varEnd).trim();
+							}
+							if(!beforeDot.isEmpty()) {
+								main.openMethodInNewTab(word, beforeDot, fullText);
+							} else {
+								main.openClassInNewTab(word);
+							}
+						} else {
+							main.openClassInNewTab(word);
+						}
 					}
 					return;
 				}

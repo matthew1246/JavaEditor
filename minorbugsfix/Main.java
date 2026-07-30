@@ -3650,6 +3650,194 @@ startercombobox.Change(fileName);
 			OpenNewTab(targetFile);
 		}
 	}
+	public void openMethodInNewTab(String methodName, String variableName, String currentText) {
+		if(fileName == null || fileName.equals("")) { return; }
+		String directory = getDirectory(fileName);
+		String className = null;
+
+		// Step 1: Find the class name from variable declaration in current file
+		Pattern declPattern = Pattern.compile("(\\w+)\\s+" + Pattern.quote(variableName) + "\\s*[=;:]");
+		Matcher declMatcher = declPattern.matcher(currentText);
+		if(declMatcher.find()) {
+			className = declMatcher.group(1);
+		}
+
+		// Step 2: Search all open tabs for the variable declaration
+		if(className == null) {
+			for(int t = 0; t < tabbedpane.getTabCount(); t++) {
+				String title = tabbedpane.getTitleAt(t);
+				if(title.equals("+")) continue;
+				Component comp = tabbedpane.getComponentAt(t);
+				if(comp instanceof JScrollPane) {
+					JTextArea ta = (JTextArea)((JScrollPane)comp).getViewport().getView();
+					String tabText = ta.getText();
+					Matcher m = declPattern.matcher(tabText);
+					if(m.find()) {
+						className = m.group(1);
+						break;
+					}
+				}
+			}
+		}
+
+		// Step 2b: variableName itself might be the class name (static call like Stringy.helloa())
+		boolean isStaticCall = false;
+		if(className == null) {
+			isStaticCall = true;
+			className = variableName;
+		}
+
+		// Step 3: Try to find file using imports in current file
+		String importPath = findImportForClass(currentText, className);
+		if(importPath != null) {
+			String targetFile = importPathToFilePath(importPath);
+			if(targetFile != null) {
+				File f = new File(targetFile);
+				if(f.exists()) {
+					OpenNewTab(targetFile);
+					String fileText = textarea.getText();
+					int methodPos = findMethodPosition(fileText, methodName);
+					if(methodPos >= 0) {
+						scrollToCaretPosition(methodPos);
+					}
+					return;
+				}
+			}
+		}
+
+		// Step 4: Search current directory
+		String targetFile = directory + className + ".java";
+		File file = new File(targetFile);
+		if(file.exists()) {
+			OpenNewTab(targetFile);
+			String fileText = textarea.getText();
+			int methodPos = findMethodPosition(fileText, methodName);
+			if(methodPos >= 0) {
+				scrollToCaretPosition(methodPos);
+			}
+			return;
+		}
+
+		// Step 5: Search all .java files recursively for the method definition
+		Pattern methodPattern = Pattern.compile("\\b" + Pattern.quote(methodName) + "\\s*\\(");
+		try {
+			File rootDir = findProjectRoot(directory);
+			List<File> results = new ArrayList<>();
+			findJavaFilesRecursive(rootDir, methodPattern, results, 0);
+			if(!results.isEmpty()) {
+				OpenNewTab(results.get(0).getAbsolutePath());
+				String fileText = textarea.getText();
+				int methodPos = findMethodPosition(fileText, methodName);
+				if(methodPos >= 0) {
+					scrollToCaretPosition(methodPos);
+				}
+			}
+		} catch(Exception ex) {}
+	}
+
+	private String findImportForClass(String text, String className) {
+		Pattern importPattern = Pattern.compile("import\\s+([\\w.]+\\." + Pattern.quote(className) + ")\\s*;");
+		Matcher m = importPattern.matcher(text);
+		if(m.find()) {
+			return m.group(1);
+		}
+		Pattern wildcardPattern = Pattern.compile("import\\s+([\\w.]+)\\s*\\*\\s*;");
+		Matcher wm = wildcardPattern.matcher(text);
+		while(wm.find()) {
+			String pkg = wm.group(1);
+			String tryFile = importPathToFilePath(pkg + "." + className);
+			if(tryFile != null && new File(tryFile).exists()) {
+				return pkg + "." + className;
+			}
+		}
+		return null;
+	}
+
+	private String importPathToFilePath(String importPath) {
+		if(fileName == null) return null;
+		String directory = getDirectory(fileName);
+		String[] parts = importPath.split("\\.");
+		if(parts.length <= 1) return null;
+		String pkgPath = "";
+		for(int i = 0; i < parts.length - 1; i++) {
+			pkgPath += parts[i] + File.separator;
+		}
+		String className2 = parts[parts.length - 1];
+		// Try relative to current file directory
+		String target = directory + pkgPath + className2 + ".java";
+		if(new File(target).exists()) return target;
+		// Try relative to project root
+		File rootDir = findProjectRoot(directory);
+		target = rootDir.getAbsolutePath() + File.separator + pkgPath + className2 + ".java";
+		if(new File(target).exists()) return target;
+		// Try src/main/java convention
+		target = rootDir.getAbsolutePath() + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + pkgPath + className2 + ".java";
+		if(new File(target).exists()) return target;
+		// Try resolving source root from package declaration in current file
+		try {
+			String fileContent = Files.readString(Paths.get(fileName), StandardCharsets.UTF_8);
+			Pattern pkgPattern = Pattern.compile("^\\s*package\\s+([\\w.]+)\\s*;", Pattern.MULTILINE);
+			Matcher pkgMatcher = pkgPattern.matcher(fileContent);
+			if(pkgMatcher.find()) {
+				String currentPkg = pkgMatcher.group(1);
+				String[] pkgParts = currentPkg.split("\\.");
+				// Walk up from current directory by package parts to find source root
+				File srcRoot = new File(directory);
+				for(int i = 0; i < pkgParts.length; i++) {
+					srcRoot = srcRoot.getParentFile();
+					if(srcRoot == null) break;
+				}
+				if(srcRoot != null) {
+					target = srcRoot.getAbsolutePath() + File.separator + pkgPath + className2 + ".java";
+					if(new File(target).exists()) return target;
+					target = srcRoot.getAbsolutePath() + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + pkgPath + className2 + ".java";
+					if(new File(target).exists()) return target;
+				}
+			}
+		} catch(Exception ex) {}
+		return null;
+	}
+
+	private File findProjectRoot(String directory) {
+		File dir = new File(directory);
+		File current = dir;
+		while(current != null) {
+			if(new File(current, "pom.xml").exists() || new File(current, "build.gradle").exists() || new File(current, ".git").exists()) {
+				return current;
+			}
+			current = current.getParentFile();
+		}
+		return dir;
+	}
+
+	private void findJavaFilesRecursive(File dir, Pattern methodPattern, List<File> results, int depth) {
+		if(depth > 10 || results.size() > 0) return;
+		File[] files = dir.listFiles();
+		if(files == null) return;
+		for(File f : files) {
+			if(f.isDirectory() && !f.getName().equals(".git") && !f.getName().equals("target") && !f.getName().equals("out")) {
+				findJavaFilesRecursive(f, methodPattern, results, depth + 1);
+			} else if(f.getName().endsWith(".java")) {
+				try {
+					if(fileName != null && f.getAbsolutePath().equals(new File(fileName).getAbsolutePath())) continue;
+					String content = Files.readString(f.toPath(), StandardCharsets.UTF_8);
+					Matcher m = methodPattern.matcher(content);
+					if(m.find()) {
+						results.add(f);
+					}
+				} catch(Exception ex) {}
+			}
+		}
+	}
+
+	private int findMethodPosition(String text, String methodName) {
+		Pattern pattern = Pattern.compile("\\b" + Pattern.quote(methodName) + "\\s*\\(");
+		Matcher matcher = pattern.matcher(text);
+		if(matcher.find()) {
+			return matcher.start();
+		}
+		return -1;
+	}
 	public void OpenNewTab(String filename) {
 		int tindex=tabbedpane.getSelectedIndex();
 		if(tindex != -1) {
