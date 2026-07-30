@@ -3607,6 +3607,76 @@ startercombobox.Change(fileName);
 			OpenNewTab(targetFile);
 		}
 	}
+	public void openMethodInNewTab(String methodName, String variableName, String currentText) {
+		if(fileName == null || fileName.equals("")) { return; }
+		String directory = getDirectory(fileName);
+		String className = null;
+
+		// Search in current text for the variable declaration
+		Pattern declPattern = Pattern.compile("(\\w+)\\s+" + Pattern.quote(variableName) + "\\s*[=;:]");
+		Matcher declMatcher = declPattern.matcher(currentText);
+		if(declMatcher.find()) {
+			className = declMatcher.group(1);
+		}
+
+		// If not found in current file, search all open tabs
+		if(className == null) {
+			for(int t = 0; t < tabbedpane.getTabCount(); t++) {
+				String title = tabbedpane.getTitleAt(t);
+				if(title.equals("+")) continue;
+				Component comp = tabbedpane.getComponentAt(t);
+				if(comp instanceof JScrollPane) {
+					JTextArea ta = (JTextArea)((JScrollPane)comp).getViewport().getView();
+					String tabText = ta.getText();
+					Matcher m = declPattern.matcher(tabText);
+					if(m.find()) {
+						className = m.group(1);
+						break;
+					}
+				}
+			}
+		}
+
+		// If still not found, search all .java files in directory for the method definition
+		if(className == null) {
+			try {
+				File dir = new File(directory);
+				File[] files = dir.listFiles((d, name) -> name.endsWith(".java"));
+				if(files != null) {
+					Pattern methodPattern = Pattern.compile("\\b" + Pattern.quote(methodName) + "\\s*\\(");
+					for(File f : files) {
+						String content = Files.readString(f.toPath(), StandardCharsets.UTF_8);
+						Matcher m = methodPattern.matcher(content);
+						if(m.find()) {
+							className = f.getName().replace(".java", "");
+							break;
+						}
+					}
+				}
+			} catch(Exception ex) {}
+		}
+
+		if(className == null) { return; }
+
+		String targetFile = directory + className + ".java";
+		File file = new File(targetFile);
+		if(file.exists()) {
+			OpenNewTab(targetFile);
+			String fileText = textarea.getText();
+			int methodPos = findMethodPosition(fileText, methodName);
+			if(methodPos >= 0) {
+				scrollToCaretPosition(methodPos);
+			}
+		}
+	}
+	private int findMethodPosition(String text, String methodName) {
+		Pattern pattern = Pattern.compile("\\b" + methodName + "\\s*\\(");
+		Matcher matcher = pattern.matcher(text);
+		if(matcher.find()) {
+			return matcher.start();
+		}
+		return -1;
+	}
 	public static String addDotJava(String filename) {	
 		if(!(filename.endsWith(".java"))) {
 			filename+=".java";
