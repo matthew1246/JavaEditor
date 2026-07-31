@@ -3,13 +3,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\jsdfj\\whatever\\Hello\\\\Stringy.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\withjavafx\\Main.java",
-      "C:\\javaeditor\\withjavafx\\AllVersionsJar.java",
-      "C:\\jsdfj\\testy\\matthew\\Main.java",
-      "C:\\jsdfj\\whatever\\Hello\\\\Stringy.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
