@@ -12,13 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
-      "C:\\jsdfj\\testy\\matthew\\Main.java",
-      "C:\\jsdfj\\whatever\\Hello\\\\Stringy.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
