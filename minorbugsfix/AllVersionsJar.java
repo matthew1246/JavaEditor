@@ -139,9 +139,9 @@ public class AllVersionsJar {
 				}
 			}
 			else if(!packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getParentFile().getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
 				}	
 			}
 			else { // packager.isInRightFolders() == true

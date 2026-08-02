@@ -6,7 +6,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 108
+    "caretposition": 23
   },
   "lastopened": {
     "isLocked": false,
@@ -2170,7 +2170,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 5309
+    "caretposition": 5044
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\powershell.java": {
     "isLocked": true,
@@ -2187,5 +2187,14 @@
     ],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\whattt\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "Main",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 23
   }
 }
