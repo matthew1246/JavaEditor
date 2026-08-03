@@ -172,7 +172,8 @@ public class Git {
 			git(command);
 		});
 		addtoall.addActionListener( (ev) -> {
-			String command = "eval $(git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
+			String branch = frame.getTitle();
+			String command = "eval $(git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+branch+"; git push;\" refs/remotes); git switch "+branch;
 			JOptionPane.showMessageDialog(null,command);
 			git(command);
 		});
