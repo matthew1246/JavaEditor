@@ -41,7 +41,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 377
+    "caretposition": 5582
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
@@ -61,7 +61,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 200297
+    "caretposition": 6771
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -929,7 +929,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 200297
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Customs.java": {
     "isLocked": false,
