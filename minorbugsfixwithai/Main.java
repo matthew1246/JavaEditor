@@ -1602,7 +1602,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
-		AI ai =new AI(this);
+		AI ai = new AI(this);
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();

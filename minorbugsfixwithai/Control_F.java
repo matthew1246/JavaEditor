@@ -107,6 +107,8 @@ public class Control_F {
 				}
 				if(x < (textarea.getText().length()-1) ) {
 					main.scrollToCaretPositionWithoutFocus(x);
+					StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
+					storeselectedfile2.setCaretPosition(main.fileName,x);
 				}
 				else {
 					main.scrollToCaretPositionWithoutFocus(textarea.getText().length()-1);
@@ -200,6 +202,8 @@ public class Control_F {
 							liveiterator.remove(filename);
 						if(x < (text.length()-1) ) {
 							main.scrollToCaretPositionWithoutFocus(x);
+							StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
+							storeselectedfile2.setCaretPosition(main.fileName,x);
 							return;
 						}
 						else {
@@ -317,6 +321,8 @@ public class Control_F {
 				}
 				if(x < (textarea.getText().length()-1) ) {
 					main.scrollToCaretPosition(x);
+					StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
+					storeselectedfile2.setCaretPosition(main.fileName,x);
 				}
 				else {
 					main.scrollToCaretPosition(textarea.getText().length()-1);
@@ -403,6 +409,8 @@ public class Control_F {
 							liveiterator.remove(filename);
 						if(x < (text.length()-1) ) {
 							main.scrollToCaretPosition(x);
+							StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
+							storeselectedfile2.setCaretPosition(main.fileName,x);
 							return;
 						}
 						else {

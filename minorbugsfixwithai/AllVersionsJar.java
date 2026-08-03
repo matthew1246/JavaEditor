@@ -31,10 +31,6 @@ public class AllVersionsJar {
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 	}
-	public void Compile(int javaversionnumber) {
-		Compile compile = new Compile();
-		compile.compileall(main,fileName,javaversionnumber,sal,ev4);
-	}
 	public Preferences extractJars(StoreSelectedFile storeselectedfile) {		
 		CommandLine commandline = new CommandLine();
 		Preferences preferences=storeselectedfile.get(fileName);
@@ -71,7 +67,7 @@ public class AllVersionsJar {
 			}	
 		}
 		return preferences;
-	}		
+	}	
 	public String getMain(StoreSelectedFile storeselectedfile,Preferences preferences) {
 		String main_string=preferences.starterclass;
 		if(!fileName.equals("")) {
@@ -111,6 +107,19 @@ public class AllVersionsJar {
 		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
 	}
+	public void Powershell(String main_class) {
+		Powershell powershell = new Powershell(main,main_class,dir,allfiles);
+		for(int i = 18; i <= 23; i++) {
+			powershell.Compile(i,fileName);
+			powershell.makeJar(i);
+		}
+		powershell.Finish();
+
+	}
+	public void Compile(int javaversionnumber) {
+		Compile compile = new Compile();
+		compile.compileall(main,fileName,javaversionnumber,sal,ev4);
+	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
 			String[] splited=  main_class.split("\\.");
@@ -123,11 +132,17 @@ public class AllVersionsJar {
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			
 			String input = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+			if(!packager.containsPackage()) {
 				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23) {
 					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
 				}
+			}
+			else if(!packager.isInRightFolders()) {
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				if(javaversionnumber == 23) {
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+				}	
 			}
 			else { // packager.isInRightFolders() == true
 				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
@@ -162,13 +177,5 @@ public class AllVersionsJar {
 		} catch (java.io.IOException ex) {
 			ex.printStackTrace();
 		}
-	}
-	public void Powershell(String main_class) {
-		Powershell powershell = new Powershell(main,main_class,dir,allfiles);
-		for(int i = 18; i <= 23; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
-		}
-		powershell.Finish();
 	}
 }
