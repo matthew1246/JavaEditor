@@ -24,7 +24,7 @@ public class FindMethodNameString {
 	}
 	
 	public String parseMethodName(String subline) {
-		Pattern pattern = Pattern.compile("([a-zA-Z]+)\\(");
+		Pattern pattern = Pattern.compile("([a-zA-Z_]+)\\(");
 		Matcher matcher =pattern.matcher(subline);
 		if(matcher.find()) {
 			return matcher.group(1);
