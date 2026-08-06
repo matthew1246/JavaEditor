@@ -558,9 +558,6 @@ mvn exec:exec@xdelta
         
         <winShortcut>true</winShortcut>
         <winMenu>true</winMenu>
-        <additionalOptions>
-            <option>--win-request-admin-privileges</option>
-        </additionalOptions>
         <javaOptions>
           <option>-Xmx2g</option>
         </javaOptions>
