@@ -664,6 +664,7 @@ public class Maven {
         %s
         <winShortcut>true</winShortcut>
         <winMenu>true</winMenu>
+        <winRequestAdminPrivileges>true</winRequestAdminPrivileges>
         <javaOptions>
           <option>-Xmx2g</option>
         </javaOptions>
