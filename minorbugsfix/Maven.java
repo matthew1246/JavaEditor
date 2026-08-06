@@ -548,8 +548,9 @@ mvn exec:exec@xdelta
         newpomxml+=isconsole;
         newpomxml+="""	
         
-        <winShortcut>true</winShortcut>
+        <winShortcut>true</winShortcut>        
         <winMenu>true</winMenu>
+        <winRequestAdminPrivileges>true</winRequestAdminPrivileges>
         <javaOptions>
           <option>-Xmx2g</option>
         </javaOptions>
