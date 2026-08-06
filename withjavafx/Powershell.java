@@ -208,9 +208,6 @@ public class Powershell {
 			}
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			if(packager.containsPackage() && packager.isInRightFolders()) {	
-				parentdirectory=file;	
-			}
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			
 			if(main_class2.endsWith("two")) {
