@@ -500,7 +500,17 @@ mvn exec:exec@xdelta
       		</goals>
       		<configuration>
         		   <target>
-          			<mkdir dir="${project.build.directory}/extra-files"/>
+            			<mkdir dir="${project.build.directory}/extra-files"/>
+            			<echo file="${project.build.directory}/extra-files/MatthewJavaEditorJavaFX.exe.manifest"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <requestedExecutionLevel level="requireAdministrator" uiAccess="false"/>
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</assembly>]]></echo>
         		   </target>
       		</configuration>
     	</execution>
