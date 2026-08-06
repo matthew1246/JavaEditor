@@ -130,9 +130,6 @@ public class AllVersionsJar {
 			String main_class2 = splited[splited.length-1];
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			if(packager.containsPackage() && packager.isInRightFolders()) {
-				parentdirectory=file;	
-			}
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			
 			String input = "";
