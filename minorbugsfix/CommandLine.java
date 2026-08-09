@@ -66,7 +66,8 @@ public class CommandLine {
 		java_star_nor_dot.setStarNorDot(".");
 	}
 	private String packagename;
-	private boolean isPackage = false;
+	
+private boolean isPackage = false;
 	public void addPackage(String packagename) {
 		isPackage = true;	
 		this.packagename=packagename;
@@ -124,7 +125,8 @@ public class CommandLine {
 		if(!isjavaorjavac.isEmpty()) {
 			classpath=isjavaorjavac.getStarNorDot()+classpath;
 		}
-		classpath = "-cp "+classpath;
+		
+classpath = "-cp "+classpath;
 		return classpath;
 	}
 	
@@ -146,7 +148,7 @@ public class CommandLine {
 		if(isPackage && !isPackageWithMinusD) {
 			package1=packagename.replace(".","\\")+"\\";
 		}						
-		String str = "javac";
+		String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
 		}
@@ -169,7 +171,8 @@ public class CommandLine {
 		else if(isPackageWithMinusD) {
 			package2=packagename+".";
 		}		
-		String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		//String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
 		JOptionPane.showMessageDialog(null,command);
 		return command;
 	}	
@@ -186,6 +189,28 @@ String[] command2 =new String[3];
 			command2[1] = "/c";
 			command2[2] = command;
 			Process process = Runtime.getRuntime().exec(command2,null,new File(dir));
+			return process;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	/*
+	** Run any command as administrator
+	*/
+	public Process runAsAdmin(String command, String dir) 	{
+		try {
+			// command format: "C:\path\to\jar.exe" arg1 arg2 ...
+			int endQuote = command.indexOf("\"", 1);
+			String exePath = command.substring(1, endQuote);
+			String args = command.substring(endQuote + 1).trim();
+			String ps = "Start-Process -FilePath '" + exePath + "' -Verb RunAs -ArgumentList '" + args.replace(" ", "','") + "'";
+			System.out.println("command: "+ps);
+			ProcessBuilder pb = new ProcessBuilder(
+				"powershell", "-NoProfile", "-Command", ps
+			);
+			pb.directory(new File(dir));
+			Process process = pb.start();
 			return process;
 		} catch (IOException ex) {
 			ex.printStackTrace();
