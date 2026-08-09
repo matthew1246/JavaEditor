@@ -200,7 +200,11 @@ String[] command2 =new String[3];
 	*/
 	public Process runAsAdmin(String command, String dir) 	{
 		try {
-			String ps = "Start-Process cmd -Verb RunAs -ArgumentList '/c " + command + "'";
+			// command format: "C:\path\to\jar.exe" arg1 arg2 ...
+			int endQuote = command.indexOf("\"", 1);
+			String exePath = command.substring(1, endQuote);
+			String args = command.substring(endQuote + 1).trim();
+			String ps = "Start-Process -FilePath '" + exePath + "' -Verb RunAs -ArgumentList '" + args.replace(" ", "','") + "'";
 			System.out.println("command: "+ps);
 			ProcessBuilder pb = new ProcessBuilder(
 				"powershell", "-NoProfile", "-Command", ps
