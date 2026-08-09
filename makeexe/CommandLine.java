@@ -198,15 +198,15 @@ String[] command2 =new String[3];
 	/*
 	** Run any command as administrator
 	*/
-	public Process runAsAdmin(String command, String dir) {
+	public Process runAsAdmin(String command, String dir) 	{
 		try {
-			String escaped = command.replace("\"", "\\\"");
-			String ps = "powershell -Command \"Start-Process cmd -Verb runAs -ArgumentList '/c " + escaped + "'\"";
-			String[] command2 = new String[3];
-			command2[0] = "cmd.exe";
-			command2[1] = "/c";
-			command2[2] = ps;
-			Process process = Runtime.getRuntime().exec(command2, null, new File(dir));
+			String ps = "Start-Process cmd -Verb RunAs -ArgumentList '/c " + command + "'";
+			System.out.println("command: "+ps);
+			ProcessBuilder pb = new ProcessBuilder(
+				"powershell", "-NoProfile", "-Command", ps
+			);
+			pb.directory(new File(dir));
+			Process process = pb.start();
 			return process;
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -239,4 +239,4 @@ String[] command2 =new String[3];
 		}
 	}
 }
-																																
+																																
