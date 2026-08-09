@@ -196,6 +196,24 @@ String[] command2 =new String[3];
 		}
 	}
 	/*
+	** Run any command as administrator
+	*/
+	public Process runAsAdmin(String command, String dir) {
+		try {
+			String escaped = command.replace("\"", "\\\"");
+			String ps = "powershell -Command \"Start-Process cmd -Verb runAs -ArgumentList '/c " + escaped + "'\"";
+			String[] command2 = new String[3];
+			command2[0] = "cmd.exe";
+			command2[1] = "/c";
+			command2[2] = ps;
+			Process process = Runtime.getRuntime().exec(command2, null, new File(dir));
+			return process;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	/*
 	** Run any command while showing MSDOS console
 	*/
 	public Process runWithMSDOS(String command,String dir) {

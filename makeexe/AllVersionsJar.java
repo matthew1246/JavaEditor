@@ -115,7 +115,7 @@ public class AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			File file = new File(dir);
+		File file = new File(dir);
 			File parentdirectory=file.getParentFile();
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			
@@ -133,11 +133,11 @@ public class AllVersionsJar {
 					// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
 					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
 				}	
-			}		
+			}
 		
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
-			Process process=commandline.run(input,dir);
+			Process process=commandline.runAsAdmin(input,dir);
 			
 			java.io.InputStream inputstream = process.getErrorStream();
 			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);
