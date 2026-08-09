@@ -12,13 +12,11 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\CommandLine.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\CommandLine.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -92,7 +90,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 6636
+    "caretposition": 5662
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -159,7 +157,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6417
+    "caretposition": 5903
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Control_F.java": {
     "isLocked": true,
@@ -269,7 +267,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 2054
+    "caretposition": 6384
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Git.java": {
     "isLocked": false,
@@ -2199,5 +2197,32 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 23
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "AllVersionsJar"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 5512
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MinorCompile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "MinorCompile"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
