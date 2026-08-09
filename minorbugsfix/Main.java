@@ -1941,7 +1941,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {				
+		generatejar.addActionListener((ev) -> {						
 																
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
@@ -2017,6 +2017,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						try {
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
 							getjavaversion.dispose();
+							
+							if(!isLatestCodeSaved()) {
+								if(sal == null)
+									sal = new SaveActionListener(this);
+								sal.actionPerformed(null); // Save latest code.
+							}
+							
 							Compile compile = new Compile();
 							compile.compileall(this,fileName,javaversionnumber,sal,ev4);
 							
@@ -2179,6 +2186,12 @@ Packager packager2 = new Packager(this);
 				break;
 				case JOptionPane.NO_OPTION:
 					try {
+						if(!isLatestCodeSaved()) {
+							if(sal == null)
+								sal = new SaveActionListener(this);
+							sal.actionPerformed(null); // Save latest code.
+						}
+						
 						Compile compile = new Compile();
 						compile.compileall(this,fileName,sal,ev);
 						CommandLine commandline = new CommandLine();
@@ -4274,6 +4287,8 @@ startercombobox.Change(fileName);
 	}
 	public boolean isLatestCodeSaved() {
 		try {
+			if(fileName== null || fileName.equals(""))
+				return true;	
 			// Check if already saved
 			File file2 = new File(fileName);
 			Path path = Paths.get(file2.getPath());
@@ -4283,7 +4298,7 @@ startercombobox.Change(fileName);
 			return lines.equals(string);
 		} catch (IOException ex) {
 			ex.printStackTrace();
-			return false;
+			return true;
 		}
 	}
 	class Lock extends JButton {
