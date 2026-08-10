@@ -1455,7 +1455,7 @@ edit.add(functionLines);
 					
 				JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 				JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
-			
+						
 				MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
 				mycaretlistener2.caret_tracker.caret_tracker.add(wholedocumentindex);
 					
@@ -1994,6 +1994,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
 							Main.this.fileName = nofileopen.getFileName();
 						}
+						else {
+							if(!isLatestCodeSaved()) {
+								if(sal == null)
+									sal = new SaveActionListener(this);
+								sal.actionPerformed(null); // Save latest code.
+							}
+						}
 						
 						AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2015,6 +2022,19 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						try {
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
 							getjavaversion.dispose();
+							
+							if(fileName.equals("")) {
+								NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+								Main.this.fileName = nofileopen.getFileName();
+							}
+							else {
+								if(!isLatestCodeSaved()) {
+									if(sal == null)
+										sal = new SaveActionListener(this);
+									sal.actionPerformed(null); // Save latest code.
+								}
+							}
+							
 							Compile compile = new Compile();
 							compile.compileall(this,fileName,javaversionnumber,sal,ev4);
 							
@@ -2172,6 +2192,18 @@ Packager packager2 = new Packager(this);
 				break;
 				case JOptionPane.NO_OPTION:
 					try {
+						if(fileName.equals("")) {
+							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+							Main.this.fileName = nofileopen.getFileName();
+						}
+						else {
+							if(!isLatestCodeSaved()) {
+								if(sal == null)
+									sal = new SaveActionListener(this);
+								sal.actionPerformed(null); // Save latest code.
+							}
+						}
+						
 						Compile compile = new Compile();
 						compile.compileall(this,fileName,sal,ev);
 						CommandLine commandline = new CommandLine();
@@ -4229,6 +4261,22 @@ startercombobox.Change(fileName);
 	public boolean isClassExists(String fileName2) {
 		File file = new File((fileName2.substring(0,fileName2.length()-5))+".class");
 		return file.exists();
+	}
+	public boolean isLatestCodeSaved() {
+		try {
+			if(fileName== null || fileName.equals(""))
+				return true;	
+			// Check if already saved
+			File file2 = new File(fileName);
+			Path path = Paths.get(file2.getPath());
+			String lines = Files.readString(path,StandardCharsets.UTF_8);
+			
+			String string = textarea.getText();
+			return lines.equals(string);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return true;
+		}
 	}
 	class Lock extends JButton {
 		public Lock() {
