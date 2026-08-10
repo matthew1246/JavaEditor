@@ -148,7 +148,7 @@ public class AllVersionsJar {
 			
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
-			Process process=commandline.run(input,dir);
+			Process process=commandline.runAsAdmin(input,dir);
 			
 			java.io.InputStream inputstream = process.getErrorStream();
 			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);
