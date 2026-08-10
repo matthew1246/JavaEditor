@@ -2274,7 +2274,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								Main.this.fileName = nofileopen.getFileName();
 							}
 							else {
-								sal.actionPerformed(ev5);
+								if(!isLatestCodeSaved()) {
+									if(sal == null)
+										sal = new SaveActionListener(this);
+									sal.actionPerformed(null); // Save latest code.
+								}
 							}
 							
 							boolean isJavaFX = false;
@@ -2329,6 +2333,19 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							try {
 								int javaversionnumber=(Integer)combobox.getSelectedItem();
 								getjavaversion.dispose();
+								
+								if(fileName.equals("")) {
+									NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+									Main.this.fileName = nofileopen.getFileName();
+								}
+								else {
+									if(!isLatestCodeSaved()) {
+										if(sal == null)
+											sal = new SaveActionListener(this);
+										sal.actionPerformed(null); // Save latest code.
+									}
+								}
+
 								Compile compile = new Compile();
 								
 								boolean isJavaFX = false;
@@ -2519,6 +2536,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				case JOptionPane.NO_OPTION:
 					Thread thread2 = new Thread(() -> {
 						try {
+							if(fileName.equals("")) {
+								NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+								Main.this.fileName = nofileopen.getFileName();
+							}
+							else {
+								if(!isLatestCodeSaved()) {
+									if(sal == null)
+										sal = new SaveActionListener(this);
+									sal.actionPerformed(null); // Save latest code.
+								}
+							}
+							
 							Compile compile = new Compile();
 							boolean isJavaFX = false;
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -4764,6 +4793,22 @@ CommandLine commandline = new CommandLine();
 	public boolean isClassExists(String fileName2) 	{
 		File file = new File((fileName2.substring(0,fileName2.length()-5))+".class");
 		return file.exists();
+	}
+	public boolean isLatestCodeSaved() {
+		try {
+			if(fileName== null || fileName.equals(""))
+				return true;	
+			// Check if already saved
+			File file2 = new File(fileName);
+			Path path = Paths.get(file2.getPath());
+			String lines = Files.readString(path,StandardCharsets.UTF_8);
+			
+			String string = textarea.getText();
+			return lines.equals(string);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return true;
+		}
 	}
 	class Lock extends JButton {
 		public Lock() {

@@ -2018,7 +2018,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
 							getjavaversion.dispose();
 							
-							if(!isLatestCodeSaved()) {
+							if(fileName.equals("")) {
+								NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+								Main.this.fileName = nofileopen.getFileName();
+							}
+							else if(!isLatestCodeSaved()) {
 								if(sal == null)
 									sal = new SaveActionListener(this);
 								sal.actionPerformed(null); // Save latest code.
@@ -2186,7 +2190,11 @@ Packager packager2 = new Packager(this);
 				break;
 				case JOptionPane.NO_OPTION:
 					try {
-						if(!isLatestCodeSaved()) {
+						if(fileName.equals("")) {
+							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+							Main.this.fileName = nofileopen.getFileName();
+						}
+						else if(!isLatestCodeSaved()) {
 							if(sal == null)
 								sal = new SaveActionListener(this);
 							sal.actionPerformed(null); // Save latest code.
