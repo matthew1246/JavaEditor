@@ -5527,18 +5527,26 @@ class MethodSuggestionBox {
 		position = caretposition;
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
+		System.out.println("MSB-CONSTRUCT: currentline2='"+currentline2+"' caretpos="+caretposition);
 		if(currentline2.length() > 0) {
 			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z0-9\\.\\(\\)]+)\\z");
 			Matcher matcher0=pattern.matcher(currentline2);	
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
 				currentline = matcher0.group(2);
-				System.out.println("*"+currentline+"*");
+				System.out.println("MSB-CONSTRUCT: currentline='"+currentline+"'");
 									
 				Object[] allobjects=search(currentline);
+				System.out.println("MSB-CONSTRUCT: search returned "+allobjects.length+" results");
 				if(allobjects.length > 0)
 					show(allobjects,caretposition,currentline);	
+				else
+					System.out.println("MSB-CONSTRUCT: show() NOT called - no results");
+			} else {
+				System.out.println("MSB-CONSTRUCT: regex did not match on '"+currentline2+"'");
 			}
+		} else {
+			System.out.println("MSB-CONSTRUCT: currentline2 is empty");
 		}
 	}
 	public String findEnclosingClassName(int caretPosition) {
@@ -5584,17 +5592,24 @@ class MethodSuggestionBox {
 		try {
 			int caretposition2 = main.textarea.getCaretPosition();
 			String className = findEnclosingClassName(caretposition2);
+			System.out.println("GMOEC: className='"+className+"' caretpos="+caretposition2+" textLen="+text.length());
 			if(className != null) {
 				Class<?> classQ = null;
 				try {
 					classQ = getClassQuestionMark(className, text);
-				} catch(Exception ex) {}
+				} catch(Exception ex) { System.out.println("GMOEC: getClassQuestionMark exception: "+ex); }
+				System.out.println("GMOEC: classQ="+classQ);
 				if(classQ != null && classQ != java.lang.Object.class) {
 					return getAllPropertyAndMethodsAndEnums(classQ);
 				}
-				return parseFieldsAndMethodsFromText(className, text, caretposition2);
+				Object[] result = parseFieldsAndMethodsFromText(className, text, caretposition2);
+				System.out.println("GMOEC: parseFieldsAndMethodsFromText returned "+result.length+" results");
+				return result;
+			} else {
+				System.out.println("GMOEC: className is NULL");
 			}
 		} catch(Exception ex) {
+			System.out.println("GMOEC: EXCEPTION: "+ex);
 			ex.printStackTrace();
 		}
 		return new Object[0];
@@ -6105,13 +6120,6 @@ class MethodSuggestionBox {
 				}
 				strings[i] =fieldType+" "+name;
 			}
-			else if(methods[i] instanceof Member) {
-				String name=((Member)methods[i]).getName();
-				if(name.contains("$")) {
-					name=name.replaceAll(".+\\$","");
-				}
-				strings[i] =name;
-			}
 			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
 				String name= methods[i].toString();
 				if(name.contains("$")) {
@@ -6377,8 +6385,13 @@ class MethodSuggestionBox {
 						if(searchy.endsWith("()")) {
 							searchy = searchy.substring(0, searchy.length() - 2);
 						}
-						for(JLabel label:labels2) {	
-							if( ! (label.getText().toLowerCase().startsWith(searchy)) ) {
+						for(JLabel label:labels2) {
+							String labelText = label.getText().toLowerCase();
+							int spIdx = labelText.indexOf(" ");
+							if(spIdx > 0) {
+								labelText = labelText.substring(spIdx + 1);
+							}
+							if( ! (labelText.startsWith(searchy)) ) {
 								liveiterator.remove(label);
 							}
 						}
@@ -6463,17 +6476,20 @@ class MethodSuggestionBox {
 				labels[i] = new JLabel((String)methods[i]);
 			}		
 			else if(methods[i] instanceof Method) {
+				String returnType=((Method)methods[i]).getReturnType().getSimpleName();
 				String name=((Method)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
-				labels[i] = new JLabel(name);
+				name+=getParanthesesAndParameters(methods[i]);
+				labels[i] = new JLabel(returnType+" "+name);
 			}
 			else if(methods[i] instanceof Constructor) {
 				String name=((Constructor)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
+				name+=getParanthesesAndParameters(methods[i]);
 				labels[i] = new JLabel(name);
 			}
 			else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
@@ -6491,12 +6507,13 @@ class MethodSuggestionBox {
 				}
 				labels[i] = new JLabel(name);
 			}
-			else if(methods[i] instanceof Member) {
+			else if(methods[i] instanceof Field) {
+				String fieldType=((Field)methods[i]).getType().getSimpleName();
 				String name=((Member)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
-				labels[i] = new JLabel(name);
+				labels[i] = new JLabel(fieldType+" "+name);
 			}
 			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
 				String name= methods[i].toString();

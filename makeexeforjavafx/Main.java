@@ -6076,23 +6076,196 @@ class MethodSuggestionBox {
 		position = caretposition;
 		//String currentline=middle.getWholeLine2(caretposition);
 		String currentline2= middle.getCurrentLine();
+		System.out.println("MSB-CONSTRUCT: currentline2='"+currentline2+"' caretpos="+caretposition);
 		if(currentline2.length() > 0) {
 			Pattern pattern = Pattern.compile("(import)?\\s*([a-zA-Z0-9\\.\\(\\)]+)\\z");
 			Matcher matcher0=pattern.matcher(currentline2);	
 			//List<String> classesfrompackage=null;	
 			if(matcher0.find()) {
 				currentline = matcher0.group(2);
-				System.out.println("*"+currentline+"*");
+				System.out.println("MSB-CONSTRUCT: currentline='"+currentline+"'");
 									
 				Object[] allobjects=search(currentline);
+				System.out.println("MSB-CONSTRUCT: search returned "+allobjects.length+" results");
 				if(allobjects.length > 0)
 					show(allobjects,caretposition,currentline);	
+				else
+					System.out.println("MSB-CONSTRUCT: show() NOT called - no results");
+			} else {
+				System.out.println("MSB-CONSTRUCT: regex did not match on '"+currentline2+"'");
+			}
+		} else {
+			System.out.println("MSB-CONSTRUCT: currentline2 is empty");
+		}
+	}
+	public String findEnclosingClassName(int caretPosition) {
+		String wholeText = text;
+		int braceDepth = 0;
+		LinkedList<String> classNames = new LinkedList<String>();
+		LinkedList<Integer> classDepths = new LinkedList<Integer>();
+		for(int i = 0; i < caretPosition && i < wholeText.length(); i++) {
+			char c = wholeText.charAt(i);
+			if(c == '{') {
+				braceDepth++;
+				int lineStart = wholeText.lastIndexOf('\n', i - 1) + 1;
+				String line = wholeText.substring(lineStart, i + 1);
+				int prevLineStart = wholeText.lastIndexOf('\n', lineStart - 1) + 1;
+				String prevLine = wholeText.substring(prevLineStart, lineStart);
+				String className = null;
+				if(line.contains("class")) {
+					Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+					Matcher mt = p.matcher(line);
+					if(mt.find()) className = mt.group(1);
+				}
+				if(className == null && prevLine.contains("class")) {
+					Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+					Matcher mt = p.matcher(prevLine);
+					if(mt.find()) className = mt.group(1);
+				}
+				if(className != null) {
+					classNames.add(className);
+					classDepths.add(braceDepth);
+				}
+			}
+			else if(c == '}') {
+				if(!classDepths.isEmpty() && classDepths.getLast() == braceDepth) {
+					classNames.removeLast();
+					classDepths.removeLast();
+				}
+				braceDepth--;
 			}
 		}
+		return classNames.isEmpty() ? null : classNames.getLast();
+	}
+	public Object[] getMethodsOfEnclosingClass() {
+		try {
+			int caretposition2 = main.textarea.getCaretPosition();
+			String className = findEnclosingClassName(caretposition2);
+			System.out.println("GMOEC: className='"+className+"' caretpos="+caretposition2+" textLen="+text.length());
+			if(className != null) {
+				Class<?> classQ = null;
+				try {
+					classQ = getClassQuestionMark(className, text);
+				} catch(Exception ex) { System.out.println("GMOEC: getClassQuestionMark exception: "+ex); }
+				System.out.println("GMOEC: classQ="+classQ);
+				if(classQ != null && classQ != java.lang.Object.class) {
+					return getAllPropertyAndMethodsAndEnums(classQ);
+				}
+				Object[] result = parseFieldsAndMethodsFromText(className, text, caretposition2);
+				System.out.println("GMOEC: parseFieldsAndMethodsFromText returned "+result.length+" results");
+				return result;
+			} else {
+				System.out.println("GMOEC: className is NULL");
+			}
+		} catch(Exception ex) {
+			System.out.println("GMOEC: EXCEPTION: "+ex);
+			ex.printStackTrace();
+		}
+		return new Object[0];
+	}
+	public Object[] parseFieldsAndMethodsFromText(String className, String wholeText, int caretPosition) {
+		List<Object> results = new ArrayList<>();
+		int braceDepth = 0;
+		int classStart = -1;
+		int classEnd = -1;
+		for(int i = 0; i < wholeText.length(); i++) {
+			if(wholeText.charAt(i) == '{') {
+				braceDepth++;
+				if(braceDepth == 1) {
+					int lineStart = wholeText.lastIndexOf('\n', i - 1) + 1;
+					String line = wholeText.substring(lineStart, i + 1);
+					int prevLineStart = wholeText.lastIndexOf('\n', lineStart - 1) + 1;
+					String prevLine = wholeText.substring(prevLineStart, lineStart);
+					String foundClassName = null;
+					if(line.contains("class")) {
+						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+						Matcher mt = p.matcher(line);
+						if(mt.find()) foundClassName = mt.group(1);
+					}
+					if(foundClassName == null && prevLine.contains("class")) {
+						Pattern p = Pattern.compile("class\\s+([a-zA-Z0-9_]+)");
+						Matcher mt = p.matcher(prevLine);
+						if(mt.find()) foundClassName = mt.group(1);
+					}
+					if(className.equals(foundClassName)) {
+						classStart = i + 1;
+					}
+				}
+			}
+			else if(wholeText.charAt(i) == '}') {
+				braceDepth--;
+				if(braceDepth == 0 && classStart > 0) {
+					classEnd = i;
+					break;
+				}
+			}
+		}
+		if(classStart < 0 || classEnd < 0) return results.toArray();
+		String body = wholeText.substring(classStart, classEnd);
+		String[] lines = body.split("\n");
+		int depth = 0;
+		for(String line : lines) {
+			String t = line.trim();
+			if(depth > 0) {
+				for(int i = 0; i < t.length(); i++) {
+					char c = t.charAt(i);
+					if(c == '{') depth++;
+					else if(c == '}') {
+						depth--;
+						if(depth < 0) depth = 0;
+					}
+				}
+				continue;
+			}
+			if(t.isEmpty() || t.startsWith("//") || t.startsWith("@") || t.startsWith("/*") || t.startsWith("*")) continue;
+			if(t.equals("{") || t.equals("}")) continue;
+			for(int i = 0; i < t.length(); i++) {
+				char c = t.charAt(i);
+				if(c == '{') depth++;
+				else if(c == '}') {
+					depth--;
+					if(depth < 0) depth = 0;
+				}
+			}
+			if(t.contains("(") && t.contains(")")) {
+				int pStart = t.indexOf('(');
+				int pEnd = t.indexOf(')');
+				String before = t.substring(0, pStart).trim();
+				String params = pEnd > pStart ? t.substring(pStart + 1, pEnd).trim() : "";
+				String[] parts = before.split("\\s+");
+				if(parts.length >= 2) {
+					String name = parts[parts.length - 1];
+					if(name.equals(className)) {
+						results.add(name + "(" + params + ")");
+					}
+					else {
+						String retType = parts[parts.length - 2];
+						results.add(retType + " " + name + "(" + params + ")");
+					}
+				}
+			}
+			else if(t.endsWith(";")) {
+				String cleaned = t.replaceAll(";", "").trim();
+				int eqIdx = cleaned.indexOf('=');
+				if(eqIdx > 0) cleaned = cleaned.substring(0, eqIdx).trim();
+				String[] parts = cleaned.split("\\s+");
+				if(parts.length >= 2) {
+					String name = parts[parts.length - 1];
+					String type = parts[parts.length - 2];
+					if(!type.equals("class") && !type.equals("return") && !type.equals("new")) {
+						results.add(type + " " + name);
+					}
+				}
+			}
+		}
+		return results.toArray();
 	}
 	public Object[] search(String input) {
 		// JOptionPane.showMessageDialog(null,input);
-		if(input.equals("this")) {
+		
+		String strippedInput = input;
+		if(strippedInput.endsWith(".")) strippedInput = strippedInput.substring(0, strippedInput.length()-1);
+		if(strippedInput.equals("this")) {
 			return getMethodsOfEnclosingClass();
 		}
 		Object[] innerpackages=getInnerPackages(input);
@@ -6222,138 +6395,25 @@ class MethodSuggestionBox {
 				}
 				//JOptionPane.showMessageDialog(null,classname);
 				
-				if(Main.muck == null || Main.muck.links == null)
-					return null;
-				List<String> imports =Main.muck.links.getImport(classname);
-				//JOptionPane.showMessageDialog(null,imports.size()+"");
-				if(imports == null)
-					return null;
-				for(String importy:imports) {
-					String select="import "+importy.replaceAll(classname+"$","")+"*;";
-					if(text.contains(select))
-						return Class.forName(importy);
+				if(Main.muck != null && Main.muck.links != null) {
+					List<String> imports =Main.muck.links.getImport(classname);
+					//JOptionPane.showMessageDialog(null,imports.size()+"");
+					if(imports == null)
+						return null;
+					for(String importy:imports) {
+						String select="import "+importy.replaceAll(classname+"$","")+"*;";
+						if(text.contains(select))
+							return Class.forName(importy);
+					}
+					return Class.forName(imports.get(0));
 				}
-				return Class.forName(imports.get(0));
+				return null;
 			}
 			catch(ClassNotFoundException ex4) {
 				ex4.printStackTrace();
 				return null;
 			}
 		}
-	}
-	public String findEnclosingClassName() {
-		int caretPos = main.textarea.getCaretPosition();
-		String text = main.textarea.getText();
-		int braceDepth = 0;
-		String foundClassName = null;
-		List<Integer> classDepths = new ArrayList<Integer>();
-		List<String> classNames = new ArrayList<String>();
-		for (int i = 0; i < caretPos && i < text.length(); i++) {
-			char c = text.charAt(i);
-			if (c == '{') {
-				braceDepth++;
-			} else if (c == '}') {
-				braceDepth--;
-				for (int j = classDepths.size() - 1; j >= 0; j--) {
-					if (classDepths.get(j) >= braceDepth) {
-						classDepths.remove(j);
-						classNames.remove(j);
-					}
-				}
-			}
-			if (i < text.length() - 6 && text.substring(i, i + 6).equals("class ")) {
-				int classNameStart = i + 6;
-				int classNameEnd = classNameStart;
-				while (classNameEnd < text.length() && text.charAt(classNameEnd) != ' ' && text.charAt(classNameEnd) != '{' && text.charAt(classNameEnd) != '<' && text.charAt(classNameEnd) != '\n' && text.charAt(classNameEnd) != '\r') {
-					classNameEnd++;
-				}
-				if (classNameEnd > classNameStart) {
-					String className = text.substring(classNameStart, classNameEnd).trim();
-					if (!className.isEmpty() && !className.equals("extends") && !className.equals("implements")) {
-						classDepths.add(braceDepth);
-						classNames.add(className);
-						foundClassName = className;
-					}
-				}
-			}
-		}
-		return foundClassName;
-	}
-	public Object[] getMethodsOfEnclosingClass() {
-		try {
-			String className = findEnclosingClassName();
-			if (className == null) return new Object[0];
-			Class<?> classQ = getClassQuestionMark(className, main.textarea.getText());
-			if (classQ == null || classQ == java.lang.Object.class) return new Object[0];
-			Member[] methods = classQ.getDeclaredMethods();
-			Member[] constructors = classQ.getDeclaredConstructors();
-			Member[] all = addMembersToMembers(methods, constructors);
-			Member[] fields = classQ.getDeclaredFields();
-			all = addMembersToMembers(all, fields);
-			return all;
-		} catch (Exception e) {
-			return new Object[0];
-		}
-	}
-	public Object[] parseFieldsAndMethodsFromText(String text, String className) {
-		List<Object> result = new ArrayList<Object>();
-		int classStart = -1;
-		int classEnd = -1;
-		int depth = 0;
-		boolean inClass = false;
-		for (int i = 0; i < text.length(); i++) {
-			if (!inClass) {
-				if (text.substring(i).startsWith("class " + className)) {
-					classStart = i;
-					inClass = true;
-				}
-			} else {
-				if (text.charAt(i) == '{') {
-					depth++;
-				} else if (text.charAt(i) == '}') {
-					depth--;
-					if (depth == 0) {
-						classEnd = i + 1;
-						break;
-					}
-				}
-			}
-		}
-		if (classStart == -1 || classEnd == -1) return new Object[0];
-		String classBody = text.substring(classStart, classEnd);
-		depth = 0;
-		int methodStart = -1;
-		int methodDepth = 0;
-		for (int i = 0; i < classBody.length(); i++) {
-			if (classBody.charAt(i) == '{') {
-				depth++;
-				if (methodDepth == 0 && depth == 1) {
-					methodStart = i;
-					methodDepth = 1;
-				}
-			} else if (classBody.charAt(i) == '}') {
-				if (methodDepth > 0) {
-					methodDepth--;
-					if (methodDepth == 0 && methodStart != -1) {
-						String methodSig = classBody.substring(0, methodStart).trim();
-						String methodBody = classBody.substring(methodStart + 1, i);
-						int lastSpace = methodSig.lastIndexOf(' ');
-						String methodName = (lastSpace > 0) ? methodSig.substring(lastSpace + 1).trim() : methodSig;
-						int paren = methodName.indexOf('(');
-						if (paren > 0) {
-							methodName = methodName.substring(0, paren);
-						}
-						if (!methodName.isEmpty() && !methodName.equals(className)) {
-							result.add(methodName);
-						}
-						methodStart = -1;
-					}
-				} else {
-					depth--;
-				}
-			}
-		}
-		return result.toArray(new Object[0]);
 	}
 	public Member[] getAllPropertyAndMethods(String classname,String text) {
 		Class<?> members = 	getClassQuestionMark(classname,text);
@@ -6608,13 +6668,6 @@ class MethodSuggestionBox {
 					name=name.replaceAll(".+\\$","");
 				}
 				strings[i] =fieldType+" "+name;
-			}
-			else if(methods[i] instanceof Member) {
-				String name=((Member)methods[i]).getName();
-				if(name.contains("$")) {
-					name=name.replaceAll(".+\\$","");
-				}
-				strings[i] =name;
 			}
 			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
 				String name= methods[i].toString();
@@ -6881,8 +6934,13 @@ class MethodSuggestionBox {
 						if(searchy.endsWith("()")) {
 							searchy = searchy.substring(0, searchy.length() - 2);
 						}
-						for(JLabel label:labels2) {	
-							if( ! (label.getText().toLowerCase().startsWith(searchy)) ) {
+						for(JLabel label:labels2) {
+							String labelText = label.getText().toLowerCase();
+							int spIdx = labelText.indexOf(" ");
+							if(spIdx > 0) {
+								labelText = labelText.substring(spIdx + 1);
+							}
+							if( ! (labelText.startsWith(searchy)) ) {
 								liveiterator.remove(label);
 							}
 						}
@@ -6967,17 +7025,20 @@ class MethodSuggestionBox {
 				labels[i] = new JLabel((String)methods[i]);
 			}		
 			else if(methods[i] instanceof Method) {
+				String returnType=((Method)methods[i]).getReturnType().getSimpleName();
 				String name=((Method)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
-				labels[i] = new JLabel(name);
+				name+=getParanthesesAndParameters(methods[i]);
+				labels[i] = new JLabel(returnType+" "+name);
 			}
 			else if(methods[i] instanceof Constructor) {
 				String name=((Constructor)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
+				name+=getParanthesesAndParameters(methods[i]);
 				labels[i] = new JLabel(name);
 			}
 			else if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isEnum()) {
@@ -6995,12 +7056,13 @@ class MethodSuggestionBox {
 				}
 				labels[i] = new JLabel(name);
 			}
-			else if(methods[i] instanceof Member) {
+			else if(methods[i] instanceof Field) {
+				String fieldType=((Field)methods[i]).getType().getSimpleName();
 				String name=((Member)methods[i]).getName();
 				if(name.contains("$")) {
 					name=name.replaceAll(".+\\$","");
 				}
-				labels[i] = new JLabel(name);
+				labels[i] = new JLabel(fieldType+" "+name);
 			}
 			else { // if(methods[i] instanceof Class<?> && ((Class<?>)methods[i]).isLocalClass()) {
 				String name= methods[i].toString();
