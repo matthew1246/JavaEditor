@@ -12,11 +12,13 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfix\\Main.java",
-      ""
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\NoFileOpen.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\NoFileOpen.java"
     ],
     "caretposition": 0
   },
@@ -74,7 +76,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 2020
+    "caretposition": 1084
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "isLocked": false,
@@ -201,7 +203,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 5750
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java": {
     "isLocked": false,
@@ -2234,5 +2236,53 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 1746
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "NoFileOpen"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 1330
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\NoFileOpen.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "NoFileOpen"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 1084
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\NoFileOpen.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "NoFileOpen"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 1330
   }
 }
