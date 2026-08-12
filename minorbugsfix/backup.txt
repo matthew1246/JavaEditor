@@ -6,16 +6,16 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 23
+    "caretposition": 105
   },
   "lastopened": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\NoFileOpen.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\NoFileOpen.java"
@@ -62,7 +62,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 80468
+    "caretposition": 1302
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -2284,5 +2284,14 @@
     ],
     "fileNames": [],
     "caretposition": 1330
+  },
+  "C:\\kjkjk\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "Main",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 105
   }
 }
