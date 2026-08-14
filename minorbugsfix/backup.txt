@@ -12,14 +12,15 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\akjajkjka\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\NoFileOpen.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\NoFileOpen.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\NoFileOpen.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\NoFileOpen.java",
+      "C:\\akjajkjka\\Main.java"
     ],
     "caretposition": 0
   },
@@ -2315,6 +2316,17 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
+    "starterclass": "Main",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 105
+  },
+  "C:\\akjajkjka\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
