@@ -12,11 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfix\\Main.java",
-      ""
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
     ],
     "caretposition": 0
   },

@@ -1985,9 +1985,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					compileallversions.addActionListener( (ev5) -> {
 						getjavaversion.dispose();
 						
-						if(fileName.equals("")) {
+					if(fileName.equals("")) {
 							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
 							Main.this.fileName = nofileopen.getFileName();
+							if(sal == null)
+								sal = new SaveActionListener(this);
+							sal.actionPerformed(null); // Save file and update UI.
 						}
 						else {
 							if(!isLatestCodeSaved()) {
@@ -2018,9 +2021,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
 							getjavaversion.dispose();
 							
-							if(fileName.equals("")) {
+						if(fileName.equals("")) {
 								NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
 								Main.this.fileName = nofileopen.getFileName();
+								if(sal == null)
+									sal = new SaveActionListener(this);
+								sal.actionPerformed(null); // Save file and update UI.
 							}
 							else if(!isLatestCodeSaved()) {
 								if(sal == null)
@@ -2193,6 +2199,9 @@ Packager packager2 = new Packager(this);
 						if(fileName.equals("")) {
 							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
 							Main.this.fileName = nofileopen.getFileName();
+							if(sal == null)
+								sal = new SaveActionListener(this);
+							sal.actionPerformed(null); // Save file and update UI.
 						}
 						else if(!isLatestCodeSaved()) {
 							if(sal == null)
