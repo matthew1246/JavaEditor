@@ -1991,6 +1991,22 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(sal == null)
 								sal = new SaveActionListener(this);
 							sal.actionPerformed(null); // Save file and update UI.
+							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
+							List<String> tabs=fileNames;
+							int tabsize=tabbedpane.getSelectedIndex();
+							if(tabs.size()<=tabsize)
+								tabs.add(Main.this.fileName);
+							else
+								tabs.set(tabsize,Main.this.fileName);
+							StoreSelectedFile storeselectedfilenew=new StoreSelectedFile();
+							storeselectedfilenew.set(Main.this.fileName);
+							storeselectedfilenew.setTabs(tabs);
+							storeselectedfilenew.setStarterClass(Main.this.fileName);
+							threecomboboxes.load(Main.this.fileName);
+							expandable.open();
+							startercombobox.Change(Main.this.fileName);
+							git.Change(Main.this.fileName);
+							maven.Change(Main.this.fileName);
 						}
 						else {
 							if(!isLatestCodeSaved()) {
@@ -2027,6 +2043,22 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								if(sal == null)
 									sal = new SaveActionListener(this);
 								sal.actionPerformed(null); // Save file and update UI.
+								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
+								List<String> tabs=fileNames;
+								int tabsize=tabbedpane.getSelectedIndex();
+								if(tabs.size()<=tabsize)
+									tabs.add(Main.this.fileName);
+								else
+									tabs.set(tabsize,Main.this.fileName);
+								StoreSelectedFile storeselectedfilenew=new StoreSelectedFile();
+								storeselectedfilenew.set(Main.this.fileName);
+								storeselectedfilenew.setTabs(tabs);
+								storeselectedfilenew.setStarterClass(Main.this.fileName);
+								threecomboboxes.load(Main.this.fileName);
+								expandable.open();
+								startercombobox.Change(Main.this.fileName);
+								git.Change(Main.this.fileName);
+								maven.Change(Main.this.fileName);
 							}
 							else if(!isLatestCodeSaved()) {
 								if(sal == null)
@@ -2202,6 +2234,22 @@ Packager packager2 = new Packager(this);
 							if(sal == null)
 								sal = new SaveActionListener(this);
 							sal.actionPerformed(null); // Save file and update UI.
+							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
+							List<String> tabs=fileNames;
+							int tabsize=tabbedpane.getSelectedIndex();
+							if(tabs.size()<=tabsize)
+								tabs.add(Main.this.fileName);
+							else
+								tabs.set(tabsize,Main.this.fileName);
+							StoreSelectedFile storeselectedfilenew=new StoreSelectedFile();
+							storeselectedfilenew.set(Main.this.fileName);
+							storeselectedfilenew.setTabs(tabs);
+							storeselectedfilenew.setStarterClass(Main.this.fileName);
+							threecomboboxes.load(Main.this.fileName);
+							expandable.open();
+							startercombobox.Change(Main.this.fileName);
+							git.Change(Main.this.fileName);
+							maven.Change(Main.this.fileName);
 						}
 						else if(!isLatestCodeSaved()) {
 							if(sal == null)
