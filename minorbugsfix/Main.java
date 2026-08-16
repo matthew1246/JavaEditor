@@ -2188,6 +2188,16 @@ Packager packager2 = new Packager(this);
 							if(existingJar.exists()) {
 								existingJar.delete();
 							}
+							String classnameJar2 = new File(dir).getParentFile().getAbsolutePath()+"\\"+main+".jar";
+							File existingJar2 = new File(classnameJar2);
+							if(existingJar2.exists()) {
+								existingJar2.delete();
+							}
+							String classnameJar3 = new File(dir).getParentFile().getParentFile().getAbsolutePath()+"\\"+main+".jar";
+							File existingJar3 = new File(classnameJar3);
+							if(existingJar3.exists()) {
+								existingJar3.delete();
+							}
 							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 							if(packager2.containsPackage()) {
 								if(!packager2.isInRightFolders()) { // javac.exe used -d option
@@ -2389,6 +2399,16 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 							File existingJar = new File(classnameJar);
 							if(existingJar.exists()) {
 								existingJar.delete();
+							}
+							String classnameJar2 = new File(dir).getParentFile().getAbsolutePath()+"\\"+main+".jar";
+							File existingJar2 = new File(classnameJar2);
+							if(existingJar2.exists()) {
+								existingJar2.delete();
+							}
+							String classnameJar3 = new File(dir).getParentFile().getParentFile().getAbsolutePath()+"\\"+main+".jar";
+							File existingJar3 = new File(classnameJar3);
+							if(existingJar3.exists()) {
+								existingJar3.delete();
 							}
 							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 							if(packager3.containsPackage()) {
