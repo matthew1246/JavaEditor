@@ -2546,19 +2546,24 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								
 									commandline.runWithMSDOS(liney,dir);
 								}
-								else {
-									String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
-									if(packager2.containsPackage()) {
-										if(!packager2.isInRightFolders()) { // javac.exe used -d option
-											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
-										}
-										else { // packager2.isInRightFolders()
-											input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
-										}
+							else {
+								String classnameJar = dir+main+".jar";
+								File existingJar = new File(classnameJar);
+								if(existingJar.exists()) {
+									existingJar.delete();
+								}
+								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+								if(packager2.containsPackage()) {
+									if(!packager2.isInRightFolders()) { // javac.exe used -d option
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 									}
-									JOptionPane.showMessageDialog(null,input);
-									JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
-									Process process=commandline.run(input,dir);
+									else { // packager2.isInRightFolders()
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+									}
+								}
+								JOptionPane.showMessageDialog(null,input);
+								JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
+								Process process=commandline.run(input,dir);
 									
 									InputStream inputstream = process.getErrorStream();
 									InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
@@ -2766,6 +2771,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								commandline.runWithMSDOS(liney,dir);
 							}
 							else { 
+								String classnameJar = dir+main+".jar";
+								File existingJar = new File(classnameJar);
+								if(existingJar.exists()) {
+									existingJar.delete();
+								}
 								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 								if(packager3.containsPackage()) {
 									if(!packager3.isInRightFolders()) { // javac.exe used -d option

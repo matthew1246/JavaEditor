@@ -136,9 +136,14 @@ public class AllVersionsJar {
 				}	
 			}
 		
-			JOptionPane.showMessageDialog(null,input);
-			CommandLine commandline = new CommandLine();
-			Process process=commandline.runAsAdmin(input,dir);
+		JOptionPane.showMessageDialog(null,input);
+		CommandLine commandline = new CommandLine();
+		String classnameJar = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+		File existingJar = new File(classnameJar);
+		if(existingJar.exists()) {
+			existingJar.delete();
+		}
+		Process process=commandline.runAsAdmin(input,dir);
 			
 			java.io.InputStream inputstream = process.getErrorStream();
 			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);

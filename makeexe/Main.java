@@ -2186,6 +2186,11 @@ Packager packager2 = new Packager(this);
 								commandline.runWithMSDOS(liney,dir);
 							}
 							else {
+								String classnameJar = dir+main+".jar";
+								File existingJar = new File(classnameJar);
+								if(existingJar.exists()) {
+									existingJar.delete();
+								}
 								String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 								if(packager2.containsPackage()) {
 									if(!packager2.isInRightFolders()) { // javac.exe used -d option
@@ -2379,6 +2384,11 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 							commandline.runWithMSDOS(liney,dir);
 						}
 						else { 
+							String classnameJar = dir+main+".jar";
+							File existingJar = new File(classnameJar);
+							if(existingJar.exists()) {
+								existingJar.delete();
+							}
 							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 							if(packager3.containsPackage()) {
 								if(!packager3.isInRightFolders()) { // javac.exe used -d option
