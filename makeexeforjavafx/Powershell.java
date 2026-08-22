@@ -213,6 +213,24 @@ public class Powershell {
 			if(main_class2.endsWith("two")) {
 				main_class2=main_class2.substring(0,(main_class2.length()-3));
 			}
+			String classnameJar = dir+main_class2+".jar";
+			File existingJar = new File(classnameJar);
+			if(existingJar.exists()) {
+				output2.write("del "+classnameJar);
+				output2.write("\n");
+			}
+			String classnameJar2 = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+			File existingJar2 = new File(classnameJar2);
+			if(existingJar2.exists()) {
+				output2.write("del "+classnameJar2);
+				output2.write("\n");
+			}
+			String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
+			File existingJar3 = new File(classnameJar3);
+			if(existingJar3.exists()) {
+				output2.write("del "+classnameJar3);
+				output2.write("\n");
+			}
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
 				if(javaversionnumber == 23) {	
