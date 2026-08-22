@@ -163,6 +163,32 @@ public class Powershell {
 					output2.write("\n");
 				}
 			}
+			String classnameJar = dir+main_class+".jar";
+			File existingJar = new File(classnameJar);
+			if(existingJar.exists()) {
+				output2.write("del "+classnameJar);
+				output2.write("\n");
+			}
+			File pardir = new File(dir).getParentFile();
+			if(pardir != null) {
+				String classnameJar2 = pardir.getAbsolutePath();
+				if(!classnameJar2.endsWith("\\"))
+					classnameJar2=classnameJar2+"\\";
+				classnameJar2=classnameJar2+main_class+".jar";
+				File existingJar2 = new File(classnameJar2);
+				if(existingJar2.exists()) {
+					output2.write("del "+classnameJar2);
+					output2.write("\n");
+				}
+				if(pardir.getParentFile() != null) {
+					String classnameJar3 = pardir.getParentFile().getAbsolutePath()+"\\"+main_class+".jar";
+					File existingJar3 = new File(classnameJar3);
+					if(existingJar3.exists()) {
+						output2.write("del "+classnameJar3);
+						output2.write("\n");
+					}
+				}
+			}
 			// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
@@ -210,29 +236,6 @@ public class Powershell {
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
-			String classnameJar = dir+main_class2+".jar";
-			File existingJar = new File(classnameJar);
-			if(existingJar.exists()) {
-				output2.write("del "+classnameJar);
-				output2.write("\n");
-			}
-			String classnameJar2 = parentdirectory.getAbsolutePath();
-			if(!classnameJar2.endsWith("\\"))
-				classnameJar2=classnameJar2+"\\";
-			classnameJar2=classnameJar2+main_class2+".jar";
-			File existingJar2 = new File(classnameJar2);
-			if(existingJar2.exists()) {
-				output2.write("del "+classnameJar2);
-				output2.write("\n");
-			}
-			if(parentdirectory.getParentFile() != null) {
-				String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
-				File existingJar3 = new File(classnameJar3);
-				if(existingJar3.exists()) {
-					output2.write("del "+classnameJar3);
-					output2.write("\n");
-				}
-			}
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 				if(javaversionnumber != 23) {

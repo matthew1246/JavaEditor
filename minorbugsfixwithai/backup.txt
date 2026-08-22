@@ -2090,7 +2090,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 5851
+    "caretposition": 11067
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Powershell.java": {
     "isLocked": false,
@@ -2122,7 +2122,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 80240
+    "caretposition": 80263
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,
