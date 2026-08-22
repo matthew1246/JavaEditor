@@ -163,28 +163,30 @@ public class Powershell {
 					output2.write("\n");
 				}
 			}
-			String classnameJar = dir+main_class+".jar";
-			File existingJar = new File(classnameJar);
+			String classnameJar2 = dir+main_class+".jar";
+			String[] splited=  main_class.split("\\.");
+			classnameJar2 = dir+splited[splited.length-1]+".jar";
+			File existingJar = new File(classnameJar2);
 			if(existingJar.exists()) {
-				output2.write("del "+classnameJar);
+				output2.write("del "+classnameJar2);
 				output2.write("\n");
 			}
 			File pardir = new File(dir).getParentFile();
 			if(pardir != null) {
-				String classnameJar2 = pardir.getAbsolutePath();
-				if(!classnameJar2.endsWith("\\"))
-					classnameJar2=classnameJar2+"\\";
-				classnameJar2=classnameJar2+main_class+".jar";
-				File existingJar2 = new File(classnameJar2);
+				String classnameJar3 = pardir.getAbsolutePath();
+				if(!classnameJar3.endsWith("\\"))
+					classnameJar3=classnameJar3+"\\";
+				classnameJar3=classnameJar3+splited[splited.length-1]+".jar";
+				File existingJar2 = new File(classnameJar3);
 				if(existingJar2.exists()) {
-					output2.write("del "+classnameJar2);
+					output2.write("del "+classnameJar3);
 					output2.write("\n");
 				}
 				if(pardir.getParentFile() != null) {
-					String classnameJar3 = pardir.getParentFile().getAbsolutePath()+"\\"+main_class+".jar";
-					File existingJar3 = new File(classnameJar3);
+					String classnameJar4 = pardir.getParentFile().getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
+					File existingJar3 = new File(classnameJar4);
 					if(existingJar3.exists()) {
-						output2.write("del "+classnameJar3);
+						output2.write("del "+classnameJar4);
 						output2.write("\n");
 					}
 				}
