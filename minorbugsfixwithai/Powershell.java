@@ -222,11 +222,13 @@ public class Powershell {
 				output2.write("del "+classnameJar2);
 				output2.write("\n");
 			}
-			String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
-			File existingJar3 = new File(classnameJar3);
-			if(existingJar3.exists()) {
-				output2.write("del "+classnameJar3);
-				output2.write("\n");
+			if(parentdirectory.getParentFile() != null) {
+				String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
+				File existingJar3 = new File(classnameJar3);
+				if(existingJar3.exists()) {
+					output2.write("del "+classnameJar3);
+					output2.write("\n");
+				}
 			}
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .

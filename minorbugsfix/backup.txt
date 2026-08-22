@@ -12,13 +12,13 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\NoFileOpen.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\NoFileOpen.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Powershell.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Powershell.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
     ],
     "caretposition": 0
@@ -63,7 +63,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 71494
+    "caretposition": 71701
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -93,7 +93,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 80271
+    "caretposition": 80345
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -345,7 +345,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 5750
+    "caretposition": 8915
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java": {
     "isLocked": false,
@@ -1326,7 +1326,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 7389
+    "caretposition": 8294
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\SuggestionBoxSelected.java": {
     "isLocked": false,
@@ -2083,7 +2083,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 5855
+    "caretposition": 8728
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Powershell.java": {
     "isLocked": false,
@@ -2094,7 +2094,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 5851
+    "caretposition": 8579
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Powershell.java": {
     "isLocked": false,
@@ -2110,7 +2110,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 5843
+    "caretposition": 8635
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java": {
     "isLocked": false,
@@ -2126,7 +2126,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 7036
+    "caretposition": 8695
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,

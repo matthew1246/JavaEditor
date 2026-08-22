@@ -109,7 +109,7 @@ public class Powershell {
 					
 					// Copy all classes with the same package name to new folder
 					File targetDir = new File(dir+packagename.replace(".","\\"));   
-					// destination folder
+					// des					tination folder
 					targetDir.mkdirs();
 					for(String file:main.filelistmodifier.fullpath) {
 						Packager packagerCustomFile=new Packager(file);
@@ -139,7 +139,6 @@ public class Powershell {
 			filename = main.getFileName(filename);
 			if(filename.startsWith("/"))
 				filename=filename.substring(1,filename.length());
-			JOptionPane.showMessageDialog(null,filename+" is already open. Run script to close "+filename);
 			if(dir.contains("\\")) {
 				if(!dir.endsWith("\\"))
 					dir=dir+"\\";
@@ -148,6 +147,7 @@ public class Powershell {
 				if(!dir.endsWith("/"))
 					dir=dir+"/";
 			}
+			JOptionPane.showMessageDialog(null,filename+" is already open. Run script to close "+filename);
 			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
 			output2 = new BufferedWriter(filewriter2);
 			output2.write("cd "+dir);
@@ -222,11 +222,13 @@ public class Powershell {
 				output2.write("del "+classnameJar2);
 				output2.write("\n");
 			}
-			String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
-			File existingJar3 = new File(classnameJar3);
-			if(existingJar3.exists()) {
-				output2.write("del "+classnameJar3);
-				output2.write("\n");
+			if(parentdirectory.getParentFile() != null) {
+				String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
+				File existingJar3 = new File(classnameJar3);
+				if(existingJar3.exists()) {
+					output2.write("del "+classnameJar3);
+					output2.write("\n");
+				}
 			}
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
@@ -245,6 +247,7 @@ public class Powershell {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
 				}
 				else {
+					// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .");
 					output2.write("\n");
 					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");
@@ -268,4 +271,4 @@ public class Powershell {
 			ex.printStackTrace();
 		}
 	}
-}
+}
