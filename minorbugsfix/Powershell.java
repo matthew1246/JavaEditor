@@ -216,7 +216,10 @@ public class Powershell {
 				output2.write("del "+classnameJar);
 				output2.write("\n");
 			}
-			String classnameJar2 = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+			String classnameJar2 = parentdirectory.getAbsolutePath();
+			if(!classnameJar2.endsWith("\\"))
+				classnameJar2=classnameJar2+"\\";
+			classnameJar2=classnameJar2+main_class2+".jar";
 			File existingJar2 = new File(classnameJar2);
 			if(existingJar2.exists()) {
 				output2.write("del "+classnameJar2);
