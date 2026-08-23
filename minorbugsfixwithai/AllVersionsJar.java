@@ -148,10 +148,12 @@ public class AllVersionsJar {
 		if(existingJar2.exists()) {
 			existingJar2.delete();
 		}
-		String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
-		File existingJar3 = new File(classnameJar3);
-		if(existingJar3.exists()) {
-			existingJar3.delete();
+		if(parentdirectory.getParentFile() != null) {
+			String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
+			File existingJar3 = new File(classnameJar3);
+			if(existingJar3.exists()) {
+				existingJar3.delete();
+			}
 		}
 		Process process=commandline.runAsAdmin(input,dir);
 			
