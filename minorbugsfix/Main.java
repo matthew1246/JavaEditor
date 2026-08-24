@@ -6162,7 +6162,7 @@ class MethodSuggestionBox {
 							break escapey;
 						}
 					}
-					else { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
+					else if(member instanceof Class<?>) { // if(member instanceof Class<?> && ((Class<?>)member).isLocalClass()) {
 						String name=((Class<?>)member).getName();
 						//JOptionPane.showMessageDialog(null,"else");
 						//JOptionPane.showMessageDialog(null,name);
@@ -6173,6 +6173,11 @@ class MethodSuggestionBox {
 							property=(Class<?>)member;
 							break escapey;
 						}
+					}
+					else if(member instanceof Constructor) {
+						// Constructors are included in the final suggestions
+						// via getAllPropertyAndMethodsAndEnums but cannot
+						// resolve chain segments like fields/methods can.
 					}
 				}
 			}
