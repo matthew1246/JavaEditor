@@ -2529,22 +2529,28 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									commandline.runWithMSDOS(liney,dir);
 								}
 							else {
-								String classnameJar = dir+main+".jar";
-								File existingJar = new File(classnameJar);
-								if(existingJar.exists()) {
-									existingJar.delete();
-								}
-								String classnameJar2 = new File(dir).getParentFile().getAbsolutePath()+"\\"+main+".jar";
+							String classnameJar = dir+main+".jar";
+							File existingJar = new File(classnameJar);
+							if(existingJar.exists()) {
+								existingJar.delete();
+							}
+							File parentDir2 = new File(dir).getParentFile();
+							if(parentDir2 != null) {
+								String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main+".jar";
 								File existingJar2 = new File(classnameJar2);
 								if(existingJar2.exists()) {
 									existingJar2.delete();
 								}
-								String classnameJar3 = new File(dir).getParentFile().getParentFile().getAbsolutePath()+"\\"+main+".jar";
-								File existingJar3 = new File(classnameJar3);
-								if(existingJar3.exists()) {
-									existingJar3.delete();
+								File parentDir3 = parentDir2.getParentFile();
+								if(parentDir3 != null) {
+									String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main+".jar";
+									File existingJar3 = new File(classnameJar3);
+									if(existingJar3.exists()) {
+										existingJar3.delete();
+									}
 								}
-								String input = "jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+							}
+							String input = "jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 								if(packager2.containsPackage()) {
 									if(!packager2.isInRightFolders()) { // javac.exe used -d option
 										input="START /B /WAIT cmd.exe /c jar cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
@@ -2766,22 +2772,28 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								commandline.runWithMSDOS(liney,dir);
 							}
 							else { 
-								String classnameJar = dir+main+".jar";
-								File existingJar = new File(classnameJar);
-								if(existingJar.exists()) {
-									existingJar.delete();
-								}
-								String classnameJar2 = new File(dir).getParentFile().getAbsolutePath()+"\\"+main+".jar";
+							String classnameJar = dir+main+".jar";
+							File existingJar = new File(classnameJar);
+							if(existingJar.exists()) {
+								existingJar.delete();
+							}
+							File parentDir2 = new File(dir).getParentFile();
+							if(parentDir2 != null) {
+								String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main+".jar";
 								File existingJar2 = new File(classnameJar2);
 								if(existingJar2.exists()) {
 									existingJar2.delete();
 								}
-								String classnameJar3 = new File(dir).getParentFile().getParentFile().getAbsolutePath()+"\\"+main+".jar";
-								File existingJar3 = new File(classnameJar3);
-								if(existingJar3.exists()) {
-									existingJar3.delete();
+								File parentDir3 = parentDir2.getParentFile();
+								if(parentDir3 != null) {
+									String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main+".jar";
+									File existingJar3 = new File(classnameJar3);
+									if(existingJar3.exists()) {
+										existingJar3.delete();
+									}
 								}
-								String input = "jar cfm "+main+".jar mf.txt .";
+							}
+							String input = "jar cfm "+main+".jar mf.txt .";
 								if(packager3.containsPackage()) {
 									if(!packager3.isInRightFolders()) { // javac.exe used -d option
 										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .";

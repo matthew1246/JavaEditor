@@ -6,7 +6,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 105
+    "caretposition": 127
   },
   "lastopened": {
     "isLocked": false,
@@ -19,7 +19,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Powershell.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Powershell.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Powershell.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Powershell.java",
+      "C:\\wally\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -2330,5 +2331,16 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 105
+  },
+  "C:\\wally\\minorbugsfix\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "Main",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 127
   }
 }
