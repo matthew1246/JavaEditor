@@ -2015,8 +2015,25 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								sal.actionPerformed(null); // Save latest code.
 							}
 						}						
-						
-						AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
+						String[] options3={"One","More than One"};
+						int result = JOptionPane.showOptionDialog(
+						    null,
+						    "Do you want to make a jar with one or more packages?",
+						    "Package Selection",
+						    JOptionPane.DEFAULT_OPTION,
+						    JOptionPane.QUESTION_MESSAGE,
+						    null,
+						    options3,
+						    options3[1]  // <-- sets "More than one" as the default focused button
+						);
+						AllVersionsJar allversionsjar = null;
+						if(result == 0) {
+							allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
+						}
+						else {
+							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
+						}
+						// AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
