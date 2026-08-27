@@ -2134,7 +2134,9 @@ Packager packager2 = new Packager(this);
 										}
 										for(String jar:jars) {
 											// jar = getFileName(jar);
-											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+											//Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+
 											process.waitFor();
 											//output.write(" "+jar);
 										}
