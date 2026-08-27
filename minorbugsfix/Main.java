@@ -2183,12 +2183,17 @@ Packager packager2 = new Packager(this);
 							commandline.runWithMSDOS(liney,dir);
 						}
 					else {
-						String classnameJar = dir+main+".jar";
+						String classnameJar;
+						if(packager2.containsPackage() && packager2.isInRightFolders()) {
+							classnameJar = dir + packager2.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+						} else {
+							classnameJar = dir+main+".jar";
+						}
 						File existingJar = new File(classnameJar);
 						if(existingJar.exists()) {
 							existingJar.delete();
 						}
-						File parentDir2 = new File(dir).getParentFile();
+						File parentDir2 = new File(classnameJar).getParentFile();
 						if(parentDir2 != null) {
 							String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main+".jar";
 							File existingJar2 = new File(classnameJar2);
@@ -2401,12 +2406,17 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 							commandline.runWithMSDOS(liney,dir);
 						}
 					else {
-						String classnameJar = dir+main+".jar";
+						String classnameJar;
+						if(packager3.containsPackage() && packager3.isInRightFolders()) {
+							classnameJar = dir + packager3.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+						} else {
+							classnameJar = dir+main+".jar";
+						}
 						File existingJar = new File(classnameJar);
 						if(existingJar.exists()) {
 							existingJar.delete();
 						}
-						File parentDir2 = new File(dir).getParentFile();
+						File parentDir2 = new File(classnameJar).getParentFile();
 						if(parentDir2 != null) {
 							String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main+".jar";
 							File existingJar2 = new File(classnameJar2);
