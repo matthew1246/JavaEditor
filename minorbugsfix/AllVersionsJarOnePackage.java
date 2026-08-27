@@ -9,14 +9,14 @@ import java.io.IOException;
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
 */
-public class AllVersionsJar {
+public class AllVersionsJarOnePackage implements AllVersionsJar {
 	private Packager packager;
 	private String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
-	public AllVersionsJar(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
+	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -116,7 +116,9 @@ public class AllVersionsJar {
 			String main_class2 = splited[splited.length-1];
 			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
-			if(packager.containsPackage() && packager.isInRightFolders()) {+}
+			if(packager.containsPackage() && packager.isInRightFolders()) {
+				parentdirectory=file;	
+			}
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			
 			String input = "";
