@@ -189,7 +189,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 	}
 	public void Powershell(String main_class) {
 		
-		Powershell powershell = new Powershell(main,main_class,dir,allfiles);
+		Powershell powershell = new PowershellMoreThanOnePackage(main,main_class,dir,allfiles);
 		for(int i = 18; i <= 23; i++) {
 			powershell.Compile(i,fileName);
 			powershell.makeJar(i);

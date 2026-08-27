@@ -1985,7 +1985,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					compileallversions.addActionListener( (ev5) -> {
 						getjavaversion.dispose();
 						
-					if(fileName.equals("")) {
+						if(fileName.equals("")) {
 							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
 							Main.this.fileName = nofileopen.getFileName();
 							if(sal == null)
