@@ -2151,15 +2151,20 @@ Packager packager2 = new Packager(this);
 								output2.write("\n");
 								output2.write("START /B /WAIT taskkill /F /im javaw.exe");
 								output2.write("\n");
-								for(int i = 0; i < allfiles.files.size(); i++) {
-									File file2 = new File(allfiles.files.get(i));
-									if(file2.exists()) {
-										output2.write("del "+allfiles.files.get(i));
-										output2.write("\n");
-									}
+							for(int i = 0; i < allfiles.files.size(); i++) {
+								File file2 = new File(allfiles.files.get(i));
+								if(file2.exists()) {
+									output2.write("del "+allfiles.files.get(i));
+									output2.write("\n");
 								}
-								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-								if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
+							}
+							if(packager2.containsPackage() && packager2.isInRightFolders()) {
+								String classnameJarPkg = dir + packager2.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+								output2.write("del "+classnameJarPkg);
+								output2.write("\n");
+							}
+							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
+							if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
 									// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 									output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 								}
@@ -2377,6 +2382,11 @@ Packager packager2 = new Packager(this);
 									output2.write("del "+allfiles.files.get(i));
 									output2.write("\n");
 								}
+							}
+							if(packager3.containsPackage() && packager3.isInRightFolders()) {
+								String classnameJarPkg = dir + packager3.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+								output2.write("del "+classnameJarPkg);
+								output2.write("\n");
 							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 							Packager packager2 = new Packager(this);
