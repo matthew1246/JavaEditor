@@ -2152,25 +2152,30 @@ Packager packager2 = new Packager(this);
 								output2.write("\n");
 								output2.write("START /B /WAIT taskkill /F /im javaw.exe");
 								output2.write("\n");
-								for(int i = 0; i < allfiles.files.size(); i++) {
-									File file2 = new File(allfiles.files.get(i));
-									if(file2.exists()) {
-										output2.write("del "+allfiles.files.get(i));
-										output2.write("\n");
-									}
+							for(int i = 0; i < allfiles.files.size(); i++) {
+								File file2 = new File(allfiles.files.get(i));
+								if(file2.exists()) {
+									output2.write("del "+allfiles.files.get(i));
+									output2.write("\n");
 								}
-								// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-								if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
+							}
+							if(packager2.containsPackage() && packager2.isInRightFolders()) {
+								String classnameJarPkg = dir + packager2.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+								output2.write("del "+classnameJarPkg);
+								output2.write("\n");
+							}
+							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
+							if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
+								// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+								output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+							}
+							else {
+								if(packager2.isInRightFolders()) {
+									// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
 									// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 									output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 								}
-								else {
-									if(packager2.isInRightFolders()) {
-										// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
-										// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
-										output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
-									}
-								}
+							}
 								output2.write("\n");
 								
 								commandline = new CommandLine();
@@ -2183,13 +2188,18 @@ Packager packager2 = new Packager(this);
 							
 								commandline.runWithMSDOS(liney,dir);
 							}
-						else {
-						String classnameJar = dir+main+".jar";
+					else {
+						String classnameJar;
+						if(packager2.containsPackage() && packager2.isInRightFolders()) {
+							classnameJar = dir + packager2.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+						} else {
+							classnameJar = dir+main+".jar";
+						}
 						File existingJar = new File(classnameJar);
 						if(existingJar.exists()) {
 							existingJar.delete();
 						}
-						File parentDir2 = new File(dir).getParentFile();
+						File parentDir2 = new File(classnameJar).getParentFile();
 						if(parentDir2 != null) {
 							String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main+".jar";
 							File existingJar2 = new File(classnameJar2);
@@ -2374,6 +2384,11 @@ Packager packager2 = new Packager(this);
 									output2.write("\n");
 								}
 							}
+							if(packager3.containsPackage() && packager3.isInRightFolders()) {
+								String classnameJarPkg = dir + packager3.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+								output2.write("del "+classnameJarPkg);
+								output2.write("\n");
+							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 							Packager packager2 = new Packager(this);
 							if(!packager2.containsPackage()) { // Doesn't contain package.
@@ -2402,12 +2417,17 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 							commandline.runWithMSDOS(liney,dir);
 						}
 					else { 
-						String classnameJar = dir+main+".jar";
+						String classnameJar;
+						if(packager3.containsPackage() && packager3.isInRightFolders()) {
+							classnameJar = dir + packager3.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
+						} else {
+							classnameJar = dir+main+".jar";
+						}
 						File existingJar = new File(classnameJar);
 						if(existingJar.exists()) {
 							existingJar.delete();
 						}
-						File parentDir2 = new File(dir).getParentFile();
+						File parentDir2 = new File(classnameJar).getParentFile();
 						if(parentDir2 != null) {
 							String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main+".jar";
 							File existingJar2 = new File(classnameJar2);

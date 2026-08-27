@@ -162,20 +162,21 @@ public class Powershell {
 					output2.write("\n");
 				}
 			}
-			String classnameJar2 = dir+main_class+".jar";
 			String[] splited=  main_class.split("\\.");
-			classnameJar2 = dir+splited[splited.length-1]+".jar";
+			String classnameJar2;
+			if(packager.containsPackage() && packager.isInRightFolders()) {
+				classnameJar2 = dir + packager.getPackageName().replace(".", "\\") + "\\" + splited[splited.length-1] + ".jar";
+			} else {
+				classnameJar2 = dir+splited[splited.length-1]+".jar";
+			}
 			File existingJar = new File(classnameJar2);
 			if(existingJar.exists()) {
 				output2.write("del "+classnameJar2);
 				output2.write("\n");
 			}
-			File pardir = new File(dir).getParentFile();
+			File pardir = new File(classnameJar2).getParentFile();
 			if(pardir != null) {
-				String classnameJar3 = pardir.getAbsolutePath();
-				if(!classnameJar3.endsWith("\\"))
-					classnameJar3=classnameJar3+"\\";
-				classnameJar3=classnameJar3+splited[splited.length-1]+".jar";
+				String classnameJar3 = pardir.getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
 				File existingJar2 = new File(classnameJar3);
 				if(existingJar2.exists()) {
 					output2.write("del "+classnameJar3);

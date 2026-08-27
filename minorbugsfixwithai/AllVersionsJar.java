@@ -138,21 +138,30 @@ public class AllVersionsJar {
 		
 		JOptionPane.showMessageDialog(null,input);
 		CommandLine commandline = new CommandLine();
-		String classnameJar = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+		String classnameJar;
+		if(packager.containsPackage() && packager.isInRightFolders()) {
+			classnameJar = dir + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
+		} else {
+			classnameJar = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+		}
 		File existingJar = new File(classnameJar);
 		if(existingJar.exists()) {
 			existingJar.delete();
 		}
-		String classnameJar2 = dir+main_class2+".jar";
-		File existingJar2 = new File(classnameJar2);
-		if(existingJar2.exists()) {
-			existingJar2.delete();
-		}
-		if(parentdirectory.getParentFile() != null) {
-			String classnameJar3 = parentdirectory.getParentFile().getAbsolutePath()+"\\"+main_class2+".jar";
-			File existingJar3 = new File(classnameJar3);
-			if(existingJar3.exists()) {
-				existingJar3.delete();
+		File parentDir2 = new File(classnameJar).getParentFile();
+		if(parentDir2 != null) {
+			String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main_class2+".jar";
+			File existingJar2 = new File(classnameJar2);
+			if(existingJar2.exists()) {
+				existingJar2.delete();
+			}
+			File parentDir3 = parentDir2.getParentFile();
+			if(parentDir3 != null) {
+				String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main_class2+".jar";
+				File existingJar3 = new File(classnameJar3);
+				if(existingJar3.exists()) {
+					existingJar3.delete();
+				}
 			}
 		}
 		Process process=commandline.runAsAdmin(input,dir);
