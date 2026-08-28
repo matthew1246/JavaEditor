@@ -23,9 +23,10 @@ public class AI {
 	private void Extract() {
 		try {
 			String dir = "";
+			String jarPath = "";
 			try {
 				java.net.URI jarUri = AI.class.getProtectionDomain().getCodeSource().getLocation().toURI();
-				String jarPath = jarUri.getPath();
+				jarPath = jarUri.getPath();
 				if(jarPath.startsWith("/"))
 					jarPath=jarPath.substring(1,jarPath.length());
 				File jarFile = new File(jarPath);
@@ -43,14 +44,32 @@ public class AI {
 			if(exeFile.exists())
 				return;
 
+			try(java.util.jar.JarFile jar = new java.util.jar.JarFile(jarPath)) {
+				java.util.jar.JarEntry entry = jar.getJarEntry("opencode.exe");
+				if(entry == null) {
+					entry = jar.getJarEntry("/opencode.exe");
+				}
+				if(entry != null) {
+					try(InputStream is = jar.getInputStream(entry)) {
+						Path outputpath=Paths.get(opencodeexe);
+						Files.copy(is,outputpath,StandardCopyOption.REPLACE_EXISTING);
+					}
+					return;
+				}
+			}
+
 			URL url=AI.class.getClassLoader().getResource("opencode.exe");
 			if(url == null) {
-				System.err.println("opencode.exe not found in classpath, skipping extraction.");
+				url = AI.class.getResource("/opencode.exe");
+			}
+			if(url != null) {
+				try(InputStream inputstream=url.openStream()) {
+					Path outputpath=Paths.get(opencodeexe);
+					Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
+				}
 				return;
 			}
-			InputStream inputstream=url.openStream();
-			Path outputpath=Paths.get(opencodeexe);
-			Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
+			System.err.println("opencode.exe not found, skipping extraction.");
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
