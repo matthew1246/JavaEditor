@@ -22,8 +22,6 @@ public class AI {
 	}
 	private void Extract() {
 		try {
-			URL url=AI.class.getClassLoader().getResource("opencode.exe");	
-			InputStream inputstream=url.openStream();
 			String dir = "";
 			try {
 				java.net.URI jarUri = AI.class.getProtectionDomain().getCodeSource().getLocation().toURI();
@@ -40,10 +38,20 @@ public class AI {
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
 			opencodeexe=dir+"opencode.exe";
+
+			File exeFile = new File(opencodeexe);
+			if(exeFile.exists())
+				return;
+
+			URL url=AI.class.getClassLoader().getResource("opencode.exe");
+			if(url == null) {
+				System.err.println("opencode.exe not found in classpath, skipping extraction.");
+				return;
+			}
+			InputStream inputstream=url.openStream();
 			Path outputpath=Paths.get(opencodeexe);
-					
 			Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
-		} catch(IOException ex) {
+		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 	}
