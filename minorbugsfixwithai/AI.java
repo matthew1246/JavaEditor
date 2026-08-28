@@ -44,10 +44,12 @@ public class AI {
 			if(exeFile.exists())
 				return;
 
+			String resPath = AI.class.getPackage().getName().replace('.','/') + "/opencode.exe";
+
 			try(java.util.jar.JarFile jar = new java.util.jar.JarFile(jarPath)) {
-				java.util.jar.JarEntry entry = jar.getJarEntry("opencode.exe");
+				java.util.jar.JarEntry entry = jar.getJarEntry(resPath);
 				if(entry == null) {
-					entry = jar.getJarEntry("/opencode.exe");
+					entry = jar.getJarEntry("opencode.exe");
 				}
 				if(entry != null) {
 					try(InputStream is = jar.getInputStream(entry)) {
@@ -58,7 +60,10 @@ public class AI {
 				}
 			}
 
-			URL url=AI.class.getClassLoader().getResource("opencode.exe");
+			URL url=AI.class.getResource("/" + resPath);
+			if(url == null) {
+				url=AI.class.getClassLoader().getResource(resPath);
+			}
 			if(url == null) {
 				url = AI.class.getResource("/opencode.exe");
 			}
