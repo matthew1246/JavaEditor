@@ -25,7 +25,6 @@ public class ExtractJUnit {
 			}
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
-
 			Path outputpath=Paths.get(dir+jar);
 			if(Files.exists(outputpath))
 				return;

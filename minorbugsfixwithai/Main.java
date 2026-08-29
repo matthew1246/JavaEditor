@@ -1602,7 +1602,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
-		AI ai=new AI(this);
+		AI ai =new AI(this);
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
@@ -1943,7 +1943,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});
 		
 		generatejar.addActionListener((ev) -> {						
-																
+			// 3a85e18ee02774cb28448df6ce540ad792d54fc9 is git commit id for -C make a jar for only package.																		
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
 			storeselectedfile2.setCaretPosition(fileName,caretposition);
@@ -1986,7 +1986,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					compileallversions.addActionListener( (ev5) -> {
 						getjavaversion.dispose();
 						
-					if(fileName.equals("")) {
+						if(fileName.equals("")) {
 							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
 							Main.this.fileName = nofileopen.getFileName();
 							if(sal == null)
@@ -2016,8 +2016,25 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								sal.actionPerformed(null); // Save latest code.
 							}
 						}						
-						
-						AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
+						String[] options3={"One","More than One"};
+						int result = JOptionPane.showOptionDialog(
+						    null,
+						    "Do you want to make a jar with one or more packages?",
+						    "Package Selection",
+						    JOptionPane.DEFAULT_OPTION,
+						    JOptionPane.QUESTION_MESSAGE,
+						    null,
+						    options3,
+						    options3[1]  // <-- sets "More than one" as the default focused button
+						);
+						AllVersionsJar allversionsjar = null;
+						if(result == 0) {
+							allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
+						}
+						else {
+							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
+						}
+						// AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
@@ -2038,7 +2055,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							int javaversionnumber=(Integer)combobox.getSelectedItem();
 							getjavaversion.dispose();
 							
-						if(fileName.equals("")) {
+							if(fileName.equals("")) {
 								NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
 								Main.this.fileName = nofileopen.getFileName();
 								if(sal == null)
@@ -2084,6 +2101,21 @@ Packager packager2 = new Packager(this);
 							}
 							if(!dir.endsWith("\\"))
 								dir=dir+"\\";
+							String[] options3={"One","More than One"};
+							int result = JOptionPane.showOptionDialog(
+							    null,
+							    "Do you want to make a jar with one or more packages?",
+							    "Package Selection",
+							    JOptionPane.DEFAULT_OPTION,
+							    JOptionPane.QUESTION_MESSAGE,
+							    null,
+							    options3,
+							    options3[1]  // <-- sets "More than one" as the default focused button
+							);
+							boolean isOnePackage = false;
+							if(result == 0)
+								isOnePackage = true;
+							else isOnePackage = false;
 							if(!fileName.equals("")) {
 								List<String> jars = preferences.jars;
 								if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
@@ -2095,17 +2127,29 @@ Packager packager2 = new Packager(this);
 									}		
 								}
 								else { // Package used javac.exe didn't used -d option
-									/*JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
-									File createdir = new File(dir+"jars");
-									if(!createdir.exists()) {
-										createdir.mkdir();
-									}*/
-									for(String jar:jars) {
-										// jar = getFileName(jar);
-										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-										process.waitFor();
-										//output.write(" "+jar);
+									if(isOnePackage) {
+										JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+										File createdir = new File(dir+"jars");
+										if(!createdir.exists()) {
+											createdir.mkdir();
+										}
+										for(String jar:jars) {
+											// jar = getFileName(jar);
+											//Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+
+											process.waitFor();
+											//output.write(" "+jar);
+										}
 									}
+									else { // Is more than one package
+										for(String jar:jars) {
+											// jar = getFileName(jar);
+											Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+											process.waitFor();
+											//output.write(" "+jar);
+										}
+									}			
 								}		
 							}
 							
@@ -2166,16 +2210,20 @@ Packager packager2 = new Packager(this);
 							}
 							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 							if(!packager2.containsPackage() || !packager2.isInRightFolders()) {
-								// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
-								output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
-							}
-							else {
-								if(packager2.isInRightFolders()) {
-									// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
 									// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 									output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
 								}
-							}
+								else {
+									if(packager2.isInRightFolders()) {
+										if(isOnePackage) {																							output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+											// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+											// output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+										}
+										else { // Is more than package
+											output2.write("START /B /WAIT cmd.exe /c jar cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .");
+										}
+									}
+								}
 								output2.write("\n");
 								
 								commandline = new CommandLine();
@@ -2186,8 +2234,8 @@ Packager packager2 = new Packager(this);
 								commandline = new CommandLine();
 								String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
 							
-								commandline.runWithMSDOS(liney,dir);
-							}
+							commandline.runWithMSDOS(liney,dir);
+						}
 					else {
 						String classnameJar;
 						if(packager2.containsPackage() && packager2.isInRightFolders()) {
@@ -2221,9 +2269,12 @@ Packager packager2 = new Packager(this);
 									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
 								}
 								else { // packager2.isInRightFolders()
-									// input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
-									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
-
+									if(isOnePackage) {
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+"ForJava"+javaversionnumber+"_"+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\");
+									}
+									else { // Is more than one package
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm ForJava"+javaversionnumber+"_"+main+".jar mf.txt .";
+									}
 								}
 							}
 							JOptionPane.showMessageDialog(null,input);
@@ -2304,6 +2355,22 @@ Packager packager2 = new Packager(this);
 						}
 						if(!dir.endsWith("\\"))
 							dir = dir+"\\";
+						String[] options3={"One","More than One"};
+						int result = JOptionPane.showOptionDialog(
+						    null,
+						    "Do you want to make a jar with one or more packages?",
+						    "Package Selection",
+						    JOptionPane.DEFAULT_OPTION,
+						    JOptionPane.QUESTION_MESSAGE,
+						    null,
+						    options3,
+						    options3[1]  // <-- sets "More than one" as the default focused button
+						);
+						boolean isOnePackage = false;
+						if(result == 0) {
+							isOnePackage = true;
+						}
+						else isOnePackage = false;
 						if(!fileName.equals("")) {
 							List<String> jars = preferences.jars;
 							if(!packager3.containsPackage() || !packager3.isInRightFolders()) { // Contains no package
@@ -2315,23 +2382,32 @@ Packager packager2 = new Packager(this);
 								}
 							}
 							else { // Package used javac.exe didn't used -d option
-								/*JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
-								File createdir = new File(dir+"jars");
-								if(!createdir.exists()) {
-									createdir.mkdir();
-								}*/
-								for(String jar:jars) {
-									// jar = getFileName(jar);
-									// Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
-																		Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-
-									process.waitFor();
-									//output.write(" "+jar);
+								if(isOnePackage) {
+									JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
+									File createdir = new File(dir+"jars");
+									if(!createdir.exists()) {
+										createdir.mkdir();
+									}
+									for(String jar:jars) {
+										// jar = getFileName(jar);
+										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+										// Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+	
+										process.waitFor();
+										//output.write(" "+jar);
+									}
+								}
+								else { // Is more than one package
+									for(String jar:jars) {
+										// jar = getFileName(jar);
+										// Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+										Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+	
+										process.waitFor();
+										//output.write(" "+jar);
+									}
 								}
 							}		
-
-		
-
 						}
 						if(!fileName.equals("")) {
 							if(main.equals("")) {
@@ -2401,8 +2477,12 @@ Packager packager2 = new Packager(this);
 output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
 								}
 								else { // packager2.isInRightFolders()
-									// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
-									output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+									if(isOnePackage) {
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager2.getPackageName().replace(".","\\"));
+									}
+									else { // Is more than one package
+										output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .");
+									}
 								}
 							}
 							output2.write("\n");
@@ -2416,7 +2496,7 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 							
 							commandline.runWithMSDOS(liney,dir);
 						}
-					else { 
+					else {
 						String classnameJar;
 						if(packager3.containsPackage() && packager3.isInRightFolders()) {
 							classnameJar = dir + packager3.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
@@ -2443,14 +2523,18 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 								}
 							}
 						}
-						String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+							String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 							if(packager3.containsPackage()) {
 								if(!packager3.isInRightFolders()) { // javac.exe used -d option
 									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
 								}
 								else { // packager2.isInRightFolders()
-									// input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
-									input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+									if(isOnePackage) {
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt -C jars . "+packager3.getPackageName().replace(".","\\");
+									}
+									else {
+										input="START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+main+".jar mf.txt .";
+									}
 								}
 							}
 							JOptionPane.showMessageDialog(null,input);

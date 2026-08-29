@@ -35,6 +35,7 @@ public class NoFileOpen {
 		else { // If file already exists.
 			String[] options={"Yes","No"};
 			int yesorno=JOptionPane.showOptionDialog(null,"Overwrite existing file?","Do you want overwrite the existing file with this code?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+			
 			switch(yesorno) {
 				case JOptionPane.YES_OPTION:
 					saveTabs(fileName);
