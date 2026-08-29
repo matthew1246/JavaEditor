@@ -16,8 +16,6 @@ public class ExtractJUnit {
 	}
 	public void ExtractJar(String jar) {
 		try {
-			URL url=ExtractJUnit.class.getClassLoader().getResource(jar);	
-			InputStream inputstream=url.openStream();
 			String dir = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				dir=main.getDirectory(main.fileName);
@@ -27,10 +25,49 @@ public class ExtractJUnit {
 			}
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
+
 			Path outputpath=Paths.get(dir+jar);
-					
-			Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
-		} catch(IOException ex) {
+			if(Files.exists(outputpath))
+				return;
+
+			String resPath = ExtractJUnit.class.getPackage().getName().replace('.','/') + "/" + jar;
+			String jarPath = "";
+			try {
+				java.net.URI jarUri = ExtractJUnit.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+				jarPath = jarUri.getPath();
+				if(jarPath.startsWith("/"))
+					jarPath=jarPath.substring(1,jarPath.length());
+			} catch(Exception ex) {}
+
+			if(!jarPath.isEmpty()) {
+				try(java.util.jar.JarFile jf = new java.util.jar.JarFile(jarPath)) {
+					java.util.jar.JarEntry entry = jf.getJarEntry(resPath);
+					if(entry == null)
+						entry = jf.getJarEntry(jar);
+					if(entry != null) {
+						try(InputStream is = jf.getInputStream(entry)) {
+							Files.copy(is,outputpath,StandardCopyOption.REPLACE_EXISTING);
+						}
+						return;
+					}
+				}
+			}
+
+			URL url=ExtractJUnit.class.getResource("/" + resPath);
+			if(url == null)
+				url=ExtractJUnit.class.getClassLoader().getResource(resPath);
+			if(url == null)
+				url=ExtractJUnit.class.getClassLoader().getResource(jar);
+			if(url == null)
+				url = ExtractJUnit.class.getResource("/" + jar);
+			if(url != null) {
+				try(InputStream inputstream=url.openStream()) {
+					Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
+				}
+				return;
+			}
+			System.err.println(jar + " not found, skipping extraction.");
+		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 	}		
