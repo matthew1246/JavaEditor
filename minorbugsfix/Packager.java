@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;

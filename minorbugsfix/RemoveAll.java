@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 public class RemoveAll {

@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;

@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import javax.swing.JTextArea;
 import java.util.regex.*;
 import javax.swing.JOptionPane;

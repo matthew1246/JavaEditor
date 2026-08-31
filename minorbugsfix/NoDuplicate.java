@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import java.util.LinkedHashMap;
 import com.google.gson.*;
 import com.google.gson.reflect.*;
