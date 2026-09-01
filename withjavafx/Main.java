@@ -2300,11 +2300,30 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							
+							String[] options3={"One","More than One"};
+							int result = JOptionPane.showOptionDialog(
+							    null,
+							    "Do you want to make a jar with one or more packages?",
+							    "Package Selection",
+							    JOptionPane.DEFAULT_OPTION,
+							    JOptionPane.QUESTION_MESSAGE,
+							    null,
+							    options3,
+							    options3[1]  // <-- sets "More than one" as the default focused button
+							);
+							boolean isOnePackage = false;
+							if(result == 0)
+								isOnePackage = true;
 							boolean isJavaFX = false;
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							if(option2 ==JOptionPane.YES_OPTION) {
 								isJavaFX = true;
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+								if(!isOnePackage) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+								}
+								else {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+								}
 							}
 							else if(option2 == JOptionPane.NO_OPTION) {
 								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
