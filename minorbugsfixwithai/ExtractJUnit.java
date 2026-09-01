@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.net.URL;
 import java.nio.file.Paths;
 import java.nio.file.Path;

@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;

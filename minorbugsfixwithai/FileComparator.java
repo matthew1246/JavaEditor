@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.util.Comparator;
 import java.io.File;
 public class FileComparator implements Comparator<File> {

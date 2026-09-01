@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import javax.swing.SwingUtilities;
 import javax.swing.BorderFactory;
 import java.awt.Toolkit;
