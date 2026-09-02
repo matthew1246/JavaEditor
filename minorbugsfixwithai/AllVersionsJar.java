@@ -20,4 +20,4 @@ public interface AllVersionsJar {
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class);
 	public void Powershell(String main_class);
 }
-
+
