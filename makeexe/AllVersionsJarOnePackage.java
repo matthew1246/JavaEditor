@@ -92,17 +92,12 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		try {
 			if(dir.endsWith("\\\\"))
 				dir=dir.substring(0,dir.length()-1);
+			if(!dir.endsWith("\\"))
+				dir=dir+"\\";
 			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				System.out.println("dir3:"+dir);
-				java.io.FileWriter batfilewriter = new java.io.FileWriter(dir+"writemanifest.bat", java.nio.charset.StandardCharsets.UTF_8);
-				java.io.BufferedWriter batoutput = new java.io.BufferedWriter(batfilewriter);
-				batoutput.write("@echo off\n");
-				batoutput.write("(echo Manifest-Version: 1.0\n");
-				batoutput.write("echo Main-Class: "+main_class+"\n");
-				batoutput.write(") > \""+dir+"mf.txt\"\n");
-				batoutput.close();
 				CommandLine commandline = new CommandLine();
-				String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"writemanifest.bat\"'\"";
+				String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \\\"(echo Manifest-Version: 1.0 & echo Main-Class: "+main_class+") > \\\"\\\""+dir+"mf.txt\\\"\\\"\\\"'";
 				commandline.runWithMSDOS(liney, dir);
 			}
 			else {
