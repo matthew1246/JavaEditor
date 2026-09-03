@@ -192,7 +192,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 				}
 			}
 			Process process;
-			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+			if(dir.replace("\\","").matches("[a-zA-Z]:") || parentdirectory.getAbsolutePath().replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,dir);
 			}
 			else {
