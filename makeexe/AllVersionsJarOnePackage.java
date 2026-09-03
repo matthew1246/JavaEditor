@@ -106,7 +106,7 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				batoutput.close();
 				String liney = "powershell -Command Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+tempfile.getAbsolutePath()+"\"'";
 				System.out.println(liney);
-				commandline.runWithMSDOS(liney, dir);
+				commandline.run(liney, dir);
 			}
 			else {
 				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
