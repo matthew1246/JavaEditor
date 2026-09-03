@@ -98,6 +98,7 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 			System.out.println("dir3:"+dir);
 			CommandLine commandline = new CommandLine();
 			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c echo ''Manifest-Version: 1.0'' > ''"+dir+"mf.txt'' & echo ''Main-Class: "+main_class+"'' >> ''"+dir+"mf.txt'''\"";
+			System.out.println(liney);
 			commandline.runWithMSDOS(liney, dir);
 		}
 			else {
