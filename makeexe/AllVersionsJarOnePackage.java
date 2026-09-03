@@ -137,7 +137,13 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
-			Process process=commandline.run(input,dir);
+			Process process;
+			if(dir.replaceAll("\\+$","").matches("[a-zA-Z]:")) {
+				process=commandline.runAsAdmin(input,dir);
+			}
+			else {
+				process=commandline.run(input,dir);
+			}
 			
 			java.io.InputStream inputstream = process.getErrorStream();
 			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);

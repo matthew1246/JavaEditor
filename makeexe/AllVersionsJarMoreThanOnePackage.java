@@ -163,7 +163,13 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 					}
 				}
 			}
-			Process process=commandline.runAsAdmin(input,dir);
+			Process process;
+			if(dir.replaceAll("\\+$","").matches("[a-zA-Z]:")) {
+				process=commandline.runAsAdmin(input,dir);
+			}
+			else {
+				process=commandline.run(input,dir);
+			}
 			
 			java.io.InputStream inputstream = process.getErrorStream();
 			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);
