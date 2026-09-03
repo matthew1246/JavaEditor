@@ -103,7 +103,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 	}
 	public void WriteManifest(String main_class) {
 		try {
-			if(dir.replaceAll("\\+$","").matches("[a-zA-Z]:")) {
+			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				CommandLine commandline = new CommandLine();
 				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.ps1");
 				java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
@@ -189,7 +189,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 				}
 			}
 			Process process;
-			if(dir.replaceAll("\\+$","").matches("[a-zA-Z]:")) {
+			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,dir);
 			}
 			else {
