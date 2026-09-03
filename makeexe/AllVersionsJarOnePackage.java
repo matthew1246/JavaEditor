@@ -11,7 +11,7 @@ import java.io.IOException;
 */
 public class AllVersionsJarOnePackage implements AllVersionsJar {
 	private Packager packager;
-	private String dir;
+	public String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
@@ -30,6 +30,10 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		}
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
+	}
+	@Override
+	public String getDir() {
+		return dir;
 	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
@@ -126,10 +130,14 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	private AllFiles allfiles;
+	public AllFiles allfiles;
 	public boolean isMatthewJavaEditor(String main_class) {
 		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
+	}
+	@Override
+	public AllFiles getAllFiles() {
+		return allfiles;
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {

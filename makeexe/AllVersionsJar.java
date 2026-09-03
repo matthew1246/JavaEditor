@@ -10,6 +10,8 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public interface AllVersionsJar {
+	public String getDir();
+	public AllFiles getAllFiles();
 	public void Compile(int javaversionnumber);
 	public Preferences extractJars(StoreSelectedFile storeselectedfile);
 	public String getMain(StoreSelectedFile storeselectedfile,Preferences preferences);
@@ -18,4 +20,4 @@ public interface AllVersionsJar {
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class);
 	public void Powershell(String main_class);
 }
-
+

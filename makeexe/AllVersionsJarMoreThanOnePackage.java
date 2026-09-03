@@ -31,6 +31,9 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 	}
+	public String getDir() {
+		return dir;
+	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
 		compile.compileall(main,fileName,javaversionnumber,sal,ev4);
@@ -130,6 +133,10 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 	public boolean isMatthewJavaEditor(String main_class) {
 		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
+	}
+	@Override
+	public AllFiles getAllFiles() {
+		return allfiles;
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
