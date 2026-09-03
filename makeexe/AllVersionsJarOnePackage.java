@@ -94,12 +94,12 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				dir=dir.substring(0,dir.length()-1);
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
-			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
-				System.out.println("dir3:"+dir);
-				CommandLine commandline = new CommandLine();
-				String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command echo ''Manifest-Version: 1.0'' > ''"+dir+"mf.txt'' & echo ''Main-Class: "+main_class+"'' >> ''"+dir+"mf.txt'''\"";
-				commandline.runWithMSDOS(liney, dir);
-			}
+		if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+			System.out.println("dir3:"+dir);
+			CommandLine commandline = new CommandLine();
+			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c echo ''Manifest-Version: 1.0'' > ''"+dir+"mf.txt'' & echo ''Main-Class: "+main_class+"'' >> ''"+dir+"mf.txt'''\"";
+			commandline.runWithMSDOS(liney, dir);
+		}
 			else {
 				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
 				java.io.BufferedWriter output = new java.io.BufferedWriter(filewriter);
