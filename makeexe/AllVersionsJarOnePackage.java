@@ -97,7 +97,7 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				System.out.println("dir3:"+dir);
 				CommandLine commandline = new CommandLine();
-				String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \\\"(echo Manifest-Version: 1.0 & echo Main-Class: "+main_class+") > \\\"\\\""+dir+"mf.txt\\\"\\\"\\\"'";
+				String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command echo ''Manifest-Version: 1.0'' > ''"+dir+"mf.txt'' & echo ''Main-Class: "+main_class+"'' >> ''"+dir+"mf.txt'''\"";
 				commandline.runWithMSDOS(liney, dir);
 			}
 			else {
@@ -113,6 +113,7 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				//output.write("\n");
 				output.close();
 			}
+
 		} catch(java.io.IOException ex) {
 			ex.printStackTrace();
 		}
