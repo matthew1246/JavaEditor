@@ -94,13 +94,20 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				dir=dir.substring(0,dir.length()-1);
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
-		if(dir.replace("\\","").matches("[a-zA-Z]:")) {
-			System.out.println("dir3:"+dir);
-			CommandLine commandline = new CommandLine();
-			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c echo ''Manifest-Version: 1.0'' > ''"+dir+"mf.txt'' & echo ''Main-Class: "+main_class+"'' >> ''"+dir+"mf.txt'''\"";
-			System.out.println(liney);
-			commandline.runWithMSDOS(liney, dir);
-		}
+			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+				System.out.println("dir3:"+dir);
+				CommandLine commandline = new CommandLine();
+				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"writemf.bat");
+				java.io.FileWriter batwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
+				java.io.BufferedWriter batoutput = new java.io.BufferedWriter(batwriter);
+				batoutput.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"");
+				batoutput.write("\n");
+				batoutput.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"");
+				batoutput.close();
+				String liney = "powershell -Command Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+tempfile.getAbsolutePath()+"\"'";
+				System.out.println(liney);
+				commandline.runWithMSDOS(liney, dir);
+			}
 			else {
 				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
 				java.io.BufferedWriter output = new java.io.BufferedWriter(filewriter);
