@@ -101,7 +101,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 				scriptwriter.write("$content = 'Manifest-Version: 1.0' + [Environment]::NewLine + 'Main-Class: "+main_class+"' + [Environment]::NewLine\n");
 				scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
 				scriptwriter.close();
-				Process process = commandline.runAsAdmin("powershell -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
+				Process process = commandline.runAsAdmin("\"powershell\" -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
 				try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
 				tempfile.delete();
 			}
