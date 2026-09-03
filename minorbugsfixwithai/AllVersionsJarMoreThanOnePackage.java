@@ -94,17 +94,30 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 	}
 	public void WriteManifest(String main_class) {
 		try {
-			java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
-			java.io.BufferedWriter output = new java.io.BufferedWriter(filewriter);
-			output.write("Manifest-Version: 1.0");
-			output.write("\n");
-			output.write("Main-Class: ");
-			output.write(main_class);
-			output.write("\n");
-			//output.write("Class-Path:");
-			//output.write(" *");
-			//output.write("\n");
-			output.close();
+			if(dir.replaceAll("\\+$","").matches("[a-zA-Z]:")) {
+				CommandLine commandline = new CommandLine();
+				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.ps1");
+				java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
+				scriptwriter.write("$content = 'Manifest-Version: 1.0' + [Environment]::NewLine + 'Main-Class: "+main_class+"' + [Environment]::NewLine\n");
+				scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
+				scriptwriter.close();
+				Process process = commandline.runAsAdmin("powershell -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
+				process.waitFor();
+				tempfile.delete();
+			}
+			else {
+				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
+				java.io.BufferedWriter output = new java.io.BufferedWriter(filewriter);
+				output.write("Manifest-Version: 1.0");
+				output.write("\n");
+				output.write("Main-Class: ");
+				output.write(main_class);
+				output.write("\n");
+				//output.write("Class-Path:");
+				//output.write(" *");
+				//output.write("\n");
+				output.close();
+			}
 		} catch(java.io.IOException ex) {
 			ex.printStackTrace();
 		}
