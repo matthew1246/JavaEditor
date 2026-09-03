@@ -112,7 +112,7 @@ public class AllVersionsJar {
 				scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
 				scriptwriter.close();
 				Process process = commandline.runAsAdmin("powershell -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
-				process.waitFor();
+				try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
 				tempfile.delete();
 			}
 			else {
