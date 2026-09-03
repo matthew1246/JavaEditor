@@ -2335,7 +2335,13 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								isJavaFX = false;
 							}
 							
-							AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
+							AllVersionsJar allversionsjar = null;
+							if(isOnePackage) {
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
+							}
+							else {
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
+							}
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
