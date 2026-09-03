@@ -156,6 +156,14 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				}	
 			}		
 		
+			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
+			String dir2=Main.getDirectory(main.fileName);
+			if(!dir2.endsWith("\\"))
+				dir2=dir2+"\\";
+			File mainjarfile=new File(dir2+main_class2+".jar");
+			if(mainjarfile.exists())
+				mainjarfile.delete();
+			
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
 			Process process;
