@@ -219,7 +219,8 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				commandline.addExternalJar(jar);
 			}
 		
-			commandline.earlierjavaversion(javaversionnumber);
+			if(javaversionnumber != -2)	
+				commandline.earlierjavaversion(javaversionnumber);
 			
 			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
 			output2.write("\n");
@@ -241,7 +242,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-				if(javaversionnumber != 23) {
+				if(javaversionnumber != 23 && javaversionnumber != -2) {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
 				}
 				else {
@@ -251,7 +252,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
-				if(javaversionnumber != 23) {
+				if(javaversionnumber != 23 && javaversionnumber != -2) {
 					// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
 				}

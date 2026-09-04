@@ -94,7 +94,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 	}
 	public void WriteManifest(String main_class) {
 		try {
-				if(dir.endsWith("\\\\"))
+			if(dir.endsWith("\\\\"))
 				dir=dir.substring(0,dir.length()-1);
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";

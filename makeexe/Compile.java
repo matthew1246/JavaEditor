@@ -307,7 +307,8 @@ public class Compile {
 				commandline.addExternalJar(jar);
 			}
 			
-			commandline.earlierjavaversion(javaversionnumber);
+			if(javaversionnumber != -2)
+				commandline.earlierjavaversion(javaversionnumber);
 			
 			//Process process = compileFromMSDOS("*.java",classpath);
 			String[] command = new String[3];

@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\AllVersionsJarMoreThanOnePackage.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -21,7 +21,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellMoreThanOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Compile.java"
     ],
     "caretposition": 0
   },
@@ -1132,7 +1133,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 95937
+    "caretposition": 79299
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
     "isLocked": false,
@@ -1312,7 +1313,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 777
+    "caretposition": 9946
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Powershell.java": {
     "isLocked": true,
@@ -1329,7 +1330,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 268
+    "caretposition": 720
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\SuggestionBoxSelected.java": {
     "isLocked": false,
@@ -1669,8 +1670,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
-      "Compile"
+      "Compile",
+      "Main"
     ],
     "starterclass": "",
     "jars": [
@@ -1680,7 +1681,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 19355
+    "caretposition": 12306
   },
   "C:\\Users\\Owner\\Documents\\git\\foldersizecalculator\\FolderSizeCalculator.java": {
     "isLocked": false,
@@ -2375,7 +2376,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 7566
+    "caretposition": 3270
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\AllVersionsJarOnePackage.java": {
     "isLocked": true,
@@ -2439,7 +2440,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 5777
+    "caretposition": 9352
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellMoreThanOnePackage.java": {
     "isLocked": true,
@@ -2455,7 +2456,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 379
+    "caretposition": 9946
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java": {
     "isLocked": true,
