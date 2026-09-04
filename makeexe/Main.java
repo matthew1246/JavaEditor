@@ -2021,17 +2021,22 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 						}
 						
-						String[] options3={"One","More than One"};
-						int result = JOptionPane.showOptionDialog(
-						    null,
-						    "Do you want to make a jar with one or more packages?",
-						    "Package Selection",
-						    JOptionPane.DEFAULT_OPTION,
-						    JOptionPane.QUESTION_MESSAGE,
-						    null,
-						    options3,
-						    options3[1]  // <-- sets "More than one" as the default focused button
-						);
+						int result = 1;
+						Packager packager = new Packager(this);
+						if(packager.containsPackage())
+						{
+							String[] options3={"One","More than One"};
+							result = JOptionPane.showOptionDialog(
+							    null,
+							    "Do you want to make a jar with one or more packages?",
+							    "Package Selection",
+							    JOptionPane.DEFAULT_OPTION,
+							    JOptionPane.QUESTION_MESSAGE,
+							    null,
+							    options3,
+							    options3[1]  // <-- sets "More than one" as the default focused button
+							);
+						}
 						AllVersionsJar allversionsjar = null;
 						if(result == 0) {
 							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev5);
@@ -2090,17 +2095,21 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							
-							String[] options3={"One","More than One"};
-							int result = JOptionPane.showOptionDialog(
-							    null,
-							    "Do you want to make a jar with one or more packages?",
-							    "Package Selection",
-							    JOptionPane.DEFAULT_OPTION,
-							    JOptionPane.QUESTION_MESSAGE,
-							    null,
-							    options3,
-							    options3[1]  // <-- sets "More than one" as the default focused button
-							);
+							int result = 1;
+							Packager packager=new Packager(this);
+							if(packager.containsPackage()) {
+								String[] options3={"One","More than One"};
+								result = JOptionPane.showOptionDialog(
+								    null,
+								    "Do you want to make a jar with one or more packages?",
+								    "Package Selection",
+								    JOptionPane.DEFAULT_OPTION,
+								    JOptionPane.QUESTION_MESSAGE,
+								    null,
+								    options3,
+								    options3[1]  // <-- sets "More than one" as the default focused button
+								);
+							}
 							boolean isOnePackage = false;
 							if(result == 0) isOnePackage = true;		
 							AllVersionsJar allversionsjar = null;
@@ -2168,17 +2177,21 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						}
 					}
 					
-					String[] options3={"One","More than One"};
-					int result = JOptionPane.showOptionDialog(
-					    null,
-					    "Do you want to make a jar with one or more packages?",
-					    "Package Selection",
-					    JOptionPane.DEFAULT_OPTION,
-					    JOptionPane.QUESTION_MESSAGE,
-					    null,
-					    options3,
-					    options3[1]  // <-- sets "More than one" as the default focused button
-					);
+					Packager packager=new Packager(this);
+					int result = 1;
+					if(packager.containsPackage()) {
+						String[] options3={"One","More than One"};
+						result = JOptionPane.showOptionDialog(
+						    null,
+						    "Do you want to make a jar with one or more packages?",
+						    "Package Selection",
+						    JOptionPane.DEFAULT_OPTION,
+						    JOptionPane.QUESTION_MESSAGE,
+						    null,
+						    options3,
+						    options3[1]  // <-- sets "More than one" as the default focused button
+						);
+					}
 					boolean isOnePackage = false;
 					if(result == 0) isOnePackage = true;		
 					AllVersionsJar allversionsjar = null;
