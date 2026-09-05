@@ -163,32 +163,34 @@ public class PowershellMoreThanOnePackage implements Powershell {
 					output2.write("\n");
 				}
 			}
-			String[] splited=  main_class.split("\\.");
-			String classnameJar2;
-			if(packager.containsPackage() && packager.isInRightFolders()) {
-				classnameJar2 = dir + packager.getPackageName().replace(".", "\\") + "\\" + splited[splited.length-1] + ".jar";
-			} else {
-				classnameJar2 = dir+splited[splited.length-1]+".jar";
-			}
-			File existingJar = new File(classnameJar2);
-			if(existingJar.exists()) {
-				output2.write("del "+classnameJar2);
-				output2.write("\n");
-			}
-			File pardir = new File(classnameJar2).getParentFile();
-			if(pardir != null) {
-				String classnameJar3 = pardir.getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
-				File existingJar2 = new File(classnameJar3);
-				if(existingJar2.exists()) {
-					output2.write("del "+classnameJar3);
+			if(packager.containsPackage()) {
+				String[] splited=  main_class.split("\\.");
+				String classnameJar2;
+				if(packager.containsPackage() && packager.isInRightFolders()) {
+					classnameJar2 = dir + packager.getPackageName().replace(".", "\\") + "\\" + splited[splited.length-1] + ".jar";
+				} else {
+					classnameJar2 = dir+splited[splited.length-1]+".jar";
+				}
+				File existingJar = new File(classnameJar2);
+				if(existingJar.exists()) {
+					output2.write("del "+classnameJar2);
 					output2.write("\n");
 				}
-				if(pardir.getParentFile() != null) {
-					String classnameJar4 = pardir.getParentFile().getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
-					File existingJar3 = new File(classnameJar4);
-					if(existingJar3.exists()) {
-						output2.write("del "+classnameJar4);
+				File pardir = new File(classnameJar2).getParentFile();
+				if(pardir != null) {
+					String classnameJar3 = pardir.getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
+					File existingJar2 = new File(classnameJar3);
+					if(existingJar2.exists()) {
+						output2.write("del "+classnameJar3);
 						output2.write("\n");
+					}
+					if(pardir.getParentFile() != null) {
+						String classnameJar4 = pardir.getParentFile().getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
+						File existingJar3 = new File(classnameJar4);
+						if(existingJar3.exists()) {
+							output2.write("del "+classnameJar4);
+							output2.write("\n");
+						}
 					}
 				}
 			}
@@ -238,7 +240,13 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				main_class2 = splited[splited.length-1];
 			}
 			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
+			File parentdirectory = null;
+			if(packager.containsPackage()) {
+				parentdirectory=file.getParentFile();
+			}
+			else {
+				parentdirectory=file;
+			}
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .

@@ -142,8 +142,10 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-		File file = new File(dir);
+			File file = new File(dir);
 			File parentdirectory=file.getParentFile();
+			if(!packager.containsPackage())
+				parentdirectory=file;	
 			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
 			
 			String input = "";
@@ -182,19 +184,21 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 			if(existingJar.exists()) {
 				existingJar.delete();
 			}
-			File parentDir2 = new File(classnameJar).getParentFile();
-			if(parentDir2 != null) {
-				String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main_class2+".jar";
-				File existingJar2 = new File(classnameJar2);
-				if(existingJar2.exists()) {
-					existingJar2.delete();
-				}
-				File parentDir3 = parentDir2.getParentFile();
-				if(parentDir3 != null) {
-					String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main_class2+".jar";
-					File existingJar3 = new File(classnameJar3);
-					if(existingJar3.exists()) {
-						existingJar3.delete();
+			if(packager.containsPackage()) {
+				File parentDir2 = new File(classnameJar).getParentFile();
+				if(parentDir2 != null) {
+					String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main_class2+".jar";
+					File existingJar2 = new File(classnameJar2);
+					if(existingJar2.exists()) {
+						existingJar2.delete();
+					}
+					File parentDir3 = parentDir2.getParentFile();
+					if(parentDir3 != null) {
+						String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main_class2+".jar";
+						File existingJar3 = new File(classnameJar3);
+						if(existingJar3.exists()) {
+							existingJar3.delete();
+						}
 					}
 				}
 			}
@@ -234,6 +238,5 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 			powershell.makeJar(i);
 		}
 		powershell.Finish();
-
 	}
-}
+}
