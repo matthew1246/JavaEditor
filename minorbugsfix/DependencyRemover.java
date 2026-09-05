@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;

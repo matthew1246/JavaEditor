@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 public class SteveJobsNot {
 	public static void main(String[] args) {
 		System.out.println("Hello World!");

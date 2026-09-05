@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.nio.file.DirectoryStream;
 import java.nio.file.StandardCopyOption;
 import java.awt.KeyboardFocusManager;
@@ -3349,6 +3347,36 @@ output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\
 								}
 							}
 						}
+						else {
+							// Current file has no package name. Check if any other file has a package name.
+							boolean anyOtherHasPackage = false;
+							for(String file : filelistmodifier.fullpath) {
+								Packager packagerOther = new Packager(file);
+								if(packagerOther.containsPackage()) {
+									anyOtherHasPackage = true;
+									break;
+								}
+							}
+							if(anyOtherHasPackage) {
+								String[] options = {"Yes","No"};
+								int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+								if(option == JOptionPane.YES_OPTION) {
+									try {
+										for(String file : filelistmodifier.fullpath) {
+											Packager packagerOther = new Packager(file);
+											if(packagerOther.containsPackage()) {
+												String content = Files.readString(Paths.get(file));
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+												Files.writeString(Paths.get(file), content);
+											}
+										}
+										JOptionPane.showMessageDialog(null,"Package names removed");
+									} catch (Exception ex) {
+										ex.printStackTrace();
+									}
+								}
+							}
+						}
 						
 
 JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
@@ -3678,8 +3706,38 @@ CommandLine commandline = new CommandLine();
 												            } catch (IOException ex) {
 												                JOptionPane.showMessageDialog(null, "Copy failed: " + ex.getMessage());
 												            }
+												            }
 			
+											}
+										}
+									}
+								}
+								else {
+									// Current file has no package name. Check if any other file has a package name.
+									boolean anyOtherHasPackage = false;
+									for(String file : filelistmodifier.fullpath) {
+										Packager packagerOther = new Packager(file);
+										if(packagerOther.containsPackage()) {
+											anyOtherHasPackage = true;
+											break;
+										}
+									}
+									if(anyOtherHasPackage) {
+										String[] options = {"Yes","No"};
+										int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										if(option == JOptionPane.YES_OPTION) {
+											try {
+												for(String file : filelistmodifier.fullpath) {
+													Packager packagerOther = new Packager(file);
+													if(packagerOther.containsPackage()) {
+														String content = Files.readString(Paths.get(file));
+														content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+														Files.writeString(Paths.get(file), content);
+													}
 												}
+												JOptionPane.showMessageDialog(null,"Package names removed");
+											} catch (Exception ex) {
+												ex.printStackTrace();
 											}
 										}
 									}

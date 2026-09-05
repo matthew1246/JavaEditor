@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.util.HashSet;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;

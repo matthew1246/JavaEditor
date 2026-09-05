@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 public class Group {
 	int start = 0;
 	int end = 0;

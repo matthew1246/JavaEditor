@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;

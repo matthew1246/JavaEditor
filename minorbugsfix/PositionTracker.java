@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JTextArea;

@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import javax.swing.*;
 import java.util.regex.*;
 public class GetClassName {
