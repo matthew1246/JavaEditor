@@ -2121,8 +2121,38 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										}
 									}
 								}
+						}
+						else {
+							// Current file has no package name. Check if any other file has a package name.
+							boolean anyOtherHasPackage = false;
+							for(String file : filelistmodifier.fullpath) {
+								Packager packagerOther = new Packager(file);
+								if(packagerOther.containsPackage()) {
+									anyOtherHasPackage = true;
+									break;
+								}
 							}
-							JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
+							if(anyOtherHasPackage) {
+								String[] options = {"Yes","No"};
+								int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+								if(option == JOptionPane.YES_OPTION) {
+									try {
+										for(String file : filelistmodifier.fullpath) {
+											Packager packagerOther = new Packager(file);
+											if(packagerOther.containsPackage()) {
+												String content = Files.readString(Paths.get(file));
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+												Files.writeString(Paths.get(file), content);
+											}
+										}
+										JOptionPane.showMessageDialog(null,"Package names removed");
+									} catch (Exception ex) {
+										ex.printStackTrace();
+									}
+								}
+							}
+						}
+						JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
@@ -3738,6 +3768,36 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 								}
 							}
+							else {
+								// Current file has no package name. Check if any other file has a package name.
+								boolean anyOtherHasPackage = false;
+								for(String file : filelistmodifier.fullpath) {
+									Packager packagerOther = new Packager(file);
+									if(packagerOther.containsPackage()) {
+										anyOtherHasPackage = true;
+										break;
+									}
+								}
+								if(anyOtherHasPackage) {
+									String[] options = {"Yes","No"};
+									int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									if(option == JOptionPane.YES_OPTION) {
+										try {
+											for(String file : filelistmodifier.fullpath) {
+												Packager packagerOther = new Packager(file);
+												if(packagerOther.containsPackage()) {
+													String content = Files.readString(Paths.get(file));
+													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+													Files.writeString(Paths.get(file), content);
+												}
+											}
+											JOptionPane.showMessageDialog(null,"Package names removed");
+										} catch (Exception ex) {
+											ex.printStackTrace();
+										}
+									}
+								}
+							}
 							JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -3857,8 +3917,38 @@ CommandLine commandline = new CommandLine();
 									else { // package name is not in right folder
 										commandline.addPackageWithMinusD(packager.getPackageName());
 									}
+							}
+							else {
+								// Current file has no package name. Check if any other file has a package name.
+								boolean anyOtherHasPackage = false;
+								for(String file : filelistmodifier.fullpath) {
+									Packager packagerOther = new Packager(file);
+									if(packagerOther.containsPackage()) {
+										anyOtherHasPackage = true;
+										break;
+									}
 								}
-								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
+								if(anyOtherHasPackage) {
+									String[] options = {"Yes","No"};
+									int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									if(option == JOptionPane.YES_OPTION) {
+										try {
+											for(String file : filelistmodifier.fullpath) {
+												Packager packagerOther = new Packager(file);
+												if(packagerOther.containsPackage()) {
+													String content = Files.readString(Paths.get(file));
+													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+													Files.writeString(Paths.get(file), content);
+												}
+											}
+											JOptionPane.showMessageDialog(null,"Package names removed");
+										} catch (Exception ex) {
+											ex.printStackTrace();
+										}
+									}
+								}
+							}
+							JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
 								
 								if(jarcheckbox.isSelected()) {
 									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);																	commandline.addJunit();
@@ -4103,8 +4193,38 @@ CommandLine commandline = new CommandLine();
 											}
 										}
 									}
+							}
+							else {
+								// Current file has no package name. Check if any other file has a package name.
+								boolean anyOtherHasPackage = false;
+								for(String file : filelistmodifier.fullpath) {
+									Packager packagerOther = new Packager(file);
+									if(packagerOther.containsPackage()) {
+										anyOtherHasPackage = true;
+										break;
+									}
 								}
-								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
+								if(anyOtherHasPackage) {
+									String[] options = {"Yes","No"};
+									int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									if(option == JOptionPane.YES_OPTION) {
+										try {
+											for(String file : filelistmodifier.fullpath) {
+												Packager packagerOther = new Packager(file);
+												if(packagerOther.containsPackage()) {
+													String content = Files.readString(Paths.get(file));
+													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+													Files.writeString(Paths.get(file), content);
+												}
+											}
+											JOptionPane.showMessageDialog(null,"Package names removed");
+										} catch (Exception ex) {
+											ex.printStackTrace();
+										}
+									}
+								}
+							}
+							JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
 								
 								String[] options={"Yes","No"};
 								int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
@@ -4157,9 +4277,39 @@ CommandLine commandline = new CommandLine();
 										else { // package name is not in right folder
 											commandline.addPackageWithMinusD(packager.getPackageName());
 										}
+								}
+								else {
+									// Current file has no package name. Check if any other file has a package name.
+									boolean anyOtherHasPackage = false;
+									for(String file : filelistmodifier.fullpath) {
+										Packager packagerOther = new Packager(file);
+										if(packagerOther.containsPackage()) {
+											anyOtherHasPackage = true;
+											break;
+										}
 									}
-									
-									if(lock.isSelected()) {
+									if(anyOtherHasPackage) {
+										String[] options = {"Yes","No"};
+										int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+										if(option == JOptionPane.YES_OPTION) {
+											try {
+												for(String file : filelistmodifier.fullpath) {
+													Packager packagerOther = new Packager(file);
+													if(packagerOther.containsPackage()) {
+														String content = Files.readString(Paths.get(file));
+														content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+														Files.writeString(Paths.get(file), content);
+													}
+												}
+												JOptionPane.showMessageDialog(null,"Package names removed");
+											} catch (Exception ex) {
+												ex.printStackTrace();
+											}
+										}
+									}
+								}
+								
+								if(lock.isSelected()) {
 										String save = selected.replace(".java","");
 										storeselectedfile = new StoreSelectedFile();
 										storeselectedfile.set(fileName);
