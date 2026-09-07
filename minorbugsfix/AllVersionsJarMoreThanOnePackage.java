@@ -137,23 +137,21 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-		File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			JOptionPane.showMessageDialog(null,"Output jat location is:"+isMoreThanOneJar.getCreateJarFolderLocation(fileName));
 			
 			String input = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(fileName)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(fileName)+"\\"+main_class2+".jar mf.txt .";
 				}
 			}
 			else { // packager.isInRightFolders() == true
 				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(fileName)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23 || javaversionnumber == -2) {
 					// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(fileName)+"\\"+main_class2+".jar mf.txt .";
 				}	
 			}
 		
@@ -163,28 +161,13 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 	if(packager.containsPackage() && packager.isInRightFolders()) {
 		classnameJar = dir + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
 	} else {
-		classnameJar = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+		classnameJar = dir+main_class2+".jar";
 	}
 	File existingJar = new File(classnameJar);
 	if(existingJar.exists()) {
 		existingJar.delete();
 	}
-	File parentDir2 = new File(classnameJar).getParentFile();
-	if(parentDir2 != null) {
-		String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main_class2+".jar";
-		File existingJar2 = new File(classnameJar2);
-		if(existingJar2.exists()) {
-			existingJar2.delete();
-		}
-		File parentDir3 = parentDir2.getParentFile();
-		if(parentDir3 != null) {
-			String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main_class2+".jar";
-			File existingJar3 = new File(classnameJar3);
-			if(existingJar3.exists()) {
-				existingJar3.delete();
-			}
-		}
-	}
+
 		Process process;
 		if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 			process=commandline.runAsAdmin(input,dir);
