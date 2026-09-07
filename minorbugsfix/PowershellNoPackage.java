@@ -81,9 +81,9 @@ public class PowershellNoPackage implements Powershell {
 				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
 			}
 			else {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .");
+				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+main_class2+".jar mf.txt .");
 				output2.write("\n");
-				output2.write("java -jar "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar");
+				output2.write("java -jar "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+main_class2+".jar");
 			}
 			output2.write("\n");
 			// output2.close();
