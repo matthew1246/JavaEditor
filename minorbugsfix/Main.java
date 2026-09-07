@@ -111,7 +111,8 @@ public class Main {
 	public JMenuItem rename_file = new JMenuItem("Rename File");
 	public JMenuItem closetab = new JMenuItem("Close Tab");	
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
-	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");	
+	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");
+	public JMenuItem reloadall = new JMenuItem("Reload All Tabs");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
 	public JMenuItem generatejar;
@@ -919,6 +920,7 @@ public class Main {
 		menu.add(saveItem);
 		menu.add(saveasitem);
 		menu.add(saveall);
+		menu.add(reloadall);
 		menu.add(generatejar);
 		menu.add(exitItem);
 		edit.add(control_f);
@@ -2219,6 +2221,27 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		}
 		);
+
+		reloadall.addActionListener((ev) -> {
+			for(int i = 0; i < tabbedpane.getTabCount(); i++) {
+				if(tabbedpane.getComponentAt(i) == pluspanel) continue;
+				try {
+					String fn = fileNames.get(i);
+					if(fn != null && !fn.equals("")) {
+						JScrollPane jsp = (JScrollPane) tabbedpane.getComponentAt(i);
+						JTextArea ta = (JTextArea) jsp.getViewport().getView();
+						String lines = Files.readString(Paths.get(fn), StandardCharsets.UTF_8);
+						int cp = ta.getCaretPosition();
+						ta.setText(lines);
+						ta.setCaretPosition(cp);
+						((JTextAreaGroup) ta).codes = new LinkedList<Code>();
+					}
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+
 		addjar.addActionListener((ev) -> {
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Preferences preferences=storeselectedfile.get(fileName);
