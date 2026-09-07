@@ -1,5 +1,4 @@
 import java.io.File;
-import org.junit.*;
 public class IsMoreThanOneJar {
 	private boolean isMoreThanOneJar;
 	public IsMoreThanOneJar(boolean isMoreThanOneJar) {

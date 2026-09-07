@@ -33,6 +33,12 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 	}
+	public String getDir() {
+		return dir;
+	}
+	public AllFiles getAllFiles() {
+		return allfiles;
+	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
 		compile.compileall(main,fileName,javaversionnumber,sal,ev4);
