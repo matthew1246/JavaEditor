@@ -1941,7 +1941,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {						
+		generatejar.addActionListener((ev) -> {								
 			// 3a85e18ee02774cb28448df6ce540ad792d54fc9 is git commit id for -C make a jar for only package.																		
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
@@ -2014,25 +2014,32 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									sal = new SaveActionListener(this);
 								sal.actionPerformed(null); // Save latest code.
 							}
-						}						
-						String[] options3={"One","More than One"};
-						int result = JOptionPane.showOptionDialog(
-						    null,
-						    "Do you want to make a jar with one or more packages?",
-						    "Package Selection",
-						    JOptionPane.DEFAULT_OPTION,
-						    JOptionPane.QUESTION_MESSAGE,
-						    null,
-						    options3,
-						    options3[1]  // <-- sets "More than one" as the default focused button
-						);
+						}		
+						Packager packager=new Packager(this);				
 						AllVersionsJar allversionsjar = null;
-						if(result == 0) {
-							allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
+						if(packager.containsPackage()) {
+							String[] options3={"One","More than One"};
+							int result = JOptionPane.showOptionDialog(
+							    null,
+							    "Do you want to make a jar with one or more packages?",
+							    "Package Selection",
+							    JOptionPane.DEFAULT_OPTION,
+							    JOptionPane.QUESTION_MESSAGE,
+							    null,
+							    options3,
+							    options3[1]  // <-- sets "More than one" as the default focused button
+							);
+							if(result == 0) {
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
+							}
+							else {
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
+							}
 						}
 						else {
-							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5);
 						}
+						
 						// AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
