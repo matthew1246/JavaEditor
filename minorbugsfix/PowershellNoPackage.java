@@ -10,7 +10,9 @@ public class PowershellNoPackage implements Powershell {
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
-	public PowershellNoPackage(Main main,String main_class,String dir,AllFiles allfiles) {
+	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellNoPackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		this.isMoreThanOneJar = new IsMoreThanOneJar(_isMoreThanOneJar);
 		try {
 			this.dir = dir;
 			this.main_class = main_class;
@@ -69,20 +71,19 @@ public class PowershellNoPackage implements Powershell {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}			
+	}										
 	public void makeJar(int javaversionnumber) {
 		try {
 			String main_class2 = main_class;
-			File file = new File(dir);
-			JOptionPane.showMessageDialog(null,"jar will be extracted is:"+file.getAbsolutePath());
+			JOptionPane.showMessageDialog(null,"jar will be created on:"+isMoreThanOneJar.getCreateJarFolderLocation(dir));
 			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 			if(javaversionnumber != 23 && javaversionnumber != -2) {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+file.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
 			}
 			else {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+file.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .");
+				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .");
 				output2.write("\n");
-				output2.write("java -jar "+file.getAbsolutePath()+"\\"+main_class2+".jar");
+				output2.write("java -jar "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar");
 			}
 			output2.write("\n");
 			// output2.close();

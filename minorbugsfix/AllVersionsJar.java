@@ -17,5 +17,6 @@ public interface AllVersionsJar {
 	public boolean isMatthewJavaEditor(String main_class);
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class);
 	public void Powershell(String main_class);
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean isMoreThanOneJar);
 }
-
+

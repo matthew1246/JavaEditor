@@ -166,4 +166,5 @@ public class AllVersionsJarNoPackage implements AllVersionsJar {
 		}
 		powershell.Finish();
 	}
+	public Powershell getPowershell();
 }
