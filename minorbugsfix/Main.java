@@ -2030,23 +2030,22 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
 							if(result == 0) {
-								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
 							}
 						}
 						else {
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
 						}
 						
-						// AllVersionsJar allversionsjar = new AllVersionsJar(this,fileName,sal,ev5);
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							allversionsjar.Powershell(main);
+							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),true);
 						}
 						else {
 							for(int i = 18; i <= 23; i++) {
@@ -2110,20 +2109,16 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
 							}
 						}	
-
+						else {
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
+						}
 						
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							Powershell powershell = null;
-							if(isOnePackage) {
-								powershell=new PowershellOnePackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
-							}
-							else {
-								powershell=new PowershellMoreThanOnePackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
-							}
+							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
 							powershell.Compile(javaversionnumber,fileName);
 							powershell.makeJar(javaversionnumber);							
 							powershell.Finish();
@@ -2132,7 +2127,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.Compile(javaversionnumber);	
 							allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
 						}
-						
+					});
 				break;
 				case JOptionPane.NO_OPTION:
 					try {

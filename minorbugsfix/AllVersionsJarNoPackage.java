@@ -5,14 +5,16 @@ import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.io.BufferedWriter;
 import java.io.IOException;
-public class AllVersionsJarNoPackage implements AllVersionsJar {
+public class AllVersionsJarNoPackage extends AllVersionsJar {
 	private Packager packager;
 	private String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
-	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
+	private IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
+		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -26,6 +28,12 @@ public class AllVersionsJarNoPackage implements AllVersionsJar {
 		}
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
+	}
+	public String getDir() {
+		return dir;
+	}
+	public AllFiles getAllFiles() {
+		return allfiles;
 	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
@@ -158,13 +166,7 @@ public class AllVersionsJarNoPackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellNoPackage(main,main_class,dir,allfiles);
-		for(int i = 18; i <= 23; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
-		}
-		powershell.Finish();
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		return new PowershellNoPackage(main,main_class,dir,allfiles,_isMoreThanOneJar);
 	}
-	public Powershell getPowershell();
 }

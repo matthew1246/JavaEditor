@@ -13,7 +13,9 @@ public class PowershellOnePackage implements Powershell {
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
-	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles) {
+	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.dir = dir;
 		this.main_class = main_class;
 		try {

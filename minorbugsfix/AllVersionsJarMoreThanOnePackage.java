@@ -9,14 +9,16 @@ import java.io.IOException;
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
 */
-public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
+public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 	private Packager packager;
 	private String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
-	public AllVersionsJarMoreThanOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
+	private IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarMoreThanOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
+		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -206,14 +208,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(String main_class) {
-		
-		Powershell powershell = new PowershellMoreThanOnePackage(main,main_class,dir,allfiles);
-		for(int i = 18; i <= 23; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
-		}
-		powershell.Finish();
-
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		return new PowershellMoreThanOnePackage(main,main_class,dir,allfiles,_isMoreThanOneJar);
 	}
 }
