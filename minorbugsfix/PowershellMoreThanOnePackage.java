@@ -166,35 +166,20 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				}
 			}
 		String[] splited=  main_class.split("\\.");
-		String classnameJar2;
-		if(packager.containsPackage() && packager.isInRightFolders()) {
-			classnameJar2 = dir + packager.getPackageName().replace(".", "\\") + "\\" + splited[splited.length-1] + ".jar";
-		} else {
-			classnameJar2 = dir+splited[splited.length-1]+".jar";
-		}
+		String classnameJar2 = dir + packager.getPackageName().replace(".", "\\") + "\\" + splited[splited.length-1] + ".jar";
 		File existingJar = new File(classnameJar2);
 		if(existingJar.exists()) {
 			output2.write("del "+classnameJar2);
 			output2.write("\n");
 		}
-		File pardir = new File(classnameJar2).getParentFile();
-		if(pardir != null) {
-			String classnameJar3 = pardir.getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
-			File existingJar2 = new File(classnameJar3);
-			if(existingJar2.exists()) {
-				output2.write("del "+classnameJar3);
-				output2.write("\n");
-			}
-			if(pardir.getParentFile() != null) {
-				String classnameJar4 = pardir.getParentFile().getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
-				File existingJar3 = new File(classnameJar4);
-				if(existingJar3.exists()) {
-					output2.write("del "+classnameJar4);
-					output2.write("\n");
-				}
-			}
+		
+		classnameJar2 = dir+splited[splited.length-1]+".jar";
+		existingJar = new File(classnameJar2);
+		if(existingJar.exists()) {
+			output2.write("del "+classnameJar2);
+			output2.write("\n");
 		}
-			// output2.close();
+		// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
 		} catch (java.io.IOException ex) {
