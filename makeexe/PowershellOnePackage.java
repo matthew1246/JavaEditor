@@ -226,7 +226,7 @@ public class PowershellOnePackage implements Powershell {
 				else {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
 					output2.write("\n");
-					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");
+					output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");
 				}
 			}						
 			output2.write("\n");
