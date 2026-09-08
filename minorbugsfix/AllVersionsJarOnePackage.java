@@ -198,6 +198,6 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 		}
 	}
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
-		return new PowershellOnePackage(main,main_class,dir,allfiles,_isMoreThanOneJar);
+		return new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
 	}
 }

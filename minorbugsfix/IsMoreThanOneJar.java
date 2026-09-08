@@ -1,6 +1,6 @@
 import java.io.File;
 public class IsMoreThanOneJar {
-	private boolean isMoreThanOneJar;
+	public boolean isMoreThanOneJar;
 	public IsMoreThanOneJar(boolean isMoreThanOneJar) {
 		this.isMoreThanOneJar=isMoreThanOneJar;
 	}

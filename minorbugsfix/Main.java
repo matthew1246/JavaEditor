@@ -2035,7 +2035,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,false);
 							}
 						}
 						else {
