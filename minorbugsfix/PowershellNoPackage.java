@@ -75,7 +75,7 @@ public class PowershellNoPackage implements Powershell {
 	public void makeJar(int javaversionnumber) {
 		try {
 			String createJarLocationFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
-			if(!createJarLocationFolder.endsWith(createJarLocationFolder))
+			if(!createJarLocationFolder.endsWith("\\"))
 				createJarLocationFolder=createJarLocationFolder+"\\";
 			String main_class2 = main_class;
 			JOptionPane.showMessageDialog(null,"jar will be created on:"+createJarLocationFolder);
