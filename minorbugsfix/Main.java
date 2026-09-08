@@ -2032,10 +2032,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
 							if(result == 0) {
-								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,false);
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
 							}
 						}
 						else {
