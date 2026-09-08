@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -22,7 +22,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\isMoreThanOneJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java"
     ],
     "caretposition": 0
   },
@@ -2472,7 +2473,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 9894
+    "caretposition": 9571
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java": {
     "isLocked": true,
@@ -2488,7 +2489,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 7156
+    "caretposition": 10659
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java": {
     "isLocked": true,
@@ -2504,7 +2505,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 2775
+    "caretposition": 2868
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarNoPackage.java": {
     "isLocked": true,

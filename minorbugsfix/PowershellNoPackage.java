@@ -71,22 +71,23 @@ public class PowershellNoPackage implements Powershell {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}										
+	}				
+	private String main_class2;						
 	public void makeJar(int javaversionnumber) {
 		try {
 			String createJarLocationFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
 			if(!createJarLocationFolder.endsWith("\\"))
 				createJarLocationFolder=createJarLocationFolder+"\\";
-			String main_class2 = main_class;
+			main_class2 = main_class;
 			JOptionPane.showMessageDialog(null,"jar will be created on:"+createJarLocationFolder);
 			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 			if(javaversionnumber != 23 && javaversionnumber != -2) {
 				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarLocationFolder+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+				main_class2=createJarLocationFolder+"ForJava"+javaversionnumber+"_"+main_class2;
 			}
 			else {
 				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarLocationFolder+main_class2+".jar mf.txt .");
-				output2.write("\n");
-				output2.write("java -jar "+createJarLocationFolder+main_class2+".jar");
+				main_class2=createJarLocationFolder+main_class2;
 			}
 			output2.write("\n");
 			// output2.close();
@@ -96,6 +97,9 @@ public class PowershellNoPackage implements Powershell {
 	}		
 	public void Finish() {
 		try {
+			output2.write("\n");
+			output2.write("java -jar "+main_class2+".jar");
+
 			output2.close();
 			CommandLine commandline = new CommandLine();
 			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";

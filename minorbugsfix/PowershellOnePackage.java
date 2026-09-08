@@ -197,9 +197,10 @@ public class PowershellOnePackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
+	private String main_class2;
 	public void makeJar(int javaversionnumber) {
 		try {
-			String main_class2 = main_class;
+			main_class2 = main_class;
 			if(packager.containsPackage()) {
 				String[] splited=  main_class.split("\\.");
 				main_class2 = splited[splited.length-1];
@@ -209,21 +210,21 @@ public class PowershellOnePackage implements Powershell {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 				if(javaversionnumber != 23 && javaversionnumber != -2) {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2;
 				}
 				else {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .");
-					output2.write("\n");
-					output2.write("java -jar "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar");
+					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2;
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
 				if(javaversionnumber != 23 && javaversionnumber != -2) {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2;
 				}
 				else {
 					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-					output2.write("\n");
-					output2.write("java -jar "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar");
+					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2;
 				}
 			}						
 			output2.write("\n");
@@ -234,6 +235,8 @@ public class PowershellOnePackage implements Powershell {
 	}
 	public void Finish() {
 		try {
+			output2.write("\n");
+			output2.write("java -jar "+main_class2+".jar");
 			output2.close();
 			CommandLine commandline = new CommandLine();
 			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
