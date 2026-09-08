@@ -223,8 +223,8 @@ public class PowershellOnePackage implements Powershell {
 					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2;
 				}
 				else {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2;
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+main_class2;
 				}
 			}						
 			output2.write("\n");

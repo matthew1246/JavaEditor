@@ -2473,7 +2473,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 9571
+    "caretposition": 9542
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java": {
     "isLocked": true,
