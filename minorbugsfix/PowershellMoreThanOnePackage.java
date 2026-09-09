@@ -172,13 +172,6 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			output2.write("del "+classnameJar2);
 			output2.write("\n");
 		}
-		
-		classnameJar2 = dir+splited[splited.length-1]+".jar";
-		existingJar = new File(classnameJar2);
-		if(existingJar.exists()) {
-			output2.write("del "+classnameJar2);
-			output2.write("\n");
-		}
 		// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
@@ -225,28 +218,31 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				String[] splited=  main_class.split("\\.");
 				main_class2 = splited[splited.length-1];
 			}
-			JOptionPane.showMessageDialog(null,"Output jar location is:"+isMoreThanOneJar.getCreateJarFolderLocation(dir));
+			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!createJarFolderLocation.endsWith("\\"))
+				createJarFolderLocation=createJarFolderLocation+"\\";
+			JOptionPane.showMessageDialog(null,"Output jar location is:"+createJarFolderLocation);
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
 				if(javaversionnumber != 23 && javaversionnumber != -2) {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
-					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2;
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+					main_class2=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2;
 				}
 				else {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .");
-					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2;
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt .");
+					main_class2=createJarFolderLocation+main_class2;
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
 				if(javaversionnumber != 23 && javaversionnumber != -2) {
 					// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
-					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2;
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+					main_class2=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2;
 				}
 				else {
 					// output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .");
-					main_class2=isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2;
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt .");
+					main_class2=createJarFolderLocation+main_class2;
 				}
 			}						
 			output2.write("\n");
