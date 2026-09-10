@@ -24,7 +24,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarOnePackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java"
     ],
     "caretposition": 0
   },
@@ -334,7 +335,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 69560
+    "caretposition": 535
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
     "isLocked": true,
