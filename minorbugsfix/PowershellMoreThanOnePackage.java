@@ -165,13 +165,6 @@ public class PowershellMoreThanOnePackage implements Powershell {
 					output2.write("\n");
 				}
 			}
-		String[] splited=  main_class.split("\\.");
-		String classnameJar2 = dir + packager.getPackageName().replace(".", "\\") + "\\" + splited[splited.length-1] + ".jar";
-		File existingJar = new File(classnameJar2);
-		if(existingJar.exists()) {
-			output2.write("del "+classnameJar2);
-			output2.write("\n");
-		}
 		// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();

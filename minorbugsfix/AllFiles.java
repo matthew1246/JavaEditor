@@ -16,7 +16,8 @@ public class AllFiles {
 		for(int i = 0; i < 23; i++) {
 			files.add(dir+"ForJava"+(i+1)+"_"+main+".jar");
 		}
-		files.add(dir+main.replace(".","\\")+".jar");
+		String[] packagesandmain=main.split(".");
+		files.add(dir+packagesandmain[packagesandmain.length-1]+".jar");
 	}
 	public boolean isSameDirectory(Main main2) {
 		try {	
