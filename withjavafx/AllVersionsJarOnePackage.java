@@ -49,34 +49,21 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 		Preferences preferences=storeselectedfile.get(fileName);
 		if(!fileName.equals("")) {
 			java.util.List<String> jars = preferences.jars;
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				for(String jar:jars) {
-					try {
-						// jar = main.getFileName(jar);
-						Process process=commandline.run("jar xf "+jar,dir);
-						process.waitFor();
-						//output.write(" "+jar);
-					} catch (InterruptedException ex) {
-						ex.printStackTrace();
-					}				
+			// package.isInRightFolders() is true
+			File createdir = new File(dir+"jars");
+			if(!createdir.exists()) {
+				createdir.mkdir();
+			}
+			for(String jar:jars) {
+				try {
+					// jar = getFileName(jar);
+					Process process=commandline.run("jar xf "+jar,dir+"jars");
+					process.waitFor();
+					//output.write(" "+jar);
+				} catch(InterruptedException ex) {
+					ex.printStackTrace();
 				}
 			}
-			else { // package.isInRightFolders() is true
-				File createdir = new File(dir+"jars");
-				if(!createdir.exists()) {
-					createdir.mkdir();
-				}
-				for(String jar:jars) {
-					try {
-						// jar = getFileName(jar);
-						Process process=commandline.run("jar xf "+jar,dir+"jars");
-						process.waitFor();
-						//output.write(" "+jar);
-					} catch(InterruptedException ex) {
-						ex.printStackTrace();
-					}
-				}
-			}	
 		}
 		return preferences;
 	}		
