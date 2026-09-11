@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
@@ -18,7 +16,9 @@ public class AllFiles {
 		for(int i = 0; i < 23; i++) {
 			files.add(dir+"ForJava"+(i+1)+"_"+main+".jar");
 		}
-		files.add(dir+main+".jar");
+		String[] packagesandmain=main.split("\\.");
+		if(packagesandmain.length > 0)
+			files.add(dir+packagesandmain[packagesandmain.length-1]+".jar");
 	}
 	public boolean isSameDirectory(Main main2) {
 		try {	

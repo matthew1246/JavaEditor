@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import javax.swing.*;
 import java.awt.event.*;
 public class Muck {

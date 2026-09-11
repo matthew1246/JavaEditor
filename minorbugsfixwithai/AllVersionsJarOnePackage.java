@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -11,14 +9,16 @@ import java.io.IOException;
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
 */
-public class AllVersionsJarOnePackage implements AllVersionsJar {
+public class AllVersionsJarOnePackage extends AllVersionsJar {
 	private Packager packager;
 	private String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
-	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
+	private IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
+		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -32,6 +32,12 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		}
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
+	}
+	public String getDir() {
+		return dir;
+	}
+	public AllFiles getAllFiles() {
+		return allfiles;
 	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
@@ -129,29 +135,39 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			if(packager.containsPackage() && packager.isInRightFolders()) {
-				parentdirectory=file;	
-			}
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			JOptionPane.showMessageDialog(null,"output jar location is:"+isMoreThanOneJar.getCreateJarFolderLocation(dir));
 			
 			String input = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				if(javaversionnumber == 23 || javaversionnumber == -2) {
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .";
 				}
 			}
 			else { // packager.isInRightFolders() == true
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				if(javaversionnumber == 23) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+				if(javaversionnumber == 23 || javaversionnumber == -2) {
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
 				}	
 			}		
 		
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
+			
+			// Main.jar inside package folder.
+			String classnameJar = dir + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
+			File existingJar = new File(classnameJar);
+			if(existingJar.exists()) {
+				existingJar.delete();
+			}
+			
+			// Main.jar in C:\Users\Owner\Documents\Main.jar when C:\Users\Owner\Documents\javaeditor\minorbugsfix\Main.java.
+			classnameJar = dir+main_class2+".jar";
+			existingJar = new File(classnameJar);
+			if(existingJar.exists()) {
+				existingJar.delete();
+			}
+			
 			Process process;
 			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,dir);
@@ -181,13 +197,7 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellOnePackage(main,main_class,dir,allfiles);
-		for(int i = 18; i <= 23; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
-		}
-		powershell.Finish();
-
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		return new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
 	}
 }

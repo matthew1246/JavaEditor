@@ -1,8 +1,7 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.DirectoryStream;
 import javax.swing.*;
 import java.io.*;
@@ -131,6 +130,36 @@ public class Compile {
 							            }
 
 							}
+						}
+					}
+				}
+			}
+			else {
+				// Current file has no package name. Check if any other file has a package name.
+				boolean anyOtherHasPackage = false;
+				for(String file : main.filelistmodifier.fullpath) {
+					Packager packagerOther = new Packager(file);
+					if(packagerOther.containsPackage()) {
+						anyOtherHasPackage = true;
+						break;
+					}
+				}
+				if(anyOtherHasPackage) {
+					String[] options = {"Yes","No"};
+					int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+					if(option == JOptionPane.YES_OPTION) {
+						try {
+							for(String file : main.filelistmodifier.fullpath) {
+								Packager packagerOther = new Packager(file);
+								if(packagerOther.containsPackage()) {
+									String content = Files.readString(Paths.get(file));
+									content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+									Files.writeString(Paths.get(file), content);
+								}
+							}
+							JOptionPane.showMessageDialog(null,"Package names removed");
+						} catch (Exception ex) {
+							ex.printStackTrace();
 						}
 					}
 				}
@@ -309,6 +338,36 @@ public class Compile {
 					}
 				}
 			}
+			else {
+				// Current file has no package name. Check if any other file has a package name.
+				boolean anyOtherHasPackage = false;
+				for(String file : main.filelistmodifier.fullpath) {
+					Packager packagerOther = new Packager(file);
+					if(packagerOther.containsPackage()) {
+						anyOtherHasPackage = true;
+						break;
+					}
+				}
+				if(anyOtherHasPackage) {
+					String[] options = {"Yes","No"};
+					int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+					if(option == JOptionPane.YES_OPTION) {
+						try {
+							for(String file : main.filelistmodifier.fullpath) {
+								Packager packagerOther = new Packager(file);
+								if(packagerOther.containsPackage()) {
+									String content = Files.readString(Paths.get(file));
+									content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+									Files.writeString(Paths.get(file), content);
+								}
+							}
+							JOptionPane.showMessageDialog(null,"Package names removed");
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
+			}
 			JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 					
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -474,8 +533,38 @@ public class Compile {
 					}
 				}
 			}
+			else {
+				// Current file has no package name. Check if any other file has a package name.
+				boolean anyOtherHasPackage = false;
+				for(String file : main.filelistmodifier.fullpath) {
+					Packager packagerOther = new Packager(file);
+					if(packagerOther.containsPackage()) {
+						anyOtherHasPackage = true;
+						break;
+					}
+				}
+				if(anyOtherHasPackage) {
+					String[] options = {"Yes","No"};
+					int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+					if(option == JOptionPane.YES_OPTION) {
+						try {
+							for(String file : main.filelistmodifier.fullpath) {
+								Packager packagerOther = new Packager(file);
+								if(packagerOther.containsPackage()) {
+									String content = Files.readString(Paths.get(file));
+									content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+									Files.writeString(Paths.get(file), content);
+								}
+							}
+							JOptionPane.showMessageDialog(null,"Package names removed");
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
+			}
 			JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
-			
+					
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Preferences preferences=storeselectedfile.get(fileName);
 			
@@ -483,7 +572,8 @@ public class Compile {
 				commandline.addExternalJar(jar);
 			}
 			
-			commandline.earlierjavaversion(javaversionnumber);
+			if(javaversionnumber != -2)
+				commandline.earlierjavaversion(javaversionnumber);
 			
 			//Process process = compileFromMSDOS("*.java",classpath);
 			String[] command = new String[3];
@@ -637,6 +727,36 @@ public class Compile {
 							            }
 
 							}
+						}
+					}
+				}
+			}
+			else {
+				// Current file has no package name. Check if any other file has a package name.
+				boolean anyOtherHasPackage = false;
+				for(String file : main.filelistmodifier.fullpath) {
+					Packager packagerOther = new Packager(file);
+					if(packagerOther.containsPackage()) {
+						anyOtherHasPackage = true;
+						break;
+					}
+				}
+				if(anyOtherHasPackage) {
+					String[] options = {"Yes","No"};
+					int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+					if(option == JOptionPane.YES_OPTION) {
+						try {
+							for(String file : main.filelistmodifier.fullpath) {
+								Packager packagerOther = new Packager(file);
+								if(packagerOther.containsPackage()) {
+									String content = Files.readString(Paths.get(file));
+									content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+									Files.writeString(Paths.get(file), content);
+								}
+							}
+							JOptionPane.showMessageDialog(null,"Package names removed");
+						} catch (Exception ex) {
+							ex.printStackTrace();
 						}
 					}
 				}

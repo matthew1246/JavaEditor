@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.nio.file.DirectoryStream;
@@ -15,7 +13,9 @@ public class PowershellOnePackage implements Powershell {
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
-	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles) {
+	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.dir = dir;
 		this.main_class = main_class;
 		try {
@@ -186,7 +186,8 @@ public class PowershellOnePackage implements Powershell {
 				commandline.addExternalJar(jar);
 			}
 		
-			commandline.earlierjavaversion(javaversionnumber);
+			if(javaversionnumber != -2)	
+				commandline.earlierjavaversion(javaversionnumber);
 			
 			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
 			output2.write("\n");
@@ -196,38 +197,37 @@ public class PowershellOnePackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
+	private String main_class2;
 	public void makeJar(int javaversionnumber) {
 		try {
-			String main_class2 = main_class;
+			main_class2 = main_class;
 			if(packager.containsPackage()) {
 				String[] splited=  main_class.split("\\.");
 				main_class2 = splited[splited.length-1];
 			}
-			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			if(packager.containsPackage() && packager.isInRightFolders()) {	
-				parentdirectory=file;	
-			}
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!createJarFolderLocation.endsWith("\\"))
+				createJarFolderLocation=createJarFolderLocation+"\\";
+			JOptionPane.showMessageDialog(null,"jar output directory is:"+createJarFolderLocation);
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-				if(javaversionnumber != 23) {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+				if(javaversionnumber != 23 && javaversionnumber != -2) {
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
+					main_class2=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2;
 				}
 				else {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .");
-					output2.write("\n");
-					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt .");
+					main_class2=createJarFolderLocation+main_class2;
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
-				if(javaversionnumber != 23) {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+				if(javaversionnumber != 23 && javaversionnumber != -2) {
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+					main_class2=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2;
 				}
 				else {
-					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-					output2.write("\n");
-					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");
+					output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+					main_class2=createJarFolderLocation+main_class2;
 				}
 			}						
 			output2.write("\n");
@@ -238,6 +238,8 @@ public class PowershellOnePackage implements Powershell {
 	}
 	public void Finish() {
 		try {
+			output2.write("\n");
+			output2.write("java -jar "+main_class2+".jar");
 			output2.close();
 			CommandLine commandline = new CommandLine();
 			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";

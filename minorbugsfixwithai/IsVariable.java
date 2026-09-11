@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import javax.swing.*;
 import java.util.regex.*;
 public class IsVariable {

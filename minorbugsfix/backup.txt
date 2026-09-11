@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -25,7 +25,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
     ],
     "caretposition": 0
   },
@@ -330,10 +331,7 @@
       "Main"
     ],
     "starterclass": "",
-    "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
-    ],
+    "jars": [],
     "fileNames": [],
     "caretposition": 579
   },
@@ -2127,13 +2125,13 @@
     ],
     "starterclass": "Main",
     "jars": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 69596
+    "caretposition": 55370
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,

@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.io.*;
 import java.util.*;
 import com.google.gson.*;

@@ -12,16 +12,20 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\AllVersionsJarMoreThanOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellMoreThanOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarMoreThanOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\isMoreThanOneJar.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllFiles.java"
     ],
     "caretposition": 0
   },
@@ -65,7 +69,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 33
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -301,7 +305,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 271
+    "caretposition": 22380
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": true,
@@ -331,7 +335,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 69560
+    "caretposition": 579
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
     "isLocked": true,
@@ -1132,7 +1136,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 95937
+    "caretposition": 79303
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
     "isLocked": false,
@@ -1312,7 +1316,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 777
+    "caretposition": 6409
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Powershell.java": {
     "isLocked": true,
@@ -1329,7 +1333,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 268
+    "caretposition": 720
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\SuggestionBoxSelected.java": {
     "isLocked": false,
@@ -1669,8 +1673,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
-      "Compile"
+      "Compile",
+      "Main"
     ],
     "starterclass": "",
     "jars": [
@@ -1680,7 +1684,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 19355
+    "caretposition": 12306
   },
   "C:\\Users\\Owner\\Documents\\git\\foldersizecalculator\\FolderSizeCalculator.java": {
     "isLocked": false,
@@ -2129,7 +2133,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 39
+    "caretposition": 69596
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,
@@ -2375,7 +2379,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 7566
+    "caretposition": 7905
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\AllVersionsJarOnePackage.java": {
     "isLocked": true,
@@ -2391,7 +2395,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 6048
+    "caretposition": 6102
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\AllVersionsJar.java": {
     "isLocked": false,
@@ -2439,7 +2443,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 5777
+    "caretposition": 9352
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellMoreThanOnePackage.java": {
     "isLocked": true,
@@ -2455,7 +2459,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 379
+    "caretposition": 9946
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java": {
     "isLocked": true,
@@ -2471,6 +2475,97 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 5777
+    "caretposition": 8340
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 6639
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 2868
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarNoPackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 9389
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarMoreThanOnePackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 6744
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\isMoreThanOneJar.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 60
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarOnePackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 7876
   }
 }
