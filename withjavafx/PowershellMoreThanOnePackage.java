@@ -9,11 +9,17 @@ import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.IOException;
 public class PowershellMoreThanOnePackage implements Powershell {
+	protected AllFiles allfiles;
+	protected Main main;
 	protected Packager packager;
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
-	public PowershellMoreThanOnePackage(Main main,String main_class,String dir,AllFiles allfiles) {
+	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellMoreThanOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
+		this.allfiles=allfiles;
+		this.main=main;
 		this.dir = dir;
 		this.main_class = main_class;
 		try {
@@ -162,35 +168,6 @@ public class PowershellMoreThanOnePackage implements Powershell {
 					output2.write("\n");
 				}
 			}
-			String[] splited=  main_class.split("\\.");
-			String classnameJar2;
-			if(packager.containsPackage() && packager.isInRightFolders()) {
-				classnameJar2 = dir + packager.getPackageName().replace(".", "\\") + "\\" + splited[splited.length-1] + ".jar";
-			} else {
-				classnameJar2 = dir+splited[splited.length-1]+".jar";
-			}
-			File existingJar = new File(classnameJar2);
-			if(existingJar.exists()) {
-				output2.write("del "+classnameJar2);
-				output2.write("\n");
-			}
-			File pardir = new File(classnameJar2).getParentFile();
-			if(pardir != null) {
-				String classnameJar3 = pardir.getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
-				File existingJar2 = new File(classnameJar3);
-				if(existingJar2.exists()) {
-					output2.write("del "+classnameJar3);
-					output2.write("\n");
-				}
-				if(pardir.getParentFile() != null) {
-					String classnameJar4 = pardir.getParentFile().getAbsolutePath()+"\\"+splited[splited.length-1]+".jar";
-					File existingJar3 = new File(classnameJar4);
-					if(existingJar3.exists()) {
-						output2.write("del "+classnameJar4);
-						output2.write("\n");
-					}
-				}
-			}
 			// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
@@ -218,7 +195,8 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				commandline.addExternalJar(jar);
 			}
 		
-			commandline.earlierjavaversion(javaversionnumber);
+			if(javaversionnumber != -2)	
+				commandline.earlierjavaversion(javaversionnumber);
 			
 			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
 			output2.write("\n");
@@ -230,32 +208,25 @@ public class PowershellMoreThanOnePackage implements Powershell {
 	}
 	public void makeJar(int javaversionnumber) {
 		try {
-			String main_class2 = main_class;
-			if(packager.containsPackage()) {
-				String[] splited=  main_class.split("\\.");
-				main_class2 = splited[splited.length-1];
-			}
-			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!createJarFolderLocation.endsWith("\\"))
+				createJarFolderLocation=createJarFolderLocation+"\\";
+			JOptionPane.showMessageDialog(null,"Create jar location is:"+createJarFolderLocation);
 			
-			if(main_class2.endsWith("two")) {
-				main_class2=main_class2.substring(0,(main_class2.length()-3));
-			}
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
+				output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
 				if(javaversionnumber == 23) {	
 					output2.write("\n");
-					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
+					output2.write("java -jar "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
 				//output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-				output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
+				output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
 
 				if(javaversionnumber == 23) {
 					output2.write("\n");
-					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
+					output2.write("java -jar "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
 				}
 			}	
 			output2.write("\n");

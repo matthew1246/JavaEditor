@@ -9,7 +9,7 @@ import java.io.IOException;
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
 */
-public class AllVersionsJarOnePackage implements AllVersionsJar {
+public class AllVersionsJarOnePackage extends AllVersionsJar {
 	private Packager packager;
 	private String dir;
 	private Main main;
@@ -191,20 +191,7 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(boolean isJavaFX,String main_class) {
-		Powershell powershell = new PowershellOnePackage(main,main_class,dir,allfiles);
-		/*if(!isJavaFX) {
-			for(int i = 18; i <= 22; i++) {
-				powershell.Compile(i,fileName);
-				powershell.makeJar(i);
-			}
-		}
-		else {*/ // Has JavaFX code.
-			for(int i = 22; i <= 23; i++) {
-				powershell.Compile(i,fileName);
-				powershell.makeJar(i);
-			}
-		// }
-		powershell.Finish();
+	public Powershell getPowershell(String main_class) {
+		return new PowershellOnePackage(main,main_class,dir,allfiles);
 	}
 }

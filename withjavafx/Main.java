@@ -2135,7 +2135,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							if(anyOtherHasPackage) {
-								String[] options = {"Yes","No"};
 								int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 								if(option == JOptionPane.YES_OPTION) {
 									try {
@@ -2332,48 +2331,54 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							
-							String[] options3={"One","More than One"};
-							int result = JOptionPane.showOptionDialog(
-							    null,
-							    "Do you want to make a jar with one or more packages?",
-							    "Package Selection",
-							    JOptionPane.DEFAULT_OPTION,
-							    JOptionPane.QUESTION_MESSAGE,
-							    null,
-							    options3,
-							    options3[1]  // <-- sets "More than one" as the default focused button
-							);
-							boolean isOnePackage = false;
-							if(result == 0)
-								isOnePackage = true;
-							boolean isJavaFX = false;
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-							if(option2 ==JOptionPane.YES_OPTION) {
-								isJavaFX = true;
-								if(!isOnePackage) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+							boolean isJavaFX= false;
+							if(option2 ==JOptionPane.YES_OPTION)
+								isJavaFX=true;
+							AllVersionsJar allversionsjar=null;
+							Packager packager=new Packager(this);
+							if(packager.containsPackage()) {
+								String[] options3={"One","More than One"};
+								int result = JOptionPane.showOptionDialog(
+								    null,
+								    "Do you want to make a jar with one or more packages?",
+								    "Package Selection",
+								    JOptionPane.DEFAULT_OPTION,
+								    JOptionPane.QUESTION_MESSAGE,
+								    null,
+								    options3,
+								    options3[1]  // <-- sets "More than one" as the default focused button
+								);
+								if(result == 0) {
+									option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									if(option2 ==JOptionPane.YES_OPTION) {
+										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									} else {
+										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+										File javafxlauncher=new File(maintwo);
+										if(javafxlauncher.exists()) {
+											javafxlauncher.delete();
+										}
+									}
+									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
 								}
-								else {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+								else { // More than one package
+									option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+									if(option2 ==JOptionPane.YES_OPTION) {
+										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									} else {
+										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+										File javafxlauncher=new File(maintwo);
+										if(javafxlauncher.exists()) {
+											javafxlauncher.delete();
+										}
+									}
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
 								}
-							}
-							else if(option2 == JOptionPane.NO_OPTION) {
-								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
-								File javafxlauncher=new File(maintwo);
-								if(javafxlauncher.exists()) {
-									javafxlauncher.delete();
-								}
-								
-								isJavaFX = false;
-							}
-							
-							AllVersionsJar allversionsjar = null;
-							if(isOnePackage) {
-								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
-							}
+							}		
+							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
@@ -2383,7 +2388,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									extractjavafxjars.unzipJars();
 								}		
-								allversionsjar.Powershell(isJavaFX,main);
+								allversionsjar.Powershell(isJavaFX,main,fileName);
 							}
 							else {
 								if(!isJavaFX) {
@@ -3802,7 +3807,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 								}
 								if(anyOtherHasPackage) {
-									String[] options = {"Yes","No"};
 									int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 									if(option == JOptionPane.YES_OPTION) {
 										try {
@@ -4312,7 +4316,6 @@ CommandLine commandline = new CommandLine();
 										}
 									}
 									if(anyOtherHasPackage) {
-										String[] options = {"Yes","No"};
 										int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 										if(option == JOptionPane.YES_OPTION) {
 											try {
