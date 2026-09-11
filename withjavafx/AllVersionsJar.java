@@ -10,6 +10,8 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public abstract class AllVersionsJar {
+	public abstract String getDir();
+	public abstract AllFiles getAllFiles();
 	public abstract void Compile(boolean isJavaFX,int javaversionnumber);
 	public abstract Preferences extractJars(StoreSelectedFile storeselectedfile);
 	public abstract String getMain(boolean isJavaFX,StoreSelectedFile storeselectedfile,Preferences preferences);

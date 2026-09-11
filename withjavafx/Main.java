@@ -2373,10 +2373,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											javafxlauncher.delete();
 										}
 									}
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
 								}
 							}
 							else {
+								//allversionsjar=new AllVersionsJarNoPackage(	
 							}		
 							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2387,8 +2388,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								if(isJavaFX) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									extractjavafxjars.unzipJars();
-								}		
-								allversionsjar.Powershell(isJavaFX,main,fileName);
+								}	
+								allversionsjar.Powershell(isJavaFX,fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),true);
 							}
 							else {
 								if(!isJavaFX) {
