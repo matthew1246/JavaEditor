@@ -169,7 +169,7 @@ public class PowershellOnePackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
-	public void Compile(int javaversionnumber,String fileName) {
+	public void Compile(int javaversionnumber,String fileName,boolean hasJavaFX) {
 		try {
 			CommandLine commandline = new CommandLine();
 			commandline.compileAll();
@@ -184,6 +184,9 @@ public class PowershellOnePackage implements Powershell {
 					commandline.addPackageWithMinusD();
 				}
 			}
+			
+			if(hasJavaFX)
+				commandline.addJavaFX();
 			
 			for(String jar:preferences.jars) {
 				commandline.addExternalJar(jar);

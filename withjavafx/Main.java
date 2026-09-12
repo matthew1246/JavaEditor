@@ -2396,7 +2396,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
 									extractjavafxjars.unzipJars();
 								}	
-								allversionsjar.Powershell(isJavaFX,fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),true);
+								allversionsjar.Powershell(isJavaFX,fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							}
 							else {
 								if(!isJavaFX) {
@@ -2409,6 +2409,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									for(int i = 22; i <= 23; i++) {
 										allversionsjar.Compile(isJavaFX,i);	
 										String main2 = main.substring(0,(main.length()-3));
+										JOptionPane.showMessageDialog(null,"main2 is:"+main2);
 										allversionsjar.MakeJarUsingmsdos(i,main2);	
 									}
 								}				
@@ -2509,7 +2510,31 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
 							}			
 							
-								
+							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
+							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
+							allversionsjar.WriteManifest(main);
+							if(allversionsjar.isMatthewJavaEditor(main)) {
+								if(isJavaFX) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
+									extractjavafxjars.unzipJars();
+								}	
+								Powershell powershell=allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
+								powershell.Compile(javaversionnumber,fileName,isJavaFX);
+								powershell.makeJar(javaversionnumber);
+								powershell.Finish();
+							}
+							else {
+								if(!isJavaFX) {
+									allversionsjar.Compile(isJavaFX,javaversionnumber);	
+									allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
+								}
+								else { // Has JavaFX code.
+									allversionsjar.Compile(isJavaFX,javaversionnumber);	
+									String main2 = main.substring(0,(main.length()-3));
+									allversionsjar.MakeJarUsingmsdos(javaversionnumber,main2);	
+								}				
+							}
 						});
 						thread1.start();
 					});

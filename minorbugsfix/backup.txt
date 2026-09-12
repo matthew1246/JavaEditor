@@ -17,7 +17,9 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarMoreThanOnePackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Powershell.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellOnePackage.java"
     ],
     "caretposition": 0
   },
@@ -61,7 +63,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 69626
+    "caretposition": 77254
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -91,7 +93,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 92157
+    "caretposition": 92997
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -2079,7 +2081,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 8988
+    "caretposition": 427
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Powershell.java": {
     "isLocked": false,
@@ -2207,7 +2209,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1127
+    "caretposition": 1357
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MinorCompile.java": {
     "isLocked": false,
@@ -2587,7 +2589,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 817
+    "caretposition": 7331
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarNoPackage.java": {
     "isLocked": false,
@@ -2603,7 +2605,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 7936
+    "caretposition": 8016
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarMoreThanOnePackage.java": {
     "isLocked": false,
@@ -2619,7 +2621,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 8225
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\IsMoreThanOneJar.java": {
     "isLocked": false,
@@ -2667,7 +2669,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 7405
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java": {
     "isLocked": false,
@@ -2683,6 +2685,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 606
+    "caretposition": 7405
   }
 }
