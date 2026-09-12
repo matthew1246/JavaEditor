@@ -3685,6 +3685,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									if(option == JOptionPane.YES_OPTION) {
 										try {
 											for(String file : filelistmodifier.fullpath) {
+												// Need fixing!
 												Packager packagerOther = new Packager(file);
 												if(packagerOther.containsPackage()) {
 													String content = Files.readString(Paths.get(file));
