@@ -19,7 +19,7 @@ public abstract class AllVersionsJar {
 	public abstract boolean isMatthewJavaEditor(String main_class);
 	public abstract void MakeJarUsingmsdos(int javaversionnumber,String main_class);
 	public void Powershell(boolean isJavaFX,String fileName,Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
-		Powershell powershell = getPowershell(main,main_class,dir,allfiles,_isMoreThanOneJar);
+		Powershell powershell = getPowershell(main,main_class,dir,allfiles);
 		if(!isJavaFX) { // No JavaFX
 			for(int i = 18; i <= 22; i++) {
 				powershell.Compile(i,fileName);
@@ -34,6 +34,6 @@ public abstract class AllVersionsJar {
 		}
 		powershell.Finish();
 	}
-	public abstract Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar);
+	public abstract Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles);
 }
 

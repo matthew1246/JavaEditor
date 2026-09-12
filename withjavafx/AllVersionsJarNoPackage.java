@@ -201,7 +201,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
-		 return new PowershellMoreThanOnePackage(main,main_class,dir,allfiles,_isMoreThanOneJar);
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
+		 return new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
 	 }		
 }

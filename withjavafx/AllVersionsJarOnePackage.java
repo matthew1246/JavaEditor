@@ -18,7 +18,10 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
-		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
+		if(_isMoreThanOneJar)
+			this.isMoreThanOneJar=new IsMoreThanOneJar(false);
+		else
+			this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -186,7 +189,7 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
-		return new PowershellOnePackage(main,main_class,dir,allfiles,_isMoreThanOneJar);
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
+		return new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
 	}
 }

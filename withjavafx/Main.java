@@ -2375,6 +2375,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							else {
+								if(isJavaFX) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+								} else {
+									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+									File javafxlauncher=new File(maintwo);
+									if(javafxlauncher.exists()) {
+										javafxlauncher.delete();
+									}
+								}
 								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
 							}		
 							
