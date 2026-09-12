@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -1688,7 +1688,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 201
+    "caretposition": 1900
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Git.java": {
     "isLocked": false,
