@@ -18,8 +18,8 @@ public abstract class AllVersionsJar {
 	public abstract void WriteManifest(String main_class);
 	public abstract boolean isMatthewJavaEditor(String main_class);
 	public abstract void MakeJarUsingmsdos(int javaversionnumber,String main_class);
-	public void Powershell(String fileName,Main main,String main_class,String dir,AllFiles allfiles,boolean isMoreThanOneJar) {
-		Powershell powershell = getPowershell(main,main_class,dir,allfiles,isMoreThanOneJar);
+	public void Powershell(String fileName,Main main,String main_class,String dir,AllFiles allfiles) {
+		Powershell powershell = getPowershell(main,main_class,dir,allfiles);
 		for(int i = 18; i <= 23; i++) {
 			powershell.Compile(i,fileName);
 			powershell.makeJar(i);
@@ -27,6 +27,6 @@ public abstract class AllVersionsJar {
 
 		powershell.Finish();
 	}
-	public abstract Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean isMoreThanOneJar);
+	public abstract Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles);
 }
 

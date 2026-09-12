@@ -1603,8 +1603,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() 	{	
-		AI ai=new AI(this);
+	public void setListeners() {	
+		AI ai =new AI(this);
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
@@ -2033,7 +2033,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
 							if(result == 0) {
-								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,false);
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
 							}
 							else {
 								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
@@ -2048,7 +2048,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),true);
+							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						}
 						else {
 							for(int i = 18; i <= 23; i++) {
@@ -2121,7 +2121,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
+							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							powershell.Compile(javaversionnumber,fileName);
 							powershell.makeJar(javaversionnumber);							
 							powershell.Finish();
@@ -2193,7 +2193,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					String main=allversionsjar.getMain(storeselectedfile,preferences);
 					allversionsjar.WriteManifest(main);
 					if(allversionsjar.isMatthewJavaEditor(main)) {
-						Powershell powershell = allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
+						Powershell powershell = allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						powershell.Compile(no_java_verson_number,fileName);
 						powershell.makeJar(no_java_verson_number);							
 						powershell.Finish();
