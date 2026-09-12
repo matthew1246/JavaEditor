@@ -2409,7 +2409,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									for(int i = 22; i <= 23; i++) {
 										allversionsjar.Compile(isJavaFX,i);	
 										String main2 = main.substring(0,(main.length()-3));
-										JOptionPane.showMessageDialog(null,"main2 is:"+main2);
 										allversionsjar.MakeJarUsingmsdos(i,main2);	
 									}
 								}				
