@@ -2359,7 +2359,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											javafxlauncher.delete();
 										}
 									}
-									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
+									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,false);
 								}
 								else { // More than one package
 									if(isJavaFX) {
@@ -2375,7 +2375,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							else {
-								//allversionsjar=new AllVersionsJarNoPackage(	
+								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
 							}		
 							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();

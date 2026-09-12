@@ -10,13 +10,15 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public class AllVersionsJarNoPackage extends AllVersionsJar {
+	private IsMoreThanOneJar isMoreThanOneJar;
 	private Packager packager;
 	private String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
-	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
+	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
+		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -30,6 +32,12 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 		}
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
+	}
+	public String getDir() {
+		return dir;
+	}
+	public AllFiles getAllFiles() {
+		return allfiles;
 	}
 	public void Compile(boolean isJavaFX,int javaversionnumber) {
 		if(!isJavaFX) {
