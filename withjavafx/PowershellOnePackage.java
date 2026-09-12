@@ -9,11 +9,17 @@ import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.IOException;
 public class PowershellOnePackage implements Powershell {
+	private Main main;
+	private AllFiles allfiles;
+	private IsMoreThanOneJar isMoreThanOneJar;
 	protected Packager packager;
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
-	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles) {
+	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		this.main = main;
+		this.allfiles=allfiles;
+		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.dir = dir;
 		this.main_class = main_class;
 		try {

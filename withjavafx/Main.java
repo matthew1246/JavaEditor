@@ -2350,8 +2350,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								    options3[1]  // <-- sets "More than one" as the default focused button
 								);
 								if(result == 0) {
-									option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-									if(option2 ==JOptionPane.YES_OPTION) {
+									if(isJavaFX) {
 										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									} else {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
@@ -2363,8 +2362,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5);
 								}
 								else { // More than one package
-									option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-									if(option2 ==JOptionPane.YES_OPTION) {
+									if(isJavaFX) {
 										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									} else {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");

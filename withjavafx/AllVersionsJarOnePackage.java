@@ -31,6 +31,12 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 	}
+	public String getDir() {
+		return dir;
+	}
+	public AllFiles getAllFiles() {
+		return allfiles;
+	}
 	public void Compile(boolean isJavaFX,int javaversionnumber) {
 		if(!isJavaFX) { // No JavaFX!
 			/*MinorCompile compile = new MinorCompile();
@@ -178,7 +184,7 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public Powershell getPowershell(String main_class) {
-		return new PowershellOnePackage(main,main_class,dir,allfiles);
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
+		return new PowershellOnePackage(main,main_class,dir,allfiles,_isMoreThanOneJar);
 	}
 }
