@@ -55,6 +55,11 @@ public FileListModifier() {
 	public void addBlank() {
 		filelist.add(0,"");
 	}
+	public void removeFile(String filename) {
+		filelist.remove(filename);
+		original.remove(filename);
+		fullpath.removeIf(p -> p.endsWith("\\" + filename) || p.endsWith("/" + filename));
+	}
 	
 	public void fillList(String filenameanddirectory) {
 		directoryandfilename = filenameanddirectory;

@@ -2002,6 +2002,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								File javafxlauncher=new File(maintwo);
 								if(javafxlauncher.exists()) {
 									javafxlauncher.delete();
+									Main.this.filelistmodifier.removeFile(maintwo);
 								}
 							}
 					
@@ -2357,6 +2358,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
 											javafxlauncher.delete();
+											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
 									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
@@ -2369,6 +2371,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
 											javafxlauncher.delete();
+											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
@@ -2382,6 +2385,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									File javafxlauncher=new File(maintwo);
 									if(javafxlauncher.exists()) {
 										javafxlauncher.delete();
+										Main.this.filelistmodifier.removeFile(maintwo);
 									}
 								}
 								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
@@ -2479,6 +2483,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
 											javafxlauncher.delete();
+											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
 									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
@@ -2491,6 +2496,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
 											javafxlauncher.delete();
+											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
@@ -2504,6 +2510,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									File javafxlauncher=new File(maintwo);
 									if(javafxlauncher.exists()) {
 										javafxlauncher.delete();
+										Main.this.filelistmodifier.removeFile(maintwo);
 									}
 								}
 								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
@@ -2583,6 +2590,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								File javafxlauncher=new File(maintwo);
 								if(javafxlauncher.exists()) {
 									javafxlauncher.delete();
+									Main.this.filelistmodifier.removeFile(maintwo);
 								}
 							
 								isJavaFX = false;
@@ -3433,6 +3441,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					File javafxlauncher=new File(maintwo);
 					if(javafxlauncher.exists()) {
 						javafxlauncher.delete();
+						Main.this.filelistmodifier.removeFile(maintwo);
 					}
 					withJavaFX = false;
 				}
@@ -3463,6 +3472,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							File javafxlauncher=new File(maintwo);
 							if(javafxlauncher.exists()) {
 								javafxlauncher.delete();
+								Main.this.filelistmodifier.removeFile(maintwo);
 							}
 						}
 						for(String jar:preferences.jars) {
@@ -3548,6 +3558,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								File javafxlauncher=new File(maintwo);
 								if(javafxlauncher.exists()) {
 									javafxlauncher.delete();
+									Main.this.filelistmodifier.removeFile(maintwo);
 								}
 							}
 					
@@ -3875,6 +3886,7 @@ CommandLine commandline = new CommandLine();
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
 											javafxlauncher.delete();
+											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 										if(save.endsWith("two")) {
 											save=save.substring(0,save.length()-3);
@@ -3910,6 +3922,7 @@ CommandLine commandline = new CommandLine();
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
 											javafxlauncher.delete();
+											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 										commandline.setMainClass(fileNameWithoutDotJava);
 
@@ -4140,6 +4153,7 @@ CommandLine commandline = new CommandLine();
 									File javafxlauncher=new File(maintwo);
 									if(javafxlauncher.exists()) {
 										javafxlauncher.delete();
+										Main.this.filelistmodifier.removeFile(maintwo);
 									}
 									commandline.setMainClass(main_class);
 
@@ -4242,11 +4256,12 @@ CommandLine commandline = new CommandLine();
 											File javafxlauncher=new File(maintwo);
 											if(javafxlauncher.exists()) {
 												javafxlauncher.delete();
+												Main.this.filelistmodifier.removeFile(maintwo);
 											}
 											if(save.endsWith("two"))
 												save=save.substring(0,save.length()-3);
 											commandline.setMainClass(save);
-										}													
+										}														
 									}
 									else {
 										fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
@@ -4257,16 +4272,18 @@ CommandLine commandline = new CommandLine();
 											commandline.addJavaFX();
 											commandline.setMainClass(extractjavafxjars.starter);
 										}
-										else if(option2 == JOptionPane.NO_OPTION) {
-											String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
-											File javafxlauncher=new File(maintwo);
-											if(javafxlauncher.exists()) {
-												javafxlauncher.delete();
-											}
-											commandline.setMainClass(fileNameWithoutDotJava);
-										}	
-										
-										storeselectedfile = new StoreSelectedFile();
+									else if(option2 == JOptionPane.NO_OPTION) {
+										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+										File javafxlauncher=new File(maintwo);
+										if(javafxlauncher.exists()) {
+											javafxlauncher.delete();
+											Main.this.filelistmodifier.removeFile(maintwo);
+										}
+										commandline.setMainClass(fileNameWithoutDotJava);
+
+									}	
+
+									storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName);
 										for(String jar:preferences.jars) {										
 											commandline.addExternalJar(jar);
