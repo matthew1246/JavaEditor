@@ -225,21 +225,20 @@ public class PowershellNoPackage implements Powershell {
 						fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
 					}
 					else {
-						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+main_class+".jar mf.txt .");
-						fileName=createJarFolderLocation+"ForJava"+javaversionnumber+main_class+".jar";
-					}
-					else {
-					
+						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
+						fileName=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class+".jar";
 					}
 				}
 				else { // Is Main.jar
 					if(hasJavaFX) {
-							
+						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_"+main_class+".jar");
+						fileName=createJarFolderLocation+"HasJavaFX_"+main_class+".jar";
 					}
 					else {
 						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+main_class+".jar");
 						fileName=createJarFolderLocation+main_class+".jar";
 					}
+				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
 				//output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));

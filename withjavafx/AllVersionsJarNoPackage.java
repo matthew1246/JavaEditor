@@ -146,27 +146,29 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
 	}
+	private String folderName;
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			folderName=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!folderName.endsWith("\\"))
+				folderName=folderName+"\\";
+			JOptionPane.showMessageDialog(null,"jar folder creation:"+folderName);
 			
 			String input = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				if(javaversionnumber== 23 || javaversionnumber == -2) {
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt .";
 				}
 			}
 			else { // packager.isInRightFolders() == true
-				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				if(javaversionnumber==23 || javaversionnumber == -2) {
+					// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt .";
 				}	
 			}
 			
