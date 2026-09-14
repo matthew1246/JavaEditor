@@ -175,6 +175,7 @@ public class PowershellNoPackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
+	private boolean hasJavaFX = false;
 	public void Compile(int javaversionnumber,String fileName,boolean hasJavaFX) {
 		try {
 			CommandLine commandline = new CommandLine();
@@ -191,9 +192,10 @@ public class PowershellNoPackage implements Powershell {
 				}
 			}
 			
-			if(hasJavaFX)
+			if(hasJavaFX) {
+				this.hasJavaFX=hasJavaFX;
 				commandline.addJavaFX();
-			
+			}
 			for(String jar:preferences.jars) {
 				commandline.addExternalJar(jar);
 			}
@@ -217,8 +219,27 @@ public class PowershellNoPackage implements Powershell {
 				createJarFolderLocation=createJarFolderLocation+"\\";
 			JOptionPane.showMessageDialog(null,"Create jar location is:"+createJarFolderLocation);
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
-				fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
+				if(javaversionnumber != -2) { // Not Main.jar
+					if(hasJavaFX) {
+						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
+						fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
+					}
+					else {
+						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+main_class+".jar mf.txt .");
+						fileName=createJarFolderLocation+"ForJava"+javaversionnumber+main_class+".jar";
+					}
+					else {
+					
+					}
+				}
+				else { // Is Main.jar
+					if(hasJavaFX) {
+							
+					}
+					else {
+						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+main_class+".jar");
+						fileName=createJarFolderLocation+main_class+".jar";
+					}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
 				//output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
