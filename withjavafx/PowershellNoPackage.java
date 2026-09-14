@@ -209,30 +209,22 @@ public class PowershellNoPackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
+	String fileName;
 	public void makeJar(int javaversionnumber) {
 		try {
 			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
 			if(!createJarFolderLocation.endsWith("\\"))
 				createJarFolderLocation=createJarFolderLocation+"\\";
 			JOptionPane.showMessageDialog(null,"Create jar location is:"+createJarFolderLocation);
-			
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
-				if(javaversionnumber == 23) {	
-					output2.write("\n");
-					output2.write("java -jar "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
-				}
+				fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
 			}
 			else { // Code is a package and package.isInRightFolder() == true
 				//output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
 				output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
-
-				if(javaversionnumber == 23) {
-					output2.write("\n");
-					output2.write("java -jar "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar");
-				}
+				fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
 			}	
-			output2.write("\n");
 			
 			// output2.close();
 		} catch (IOException ex) {
@@ -241,6 +233,9 @@ public class PowershellNoPackage implements Powershell {
 	}
 	public void Finish() {
 		try {
+			output2.write("\n");
+			output2.write("java -jar "+fileName);
+			output2.write("\n");
 			output2.close();
 			CommandLine commandline = new CommandLine();
 			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
