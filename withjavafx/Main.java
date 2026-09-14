@@ -2547,253 +2547,123 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				break;
 				case JOptionPane.NO_OPTION:
 					Thread thread2 = new Thread(() -> {
-						try {
-							if(fileName.equals("")) {
-								NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
-								Main.this.fileName = nofileopen.getFileName();
+						if(fileName.equals("")) {
+							NoFileOpen nofileopen = new NoFileOpen(Main.this,textarea,tabbedpane);
+							Main.this.fileName = nofileopen.getFileName();
+							if(sal == null)
+								sal = new SaveActionListener(this);
+							sal.actionPerformed(null); // Save file and update UI.
+							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
+							List<String> tabs=fileNames;
+							int tabsize=tabbedpane.getSelectedIndex();
+							if(tabs.size()<=tabsize)
+								tabs.add(Main.this.fileName);
+							else
+								tabs.set(tabsize,Main.this.fileName);
+							StoreSelectedFile storeselectedfilenew=new StoreSelectedFile();
+							storeselectedfilenew.set(Main.this.fileName);
+							storeselectedfilenew.setTabs(tabs);
+							storeselectedfilenew.setStarterClass(Main.this.fileName);
+							threecomboboxes.load(Main.this.fileName);
+							expandable.open();
+							startercombobox.Change(Main.this.fileName);
+							git.Change(Main.this.fileName);
+							maven.Change(Main.this.fileName);
+						}
+						else {
+							if(!isLatestCodeSaved()) {
 								if(sal == null)
 									sal = new SaveActionListener(this);
-								sal.actionPerformed(null); // Save file and update UI.
-								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
-								List<String> tabs=fileNames;
-								int tabsize=tabbedpane.getSelectedIndex();
-								if(tabs.size()<=tabsize)
-									tabs.add(Main.this.fileName);
-								else
-									tabs.set(tabsize,Main.this.fileName);
-								StoreSelectedFile storeselectedfilenew=new StoreSelectedFile();
-								storeselectedfilenew.set(Main.this.fileName);
-								storeselectedfilenew.setTabs(tabs);
-								storeselectedfilenew.setStarterClass(Main.this.fileName);
-								threecomboboxes.load(Main.this.fileName);
-								expandable.open();
-								startercombobox.Change(Main.this.fileName);
-								git.Change(Main.this.fileName);
-								maven.Change(Main.this.fileName);
+								sal.actionPerformed(null); // Save latest code.
 							}
-							else {
-								if(!isLatestCodeSaved()) {
-									if(sal == null)
-										sal = new SaveActionListener(this);
-									sal.actionPerformed(null); // Save latest code.
+						}
+						
+						int javaversionnumber= -2;
+						int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+						boolean isJavaFX= false;
+						if(option2 ==JOptionPane.YES_OPTION)
+							isJavaFX=true;
+						AllVersionsJar allversionsjar=null;
+						Packager packager=new Packager(this);
+						if(packager.containsPackage()) {
+							String[] options3={"One","More than One"};
+							int result = JOptionPane.showOptionDialog(
+							    null,
+							    "Do you want to make a jar with one or more packages?",
+							    "Package Selection",
+							    JOptionPane.DEFAULT_OPTION,
+							    JOptionPane.QUESTION_MESSAGE,
+							    null,
+							    options3,
+							    options3[1]  // <-- sets "More than one" as the default focused button
+							);
+							if(result == 0) {
+								if(isJavaFX) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+								} else {
+									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+									File javafxlauncher=new File(maintwo);
+									if(javafxlauncher.exists()) {
+										javafxlauncher.delete();
+										Main.this.filelistmodifier.removeFile(maintwo);
+									}
 								}
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
 							}
-							
-							Compile compile = new Compile();
-							boolean isJavaFX = false;
-							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-							if(option2 ==JOptionPane.YES_OPTION) {
-								isJavaFX = true;
+							else { // More than one package
+								if(isJavaFX) {
+									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+								} else {
+									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
+									File javafxlauncher=new File(maintwo);
+									if(javafxlauncher.exists()) {
+										javafxlauncher.delete();
+										Main.this.filelistmodifier.removeFile(maintwo);
+									}
+								}
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
 							}
-							else if(option2 == JOptionPane.NO_OPTION) {
+						}
+						else {
+							if(isJavaFX) {
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+							} else {
 								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 								File javafxlauncher=new File(maintwo);
 								if(javafxlauncher.exists()) {
 									javafxlauncher.delete();
 									Main.this.filelistmodifier.removeFile(maintwo);
 								}
-							
-								isJavaFX = false;
 							}
-							if(!isJavaFX) {
-								compile.compileall(fileName,sal,ev,isJavaFX,this);
-							}
-							else {
-								compile.compileall(fileName,sal,ev,isJavaFX,this,true);
-							}
-							
-							CommandLine commandline = new CommandLine();
-							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-							Preferences preferences=storeselectedfile.get(fileName);
-							String main=preferences.starterclass;
-							String dir = fileName.replaceAll("[^\\\\]+\\.java","");
-							Packager packager3=new Packager(this);
-							if(packager3.containsPackage()) {		
-								if(packager3.isInRightFolders()) {
-									dir=packager3.classpath;	
-								}							
-							}
-							if(!dir.endsWith("\\"))
-								dir = dir+"\\";
-							List<String> jars = preferences.jars;
-							if(!packager3.containsPackage() || !packager3.isInRightFolders()) { // Contains no package
-								for(String jar:jars) {
-									// jar = getFileName(jar);
-									Process process=commandline.run("jar xf "+jar,dir);
-									process.waitFor();
-									//output.write(" "+jar);
-								}
-							}
-							else { // Package used javac.exe didn't used -d option
-								/*JOptionPane.showMessageDialog(null,"jars extract:"+dir+"jars");
-								File createdir = new File(dir+"jars");
-								if(!createdir.exists()) {
-									createdir.mkdir();
-								}*/
-								for(String jar:jars) {
-									// jar = getFileName(jar);
-									Process process=commandline.run("jar xf "+jar,dir);
-									process.waitFor();
-									//output.write(" "+jar);
-								}
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
+						}		
+
+
+						
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
+						String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
+						allversionsjar.WriteManifest(main);
+						if(allversionsjar.isMatthewJavaEditor(main)) {
+							if(isJavaFX) {
+								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
+								extractjavafxjars.unzipJars();
 							}	
-							if(!fileName.equals("")) {
-								if(main.equals("")) {
-									main=fileName.replaceAll(".+\\\\","");
-									main = main.replaceAll("\\.java","");
-								}
-								storeselectedfile.set(fileName);
-								LinkedHashMap<String,Preferences> linkedhashmap=storeselectedfile.getBackup();
-								linkedhashmap.get(fileName).starterclass=main;
-								storeselectedfile.setBackup(linkedhashmap);
-							}
-							
-	
-							JOptionPane.showMessageDialog(null,dir+"mf.txt");
-							FileWriter filewriter = new FileWriter( dir+"mf.txt",StandardCharsets.UTF_8);
-							BufferedWriter output = new BufferedWriter(filewriter);
-							output.write("Manifest-Version: 1.0");
-							output.write("\n");
-							output.write("Main-Class: ");
-							String outputmainclass= "";
-							
+							Powershell powershell=allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
+							powershell.Compile(javaversionnumber,fileName,isJavaFX);
+							powershell.makeJar(javaversionnumber);
+							powershell.Finish();
+						}
+						else {
 							if(!isJavaFX) {
-								outputmainclass=main;	
+								allversionsjar.Compile(isJavaFX,javaversionnumber);	
+								allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
 							}
-							else { // isJavaFX == true
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
-								outputmainclass=extractjavafxjars.starter;
-							}
-							if(!packager3.containsPackage()) {
-								output.write(outputmainclass);
-							}
-							else { // Contains package name
-								output.write(packager3.getPackageName()+"."+outputmainclass);
-							}
-							
-							output.write("\n");
-							//output.write("Class-Path: ");
-							//output.write("javafx/lib/");
-							
-							//output.write(" *");
-							//output.write("\n");
-							output.close();
-							
-							//File file = new File(dir+main+".jar");
-							AllFiles allfiles = new AllFiles(main,dir);
-							if(allfiles.isSameDirectory(Main.this) || (allfiles.exists() && !allfiles.delete())) {
-								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(this);
-									extractjavafxjars.unzipJars();
-								}		
-								JOptionPane.showMessageDialog(null,dir+main+".jar is already open. Run script to close "+main+".jar");
-								FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
-								BufferedWriter output2 = new BufferedWriter(filewriter2);
-								output2.write("cd "+dir);
-								output2.write("\n");
-								output2.write("START /B /WAIT taskkill /F /im java.exe");
-								output2.write("\n");
-								output2.write("START /B /WAIT taskkill /F /im javaw.exe");
-								output2.write("\n");
-							for(int i = 0; i < allfiles.files.size(); i++) {
-								File file2 = new File(allfiles.files.get(i));
-								if(file2.exists()) {
-									output2.write("del "+allfiles.files.get(i));
-									output2.write("\n");
-								}
-							}
-							if(packager3.containsPackage() && packager3.isInRightFolders()) {
-								String classnameJarPkg = dir + packager3.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
-								output2.write("del "+classnameJarPkg);
-								output2.write("\n");
-							}
-							// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-							Packager packager2 = new Packager(this);
-								if(!packager2.containsPackage()) { // Doesn't contain package.
-									output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
-								}
-								else { // Contains package
-									if(!packager2.isInRightFolders()) { // javac.exe used -d option
-										output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
-									}
-									else { // packager2.isInRightFolders()
-										output2.write("START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .");
-									}
-								}
-								output2.write("\n");
-								
-								output2.write("java -jar "+main+".jar");
-								output2.write("\n");
-								output2.write("\n");
-								output2.close();
-								String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
-								
-								commandline.runWithMSDOS(liney,dir);
-							}
-						else { 
-						String classnameJar;
-						if(packager3.containsPackage() && packager3.isInRightFolders()) {
-							classnameJar = dir + packager3.getPackageName().replace(".", "\\") + "\\" + main + ".jar";
-						} else {
-							classnameJar = dir+main+".jar";
-						}
-						File existingJar = new File(classnameJar);
-						if(existingJar.exists()) {
-							existingJar.delete();
-						}
-						File parentDir2 = new File(classnameJar).getParentFile();
-						if(parentDir2 != null) {
-							String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main+".jar";
-							File existingJar2 = new File(classnameJar2);
-							if(existingJar2.exists()) {
-								existingJar2.delete();
-							}
-							File parentDir3 = parentDir2.getParentFile();
-							if(parentDir3 != null) {
-								String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main+".jar";
-								File existingJar3 = new File(classnameJar3);
-								if(existingJar3.exists()) {
-									existingJar3.delete();
-								}
-							}
-						}
-						String input = "jar cfm "+main+".jar mf.txt .";
-								if(packager3.containsPackage()) {
-									if(!packager3.isInRightFolders()) { // javac.exe used -d option
-										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .";
-									}
-									else { // packager2.isInRightFolders()
-										input="START /B /WAIT cmd.exe /c jar cfm "+main+".jar mf.txt .";
-									}
-								}
-								JOptionPane.showMessageDialog(null,input);
-								JOptionPane.showMessageDialog(null,"dir for jar.exe:"+dir);
-								Process process=commandline.run(input,dir);
-								
-								InputStream inputstream = process.getErrorStream();
-								InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-								BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-								String line = bufferedreader.readLine();
-								if(line == null) {
-									JOptionPane.showMessageDialog(null,"jar created");
-								}
-								else {
-									String lines = line;
-									while(true) {
-										line = bufferedreader.readLine();
-										if(line == null)
-											break;
-										lines = lines+"\n"+line;
-									}
-									JOptionPane.showMessageDialog(null,lines);
-								}
-							}
-						} catch(InterruptedException ex) {
-							ex.printStackTrace();
-							JOptionPane.showMessageDialog(null,ex.getMessage());
-						} catch(IOException ex) {
-							ex.printStackTrace();
-							JOptionPane.showMessageDialog(null,ex.getMessage());
+							else { // Has JavaFX code.
+								allversionsjar.Compile(isJavaFX,javaversionnumber);	
+								String main2 = main.substring(0,(main.length()-3));
+								allversionsjar.MakeJarUsingmsdos(javaversionnumber,main2);	
+							}				
 						}
 					});
 					thread2.start();
