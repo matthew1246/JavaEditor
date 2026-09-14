@@ -236,14 +236,8 @@ public class PowershellNoPackage implements Powershell {
 					}
 				}
 				else { // Is Main.jar
-					if(hasJavaFX) {
-						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_"+main_class+".jar mf.txt .");
-						fileName=createJarFolderLocation+"HasJavaFX_"+main_class+".jar";
-					}
-					else {
-						output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+main_class+".jar mf.txt .");
-						fileName=createJarFolderLocation+main_class+".jar";
-					}
+					output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+main_class+".jar mf.txt .");
+					fileName=createJarFolderLocation+main_class+".jar";
 				}
 			}
 			else { // Code is a package and package.isInRightFolder() == true
