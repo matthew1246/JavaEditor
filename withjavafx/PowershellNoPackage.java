@@ -214,6 +214,10 @@ public class PowershellNoPackage implements Powershell {
 	String fileName;
 	public void makeJar(int javaversionnumber) {
 		try {
+			if(hasJavaFX) {
+				// Remove "two" from "Maintwo" class name
+				main_class.substring(0,main_class.length()-3);
+			}
 			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
 			if(!createJarFolderLocation.endsWith("\\"))
 				createJarFolderLocation=createJarFolderLocation+"\\";
