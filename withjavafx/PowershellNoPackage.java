@@ -245,7 +245,7 @@ public class PowershellNoPackage implements Powershell {
 				output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
 				fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
 			}	
-			
+			output2.write("\n");
 			// output2.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
