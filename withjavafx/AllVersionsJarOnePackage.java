@@ -137,26 +137,15 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			if(packager.containsPackage() && packager.isInRightFolders()) {
-				parentdirectory=file;	
-			}
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			String createJarFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!createJarFolder.endsWith("\\"))
+				createJarFolder=createJarFolder+"\\";
+			JOptionPane.showMessageDialog(null,"Create jar folder location is:"+createJarFolder);
 			
-			String input = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23) {
-					input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
-				}
-			}
-			else { // packager.isInRightFolders() == true
-				input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				if(javaversionnumber == 23) {
-					input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				}	
-			}		
+			String input = "jar cfm "+createJarFolder+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+			if(javaversionnumber == 23 || javaversionnumber == -2) {
+				input = "jar cfm "+createJarFolder+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
+			}	
 			
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();

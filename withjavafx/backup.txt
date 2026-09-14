@@ -3,12 +3,12 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarMoreThanOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarOnePackage.java"
     ],
@@ -1344,7 +1344,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 6971
+    "caretposition": 10294
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarNoPackage.java": {
     "isLocked": true,
@@ -1360,7 +1360,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 7104
+    "caretposition": 6097
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellOnePackage.java": {
     "isLocked": true,
@@ -1440,6 +1440,38 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
+    "caretposition": 5187
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarMoreThanOnePackage.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "AllVersionsJarMoreThanOnePackage"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarMoreThanOnePackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 6128
   }
 }

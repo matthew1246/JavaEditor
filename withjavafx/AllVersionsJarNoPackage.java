@@ -158,10 +158,12 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 			
 			String input = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber== 23 || javaversionnumber == -2) {
 					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt .";
 				}
+				else {
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				}	
 			}
 			else { // packager.isInRightFolders() == true
 				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");

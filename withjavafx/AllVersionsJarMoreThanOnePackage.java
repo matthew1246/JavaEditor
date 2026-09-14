@@ -156,7 +156,7 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 			String input = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
 				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createdJarFolderCreation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23) {
+				if(javaversionnumber == 23 || javaversionnumber == -2) {
 					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createdJarFolderCreation+main_class2+".jar mf.txt .";
 				}
 			}
