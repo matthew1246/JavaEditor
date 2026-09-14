@@ -192,7 +192,8 @@ public class PowershellOnePackage implements Powershell {
 				commandline.addExternalJar(jar);
 			}
 		
-			commandline.earlierjavaversion(javaversionnumber);
+			if(javaversionnumber != -2)	
+				commandline.earlierjavaversion(javaversionnumber);
 			
 			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
 			output2.write("\n");
