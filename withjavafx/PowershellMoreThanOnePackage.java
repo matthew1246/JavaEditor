@@ -221,6 +221,10 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				if(split != null && split.length > 0)
 					main_class3=split[split.length-1];
 			}		
+			if(hasJavaFX) {
+				if(main_class3.endsWith("two"))
+					main_class3=main_class3.substring(0,main_class3.length()-3);
+			}
 			String createJarFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
 			if(!createJarFolder.endsWith("\\"))
 				createJarFolder=createJarFolder+"\\";
