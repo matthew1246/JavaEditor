@@ -11,7 +11,7 @@ public class MSDOS {
 		setLayout();
 		setListeners();
 	}
-
+	private JButton exp=new JButton("explorer");
 	public void setLayout() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Run MSDOS");
@@ -23,9 +23,11 @@ public class MSDOS {
 			home=home+"\\";
 		input.setText("del "+home+"backup.txt");
 		
+		
 		panel.add(input);
 		run = new JButton("run");
 		panel.add(run);
+		panel.add(exp);
 		frame.getContentPane().add(panel);
 		frame.pack();
 		frame.setLocation(1210,100);
@@ -42,7 +44,11 @@ public class MSDOS {
 		};
 		run.addActionListener(actionlistener);
 		input.addActionListener(actionlistener);
+		exp.addActionListener((ev) -> {
+			CommandLine commandline = new CommandLine();
+			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
+			commandline.runWithMSDOS("explorer .",dir);
+		});
 	}
 }
-
-			
+			
