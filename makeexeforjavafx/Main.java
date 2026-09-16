@@ -3581,7 +3581,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 								}
 								if(anyOtherHasPackage) {
-									String[] options = {"Yes","No"};
+									// String[] options = {"Yes","No"};
 									int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 									if(option == JOptionPane.YES_OPTION) {
 										try {
@@ -3601,6 +3601,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
+							StoreSelectedFile storeselectedfile=new StoreSelectedFile();
 							storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
 							
 							Preferences preferences=storeselectedfile.get(fileName);
