@@ -103,15 +103,18 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 	public void WriteManifest(String main_class) {
 		try {
 			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+				System.out.println("dir3:"+dir);
 				CommandLine commandline = new CommandLine();
-				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.ps1");
-				java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
-				scriptwriter.write("$content = 'Manifest-Version: 1.0' + [Environment]::NewLine + 'Main-Class: "+main_class+"' + [Environment]::NewLine\n");
-				scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
-				scriptwriter.close();
-				Process process = commandline.runAsAdmin("\"powershell\" -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
-				try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
-				tempfile.delete();
+				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"writemf.bat");
+				java.io.FileWriter batwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
+				java.io.BufferedWriter batoutput = new java.io.BufferedWriter(batwriter);
+				batoutput.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"");
+				batoutput.write("\n");
+				batoutput.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"");
+				batoutput.close();
+				String liney = "powershell -Command Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+tempfile.getAbsolutePath()+"\"'";
+				System.out.println(liney);
+				commandline.run(liney, dir);
 			}
 			else {
 				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
