@@ -69,7 +69,7 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 			for(String jar:jars) {
 				try {
 					// jar = getFileName(jar);
-					Process process=commandline.run("jar xf "+jar,dir+"jars");
+					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
 					process.waitFor();
 					//output.write(" "+jar);
 				} catch(InterruptedException ex) {

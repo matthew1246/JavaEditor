@@ -62,7 +62,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 				for(String jar:jars) {
 					try {
 						// jar = main.getFileName(jar);
-						Process process=commandline.run("jar xf "+jar,dir);
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch (InterruptedException ex) {
@@ -79,7 +79,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 					try {
 						// jar = getFileName(jar);
 						// Process process=commandline.run("jar xf "+jar,dir+"jars");
-						Process process=commandline.run("jar xf "+jar,dir);
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch(InterruptedException ex) {
