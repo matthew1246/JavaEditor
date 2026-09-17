@@ -1604,7 +1604,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
 	public void setListeners() {	
-		AI ai =new AI(this);
+		AI ai=new AI(this);
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
@@ -1944,7 +1944,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {										
+		generatejar.addActionListener((ev) -> {												
 			// 3a85e18ee02774cb28448df6ce540ad792d54fc9 is git commit id for -C make a jar for only package.																		
 			int caretposition=textarea.getCaretPosition();
 			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
@@ -2051,6 +2051,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						}
 						else {
+							allversionsjar.deleteExistingMainJar(this,main);
 							for(int i = 18; i <= 23; i++) {
 								allversionsjar.Compile(i);	
 								allversionsjar.MakeJarUsingmsdos(i,main);	
@@ -2127,6 +2128,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							powershell.Finish();
 						}
 						else {
+							allversionsjar.deleteExistingMainJar(this,main);
 							allversionsjar.Compile(javaversionnumber);	
 							allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
 						}
@@ -2198,10 +2200,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						powershell.makeJar(no_java_verson_number);							
 						powershell.Finish();
 					}
-					else {
+				else {
+						allversionsjar.deleteExistingMainJar(this,main);
 						allversionsjar.Compile(no_java_verson_number);	
 						allversionsjar.MakeJarUsingmsdos(no_java_verson_number,main);	
-					}	
+					}
 				break;
 			}
 		});
