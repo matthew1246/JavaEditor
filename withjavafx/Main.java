@@ -2403,6 +2403,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								allversionsjar.Powershell(isJavaFX,fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							}
 							else {
+								allversionsjar.deleteExistingMainJar(this,main);
 								if(!isJavaFX) {
 									for(int i = 18; i <= 23; i++) {
 										allversionsjar.Compile(isJavaFX,i);	
@@ -2530,7 +2531,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								powershell.makeJar(javaversionnumber);
 								powershell.Finish();
 							}
-							else {
+						else {
+								allversionsjar.deleteExistingMainJar(this,main);
 								if(!isJavaFX) {
 									allversionsjar.Compile(isJavaFX,javaversionnumber);	
 									allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
@@ -2654,7 +2656,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							powershell.makeJar(javaversionnumber);
 							powershell.Finish();
 						}
-						else {
+					else {
+							allversionsjar.deleteExistingMainJar(this,main);
 							if(!isJavaFX) {
 								allversionsjar.Compile(isJavaFX,javaversionnumber);	
 								allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	

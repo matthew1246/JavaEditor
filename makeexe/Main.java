@@ -2054,6 +2054,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.Powershell(main);
 						}
 						else {
+							allversionsjar.deleteExistingMainJar(this,main);
 							for(int i = 18; i <= 23; i++) {
 								allversionsjar.Compile(i);	
 								allversionsjar.MakeJarUsingmsdos(i,main);	
@@ -2137,7 +2138,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								powershell.makeJar(javaversionnumber);							
 								powershell.Finish();
 							}
-							else {
+						else {
+								allversionsjar.deleteExistingMainJar(this,main);
 								allversionsjar.Compile(javaversionnumber);	
 								allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
 							}
@@ -2221,6 +2223,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						powershell.Finish();
 					}
 					else {
+						allversionsjar.deleteExistingMainJar(this,main);
 						allversionsjar.Compile(no_java_verson_number);	
 						allversionsjar.MakeJarUsingmsdos(no_java_verson_number,main);	
 					}

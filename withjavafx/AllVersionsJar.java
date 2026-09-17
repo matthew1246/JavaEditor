@@ -35,5 +35,23 @@ public abstract class AllVersionsJar {
 		powershell.Finish();
 	}
 	public abstract Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles);
+	public void deleteExistingMainJar(Main main,String main_class) {
+		String[] splited = main_class.split("\\.");
+		String main_class2 = splited[splited.length-1];
+
+		String dir2 = Main.getDirectory(main.fileName);
+		if(!dir2.endsWith("\\"))
+			dir2 = dir2+"\\";
+		File mainJarFile = new File(dir2+main_class2+".jar");
+		if(mainJarFile.exists())
+			mainJarFile.delete();
+
+		String dir3 = getDir();
+		if(!dir3.endsWith("\\"))
+			dir3 = dir3+"\\";
+		File dirJarFile = new File(dir3+main_class2+".jar");
+		if(dirJarFile.exists())
+			dirJarFile.delete();
+	}
 }
 
