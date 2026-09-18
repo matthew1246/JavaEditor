@@ -9,11 +9,18 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 public class VariableSuggestionBoxSelected {
 	private LinkedHashMap<String,ArrayList<String>> linkedhashmap;
+	private String getBackupDir() {
+		String userDir = System.getProperty("user.dir");
+		if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
+			return System.getProperty("user.home");
+		}
+		return userDir;
+	}
 	public VariableSuggestionBoxSelected() {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
-		File backup = new File("autosuggestionbox.txt");
+		File backup = new File(getBackupDir() + File.separator + "autosuggestionbox.txt");
 		if(!backup.exists()) {
 			this.linkedhashmap= new LinkedHashMap<String,ArrayList<String>>();
 		}
@@ -120,7 +127,7 @@ public class VariableSuggestionBoxSelected {
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();
 			String contents = gson.toJson(linkedhashmap);
-			PrintWriter printwriter=new PrintWriter(new File("autosuggestionbox.txt"));
+			PrintWriter printwriter=new PrintWriter(new File(getBackupDir() + File.separator + "autosuggestionbox.txt"));
 			printwriter.print(contents);		
 			printwriter.close();
 		}
