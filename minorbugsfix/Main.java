@@ -4319,7 +4319,14 @@ class OpenDefaultContent {
 		this.fileName = storeselectedfile.get();
 		File file2 = new File(fileName); 
 		if(!file2.exists()) {
-			this.fileName = System.getProperty("user.dir") + File.separator + "Main.java";
+			String userDir = System.getProperty("user.dir");
+			String baseDir;
+			if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
+				baseDir = System.getProperty("user.home");
+			} else {
+				baseDir = userDir;
+			}
+			this.fileName = baseDir + File.separator + "Main.java";
 			File mainFile = new File(this.fileName);
 			if(!mainFile.exists()) {
 				FileWriter filewriter2 = new FileWriter(mainFile);
