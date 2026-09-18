@@ -131,13 +131,20 @@ public class StoreSelectedFile {
 		}
 	}
 	private NoDuplicate noduplicate = new NoDuplicate();
+	private String getBackupDir() {
+		String userDir = System.getProperty("user.dir");
+		if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
+			return System.getProperty("user.home");
+		}
+		return userDir;
+	}
 	public void set(String filenameandpath) {
 		LinkedHashMap<String,Preferences> linkedhashmap = getBackup();
 		Preferences preferences = null; // always set in next if else statement
 		if(linkedhashmap.containsKey("lastopened")) {
 			preferences=linkedhashmap.get("lastopened");
 			if(!preferences.starterclass.equals(filenameandpath)) {	
-				if( !(new File("original.txt").exists()) ) {
+				if( !(new File(getBackupDir() + File.separator + "original.txt").exists()) ) {
 					noduplicate.CreateOriginal();
 				}		
 			}	
@@ -178,7 +185,7 @@ public class StoreSelectedFile {
 		GsonBuilder gsonbuilder=new GsonBuilder();
 		gsonbuilder.setPrettyPrinting();
 		Gson gson = gsonbuilder.create();
-		File backup = new File("backup.txt");
+		File backup = new File(getBackupDir() + File.separator + "backup.txt");
 		if(!backup.exists()) {
 			return new LinkedHashMap<String,Preferences>();
 		}
@@ -220,7 +227,7 @@ public class StoreSelectedFile {
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();
 			String contents = gson.toJson(hashmap);
-			PrintWriter printwriter=new PrintWriter(new File("backup.txt"));
+			PrintWriter printwriter=new PrintWriter(new File(getBackupDir() + File.separator + "backup.txt"));
 			printwriter.print(contents);		
 			printwriter.close();
 		}
