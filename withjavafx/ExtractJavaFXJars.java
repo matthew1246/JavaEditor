@@ -537,13 +537,7 @@ public class ExtractJavaFXJars {
 	public boolean isUnzipped() {
 		try {
 			boolean allExtracted;
-			Path extractDir;
-			if(!makejar) {
-				extractDir = Paths.get(dir);
-			}
-			else {
-				extractDir = Paths.get(dir.substring(0,dir.length()-5));
-			}
+			Path extractDir = Paths.get(dir);
 	
 			CommandLine commandline = new CommandLine();
 			List<String> jars=commandline.getJavaFX();
