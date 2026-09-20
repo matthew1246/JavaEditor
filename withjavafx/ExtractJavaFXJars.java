@@ -561,12 +561,14 @@ public class ExtractJavaFXJars {
 				jarFile.close();
 				for(String root : rootFolders) {
 					File file;
-					if(!makejar) {
+					/*if(!makejar) {
 						file = new File(dir + root);
 					}
 					else {
 						file = new File(dir.substring(0, dir.length()-5) + root);
 					}
+					*/
+					file=new File(dir+root);
 					if(!file.exists())
 						return false;
 				}

@@ -1508,7 +1508,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 4316
+    "caretposition": 16712
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Compile.java": {
     "isLocked": false,
