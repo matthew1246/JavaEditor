@@ -536,8 +536,7 @@ public class ExtractJavaFXJars {
 	}
 	public boolean isUnzipped() {
 		try {
-			boolean allExtracted;
-			Path extractDir = Paths.get(dir);
+			Path extractDir = Paths.get(dir);
 	
 			CommandLine commandline = new CommandLine();
 			List<String> jars=commandline.getJavaFX();
@@ -549,16 +548,16 @@ public class ExtractJavaFXJars {
 				else { // If C:\Documents\jars\
 					filename=dir.substring(0,dir.length()-5)+jar;
 				}
-				try (JarFile jar2 = new JarFile(filename)) {
-					allExtracted = jar2.stream()
-					.map(JarEntry::getName)
-					.map(name -> name.split("/", 2)[0])
-					.filter(name -> !name.contains(".")) // exclude top-level files
-					.distinct()
-					.allMatch(name -> Files.isDirectory(extractDir.resolve(name)));
-				}
+			try (JarFile jar2 = new JarFile(filename)) {
+				boolean allExtracted = jar2.stream()
+				.map(JarEntry::getName)
+				.map(name -> name.split("/", 2)[0])
+				.filter(name -> !name.contains(".")) // exclude top-level files
+				.distinct()
+				.allMatch(name -> Files.isDirectory(extractDir.resolve(name)));
 				if(!allExtracted)
-					return false;	
+					return false;
+			}
 			}
 			return true;
 		} catch (IOException ex) {

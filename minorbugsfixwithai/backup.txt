@@ -94,7 +94,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 98576
+    "caretposition": 17499
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -123,7 +123,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 12446
+    "caretposition": 1240
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
     "isLocked": true,
@@ -357,7 +357,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 17512
+    "caretposition": 17374
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java": {
     "isLocked": false,
@@ -2211,7 +2211,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1357
+    "caretposition": 16568
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MinorCompile.java": {
     "isLocked": false,
@@ -2704,5 +2704,14 @@
     ],
     "fileNames": [],
     "caretposition": 17116
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 384
   }
 }

@@ -10,6 +10,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarMoreThanOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\extractjavafxjars.java"
     ],
     "caretposition": 0
@@ -28,7 +31,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 33494
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -251,7 +254,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 5813
+    "caretposition": 1255
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
     "isLocked": false,
@@ -746,7 +749,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 7442
+    "caretposition": 116
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\XML.java": {
     "isLocked": false,
