@@ -143,6 +143,7 @@ public class ExtractJavaFXJars {
 		CommandLine commandline = new CommandLine();	
 		String jarExe = "jar";
 		
+		JOptionPane.showMessageDialog(null,"JavaFX jars will be extracted to:"+dir);
 		for(String jar:commandline.getJavaFX()) {
 			           		/*ProcessBuilder pb = new ProcessBuilder(
 			                    	"jar",
