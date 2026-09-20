@@ -20,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\MSDOS.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java"
     ],
     "caretposition": 0
   },
@@ -357,7 +357,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 17374
+    "caretposition": 17155
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java": {
     "isLocked": false,

@@ -12,6 +12,8 @@ import javax.swing.SwingUtilities;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JOptionPane;
@@ -535,34 +537,32 @@ public class ExtractJavaFXJars {
 		return true;
 	}
 	public boolean isUnzipped() {
-		try {
-			Path extractDir = Paths.get(dir);
-	
-			CommandLine commandline = new CommandLine();
-			List<String> jars=commandline.getJavaFX();
-			for(String jar:jars) {
-				String filename=null;
-				if(!makejar) {
-					filename=dir+jar;
+		CommandLine commandline = new CommandLine();
+		List<String> jars = commandline.getJavaFX();
+		Path extractDir = Paths.get(dir);
+
+		for (String jar : jars) {
+			String jarPath = makejar
+				? dir.substring(0, dir.length() - 5) + jar
+				: dir + jar;
+
+			try (JarFile jarFile = new JarFile(jarPath)) {
+				Set<String> rootFolders = jarFile.stream()
+					.map(JarEntry::getName)
+					.filter(name -> name.contains("/"))
+					.map(name -> name.split("/", 2)[0])
+					.collect(Collectors.toSet());
+
+				for (String folder : rootFolders) {
+					if (!Files.isDirectory(extractDir.resolve(folder))) {
+						return false;
+					}
 				}
-				else { // If C:\Documents\jars\
-					filename=dir.substring(0,dir.length()-5)+jar;
-				}
-			try (JarFile jar2 = new JarFile(filename)) {
-				boolean allExtracted = jar2.stream()
-				.map(JarEntry::getName)
-				.map(name -> name.split("/", 2)[0])
-				.filter(name -> !name.contains(".")) // exclude top-level files
-				.distinct()
-				.allMatch(name -> Files.isDirectory(extractDir.resolve(name)));
-				if(!allExtracted)
-					return false;
+			} catch (IOException ex) {
+				ex.printStackTrace();
+				return false;
 			}
-			}
-			return true;
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return false;
 		}
+		return true;
 	}
 }
