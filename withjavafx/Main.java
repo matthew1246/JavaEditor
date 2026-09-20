@@ -2398,7 +2398,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
-									extractjavafxjars.unzipJars();
+									if(!extractjavafxjars.isUnzipped())
+										extractjavafxjars.unzipJars();
 								}	
 								allversionsjar.Powershell(isJavaFX,fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							}
@@ -2524,7 +2525,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
 									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
-									extractjavafxjars.unzipJars();
+									if(!extractjavafxjars.isUnzipped())
+										extractjavafxjars.unzipJars();
 								}	
 								Powershell powershell=allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 								powershell.Compile(javaversionnumber,fileName,isJavaFX);
@@ -2649,7 +2651,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 							if(isJavaFX) {
 								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
-								extractjavafxjars.unzipJars();
+								if(!extractjavafxjars.isUnzipped())
+									extractjavafxjars.unzipJars();
 							}	
 							Powershell powershell=allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							powershell.Compile(javaversionnumber,fileName,isJavaFX);

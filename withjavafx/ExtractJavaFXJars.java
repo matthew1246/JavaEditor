@@ -1,3 +1,5 @@
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import javax.swing.SwingWorker;
 import java.util.List;
 import java.io.File;
@@ -531,5 +533,43 @@ public class ExtractJavaFXJars {
 				return false;
 		}
 		return true;
+	}
+	public boolean isUnzipped() {
+		try {
+			boolean allExtracted;
+			Path extractDir;
+			if(!makejar) {
+				extractDir = Paths.get(dir);
+			}
+			else {
+				extractDir = Paths.get(dir.substring(0,dir.length()-5));
+			}
+	
+			CommandLine commandline = new CommandLine();
+			List<String> jars=commandline.getJavaFX();
+			for(String jar:jars) {
+				String filename=null;
+				if(!makejar) {
+					filename=dir+jar;
+				}
+				else { // If C:\Documents\jars\
+					filename=dir.substring(0,dir.length()-5)+jar;
+				}
+				try (JarFile jar2 = new JarFile(filename)) {
+					allExtracted = jar2.stream()
+					.map(JarEntry::getName)
+					.map(name -> name.split("/", 2)[0])
+					.filter(name -> name.contains(".")) // optional: exclude top-level files
+					.distinct()
+					.allMatch(name -> Files.isDirectory(extractDir.resolve(name)));
+				}
+				if(!allExtracted)
+					return false;	
+			}
+			return true;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 }
