@@ -20,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\MSDOS.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -94,7 +94,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 17499
+    "caretposition": 98412
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -357,7 +357,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 17155
+    "caretposition": 16315
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Code.java": {
     "isLocked": false,

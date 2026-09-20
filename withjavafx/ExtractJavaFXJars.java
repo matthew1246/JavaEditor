@@ -536,29 +536,40 @@ public class ExtractJavaFXJars {
 		}
 		return true;
 	}
-	public boolean isUnzipped() {
+	public boolean isUnzippedAgain() {
 		CommandLine commandline = new CommandLine();
 		List<String> jars = commandline.getJavaFX();
-		Path extractDir = Paths.get(dir);
-
-		for (String jar : jars) {
-			String jarPath = makejar
-				? dir.substring(0, dir.length() - 5) + jar
-				: dir + jar;
-
-			try (JarFile jarFile = new JarFile(jarPath)) {
-				Set<String> rootFolders = jarFile.stream()
-					.map(JarEntry::getName)
-					.filter(name -> name.contains("/"))
-					.map(name -> name.split("/", 2)[0])
-					.collect(Collectors.toSet());
-
-				for (String folder : rootFolders) {
-					if (!Files.isDirectory(extractDir.resolve(folder))) {
-						return false;
+		for(String jar : jars) {
+			String jarPath;
+			if(!makejar) {
+				jarPath = dir + jar;
+			}
+			else {
+				jarPath = dir.substring(0, dir.length()-5) + jar;
+			}
+			try {
+				JarFile jarFile = new JarFile(jarPath);
+				Set<String> rootFolders = new java.util.HashSet<>();
+				jarFile.stream().forEach(entry -> {
+					String name = entry.getName();
+					int slash = name.indexOf('/');
+					if(slash != -1) {
+						rootFolders.add(name.substring(0, slash));
 					}
+				});
+				jarFile.close();
+				for(String root : rootFolders) {
+					File file;
+					if(!makejar) {
+						file = new File(dir + root);
+					}
+					else {
+						file = new File(dir.substring(0, dir.length()-5) + root);
+					}
+					if(!file.exists())
+						return false;
 				}
-			} catch (IOException ex) {
+			} catch(IOException ex) {
 				ex.printStackTrace();
 				return false;
 			}

@@ -13,7 +13,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarMoreThanOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarOnePackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\extractjavafxjars.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\extractjavafxjars.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Compile.java"
     ],
     "caretposition": 0
   },
@@ -1507,6 +1508,20 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 17280
+    "caretposition": 16638
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Compile.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
