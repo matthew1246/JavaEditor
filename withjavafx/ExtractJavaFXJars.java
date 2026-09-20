@@ -553,7 +553,7 @@ public class ExtractJavaFXJars {
 					allExtracted = jar2.stream()
 					.map(JarEntry::getName)
 					.map(name -> name.split("/", 2)[0])
-					.filter(name -> name.contains(".")) // optional: exclude top-level files
+					.filter(name -> !name.contains(".")) // exclude top-level files
 					.distinct()
 					.allMatch(name -> Files.isDirectory(extractDir.resolve(name)));
 				}

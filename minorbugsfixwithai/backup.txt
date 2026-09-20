@@ -20,7 +20,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\MSDOS.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\extractjavafxjars.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -94,7 +94,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 98440
+    "caretposition": 98576
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -2227,7 +2227,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 17116
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\ComponentGridBagConstraints.java": {
     "isLocked": false,
@@ -2703,6 +2703,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 17116
   }
 }
