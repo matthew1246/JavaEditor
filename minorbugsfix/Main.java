@@ -1,8 +1,3 @@
-package javaeditor.minorbugsfix;
-
-
-import javafx.application.Application;
-import javafx.stage.Stage;
 import java.nio.file.DirectoryStream;
 import java.nio.file.StandardCopyOption;
 import java.awt.KeyboardFocusManager;
@@ -105,7 +100,7 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-public class Main extends Application {
+public class Main {
 	// public JButton label4;	
 	public JButton leftarrow;
 	public JButton rightarrow;
@@ -180,10 +175,6 @@ public class Main extends Application {
 	public MouseAdapter rightclick = new RightClick();
 	public ThreeComboboxes threecomboboxes;
 	public StringBuilder extra = new StringBuilder();
-	@Override
-	public void start(Stage stage) {
-		Main.main(null);
-	}
 	public static void main(String[] args) {  
 		SwingUtilities.invokeLater(() -> {
 			SwingWorker<OpenDefaultContent,Void> swingworker = new SwingWorker<>() {
@@ -211,8 +202,6 @@ public class Main extends Application {
 	
 	*/
 	public Main() {
-	}
-	public Main(String jkdf) {
 	msdos = new MSDOS(this);
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
