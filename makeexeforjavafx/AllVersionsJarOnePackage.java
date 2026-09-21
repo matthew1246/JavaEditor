@@ -49,11 +49,11 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 			compile.compileall(main,fileName,javaversionnumber,sal,ev4);
 			*/
 			Compile compile = new Compile();
-			compile.compileall(fileName,javaversionnumber,sal,ev4,false,main,true);
+			compile.compileall(fileName,javaversionnumber,sal,ev4,false,main,true,true);
 		} 
 		else { // isJavaFX is true so with JavaFX.
 			Compile compile=new Compile();
-			compile.compileall(fileName,javaversionnumber,sal,ev4,true,main,true);
+			compile.compileall(fileName,javaversionnumber,sal,ev4,true,main,true,true);
 		}
 	}
 	public Preferences extractJars(StoreSelectedFile storeselectedfile) {		
