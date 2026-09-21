@@ -1,5 +1,5 @@
-import java.util.Set;
-import java.util.jar.JarFile;
+package com.customyjavafx;
+
 import javax.swing.SwingWorker;
 import java.util.List;
 import java.io.File;
@@ -498,78 +498,27 @@ public class ExtractJavaFXJars {
 		return file.exists();
 	}
 	public void extractJars() {
-		CommandLine commandline = new CommandLine();
-		List<String> jars=commandline.getJavaFX();
-		for(String jar:jars) {
-			ExtractJar(jar);					
-		}
-	}		
-	public void ExtractJar(String jar) {
+		boolean needsAdmin = isDriveRoot(dir) || !canWriteToDriveRoot(dir);
+	
 		try {
-			Packager packager = new Packager(main);
-			String dir;
-			if(packager.containsPackage() && packager.isInRightFolders()) {
-				dir = packager.classpath;
-			}
-			else {
-				dir = main.getDirectory(main.fileName);
-			}
-			if(dir == null || dir.equals("")) {
-				dir = ".";
-			}
-			if(!dir.endsWith("\\"))
-				dir=dir+"\\";
-			Path dirpath=Paths.get(dir);
-			if(!Files.exists(dirpath))
-				Files.createDirectories(dirpath);
-			Path outputpath=Paths.get(dir+jar);
-			if(Files.exists(outputpath))
-				return;
-			if(isDriveRoot(dir)) {
-				relaunchAsAdmin(dir);
-				return;
-			}
-			String resPath = ExtractJUnit.class.getPackage().getName().replace('.','/') + "/" + jar;
-			String jarPath = "";
-			try {
-				java.net.URI jarUri = ExtractJUnit.class.getProtectionDomain().getCodeSource().getLocation().toURI();
-				jarPath = jarUri.getPath();
-				if(jarPath.startsWith("/"))
-					jarPath=jarPath.substring(1,jarPath.length());
-			} catch(Exception ex) {}
-
-			if(!jarPath.isEmpty()) {
-				try(java.util.jar.JarFile jf = new java.util.jar.JarFile(jarPath)) {
-					java.util.jar.JarEntry entry = jf.getJarEntry(resPath);
-					if(entry == null)
-						entry = jf.getJarEntry(jar);
-					if(entry != null) {
-						try(InputStream is = jf.getInputStream(entry)) {
-							Files.copy(is,outputpath,StandardCopyOption.REPLACE_EXISTING);
-						}
-						return;
-					}
+			CommandLine commandline = new CommandLine();
+			List<String> jars=commandline.getJavaFX();
+			for(String jar:jars) {
+				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(jar);	
+				InputStream inputstream=url.openStream();
+				Path outputpath;
+				if(!makejar) {
+					outputpath=Paths.get(dir+jar);
 				}
-			}
-
-			URL url=ExtractJUnit.class.getResource("/" + resPath);
-			if(url == null)
-				url=ExtractJUnit.class.getClassLoader().getResource(resPath);
-			if(url == null)
-				url=ExtractJUnit.class.getClassLoader().getResource(jar);
-			if(url == null)
-				url = ExtractJUnit.class.getResource("/" + jar);
-			if(url != null) {
-				try(InputStream inputstream=url.openStream()) {
-					Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
+				else { //makejar == true
+					outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
 				}
-				return;
+				copyJar(inputstream,outputpath,needsAdmin);
 			}
-System.err.println(jar + " not found, skipping extraction.");
-		} catch(Exception ex) {
+		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
-	}	
+	}		
 	public boolean isDriveRoot(String dir) {
 		return dir.matches("^[A-Za-z]:\\\\+$");
 	}
@@ -583,91 +532,67 @@ System.err.println(jar + " not found, skipping extraction.");
 			return false;
 		}
 	}
-	public void relaunchAsAdmin(String dir) {
+	public void copyJar(InputStream inputstream, Path outputpath, boolean needsAdmin) {
 		try {
-			String userdir=System.getProperty("user.dir");
-			String command;
-			String exePath=getAppExePath();
-			if(exePath != null) {
-				command="Start-Process '"+exePath+"' -Verb RunAs";
-			}
-			else {
-				String javaBin=System.getProperty("java.home")+"\\bin\\java.exe";
-				String classpath=System.getProperty("java.class.path");
-				if(classpath == null || classpath.trim().isEmpty())
-					classpath=getCodeSourcePath();
-				String mainclass=getApplicationMainClass();
-				command="Start-Process -WorkingDirectory '"+userdir+"' -FilePath '"+javaBin+"' -ArgumentList '-cp','"+classpath+"','"+mainclass+"' -Verb RunAs";
-			}
-			ProcessBuilder pb=new ProcessBuilder("powershell.exe","-NoProfile","-Command",command);
-			pb.redirectErrorStream(true);
-			Process process=pb.start();
-			int exitcode=process.waitFor();
-			if(exitcode!=0) {
-				JOptionPane.showMessageDialog(null,"Administrator privileges are required to extract jars to "+dir+".\nThe elevation request was cancelled or failed.");
-				return;
-			}
-			System.exit(0);
+			if(needsAdmin)
+				copyJarAsAdmin(inputstream,outputpath);
+			else
+				Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 		} catch(Exception ex) {
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null,"Could not relaunch the program as administrator: "+ex.getMessage());
 		}
 	}
-	public String getApplicationMainClass() {
+	public void copyJarAsAdmin(InputStream inputstream, Path outputpath) {
 		try {
-			java.net.URL location=ExtractJavaFXJars.class.getProtectionDomain().getCodeSource().getLocation();
-			if(location != null) {
-				File file=new File(location.toURI());
-				if(file.isFile() && file.getName().toLowerCase().endsWith(".jar")) {
-					try(java.util.jar.JarFile jf=new java.util.jar.JarFile(file)) {
-						java.util.jar.Manifest manifest=jf.getManifest();
-						if(manifest != null) {
-							String mainclass=manifest.getMainAttributes().getValue("Main-Class");
-							if(mainclass != null && !mainclass.trim().isEmpty())
-								return mainclass.trim();
-						}
-					}
-				}
+			Path tempfile=Files.createTempFile("extractjavafx_", ".tmp");
+			try {
+				Files.copy(inputstream,tempfile,StandardCopyOption.REPLACE_EXISTING);
+				if(!elevatedCopy(tempfile,outputpath))
+					javax.swing.JOptionPane.showMessageDialog(null,"Could not copy "+outputpath+" with administrator privileges.\nThe elevation request was cancelled or failed.");
+			} finally {
+				Files.deleteIfExists(tempfile);
 			}
-		} catch(Exception ex) {}
-		return "Main";
-	}
-	public String getCodeSourcePath() {
-		try {
-			java.net.URL location=ExtractJavaFXJars.class.getProtectionDomain().getCodeSource().getLocation();
-			if(location == null)
-				return ".";
-			java.nio.file.Path path=Paths.get(location.toURI());
-			return path.toAbsolutePath().toString();
 		} catch(Exception ex) {
-			return ".";
+			ex.printStackTrace();
 		}
 	}
-	public String getAppExePath() {
+	public boolean elevatedCopy(Path source, Path outputpath) {
 		try {
-			String javaHome=System.getProperty("java.home");
-			if(javaHome == null || javaHome.isEmpty())
-				return null;
-			boolean jpackageRuntime=javaHome.endsWith("runtime") || javaHome.endsWith("runtime\\") || javaHome.contains("\\runtime\\");
-			if(!jpackageRuntime)
-				return null;
-			String classpath=System.getProperty("java.class.path");
-			if(classpath == null || classpath.trim().isEmpty())
-				return null;
-			String first=classpath.split(";")[0];
-			File cpfile=new File(first);
-			File appdir=cpfile.isFile() ? cpfile.getParentFile() : null;
-			if(appdir == null)
-				return null;
-			File imagedir=appdir.getParentFile();
-			if(imagedir == null)
-				return null;
-			File[] exes=imagedir.listFiles((File dir,String name)->name.toLowerCase().endsWith(".exe"));
-			if(exes != null && exes.length > 0)
-				return exes[0].getAbsolutePath();
-		} catch(Exception ex) {}
-		return null;
+			String copyCommand = "Copy-Item -LiteralPath '"+singleQuote(source.toString())+"' -Destination '"+singleQuote(outputpath.toAbsolutePath().toString())+"' -Force`r`nif ($?) { exit 0 } else { Write-Error 'Copy failed'; exit 1 }";
+			String encoded = java.util.Base64.getEncoder().encodeToString(copyCommand.getBytes("UTF-16LE"));
+			Path script=Files.createTempFile("elevatedcopy_", ".ps1");
+			try {
+				String orchestrator = "$p = Start-Process -FilePath 'powershell.exe' -Verb RunAs -Wait -PassThru -WindowStyle Hidden -ArgumentList '-NoProfile','-WindowStyle','Hidden','-EncodedCommand','"+encoded+"'`r`nWrite-Output $p.ExitCode";
+				Files.write(script, orchestrator.getBytes("US-ASCII"));
+				ProcessBuilder pb=new ProcessBuilder("powershell.exe","-NoProfile","-ExecutionPolicy","Bypass","-File",script.toAbsolutePath().toString());
+				pb.redirectErrorStream(true);
+				Process process=pb.start();
+				String output=readProcessOutput(process.getInputStream());
+				int exitcode=process.waitFor();
+				return exitcode==0 && output.trim().equals("0");
+			} finally {
+				Files.deleteIfExists(script);
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
+	public String singleQuote(String s) {
+		return s.replace("'","''");
+	}
+	public String readProcessOutput(java.io.InputStream in) {
+		try {
+			java.io.ByteArrayOutputStream baos=new java.io.ByteArrayOutputStream();
+			byte[] buf=new byte[4096];
+			int n;
+			while((n=in.read(buf))!=-1)
+				baos.write(buf,0,n);
+			return new String(baos.toByteArray(),"UTF-8");
+		} catch(Exception ex) {
+			return "";
+		}
+	}		
 	public boolean isAlreadyExtracted() {
 		CommandLine commandline = new CommandLine();
 		List<String> jars=commandline.getJavaFX();
@@ -681,48 +606,6 @@ System.err.println(jar + " not found, skipping extraction.");
 			}		
 			if(!file.exists())
 				return false;
-		}
-		return true;
-	}
-	public boolean isUnzippedAgain() {
-		CommandLine commandline = new CommandLine();
-		List<String> jars = commandline.getJavaFX();
-		for(String jar : jars) {
-			String jarPath;
-			if(!makejar) {
-				jarPath = dir + jar;
-			}
-			else {
-				jarPath = dir.substring(0, dir.length()-5) + jar;
-			}
-			try {
-				JarFile jarFile = new JarFile(jarPath);
-				Set<String> rootFolders = new java.util.HashSet<>();
-				jarFile.stream().forEach(entry -> {
-					String name = entry.getName();
-					int slash = name.indexOf('/');
-					if(slash != -1) {
-						rootFolders.add(name.substring(0, slash));
-					}
-				});
-				jarFile.close();
-				for(String root : rootFolders) {
-					File file;
-					/*if(!makejar) {
-						file = new File(dir + root);
-					}
-					else {
-						file = new File(dir.substring(0, dir.length()-5) + root);
-					}
-					*/
-					file=new File(dir+root);
-					if(!file.exists())
-						return false;
-				}
-			} catch(IOException ex) {
-				ex.printStackTrace();
-				return false;
-			}
 		}
 		return true;
 	}
