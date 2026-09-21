@@ -526,7 +526,7 @@ public class ExtractJavaFXJars {
 		}
 	}		
 	public boolean isDriveRoot(String dir) {
-		return dir.matches("^[A-Za-z]:\\$");
+		return dir.matches("^[A-Za-z]:\\\\+$");
 	}
 	public void relaunchAsAdmin(String dir) {
 		try {

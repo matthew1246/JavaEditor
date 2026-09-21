@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.io.IOException;
 public class ExtractJUnit {
 	public boolean isDriveRoot(String dir) {
-		return dir.matches("^[A-Za-z]:\\$");
+		return dir.matches("^[A-Za-z]:\\\\+$");
 	}
 	public boolean canWriteToDriveRoot(String dir) {
 		try {
