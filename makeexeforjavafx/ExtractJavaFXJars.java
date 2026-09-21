@@ -499,6 +499,8 @@ public class ExtractJavaFXJars {
 	}
 	public void extractJars() {
 		boolean needsAdmin = isDriveRoot(dir) || !canWriteToDriveRoot(dir);
+		if(makejar)
+			needsAdmin=isDriveRoot(dir.substring(0,dir.length()-5)) || !canWriteToDriveRoot(dir.substring(0,dir.length()-5));
 	
 		try {
 			CommandLine commandline = new CommandLine();
@@ -651,4 +653,4 @@ public class ExtractJavaFXJars {
 		}
 		return true;
 	}
-}
+}
