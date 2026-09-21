@@ -14,9 +14,22 @@ public class ExtractJUnit {
 	}
 	public void ExtractJar(String jar) {
 		try {
-			String dir=main.getDirectory(main.fileName);
+			Packager packager = new Packager(main);
+			String dir;
+			if(packager.containsPackage() && packager.isInRightFolders()) {
+				dir = packager.classpath;
+			}
+			else {
+				dir = main.getDirectory(main.fileName);
+			}
+			if(dir == null || dir.equals("")) {
+				dir = ".";
+			}
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
+			Path dirpath=Paths.get(dir);
+			if(!Files.exists(dirpath))
+				Files.createDirectories(dirpath);
 			Path outputpath=Paths.get(dir+jar);
 			if(Files.exists(outputpath))
 				return;

@@ -506,23 +506,30 @@ public class ExtractJavaFXJars {
 	}		
 	public void ExtractJar(String jar) {
 		try {
-			String dir = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				dir=main.getDirectory(main.fileName);
+			Packager packager = new Packager(main);
+			String dir;
+			if(packager.containsPackage() && packager.isInRightFolders()) {
+				dir = packager.classpath;
 			}
-			else { // packager.isInRightFolders() == true
-				dir=packager.classpath;
+			else {
+				dir = main.getDirectory(main.fileName);
+			}
+			if(dir == null || dir.equals("")) {
+				dir = ".";
 			}
 			if(!dir.endsWith("\\"))
 				dir=dir+"\\";
+			Path dirpath=Paths.get(dir);
+			if(!Files.exists(dirpath))
+				Files.createDirectories(dirpath);
 			Path outputpath=Paths.get(dir+jar);
 			if(Files.exists(outputpath))
 				return;
 
-			String resPath = ExtractJavaFXJars.class.getPackage().getName().replace('.','/') + "/" + jar;
+			String resPath = ExtractJUnit.class.getPackage().getName().replace('.','/') + "/" + jar;
 			String jarPath = "";
 			try {
-				java.net.URI jarUri = ExtractJavaFXJars.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+				java.net.URI jarUri = ExtractJUnit.class.getProtectionDomain().getCodeSource().getLocation().toURI();
 				jarPath = jarUri.getPath();
 				if(jarPath.startsWith("/"))
 					jarPath=jarPath.substring(1,jarPath.length());
