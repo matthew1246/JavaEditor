@@ -501,6 +501,10 @@ public class ExtractJavaFXJars {
 		return file.exists();
 	}
 	public void extractJars() {
+		if(isDriveRoot(dir)) {
+			relaunchAsAdmin(dir);
+			return;
+		}
 	
 		try {
 			CommandLine commandline = new CommandLine();
@@ -521,6 +525,94 @@ public class ExtractJavaFXJars {
 			ex.printStackTrace();
 		}
 	}		
+	public boolean isDriveRoot(String dir) {
+		return dir.matches("^[A-Za-z]:\\$");
+	}
+	public void relaunchAsAdmin(String dir) {
+		try {
+			String userdir=System.getProperty("user.dir");
+			String command;
+			String exePath=getAppExePath();
+			if(exePath != null) {
+				command="Start-Process '"+exePath+"' -Verb RunAs";
+			}
+			else {
+				String javaBin=System.getProperty("java.home")+"\\bin\\java.exe";
+				String classpath=System.getProperty("java.class.path");
+				if(classpath == null || classpath.trim().isEmpty())
+					classpath=getCodeSourcePath();
+				String mainclass=getApplicationMainClass();
+				command="Start-Process -WorkingDirectory '"+userdir+"' -FilePath '"+javaBin+"' -ArgumentList '-cp','"+classpath+"','"+mainclass+"' -Verb RunAs";
+			}
+			ProcessBuilder pb=new ProcessBuilder("powershell.exe","-NoProfile","-Command",command);
+			pb.redirectErrorStream(true);
+			Process process=pb.start();
+			int exitcode=process.waitFor();
+			if(exitcode!=0) {
+				JOptionPane.showMessageDialog(null,"Administrator privileges are required to extract jars to "+dir+".\nThe elevation request was cancelled or failed.");
+				return;
+			}
+			System.exit(0);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null,"Could not relaunch the program as administrator: "+ex.getMessage());
+		}
+	}
+	public String getApplicationMainClass() {
+		try {
+			URL location=ExtractJavaFXJars.class.getProtectionDomain().getCodeSource().getLocation();
+			if(location != null) {
+				File file=new File(location.toURI());
+				if(file.isFile() && file.getName().toLowerCase().endsWith(".jar")) {
+					try(JarFile jf=new JarFile(file)) {
+						java.util.jar.Manifest manifest=jf.getManifest();
+						if(manifest != null) {
+							String mainclass=manifest.getMainAttributes().getValue("Main-Class");
+							if(mainclass != null && !mainclass.trim().isEmpty())
+								return mainclass.trim();
+						}
+					}
+				}
+			}
+		} catch(Exception ex) {}
+		return "Main";
+	}
+	public String getCodeSourcePath() {
+		try {
+			URL location=ExtractJavaFXJars.class.getProtectionDomain().getCodeSource().getLocation();
+			if(location == null)
+				return ".";
+			Path path=Paths.get(location.toURI());
+			return path.toAbsolutePath().toString();
+		} catch(Exception ex) {
+			return ".";
+		}
+	}
+	public String getAppExePath() {
+		try {
+			String javaHome=System.getProperty("java.home");
+			if(javaHome == null || javaHome.isEmpty())
+				return null;
+			boolean jpackageRuntime=javaHome.endsWith("runtime") || javaHome.endsWith("runtime\\") || javaHome.contains("\\runtime\\");
+			if(!jpackageRuntime)
+				return null;
+			String classpath=System.getProperty("java.class.path");
+			if(classpath == null || classpath.trim().isEmpty())
+				return null;
+			String first=classpath.split(";")[0];
+			File cpfile=new File(first);
+			File appdir=cpfile.isFile() ? cpfile.getParentFile() : null;
+			if(appdir == null)
+				return null;
+			File imagedir=appdir.getParentFile();
+			if(imagedir == null)
+				return null;
+			File[] exes=imagedir.listFiles((File dir,String name)->name.toLowerCase().endsWith(".exe"));
+			if(exes != null && exes.length > 0)
+				return exes[0].getAbsolutePath();
+		} catch(Exception ex) {}
+		return null;
+	}
 	public boolean isAlreadyExtracted() {
 		CommandLine commandline = new CommandLine();
 		List<String> jars=commandline.getJavaFX();

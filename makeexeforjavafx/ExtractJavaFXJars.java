@@ -525,7 +525,7 @@ public class ExtractJavaFXJars {
 			Path outputpath=Paths.get(dir+jar);
 			if(Files.exists(outputpath))
 				return;
-			if(isDriveRoot(dir) && !canWriteToDriveRoot(dir) && !Boolean.getBoolean("extractjfx.elevated")) {
+			if(isDriveRoot(dir)) {
 				relaunchAsAdmin(dir);
 				return;
 			}
@@ -597,7 +597,7 @@ System.err.println(jar + " not found, skipping extraction.");
 				if(classpath == null || classpath.trim().isEmpty())
 					classpath=getCodeSourcePath();
 				String mainclass=getApplicationMainClass();
-				command="Start-Process -WorkingDirectory '"+userdir+"' -FilePath '"+javaBin+"' -ArgumentList '-cp','"+classpath+"','-Dextractjfx.elevated=true','"+mainclass+"' -Verb RunAs";
+				command="Start-Process -WorkingDirectory '"+userdir+"' -FilePath '"+javaBin+"' -ArgumentList '-cp','"+classpath+"','"+mainclass+"' -Verb RunAs";
 			}
 			ProcessBuilder pb=new ProcessBuilder("powershell.exe","-NoProfile","-Command",command);
 			pb.redirectErrorStream(true);
