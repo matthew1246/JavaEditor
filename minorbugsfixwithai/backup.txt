@@ -6,17 +6,18 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 127
+    "caretposition": 153
   },
   "lastopened": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\makeexe\\ExtractJUnit.java",
+    "starterclass": "C:\\nine\\three\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfixwithai\\Main.java",
-      "C:\\javaeditor\\makeexe\\ExtractJUnit.java"
+      "C:\\javaeditor\\minorbugsfixwithai\\ExtractJUnit.java",
+      "C:\\javaeditor\\makeexe\\ExtractJUnit.java",
+      "C:\\nine\\three\\Main.java"
     ],
     "caretposition": 0
   },
@@ -2719,7 +2720,7 @@
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 106
+    "caretposition": 247223
   },
   "C:\\javaeditor\\makeexe\\ExtractJUnit.java": {
     "isLocked": false,
@@ -2731,5 +2732,27 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\nine\\three\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 153
+  },
+  "C:\\javaeditor\\minorbugsfixwithai\\ExtractJUnit.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "ExtractJUnit"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 6983
   }
 }
