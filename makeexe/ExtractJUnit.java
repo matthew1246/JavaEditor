@@ -67,11 +67,11 @@ public class ExtractJUnit {
 	}
 	public boolean elevatedCopy(Path source, Path outputpath) {
 		try {
-			String copyCommand = "Copy-Item -LiteralPath '"+singleQuote(source.toString())+"' -Destination '"+singleQuote(outputpath.toAbsolutePath().toString())+"' -Force`r`nif ($?) { exit 0 } else { Write-Error 'Copy failed'; exit 1 }";
+			String copyCommand = "Copy-Item -LiteralPath '"+singleQuote(source.toString())+"' -Destination '"+singleQuote(outputpath.toAbsolutePath().toString())+"' -Force\r\nif ($?) { exit 0 } else { Write-Error 'Copy failed'; exit 1 }";
 			String encoded = java.util.Base64.getEncoder().encodeToString(copyCommand.getBytes("UTF-16LE"));
 			Path script=Files.createTempFile("elevatedcopy_", ".ps1");
 			try {
-				String orchestrator = "$p = Start-Process -FilePath 'powershell.exe' -Verb RunAs -Wait -PassThru -WindowStyle Hidden -ArgumentList '-NoProfile','-WindowStyle','Hidden','-EncodedCommand','"+encoded+"'`r`nWrite-Output $p.ExitCode";
+				String orchestrator = "$p = Start-Process -FilePath 'powershell.exe' -Verb RunAs -Wait -PassThru -WindowStyle Hidden -ArgumentList '-NoProfile','-WindowStyle','Hidden','-EncodedCommand','"+encoded+"'\r\nWrite-Output $p.ExitCode";
 				Files.write(script, orchestrator.getBytes("US-ASCII"));
 				ProcessBuilder pb=new ProcessBuilder("powershell.exe","-NoProfile","-ExecutionPolicy","Bypass","-File",script.toAbsolutePath().toString());
 				pb.redirectErrorStream(true);

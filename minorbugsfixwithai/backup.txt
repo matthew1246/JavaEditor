@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\nine\\three\\Main.java",
+    "starterclass": "C:\\javaeditor\\minorbugsfixwithai\\ExtractJUnit.java",
     "jars": [],
     "fileNames": [
       "C:\\javaeditor\\minorbugsfixwithai\\ExtractJUnit.java",
