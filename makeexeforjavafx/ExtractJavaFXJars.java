@@ -1,5 +1,5 @@
-package com.customyjavafx;
-
+import java.util.Set;
+import java.util.jar.JarFile;
 import javax.swing.SwingWorker;
 import java.util.List;
 import java.io.File;
@@ -606,6 +606,48 @@ public class ExtractJavaFXJars {
 			}		
 			if(!file.exists())
 				return false;
+		}
+		return true;
+	}
+	public boolean isUnzippedAgain() {
+		CommandLine commandline = new CommandLine();
+		List<String> jars = commandline.getJavaFX();
+		for(String jar : jars) {
+			String jarPath;
+			if(!makejar) {
+				jarPath = dir + jar;
+			}
+			else {
+				jarPath = dir.substring(0, dir.length()-5) + jar;
+			}
+			try {
+				JarFile jarFile = new JarFile(jarPath);
+				Set<String> rootFolders = new java.util.HashSet<>();
+				jarFile.stream().forEach(entry -> {
+					String name = entry.getName();
+					int slash = name.indexOf('/');
+					if(slash != -1) {
+						rootFolders.add(name.substring(0, slash));
+					}
+				});
+				jarFile.close();
+				for(String root : rootFolders) {
+					File file;
+					/*if(!makejar) {
+						file = new File(dir + root);
+					}
+					else {
+						file = new File(dir.substring(0, dir.length()-5) + root);
+					}
+					*/
+					file=new File(dir+root);
+					if(!file.exists())
+						return false;
+				}
+			} catch(IOException ex) {
+				ex.printStackTrace();
+				return false;
+			}
 		}
 		return true;
 	}
