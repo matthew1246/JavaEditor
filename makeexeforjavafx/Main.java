@@ -2359,6 +2359,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								isJavaFX=true;
 							AllVersionsJar allversionsjar=null;
 							Packager packager=new Packager(this);
+							ExtractJavaFXJars extractjavafxjars=null;
 							if(packager.containsPackage()) {
 								String[] options3={"One","More than One"};
 								int result = JOptionPane.showOptionDialog(
@@ -2373,7 +2374,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								);
 								if(result == 0) {
 									if(isJavaFX) {
-										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									} else {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
@@ -2386,7 +2387,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								else { // More than one package
 									if(isJavaFX) {
-										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									} else {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
@@ -2400,7 +2401,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									extractjavafxjars = new ExtractJavaFXJars(Main.this);
 								} else {
 									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 									File javafxlauncher=new File(maintwo);
@@ -2418,7 +2419,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
 									if(!extractjavafxjars.isUnzippedAgain())
 										extractjavafxjars.unzipJars();
 								}	
@@ -2486,6 +2486,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								isJavaFX=true;
 							AllVersionsJar allversionsjar=null;
 							Packager packager=new Packager(this);
+							ExtractJavaFXJars extractjavafxjars=null;
 							if(packager.containsPackage()) {
 								String[] options3={"One","More than One"};
 								int result = JOptionPane.showOptionDialog(
@@ -2500,7 +2501,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								);
 								if(result == 0) {
 									if(isJavaFX) {
-										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									} else {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
@@ -2513,7 +2514,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								else { // More than one package
 									if(isJavaFX) {
-										ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									} else {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
@@ -2527,7 +2528,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									extractjavafxjars = new ExtractJavaFXJars(Main.this);
 								} else {
 									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 									File javafxlauncher=new File(maintwo);
@@ -2547,7 +2548,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
 									if(!extractjavafxjars.isUnzippedAgain())
 										extractjavafxjars.unzipJars();
 								}	
@@ -2612,6 +2612,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							isJavaFX=true;
 						AllVersionsJar allversionsjar=null;
 						Packager packager=new Packager(this);
+						ExtractJavaFXJars extractjavafxjars=null;
 						if(packager.containsPackage()) {
 							String[] options3={"One","More than One"};
 							int result = JOptionPane.showOptionDialog(
@@ -2626,7 +2627,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							);
 							if(result == 0) {
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 								} else {
 									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 									File javafxlauncher=new File(maintwo);
@@ -2639,7 +2640,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 							else { // More than one package
 								if(isJavaFX) {
-									ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									extractjavafxjars = new ExtractJavaFXJars(Main.this);
 								} else {
 									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 									File javafxlauncher=new File(maintwo);
@@ -2653,7 +2654,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						}
 						else {
 							if(isJavaFX) {
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this);
+								extractjavafxjars = new ExtractJavaFXJars(Main.this);
 							} else {
 								String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 								File javafxlauncher=new File(maintwo);
@@ -2673,7 +2674,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 							if(isJavaFX) {
-								ExtractJavaFXJars extractjavafxjars = new ExtractJavaFXJars(Main.this,isJavaFX);
 								if(!extractjavafxjars.isUnzippedAgain())
 									extractjavafxjars.unzipJars();
 							}	
