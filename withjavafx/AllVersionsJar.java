@@ -21,7 +21,7 @@ public abstract class AllVersionsJar {
 	public void Powershell(boolean isJavaFX,String fileName,Main main,String main_class,String dir,AllFiles allfiles) {
 		Powershell powershell = getPowershell(main,main_class,dir,allfiles);
 		if(!isJavaFX) { // No JavaFX
-			for(int i = 18; i <= 22; i++) {
+			for(int i = 18; i <= 23; i++) {
 				powershell.Compile(i,fileName,isJavaFX);
 				powershell.makeJar(i);
 			}

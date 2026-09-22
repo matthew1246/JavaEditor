@@ -3,11 +3,12 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -25,7 +26,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 98089
+    "caretposition": 1247
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -248,7 +249,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 40368
+    "caretposition": 1161
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Powershell.java": {
     "isLocked": false,
@@ -463,7 +464,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar"
     ],
     "fileNames": [],
-    "caretposition": 410
+    "caretposition": 248
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ThreeComboboxes.java": {
     "isLocked": false,
