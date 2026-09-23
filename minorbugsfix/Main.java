@@ -278,7 +278,7 @@ public class Main {
 			textarea2.addMouseListener(rightclick);
 			
 			tabbedpane.addTab(fileName,scrollpane2);
-			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.addTab("+",pluspanel);			
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
 			allclassesinfile.ChangeFile(textarea2,"");
@@ -3979,21 +3979,21 @@ startercombobox.Change(fileName);
 						
 						//positiontrackers.add(new PositionTracker(textarea2));
 						
-			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
-			addCaretListener(textarea2);
-			CurlyBraceKeyListener curlybracekeylistener=JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
-			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				try {
-					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-						int caretposition = curlybracekeylistener.autokeylistener.position;
-						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
-					}
-				} catch (BadLocationException ex) {
-					ex.printStackTrace();
-				}
+						textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+						addCaretListener(textarea2);
+						CurlyBraceKeyListener curlybracekeylistener=JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
+						scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+								if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+									int caretposition = curlybracekeylistener.autokeylistener.position;
+									Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+									Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+									SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+									curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+								}
+							} catch (BadLocationException ex) {
+								ex.printStackTrace();
+							}
 						});
 						scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 							try {
@@ -4039,6 +4039,12 @@ startercombobox.Change(fileName);
 						tabbedpane.addTab(filename,scrollpane2);
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+						
+						this.fileName=directoryandfilename;
+						int caretposition=storeselectedfile.getCaretPosition(directoryandfilename);
+						SwingUtilities.invokeLater(() -> {
+							scrollToCaretPosition(caretposition);
+						});
 					}
 					else if(result == JFileChooser.CANCEL_OPTION) {
 						return;
