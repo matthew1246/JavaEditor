@@ -4723,6 +4723,12 @@ CommandLine commandline = new CommandLine();
 						tabbedpane.addTab(filename,scrollpane2);
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+						
+						this.fileName = directoryandfilename;
+						int caretposition=storeselectedfile.getCaretPosition(this.fileName);
+						SwingUtilities.invokeLater(() -> {
+							scrollToCaretPosition(caretposition);
+						});
 					}
 					else if(result == JFileChooser.CANCEL_OPTION) {
 						return;

@@ -12,10 +12,11 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -89,7 +90,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 7394
+    "caretposition": 6701
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
