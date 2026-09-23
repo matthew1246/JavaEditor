@@ -4701,6 +4701,10 @@ CommandLine commandline = new CommandLine();
 						tabbedpane.addTab(filename,scrollpane2);
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+						
+						fileName=directoryandfilename;
+						int caretposition=storeselectedfile.getCaretPosition(fileName);
+						scrollToCaretPosition(caretposition);
 					}
 					else if(result == JFileChooser.CANCEL_OPTION) {
 						return;
