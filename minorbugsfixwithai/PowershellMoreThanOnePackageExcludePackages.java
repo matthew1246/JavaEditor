@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.io.File;

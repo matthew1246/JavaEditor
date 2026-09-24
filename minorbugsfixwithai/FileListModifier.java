@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.util.*;
 import java.io.*;
 public class FileListModifier implements Cloneable {

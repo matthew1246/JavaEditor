@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.awt.GridBagConstraints;
 import java.awt.Component;
 public class ComponentGridBagConstraints {
