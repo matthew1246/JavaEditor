@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 public class TestEnum {
 	private enum Size {
 		small,medium,large

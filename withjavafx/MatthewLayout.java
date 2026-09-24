@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import javax.swing.SwingUtilities;
 import javax.swing.BorderFactory;
 import java.awt.Toolkit;

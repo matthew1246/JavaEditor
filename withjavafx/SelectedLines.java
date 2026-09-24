@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
 public class SelectedLines {

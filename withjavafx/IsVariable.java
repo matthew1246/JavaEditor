@@ -1,6 +1,4 @@
-package javaeditor.withjavafx;
-
- import javax.swing.*;
+import javax.swing.*;
 import java.util.regex.*;
 public class IsVariable {
 	protected JTextArea textarea;

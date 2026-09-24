@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 public class Group {
 	int start = 0;
 	int end = 0;

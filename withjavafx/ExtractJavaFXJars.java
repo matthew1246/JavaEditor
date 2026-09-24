@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import javax.swing.SwingWorker;

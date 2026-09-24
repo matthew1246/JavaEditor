@@ -96,7 +96,7 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-public class Main extends Application {
+public class Main {
 	public JButton leftarrow;
 	public JButton rightarrow;
 	public ThreeComboboxes threecomboboxes;
@@ -172,10 +172,6 @@ public class Main extends Application {
 	public static String value = System.getProperty("user.home")+"\\load_program.ser";
 	//public String value="load_program.ser";
 	public Maven maven = new Maven();
-	@Override
-	public void start(Stage stage) {
-		Main.main(null);
-	}
 	public static void main(String[] args) { 
 		SwingUtilities.invokeLater(() -> {
 			SwingWorker<OpenDefaultContent,Void> swingworker = new SwingWorker<>() {

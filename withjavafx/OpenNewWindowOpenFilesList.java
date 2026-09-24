@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import java.util.*;
 public class OpenNewWindowOpenFilesList extends OpenFilesList {
 	private String filenameanddirectory;

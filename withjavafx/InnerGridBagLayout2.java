@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import java.awt.GridBagLayout;
 import java.awt.Container;
 import java.util.ArrayList;

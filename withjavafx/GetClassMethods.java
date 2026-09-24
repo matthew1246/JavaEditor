@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import java.util.*;
 import javax.swing.*;
 import java.io.*;

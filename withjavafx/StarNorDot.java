@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 public class StarNorDot { 	
  	private boolean isLocked = false;
  	private String str_nor_dot = "";

@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import javax.swing.*;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

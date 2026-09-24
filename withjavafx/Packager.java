@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;

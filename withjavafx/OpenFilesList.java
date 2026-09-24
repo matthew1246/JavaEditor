@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import java.util.*;
 import java.io.*;
 public abstract class OpenFilesList {

@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import java.util.regex.*;
 public class TestIsVariable {
 	public static void main(String[] args) {

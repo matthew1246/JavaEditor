@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import javax.swing.JTextArea;
 public class Tracker {
 	public boolean isDeleted = false;

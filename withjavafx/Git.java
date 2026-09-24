@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;

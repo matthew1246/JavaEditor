@@ -1,5 +1,3 @@
-package javaeditor.withjavafx;
-
 import javax.swing.JComboBox;
 import java.util.List;
 import java.util.ArrayList;
