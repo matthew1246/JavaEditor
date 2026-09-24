@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -13,7 +15,7 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 	protected Packager packager;
 	private String dir;
 	private Main main;
-	private String fileName;
+	protected String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	private IsMoreThanOneJar isMoreThanOneJar;

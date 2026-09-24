@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import javax.swing.*;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

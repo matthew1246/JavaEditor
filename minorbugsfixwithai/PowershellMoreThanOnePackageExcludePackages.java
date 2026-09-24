@@ -1,5 +1,8 @@
+package javaeditor.minorbugsfixwithai;
+
 import javax.swing.JOptionPane;
 import java.util.List;
+import java.io.File;
 /*
 ** This generates all versions of Java for Jars when Main.jar is open.
 ** The user selected folders to exclude or include for the jar.
@@ -38,6 +41,9 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 			}
 			for(String relative:includedFolders) {
 				output2.write(" -C "+classpath+" "+relative);
+			}
+			if(new File(classpath+"\\jars").exists()) {
+				output2.write(" -C jars .");
 			}
 			output2.write("\n");
 		} catch (java.io.IOException ex) {

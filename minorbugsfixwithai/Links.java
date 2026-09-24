@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.io.*;
 import java.util.regex.*;
 import javax.swing.*;

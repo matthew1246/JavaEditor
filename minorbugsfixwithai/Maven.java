@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.io.FileNotFoundException;
 import java.io.Console;
 import okhttp3.OkHttpClient;

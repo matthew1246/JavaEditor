@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.io.*;
 import javax.swing.JOptionPane;
 public class DisplayOutput {

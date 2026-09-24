@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -35,6 +37,39 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 	}
 	public String getClasspath() {
 		return classpath;
+	}
+	@Override
+	public Preferences extractJars(StoreSelectedFile storeselectedfile) {
+		CommandLine commandline = new CommandLine();
+		Preferences preferences=storeselectedfile.get(fileName);
+		if(!fileName.equals("")) {
+			java.util.List<String> jars = preferences.jars;
+			if(!packager.containsPackage() || !packager.isInRightFolders()) {
+				for(String jar:jars) {
+					try {
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,getDir());
+						process.waitFor();
+					} catch (InterruptedException ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+			else { // package is in right folders: extract the classpath jars into <classpath>\jars
+				File createdir = new File(classpath+"\\jars");
+				if(!createdir.exists()) {
+					createdir.mkdir();
+				}
+				for(String jar:jars) {
+					try {
+						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,classpath+"\\jars");
+						process.waitFor();
+					} catch(InterruptedException ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+		}
+		return preferences;
 	}
 	private boolean isPackageFolder(File folder) {
 		String packagename = packager.getPackageName();
@@ -205,6 +240,9 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 			}
 			for(String relative:includedFolders) {
 				input = input+" -C "+classpath+" "+relative;
+			}
+			if(new File(classpath+"\\jars").exists()) {
+				input = input+" -C jars .";
 			}
 		
 			JOptionPane.showMessageDialog(null,input);

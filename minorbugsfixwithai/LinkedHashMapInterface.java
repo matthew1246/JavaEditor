@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.util.*;
 public class LinkedHashMapInterface<K,V> {
 	public LinkedHashMap<K, V> linkedhashmap;

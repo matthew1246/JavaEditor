@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
