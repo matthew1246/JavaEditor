@@ -175,7 +175,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
-	private boolean hasJavaFX;
+	protected boolean hasJavaFX;
 	public void Compile(int javaversionnumber,String fileName,boolean isJavaFX) {
 		try {
 			CommandLine commandline = new CommandLine();
@@ -212,7 +212,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
-	private String folderPlusFileName;
+	protected String folderPlusFileName;
 	public void makeJar(int javaversionnumber) {
 		try {
 			String main_class3 = main_class;

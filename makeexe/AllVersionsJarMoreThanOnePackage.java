@@ -10,10 +10,10 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
-	private Packager packager;
+	protected Packager packager;
 	private String dir;
-	private Main main;
-	private String fileName;
+	protected Main main;
+	protected String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	public AllVersionsJarMoreThanOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
@@ -129,7 +129,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	private AllFiles allfiles;
+	protected AllFiles allfiles;
 	public boolean isMatthewJavaEditor(String main_class) {
 		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));

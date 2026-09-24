@@ -10,10 +10,10 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
-	private Packager packager;
+protected Packager packager;
 	private String dir;
 	private Main main;
-	private String fileName;
+	protected String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	public IsMoreThanOneJar isMoreThanOneJar;

@@ -2396,7 +2396,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
+									String[] options5={"Yes","No"};
+								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
+								if(excludepackages == JOptionPane.YES_OPTION) {
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+								}
+								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+								}
 								}
 							}
 							else {
@@ -2523,7 +2530,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
+									String[] options4={"Yes","No"};
+								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options4,options4[1]);
+								if(excludepackages == JOptionPane.YES_OPTION) {
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
+								}
+								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+								}
 								}
 							}
 							else {
@@ -2649,7 +2663,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										Main.this.filelistmodifier.removeFile(maintwo);
 									}
 								}
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+								String[] options6={"Yes","No"};
+								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options6,options6[1]);
+								if(excludepackages == JOptionPane.YES_OPTION) {
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
+								}
+								else {
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+								}
 							}
 						}
 						else {
