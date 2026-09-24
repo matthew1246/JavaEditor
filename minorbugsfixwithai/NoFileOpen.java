@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.util.List;
 import javax.swing.JTabbedPane;
 import javax.swing.JFileChooser;
