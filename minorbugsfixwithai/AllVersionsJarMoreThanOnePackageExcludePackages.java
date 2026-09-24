@@ -8,11 +8,12 @@ import java.util.Set;
 /*
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
-** The user selects which folders to exclude from the jar.
+** The user is asked whether they want to select folders to EXCLUDE or folders
+** to INCLUDE in the jar.
 ** The user can select the direct subfolders of the classpath AND all subfolders
 ** of the package name folders (for example package javaeditor.minorbugsfixwithai
 ** lets the user select all javaeditor subfolders).
-** The folders that were not selected to exclude are added to the jar with:
+** The included folders are added to the jar with:
 ** jar.exe ... -C "<classpath>" <relative folder path> ...
 */
 public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersionsJarMoreThanOnePackage {
@@ -80,20 +81,51 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		for(int i = 0; i < candidates.size(); i++) {
 			names[i] = candidates.get(i).getAbsolutePath();
 		}
+		String[] modeOptions = {"Select folders to EXCLUDE","Select folders to INCLUDE"};
+		int mode = JOptionPane.showOptionDialog(null,"Do you want to select folders to exclude or include?","Exclude or Include",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,modeOptions,modeOptions[1]);
+		if(mode < 0) {
+			included.add(".");
+			return included;
+		}
 		javax.swing.JList<String> list = new javax.swing.JList<String>(names);
 		list.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		javax.swing.JScrollPane scrollpane = new javax.swing.JScrollPane(list);
 		javax.swing.JPanel panel = new javax.swing.JPanel();
 		panel.add(scrollpane);
 		String[] options = {"OK","Cancel"};
-		int result = JOptionPane.showOptionDialog(null,panel,"Select folders to EXCLUDE from jar:",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-		if(result != 0) {
-			included.add(".");
-			return included;
+		if(mode == 0) {
+			int result = JOptionPane.showOptionDialog(null,panel,"Select folders to EXCLUDE from jar (folders not selected are included):",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+			if(result != 0) {
+				included.add(".");
+				return included;
+			}
+			List<String> selected = list.getSelectedValuesList();
+			if(selected.size() == 0) {
+				included.add(".");
+				return included;
+			}
+			Set<String> excluded = new HashSet<String>(selected);
+			addIncludedFoldersFromExcluded(new File(classpath),excluded,included);
 		}
-		List<String> selected = list.getSelectedValuesList();
-		Set<String> excluded = new HashSet<String>(selected);
-		addIncludedFolders(new File(classpath),excluded,included);
+		else {
+			int result = JOptionPane.showOptionDialog(null,panel,"Select folders to INCLUDE in jar (folders not selected are excluded):",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+			if(result != 0) {
+				included.add(".");
+				return included;
+			}
+			List<String> selected = list.getSelectedValuesList();
+			if(selected.size() == 0) {
+				included.add(".");
+				return included;
+			}
+			Set<String> selectedSet = new HashSet<String>(selected);
+			for(String path:selected) {
+				File folder = new File(path);
+				if(hasSelectedAncestor(folder,selectedSet))
+					continue;
+				included.add(getRelativePath(folder));
+			}
+		}
 		if(included.size() == 0)
 			included.add(".");
 		return included;
@@ -111,7 +143,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		}
 		return false;
 	}
-	private void addIncludedFolders(File folder,Set<String> excluded,List<String> included) {
+	private void addIncludedFoldersFromExcluded(File folder,Set<String> excluded,List<String> included) {
 		if(excluded.contains(folder.getAbsolutePath()))
 			return;
 		if(folder.getAbsolutePath().equals(new File(classpath).getAbsolutePath())) {
@@ -123,7 +155,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 			if(subfolders == null)
 				return;
 			for(File subfolder:subfolders) {
-				addIncludedFolders(subfolder,excluded,included);
+				addIncludedFoldersFromExcluded(subfolder,excluded,included);
 			}
 			return;
 		}
@@ -135,8 +167,20 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		if(subfolders == null)
 			return;
 		for(File subfolder:subfolders) {
-			addIncludedFolders(subfolder,excluded,included);
+			addIncludedFoldersFromExcluded(subfolder,excluded,included);
 		}
+	}
+	private boolean hasSelectedAncestor(File folder,Set<String> selected) {
+		File parent = folder.getParentFile();
+		while(parent != null) {
+			String parentPath = parent.getAbsolutePath();
+			if(parentPath.equals(new File(classpath).getAbsolutePath()))
+				return false;
+			if(selected.contains(parentPath))
+				return true;
+			parent = parent.getParentFile();
+		}
+		return false;
 	}
 	private String getRelativePath(File folder) {
 		String folderPath = folder.getAbsolutePath();
