@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -26,8 +28,8 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		classpath = packager.classpath;
 		if(classpath == null || classpath.equals(""))
 			classpath = getDir();
-		if(!classpath.endsWith("\\"))
-			classpath = classpath+"\\";
+		if(classpath.endsWith("\\"))
+			classpath = classpath.substring(0,classpath.length()-1);
 		includedFolders = selectIncludedFolders();
 	}
 	public List<String> getIncludedFolders() {
@@ -204,7 +206,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(getDir())+"\\"+main_class2+".jar mf.txt";
 			}
 			for(String relative:includedFolders) {
-				input = input+" -C \""+classpath+"\" "+relative;
+				input = input+" -C "+classpath+" "+relative;
 			}
 		
 			JOptionPane.showMessageDialog(null,input);

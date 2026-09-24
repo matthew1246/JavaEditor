@@ -1,10 +1,12 @@
+package javaeditor.minorbugsfixwithai;
+
 import javax.swing.JOptionPane;
 import java.util.List;
 /*
 ** This generates all versions of Java for Jars when Main.jar is open.
-** The user excluded some folders from classpath and its package name folders.
-** The folders that were not excluded are added to the jar with:
-** jar.exe ... -C "<classpath>" <relative folder path> ...
+** The user selected folders to exclude or include for the jar.
+** The included folders are added to the jar with:
+** jar.exe ... -C <classpath> <relative folder path> ...
 */
 public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreThanOnePackage {
 	private IsMoreThanOneJar isMoreThanOneJar;
@@ -19,7 +21,7 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 	@Override
 	public void makeJar(int javaversionnumber) {
 		try {
-			String main_class2 = main_class;
+			main_class2 = main_class;
 			if(packager.containsPackage()) {
 				String[] splited=  main_class.split("\\.");
 				main_class2 = splited[splited.length-1];
@@ -37,7 +39,7 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 				main_class2=createJarFolderLocation+main_class2;
 			}
 			for(String relative:includedFolders) {
-				output2.write(" -C \""+classpath+"\" "+relative);
+				output2.write(" -C "+classpath+" "+relative);
 			}
 			output2.write("\n");
 		} catch (java.io.IOException ex) {

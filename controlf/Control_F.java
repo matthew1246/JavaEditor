@@ -1,3 +1,9 @@
+package javaeditor.controlf;
+
+
+import javaeditor.minorbugsfixwithai.LiveIterator;
+import javaeditor.minorbugsfixwithai.Main;
+import javaeditor.minorbugsfixwithai.StoreSelectedFile;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
@@ -107,8 +113,7 @@ public class Control_F {
 				}
 				if(x < (textarea.getText().length()-1) ) {
 					main.scrollToCaretPositionWithoutFocus(x);
-					StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
-					storeselectedfile2.setCaretPosition(main.fileName,x);
+					saveCaretPosition(x);
 				}
 				else {
 					main.scrollToCaretPositionWithoutFocus(textarea.getText().length()-1);
@@ -202,8 +207,7 @@ public class Control_F {
 							liveiterator.remove(filename);
 						if(x < (text.length()-1) ) {
 							main.scrollToCaretPositionWithoutFocus(x);
-							StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
-							storeselectedfile2.setCaretPosition(main.fileName,x);
+							saveCaretPosition(x);
 							return;
 						}
 						else {
@@ -321,8 +325,7 @@ public class Control_F {
 				}
 				if(x < (textarea.getText().length()-1) ) {
 					main.scrollToCaretPosition(x);
-					StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
-					storeselectedfile2.setCaretPosition(main.fileName,x);
+					saveCaretPosition(x);
 				}
 				else {
 					main.scrollToCaretPosition(textarea.getText().length()-1);
@@ -371,7 +374,14 @@ public class Control_F {
 										z = 0;
 									}
 									break;
-								}
+								}
+
+
+
+
+
+
+
 							}
 							if(i == (lines.length-1) )
 								z = 0;
@@ -409,8 +419,7 @@ public class Control_F {
 							liveiterator.remove(filename);
 						if(x < (text.length()-1) ) {
 							main.scrollToCaretPosition(x);
-							StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
-							storeselectedfile2.setCaretPosition(main.fileName,x);
+							saveCaretPosition(x);
 							return;
 						}
 						else {
@@ -431,4 +440,8 @@ public class Control_F {
 			}
 		}
 	}
-}
+	public void saveCaretPosition(int caretposition) {
+		 StoreSelectedFile storeselectedfile=new StoreSelectedFile();
+		 storeselectedfile.setCaretPosition(main.fileName,caretposition);
+	 }
+}

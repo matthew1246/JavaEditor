@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.util.HashSet;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;

@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfixwithai;
+
 import java.io.ByteArrayInputStream;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerConfigurationException;
