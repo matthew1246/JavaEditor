@@ -689,6 +689,42 @@ public class Main {
 		}
 		return filename;
 	}
+	public void removePackageNamesFromOtherFiles() {
+		try {
+			if(fileName == null || fileName.equals(""))
+				return;
+			FileListModifier listmodifier = new FileListModifier(fileName);
+			boolean anyOtherHasPackage = false;
+			for(String file : listmodifier.fullpath) {
+				if(file.equalsIgnoreCase(fileName))
+					continue;
+				Packager packagerOther = new Packager(file);
+				if(packagerOther.containsPackage()) {
+					anyOtherHasPackage = true;
+					break;
+				}
+			}
+			if(anyOtherHasPackage) {
+				String[] options2 = {"Yes","No"};
+				int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options2,options2[1]);
+				if(option == JOptionPane.YES_OPTION) {
+					for(String file : listmodifier.fullpath) {
+						if(file.equalsIgnoreCase(fileName))
+							continue;
+						Packager packagerOther = new Packager(file);
+						if(packagerOther.containsPackage()) {
+							String content = Files.readString(Paths.get(file));
+							content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+							Files.writeString(Paths.get(file), content);
+						}
+					}
+					JOptionPane.showMessageDialog(null,"Package names removed");
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
 	}
@@ -2048,6 +2084,7 @@ if(result == 0) {
 							}
 						}
 						else {
+							removePackageNamesFromOtherFiles();
 							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
 						}
 						
@@ -2132,6 +2169,7 @@ if(result == 0) {
 							}
 						}	
 						else {
+							removePackageNamesFromOtherFiles();
 							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
 						}
 						
@@ -2214,7 +2252,8 @@ if(result == 0) {  // isOnePackage = true;
 						}
 					}
 					else {
-						allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
+						removePackageNamesFromOtherFiles();
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
 					}
 				
 					int no_java_verson_number = -2;
