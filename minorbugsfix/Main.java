@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.nio.file.DirectoryStream;
 import java.nio.file.StandardCopyOption;
 import java.awt.KeyboardFocusManager;
@@ -2032,8 +2030,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3,
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
-							if(result == 0) {
+if(result == 0) {
 								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
+							}
+							else if(result == 1) {
+								String[] options5={"Yes","No"};
+								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
+								if(excludepackages == JOptionPane.YES_OPTION) {
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+								}
+								else {
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+								}
 							}
 							else {
 								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
@@ -2106,8 +2114,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3,
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
-							if(result == 0) {
+if(result == 0) {
 								allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
+							}
+							else if(result == 1) {
+								String[] options5={"Yes","No"};
+								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
+								if(excludepackages == JOptionPane.YES_OPTION) {
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
+								}
+								else {
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+								}
 							}
 							else {
 								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
@@ -2178,8 +2196,18 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						    options3,
 						    options3[1]  // <-- sets "More than one" as the default focused button
 						);
-						if(result == 0) {  // isOnePackage = true;		
+if(result == 0) {  // isOnePackage = true;		
 							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
+						}
+						else if(result == 1) {
+							String[] options5={"Yes","No"};
+							int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
+							if(excludepackages == JOptionPane.YES_OPTION) {
+								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
+							}
+							else {
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+							}
 						}
 						else {
 							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);

@@ -203,7 +203,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
-	private String main_class2;
+	protected String main_class2;
 	public void makeJar(int javaversionnumber) {
 		try {
 			main_class2 = main_class;
