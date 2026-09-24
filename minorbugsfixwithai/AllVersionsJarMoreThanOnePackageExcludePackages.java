@@ -8,34 +8,77 @@ import java.util.Set;
 /*
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
-** The user selects which folders from packager.classpath to exclude.
-** The folders that were not selected to exclude are added to the jar with jar.exe -C folder .
+** The user selects which folders to exclude from the jar.
+** The user can select the direct subfolders of the classpath AND all subfolders
+** of the package name folders (for example package javaeditor.minorbugsfixwithai
+** lets the user select all javaeditor subfolders).
+** The folders that were not selected to exclude are added to the jar with:
+** jar.exe ... -C "<classpath>" <relative folder path> ...
 */
 public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersionsJarMoreThanOnePackage {
 	private IsMoreThanOneJar isMoreThanOneJar;
+	private String classpath;
 	private List<String> includedFolders;
 	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		super(main,fileName,sal,ev4,_isMoreThanOneJar);
 		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
-		includedFolders=selectIncludedFolders();
+		classpath = packager.classpath;
+		if(classpath == null || classpath.equals(""))
+			classpath = getDir();
+		if(!classpath.endsWith("\\"))
+			classpath = classpath+"\\";
+		includedFolders = selectIncludedFolders();
 	}
 	public List<String> getIncludedFolders() {
 		return includedFolders;
 	}
-	private List<String> selectIncludedFolders() {
-		String classpath = packager.classpath;
-		if(classpath == null || classpath.equals(""))
-			classpath = getDir();
+	public String getClasspath() {
+		return classpath;
+	}
+	private boolean isPackageFolder(File folder) {
+		String packagename = packager.getPackageName();
+		String[] segments = packagename.split("\\.");
+		File pkg = new File(classpath);
+		for(String segment:segments) {
+			pkg = new File(pkg,segment);
+		}
+		String pkgPath = pkg.getAbsolutePath();
+		String folderPath = folder.getAbsolutePath();
+		return pkgPath.equals(folderPath) || pkgPath.startsWith(folderPath+"\\") || pkgPath.startsWith(folderPath+"/");
+	}
+	private void addAllDescendantFolders(File dir,List<File> list) {
+		File[] subfolders = dir.listFiles(File::isDirectory);
+		if(subfolders == null)
+			return;
+		for(File subfolder:subfolders) {
+			list.add(subfolder);
+			addAllDescendantFolders(subfolder,list);
+		}
+	}
+	private List<File> getCandidateFolders() {
+		List<File> candidates = new ArrayList<File>();
 		File classpathDir = new File(classpath);
-		File[] subfolders = classpathDir.listFiles(File::isDirectory);
+		File[] topfolders = classpathDir.listFiles(File::isDirectory);
+		if(topfolders != null) {
+			for(File folder:topfolders) {
+				candidates.add(folder);
+				if(isPackageFolder(folder)) {
+					addAllDescendantFolders(folder,candidates);
+				}
+			}
+		}
+		return candidates;
+	}
+	private List<String> selectIncludedFolders() {
+		List<File> candidates = getCandidateFolders();
 		List<String> included = new ArrayList<String>();
-		if(subfolders == null || subfolders.length == 0) {
-			included.add(classpath);
+		if(candidates.size() == 0) {
+			included.add(".");
 			return included;
 		}
-		String[] names = new String[subfolders.length];
-		for(int i = 0; i < subfolders.length; i++) {
-			names[i] = subfolders[i].getName();
+		String[] names = new String[candidates.size()];
+		for(int i = 0; i < candidates.size(); i++) {
+			names[i] = candidates.get(i).getAbsolutePath();
 		}
 		javax.swing.JList<String> list = new javax.swing.JList<String>(names);
 		list.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -45,19 +88,65 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		String[] options = {"OK","Cancel"};
 		int result = JOptionPane.showOptionDialog(null,panel,"Select folders to EXCLUDE from jar:",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 		if(result != 0) {
-			included.add(classpath);
+			included.add(".");
 			return included;
 		}
 		List<String> selected = list.getSelectedValuesList();
 		Set<String> excluded = new HashSet<String>(selected);
-		for(int i = 0; i < subfolders.length; i++) {
-			if(!excluded.contains(names[i])) {
-				included.add(subfolders[i].getAbsolutePath());
-			}
-		}
+		addIncludedFolders(new File(classpath),excluded,included);
 		if(included.size() == 0)
-			included.add(classpath);
+			included.add(".");
 		return included;
+	}
+	private boolean hasExcludedDescendant(File folder,Set<String> excluded) {
+		String path = folder.getAbsolutePath();
+		if(excluded.contains(path))
+			return true;
+		File[] subfolders = folder.listFiles(File::isDirectory);
+		if(subfolders == null)
+			return false;
+		for(File subfolder:subfolders) {
+			if(hasExcludedDescendant(subfolder,excluded))
+				return true;
+		}
+		return false;
+	}
+	private void addIncludedFolders(File folder,Set<String> excluded,List<String> included) {
+		if(excluded.contains(folder.getAbsolutePath()))
+			return;
+		if(folder.getAbsolutePath().equals(new File(classpath).getAbsolutePath())) {
+			if(!hasExcludedDescendant(folder,excluded)) {
+				included.add(".");
+				return;
+			}
+			File[] subfolders = folder.listFiles(File::isDirectory);
+			if(subfolders == null)
+				return;
+			for(File subfolder:subfolders) {
+				addIncludedFolders(subfolder,excluded,included);
+			}
+			return;
+		}
+		if(!hasExcludedDescendant(folder,excluded)) {
+			included.add(getRelativePath(folder));
+			return;
+		}
+		File[] subfolders = folder.listFiles(File::isDirectory);
+		if(subfolders == null)
+			return;
+		for(File subfolder:subfolders) {
+			addIncludedFolders(subfolder,excluded,included);
+		}
+	}
+	private String getRelativePath(File folder) {
+		String folderPath = folder.getAbsolutePath();
+		String classpathPath = new File(classpath).getAbsolutePath();
+		if(folderPath.equals(classpathPath))
+			return ".";
+		String relative = folderPath.substring(classpathPath.length());
+		if(relative.startsWith("\\") || relative.startsWith("/"))
+			relative = relative.substring(1);
+		return relative.replace("\\","/");
 	}
 	@Override
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
@@ -70,8 +159,8 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 			if(javaversionnumber == 23 || javaversionnumber == -2) {
 				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(getDir())+"\\"+main_class2+".jar mf.txt";
 			}
-			for(String folder:includedFolders) {
-				input = input+" -C \""+folder+"\" .";
+			for(String relative:includedFolders) {
+				input = input+" -C \""+classpath+"\" "+relative;
 			}
 		
 			JOptionPane.showMessageDialog(null,input);
@@ -120,6 +209,6 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 	}
 	@Override
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
-		return new PowershellMoreThanOnePackageExcludePackages(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,includedFolders);
+		return new PowershellMoreThanOnePackageExcludePackages(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders);
 	}
 }
