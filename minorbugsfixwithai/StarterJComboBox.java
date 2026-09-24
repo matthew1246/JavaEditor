@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import javax.swing.JComboBox;
 import java.util.List;
 import java.util.ArrayList;

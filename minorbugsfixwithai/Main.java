@@ -1,6 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
-import javaeditor.controlf.Control_F;
 import java.nio.file.DirectoryStream;
 import java.nio.file.StandardCopyOption;
 import java.awt.KeyboardFocusManager;

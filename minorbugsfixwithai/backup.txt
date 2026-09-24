@@ -16,7 +16,7 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\controlf\\Control_F.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Control_F.java"
     ],
     "caretposition": 0
   },
@@ -2122,7 +2122,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 77
+    "caretposition": 38
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,
@@ -2845,6 +2845,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 12746
   }
 }

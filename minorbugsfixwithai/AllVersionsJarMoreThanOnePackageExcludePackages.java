@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfixwithai;
-
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
