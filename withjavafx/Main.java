@@ -96,7 +96,7 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-public class Main {
+public class Main extends Application {
 	public JButton leftarrow;
 	public JButton rightarrow;
 	public ThreeComboboxes threecomboboxes;
@@ -172,6 +172,10 @@ public class Main {
 	public static String value = System.getProperty("user.home")+"\\load_program.ser";
 	//public String value="load_program.ser";
 	public Maven maven = new Maven();
+	@Override
+	public void start(Stage stage) {
+		Main.main(null);
+	}
 	public static void main(String[] args) { 
 		SwingUtilities.invokeLater(() -> {
 			SwingWorker<OpenDefaultContent,Void> swingworker = new SwingWorker<>() {
@@ -199,6 +203,8 @@ public class Main {
 	
 	*/
 	public Main() {
+	}
+	public Main(String skjsjs) {
 		msdos = new MSDOS(this);
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
@@ -685,6 +691,42 @@ public class Main {
 		};
 		swingworker.execute();	
 
+	}
+	public void removePackageNamesFromOtherFiles() {
+		try {
+			if(fileName == null || fileName.equals(""))
+				return;
+			FileListModifier listmodifier = new FileListModifier(fileName);
+			boolean anyOtherHasPackage = false;
+			for(String file : listmodifier.fullpath) {
+				if(file.equalsIgnoreCase(fileName))
+					continue;
+				Packager packagerOther = new Packager(file);
+				if(packagerOther.containsPackage()) {
+					anyOtherHasPackage = true;
+					break;
+				}
+			}
+			if(anyOtherHasPackage) {
+				String[] options2 = {"Yes","No"};
+				int option = JOptionPane.showOptionDialog(null,"Remove package names from all other files in same folder?","Remove packages?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options2,options2[1]);
+				if(option == JOptionPane.YES_OPTION) {
+					for(String file : listmodifier.fullpath) {
+						if(file.equalsIgnoreCase(fileName))
+							continue;
+						Packager packagerOther = new Packager(file);
+						if(packagerOther.containsPackage()) {
+							String content = Files.readString(Paths.get(file));
+							content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+							Files.writeString(Paths.get(file), content);
+						}
+					}
+					JOptionPane.showMessageDialog(null,"Package names removed");
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	public static String getFileName(String directoryandfilename) {
 		return directoryandfilename.replaceAll(".+\\\\","");
@@ -2364,10 +2406,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
 								}
-								else { // More than one package
-									if(isJavaFX) {
-										extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									} else {
+else { // More than one package
+									if(!isJavaFX) {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
@@ -2379,9 +2419,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									}
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									}
 								}
 								}
 							}
@@ -2396,6 +2442,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										Main.this.filelistmodifier.removeFile(maintwo);
 									}
 								}
+								removePackageNamesFromOtherFiles();
 								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
 							}		
 							
@@ -2498,10 +2545,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
 								}
-								else { // More than one package
-									if(isJavaFX) {
-										extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									} else {
+else { // More than one package
+									if(!isJavaFX) {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
@@ -2513,9 +2558,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options4,options4[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									}
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									}
 								}
 								}
 							}
@@ -2530,6 +2581,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 										Main.this.filelistmodifier.removeFile(maintwo);
 									}
 								}
+								removePackageNamesFromOtherFiles();
 								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
 							}			
 							
@@ -2629,10 +2681,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
 							}
-							else { // More than one package
-								if(isJavaFX) {
-									extractjavafxjars = new ExtractJavaFXJars(Main.this);
-								} else {
+else { // More than one package
+								if(!isJavaFX) {
 									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 									File javafxlauncher=new File(maintwo);
 									if(javafxlauncher.exists()) {
@@ -2644,9 +2694,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options6,options6[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									}
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									}
 								}
 							}
 						}
@@ -2661,6 +2717,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									Main.this.filelistmodifier.removeFile(maintwo);
 								}
 							}
+							removePackageNamesFromOtherFiles();
 							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
 						}		
 

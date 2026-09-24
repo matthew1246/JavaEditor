@@ -1,9 +1,9 @@
 package javaeditor.controlf;
 
 
-import javaeditor.minorbugsfixwithai.LiveIterator;
-import javaeditor.minorbugsfixwithai.Main;
-import javaeditor.minorbugsfixwithai.StoreSelectedFile;
+import javaeditor.withjavafx.LiveIterator;
+import javaeditor.withjavafx.Main;
+import javaeditor.withjavafx.StoreSelectedFile;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;

@@ -2385,10 +2385,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
 								}
-								else { // More than one package
-									if(isJavaFX) {
-										extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									} else {
+else { // More than one package
+									if(!isJavaFX) {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
@@ -2400,9 +2398,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									}
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									}
 								}
 								}
 							}
@@ -2519,10 +2523,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 									}
 									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
 								}
-								else { // More than one package
-									if(isJavaFX) {
-										extractjavafxjars = new ExtractJavaFXJars(Main.this);
-									} else {
+else { // More than one package
+									if(!isJavaFX) {
 										String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 										File javafxlauncher=new File(maintwo);
 										if(javafxlauncher.exists()) {
@@ -2534,9 +2536,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options4,options4[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									}
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									}
 								}
 								}
 							}
@@ -2652,10 +2660,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
 							}
-							else { // More than one package
-								if(isJavaFX) {
-									extractjavafxjars = new ExtractJavaFXJars(Main.this);
-								} else {
+else { // More than one package
+								if(!isJavaFX) {
 									String maintwo = Main.this.getFileName(Main.this.fileName).replace(".java","two.java");
 									File javafxlauncher=new File(maintwo);
 									if(javafxlauncher.exists()) {
@@ -2667,9 +2673,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options6,options6[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
+									}
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+									if(isJavaFX) {
+										extractjavafxjars = new ExtractJavaFXJars(Main.this);
+									}
 								}
 							}
 						}

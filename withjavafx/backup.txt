@@ -6,9 +6,6 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Control_F.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
@@ -27,7 +24,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 3666
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -1537,5 +1534,16 @@
     ],
     "fileNames": [],
     "caretposition": 3666
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\controlf\\Control_F.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Control_F"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 127
   }
 }

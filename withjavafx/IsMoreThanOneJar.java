@@ -1,3 +1,5 @@
+package javaeditor.withjavafx;
+
 import java.io.File;
 public class IsMoreThanOneJar {
 	public boolean isMoreThanOneJar;

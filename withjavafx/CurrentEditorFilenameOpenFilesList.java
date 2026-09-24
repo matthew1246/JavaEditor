@@ -1,3 +1,5 @@
+package javaeditor.withjavafx;
+
 import java.util.*;
 public class CurrentEditorFilenameOpenFilesList extends OpenFilesList {
 	public List<String> filelist = new ArrayList<String>();

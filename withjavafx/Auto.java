@@ -1,3 +1,5 @@
+package javaeditor.withjavafx;
+
 public class Auto {
 	private String main;
 	private enum Hello {

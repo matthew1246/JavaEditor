@@ -1,3 +1,5 @@
+package javaeditor.withjavafx;
+
 public class MiddleString {
 	private String wholetext;
 	public MiddleString(String wholetext) {

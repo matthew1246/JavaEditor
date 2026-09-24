@@ -1,3 +1,5 @@
+package javaeditor.withjavafx;
+
 import java.util.*;
 import java.io.*;
 public class BackupFileOpenFilesList extends OpenFilesList {

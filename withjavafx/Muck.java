@@ -1,3 +1,5 @@
+package javaeditor.withjavafx;
+
 import javax.swing.*;
 import java.awt.event.*;
 public class Muck {
