@@ -17,10 +17,12 @@ import java.util.Set;
 ** jar.exe ... -C "<classpath>" <relative folder path> ...
 */
 public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersionsJarMoreThanOnePackage {
+	private IsMoreThanOneJar isMoreThanOneJar;
 	private String classpath;
 	private List<String> includedFolders;
-	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
-		super(main,fileName,sal,ev4);
+	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
+		super(main,fileName,sal,ev4,_isMoreThanOneJar);
+		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		classpath = packager.classpath;
 		if(classpath == null || classpath.equals(""))
 			classpath = getDir();
@@ -228,18 +230,17 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			File file = new File(getDir());
-			File parentdirectory=file.getParentFile();
-			if(!packager.containsPackage())
-				parentdirectory=file;
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(getDir());
+			if(!createJarFolderLocation.endsWith("\\"))
+				createJarFolderLocation=createJarFolderLocation+"\\";
+			JOptionPane.showMessageDialog(null,"Output jar location is:"+createJarFolderLocation);
 			
 			String input = "";
 			if(javaversionnumber == 23 || javaversionnumber == -2) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt";
 			}
 			else {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt";
 			}
 			for(String relative:includedFolders) {
 				input = input+" -C "+classpath+" "+relative;
@@ -262,7 +263,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 			if(packager.containsPackage() && packager.isInRightFolders()) {
 				classnameJar = getDir() + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
 			} else {
-				classnameJar = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+				classnameJar = createJarFolderLocation+main_class2+".jar";
 			}
 			File existingJar = new File(classnameJar);
 			if(existingJar.exists()) {
@@ -287,7 +288,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 				}
 			}
 			Process process;
-			if(getDir().replace("\\","").matches("[a-zA-Z]:") || parentdirectory.getAbsolutePath().replace("\\","").matches("[a-zA-Z]:")) {
+			if(getDir().replace("\\","").matches("[a-zA-Z]:") || createJarFolderLocation.replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,getDir());
 			}
 			else {
@@ -317,7 +318,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 	}
 	@Override
 	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellMoreThanOnePackageExcludePackages(main,main_class,getDir(),allfiles,classpath,includedFolders);
+		Powershell powershell = new PowershellMoreThanOnePackageExcludePackages(main,main_class,getDir(),allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders);
 		for(int i = 18; i <= 23; i++) {
 			powershell.Compile(i,fileName);
 			powershell.makeJar(i);

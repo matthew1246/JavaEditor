@@ -16,7 +16,9 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 	protected String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
-	public AllVersionsJarMoreThanOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4) {
+	protected IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarMoreThanOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
+		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -142,25 +144,24 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			File file = new File(dir);
-			File parentdirectory=file.getParentFile();
-			if(!packager.containsPackage())
-				parentdirectory=file;	
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!createJarFolderLocation.endsWith("\\"))
+				createJarFolderLocation=createJarFolderLocation+"\\";
+			JOptionPane.showMessageDialog(null,"Output jar location is:"+createJarFolderLocation);
 			
 			String input = "";
 			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt .";
 				}
 			}
 			else { // packager.isInRightFolders() == true
 				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
 				if(javaversionnumber == 23 || javaversionnumber == -2) {
 					// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt .";
+					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt .";
 				}	
 			}
 		
@@ -178,7 +179,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 			if(packager.containsPackage() && packager.isInRightFolders()) {
 				classnameJar = dir + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
 			} else {
-				classnameJar = parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar";
+				classnameJar = createJarFolderLocation+main_class2+".jar";
 			}
 			File existingJar = new File(classnameJar);
 			if(existingJar.exists()) {
@@ -203,7 +204,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 				}
 			}
 			Process process;
-			if(dir.replace("\\","").matches("[a-zA-Z]:") || parentdirectory.getAbsolutePath().replace("\\","").matches("[a-zA-Z]:")) {
+			if(dir.replace("\\","").matches("[a-zA-Z]:") || createJarFolderLocation.replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,dir);
 			}
 			else {
@@ -232,7 +233,7 @@ public class AllVersionsJarMoreThanOnePackage implements AllVersionsJar {
 		}
 	}
 	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellMoreThanOnePackage(main,main_class,dir,allfiles);
+		Powershell powershell = new PowershellMoreThanOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
 		for(int i = 18; i <= 23; i++) {
 			powershell.Compile(i,fileName);
 			powershell.makeJar(i);

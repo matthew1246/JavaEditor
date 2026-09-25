@@ -6,22 +6,18 @@ import java.nio.charset.StandardCharsets;
 import java.io.BufferedWriter;
 import java.io.IOException;
 /*
-** This generates all versions of Java for Jars
-** This class is only if Main.jar is not running.
+** This generates all versions of Java for Jars when the code has no package.
 */
-public class AllVersionsJarOnePackage implements AllVersionsJar {
+public class AllVersionsJarNoPackage implements AllVersionsJar {
 	private Packager packager;
-	public String dir;
+	private String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	private IsMoreThanOneJar isMoreThanOneJar;
-	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
-		if(_isMoreThanOneJar)
-			isMoreThanOneJar=new IsMoreThanOneJar(false);
-		else	
-			isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);			
+	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
+		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
 		this.fileName = fileName;
 		this.sal = sal;
@@ -40,6 +36,10 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 	public String getDir() {
 		return dir;
 	}
+	@Override
+	public AllFiles getAllFiles() {
+		return allfiles;
+	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
 		compile.compileall(main,fileName,javaversionnumber,sal,ev4);
@@ -49,37 +49,19 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		Preferences preferences=storeselectedfile.get(fileName);
 		if(!fileName.equals("")) {
 			java.util.List<String> jars = preferences.jars;
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				for(String jar:jars) {
-					try {
-						// jar = main.getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
-						process.waitFor();
-						//output.write(" "+jar);
-					} catch (InterruptedException ex) {
-						ex.printStackTrace();
-					}				
-				}
+			for(String jar:jars) {
+				try {
+					// jar = main.getFileName(jar);
+					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+					process.waitFor();
+					//output.write(" "+jar);
+				} catch (InterruptedException ex) {
+					ex.printStackTrace();
+				}				
 			}
-			else { // package.isInRightFolders() is true
-				File createdir = new File(dir+"jars");
-				if(!createdir.exists()) {
-					createdir.mkdir();
-				}
-				for(String jar:jars) {
-					try {
-						// jar = getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
-						process.waitFor();
-						//output.write(" "+jar);
-					} catch(InterruptedException ex) {
-						ex.printStackTrace();
-					}
-				}
-			}	
 		}
 		return preferences;
-	}		
+	}
 	public String getMain(StoreSelectedFile storeselectedfile,Preferences preferences) {
 		String main_string=preferences.starterclass;
 		if(!fileName.equals("")) {
@@ -130,43 +112,25 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				//output.write("\n");
 				output.close();
 			}
-
 		} catch(java.io.IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-	public AllFiles allfiles;
+	private AllFiles allfiles;
 	public boolean isMatthewJavaEditor(String main_class) {
 		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
-	}
-	@Override
-	public AllFiles getAllFiles() {
-		return allfiles;
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
-			if(!createJarFolderLocation.endsWith("\\"))
-				createJarFolderLocation=createJarFolderLocation+"\\";
-			JOptionPane.showMessageDialog(null,"output jar location is:"+createJarFolderLocation);
-			
-			String input = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt .";
-				}
+		
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
+			if(javaversionnumber == 23 || javaversionnumber == -2) {
+				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .";
 			}
-			else { // packager.isInRightFolders() == true
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				}	
-			}		
-	
+		
 			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
 			String dir2=Main.getDirectory(main.fileName);
 			if(!dir2.endsWith("\\"))
@@ -176,9 +140,9 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				mainjarfile.delete();	
 		
 			JOptionPane.showMessageDialog(null,input);
-			CommandLine commandline = new CommandLine();
 			Process process;
-			if(dir.replace("\\","").matches("[a-zA-Z]:") || createJarFolderLocation.replace("\\","").matches("[a-zA-Z]:")) {
+			CommandLine commandline =new CommandLine();
+			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,dir);
 			}
 			else {
@@ -207,12 +171,11 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		}
 	}
 	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
+		Powershell powershell = new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
 		for(int i = 18; i <= 23; i++) {
 			powershell.Compile(i,fileName);
 			powershell.makeJar(i);
 		}
 		powershell.Finish();
-
 	}
 }

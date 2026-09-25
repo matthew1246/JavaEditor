@@ -9,10 +9,12 @@ import java.io.IOException;
 ** jar.exe ... -C <classpath> <relative folder path> ...
 */
 public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreThanOnePackage {
+	private IsMoreThanOneJar isMoreThanOneJar;
 	private String classpath;
 	private List<String> includedFolders;
-	public PowershellMoreThanOnePackageExcludePackages(Main main,String main_class,String dir,AllFiles allfiles,String classpath,List<String> includedFolders) {
-		super(main,main_class,dir,allfiles);
+	public PowershellMoreThanOnePackageExcludePackages(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,String classpath,List<String> includedFolders) {
+		super(main,main_class,dir,allfiles,_isMoreThanOneJar);
+		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.classpath=classpath;
 		this.includedFolders=includedFolders;
 	}
@@ -24,20 +26,15 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 				String[] splited=  main_class.split("\\.");
 				main_class2 = splited[splited.length-1];
 			}
-			File file = new File(dir);
-			File parentdirectory = null;
-			if(packager.containsPackage()) {
-				parentdirectory=file.getParentFile();
-			}
-			else {
-				parentdirectory=file;
-			}
-			JOptionPane.showMessageDialog(null,"parentdirectory is:"+parentdirectory.getAbsolutePath());
+			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!createJarFolderLocation.endsWith("\\"))
+				createJarFolderLocation=createJarFolderLocation+"\\";
+			JOptionPane.showMessageDialog(null,"Output jar location is:"+createJarFolderLocation);
 			if(javaversionnumber != 23 && javaversionnumber != -2) {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt");
+				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt");
 			}
 			else {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt");
+				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt");
 			}
 			for(String relative:includedFolders) {
 				output2.write(" -C "+classpath+" "+relative);
@@ -48,10 +45,10 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 			output2.write("\n");
 			if(javaversionnumber == 23 || javaversionnumber == -2) {
 				if(!packager.containsPackage() || !packager.isInRightFolders()) {
-					output2.write("java -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");
+					output2.write("java -jar "+createJarFolderLocation+main_class2+".jar");
 				}
 				else {
-					output2.write("\""+System.getProperty("java.home")+"\\java.exe\" -jar "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar");
+					output2.write("\""+System.getProperty("java.home")+"\\java.exe\" -jar "+createJarFolderLocation+main_class2+".jar");
 				}
 				output2.write("\n");
 			}
