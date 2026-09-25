@@ -4394,11 +4394,22 @@ class OpenDefaultContent {
 		File file2 = new File(fileName); 
 		if(!file2.exists()) {
 			String userDir = System.getProperty("user.dir");
-			String baseDir;
-			if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
-				baseDir = System.getProperty("user.home");
-			} else {
-				baseDir = userDir;
+			String userHome = System.getProperty("user.home");
+			String baseDir = "";
+			String[] documentsfolders = new String[] { "Documents", "My Documents" };
+			for(String documentsfolder:documentsfolders) {
+				File documentsfile = new File(userHome + File.separator + documentsfolder);
+				if(documentsfile.isDirectory()) {
+					baseDir = documentsfile.getPath();
+					break;
+				}
+			}
+			if(baseDir.equals("")) {
+				if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
+					baseDir = userHome;
+				} else {
+					baseDir = userDir;
+				}
 			}
 			this.fileName = baseDir + File.separator + "Main.java";
 			File mainFile = new File(this.fileName);
