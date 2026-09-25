@@ -5042,9 +5042,20 @@ class OpenDefaultContent {
 		File file2 = new File(fileName); 
 		if(!file2.exists()) {
 			String home=System.getProperty("user.home");
-			if(!home.endsWith(File.separator))
-				home=home+File.separator;
-			this.fileName =home + "Main.java";
+			String baseDir = "";
+			String[] documentsfolders = new String[] { "Documents", "My Documents" };
+			for(String documentsfolder:documentsfolders) {
+				File documentsfile = new File(home + File.separator + documentsfolder);
+				if(documentsfile.isDirectory()) {
+					baseDir = documentsfile.getPath();
+					break;
+				}
+			}
+			if(baseDir.equals(""))
+				baseDir = home;
+			if(!baseDir.endsWith(File.separator))
+				baseDir=baseDir+File.separator;
+			this.fileName =baseDir + "Main.java";
 			File mainFile = new File(this.fileName);
 			if(!mainFile.exists()) {
 				FileWriter filewriter2 = new FileWriter(mainFile);
