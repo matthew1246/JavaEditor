@@ -225,16 +225,18 @@ public class ExtractJavaFXJars {
 	            delete_moduleinfo();
 	}
 	public void extractDLLFiles() {
-		try {
-			for(String dll:getDLLFiles()) {
-				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(dll);	
-				InputStream inputstream=url.openStream();
+		for(String dll:getDLLFiles()) {
+			try (InputStream inputstream=getResourceStream(dll)) {	
+				if(inputstream == null) {
+					System.err.println(dll + " not found, skipping extraction.");
+					continue;
+				}
 				Path outputpath=Paths.get(dir+dll);
 						
 				Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
+			} catch(IOException ex) {
+				ex.printStackTrace();
 			}
-		} catch(IOException ex) {
-			ex.printStackTrace();
 		}
 	}
 	public List<String> getDLLFiles() {
@@ -487,9 +489,11 @@ public class ExtractJavaFXJars {
 		return file.exists();
 	}
 	public void extractStrangeFiles() {
-		try {	
-			URL url=ExtractJavaFXJars.class.getClassLoader().getResource("javafx.properties");	
-			InputStream inputstream=url.openStream();
+		try (InputStream inputstream=getResourceStream("javafx.properties")) {	
+			if(inputstream == null) {
+				System.err.println("javafx.properties not found, skipping extraction.");
+				return;
+			}
 			Path outputpath=Paths.get(dir+"javafx.properties");
 			Files.copy(inputstream,outputpath,StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException ex) {
@@ -500,7 +504,7 @@ public class ExtractJavaFXJars {
 		File file = new File(dir+"javafx.properties");
 		return file.exists();
 	}
-	public void extractJars() {
+public void extractJars() {
 		boolean needsAdmin = isDriveRoot(dir) || !canWriteToDriveRoot(dir);
 		if(makejar)
 			needsAdmin=	isDriveRoot(dir.substring(0,dir.length()-5)) || !canWriteToDriveRoot(dir.substring(0,dir.length()-5));
@@ -508,21 +512,104 @@ public class ExtractJavaFXJars {
 			CommandLine commandline = new CommandLine();
 			List<String> jars=commandline.getJavaFX();
 			for(String jar:jars) {
-				URL url=ExtractJavaFXJars.class.getClassLoader().getResource(jar);	
-				InputStream inputstream=url.openStream();
-				Path outputpath;
-				if(!makejar) {
-					outputpath=Paths.get(dir+jar);
+				try (InputStream inputstream=getResourceStream(jar)) {	
+					if(inputstream == null) {
+						System.err.println(jar + " not found, skipping extraction.");
+						continue;
+					}
+					Path outputpath;
+					if(!makejar) {
+						outputpath=Paths.get(dir+jar);
+					}
+					else { //makejar == true
+						outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
+					}
+					copyJar(inputstream,outputpath,needsAdmin);
 				}
-				else { //makejar == true
-					outputpath=Paths.get(dir.substring(0,dir.length()-5)+jar);
-				}
-				copyJar(inputstream,outputpath,needsAdmin);
 			}
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
 	}		
+	public String getPackageFolder() {
+		Package pkg = ExtractJavaFXJars.class.getPackage();
+		if(pkg == null || pkg.getName() == null || pkg.getName().trim().isEmpty())
+			return "";
+		return pkg.getName().replace('.','/');
+	}
+	public String getPackageResourcePath(String resource) {
+		String folder = getPackageFolder();
+		if(folder.isEmpty())
+			return resource;
+		return folder + "/" + resource;
+	}
+	public String getCodeSourceLocation() {
+		try {
+			URL location=ExtractJavaFXJars.class.getProtectionDomain().getCodeSource().getLocation();
+			if(location == null)
+				return "";
+			String path=location.toURI().getPath();
+			if(path == null)
+				return "";
+			if(path.startsWith("/"))
+				path=path.substring(1);
+			return path;
+		} catch(Exception ex) {
+			return "";
+		}
+	}
+	public byte[] readAll(InputStream in) {
+		try {
+			java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+			byte[] buf = new byte[8192];
+			int n;
+			while((n=in.read(buf)) != -1)
+				baos.write(buf,0,n);
+			return baos.toByteArray();
+		} catch(Exception ex) {
+			return null;
+		}
+	}
+	public InputStream getResourceStream(String resource) {
+		try {
+			String resPath = getPackageResourcePath(resource);
+			String location = getCodeSourceLocation();
+			if(!location.isEmpty()) {
+				File file = new File(location);
+				if(file.isFile()) {
+					try(JarFile jf = new JarFile(file)) {
+						JarEntry entry = jf.getJarEntry(resPath);
+						if(entry == null && !resPath.equals(resource))
+							entry = jf.getJarEntry(resource);
+						if(entry != null) {
+							byte[] bytes=readAll(jf.getInputStream(entry));
+							if(bytes != null)
+								return new java.io.ByteArrayInputStream(bytes);
+						}
+					}
+				}
+				else if(file.isDirectory()) {
+					File resfile = new File(file,resPath);
+					if(!resfile.exists() && !resPath.equals(resource))
+						resfile = new File(file,resource);
+					if(resfile.exists())
+						return new java.io.FileInputStream(resfile);
+				}
+			}
+			URL url = ExtractJavaFXJars.class.getResource("/" + resPath);
+			if(url == null)
+				url=ExtractJavaFXJars.class.getClassLoader().getResource(resPath);
+			if(url == null && !resPath.equals(resource))
+				url=ExtractJavaFXJars.class.getClassLoader().getResource(resource);
+			if(url == null && !resPath.equals(resource))
+				url = ExtractJavaFXJars.class.getResource("/" + resource);
+			if(url != null)
+				return url.openStream();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
 	public boolean isDriveRoot(String dir) {
 		return dir.matches("^[A-Za-z]:\\\\+$");
 	}
