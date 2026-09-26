@@ -64,6 +64,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
@@ -116,6 +117,14 @@ public class Main {
 	public JMenuItem reloadall = new JMenuItem("Reload All Tabs");
 	public JTabbedPane tabbedpane = new JTabbedPane();
 	public JPanel pluspanel = new JPanel();
+	// Where the code of every open tab is scrolled to, so maximising, minimising
+	// or restoring the window keeps the same code on screen. The top left
+	// corner of the visible code is remembered as a place in the document
+	// and not as a scrollbar value, because a scrollbar value is a number
+	// of pixels and the code area changes size, and changes where its
+	// lines wrap, when the window changes size.
+	public final HashMap<Component,Integer> savedscrollpositions = new HashMap<Component,Integer>();
+	public boolean thereisascrollpositiontosave = false;
 	public JMenuItem generatejar;
 	public JButton deprecated;
 	
@@ -1522,6 +1531,61 @@ edit.add(functionLines);
 		return position;
 	}
 
+	// Remembers the top left corner of the code that is visible in every open
+	// tab, so the code can be put back there when the window changes size.
+	public void saveScrollPositionOfCode() {
+		savedscrollpositions.clear();
+		for(int i = 0; i < tabbedpane.getTabCount(); i++) {
+			Component component = tabbedpane.getComponentAt(i);
+			if(!(component instanceof JScrollPane)) {
+				continue; // this is the tab that only has the + in it.
+			}
+			JViewport viewport = ((JScrollPane)component).getViewport();
+			JTextArea textarea3 = (JTextArea)viewport.getView();
+			if(textarea3 == null) {
+				continue;
+			}
+			try {
+				Point viewposition = viewport.getViewPosition();
+				int position = textarea3.viewToModel2D(new Point2D.Double(viewposition.x,viewposition.y));
+				if(position < 0) {
+					position = 0;
+				}
+				savedscrollpositions.put(component,position);
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		thereisascrollpositiontosave = savedscrollpositions.size() > 0;
+	}
+	// Scrolls every open tab back to the place its code was saved at by
+	// saveScrollPositionOfCode(). The scrolling is done later on the event
+	// queue, so the window already has the size it is going to have and the
+	// code area has already been given that size. Without waiting, the
+	// code area still has the old size and it scrolls back to where it was
+	// when the code is finally given the new size.
+	public void restoreScrollPositionOfCode() {
+		thereisascrollpositiontosave = false;
+		for(Map.Entry<Component,Integer> entry : savedscrollpositions.entrySet()) {
+			JViewport viewport = ((JScrollPane)entry.getKey()).getViewport();
+			JTextArea textarea3 = (JTextArea)viewport.getView();
+			int position = entry.getValue();
+			SwingUtilities.invokeLater(() -> {
+				try {
+					if(position > textarea3.getDocument().getLength()) {
+						return;
+					}
+					Rectangle2D viewposition = textarea3.modelToView2D(position);
+					viewport.setViewPosition(new Point((int)viewposition.getX(),(int)viewposition.getY()));
+				}
+				catch(BadLocationException ex) {
+					ex.printStackTrace();
+				}
+			});
+		}
+		savedscrollpositions.clear();
+	}
 	public void selectCode(ActionEvent ev) {
 		String classname = (String)classnamescombobox.getSelectedItem();
 		if(classname != null && !classname.equals("")) {
@@ -1740,6 +1804,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	            	public void componentResized(ComponentEvent e) {
 	            		JTextAreaGroup textareagroup=(JTextAreaGroup)textarea;
 	            		textareagroup.previoustext = "";
+	            		if(thereisascrollpositiontosave) {
+	            			// The window is given its new size after it was maximised, minimised
+	            			// or restored, so the code is put back where it was scrolled to
+	            			// before that happened.
+	            			restoreScrollPositionOfCode();
+	            		}
 	            	}
         		});
 			
@@ -1804,20 +1874,21 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		frame.addWindowStateListener(new java.awt.event.WindowStateListener() {
 	          		public void windowStateChanged(WindowEvent e) {
 	                		int state=e.getNewState();
-	                		if ((state & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH) {
-	           				int caretposition=textarea.getCaretPosition();
-	           				textarea.setCaretPosition(caretposition);
-	           				Main.this.scrollToCaretPosition(caretposition);
+	                		if ((state & JFrame.ICONIFIED) == JFrame.ICONIFIED) {
+	                			// The window is hidden, so the code cannot be scrolled while
+	                			// the window is minimised. The position that was saved stays
+	                			// saved and is put back when the window is shown again, either
+	                			// by the next window state change or by the resize with it.
+	                			saveScrollPositionOfCode();
 	                		}
-	                		else if ((state & JFrame.ICONIFIED) == JFrame.ICONIFIED) {
-      	 				int caretposition=textarea.getCaretPosition();
-	           				textarea.setCaretPosition(caretposition);
-	           				Main.this.scrollToCaretPosition(caretposition);
-   				 } else if ((state & JFrame.NORMAL) == JFrame.NORMAL) {
-        					int caretposition=textarea.getCaretPosition();
-	           				textarea.setCaretPosition(caretposition);
-	           				Main.this.scrollToCaretPosition(caretposition);
-    				}
+	                		else {
+	                			// Maximising a window, or taking a window back off being
+	                			// maximised, changes the size of the code area, so the code is
+	                			// put back where it was scrolled to. Without this the view
+	                			// jumps to the caret and the code that was being read is lost.
+	                			saveScrollPositionOfCode();
+	                			restoreScrollPositionOfCode();
+	                		}
 	            	}
 	        	});
 		
