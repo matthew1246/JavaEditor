@@ -31,6 +31,7 @@ import java.awt.event.ComponentEvent;
 import javax.swing.text.BadLocationException;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Point2D;
 import java.awt.event.ItemEvent;
 import java.util.regex.*;
 import javax.swing.Box;
@@ -1530,6 +1531,48 @@ edit.add(functionLines);
 
 	}
 
+	// The position that has to be remembered for a file. It is the caret itself when
+	// the caret is visible inside the viewport, otherwise it is the position of the
+	// top left corner of the visible area. So after scrolling away from the caret and
+	// pressing a button such as compile, run or Make Jar, the view is remembered where
+	// it was scrolled to, as if the caret had been placed there.
+	public int getPositionToRemember(JTextArea textarea3) {
+		if(textarea3 == null) {
+			return 0;
+		}
+		int caretposition = textarea3.getCaretPosition();
+		try {
+			Rectangle visiblerect = textarea3.getVisibleRect();
+			if(visiblerect.height <= 0) { // component is not showing, nothing was scrolled.
+				return caretposition;
+			}
+			Rectangle caretrect = textarea3.modelToView2D(caretposition).getBounds();
+			if(caretrect != null && caretrect.y >= visiblerect.y
+					&& (caretrect.y+caretrect.height) <= (visiblerect.y+visiblerect.height)) {
+				return caretposition; // caret is on screen, so the caret is what matters.
+			}
+			int position = textarea3.viewToModel2D(new Point2D.Double(visiblerect.x,visiblerect.y));
+			if(position >= 0 && position <= textarea3.getDocument().getLength()) {
+				return position;
+			}
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return caretposition;
+	}
+	// Stores the position from getPositionToRemember() for fileName and gives it back.
+	// Call this before JTextAreaGroup.ExpandAll() rewrites the document, because
+	// ExpandAll() moves the caret and scrolls the view back to the top.
+	public int rememberPosition(String fileName,JTextArea textarea3) {
+		int position = getPositionToRemember(textarea3);
+		if(fileName != null && !fileName.equals("")) {
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			storeselectedfile.setCaretPosition(fileName,position);
+		}
+		return position;
+	}
+
 	public void selectCode(ActionEvent ev) {
 		String classname = (String)classnamescombobox.getSelectedItem();
 		if(classname != null && !classname.equals("")) {
@@ -2024,6 +2067,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});			
 		compileforjavafx.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int caretposition=rememberPosition(fileName,textarea);
 				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 				textarea3.ExpandAll(Main.this);		
 				Thread thread = new Thread( () -> {
@@ -2035,10 +2079,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 						}
 						sal.actionPerformed(e);
+						(new StoreSelectedFile()).setCaretPosition(fileName,caretposition);
 						if(!fileName.equals("")) {
 							String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 		
 					CommandLine commandline = new CommandLine();
+					
 					
 							String main_class = fileName.replaceAll(".+\\\\","");						
 							main_class =main_class.replaceAll("\\.java","");
@@ -2210,7 +2256,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-							storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
+							storeselectedfile.setCaretPosition(fileName,caretposition);
 							
 							Preferences preferences=storeselectedfile.get(fileName);
 							for(String jar:preferences.jars) {
@@ -2316,9 +2362,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		
 		generatejar.addActionListener((ev) -> {						
 				
-			int caretposition=textarea.getCaretPosition();
-			StoreSelectedFile storeselectedfile2= new StoreSelectedFile();
-			storeselectedfile2.setCaretPosition(fileName,caretposition);
+			int caretposition=rememberPosition(fileName,textarea);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);	
 			String[] options={"Yes","No"};
@@ -3392,6 +3436,7 @@ else { // More than one package
 			}
 		});
 		compile_all.addActionListener((ev) -> {				
+			int caretposition=rememberPosition(fileName,textarea);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(this);		
 			Thread thread4=new Thread(() -> {
@@ -3416,6 +3461,7 @@ else { // More than one package
 					withJavaFX = false;
 				}
 				compile.compileallbuttonwitherrors(fileName,sal,ev,withJavaFX,this);
+				(new StoreSelectedFile()).setCaretPosition(fileName,caretposition);
 				maven.Change(fileName);
 				threecomboboxes.load(fileName);
 				expandable.open();
@@ -3495,10 +3541,11 @@ else { // More than one package
 		compile.addActionListener(new ActionListener() {		
 		
 										
-			public void actionPerformed(ActionEvent e) {
-				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-				textarea3.ExpandAll(Main.this);		
-				Thread thread = new Thread( () -> {
+		public void actionPerformed(ActionEvent e) {
+			int caretposition=rememberPosition(fileName,textarea);
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll(Main.this);		
+			Thread thread = new Thread( () -> {
 					try {
 	
 						if(fileName.equals("")) {
@@ -3507,6 +3554,7 @@ else { // More than one package
 							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 						}
 						sal.actionPerformed(e);
+						(new StoreSelectedFile()).setCaretPosition(fileName,caretposition);
 						if(!fileName.equals("")) {
 							String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
 		
@@ -3681,7 +3729,7 @@ else { // More than one package
 							}
 							JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 							StoreSelectedFile storeselectedfile=new StoreSelectedFile();
-							storeselectedfile.setCaretPosition(fileName,textarea.getCaretPosition());
+							storeselectedfile.setCaretPosition(fileName,caretposition);
 							
 							Preferences preferences=storeselectedfile.get(fileName);
 							for(String jar:preferences.jars) {
@@ -3745,14 +3793,14 @@ else { // More than one package
 		run.addActionListener(new ActionListener() {				
 												
 			public void actionPerformed(ActionEvent e) {
-				JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
-				textarea3.ExpandAll(Main.this);		
-				Thread thread = new Thread() {
-					public void run() {
-						try {	
-							StoreSelectedFile storeselectedfile10=new StoreSelectedFile();
-							int caretposition = textarea.getCaretPosition();
-							storeselectedfile10.setCaretPosition(fileName,caretposition);
+			int caretposition=rememberPosition(fileName,textarea);
+			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
+			textarea3.ExpandAll(Main.this);		
+			Thread thread = new Thread() {
+				public void run() {
+					try {	
+						StoreSelectedFile storeselectedfile10=new StoreSelectedFile();
+						storeselectedfile10.setCaretPosition(fileName,caretposition);
 						
 							String selected = (String)startupcombobox.getSelectedItem();
 							Runtime runtime = Runtime.getRuntime();
@@ -3938,6 +3986,7 @@ CommandLine commandline = new CommandLine();
  							else { // compile because not latest code.
 								System.out.println("save new code first.");
 								sal.actionPerformed(e);
+								(new StoreSelectedFile()).setCaretPosition(fileName,caretposition);
 								
 								CommandLine commandline = new CommandLine();
 								
@@ -5125,10 +5174,11 @@ class SaveActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		try {
 			String text = main.textarea.getText();
+			int position = main.getPositionToRemember(main.textarea);
 			if(!main.fileName.equals("")) {
 				StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				storeselectedfile.set(main.fileName);
-				storeselectedfile.setCaretPosition(main.fileName,main.textarea.getCaretPosition());
+				storeselectedfile.setCaretPosition(main.fileName,position);
 				boolean isSet=(new File(main.fileName)).exists();
 				PrintWriter output = new PrintWriter(main.fileName);
 				output.print(text);
@@ -5184,6 +5234,7 @@ class SaveActionListener implements ActionListener {
 			               	}
 			               	StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			               	storeselectedfile.set(main.fileName);
+			               	storeselectedfile.setCaretPosition(main.fileName,position);
 			               	storeselectedfile.setTabs(tabs);
 			               	storeselectedfile.setStarterClass(main.fileName);
 			               	
