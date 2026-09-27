@@ -821,22 +821,44 @@ public class Main {
 		combobox = new JComboBox<String>();
 		combobox.setEditable(false);
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
-		comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
-		comboboxpanel = new JPanel(new GridBagLayout());
+		// comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
+
+		//comboboxpanel = new JPanel(new GridBagLayout());
+		comboboxpanel=new JPanel();
+		//padding 0 so comboboxpanel does not report a taller preferred size than the
+		//rest of menubar row 1; otherwise GridBagLayout stretches the whole row to it
+		//and the fixed height magnifying glass buttons are no longer 100% of the row.
+		MatthewLayout comboboxpanellayout = new MatthewLayout();
+		comboboxpanellayout.setPadding(0,0,0,0);
+		comboboxpanel.setLayout(comboboxpanellayout);
+
+		XYWidthHeight xywidthheight=new XYWidthHeight();
+		xywidthheight.x=0;
+		xywidthheight.y=0;
+		xywidthheight.width=1;
+		xywidthheight.height=1;
 		GridBagConstraints cbgbc = new GridBagConstraints();
-		cbgbc.gridx = 0;
+		/*cbgbc.gridx = 0;
 		cbgbc.gridy = 0;
 		cbgbc.weightx = 1.0;
 		cbgbc.weighty = 1.0;
 		cbgbc.fill = GridBagConstraints.BOTH;
 		comboboxpanel.add(comboboxsearchbutton, cbgbc);
-		JLabel label = new JLabel();
-		label.setText("Starter:");
-		label.setHorizontalAlignment(SwingConstants.RIGHT);
+		*/
+		comboboxpanel.add(comboboxsearchbutton,xywidthheight);
+		XYWidthHeight xywidthheight2=new XYWidthHeight();
+		xywidthheight2.x=1;
+		xywidthheight2.y=0;
+		xywidthheight2.width=2;
+		xywidthheight2.height=1;
+		JLabel label = new JLabel("Starter:");
+		/*label.setHorizontalAlignment(SwingConstants.RIGHT);
 		cbgbc.gridx = 1;
 		cbgbc.weightx = 0;
 		cbgbc.fill = GridBagConstraints.NONE;
 		comboboxpanel.add(label, cbgbc);
+		*/
+		comboboxpanel.add(label,xywidthheight2);
 
 		filenamessearchbutton = new JButton("\uD83D\uDD0D");
 		filenamessearchbutton.setMargin(new Insets(0,0,0,0));
@@ -1325,6 +1347,22 @@ edit.add(functionLines);
 				
 		frame.setLocation(190,0);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		/*
+		** "Starter:" normally sits directly after the magnifying glass button. Once the
+		** frame is resized comboboxpanel is given extra width and MatthewLayout gives
+		** that extra width to the label's column, which is then far wider than the
+		** text and leaves a grey gap before the next combo. Right align the label in
+		** that case so it stays against the combo on its right, and put it back to the
+		** left at the original frame width.
+		*/
+		final int initialframewidth = frame.getWidth();
+		frame.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent ce) {
+				label.setHorizontalAlignment(frame.getWidth() > initialframewidth
+						? SwingConstants.RIGHT : SwingConstants.LEFT);
+			}
+		});
 		frame.setVisible(true);
 		textarea.requestFocus();
 		textarea.setTabSize(4);
