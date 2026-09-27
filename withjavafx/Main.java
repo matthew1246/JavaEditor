@@ -3279,7 +3279,9 @@ else { // More than one package
 				frame2.setSize(450,110);
 					
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new MatthewLayout(true));
+				MatthewLayout matthewlayout=new MatthewLayout();
+				matthewlayout.setPadding(2,2,2,2);
+				panel0.setLayout(matthewlayout);
 				
 				JTextField input = new JTextField();
 				panel0.add(input,new XYWidthHeight(0,0,26,1));

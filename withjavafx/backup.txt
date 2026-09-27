@@ -3,11 +3,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Matth\\Documents\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\ExtractJavaFXJars.java"
+      "C:\\Users\\Matth\\Documents\\Main.java"
     ],
     "caretposition": 0
   },
@@ -1548,5 +1547,14 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 127
+  },
+  "C:\\Users\\Matth\\Documents\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
