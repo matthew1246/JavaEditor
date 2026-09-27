@@ -3280,7 +3280,7 @@ else { // More than one package
                     
 				JPanel panel0 = new JPanel();
 				MatthewLayout matthewlayout=new MatthewLayout();
-				matthewlayout.setPadding(2,2,2,2);
+				//matthewlayout.setPadding(2,2,2,2);
 				panel0.setLayout(matthewlayout);
 				
 				JTextField input = new JTextField();
@@ -3300,7 +3300,8 @@ else { // More than one package
 				** pixel at the bottom, which left the down arrow one pixel higher than
 				** the text field and the Find button beside it.
 				*/
-				arrowspanel.setLayout(new GridLayout(2,1,0,1));
+				//arrowspanel.setLayout(new GridLayout(2,1,0,1));
+				arrowspanel.setLayout(new GridLayout(2,1,0,0));
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
             			upArrow.setMargin(new Insets(0,0,0,0));
