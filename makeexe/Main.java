@@ -2209,11 +2209,12 @@ Packager packager = new Packager(this);
 						}
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
-						String main=allversionsjar.getMain(storeselectedfile,preferences);
-						allversionsjar.WriteManifest(main);
-						if(allversionsjar.isMatthewJavaEditor(main)) {
-							allversionsjar.Powershell(main);
-						}
+					String main=allversionsjar.getMain(storeselectedfile,preferences);
+					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
+					allversionsjar.WriteManifest(main);
+					if(allversionsjar.isMatthewJavaEditor(main)) {
+						allversionsjar.Powershell(main);
+					}
 						else {
 							allversionsjar.deleteExistingMainJar(this,main);
 							for(int i = 18; i <= 23; i++) {
@@ -2302,10 +2303,11 @@ boolean isNoPackage = false;
 							}
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
-							String main=allversionsjar.getMain(storeselectedfile,preferences);
-							allversionsjar.WriteManifest(main);
-							if(allversionsjar.isMatthewJavaEditor(main)) {
-								Powershell powershell = null;
+						String main=allversionsjar.getMain(storeselectedfile,preferences);
+						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
+						allversionsjar.WriteManifest(main);
+						if(allversionsjar.isMatthewJavaEditor(main)) {
+							Powershell powershell = null;
 if(isNoPackage) {
 									powershell=new PowershellNoPackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
 								}
@@ -2412,6 +2414,7 @@ boolean isOnePackage = false;
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 					String main=allversionsjar.getMain(storeselectedfile,preferences);
+					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 					allversionsjar.WriteManifest(main);
 					if(allversionsjar.isMatthewJavaEditor(main)) {
 						Powershell powershell = null;
@@ -3458,6 +3461,7 @@ CommandLine commandline = new CommandLine();
 									sc.remove(lc);
 									ssf.setStartupComboBox(fileName, sc);
 								}
+								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
 								
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -3738,10 +3742,11 @@ CommandLine commandline = new CommandLine();
 										ssf.setStartupLockedClass(fileName, "");
 										List<String> sc = ssf.getStartupComboBox(fileName);
 										sc.remove(lc);
-										ssf.setStartupComboBox(fileName, sc);
-									}
-									
-									// setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
+									ssf.setStartupComboBox(fileName, sc);
+								}
+								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
+								
+								// setStarterClassBoxes(Main.this.getDirectory(fileName)+commandline.main_class);
 									
 startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
