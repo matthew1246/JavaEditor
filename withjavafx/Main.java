@@ -3283,8 +3283,13 @@ else { // More than one package
 				//matthewlayout.setPadding(2,2,2,2);
 				panel0.setLayout(matthewlayout);
 				
-				JTextField input = new JTextField();
-				panel0.add(input,new XYWidthHeight(0,0,26,1));
+				JTextField input = new JTextField(30);
+				JPanel innerpanel=new JPanel(new GridBagLayout());
+				GridBagConstraints gbc=new GridBagConstraints();
+				gbc.fill=GridBagConstraints.BOTH;
+				gbc.anchor=GridBagConstraints.CENTER;
+				innerpanel.add(input,gbc);
+				panel0.add(innerpanel,new XYWidthHeight(0,0,26,2));
 				
 				/*
 				** The arrows are stacked in the second column and share the height of
@@ -3300,44 +3305,46 @@ else { // More than one package
 				** pixel at the bottom, which left the down arrow one pixel higher than
 				** the text field and the Find button beside it.
 				*/
-				//arrowspanel.setLayout(new GridLayout(2,1,0,1));
-				arrowspanel.setLayout(new GridLayout(2,1,0,0));
+				arrowspanel.setLayout(new MatthewLayout());
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
             			upArrow.setMargin(new Insets(0,0,0,0));
             			downArrow.setMargin(new Insets(0,0,0,0));
-            			arrowspanel.add(upArrow);
-            			arrowspanel.add(downArrow);
-            			panel0.add(arrowspanel,new XYWidthHeight(1,0,2,1));
+            			//arrowspanel.add(upArrow);
+            			//arrowspanel.add(downArrow);
+            			arrowspanel.add(upArrow,new XYWidthHeight(0,0,1,1));
+				arrowspanel.add(downArrow,new XYWidthHeight(0,1,1,1));
+            			panel0.add(arrowspanel,new XYWidthHeight(1,0,2,2));
+			
 				
 				JButton click = new JButton("Find");
-				panel0.add(click,new XYWidthHeight(2,0,4,1));
+				panel0.add(click,new XYWidthHeight(2,0,4,2));
 		
 				JCheckBox searchall = new JCheckBox("all");
-				panel0.add(searchall,new XYWidthHeight(0,1,3,1));
+				panel0.add(searchall,new XYWidthHeight(0,2,3,2));
 		
 				JCheckBox casey=new JCheckBox("case");
-				panel0.add(casey,new XYWidthHeight(1,1,4,1));
+				panel0.add(casey,new XYWidthHeight(1,2,4,2));
 		
 				JTextField replaceinput = new JTextField();
-				panel0.add(replaceinput,new XYWidthHeight(2,1,5,1));
+				panel0.add(replaceinput,new XYWidthHeight(2,2,5,2));
 				replaceinput.setEditable(false);
 				
 				JCheckBox replace = new JCheckBox("replace");
-				panel0.add(replace,new XYWidthHeight(3,1,5,1));
+				panel0.add(replace,new XYWidthHeight(3,2,5,2));
 				replace.addActionListener( (ev3) -> {
 					replaceinput.setEditable(true);
 				});
 		
 				JCheckBox selection = new JCheckBox("Select");
-				panel0.add(selection,new XYWidthHeight(4,1,5,1));
+				panel0.add(selection,new XYWidthHeight(4,2,5,2));
 					
 				
 				JCheckBox regex_checkbox = new JCheckBox("regex");
-				panel0.add(regex_checkbox,new XYWidthHeight(5,1,5,1));
+				panel0.add(regex_checkbox,new XYWidthHeight(5,2,5,2));
 				
 				JCheckBox cursor= new JCheckBox("cursor");
-				panel0.add(cursor,new XYWidthHeight(6,1,5,1));
+				panel0.add(cursor,new XYWidthHeight(6,2,5,2));
 				
 				frame2.getContentPane().add(panel0);
 				
