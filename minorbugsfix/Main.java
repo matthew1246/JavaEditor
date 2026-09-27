@@ -1221,7 +1221,11 @@ edit.add(functionLines);
 		gbc.gridx=19;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx=1.0;
+		//weightx 0 so this panel keeps its preferred width instead of taking a share
+		//of the extra space when the frame is maximised. MatthewLayout divides the
+		//panel into equal columns, so any extra width went to the magnifying glass
+		//button's column and pushed the "Starter:" label away from the JCombobox.
+		gbc.weightx=0.0;
 		gbc.weighty=1.0;
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
