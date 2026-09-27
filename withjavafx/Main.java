@@ -3276,7 +3276,7 @@ else { // More than one package
 				JFrame frame2 = new JFrame();
 				//frame2.setSize(400,110);
 				//frame2.setSize(425,110);
-				frame2.setSize(450,110);
+				frame2.setSize(450,120);
                     
 				JPanel panel0 = new JPanel();
 				MatthewLayout matthewlayout=new MatthewLayout();
