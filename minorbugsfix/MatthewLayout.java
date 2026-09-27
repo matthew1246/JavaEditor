@@ -295,8 +295,18 @@ public class MatthewLayout implements LayoutManager2 {
 				** Only the bounds are set here. Changing the preferred/minimum/maximum
 				** size of the children would make preferredLayoutSize() depend on the
 				** current size of this panel, which is what made the parent layout grow.
+				**
+				** Edges are rounded and shared between neighbours, and each size is the
+				** difference between two edges. Truncating the origin and the size
+				** separately (floor(ySum*ysize) + floor(height*ysize)) loses up to a
+				** pixel on every row boundary, which accumulates into a gap along the
+				** bottom of the panel.
 				*/
-				component.setBounds(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize)+xywidthheight.y*vGap,(int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize));
+				int left = padL+(int)Math.round(xSum*xsize);
+				int right = padL+(int)Math.round((xSum+xywidthheight.width)*xsize);
+				int top = padT+(int)Math.round(ySum*ysize)+xywidthheight.y*vGap;
+				int bottom = padT+(int)Math.round((ySum+xywidthheight.height)*ysize)+xywidthheight.y*vGap;
+				component.setBounds(left,top,right-left,bottom-top);
 				showBorderIfNeeded(component);
 			}
 		}
