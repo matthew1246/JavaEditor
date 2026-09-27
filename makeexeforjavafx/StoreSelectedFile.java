@@ -53,6 +53,43 @@ public class StoreSelectedFile {
 		preferences.startupcombobox = startups;
 		setBackup(hashmap);
 	}
+	/*
+	** Stores the executed class name inside the startupcombobox of every
+	** entry that is inside the same directory as fileName.
+	*/
+	public void addStartupComboBoxInSameDirectory(String fileName,String executedClass) {
+		if(fileName == null || fileName.equals(""))
+			return;
+		if(executedClass == null)
+			return;
+		String classname = executedClass.replace(".java","");
+		int dot = classname.lastIndexOf('.');
+		if(dot != -1)
+			classname = classname.substring(dot+1);
+		if(classname.equals(""))
+			return;
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		if(!hashmap.containsKey(fileName)) {
+			set(fileName);
+			hashmap = getBackup();
+		}
+		String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+		for(String key:new ArrayList<String>(hashmap.keySet())) {
+			String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+			if(!directory.equals(directory2))
+				continue;
+			Preferences preferences = hashmap.get(key);
+			if(preferences == null) {
+				preferences = new Preferences();
+				hashmap.put(key,preferences);
+			}
+			if(preferences.startupcombobox == null)
+				preferences.startupcombobox = new ArrayList<String>();
+			preferences.startupcombobox.remove(classname);
+			preferences.startupcombobox.add(0,classname);
+		}
+		setBackup(hashmap);
+	}
 	public void setStartupLockedClass(String fileName,String lockedClass) {
 		LinkedHashMap<String,Preferences> hashmap = getBackup();
 		Preferences preferences=hashmap.get(fileName);

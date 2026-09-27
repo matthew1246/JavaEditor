@@ -2203,6 +2203,7 @@ if(result == 0) {
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
+						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
@@ -2288,6 +2289,7 @@ if(result == 0) {
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
+						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
@@ -2372,6 +2374,7 @@ if(result == 0) {  // isOnePackage = true;
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 					String main=allversionsjar.getMain(storeselectedfile,preferences);
+					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 					allversionsjar.WriteManifest(main);
 					if(allversionsjar.isMatthewJavaEditor(main)) {
 						Powershell powershell = allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
@@ -3400,6 +3403,7 @@ CommandLine commandline = new CommandLine();
 									sc.remove(lc);
 									ssf.setStartupComboBox(fileName, sc);
 								}
+								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -3683,6 +3687,7 @@ CommandLine commandline = new CommandLine();
 										sc.remove(lc);
 										ssf.setStartupComboBox(fileName, sc);
 									}
+									ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
 									
 startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));

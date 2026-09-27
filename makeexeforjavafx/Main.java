@@ -2579,6 +2579,7 @@ else { // More than one package
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
+							storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
@@ -2720,6 +2721,7 @@ else { // More than one package
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 							String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
+							storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
 								if(isJavaFX) {
@@ -2858,6 +2860,7 @@ else { // More than one package
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(isJavaFX,storeselectedfile,preferences);
+						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
 							if(isJavaFX) {
@@ -4044,6 +4047,7 @@ CommandLine commandline = new CommandLine();
 									sc.remove(lc);
 									ssf.setStartupComboBox(fileName, sc);
 								}
+								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
 								
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -4373,6 +4377,7 @@ CommandLine commandline = new CommandLine();
 										sc.remove(lc);
 										ssf.setStartupComboBox(fileName, sc);
 									}
+									ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
 									
 									process=runtime.exec(command,null,new File(classpath1));
 									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);
