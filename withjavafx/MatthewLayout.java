@@ -303,14 +303,14 @@ public class MatthewLayout implements LayoutManager2 {
 				** pixel on every row boundary, which accumulates into a gap along the
 				** bottom of the panel.
 				**
-				** The two vertical edges come from rowEdge() and from the row index
-				** only. A component's own y used to be added to both edges, which is
-				** only correct for a component that is exactly one row tall: a taller
-				** one stopped short of the gap it spans, and any row that shared its
-				** index with a shorter chain could land a pixel away from its
-				** neighbours. rowEdge() gives every component of a row the same top
-				** and the same bottom, and the bottom of the last row lands exactly on
-				** the bottom padding.
+				** The two vertical edges come from rowTop() and rowBottom() and from
+				** the row index only. A component's own y used to be added to both
+				** edges, which is only correct for a component that is exactly one
+				** row tall: a taller one stopped short of the gap it spans, and any
+				** row that shared its index with a shorter chain could land a pixel
+				** away from its neighbours. rowTop() and rowBottom() give every
+				** component of a row the same top and the same bottom, and the bottom
+				** of the last row lands exactly on the bottom padding.
 				*/
 				int left = padL+(int)Math.round(xSum*xsize);
 				int right = padL+(int)Math.round((xSum+xywidthheight.width)*xsize);

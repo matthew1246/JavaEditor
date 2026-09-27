@@ -3308,7 +3308,13 @@ else { // More than one package
 				panel0.add(input,new XYWidthHeight(0,0,26,1));
 				
 				JPanel arrowspanel = new JPanel();
-				arrowspanel.setLayout(new GridLayout(2,1));
+				/*
+				** The 1 pixel vertical gap is what makes the two arrows add up to the
+				** full height of the row. Without it GridLayout(2,1) drops the leftover
+				** pixel at the bottom, which left the down arrow one pixel higher than
+				** the text field and the Find button beside it.
+				*/
+				arrowspanel.setLayout(new GridLayout(2,1,0,1));
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
             			upArrow.setMargin(new Insets(0,2,0,2));

@@ -243,7 +243,15 @@ public class MatthewLayout implements LayoutManager2 {
 			int padB = insets.bottom + padding.bottom;
 			int gaps = Math.max(0,maxRow-1)*vGap;
 			double xsize = Math.max(0,container.getWidth()-padL-padR) / ((double)highestXSumFraction);
-			double ysize = Math.max(0,container.getHeight()-padT-padB-gaps) / ((double)highestYSumFraction);
+			/*
+			** Every row gets the same whole number of pixels. Dividing into a double
+			** and rounding each row on its own handed the leftover pixel to whichever
+			** row it landed in, so one row (and so one component of that row, such
+			** as a text field) came out a pixel shorter than the rows around it. What
+			** is left over now stays in the bottom padding, so all rows are equal.
+			*/
+			int available = Math.max(0,container.getHeight()-padT-padB-gaps);
+			int rowHeight = (highestYSumFraction > 0) ? (available/highestYSumFraction) : 0;
 			for(int i = 0; i < components.size(); i++) {
 				XYWidthHeight xywidthheight = xywidthheights.get(i);
 				Component component = components.get(i);
@@ -301,15 +309,42 @@ public class MatthewLayout implements LayoutManager2 {
 				** separately (floor(ySum*ysize) + floor(height*ysize)) loses up to a
 				** pixel on every row boundary, which accumulates into a gap along the
 				** bottom of the panel.
+				**
+				** The two vertical edges come from rowTop() and rowBottom() and from
+				** the row index only. A component's own y used to be added to both
+				** edges, which is only correct for a component that is exactly one
+				** row tall: a taller one stopped short of the gap it spans, and any
+				** row that shared its index with a shorter chain could land a pixel
+				** away from its neighbours. rowTop() and rowBottom() give every
+				** component of a row the same top and the same bottom, and the bottom
+				** of the last row lands exactly on the bottom padding.
 				*/
 				int left = padL+(int)Math.round(xSum*xsize);
 				int right = padL+(int)Math.round((xSum+xywidthheight.width)*xsize);
-				int top = padT+(int)Math.round(ySum*ysize)+xywidthheight.y*vGap;
-				int bottom = padT+(int)Math.round((ySum+xywidthheight.height)*ysize)+xywidthheight.y*vGap;
+				int top = rowTop(ySum,padT,rowHeight,vGap);
+				int bottom = rowBottom(ySum+xywidthheight.height,padT,rowHeight,vGap);
 				component.setBounds(left,top,right-left,bottom-top);
 				showBorderIfNeeded(component);
 			}
 		}
+	}
+	/*
+	** The pixel line where a row starts: every row above it, plus the gap above each
+	** of those rows. The first row starts at the top padding.
+	*/
+	private int rowTop(int row,int padT,int rowHeight,int vGap) {
+		return padT+row*rowHeight+row*vGap;
+	}
+	/*
+	** The pixel line where a row ends: every row down to it, plus the gap between
+	** those rows only, because the gap below the last row belongs to what comes next.
+	** The bottom of the last row therefore lands on the bottom padding.
+	*/
+	private int rowBottom(int row,int padT,int rowHeight,int vGap) {
+		if(row <= 0) {
+			return padT;
+		}
+		return padT+row*rowHeight+(row-1)*vGap;
 	}
 	private void showBorderIfNeeded(Component component) {
 		if(showBorders) {
