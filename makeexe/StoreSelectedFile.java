@@ -25,23 +25,49 @@ public class StoreSelectedFile {
 	}
 	public List<String> getStartupComboBox(String fileName) {
 		Preferences preferences=getBackup().get(fileName);
-		if(preferences != null) {
-			HashSet<String> hashset = new HashSet<String>();
+		HashSet<String> hashset = new HashSet<String>();
+		if(preferences != null && preferences.startupcombobox != null) {
 			for(String startup:preferences.startupcombobox) {
 				hashset.add(startup);
 			}
-			List<String> list=new ArrayList<String>(hashset);
-			/*System.out.println("list:");
-			for(String item:list) {
-				System.out.print(item+" ");
-			}		
-			System.out.println();
-			*/
+		}
+		if(hashset.isEmpty()) { // This file has no startup classes of its own, so use the ones of the files in the same directory.
+			return getStartupComboBoxInSameDirectory(fileName);
+		}
+		/*System.out.println("list:");
+		for(String item:list) {
+			System.out.print(item+" ");
+		}		
+		System.out.println();
+		*/
+		return new ArrayList<String>(hashset);
+	}
+	/*
+	** Returns the startup classes of every entry that is inside the same
+	** directory as fileName. Used to fill the startup JComboBox of a file
+	** that was never opened before.
+	*/
+	public List<String> getStartupComboBoxInSameDirectory(String fileName) {
+		List<String> list = new ArrayList<String>();
+		if(fileName == null || fileName.equals(""))
 			return list;
+		LinkedHashMap<String,Preferences> hashmap = getBackup();
+		String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+		for(String key:hashmap.keySet()) {
+			if(key.equals(fileName))
+				continue;
+			String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+			if(!directory.equals(directory2))
+				continue;
+			Preferences preferences = hashmap.get(key);
+			if(preferences == null || preferences.startupcombobox == null)
+				continue;
+			for(String startup:preferences.startupcombobox) {
+				if(startup != null && !list.contains(startup))
+					list.add(startup);
+			}
 		}
-		else {
-			return new ArrayList<String>();
-		}
+		return list;
 	}
 	public void setStartupComboBox(String fileName,List<String> startups) {
 		LinkedHashMap<String,Preferences> hashmap = getBackup();
