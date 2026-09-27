@@ -26,31 +26,25 @@ public class MatthewLayout implements LayoutManager2 {
 		panel.setLayout(matthewLayout);
 		frame.setSize(800,600);
 		
-		JPanel guaranteedlayout=new JPanel(new GuaranteedLayout());
 		JPanel firstLabel = new JPanel(new GridBagLayout());
 		firstLabel.add(new JLabel("Face:"));
-		guaranteedlayout.add(firstLabel,new XYWidthHeight(0,0,1,1));
+		panel.add(firstLabel,new XYWidthHeight(0,0,1,1));
 		JComboBox<String> combobox = new JComboBox<String>();
 		combobox.addItem("Serif");
 		combobox.addItem("2");
-		guaranteedlayout.add(combobox,new XYWidthHeight(1,0,2,1));
-		panel.add(guaranteedlayout,new XYWidthHeight(0,0,3,1));
+		panel.add(combobox,new XYWidthHeight(1,0,2,1));
 		
 		JTextArea textArea = new JTextArea("The quick brown fox jumps over the lazy dog");
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		panel.add(textArea,new XYWidthHeight(1,0,3,6));
-		
-		JPanel guaranteedlayout2=new JPanel(new GuaranteedLayout());
+		panel.add(textArea,new XYWidthHeight(2,0,3,6));
 		JPanel subzero = new JPanel(new GridBagLayout());
 		subzero.add(new JLabel("Size:"));
-		guaranteedlayout2.add(subzero,new XYWidthHeight(0,0,1,1));
+		panel.add(subzero,new XYWidthHeight(0,1,1,1));
 		JComboBox<String> combobox2 = new JComboBox<String>();
 		combobox2.addItem("8");
 		combobox2.addItem("2");
-		guaranteedlayout2.add(combobox2,new XYWidthHeight(1,0,2,1));
-		panel.add(guaranteedlayout2,new XYWidthHeight(0,1,3,1));
-		
+		panel.add(combobox2,new XYWidthHeight(1,1,2,1));
 		JPanel panel_3 = new JPanel(new GridBagLayout());
 		panel_3.add(new JCheckBox());
 		panel_3.add(new JLabel("Bold"));
@@ -62,7 +56,6 @@ public class MatthewLayout implements LayoutManager2 {
 		frame.getContentPane().add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		
 	}
 	private boolean isFill;
 	public boolean showBorders = false;
@@ -80,8 +73,8 @@ public class MatthewLayout implements LayoutManager2 {
 			throw new RuntimeException("Need isFill to be true to use this constructor.");
 		}
 		this.isFill = isFill;
-		padding = new Insets(3,3,3,3);
-		vGap = 3;
+		padding = new Insets(0,0,0,0);
+		vGap = 0;
 	}
 	public MatthewLayout(int minimumWidth, int minimumHeight) {
 		this.minimumWidth = minimumWidth;
@@ -122,6 +115,31 @@ public class MatthewLayout implements LayoutManager2 {
 		}
 		components.add(index,component);
 		xywidthheights.add(index,xywidthheight);
+		removeButtonMargin(component);
+	}
+	/*
+	** A JButton keeps a left and right margin of its own, which takes that much
+	** off the width that is left for the label. The buttons here are stretched to
+	** fill a cell of the grid, so that margin only ever clips the label, and it is
+	** taken away here, once, when the component is added.
+	**
+	** This used to be done in layoutContainer(), which was the wrong place: the
+	** margin feeds into the preferred size of the button, so every layout pass
+	** quietly shrank the children and made the next preferredLayoutSize() answer
+	** with a smaller size than the one before it. Laying out is not allowed to
+	** change a child, and doing it here means the preferred size that is asked for
+	** is the very same one before and after the first layout pass.
+	*/
+	private void removeButtonMargin(Component component) {
+		if(!(component instanceof JButton)) {
+			return;
+		}
+		JButton button = (JButton)component;
+		Insets margin = button.getMargin();
+		if((margin == null) || ((margin.left == 0) && (margin.right == 0))) {
+			return;
+		}
+		button.setMargin(new Insets(margin.top,0,margin.bottom,0));
 	}
 	public void removeLayoutComponent(Component component) {
 		for(int i = 0; i < components.size(); i++) {
@@ -166,24 +184,52 @@ public class MatthewLayout implements LayoutManager2 {
 		if(!isFill) {
 			return new Dimension(padL+padR+columns*minimumWidth,padT+padB+rows*minimumHeight);
 		}
-		double xsize = 0;
-		double ysize = 0;
+		/*
+		** The size that is asked for here is the size at which the fractions resolve
+		** to exactly the preferred sizes of the children. The unit sizes are kept as
+		** doubles and then rounded up once, so that laying this preferred size out
+		** yields the very same unit sizes and no child is ever squeezed below its
+		** preferred size.
+		*/
+		double xunit = getPreferredUnitX();
+		double yunit = getPreferredUnitY();
+		int width = padL+padR+(int)Math.ceil(columns*xunit);
+		int height = padT+padB+(int)Math.ceil(rows*yunit)+gaps;
+		return new Dimension(width,height);
+	}
+	/*
+	** The number of pixels that one fraction of x has to be worth so that the
+	** widest child is not narrower than its preferred size. Zero if nothing is
+	** added yet.
+	*/
+	private double getPreferredUnitX() {
+		double xunit = 0;
 		for(int i = 0; i < components.size(); i++) {
 			XYWidthHeight xywidthheight = xywidthheights.get(i);
 			Dimension preferred = components.get(i).getPreferredSize();
-			if(preferred == null) {
+			if((preferred == null) || (xywidthheight.width <= 0)) {
 				continue;
 			}
-			if(xywidthheight.width > 0) {
-				xsize = Math.max(xsize,preferred.width/(double)xywidthheight.width);
-			}
-			if(xywidthheight.height > 0) {
-				ysize = Math.max(ysize,preferred.height/(double)xywidthheight.height);
-			}
+			xunit = Math.max(xunit,preferred.width/(double)xywidthheight.width);
 		}
-		int width = padL+padR+(int)Math.ceil(columns*xsize);
-		int height = padT+padB+(int)Math.ceil(rows*ysize)+gaps;
-		return new Dimension(width,height);
+		return xunit;
+	}
+	/*
+	** The number of pixels that one fraction of y has to be worth so that the
+	** tallest child is not shorter than its preferred size. Zero if nothing is
+	** added yet.
+	*/
+	private double getPreferredUnitY() {
+		double yunit = 0;
+		for(int i = 0; i < components.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			Dimension preferred = components.get(i).getPreferredSize();
+			if((preferred == null) || (xywidthheight.height <= 0)) {
+				continue;
+			}
+			yunit = Math.max(yunit,preferred.height/(double)xywidthheight.height);
+		}
+		return yunit;
 	}
 	public Dimension minimumLayoutSize(Container container) {
 		Insets insets = container.getInsets();
@@ -242,16 +288,17 @@ public class MatthewLayout implements LayoutManager2 {
 			int padT = insets.top + padding.top;
 			int padB = insets.bottom + padding.bottom;
 			int gaps = Math.max(0,maxRow-1)*vGap;
-			double xsize = Math.max(0,container.getWidth()-padL-padR) / ((double)highestXSumFraction);
+			int availableWidth = Math.max(0,container.getWidth()-padL-padR);
+			int availableHeight = Math.max(0,container.getHeight()-padT-padB-gaps);
 			/*
-			** Every row gets the same whole number of pixels. Dividing into a double
-			** and rounding each row on its own handed the leftover pixel to whichever
-			** row it landed in, so one row (and so one component of that row, such
-			** as a text field) came out a pixel shorter than the rows around it. What
-			** is left over now stays in the bottom padding, so all rows are equal.
+			** The leftover pixels are spread over the rows instead of being dropped,
+			** so the last row ends exactly on the bottom padding. The per row height
+			** then alternates by one pixel, which no gap is ever made of, because
+			** every component of a row takes its top and its bottom from the very
+			** same two pixel lines.
 			*/
-			int available = Math.max(0,container.getHeight()-padT-padB-gaps);
-			int rowHeight = (highestYSumFraction > 0) ? (available/highestYSumFraction) : 0;
+			double xsize = (highestXSumFraction > 0) ? (availableWidth/((double)highestXSumFraction)) : 0;
+			double ysize = (highestYSumFraction > 0) ? (availableHeight/((double)highestYSumFraction)) : 0;
 			for(int i = 0; i < components.size(); i++) {
 				XYWidthHeight xywidthheight = xywidthheights.get(i);
 				Component component = components.get(i);
@@ -291,60 +338,59 @@ public class MatthewLayout implements LayoutManager2 {
 					else break;
 				}
 				
-				if(component instanceof JButton) {
-					JButton button=(JButton) component;
-					Insets insets2=button.getMargin();
-					insets2.left = 0;
-					insets2.right=0;
-					button.setMargin(insets2);
-				}
-				
-				/*
-				** Only the bounds are set here. Changing the preferred/minimum/maximum
-				** size of the children would make preferredLayoutSize() depend on the
-				** current size of this panel, which is what made the parent layout grow.
-				**
-				** Edges are rounded and shared between neighbours, and each size is the
-				** difference between two edges. Truncating the origin and the size
-				** separately (floor(ySum*ysize) + floor(height*ysize)) loses up to a
-				** pixel on every row boundary, which accumulates into a gap along the
-				** bottom of the panel.
-				**
-				** The two vertical edges come from rowTop() and rowBottom() and from
-				** the row index only. A component's own y used to be added to both
-				** edges, which is only correct for a component that is exactly one
-				** row tall: a taller one stopped short of the gap it spans, and any
-				** row that shared its index with a shorter chain could land a pixel
-				** away from its neighbours. rowTop() and rowBottom() give every
-				** component of a row the same top and the same bottom, and the bottom
-				** of the last row lands exactly on the bottom padding.
-				*/
-				int left = padL+(int)Math.round(xSum*xsize);
-				int right = padL+(int)Math.round((xSum+xywidthheight.width)*xsize);
-				int top = rowTop(ySum,padT,rowHeight,vGap);
-				int bottom = rowBottom(ySum+xywidthheight.height,padT,rowHeight,vGap);
-				component.setBounds(left,top,right-left,bottom-top);
+				int left = padL + (int)Math.round(xSum*xsize);
+				int right = padL + (int)Math.round((xSum+xywidthheight.width)*xsize);
+				int top = rowTop(ySum, padT, availableHeight, highestYSumFraction, vGap);
+				int bottom = rowBottom(ySum+xywidthheight.height, padT, availableHeight, highestYSumFraction, vGap);
+				if (right < left) right = left;
+				if (bottom < top) bottom = top;
+				component.setBounds(left, top, right-left, bottom-top);
 				showBorderIfNeeded(component);
 			}
 		}
 	}
 	/*
-	** The pixel line where a row starts: every row above it, plus the gap above each
-	** of those rows. The first row starts at the top padding.
+	** The pixel line where a row starts: the rows above it scaled over the space
+	** that is left once the gaps are taken out, plus the gap above each of those
+	** rows. The first row starts at the top padding, and the scaling is rounded
+	** once per line instead of once per row so that the lines cannot drift apart
+	** and leave a gap along a row boundary.
 	*/
-	private int rowTop(int row,int padT,int rowHeight,int vGap) {
-		return padT+row*rowHeight+row*vGap;
+	private int rowTop(int row,int padT,int availableHeight,int rows,int vGap) {
+		return rowPixel(row,padT,availableHeight,rows,vGap,true);
 	}
 	/*
-	** The pixel line where a row ends: every row down to it, plus the gap between
-	** those rows only, because the gap below the last row belongs to what comes next.
-	** The bottom of the last row therefore lands on the bottom padding.
+	** The pixel line where a row ends: the rows down to it scaled over the space
+	** that is left once the gaps are taken out, plus the gap between those rows
+	** only, because the gap below the last row belongs to what comes next. The
+	** bottom of the last row therefore lands on the bottom padding.
 	*/
-	private int rowBottom(int row,int padT,int rowHeight,int vGap) {
+	private int rowBottom(int row,int padT,int availableHeight,int rows,int vGap) {
+		return rowPixel(row,padT,availableHeight,rows,vGap,false);
+	}
+	/*
+	** One shared pixel line for both edges, so that every component of a row is
+	** given the very same top and the very same bottom and can never end up a
+	** pixel away from its neighbour. belowGap decides whether the gap below the
+	** line belongs to it or to the next row. The whole available height is scaled
+	** from zero, so the line of the last row lands on the bottom padding and no
+	** pixel is left over as a gap along the bottom. A row past the end is clamped
+	** onto the last line, which keeps a badly written constraint inside the
+	** container instead of hanging out of it.
+	*/
+	private int rowPixel(int row,int padT,int availableHeight,int rows,int vGap,boolean belowGap) {
+		if(rows <= 0) {
+			return padT;
+		}
 		if(row <= 0) {
 			return padT;
 		}
-		return padT+row*rowHeight+(row-1)*vGap;
+		if(row >= rows) {
+			row = rows;
+			belowGap = false;
+		}
+		int scaled = (int)Math.round((row*availableHeight)/(double)rows);
+		return padT+scaled+((belowGap ? row : row-1)*vGap);
 	}
 	private void showBorderIfNeeded(Component component) {
 		if(showBorders) {
