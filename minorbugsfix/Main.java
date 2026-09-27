@@ -1221,11 +1221,7 @@ edit.add(functionLines);
 		gbc.gridx=19;
 		gbc.gridy=1;
 		gbc.fill = GridBagConstraints.BOTH;
-		//weightx 0 so this panel keeps its preferred width instead of taking a share
-		//of the extra space when the frame is maximised. MatthewLayout divides the
-		//panel into equal columns, so any extra width went to the magnifying glass
-		//button's column and pushed the "Starter:" label away from the JCombobox.
-		gbc.weightx=0.0;
+		gbc.weightx=1.0;
 		gbc.weighty=1.0;
 		gbc.anchor=gbc.CENTER;
 		gbc.gridwidth=1;
@@ -1350,6 +1346,22 @@ edit.add(functionLines);
 				
 		frame.setLocation(190,0);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		/*
+		** "Starter:" normally sits directly after the magnifying glass button. Once the
+		** frame is resized comboboxpanel is given extra width and MatthewLayout gives
+		** that extra width to the label's column, which is then far wider than the
+		** text and leaves a grey gap before the next combo. Right align the label in
+		** that case so it stays against the combo on its right, and put it back to the
+		** left at the original frame width.
+		*/
+		final int initialframewidth = frame.getWidth();
+		frame.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent ce) {
+				label.setHorizontalAlignment(frame.getWidth() > initialframewidth
+						? SwingConstants.RIGHT : SwingConstants.LEFT);
+			}
+		});
 		frame.setVisible(true);
 		textarea.requestFocus();
 		textarea.setTabSize(4);
