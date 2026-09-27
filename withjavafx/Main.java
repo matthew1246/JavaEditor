@@ -3283,13 +3283,13 @@ else { // More than one package
 				//matthewlayout.setPadding(2,2,2,2);
 				panel0.setLayout(matthewlayout);
 				
-				JTextField input = new JTextField(30);
+				JTextField input = new JTextField();
 				JPanel innerpanel=new JPanel(new GridBagLayout());
 				GridBagConstraints gbc=new GridBagConstraints();
 				gbc.fill=GridBagConstraints.BOTH;
 				gbc.anchor=GridBagConstraints.CENTER;
 				innerpanel.add(input,gbc);
-				panel0.add(innerpanel,new XYWidthHeight(0,0,26,2));
+				panel0.add(input,new XYWidthHeight(0,0,26,2));
 				
 				/*
 				** The arrows are stacked in the second column and share the height of
