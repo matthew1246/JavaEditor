@@ -3290,8 +3290,8 @@ else { // More than one package
 				arrowspanel.setLayout(new GridLayout(2,1));
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
-            			upArrow.setMargin(new Insets(0,2,0,2));
-            			downArrow.setMargin(new Insets(0,2,0,2));
+            			upArrow.setMargin(new Insets(0,0,0,0));
+            			downArrow.setMargin(new Insets(0,0,0,0));
             			arrowspanel.add(upArrow);
             			arrowspanel.add(downArrow);
             			panel0.add(arrowspanel,new XYWidthHeight(1,0,2,1));
