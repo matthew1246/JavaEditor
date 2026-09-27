@@ -2792,10 +2792,10 @@ if(isNoPackage) {
 				JFrame frame2 = new JFrame();
 				//frame2.setSize(400,110);
 				//frame2.setSize(425,110);
-				frame2.setSize(450,110);
+				frame2.setSize(450,120);
 					
 				JPanel panel0 = new JPanel();
-				panel0.setLayout(new MatthewLayout(true));
+				panel0.setLayout(new MatthewLayout());
 				
 				JTextField input = new JTextField();
 				panel0.add(input,new XYWidthHeight(0,0,26,1));
@@ -2807,11 +2807,11 @@ if(isNoPackage) {
 				** pixel at the bottom, which left the down arrow one pixel higher than
 				** the text field and the Find button beside it.
 				*/
-				arrowspanel.setLayout(new GridLayout(2,1,0,1));
+				arrowspanel.setLayout(new GridLayout(2,1));
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
-            			upArrow.setMargin(new Insets(0,2,0,2));
-            			downArrow.setMargin(new Insets(0,2,0,2));
+            			upArrow.setMargin(new Insets(0,0,0,0));
+            			downArrow.setMargin(new Insets(0,0,0,0));
             			arrowspanel.add(upArrow);
             			arrowspanel.add(downArrow);
             			panel0.add(arrowspanel,new XYWidthHeight(1,0,2,1));
