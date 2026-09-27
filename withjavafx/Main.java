@@ -3277,7 +3277,7 @@ else { // More than one package
 				//frame2.setSize(400,110);
 				//frame2.setSize(425,110);
 				frame2.setSize(450,110);
-					
+                    
 				JPanel panel0 = new JPanel();
 				MatthewLayout matthewlayout=new MatthewLayout();
 				matthewlayout.setPadding(2,2,2,2);
@@ -3286,6 +3286,13 @@ else { // More than one package
 				JTextField input = new JTextField();
 				panel0.add(input,new XYWidthHeight(0,0,26,1));
 				
+				/*
+				** The arrows are stacked in the second column and share the height of
+				** the first row, so each one is half as tall as the text field next to
+				** them. A panel that is two rows tall (4,2) would give each arrow a
+				** full row instead, but the two would then no longer sit in the first
+				** row.
+				*/
 				JPanel arrowspanel = new JPanel();
 				arrowspanel.setLayout(new GridLayout(2,1));
 				JButton upArrow = new JButton("\u2191");
