@@ -1,7 +1,4 @@
-import javax.swing.SwingUtilities;
-import javax.swing.BorderFactory;
 import java.awt.Toolkit;
-import javax.swing.JTextField;
 import javax.swing.JComponent;
 import javax.swing.BorderFactory;
 import java.awt.Color;
@@ -16,11 +13,9 @@ import javax.swing.JButton;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.LayoutManager2;
-import javax.swing.JOptionPane;
 import java.awt.Insets;
 import java.awt.Dimension;
 import java.awt.Component;
-import java.util.Random;
 import java.awt.Container;
 import java.awt.LayoutManager;
 public class MatthewLayout implements LayoutManager2 {
@@ -75,6 +70,8 @@ public class MatthewLayout implements LayoutManager2 {
 	private int minimumHeight;
 	private Insets padding = new Insets(0,0,0,0);
 	private int vGap = 0;
+	private List<Component> components = new ArrayList<Component>();
+	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();
 	public MatthewLayout() {
 		this(true);
 	}
@@ -99,183 +96,108 @@ public class MatthewLayout implements LayoutManager2 {
 	public void setGap(int vGap) {
 		this.vGap = vGap;
 	}
-	private List<Component> components = new ArrayList<Component>();
-	private List<XYWidthHeight> xywidthheights = new ArrayList<XYWidthHeight>();
 	public void addLayoutComponent(Component component, Object object) {
-		Dimension dimension = component.getPreferredSize();
-		
-		XYWidthHeight xywidthheight = (XYWidthHeight)object;
-		if(xywidthheights.size() > 0) { // normal
-			/*if(dimension.width < minimumWidth) {
-				minimumWidth = dimension.width;
-				minimumHeight = dimension.height;
-			}*/
-			for(int i = xywidthheights.size()-1; i >= 0; i--) {
-				XYWidthHeight xywidthheight2 = xywidthheights.get(i);
-				if(xywidthheight.y > xywidthheight2.y) {
-					components.add(i+1,component);
-					xywidthheights.add(i+1,xywidthheight);					
-					break;
-				}
-				else if(xywidthheight.y == xywidthheight2.y) {
-					if(xywidthheight.x > xywidthheight2.x) {
-						components.add(i+1,component);
-						xywidthheights.add(i+1,xywidthheight);
-						break;
-					}
-					else if(i == 0) {
-						components.add(0,component);
-						xywidthheights.add(0,xywidthheight);
-					}
-				}
-				else if(i == 0) {
-					components.add(0,component);
-					xywidthheights.add(0,xywidthheight);
-				}
+		XYWidthHeight xywidthheight;
+		if(object instanceof XYWidthHeight) {
+			xywidthheight = (XYWidthHeight)object;
+		}
+		else { // added without a constraint, so it gets its own row below everything else
+			xywidthheight = new XYWidthHeight(0,getMaxRow(),1,1);
+		}
+		if(components.contains(component)) { // re-adding moves the component instead of duplicating it
+			int oldindex = components.indexOf(component);
+			components.remove(oldindex);
+			xywidthheights.remove(oldindex);
+		}
+		int index = 0;
+		while(index < xywidthheights.size()) {
+			XYWidthHeight xywidthheight2 = xywidthheights.get(index);
+			if(xywidthheight2.y > xywidthheight.y) {
+				break;
+			}
+			if((xywidthheight2.y == xywidthheight.y) && (xywidthheight2.x > xywidthheight.x)) {
+				break;
+			}
+			index++;
+		}
+		components.add(index,component);
+		xywidthheights.add(index,xywidthheight);
+	}
+	public void removeLayoutComponent(Component component) {
+		for(int i = 0; i < components.size(); i++) {
+			if(components.get(i) == component) {
+				components.remove(i);
+				xywidthheights.remove(i);
+				return;
 			}
 		}
-		else {
-			/*minimumWidth = dimension.width;
-			minimumHeight = dimension.height;*/
-			components.add(component);
-			xywidthheights.add(xywidthheight);
-		}
 	}
-	
-	public Dimension maximumLayoutSize(Container container) {
-		JOptionPane.showMessageDialog(null,"maximumLayoutSize() called");
-		return container.getPreferredSize();
+	public void addLayoutComponent(String name,Component component) {
+		addLayoutComponent(component,null);
 	}
-	
-	
-public boolean isOn = false;
-	public int originalWidth;
-	public int originalHeight;
 	public void invalidateLayout(Container container) {
-		if(container instanceof JPanel) {
-			// System.out.println("container is jpanel");
-			JPanel panel = (JPanel)container;				
-			Container container2 = panel.getParent();
-			JFrame frame=(JFrame)SwingUtilities.getWindowAncestor(container);
-			Dimension realsize = frame.getSize();
-			System.out.println("frame realsize is "+realsize);
-			int width = (int)realsize.getWidth();
-			int height = (int)realsize.getHeight();							
-			if(width != 0 && height != 0) {
-				originalWidth = width;
-				originalHeight = height;
-			}
-		}
-		if(container instanceof JFrame) {
-			System.out.println("container is JFrame");
-		}
-		/*if(container instanceof JPanel) {
-			JPanel panel = (JPanel)container;
-			if(panel.getWidth() == 0 && panel.getHeight() == 0) {			
-				Dimension preferredsize=panel.getSize();
-				if(preferredsize.getWidth() == 0 && preferredsize.getHeight() == 0) {								
-					Container container2 = container.getParent();
-					if(container2 instanceof JFrame) {
-						JFrame frame = (JFrame)container2;
-						Dimension preferredsize2 = frame.getPreferredSize();
-						if(preferredsize2.getWidth() == 0 && preferredsize2.getHeight() == 0) {
-							Dimension realsize = frame.getSize();
-							int width = (int)realsize.getWidth();
-							int height = (int)realsize.getHeight();							
-							if(width != 0 && height != 0) {
-								originalWidth = width;
-								originalHeight = height;
-							}
-						}
-					}
-				}
-			}
-		}*/
-		// JOptionPane.showMessageDialog(null,"invalidateLayout called");
-		/*SwingUtilities.invokeLater(new Runnable(){
-		        public void run(){
-		            	int width = container.getWidth();
-		            	int height = container.getHeight();
-				System.out.println("width is "+width);
-					originalWidth = width;
-					originalHeight = height;
-					// debugger.Output(width,height);
-					isOn = true;
-			}
-		});*/
+		// Nothing to do: the fractions of every component are already known.
 	}
 	public float getLayoutAlignmentX(Container container) {
-		JOptionPane.showMessageDialog(null,"getLayoutAlignmentX() called");
 		return 0.5f;
 	}
 	public float getLayoutAlignmentY(Container container) {
-		JOptionPane.showMessageDialog(null,"getLayoutAlignmentY called.");
 		return 0.5f;
 	}
-	public void removeLayoutComponent(Component component) {
-		JOptionPane.showMessageDialog(null,"removeLayoutComponent() called");
-	}
-	public void addLayoutComponent(String name,Component component) {
-		JOptionPane.showMessageDialog(null,"addLayoutComponent() called");
-	}
+	/*
+	** The preferred size is derived from the preferred sizes of the children
+	** scaled by their XYWidthHeight fractions. It must never report the current
+	** size of the container (or the size of the window), otherwise a parent
+	** layout manager such as GridBagLayout would grow to fit this panel and
+	** resize the whole row/frame.
+	*/
 	public Dimension preferredLayoutSize(Container container) {
-		// layoutContainer(container);
-		// JOptionPane.showMessageDialog(null,"preferredLayoutSize called.");
-		/*if(isFill && (container.getWidth() == 0) && (container.getHeight() == 0)) {
-			Dimension screensize= Toolkit.getDefaultToolkit().getScreenSize();
-			container.setSize(screensize);
-		}	
-		layoutContainer(container);
-		int xSum = 0;
-		for(int j = 0; j < components.size(); j++) {
-			XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-			Component component4 = components.get(j);
-			if(xywidthheight2.y == 0) {
-				xSum+= component4.getBounds().getWidth();
-			}
-		}
-		int ySum = 0;
-		for(int j = 0; j < components.size(); j++) {
-			XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-			Component component4 = components.get(j);
-			if(xywidthheight2.x == 0) {
-				ySum+= component4.getBounds().getHeight();
-			}
-		}
-		Dimension dimension = new Dimension(0,0);
 		Insets insets = container.getInsets();
-		dimension.width = insets.left+xSum+insets.right;
-		dimension.height = insets.top+ySum+insets.bottom;
-*/
-		
-		// System.out.println("originalWidth is "+originalWidth);				
-		// System.out.println("originalHeight is "+originalHeight);
-		// System.out.println("preferredLayout width "+container.getSize());
-		Dimension dimension=container.getSize();
-		if(dimension.getWidth() != 0.0 && dimension.getHeight() != 0.0) {
-			layoutContainer(container);
-			return dimension;
-			
+		int padL = insets.left + padding.left;
+		int padR = insets.right + padding.right;
+		int padT = insets.top + padding.top;
+		int padB = insets.bottom + padding.bottom;
+		int columns = getHighestXSumFraction();
+		int rows = getHighestYSumFraction();
+		if((components.size() == 0) || (columns <= 0) || (rows <= 0)) {
+			return new Dimension(padL+padR,padT+padB);
 		}
-		else {
-			return new Dimension(originalWidth,originalHeight);
+		int gaps = Math.max(0,getMaxRow()-1)*vGap;
+		if(!isFill) {
+			return new Dimension(padL+padR+columns*minimumWidth,padT+padB+rows*minimumHeight);
 		}
+		double xsize = 0;
+		double ysize = 0;
+		for(int i = 0; i < components.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			Dimension preferred = components.get(i).getPreferredSize();
+			if(preferred == null) {
+				continue;
+			}
+			if(xywidthheight.width > 0) {
+				xsize = Math.max(xsize,preferred.width/(double)xywidthheight.width);
+			}
+			if(xywidthheight.height > 0) {
+				ysize = Math.max(ysize,preferred.height/(double)xywidthheight.height);
+			}
+		}
+		int width = padL+padR+(int)Math.ceil(columns*xsize);
+		int height = padT+padB+(int)Math.ceil(rows*ysize)+gaps;
+		return new Dimension(width,height);
 	}
 	public Dimension minimumLayoutSize(Container container) {
-		JOptionPane.showMessageDialog(null,"minimumLayoutSize() called");
-		Dimension dimension = new Dimension(0,0);
 		Insets insets = container.getInsets();
-		dimension.width = insets.left+insets.right;
-		dimension.height = insets.top+insets.bottom;
-		return dimension;
+		return new Dimension(insets.left+insets.right,insets.top+insets.bottom);
 	}
-	int x = 0;
+	public Dimension maximumLayoutSize(Container container) {
+		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+		Insets insets = container.getInsets();
+		return new Dimension(screensize.width,screensize.height-(insets.top+insets.bottom));
+	}
 	public void layoutContainer(Container container) 	{
-		if(x == 0) 
-		for(int i = 0; i < xywidthheights.size(); i++) {
-			XYWidthHeight xywidthheight = xywidthheights.get(i);
+		if(components.size() == 0) {
+			return;
 		}
-		x++;
 		if(!isFill) {
 			for(int i = 0; i < components.size(); i++) {
 				int containerWidth = container.getWidth();
@@ -307,49 +229,21 @@ public boolean isOn = false;
 			
 				Insets insets = container.getInsets();
 				component.setBounds(insets.left+padding.left+xSum,insets.top+padding.top+ySum,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
-				if(showBorders) {
-					JComponent jcomponent = (JComponent)component;
-					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
-				}
+				showBorderIfNeeded(component);
 			}
 		}
 		else { // isFill = true
-			int highestXSumFraction = 0;
-			for(int i = 0; i < components.size(); i++) {
-				XYWidthHeight xywidthheight = xywidthheights.get(i);
-				int fractionXSum =0;
-				int count = 0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2= xywidthheights.get(j);
-					if(xywidthheight.y == xywidthheight2.y) {
-						if(count != xywidthheight2.x) {
-							// JOptionPane.showMessageDialog(null,""+xywidthheight2.x+" "+count);
-							int z = xywidthheight2.x-count;
-							fractionXSum+= z;
-							count+= z;
-						}
-						fractionXSum+= xywidthheight2.width;
-						count++;
-					}					
-				}
-				if(fractionXSum > highestXSumFraction) {
-					highestXSumFraction=fractionXSum;
-				}
-			}
-			int highestYSumFraction = 0;
-			for(int i = 0; i < components.size(); i++) {
-				XYWidthHeight xywidthheight = xywidthheights.get(i);
-				int fractionYSum =0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2= xywidthheights.get(j);
-					if(xywidthheight.x == xywidthheight2.x) {
-						fractionYSum+= xywidthheight2.height;
-					}					
-				}
-				if(fractionYSum > highestYSumFraction) {
-					highestYSumFraction=fractionYSum;
-				}
-			}
+			int highestXSumFraction = getHighestXSumFraction();
+			int highestYSumFraction = getHighestYSumFraction();
+			int maxRow = getMaxRow();
+			Insets insets = container.getInsets();
+			int padL = insets.left + padding.left;
+			int padR = insets.right + padding.right;
+			int padT = insets.top + padding.top;
+			int padB = insets.bottom + padding.bottom;
+			int gaps = Math.max(0,maxRow-1)*vGap;
+			double xsize = Math.max(0,container.getWidth()-padL-padR) / ((double)highestXSumFraction);
+			double ysize = Math.max(0,container.getHeight()-padT-padB-gaps) / ((double)highestYSumFraction);
 			for(int i = 0; i < components.size(); i++) {
 				XYWidthHeight xywidthheight = xywidthheights.get(i);
 				Component component = components.get(i);
@@ -357,7 +251,6 @@ public boolean isOn = false;
 				int xcount = 0;
 				for(int j = 0; j < components.size(); j++) {
 					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-					Component component4 = components.get(j);
 					if(!xywidthheight2.equals(xywidthheight)) {
 						if(xywidthheight2.y == xywidthheight.y) {
 							if(xcount != xywidthheight2.x) {
@@ -382,7 +275,6 @@ public boolean isOn = false;
 				int ySum = 0;
 				for(int j = 0; j < components.size(); j++) {
 					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-					Component component4 = components.get(j);
 					if(!xywidthheight2.equals(xywidthheight)) {
 						if((getWeightx(xywidthheight2) == getWeightx(xywidthheight)) || isInclusiveY(xywidthheight,xywidthheight2)) {			
 							ySum+= xywidthheight2.height;
@@ -390,19 +282,6 @@ public boolean isOn = false;
 					}
 					else break;
 				}
-				Insets insets = container.getInsets();
-				int padL = insets.left + padding.left;
-				int padR = insets.right + padding.right;
-				int padT = insets.top + padding.top;
-				int padB = insets.bottom + padding.bottom;
-				double xsize = ((double)(container.getWidth()-padL-padR)) / ((double)highestXSumFraction);
-				int maxRow = 0;
-				for(XYWidthHeight xw : xywidthheights) {
-					if(xw.y >= maxRow) maxRow = xw.y + 1;
-				}
-				double ysize = ((double)(container.getHeight()-padT-padB-(maxRow-1)*vGap)) / ((double)highestYSumFraction);
-				// System.out.println("ysize is " +  ysize);
-				// container.setWidth(800);
 				
 				if(component instanceof JButton) {
 					JButton button=(JButton) component;
@@ -412,25 +291,72 @@ public boolean isOn = false;
 					button.setMargin(insets2);
 				}
 				
-				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xywidthheight.width +" "+xywidthheight.height+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
-				component.setLocation(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize)+xywidthheight.y*vGap);
-				// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
-				component.setMinimumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				component.setMaximumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				component.setSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				component.setPreferredSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				// System.out.println(container.getWidth()+" "+(int)(((double)xywidthheight.x)*xsize)+" "+(xywidthheight.width*((int)xsize))+" "+(xywidthheight.height*((int)ysize))+" "+(int)xsize+" "+(int)ysize);
-				component.validate();
-				component.repaint();
-				if(showBorders) {
-					JComponent jcomponent = (JComponent)component;
-					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
-				}
+				/*
+				** Only the bounds are set here. Changing the preferred/minimum/maximum
+				** size of the children would make preferredLayoutSize() depend on the
+				** current size of this panel, which is what made the parent layout grow.
+				*/
+				component.setBounds(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize)+xywidthheight.y*vGap,(int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize));
+				showBorderIfNeeded(component);
 			}
-			for(XYWidthHeight xywidthheight:xywidthheights) {
-				System.out.println(xywidthheight);
-			}		
 		}
+	}
+	private void showBorderIfNeeded(Component component) {
+		if(showBorders) {
+			JComponent jcomponent = (JComponent)component;
+			jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
+		}
+	}
+	private int getMaxRow() {
+		int maxRow = 0;
+		for(int i = 0; i < xywidthheights.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			if(xywidthheight.y >= maxRow) {
+				maxRow = xywidthheight.y + 1;
+			}
+		}
+		return maxRow;
+	}
+	private int getHighestXSumFraction() {
+		int highestXSumFraction = 0;
+		for(int i = 0; i < xywidthheights.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			int fractionXSum = 0;
+			int count = 0;
+			for(int j = 0; j < xywidthheights.size(); j++) {
+				XYWidthHeight xywidthheight2 = xywidthheights.get(j);
+				if(xywidthheight.y == xywidthheight2.y) {
+					if(count != xywidthheight2.x) {
+						int z = xywidthheight2.x-count;
+						fractionXSum+= z;
+						count+= z;
+					}
+					fractionXSum+= xywidthheight2.width;
+					count++;
+				}					
+			}
+			if(fractionXSum > highestXSumFraction) {
+				highestXSumFraction=fractionXSum;
+			}
+		}
+		return highestXSumFraction;
+	}
+	private int getHighestYSumFraction() {
+		int highestYSumFraction = 0;
+		for(int i = 0; i < xywidthheights.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			int fractionYSum = 0;
+			for(int j = 0; j < xywidthheights.size(); j++) {
+				XYWidthHeight xywidthheight2 = xywidthheights.get(j);
+				if(xywidthheight.x == xywidthheight2.x) {
+					fractionYSum+= xywidthheight2.height;
+				}					
+			}
+			if(fractionYSum > highestYSumFraction) {
+				highestYSumFraction=fractionYSum;
+			}
+		}
+		return highestYSumFraction;
 	}
 	public boolean isInclusiveY(XYWidthHeight xywidthheight,XYWidthHeight xywidthheight2) {
 		int weightx2= getWeightx(xywidthheight2);
