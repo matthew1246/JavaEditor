@@ -8,8 +8,6 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MatthewLayout.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\GuaranteedLayout.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Fraction.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\matthewlayout.java"
     ],
     "caretposition": 0
@@ -28,7 +26,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 128943
+    "caretposition": 126995
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
