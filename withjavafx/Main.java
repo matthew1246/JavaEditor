@@ -3321,6 +3321,7 @@ else { // More than one package
             			downArrow.setMargin(new Insets(0,0,0,0));
             			upArrow.setBorder(rowborder);
             			downArrow.setBorder(rowborder);
+            			arrowspanel.setBorder(rowborder);
             			//arrowspanel.add(upArrow);
             			//arrowspanel.add(downArrow);
             			arrowspanel.add(upArrow,new XYWidthHeight(0,0,1,1));
@@ -3330,6 +3331,7 @@ else { // More than one package
 				
 				JButton click = new JButton("Find");
 				click.setBorder(rowborder);
+				click.setMargin(new Insets(0,0,0,0));
 				panel0.add(click,new XYWidthHeight(2,0,4,2));
 		
 				JCheckBox searchall = new JCheckBox("all");
