@@ -6,7 +6,8 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MatthewLayout.java"
     ],
     "caretposition": 0
   },
@@ -24,7 +25,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 41
+    "caretposition": 284061
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -1585,6 +1586,38 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MatthewLayout.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Control_F",
+      "MSDOS",
+      "Maven",
+      "ThreeComboboxes",
+      "AddPlugin",
+      "FileListModifier",
+      "AllClassesInFile",
+      "StoreSelectedFile",
+      "AllVersionsJar",
+      "TabFileNameAndContent",
+      "StarterJComboBox",
+      "CommandLine",
+      "Git",
+      "AddDependency",
+      "DependencyRemover",
+      "XML",
+      "Packager",
+      "Links",
+      "ManterX",
+      "Preferences",
+      "Main",
+      "ExtractJavaFXJars"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
