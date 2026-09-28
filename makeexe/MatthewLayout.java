@@ -18,6 +18,8 @@ import java.awt.Dimension;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.LayoutManager;
+import java.awt.Window;
+import javax.swing.JDialog;
 public class MatthewLayout implements LayoutManager2 {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
@@ -173,7 +175,7 @@ public class MatthewLayout implements LayoutManager2 {
 		Insets insets = container.getInsets();
 		int padL = insets.left + padding.left;
 		int padR = insets.right + padding.right;
-		int padT = insets.top + padding.top;
+		int padT = insets.top + padding.top + getWindowTopInset(container);
 		int padB = insets.bottom + padding.bottom;
 		int columns = getHighestXSumFraction();
 		int rows = getHighestYSumFraction();
@@ -245,6 +247,8 @@ public class MatthewLayout implements LayoutManager2 {
 			return;
 		}
 		if(!isFill) {
+			Insets insets = container.getInsets();
+			int padT = insets.top + padding.top + getWindowTopInset(container);
 			for(int i = 0; i < components.size(); i++) {
 				int containerWidth = container.getWidth();
 				Component component = components.get(i);
@@ -273,8 +277,7 @@ public class MatthewLayout implements LayoutManager2 {
 					else break;
 				}
 			
-				Insets insets = container.getInsets();
-				component.setBounds(insets.left+padding.left+xSum,insets.top+padding.top+ySum,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
+				component.setBounds(insets.left+padding.left+xSum,padT+ySum,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
 				showBorderIfNeeded(component);
 			}
 		}
@@ -285,7 +288,7 @@ public class MatthewLayout implements LayoutManager2 {
 			Insets insets = container.getInsets();
 			int padL = insets.left + padding.left;
 			int padR = insets.right + padding.right;
-			int padT = insets.top + padding.top;
+			int padT = insets.top + padding.top + getWindowTopInset(container);
 			int padB = insets.bottom + padding.bottom;
 			int gaps = Math.max(0,maxRow-1)*vGap;
 			int availableWidth = Math.max(0,container.getWidth()-padL-padR);
@@ -391,6 +394,39 @@ public class MatthewLayout implements LayoutManager2 {
 		}
 		int scaled = (int)Math.round((row*availableHeight)/(double)rows);
 		return padT+scaled+((belowGap ? row : row-1)*vGap);
+	}
+	/*
+	** The border of a window is what keeps the left, right and bottom edges of a
+	** panel that is added straight to the content pane away from its components:
+	** that inset is empty frame and reads as a margin. The top inset of a window
+	** is not empty, it is the title bar, and the content pane starts on the very
+	** last line of it, so a first row on pixel 0 is drawn flush against the title
+	** bar. The width of the empty border is measured from the window and given to
+	** the top as well, so that all four edges end up the same distance from the
+	** window.
+	**
+	** Only a panel that is at the top of the content pane itself is given it, and
+	** only when nothing sits above it there: neither another panel nor the menu
+	** bar of the window (the content pane starts below the menu bar, so a panel
+	** added straight to it is not on the title bar either). A panel further down
+	** the window, and a panel inside another panel (the arrows of Control F, the
+	** starter panel of the menubar), already have that margin and must not be
+	** pushed down twice. A window that is not on screen yet has no insets at all,
+	** so nothing is given before the decorations are known, and by the time they
+	** are the panel has already been given its real place in the window.
+	*/
+	private int getWindowTopInset(Container container) {
+		Window window = javax.swing.SwingUtilities.getWindowAncestor(container);
+		if((window instanceof JFrame) || (window instanceof JDialog)) {
+			Container contentpane = (window instanceof JFrame) ? ((JFrame)window).getContentPane() : ((JDialog)window).getContentPane();
+			if((container.getParent() == contentpane) && (container.getY() <= 0) && (contentpane.getY() <= 0)) {
+				Insets insets = window.getInsets();
+				if(insets != null) {
+					return Math.max(insets.left,Math.max(insets.right,insets.bottom));
+				}
+			}
+		}
+		return 0;
 	}
 	private void showBorderIfNeeded(Component component) {
 		if(showBorders) {
