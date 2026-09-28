@@ -3285,9 +3285,8 @@ else { // More than one package
 				
 				JTextField input = new JTextField();
 				//Border rowborder = UIManager.getBorder("Button.border");
-				Border rowborder=input.getBorder();
 				
-				input.setBorder(rowborder);
+				//input.setBorder(rowborder);
 				JPanel gblpanel=new JPanel(new GridBagLayout());
 				GridBagConstraints gbc=new GridBagConstraints();
 				gbc.fill=GridBagConstraints.BOTH;
@@ -3298,7 +3297,7 @@ else { // More than one package
 				gblpanel.add(input,gbc);
 				JPanel inputpanel=new JPanel(new BorderLayout());
 				inputpanel.add(gblpanel,BorderLayout.CENTER);
-				panel0.add(inputpanel,new XYWidthHeight(0,0,26,2));
+				panel0.add(input,new XYWidthHeight(0,0,26,2));
 				
 				/*
 				** The arrows are stacked in the second column and share the height of
@@ -3317,11 +3316,9 @@ else { // More than one package
 				arrowspanel.setLayout(new MatthewLayout());
 				JButton upArrow = new JButton("\u2191");
             			JButton downArrow = new JButton("\u2193");
-            			upArrow.setMargin(new Insets(0,0,0,0));
-            			downArrow.setMargin(new Insets(0,0,0,0));
-            			upArrow.setBorder(rowborder);
-            			downArrow.setBorder(rowborder);
-            			arrowspanel.setBorder(rowborder);
+            			//upArrow.setBorder(rowborder);
+            			//downArrow.setBorder(rowborder);
+            			//arrowspanel.setBorder(rowborder);
             			//arrowspanel.add(upArrow);
             			//arrowspanel.add(downArrow);
             			arrowspanel.add(upArrow,new XYWidthHeight(0,0,1,1));
@@ -3330,8 +3327,7 @@ else { // More than one package
 			
 				
 				JButton click = new JButton("Find");
-				click.setBorder(rowborder);
-				click.setMargin(new Insets(0,0,0,0));
+				//click.setBorder(rowborder);
 				panel0.add(click,new XYWidthHeight(2,0,4,2));
 		
 				JCheckBox searchall = new JCheckBox("all");
@@ -3382,6 +3378,11 @@ else { // More than one package
 				input.addActionListener(clicky);
 				
 				frame2.setVisible(true);
+				
+				Border rowborder=click.getBorder();
+				arrowspanel.setBorder(rowborder);
+				input.setBorder(rowborder);
+				
 				SwingUtilities.invokeLater(() -> {
 					frame2.requestFocus();
 					input.requestFocusInWindow();

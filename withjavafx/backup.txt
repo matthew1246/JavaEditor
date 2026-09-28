@@ -7,7 +7,10 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MatthewLayout.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MatthewLayout.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\GuaranteedLayout.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Fraction.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\matthewlayout.java"
     ],
     "caretposition": 0
   },
@@ -25,7 +28,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 284061
+    "caretposition": 128943
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -1595,6 +1598,7 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Control_F",
       "MSDOS",
       "Maven",
@@ -1615,8 +1619,40 @@
       "Links",
       "ManterX",
       "Preferences",
-      "Main",
       "ExtractJavaFXJars"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\GuaranteedLayout.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Fraction.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\matthewlayout.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
     ],
     "starterclass": "",
     "jars": [],
