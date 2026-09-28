@@ -3284,7 +3284,9 @@ else { // More than one package
 				panel0.setLayout(matthewlayout);
 				
 				JTextField input = new JTextField();
-				Border rowborder = UIManager.getBorder("Button.border");
+				//Border rowborder = UIManager.getBorder("Button.border");
+				Border rowborder=input.getBorder();
+				
 				input.setBorder(rowborder);
 				JPanel gblpanel=new JPanel(new GridBagLayout());
 				GridBagConstraints gbc=new GridBagConstraints();
