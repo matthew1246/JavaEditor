@@ -115,7 +115,7 @@ public class Main {
 	private void refreshRecentFiles(JMenu menu) {
 		menu.removeAll();
 		List<String> recents = new Recents().get();
-		for(int i = 0; i < recents.size(); i++) {
+		for(int i = recents.size() - 1; i >= 0; i--) {
 			final String filename = recents.get(i);
 			JMenuItem recentitem = new JMenuItem(filename);
 			recentitem.addActionListener(new ActionListener() {

@@ -2132,8 +2132,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
-      "Main"
+      "Main",
+      "MatthewLayout"
     ],
     "starterclass": "Main",
     "jars": [
@@ -2143,7 +2143,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 36550
+    "caretposition": 36856
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,
@@ -2930,6 +2930,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Control_F",
       "ExtractJUnit",
       "AllVersionsJarMoreThanOnePackage",
@@ -2938,7 +2939,6 @@
       "XML",
       "MatthewLayout",
       "NoFileOpen",
-      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
