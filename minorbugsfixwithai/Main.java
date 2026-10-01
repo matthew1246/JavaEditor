@@ -938,34 +938,25 @@ public class Main {
 		menu.add(openemptynewtab);
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
-		StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
-		LinkedHashMap<String,Preferences> hashmap = storeselectedfile2.getBackup();
-		// Convert the linkedhashmap keys to a List and put into a JList inside a JScrollPane
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
-		for(String filename : hashmap.keySet()) {
-			String displayName = filename;
-			if(displayName.equals("lastopened")) {
-				displayName = "lastopened: " + fileName;
-			}
-			listModel.addElement(displayName);
+		for(String filename : new Recents().get()) {
+			listModel.addElement(filename);
 		}
 		JList<String> recentFilesList = new JList<String>(listModel);
 		recentFilesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		recentFilesList.setVisibleRowCount(10);
+		recentFilesList.setVisibleRowCount(Recents.max);
 		JScrollPane recentScrollPane = new JScrollPane(recentFilesList);
 		int cellHeight = recentFilesList.getFixedCellHeight();
 		if(cellHeight <= 0) {
 			cellHeight = recentFilesList.getFontMetrics(recentFilesList.getFont()).getHeight() + 4;
 		}
-		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.min(10, listModel.getSize())));
+		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.max(1, Math.min(Recents.max, listModel.getSize()))));
 		// Double-click or Enter key to open file
 		recentFilesList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2) {
 					String filename = recentFilesList.getSelectedValue();
 					if(filename != null) {
-						if(filename.startsWith("lastopened: "))
-							filename = filename.replaceFirst("lastopened: ", "");
 						Main.this.OpenNewTab(filename);
 					}
 				}
@@ -976,8 +967,6 @@ public class Main {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					String filename = recentFilesList.getSelectedValue();
 					if(filename != null) {
-						if(filename.startsWith("lastopened: "))
-							filename = filename.replaceFirst("lastopened: ", "");
 						Main.this.OpenNewTab(filename);
 					}
 				}
@@ -2255,6 +2244,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								allversionsjar.MakeJarUsingmsdos(i,main);	
 							}
 						}
+						new Recents().add(Main.this.fileName);
 					});
 				
 					compiley.addActionListener((ev4) -> {
@@ -2342,6 +2332,7 @@ else if(result == 1) {
 							allversionsjar.Compile(javaversionnumber);	
 							allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
 						}
+						new Recents().add(Main.this.fileName);
 					});
 				break;
 				case JOptionPane.NO_OPTION:
@@ -2427,6 +2418,7 @@ else if(result == 1) {
 						allversionsjar.Compile(no_java_verson_number);	
 						allversionsjar.MakeJarUsingmsdos(no_java_verson_number,main);	
 					}
+					new Recents().add(Main.this.fileName);
 				break;
 			}
 		});
@@ -3486,6 +3478,7 @@ CommandLine commandline = new CommandLine();
 									ssf.setStartupComboBox(fileName, sc);
 								}
 								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
+								new Recents().add(fileName);
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -3778,6 +3771,7 @@ CommandLine commandline = new CommandLine();
 										ssf.setStartupComboBox(fileName, sc);
 									}
 									ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
+									new Recents().add(fileName);
 									
 startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
