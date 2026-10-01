@@ -13,6 +13,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.Point;
 import java.lang.reflect.InaccessibleObjectException;
 import javax.swing.text.BadLocationException;
@@ -308,6 +310,22 @@ public class Main {
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier=new FileListModifier();
 	public Git git = new Git();
+	/*
+	** Rebuilds the Recent Files list from recents.txt.
+	** Called every time the menu is opened so files executed or jar files
+	** made in the running editor appear without restarting the editor.
+	*/
+	private void refreshRecentFiles(DefaultListModel<String> listModel,JList<String> recentFilesList,JScrollPane recentScrollPane) {
+		listModel.clear();
+		for(String filename : new Recents().get()) {
+			listModel.addElement(filename);
+		}
+		int cellHeight = recentFilesList.getFixedCellHeight();
+		if(cellHeight <= 0) {
+			cellHeight = recentFilesList.getFontMetrics(recentFilesList.getFont()).getHeight() + 4;
+		}
+		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.max(1, Math.min(Recents.max, listModel.getSize()))));
+	}
 	/*
 	** If have default content for window
 	*/
@@ -939,18 +957,10 @@ public class Main {
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
-		for(String filename : new Recents().get()) {
-			listModel.addElement(filename);
-		}
 		JList<String> recentFilesList = new JList<String>(listModel);
 		recentFilesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		recentFilesList.setVisibleRowCount(Recents.max);
 		JScrollPane recentScrollPane = new JScrollPane(recentFilesList);
-		int cellHeight = recentFilesList.getFixedCellHeight();
-		if(cellHeight <= 0) {
-			cellHeight = recentFilesList.getFontMetrics(recentFilesList.getFont()).getHeight() + 4;
-		}
-		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.max(1, Math.min(Recents.max, listModel.getSize()))));
 		// Double-click or Enter key to open file
 		recentFilesList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -972,6 +982,16 @@ public class Main {
 				}
 			}
 		});
+		recent.addMenuListener(new MenuListener() {
+			public void menuSelected(MenuEvent e) {
+				Main.this.refreshRecentFiles(listModel, recentFilesList, recentScrollPane);
+			}
+			public void menuDeselected(MenuEvent e) {
+			}
+			public void menuCanceled(MenuEvent e) {
+			}
+		});
+		Main.this.refreshRecentFiles(listModel, recentFilesList, recentScrollPane);
 		recent.add(recentScrollPane);
 		menu.add(recent);
 		menu.add(saveItem);
