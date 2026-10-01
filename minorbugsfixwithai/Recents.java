@@ -17,10 +17,12 @@ import com.google.gson.reflect.*;
 ** Entries are never duplicated, paths are compared ignoring case
 ** because the same file can be reached with a different spelling.
 **
-** Saving keeps the last good copy in recents.txt.bak and reading falls back
-** to it, so the list never shows up empty while recents.txt is being
-** replaced. Windows has no rename over an existing file, so recents.txt is
-** briefly missing during a save and a reader can land in that moment.
+** The list is held in memory and recents.txt is only read once, when the
+** editor starts. Every add changes the list in memory first and then saves
+** it, so a new entry can never throw away the entries that were already
+** there. Reading recents.txt again on every add used to lose the whole
+** list whenever that read did not work, and the next add then saved a
+** recents.txt holding only the one new file.
 **
 ** Only java.io and java.util are used here, no java.nio.file and no
 ** lambdas, so this file compiles on every java version the editor can
@@ -29,10 +31,11 @@ import com.google.gson.reflect.*;
 public class Recents {
 	public static final int max = 10;
 	/*
-	** Every add is a read modify write of recents.txt, so all of them are
-	** done under one lock. The lock is static because each caller uses its
-	** own new Recents() object, an instance lock would not be shared.
+	** The list in memory. It is null until recents.txt has been read once.
+	** Every method that touches it is synchronized on lock, and the lock is
+	** static because each caller uses its own new Recents() object.
 	*/
+	private static List<String> saved = null;
 	private static final Object lock = new Object();
 	private String getRecentsDir() {
 		return System.getProperty("user.home");
@@ -47,7 +50,7 @@ public class Recents {
 		return new File(getRecentsDir() + File.separator + "recents.txt.tmp");
 	}
 	/*
-	** Waits a short time before trying recents.txt again.
+	** Waits a short time before trying a file again.
 	** Returns false when the wait was interrupted and the caller should stop.
 	*/
 	private boolean waitBeforeRetry() {
@@ -112,8 +115,8 @@ public class Recents {
 		printwriter.close();
 	}
 	/*
-	** Turns the saved text into the list shown by the menu, dropping blanks
-	** and duplicates and keeping only the newest max entries.
+	** Turns saved text into the list shown by the menu, dropping blanks and
+	** duplicates and keeping only the newest max entries.
 	*/
 	private List<String> parse(String contents) {
 		List<String> recents = new ArrayList<String>();
@@ -147,85 +150,112 @@ public class Recents {
 		}
 		return recents;
 	}
-	public List<String> get() {
-		File recentsfile = getRecentsFile();
-		/*
-		** Replacing recents.txt can make the read fail or find the file missing
-		** for a moment on Windows, so the read is retried instead of reporting
-		** an empty Recent Files menu.
-		*/
+	/*
+	** Reads recents.txt the first time it is needed. The last good copy in
+	** recents.txt.bak is used when recents.txt cannot be read, so the list
+	** is not empty just because that one read did not work.
+	*/
+	private List<String> load() {
 		for(int attempt = 0; attempt < 40; attempt++) {
-			String contents = readText(recentsfile);
+			String contents = readText(getRecentsFile());
 			if(contents != null && !contents.trim().equals("")) {
-				List<String> recents = parse(contents);
-				if(!recents.isEmpty())
-					return recents;
+				return parse(contents);
 			}
 			if(attempt < 39) {
 				if(!waitBeforeRetry())
 					break;
 			}
 		}
-		/*
-		** recents.txt could not be read, the last good copy is used instead of
-		** showing an empty Recent Files menu.
-		*/
-		List<String> recents = parse(readText(getBackupFile()));
-		return recents;
+		return parse(readText(getBackupFile()));
 	}
-	public void set(List<String> recents) {
-		synchronized(lock) {
-			try {
-				GsonBuilder gsonbuilder = new GsonBuilder();
-				gsonbuilder.setPrettyPrinting();
-				Gson gson = gsonbuilder.create();
-				String contents = gson.toJson(recents);
-				File recentsfile = getRecentsFile();
-				/*
-				** The new contents are written to a temp file and then renamed over
-				** recents.txt so a reader can never see a half written file.
-				** Writing recents.txt directly empties it first, and a reader
-				** during that moment would lose every saved entry.
-				*/
-				File tempfile = getTempFile();
-				writeText(tempfile,contents);
-				/*
-				** Windows refuses to rename over recents.txt while any program
-				** has it open, so the rename is retried before giving up and
-				** writing recents.txt directly.
-				*/
-				boolean saved = false;
-				for(int attempt = 0; attempt < 40 && !saved; attempt++) {
-					if(recentsfile.exists() && !recentsfile.delete()) {
-						if(!waitBeforeRetry())
-							break;
-						continue;
-					}
-					if(tempfile.renameTo(recentsfile)) {
-						saved = true;
-						break;
-					}
+	/*
+	** Returns the list in a copy, so a caller cannot change it by accident.
+	*/
+	private List<String> list() {
+		if(saved == null)
+			saved = load();
+		return new ArrayList<String>(saved);
+	}
+	/*
+	** Saves the list in memory to recents.txt.
+	** The new text goes to a temp file and is then renamed over recents.txt,
+	** so a reader can never see a half written file. Windows has no rename
+	** over an existing file, so recents.txt is briefly missing during a save.
+	** recents.txt.bak keeps the last good copy for load to fall back on.
+	*/
+	private void save() {
+		try {
+			GsonBuilder gsonbuilder = new GsonBuilder();
+			gsonbuilder.setPrettyPrinting();
+			Gson gson = gsonbuilder.create();
+			String contents = gson.toJson(saved);
+			File recentsfile = getRecentsFile();
+			File tempfile = getTempFile();
+			writeText(tempfile,contents);
+			boolean written = false;
+			for(int attempt = 0; attempt < 40 && !written; attempt++) {
+				if(recentsfile.exists() && !recentsfile.delete()) {
 					if(!waitBeforeRetry())
 						break;
+					continue;
 				}
-				if(!saved) {
-					writeText(recentsfile,contents);
-					tempfile.delete();
+				if(tempfile.renameTo(recentsfile)) {
+					written = true;
+					break;
 				}
-				/*
-				** The saved contents are now in recents.txt, so the copy that was
-				** in recents.txt becomes the last good copy kept for reading.
-				*/
-				writeText(getBackupFile(),contents);
+				if(!waitBeforeRetry())
+					break;
 			}
-			catch(FileNotFoundException ex) {
-				ex.printStackTrace();
+			if(!written) {
+				writeText(recentsfile,contents);
+				tempfile.delete();
 			}
-			catch(IOException ex) {
-				ex.printStackTrace();
-			}
+			writeText(getBackupFile(),contents);
+		}
+		catch(FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
 		}
 	}
+	/*
+	** The recent files, newest first.
+	*/
+	public List<String> get() {
+		synchronized(lock) {
+			return list();
+		}
+	}
+	/*
+	** Replaces the whole list.
+	*/
+	public void set(List<String> recents) {
+		if(recents == null)
+			return;
+		synchronized(lock) {
+			if(saved == null)
+				saved = load();
+			saved = new ArrayList<String>();
+			for(int i = 0; i < recents.size(); i++) {
+				String entry = recents.get(i);
+				if(entry == null)
+					continue;
+				entry = entry.trim();
+				if(entry.equals(""))
+					continue;
+				if(contains(saved,entry))
+					continue;
+				saved.add(entry);
+			}
+			while(saved.size() > max)
+				saved.remove(saved.size()-1);
+			save();
+		}
+	}
+	/*
+	** Puts one file at the front of the list and keeps the newest max files.
+	*/
 	public void add(String entry) {
 		if(entry == null)
 			return;
@@ -233,12 +263,13 @@ public class Recents {
 		if(recent.equals(""))
 			return;
 		synchronized(lock) {
-			List<String> recents = get();
-			removeEntry(recents,recent);
-			recents.add(0,recent);
-			while(recents.size() > max)
-				recents.remove(recents.size()-1);
-			set(recents);
+			if(saved == null)
+				saved = load();
+			removeEntry(saved,recent);
+			saved.add(0,recent);
+			while(saved.size() > max)
+				saved.remove(saved.size()-1);
+			save();
 		}
 	}
 }

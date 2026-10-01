@@ -327,6 +327,21 @@ public class Main {
 		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.max(1, Math.min(Recents.max, listModel.getSize()))));
 	}
 	/*
+	** The file of the tab that is selected now.
+	** fileName is only given the new value when a tab is clicked, the same
+	** code in addOrUpdateTab is commented out, so after switching tabs any
+	** other way fileName can still point at the file of the old tab.
+	*/
+	private String getSelectedTabFileName() {
+		int tindex = tabbedpane.getSelectedIndex();
+		if(tindex != -1 && tindex < fileNames.size()) {
+			String selected = fileNames.get(tindex);
+			if(selected != null && !selected.equals(""))
+				return selected;
+		}
+		return fileName;
+	}
+	/*
 	** If have default content for window
 	*/
 	public Main(OpenDefaultContent odc) 
@@ -3498,7 +3513,7 @@ CommandLine commandline = new CommandLine();
 									ssf.setStartupComboBox(fileName, sc);
 								}
 								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
-								new Recents().add(fileName);
+								new Recents().add(getSelectedTabFileName());
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -3791,7 +3806,7 @@ CommandLine commandline = new CommandLine();
 										ssf.setStartupComboBox(fileName, sc);
 									}
 									ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
-									new Recents().add(fileName);
+									new Recents().add(getSelectedTabFileName());
 									
 startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
