@@ -2132,8 +2132,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Main",
-      "MatthewLayout"
+      "MatthewLayout",
+      "Main"
     ],
     "starterclass": "Main",
     "jars": [
@@ -2930,7 +2930,6 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Main",
       "Control_F",
       "ExtractJUnit",
       "AllVersionsJarMoreThanOnePackage",
@@ -2939,6 +2938,7 @@
       "XML",
       "MatthewLayout",
       "NoFileOpen",
+      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",

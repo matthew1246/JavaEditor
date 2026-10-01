@@ -102,7 +102,54 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 public class Main {
+	/*
+	** Rebuilds the Recent Files menu from recents.txt.
+	** Called every time the menu is opened so files executed or jar files
+	** made in the running editor appear without restarting the editor.
+	**
+	** The entries are plain menu items on purpose. A list inside a scroll pane
+	** inside a menu is not what a menu popup is sized from, the menu ignores
+	** setPreferredSize and works out its own size, so the popup can end up one
+	** row tall and hide every entry under the first one however many are in the
+	** list. Menu items are always drawn and always count towards that size.
+	*/
+	private void refreshRecentFiles(JMenu menu) {
+		menu.removeAll();
+		List<String> recents = new Recents().get();
+		for(int i = 0; i < recents.size(); i++) {
+			final String filename = recents.get(i);
+			JMenuItem recentitem = new JMenuItem(filename);
+			recentitem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Main.this.OpenNewTab(filename);
+				}
+			});
+			menu.add(recentitem);
+		}
+		if(recents.isEmpty()) {
+			JMenuItem norecents = new JMenuItem("No recent files");
+			norecents.setEnabled(false);
+			menu.add(norecents);
+		}
+	}
+	/*
+	** The file of the tab that is selected now.
+	** fileName is only given the new value when a tab is clicked, the same
+	** code in addOrUpdateTab is commented out, so after switching tabs any
+	** other way fileName can still point at the file of the old tab.
+	*/
+	private String getSelectedTabFileName() {
+		int tindex = tabbedpane.getSelectedIndex();
+		if(tindex != -1 && tindex < fileNames.size()) {
+			String selected = fileNames.get(tindex);
+			if(selected != null && !selected.equals(""))
+				return selected;
+		}
+		return fileName;
+	}
 	// public JButton label4;	
 	public JButton leftarrow;
 	public JButton rightarrow;
@@ -937,52 +984,16 @@ public class Main {
 		menu.add(openemptynewtab);
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
-		StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
-		LinkedHashMap<String,Preferences> hashmap = storeselectedfile2.getBackup();
-		// Convert the linkedhashmap keys to a List and put into a JList inside a JScrollPane
-		DefaultListModel<String> listModel = new DefaultListModel<String>();
-		for(String filename : hashmap.keySet()) {
-			String displayName = filename;
-			if(displayName.equals("lastopened")) {
-				displayName = "lastopened: " + fileName;
+		recent.addMenuListener(new MenuListener() {
+			public void menuSelected(MenuEvent e) {
+				Main.this.refreshRecentFiles(recent);
 			}
-			listModel.addElement(displayName);
-		}
-		JList<String> recentFilesList = new JList<String>(listModel);
-		recentFilesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		recentFilesList.setVisibleRowCount(10);
-		JScrollPane recentScrollPane = new JScrollPane(recentFilesList);
-		int cellHeight = recentFilesList.getFixedCellHeight();
-		if(cellHeight <= 0) {
-			cellHeight = recentFilesList.getFontMetrics(recentFilesList.getFont()).getHeight() + 4;
-		}
-		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.min(10, listModel.getSize())));
-		// Double-click or Enter key to open file
-		recentFilesList.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount() == 2) {
-					String filename = recentFilesList.getSelectedValue();
-					if(filename != null) {
-						if(filename.startsWith("lastopened: "))
-							filename = filename.replaceFirst("lastopened: ", "");
-						Main.this.OpenNewTab(filename);
-					}
-				}
+			public void menuDeselected(MenuEvent e) {
+			}
+			public void menuCanceled(MenuEvent e) {
 			}
 		});
-		recentFilesList.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String filename = recentFilesList.getSelectedValue();
-					if(filename != null) {
-						if(filename.startsWith("lastopened: "))
-							filename = filename.replaceFirst("lastopened: ", "");
-						Main.this.OpenNewTab(filename);
-					}
-				}
-			}
-		});
-		recent.add(recentScrollPane);
+		Main.this.refreshRecentFiles(recent);
 		menu.add(recent);
 		menu.add(saveItem);
 		menu.add(saveasitem);
@@ -2253,6 +2264,7 @@ if(result == 0) {
 								allversionsjar.MakeJarUsingmsdos(i,main);	
 							}
 						}
+						new Recents().add(Main.this.fileName);
 					});
 				
 					compiley.addActionListener((ev4) -> {
@@ -2340,6 +2352,7 @@ if(result == 0) {
 							allversionsjar.Compile(javaversionnumber);	
 							allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
 						}
+						new Recents().add(Main.this.fileName);
 					});
 				break;
 				case JOptionPane.NO_OPTION:
@@ -2427,6 +2440,7 @@ if(result == 0) {  // isOnePackage = true;
 					}
 				break;
 			}
+			new Recents().add(Main.this.fileName);
 		});
 		
 		
@@ -3476,6 +3490,7 @@ CommandLine commandline = new CommandLine();
 									ssf.setStartupComboBox(fileName, sc);
 								}
 								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
+								new Recents().add(getSelectedTabFileName());
 								startercombobox.Change(fileName);
 								Process process=runtime.exec(command,null,new File(classpath1));
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
@@ -3760,6 +3775,7 @@ CommandLine commandline = new CommandLine();
 										ssf.setStartupComboBox(fileName, sc);
 									}
 									ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
+									new Recents().add(getSelectedTabFileName());
 									
 startercombobox.Change(fileName);
 									process=runtime.exec(command,null,new File(classpath1));
