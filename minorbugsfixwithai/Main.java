@@ -315,16 +315,35 @@ public class Main {
 	** Called every time the menu is opened so files executed or jar files
 	** made in the running editor appear without restarting the editor.
 	*/
-	private void refreshRecentFiles(DefaultListModel<String> listModel,JList<String> recentFilesList,JScrollPane recentScrollPane) {
-		listModel.clear();
-		for(String filename : new Recents().get()) {
-			listModel.addElement(filename);
+	/*
+	** Rebuilds the Recent Files menu from recents.txt.
+	** Called every time the menu is opened so files executed or jar files
+	** made in the running editor appear without restarting the editor.
+	**
+	** The entries are plain menu items on purpose. A list inside a scroll pane
+	** inside a menu is not what a menu popup is sized from, the menu ignores
+	** setPreferredSize and works out its own size, so the popup can end up one
+	** row tall and hide every entry under the first one however many are in the
+	** list. Menu items are always drawn and always count towards that size.
+	*/
+	private void refreshRecentFiles(JMenu menu) {
+		menu.removeAll();
+		List<String> recents = new Recents().get();
+		for(int i = 0; i < recents.size(); i++) {
+			final String filename = recents.get(i);
+			JMenuItem recentitem = new JMenuItem(filename);
+			recentitem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Main.this.OpenNewTab(filename);
+				}
+			});
+			menu.add(recentitem);
 		}
-		int cellHeight = recentFilesList.getFixedCellHeight();
-		if(cellHeight <= 0) {
-			cellHeight = recentFilesList.getFontMetrics(recentFilesList.getFont()).getHeight() + 4;
+		if(recents.isEmpty()) {
+			JMenuItem norecents = new JMenuItem("No recent files");
+			norecents.setEnabled(false);
+			menu.add(norecents);
 		}
-		recentScrollPane.setPreferredSize(new Dimension(320, cellHeight * Math.max(1, Math.min(Recents.max, listModel.getSize()))));
 	}
 	/*
 	** The file of the tab that is selected now.
@@ -971,43 +990,16 @@ public class Main {
 		menu.add(openemptynewtab);
 		menu.add(closetab);
 		JMenu recent = new JMenu("Recent Files");
-		DefaultListModel<String> listModel = new DefaultListModel<String>();
-		JList<String> recentFilesList = new JList<String>(listModel);
-		recentFilesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		recentFilesList.setVisibleRowCount(Recents.max);
-		JScrollPane recentScrollPane = new JScrollPane(recentFilesList);
-		// Double-click or Enter key to open file
-		recentFilesList.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount() == 2) {
-					String filename = recentFilesList.getSelectedValue();
-					if(filename != null) {
-						Main.this.OpenNewTab(filename);
-					}
-				}
-			}
-		});
-		recentFilesList.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String filename = recentFilesList.getSelectedValue();
-					if(filename != null) {
-						Main.this.OpenNewTab(filename);
-					}
-				}
-			}
-		});
 		recent.addMenuListener(new MenuListener() {
 			public void menuSelected(MenuEvent e) {
-				Main.this.refreshRecentFiles(listModel, recentFilesList, recentScrollPane);
+				Main.this.refreshRecentFiles(recent);
 			}
 			public void menuDeselected(MenuEvent e) {
 			}
 			public void menuCanceled(MenuEvent e) {
 			}
 		});
-		Main.this.refreshRecentFiles(listModel, recentFilesList, recentScrollPane);
-		recent.add(recentScrollPane);
+		Main.this.refreshRecentFiles(recent);
 		menu.add(recent);
 		menu.add(saveItem);
 		menu.add(saveasitem);

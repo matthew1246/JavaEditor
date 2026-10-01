@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\MatthewLayout.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
@@ -2103,8 +2103,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "Powershell"
     ],
     "starterclass": "",
@@ -2132,8 +2132,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
-      "Main"
+      "Main",
+      "MatthewLayout"
     ],
     "starterclass": "Main",
     "jars": [
@@ -2319,8 +2319,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "NoFileOpen"
     ],
     "starterclass": "",
@@ -2416,8 +2416,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -2796,8 +2796,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "ExtractJUnit"
     ],
     "starterclass": "",
@@ -2814,8 +2814,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "AllVersionsJarMoreThanOnePackage"
     ],
     "starterclass": "",
@@ -2832,8 +2832,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
-      "Main"
+      "Main",
+      "MatthewLayout"
     ],
     "starterclass": "",
     "jars": [],
@@ -2844,8 +2844,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "XML"
     ],
     "starterclass": "",
@@ -2862,8 +2862,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
-      "Main"
+      "Main",
+      "MatthewLayout"
     ],
     "starterclass": "",
     "jars": [],
@@ -2885,8 +2885,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "Control_F"
     ],
     "starterclass": "",
@@ -2903,8 +2903,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MatthewLayout",
       "Main",
+      "MatthewLayout",
       "AllVersionsJarMoreThanOnePackageExcludePackages"
     ],
     "starterclass": "",
@@ -2930,6 +2930,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Control_F",
       "ExtractJUnit",
       "AllVersionsJarMoreThanOnePackage",
@@ -2938,7 +2939,6 @@
       "XML",
       "MatthewLayout",
       "NoFileOpen",
-      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
