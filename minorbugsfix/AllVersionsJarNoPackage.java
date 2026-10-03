@@ -126,7 +126,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
 			
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
 		
 			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
 			String dir2=Main.getDirectory(main.fileName);

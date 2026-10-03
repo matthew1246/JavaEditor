@@ -21,7 +21,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileName.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\IsMoreThanOneJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java",
-      "C:\\Users\\Owner\\Documents\\Main.java"
+      "C:\\Users\\Owner\\Documents\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\isMoreThanOneJar.java"
     ],
     "caretposition": 0
   },
@@ -2553,7 +2555,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6320
+    "caretposition": 4820
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarMoreThanOnePackage.java": {
     "isLocked": true,
