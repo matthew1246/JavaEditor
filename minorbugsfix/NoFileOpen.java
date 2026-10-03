@@ -26,22 +26,28 @@ public class NoFileOpen {
 		GetClassName getclassname = new GetClassName(textarea);
 		String classname=getclassname.getClassName();
 		
-		String fileName = output+classname+".java";
-		File file = new File(fileName);
-		if(!file.exists()) {
-			saveTabs(fileName);
-			return fileName;
+		String[] options={"Yes","No"};
+		int yesorno2=JOptionPane.showOptionDialog(null,"Use previous flleName folder?","Do you want use the directory from "+previousfile+" to save new code?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		if(yesorno2 == JOptionPane.NO_OPTION) {
+			return CreateFile();
 		}
-		else { // If file already exists.
-			String[] options={"Yes","No"};
-			int yesorno=JOptionPane.showOptionDialog(null,"Overwrite existing file?","Do you want overwrite the existing file with this code?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-			
-			switch(yesorno) {
-				case JOptionPane.YES_OPTION:
-					saveTabs(fileName);
-					return fileName;
-				case JOptionPane.NO_OPTION:
-					return CreateFile();
+		else if(yesorno2 == JOptionPane.YES_OPTION) {
+			String fileName = output+classname+".java";
+			File file = new File(fileName);
+			if(!file.exists()) {
+				saveTabs(fileName);
+				return fileName;
+			}
+			else { // If file already exists.
+				int yesorno=JOptionPane.showOptionDialog(null,"Overwrite existing file?","Do you want overwrite the existing file with this code?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+				
+				switch(yesorno) {
+					case JOptionPane.YES_OPTION:
+						saveTabs(fileName);
+						return fileName;
+					case JOptionPane.NO_OPTION:
+						return CreateFile();
+				}
 			}
 		}
 		return "";

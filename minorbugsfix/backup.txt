@@ -20,7 +20,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarNoPackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileName.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\IsMoreThanOneJar.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\Main.java"
     ],
     "caretposition": 0
   },
@@ -50,10 +51,10 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
-      "Main",
       "StoreSelectedFile"
     ],
     "starterclass": "Main",
@@ -64,7 +65,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 84861
+    "caretposition": 84503
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -78,7 +79,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 1084
+    "caretposition": 512
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java": {
     "isLocked": false,
@@ -209,7 +210,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar"
     ],
     "fileNames": [],
-    "caretposition": 5750
+    "caretposition": 87551
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\StoreSelectedFile.java": {
     "isLocked": false,
@@ -977,7 +978,7 @@
     "startupcombobox": [
       "Main"
     ],
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 105
@@ -985,7 +986,9 @@
   "C:\\Users\\Owner\\Documents\\Second.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
@@ -2895,5 +2898,16 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 268
+  },
+  "C:\\Users\\Owner\\Documents\\star\\Trek.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Trek"
+    ],
+    "starterclass": "Trek",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 105
   }
 }
