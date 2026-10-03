@@ -7,6 +7,10 @@ public class FileName {
 	public void makeAllVersionsJar() {
 		makeAllVersionsJar=true;
 	}
+	boolean makeCertainVersionNumber=false;
+	public void makeCertainVersionNumber() {
+		makeCertainVersionNumber=true;
+	}
 	public String getJarFileName(int javaversionnumber) {
 		if(makeAllVersionsJar) {
 			if(javaversionnumber != 23 && javaversionnumber != -2) {
@@ -15,6 +19,9 @@ public class FileName {
 			else {
 				return main_class2;
 			}
+		}
+		else if(makeCertainVersionNumber) {
+			return "ForJava"+javaversionnumber+"_"+main_class2;
 		}
 		else {
 			return main_class2;

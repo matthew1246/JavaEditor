@@ -2303,6 +2303,8 @@ if(result == 0) {
 							sal.actionPerformed(null); // Save latest code.
 						}
 						
+						FileName filename=new FileName(fileName);
+						filename.makeCertainVersionNumber();
 						AllVersionsJar allversionsjar = null;
 						Packager packager=new Packager(this);
 						if(packager.containsPackage()) {
@@ -2336,7 +2338,7 @@ if(result == 0) {
 						}	
 						else {
 							removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false,filename);
 						}
 						
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();

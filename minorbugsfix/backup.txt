@@ -67,7 +67,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 84503
+    "caretposition": 86506
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -2888,7 +2888,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 521
+    "caretposition": 701
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackageExcludePackages.java": {
     "isLocked": false,
@@ -2908,6 +2908,17 @@
       "Trek"
     ],
     "starterclass": "Trek",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 105
+  },
+  "C:\\Users\\Owner\\Documents\\akakja\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [],
     "caretposition": 105
