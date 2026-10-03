@@ -2214,9 +2214,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							}
 						}		
 						
-						FileNameJar filenamejar=new FileNameJar();
-						filenamejar.compileAllVersions();
-						
+						FileName filename=new FileName(fileName);
+						filename.makeAllVersionsJar();
 						Packager packager=new Packager(this);				
 						AllVersionsJar allversionsjar = null;
 						if(packager.containsPackage()) {
@@ -2250,7 +2249,7 @@ if(result == 0) {
 						}
 						else {
 							removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true,filename);
 						}
 						
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();

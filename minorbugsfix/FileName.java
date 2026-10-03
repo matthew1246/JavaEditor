@@ -1,6 +1,6 @@
 public class FileName {
 	protected String main_class2;
-	public FileNameJar(String fileName) {
+	public FileName(String fileName) {
 		main_class2=Main.getClassName(fileName);
 	}
 	boolean makeAllVersionsJar = false;
@@ -15,6 +15,9 @@ public class FileName {
 			else {
 				return main_class2;
 			}
+		}
+		else {
+			return main_class2;
 		}
 	}								
 }

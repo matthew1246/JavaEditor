@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.BufferedWriter;
 import java.io.IOException;
 public class AllVersionsJarNoPackage extends AllVersionsJar {
+	private FileName filename;
 	private Packager packager;
 	private String dir;
 	private Main main;
@@ -13,6 +14,10 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}
 	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
@@ -121,10 +126,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
 			
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-			if(javaversionnumber == 23 || javaversionnumber == -2) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .";
-			}
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
 		
 			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
 			String dir2=Main.getDirectory(main.fileName);
