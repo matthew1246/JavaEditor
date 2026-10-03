@@ -3,13 +3,14 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -46,7 +47,9 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
@@ -71,6 +74,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "StoreSelectedFile"
     ],
     "starterclass": "",
@@ -97,6 +101,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Git"
     ],
     "starterclass": "",
@@ -108,8 +113,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "StarterJComboBox",
-      "Main"
+      "Main",
+      "StarterJComboBox"
     ],
     "starterclass": "Main",
     "jars": [
@@ -119,12 +124,13 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 109060
+    "caretposition": 261142
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "FileListModifier"
     ],
     "starterclass": "",
@@ -167,7 +173,9 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SuggestionBoxSelected.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -195,6 +203,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Control_F"
     ],
     "starterclass": "",
@@ -208,7 +217,9 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\JTextAreaGroup.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -264,6 +275,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Powershell"
     ],
     "starterclass": "",
@@ -298,6 +310,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Compile"
     ],
     "starterclass": "",
@@ -342,7 +355,9 @@
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\RenameVariable.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
@@ -369,6 +384,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AllClassesInFile"
     ],
     "starterclass": "",
@@ -432,8 +448,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "StarterJComboBox",
-      "Main"
+      "Main",
+      "StarterJComboBox"
     ],
     "starterclass": "",
     "jars": [
@@ -459,6 +475,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Preferences"
     ],
     "starterclass": "",
@@ -488,6 +505,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "ThreeComboboxes"
     ],
     "starterclass": "",
@@ -514,6 +532,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "MSDOS"
     ],
     "starterclass": "",
@@ -545,6 +564,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Maven"
     ],
     "starterclass": "",
@@ -573,6 +593,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AddDependency"
     ],
     "starterclass": "",
@@ -601,6 +622,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "DependencyRemover"
     ],
     "starterclass": "",
@@ -640,6 +662,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "TabFileNameAndContent"
     ],
     "starterclass": "",
@@ -707,6 +730,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AddPlugin"
     ],
     "starterclass": "",
@@ -746,6 +770,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "CompileErrors"
     ],
     "starterclass": "",
@@ -778,6 +803,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "XML"
     ],
     "starterclass": "",
@@ -856,6 +882,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "CommandLine"
     ],
     "starterclass": "CommandLine",
@@ -872,6 +899,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Packager"
     ],
     "starterclass": "",
@@ -922,6 +950,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "ExtractJUnit"
     ],
     "starterclass": "",
@@ -938,6 +967,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -954,6 +984,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AllFiles"
     ],
     "starterclass": "",
@@ -1149,8 +1180,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "SeeAllGitChanges",
-      "Main"
+      "Main",
+      "SeeAllGitChanges"
     ],
     "starterclass": "",
     "jars": [
@@ -1442,6 +1473,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AllVersionsJarNoPackage"
     ],
     "starterclass": "",
@@ -1474,6 +1506,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "PowershellNoPackage"
     ],
     "starterclass": "",
@@ -1506,6 +1539,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AllVersionsJarMoreThanOnePackage"
     ],
     "starterclass": "",
@@ -1729,6 +1763,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Maven",
       "Powershell",
       "FileListModifier",
@@ -1756,8 +1791,7 @@
       "Git",
       "ExtractJUnit",
       "XML",
-      "MatthewLayout",
-      "Main"
+      "MatthewLayout"
     ],
     "starterclass": "",
     "jars": [],
