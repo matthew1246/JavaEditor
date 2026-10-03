@@ -14,6 +14,10 @@ public class PowershellMoreThanOnePackage implements Powershell {
 	protected String dir;
 	protected BufferedWriter output2;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellMoreThanOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,main_class,dir,allfiles,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public PowershellMoreThanOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
 		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.dir = dir;

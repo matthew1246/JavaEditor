@@ -10,6 +10,7 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
+	protected FileName filename;
 	protected Packager packager;
 	private String dir;
 	private Main main;
@@ -17,6 +18,10 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarMoreThanOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public AllVersionsJarMoreThanOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
@@ -137,23 +142,12 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			JOptionPane.showMessageDialog(null,"Output jat location is:"+isMoreThanOneJar.getCreateJarFolderLocation(dir));
+			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(jarFolder.endsWith(jarFolder))
+				jarFolder=jarFolder+"\\";
+			JOptionPane.showMessageDialog(null,"Output jat location is:"+jarFolder);
 			
-			String input = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .";
-				}
-			}
-			else { // packager.isInRightFolders() == true
-				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+parentdirectory.getAbsolutePath()+"\\"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .";
-				}	
-			}
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+jarFolder+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
 		
 	JOptionPane.showMessageDialog(null,input);
 	CommandLine commandline = new CommandLine();
@@ -203,6 +197,6 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 		}
 	}
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
-		return new PowershellMoreThanOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
+		return new PowershellMoreThanOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,filename);
 	}
 }
