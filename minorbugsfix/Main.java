@@ -2231,7 +2231,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
 if(result == 0) {
-								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true,filename);
 							}
 							else if(result == 1) {
 								String[] options5={"Yes","No"};
@@ -2320,7 +2320,7 @@ if(result == 0) {
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
 if(result == 0) {
-								allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
+								allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev4,false,filename);
 							}
 							else if(result == 1) {
 								String[] options5={"Yes","No"};
@@ -2406,7 +2406,7 @@ if(result == 0) {
 						    options3[1]  // <-- sets "More than one" as the default focused button
 						);
 if(result == 0) {  // isOnePackage = true;		
-							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
+							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev,false,filename);
 						}
 						else if(result == 1) {
 							String[] options5={"Yes","No"};
