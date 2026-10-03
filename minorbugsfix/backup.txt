@@ -19,7 +19,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarNoPackage.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileName.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\IsMoreThanOneJar.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\IsMoreThanOneJar.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java"
     ],
     "caretposition": 0
   },
@@ -49,10 +50,10 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
-      "Main",
       "StoreSelectedFile"
     ],
     "starterclass": "Main",
@@ -63,7 +64,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 81162
+    "caretposition": 83199
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -1526,8 +1527,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Packager",
-      "Main"
+      "Main",
+      "Packager"
     ],
     "starterclass": "",
     "jars": [],
@@ -2538,7 +2539,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 2868
+    "caretposition": 3594
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarNoPackage.java": {
     "isLocked": true,
@@ -2549,7 +2550,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 725
+    "caretposition": 6320
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJarMoreThanOnePackage.java": {
     "isLocked": true,
@@ -2772,6 +2773,7 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -2813,7 +2815,6 @@
       "Links",
       "MatthewLayout",
       "LinkedHashMapInterface",
-      "Main",
       "NewtonFirsty"
     ],
     "starterclass": "",
@@ -2830,6 +2831,7 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -2871,7 +2873,6 @@
       "Links",
       "MatthewLayout",
       "LinkedHashMapInterface",
-      "Main",
       "NewtonFirsty"
     ],
     "starterclass": "",
@@ -2883,5 +2884,16 @@
     ],
     "fileNames": [],
     "caretposition": 521
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackageExcludePackages.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 268
   }
 }

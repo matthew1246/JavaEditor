@@ -168,6 +168,6 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 		}
 	}
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
-		return new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
+		return new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,filename);
 	}
 }
