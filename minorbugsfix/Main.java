@@ -2213,6 +2213,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								sal.actionPerformed(null); // Save latest code.
 							}
 						}		
+						
+						FileNameJar filenamejar=new FileNameJar();
+						filenamejar.compileAllVersions();
+						
 						Packager packager=new Packager(this);				
 						AllVersionsJar allversionsjar = null;
 						if(packager.containsPackage()) {
