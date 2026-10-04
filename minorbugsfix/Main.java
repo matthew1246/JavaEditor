@@ -2237,7 +2237,7 @@ if(result == 0) {
 								String[] options5={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true,filename);
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
@@ -2326,7 +2326,7 @@ if(result == 0) {
 								String[] options5={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false,filename);
 								}
 								else {
 									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
@@ -2412,7 +2412,7 @@ if(result == 0) {  // isOnePackage = true;
 							String[] options5={"Yes","No"};
 							int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 							if(excludepackages == JOptionPane.YES_OPTION) {
-								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false,filename);
 							}
 							else {
 								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
