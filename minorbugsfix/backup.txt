@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileName.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
@@ -2842,6 +2842,7 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -2883,7 +2884,6 @@
       "Links",
       "MatthewLayout",
       "LinkedHashMapInterface",
-      "Main",
       "NewtonFirsty"
     ],
     "starterclass": "",
@@ -2933,6 +2933,7 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -2974,7 +2975,6 @@
       "Links",
       "MatthewLayout",
       "LinkedHashMapInterface",
-      "Main",
       "NewtonFirsty"
     ],
     "starterclass": "",
