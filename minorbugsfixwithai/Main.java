@@ -13,8 +13,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.lang.reflect.Method;
 import java.awt.Rectangle;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.Point;
 import java.lang.reflect.InaccessibleObjectException;
 import javax.swing.text.BadLocationException;
@@ -104,7 +102,54 @@ import java.awt.event.WindowEvent;
 import javax.lang.model.SourceVersion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 public class Main {
+	/*
+	** Rebuilds the Recent Files menu from recents.txt.
+	** Called every time the menu is opened so files executed or jar files
+	** made in the running editor appear without restarting the editor.
+	**
+	** The entries are plain menu items on purpose. A list inside a scroll pane
+	** inside a menu is not what a menu popup is sized from, the menu ignores
+	** setPreferredSize and works out its own size, so the popup can end up one
+	** row tall and hide every entry under the first one however many are in the
+	** list. Menu items are always drawn and always count towards that size.
+	*/
+	private void refreshRecentFiles(JMenu menu) {
+		menu.removeAll();
+		List<String> recents = new Recents().get();
+		for(int i = recents.size() - 1; i >= 0; i--) {
+			final String filename = recents.get(i);
+			JMenuItem recentitem = new JMenuItem(filename);
+			recentitem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Main.this.OpenNewTab(filename);
+				}
+			});
+			menu.add(recentitem);
+		}
+		if(recents.isEmpty()) {
+			JMenuItem norecents = new JMenuItem("No recent files");
+			norecents.setEnabled(false);
+			menu.add(norecents);
+		}
+	}
+	/*
+	** The file of the tab that is selected now.
+	** fileName is only given the new value when a tab is clicked, the same
+	** code in addOrUpdateTab is commented out, so after switching tabs any
+	** other way fileName can still point at the file of the old tab.
+	*/
+	private String getSelectedTabFileName() {
+		int tindex = tabbedpane.getSelectedIndex();
+		if(tindex != -1 && tindex < fileNames.size()) {
+			String selected = fileNames.get(tindex);
+			if(selected != null && !selected.equals(""))
+				return selected;
+		}
+		return fileName;
+	}
 	// public JButton label4;	
 	public JButton leftarrow;
 	public JButton rightarrow;
@@ -214,7 +259,6 @@ public class Main {
 	
 	*/
 	public Main() {
-	
 	msdos = new MSDOS(this);
 		threecomboboxes = new ThreeComboboxes(this);
 		expandable = new Expandable(this);	
@@ -291,7 +335,7 @@ public class Main {
 			textarea2.addMouseListener(rightclick);
 			
 			tabbedpane.addTab(fileName,scrollpane2);
-			tabbedpane.addTab("+",pluspanel);
+			tabbedpane.addTab("+",pluspanel);			
 			tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 			fileNames.add("");
 			allclassesinfile.ChangeFile(textarea2,"");
@@ -310,56 +354,6 @@ public class Main {
 	public int tabs_selected = -1;
 	public FileListModifier filelistmodifier=new FileListModifier();
 	public Git git = new Git();
-	/*
-	** Rebuilds the Recent Files list from recents.txt.
-	** Called every time the menu is opened so files executed or jar files
-	** made in the running editor appear without restarting the editor.
-	*/
-	/*
-	** Rebuilds the Recent Files menu from recents.txt.
-	** Called every time the menu is opened so files executed or jar files
-	** made in the running editor appear without restarting the editor.
-	**
-	** The entries are plain menu items on purpose. A list inside a scroll pane
-	** inside a menu is not what a menu popup is sized from, the menu ignores
-	** setPreferredSize and works out its own size, so the popup can end up one
-	** row tall and hide every entry under the first one however many are in the
-	** list. Menu items are always drawn and always count towards that size.
-	*/
-	private void refreshRecentFiles(JMenu menu) {
-		menu.removeAll();
-		List<String> recents = new Recents().get();
-		for(int i = recents.size() - 1; i >= 0; i--) {
-			final String filename = recents.get(i);
-			JMenuItem recentitem = new JMenuItem(filename);
-			recentitem.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Main.this.OpenNewTab(filename);
-				}
-			});
-			menu.add(recentitem);
-		}
-		if(recents.isEmpty()) {
-			JMenuItem norecents = new JMenuItem("No recent files");
-			norecents.setEnabled(false);
-			menu.add(norecents);
-		}
-	}
-	/*
-	** The file of the tab that is selected now.
-	** fileName is only given the new value when a tab is clicked, the same
-	** code in addOrUpdateTab is commented out, so after switching tabs any
-	** other way fileName can still point at the file of the old tab.
-	*/
-	private String getSelectedTabFileName() {
-		int tindex = tabbedpane.getSelectedIndex();
-		if(tindex != -1 && tindex < fileNames.size()) {
-			String selected = fileNames.get(tindex);
-			if(selected != null && !selected.equals(""))
-				return selected;
-		}
-		return fileName;
-	}
 	/*
 	** If have default content for window
 	*/
@@ -874,7 +868,7 @@ public class Main {
 		combobox.setEditable(false);
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
 		// comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
-
+		
 		//comboboxpanel = new JPanel(new GridBagLayout());
 		comboboxpanel=new JPanel();
 		//padding 0 so comboboxpanel does not report a taller preferred size than the
@@ -883,7 +877,7 @@ public class Main {
 		MatthewLayout comboboxpanellayout = new MatthewLayout();
 		comboboxpanellayout.setPadding(0,0,0,0);
 		comboboxpanel.setLayout(comboboxpanellayout);
-
+		
 		XYWidthHeight xywidthheight=new XYWidthHeight();
 		xywidthheight.x=0;
 		xywidthheight.y=0;
@@ -1800,8 +1794,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() {	
-		AI ai=new AI(this);
+	public void setListeners() {
+		AI ai=new AI(this);		
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
@@ -2220,6 +2214,9 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								sal.actionPerformed(null); // Save latest code.
 							}
 						}		
+						
+						FileName filename=new FileName(fileName);
+						filename.makeAllVersionsJar();
 						Packager packager=new Packager(this);				
 						AllVersionsJar allversionsjar = null;
 						if(packager.containsPackage()) {
@@ -2234,26 +2231,26 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3,
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
-							if(result == 0) {
-								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
+if(result == 0) {
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true,filename);
 							}
 							else if(result == 1) {
 								String[] options5={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true,filename);
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 								}
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 							}
 						}
 						else {
 							removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true,filename);
 						}
 						
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2262,6 +2259,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
+							filename.isPowershell();
 							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						}
 						else {
@@ -2307,6 +2305,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							sal.actionPerformed(null); // Save latest code.
 						}
 						
+						FileName filename=new FileName(fileName);
+						filename.makeCertainVersionNumber();
 						AllVersionsJar allversionsjar = null;
 						Packager packager=new Packager(this);
 						if(packager.containsPackage()) {
@@ -2322,25 +2322,25 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
 if(result == 0) {
-								allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
+								allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev4,false,filename);
 							}
-else if(result == 1) {
+							else if(result == 1) {
 								String[] options5={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false,filename);
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
 								}
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
 							}
 						}	
 						else {
 							removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false,filename);
 						}
 						
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2349,6 +2349,7 @@ else if(result == 1) {
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
+							filename.isPowershell();
 							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							powershell.Compile(javaversionnumber,fileName);
 							powershell.makeJar(javaversionnumber);							
@@ -2392,6 +2393,7 @@ else if(result == 1) {
 						sal.actionPerformed(null); // Save latest code.
 					}
 					
+					FileName filename=new FileName(fileName);
 					AllVersionsJar allversionsjar = null;
 					Packager packager=new Packager(this);
 					if(packager.containsPackage()) {
@@ -2407,25 +2409,25 @@ else if(result == 1) {
 						    options3[1]  // <-- sets "More than one" as the default focused button
 						);
 if(result == 0) {  // isOnePackage = true;		
-							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
+							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev,false,filename);
 						}
-else if(result == 1) {
+						else if(result == 1) {
 							String[] options5={"Yes","No"};
 							int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 							if(excludepackages == JOptionPane.YES_OPTION) {
-								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false,filename);
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
 							}
 						}
 						else {
-							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
 						}
 					}
 					else {
 						removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false,filename);
 					}
 				
 					int no_java_verson_number = -2;
@@ -2435,6 +2437,7 @@ else if(result == 1) {
 					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 					allversionsjar.WriteManifest(main);
 					if(allversionsjar.isMatthewJavaEditor(main)) {
+						filename.isPowershell();
 						Powershell powershell = allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						powershell.Compile(no_java_verson_number,fileName);
 						powershell.makeJar(no_java_verson_number);							
@@ -2445,9 +2448,9 @@ else if(result == 1) {
 						allversionsjar.Compile(no_java_verson_number);	
 						allversionsjar.MakeJarUsingmsdos(no_java_verson_number,main);	
 					}
-					new Recents().add(Main.this.fileName);
 				break;
 			}
+			new Recents().add(Main.this.fileName);
 		});
 		
 		
@@ -3156,13 +3159,13 @@ else if(result == 1) {
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(Main.this);	
 			try {
-					if(fileName.equals("")) {
-						NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);
-						fileName=nofileopen.getFileName();
-						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
-					}
-					sal.actionPerformed(e);
-					(new StoreSelectedFile()).setCaretPosition(fileName,caretposition);
+				if(fileName.equals("")) {
+					NoFileOpen nofileopen=new NoFileOpen(Main.this,textarea,tabbedpane);
+					fileName=nofileopen.getFileName();
+					tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
+				}
+				sal.actionPerformed(e);
+				(new StoreSelectedFile()).setCaretPosition(fileName,caretposition);
 					if(!fileName.equals("")) {
 						CommandLine commandline = new CommandLine();
 						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
@@ -3187,23 +3190,19 @@ else if(result == 1) {
 											
 												       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 													          	for (Path entry : stream) {
-															try {
-
-																// Read file
-																String content = Files.readString(entry);
-
-																// Remove existing package if present
-																content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-																// Prepend correct package
-																content = "package "+packagename + ";\n\n" + content;
-
-																// Write to target
-																Path targetFile = targetDir.resolve(entry.getFileName());
-																Files.writeString(targetFile, content);
-															} catch (Exception ex) {
-																JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-															}
+													
+															// Read file
+															String content = Files.readString(entry);
+														
+															// Remove existing package if present
+															content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+														
+															// Prepend correct package
+															content = "package "+packagename + ";\n\n" + content;
+														
+															// Write to target
+															Path targetFile = targetDir.resolve(entry.getFileName());
+															Files.writeString(targetFile, content);
 													            }
 													}
 													JOptionPane.showMessageDialog(null,"Code Updated");
@@ -3237,23 +3236,19 @@ else if(result == 1) {
 											
 												       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 													          	for (Path entry : stream) {
-															try {
-
-																// Read file
-																String content = Files.readString(entry);
-
-																// Remove existing package if present
-																content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-																// Prepend correct package
-																content = "package "+packagename + ";\n\n" + content;
-
-																// Write to target
-																Path targetFile = targetDir.resolve(entry.getFileName());
-																Files.writeString(targetFile, content);
-															} catch (Exception ex) {
-																JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-															}
+													
+															// Read file
+															String content = Files.readString(entry);
+														
+															// Remove existing package if present
+															content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+														
+															// Prepend correct package
+															content = "package "+packagename + ";\n\n" + content;
+														
+															// Write to target
+															Path targetFile = targetDir.resolve(entry.getFileName());
+															Files.writeString(targetFile, content);
 													            }
 													}
 													JOptionPane.showMessageDialog(null,"Code Updated");
@@ -3328,9 +3323,9 @@ else if(result == 1) {
 
 JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 					
-						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-						storeselectedfile.set(fileName);
-						storeselectedfile.setCaretPosition(fileName,caretposition);
+					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+					storeselectedfile.set(fileName);
+					storeselectedfile.setCaretPosition(fileName,caretposition);
 						
 						Preferences preferences=storeselectedfile.get(fileName);
 						for(String jar:preferences.jars) {
@@ -3393,12 +3388,12 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 		run.addActionListener(new ActionListener() {				
 		
 		public void actionPerformed(ActionEvent e) {
-			int caretposition=rememberPosition(fileName,textarea);
+			final int caretposition=rememberPosition(fileName,textarea);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
 			textarea3.ExpandAll(Main.this);	
 			Thread thread = new Thread() {
-					public void run() {
-						try {	
+				public void run() {
+					try {	
 						StoreSelectedFile storeselectedfile10=new StoreSelectedFile();
 						storeselectedfile10.setCaretPosition(fileName,caretposition);
 						
@@ -3563,23 +3558,19 @@ CommandLine commandline = new CommandLine();
 													
 														       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 															          	for (Path entry : stream) {
-																	try {
-
-																		// Read file
-																		String content = Files.readString(entry);
-
-																		// Remove existing package if present
-																		content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-																		// Prepend correct package
-																		content = "package "+packagename + ";\n\n" + content;
-
-																		// Write to target
-																		Path targetFile = targetDir.resolve(entry.getFileName());
-																		Files.writeString(targetFile, content);
-																	} catch (Exception ex) {
-																		JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-																	}
+															
+																	// Read file
+																	String content = Files.readString(entry);
+																
+																	// Remove existing package if present
+																	content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+																
+																	// Prepend correct package
+																	content = "package "+packagename + ";\n\n" + content;
+																
+																	// Write to target
+																	Path targetFile = targetDir.resolve(entry.getFileName());
+																	Files.writeString(targetFile, content);
 															            }
 															}
 															JOptionPane.showMessageDialog(null,"Code Updated");
@@ -3613,23 +3604,19 @@ CommandLine commandline = new CommandLine();
 													
 														       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 															          	for (Path entry : stream) {
-																	try {
-
-																		// Read file
-																		String content = Files.readString(entry);
-
-																		// Remove existing package if present
-																		content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-																		// Prepend correct package
-																		content = "package "+packagename + ";\n\n" + content;
-
-																		// Write to target
-																		Path targetFile = targetDir.resolve(entry.getFileName());
-																		Files.writeString(targetFile, content);
-																	} catch (Exception ex) {
-																		JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-																	}
+															
+																	// Read file
+																	String content = Files.readString(entry);
+																
+																	// Remove existing package if present
+																	content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+																
+																	// Prepend correct package
+																	content = "package "+packagename + ";\n\n" + content;
+																
+																	// Write to target
+																	Path targetFile = targetDir.resolve(entry.getFileName());
+																	Files.writeString(targetFile, content);
 															            }
 															}
 															JOptionPane.showMessageDialog(null,"Code Updated");
@@ -4281,21 +4268,21 @@ startercombobox.Change(fileName);
 						
 						//positiontrackers.add(new PositionTracker(textarea2));
 						
-			textarea2.addKeyListener(new CurlyBraceKeyListener(this));
-			addCaretListener(textarea2);
-			CurlyBraceKeyListener curlybracekeylistener=JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
-			scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
-				try {
-					if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
-						int caretposition = curlybracekeylistener.autokeylistener.position;
-						Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
-						Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
-						SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
-						curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
-					}
-				} catch (BadLocationException ex) {
-					ex.printStackTrace();
-				}
+						textarea2.addKeyListener(new CurlyBraceKeyListener(this));
+						addCaretListener(textarea2);
+						CurlyBraceKeyListener curlybracekeylistener=JTextAreaGroup.findCurlyBraceKeyListener(textarea2);
+						scrollpane2.getVerticalScrollBar().addAdjustmentListener((ev) -> {
+							try {
+								if(curlybracekeylistener.autokeylistener.suggestionbox != null && curlybracekeylistener.autokeylistener.suggestionbox.isVisible()) {
+									int caretposition = curlybracekeylistener.autokeylistener.position;
+									Rectangle2D rectanglecoords=textarea2.modelToView2D(caretposition);
+									Point screencoordinates= new Point((int)(Math.round(rectanglecoords.getX())),(int)(Math.round(rectanglecoords.getY())));
+									SwingUtilities.convertPointToScreen(screencoordinates,textarea2);
+									curlybracekeylistener.autokeylistener.suggestionbox.setLocation(screencoordinates);
+								}
+							} catch (BadLocationException ex) {
+								ex.printStackTrace();
+							}
 						});
 						scrollpane2.getHorizontalScrollBar().addAdjustmentListener((ev) -> {
 							try {
@@ -4341,6 +4328,12 @@ startercombobox.Change(fileName);
 						tabbedpane.addTab(filename,scrollpane2);
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
+						
+						this.fileName=directoryandfilename;
+						int caretposition=storeselectedfile.getCaretPosition(directoryandfilename);
+						SwingUtilities.invokeLater(() -> {
+							scrollToCaretPosition(caretposition);
+						});
 					}
 					else if(result == JFileChooser.CANCEL_OPTION) {
 						return;

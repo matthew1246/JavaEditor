@@ -11,8 +11,8 @@ import java.util.Set;
 ** The user is asked whether they want to select folders to EXCLUDE or folders
 ** to INCLUDE in the jar.
 ** The user can select the direct subfolders of the classpath AND all subfolders
-** of the package name folders (for example package javaeditor.minorbugsfixwithai
-** lets the user select all javaeditor subfolders).
+** of the package name folders (for example package javaeditor.foo lets the user
+** select all javaeditor subfolders).
 ** The included folders are added to the jar with:
 ** jar.exe ... -C "<classpath>" <relative folder path> ...
 */
@@ -20,6 +20,10 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 	private IsMoreThanOneJar isMoreThanOneJar;
 	private String classpath;
 	private List<String> includedFolders;
+	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		super(main,fileName,sal,ev4,_isMoreThanOneJar);
 		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
@@ -42,28 +46,16 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		Preferences preferences=storeselectedfile.get(fileName);
 		if(!fileName.equals("")) {
 			java.util.List<String> jars = preferences.jars;
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				for(String jar:jars) {
-					try {
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,getDir());
-						process.waitFor();
-					} catch (InterruptedException ex) {
-						ex.printStackTrace();
-					}
-				}
+			File createdir = new File(classpath+"\\jars");
+			if(!createdir.exists()) {
+				createdir.mkdir();
 			}
-			else { // package is in right folders: extract the classpath jars into <classpath>\jars
-				File createdir = new File(classpath+"\\jars");
-				if(!createdir.exists()) {
-					createdir.mkdir();
-				}
-				for(String jar:jars) {
-					try {
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,classpath+"\\jars");
-						process.waitFor();
-					} catch(InterruptedException ex) {
-						ex.printStackTrace();
-					}
+			for(String jar:jars) {
+				try {
+					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,classpath+"\\jars");
+					process.waitFor();
+				} catch(InterruptedException ex) {
+					ex.printStackTrace();
 				}
 			}
 		}
@@ -230,12 +222,13 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			JOptionPane.showMessageDialog(null,"Output jar location is:"+isMoreThanOneJar.getCreateJarFolderLocation(getDir()));
+			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(getDir());
+			if(!jarFolder.endsWith("\\"))
+				jarFolder=jarFolder+"\\";
+			JOptionPane.showMessageDialog(null,"Output jar location is:"+jarFolder);
 			
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(getDir())+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt";
-			if(javaversionnumber == 23 || javaversionnumber == -2) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(getDir())+"\\"+main_class2+".jar mf.txt";
-			}
+			main_class2=filename.getJarFileName(javaversionnumber);
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+jarFolder+"\\"+main_class2+".jar mf.txt";
 			for(String relative:includedFolders) {
 				input = input+" -C "+classpath+" "+relative;
 			}
@@ -289,6 +282,6 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 	}
 	@Override
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
-		return new PowershellMoreThanOnePackageExcludePackages(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders);
+		return new PowershellMoreThanOnePackageExcludePackages(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders,filename);
 	}
 }

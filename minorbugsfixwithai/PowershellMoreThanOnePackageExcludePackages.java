@@ -11,6 +11,10 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 	private IsMoreThanOneJar isMoreThanOneJar;
 	private String classpath;
 	private List<String> includedFolders;
+	public PowershellMoreThanOnePackageExcludePackages(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,String classpath,List<String> includedFolders,FileName filename) {
+		this(main,main_class,dir,allfiles,_isMoreThanOneJar,classpath,includedFolders);
+		this.filename=filename;
+	}
 	public PowershellMoreThanOnePackageExcludePackages(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,String classpath,List<String> includedFolders) {
 		super(main,main_class,dir,allfiles,_isMoreThanOneJar);
 		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
@@ -25,18 +29,13 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 				String[] splited=  main_class.split("\\.");
 				main_class2 = splited[splited.length-1];
 			}
-			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
-			if(!createJarFolderLocation.endsWith("\\"))
-				createJarFolderLocation=createJarFolderLocation+"\\";
-			JOptionPane.showMessageDialog(null,"Output jar location is:"+createJarFolderLocation);
-			if(javaversionnumber != 23 && javaversionnumber != -2) {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt");
-				main_class2=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2;
-			}
-			else {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt");
-				main_class2=createJarFolderLocation+main_class2;
-			}
+			String createFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!createFolder.endsWith("\\"))
+				createFolder=createFolder+"\\";
+			JOptionPane.showMessageDialog(null,"Output jar location is:"+createFolder);
+			main_class2=filename.getJarFileName(javaversionnumber);
+			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createFolder+main_class2+".jar mf.txt");
+			main_class2=createFolder+main_class2;
 			for(String relative:includedFolders) {
 				output2.write(" -C "+classpath+" "+relative);
 			}

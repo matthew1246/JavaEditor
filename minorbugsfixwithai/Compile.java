@@ -35,23 +35,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");
@@ -86,23 +82,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");
@@ -247,23 +239,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");
@@ -298,23 +286,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");
@@ -450,23 +434,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");
@@ -501,23 +481,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");
@@ -656,23 +632,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");
@@ -707,23 +679,19 @@ public class Compile {
 								
 									       	try (DirectoryStream<Path> stream = Files.newDirectoryStream(targetDir, "*.java")) {
 										          	for (Path entry : stream) {
-												try {
-
-													// Read file
-													String content = Files.readString(entry);
-
-													// Remove existing package if present
-													content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
-
-													// Prepend correct package
-													content = "package "+packagename + ";\n\n" + content;
-
-													// Write to target
-													Path targetFile = targetDir.resolve(entry.getFileName());
-													Files.writeString(targetFile, content);
-												} catch (Exception ex) {
-													JOptionPane.showMessageDialog(null,"Could not update file "+entry.getFileName()+": "+ex.getMessage());
-												}
+										
+												// Read file
+												String content = Files.readString(entry);
+											
+												// Remove existing package if present
+												content = content.replaceFirst("(?s)^\\s*package\\s+[^;]+;\\s*", "");
+											
+												// Prepend correct package
+												content = "package "+packagename + ";\n\n" + content;
+											
+												// Write to target
+												Path targetFile = targetDir.resolve(entry.getFileName());
+												Files.writeString(targetFile, content);
 										            }
 										}
 										JOptionPane.showMessageDialog(null,"Code Updated");

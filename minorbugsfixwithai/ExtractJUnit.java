@@ -1,4 +1,3 @@
-import javax.swing.JOptionPane;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.nio.file.Path;
@@ -206,7 +205,6 @@ public class ExtractJUnit {
 				pb.redirectErrorStream(true);
 				Process process=pb.start();
 				String output=readProcessOutput(process.getInputStream());
-				JOptionPane.showMessageDialog(null,output);
 				int exitcode=process.waitFor();
 				return exitcode==0 && output.trim().equals("0");
 			} finally {
