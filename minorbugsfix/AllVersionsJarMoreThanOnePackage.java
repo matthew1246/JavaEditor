@@ -143,7 +143,7 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
 			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
-			if(jarFolder.endsWith(jarFolder))
+			if(!jarFolder.endsWith("\\"))
 				jarFolder=jarFolder+"\\";
 			JOptionPane.showMessageDialog(null,"Output jat location is:"+jarFolder);
 			
@@ -159,6 +159,7 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 		existingJar.delete();
 	}
 	
+	// to do todo
 	// Remove C:\Users\Owner\Documents\Main.jar if C:\Users\Owner\Documents\javaeditor\minorbugsfix\Main.java
 	classnameJar = dir+main_class2+".jar";
 	existingJar = new File(classnameJar);

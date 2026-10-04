@@ -2240,11 +2240,11 @@ if(result == 0) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 								}
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 							}
 						}
 						else {
@@ -2329,11 +2329,11 @@ if(result == 0) {
 									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
 								}
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
 							}
 						}	
 						else {
@@ -2415,11 +2415,11 @@ if(result == 0) {  // isOnePackage = true;
 								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
 							}
 						}
 						else {
-							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
 						}
 					}
 					else {
