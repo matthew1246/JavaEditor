@@ -21,7 +21,12 @@ public class FileName {
 			}
 		}
 		else if(makeCertainVersionNumber) {
-			return "ForJava"+javaversionnumber+"_"+main_class2;
+			if(javaversionnumber != -2) {
+				return "ForJava"+javaversionnumber+"_"+main_class2;
+			}
+			else { // javaversionnumber == -2
+				return "ForJava23_"+main_class2;
+			}		
 		}
 		else {
 			return main_class2;
