@@ -2478,7 +2478,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					fileNames.remove(i);
 				}
 			}
-			tabbedpane.setSelectedIndex(keepindex);
+			tabbedpane.setSelectedIndex(0);
 			JScrollPane jscrollpane6 = (JScrollPane)tabbedpane.getSelectedComponent();
 			textarea = (JTextArea)jscrollpane6.getViewport().getView();
 			String fileName2 = fileNames.get(tabbedpane.getSelectedIndex());

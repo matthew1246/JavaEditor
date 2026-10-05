@@ -158,6 +158,7 @@ public class Main {
 	public JMenuItem functionLines = new JMenuItem("Show Function Lines");
 	public JMenuItem rename_file = new JMenuItem("Rename File");
 	public JMenuItem closetab = new JMenuItem("Close Tab");	
+	public JMenuItem keepclosealltabs = new JMenuItem("Keep & Close All Tabs");
 	public JMenuItem opennewtab = new JMenuItem("Open New Tab");
 	public JMenuItem openemptynewtab = new JMenuItem("Open Empty Tab");
 	public JMenuItem reloadall = new JMenuItem("Reload All Tabs");
@@ -959,6 +960,7 @@ public static String getClassName(String filename) {
 		menu.add(opennewtab);
 		menu.add(openemptynewtab);
 		menu.add(closetab);
+		menu.add(keepclosealltabs);
 		JMenu recent = new JMenu("Recent Files");
 		recent.addMenuListener(new MenuListener() {
 			public void menuSelected(MenuEvent e) {
@@ -2048,6 +2050,15 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				//tabbedpane.setSelectedIndex((tabtindex-1));
 			//else if(fileNames.size() > 1 && tabtindex == 0)
 				// tabbedpane.setSelectedIndex(1);
+			if(tabtindex < 0) {
+				return;
+			}
+			if(tabbedpane.getComponentAt(tabtindex) == pluspanel) {
+				return;
+			}
+			if(tabbedpane.getTabCount() <= 2) {
+				return;
+			}
 			if(tabtindex == (tabbedpane.getTabCount()-2) && tabtindex > 0) {
 				tabbedpane.setSelectedIndex((tabtindex-1));
 			}
@@ -2081,6 +2092,45 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		});
 				
 				
+		keepclosealltabs.addActionListener((ev) -> {
+			int keepindex=tabbedpane.getSelectedIndex();
+			if(keepindex < 0) {
+				return;
+			}
+			if(tabbedpane.getComponentAt(keepindex) == pluspanel) {
+				return;
+			}
+			if(tabbedpane.getTabCount() <= 2) {
+				return;
+			}
+			for(int i = tabbedpane.getTabCount()-1; i >= 0; i--) {
+				if(i == keepindex) {
+					continue;
+				}
+				if(tabbedpane.getComponentAt(i) == pluspanel) {
+					continue;
+				}
+				tabbedpane.remove(i);
+				if(i < fileNames.size()) {
+					fileNames.remove(i);
+				}
+			}
+			tabbedpane.setSelectedIndex(0);
+			JScrollPane jscrollpane6 = (JScrollPane)tabbedpane.getSelectedComponent();
+			textarea = (JTextArea)jscrollpane6.getViewport().getView();
+			String fileName2 = fileNames.get(tabbedpane.getSelectedIndex());
+			Main.this.fileName = fileName2;
+			git.Change(fileName2);
+			threecomboboxes.load(fileName2);
+			expandable.open();
+			allclassesinfile.ChangeFile(textarea,fileName2);
+			maven.Change(fileName2);
+			startercombobox.Change(fileName2);
+			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+			storeselectedfile.set(fileName2);
+			storeselectedfile.setTabs(fileNames);
+			updateJFrameTitle();
+		});
 		opennewtab.addActionListener((ev) -> {
 			addOrUpdateTab(ev);
 		});
