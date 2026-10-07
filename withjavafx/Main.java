@@ -2611,7 +2611,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
-									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true,filename);
 								}
 else { // More than one package
 									if(!isJavaFX) {
