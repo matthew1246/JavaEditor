@@ -2650,7 +2650,7 @@ else { // More than one package
 									}
 								}
 								removePackageNamesFromOtherFiles();
-								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true,filename);
 							}		
 							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2860,6 +2860,7 @@ else { // More than one package
 							}
 						}
 						
+						FileName filename=new FileName(fileName);
 						int javaversionnumber= -2;
 						int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 						boolean isJavaFX= false;
@@ -2930,7 +2931,7 @@ else { // More than one package
 								}
 							}
 							removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false,filename);
 						}		
 
 
