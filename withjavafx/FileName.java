@@ -39,12 +39,23 @@ public class FileName {
 			}
 		}
 		else if(makeCertainVersionNumber) {
-			if(javaversionnumber != -2) {
-				return "ForJava"+javaversionnumber+"_"+main_class2;
+			if(isPowershell) {
+				if(javaversionnumber == -2) {
+					return "HasJavaFX_ForJava23_Windows11x64";
+				}
+				else {
+					return "HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64";
+				}
 			}
-			else { // javaversionnumber == -2
-				return "ForJava23_"+main_class2;
-			}		
+			else
+			{
+				if(javaversionnumber != -2) {
+					return "ForJava"+javaversionnumber+"_"+main_class2;
+				}
+				else { // javaversionnumber == -2
+					return "ForJava23_"+main_class2;
+				}
+			}				
 		}
 		else {
 			return main_class2;

@@ -3043,7 +3043,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 838
+    "caretposition": 1447
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AddDependency.java": {
     "isLocked": false,
