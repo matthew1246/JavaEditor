@@ -24,7 +24,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 289033
+    "caretposition": 91699
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -1821,7 +1821,6 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
       "Control_F",
       "MSDOS",
       "Maven",
@@ -1842,6 +1841,7 @@
       "Links",
       "ManterX",
       "Preferences",
+      "Main",
       "ExtractJavaFXJars"
     ],
     "starterclass": "",

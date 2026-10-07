@@ -20,6 +20,10 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 	private IsMoreThanOneJar isMoreThanOneJar;
 	private String classpath;
 	private List<String> includedFolders;
+	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		super(main,fileName,sal,ev4,_isMoreThanOneJar);
 		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
@@ -42,28 +46,16 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		Preferences preferences=storeselectedfile.get(fileName);
 		if(!fileName.equals("")) {
 			java.util.List<String> jars = preferences.jars;
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				for(String jar:jars) {
-					try {
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,getDir());
-						process.waitFor();
-					} catch (InterruptedException ex) {
-						ex.printStackTrace();
-					}
-				}
+			File createdir = new File(classpath+"\\jars");
+			if(!createdir.exists()) {
+				createdir.mkdir();
 			}
-			else { // package is in right folders: extract the classpath jars into <classpath>\jars
-				File createdir = new File(classpath+"\\jars");
-				if(!createdir.exists()) {
-					createdir.mkdir();
-				}
-				for(String jar:jars) {
-					try {
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,classpath+"\\jars");
-						process.waitFor();
-					} catch(InterruptedException ex) {
-						ex.printStackTrace();
-					}
+			for(String jar:jars) {
+				try {
+					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,classpath+"\\jars");
+					process.waitFor();
+				} catch(InterruptedException ex) {
+					ex.printStackTrace();
 				}
 			}
 		}
@@ -230,18 +222,13 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(getDir());
-			if(!createJarFolderLocation.endsWith("\\"))
-				createJarFolderLocation=createJarFolderLocation+"\\";
-			JOptionPane.showMessageDialog(null,"Output jar location is:"+createJarFolderLocation);
+			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(getDir());
+			if(!jarFolder.endsWith("\\"))
+				jarFolder=jarFolder+"\\";
+			JOptionPane.showMessageDialog(null,"Output jar location is:"+jarFolder);
 			
-			String input = "";
-			if(javaversionnumber == 23 || javaversionnumber == -2) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt";
-			}
-			else {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt";
-			}
+			main_class2=filename.getJarFileName(javaversionnumber);
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+jarFolder+"\\"+main_class2+".jar mf.txt";
 			for(String relative:includedFolders) {
 				input = input+" -C "+classpath+" "+relative;
 			}
@@ -249,46 +236,23 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 				input = input+" -C jars .";
 			}
 		
-			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
-			String dir2=Main.getDirectory(main.fileName);
-			if(!dir2.endsWith("\\"))
-				dir2=dir2+"\\";
-			File mainjarfile=new File(dir2+main_class2+".jar");
-			if(mainjarfile.exists())
-				mainjarfile.delete();	
-		
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
-			String classnameJar;
-			if(packager.containsPackage() && packager.isInRightFolders()) {
-				classnameJar = getDir() + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
-			} else {
-				classnameJar = createJarFolderLocation+main_class2+".jar";
-			}
+			
+			String classnameJar = getDir() + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
 			File existingJar = new File(classnameJar);
 			if(existingJar.exists()) {
 				existingJar.delete();
 			}
-			if(packager.containsPackage()) {
-				File parentDir2 = new File(classnameJar).getParentFile();
-				if(parentDir2 != null) {
-					String classnameJar2 = parentDir2.getAbsolutePath()+"\\"+main_class2+".jar";
-					File existingJar2 = new File(classnameJar2);
-					if(existingJar2.exists()) {
-						existingJar2.delete();
-					}
-					File parentDir3 = parentDir2.getParentFile();
-					if(parentDir3 != null) {
-						String classnameJar3 = parentDir3.getAbsolutePath()+"\\"+main_class2+".jar";
-						File existingJar3 = new File(classnameJar3);
-						if(existingJar3.exists()) {
-							existingJar3.delete();
-						}
-					}
-				}
+			
+			classnameJar = getDir()+main_class2+".jar";
+			existingJar = new File(classnameJar);
+			if(existingJar.exists()) {
+				existingJar.delete();
 			}
+			
 			Process process;
-			if(getDir().replace("\\","").matches("[a-zA-Z]:") || createJarFolderLocation.replace("\\","").matches("[a-zA-Z]:")) {
+			if(getDir().replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,getDir());
 			}
 			else {
@@ -317,12 +281,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		}
 	}
 	@Override
-	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellMoreThanOnePackageExcludePackages(main,main_class,getDir(),allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders);
-		for(int i = 18; i <= 23; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
-		}
-		powershell.Finish();
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
+		return new PowershellMoreThanOnePackageExcludePackages(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders,filename);
 	}
 }

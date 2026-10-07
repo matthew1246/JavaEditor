@@ -5,10 +5,8 @@ import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.io.BufferedWriter;
 import java.io.IOException;
-/*
-** This generates all versions of Java for Jars when the code has no package.
-*/
-public class AllVersionsJarNoPackage implements AllVersionsJar {
+public class AllVersionsJarNoPackage extends AllVersionsJar {
+	private FileName filename;
 	private Packager packager;
 	private String dir;
 	private Main main;
@@ -16,6 +14,10 @@ public class AllVersionsJarNoPackage implements AllVersionsJar {
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}
 	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
@@ -32,11 +34,9 @@ public class AllVersionsJarNoPackage implements AllVersionsJar {
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 	}
-	@Override
 	public String getDir() {
 		return dir;
 	}
-	@Override
 	public AllFiles getAllFiles() {
 		return allfiles;
 	}
@@ -125,11 +125,8 @@ public class AllVersionsJarNoPackage implements AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-		
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-			if(javaversionnumber == 23 || javaversionnumber == -2) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+"\\"+main_class2+".jar mf.txt .";
-			}
+			
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
 		
 			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
 			String dir2=Main.getDirectory(main.fileName);
@@ -170,12 +167,7 @@ public class AllVersionsJarNoPackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
-		for(int i = 18; i <= 23; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
-		}
-		powershell.Finish();
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
+		return new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,filename);
 	}
 }

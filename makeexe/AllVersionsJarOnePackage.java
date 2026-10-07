@@ -9,14 +9,19 @@ import java.io.IOException;
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
 */
-public class AllVersionsJarOnePackage implements AllVersionsJar {
+public class AllVersionsJarOnePackage extends AllVersionsJar {
+	protected FileName filename;
 	private Packager packager;
-	public String dir;
+	private String dir;
 	private Main main;
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		if(_isMoreThanOneJar)
 			isMoreThanOneJar=new IsMoreThanOneJar(false);
@@ -36,9 +41,11 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 		if(!dir.endsWith("\\"))
 			dir=dir+"\\";
 	}
-	@Override
 	public String getDir() {
 		return dir;
+	}
+	public AllFiles getAllFiles() {
+		return allfiles;
 	}
 	public void Compile(int javaversionnumber) {
 		Compile compile = new Compile();
@@ -99,23 +106,16 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 	}
 	public void WriteManifest(String main_class) {
 		try {
-			if(dir.endsWith("\\\\"))
-				dir=dir.substring(0,dir.length()-1);
-			if(!dir.endsWith("\\"))
-				dir=dir+"\\";
 			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
-				System.out.println("dir3:"+dir);
 				CommandLine commandline = new CommandLine();
-				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"writemf.bat");
-				java.io.FileWriter batwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
-				java.io.BufferedWriter batoutput = new java.io.BufferedWriter(batwriter);
-				batoutput.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"");
-				batoutput.write("\n");
-				batoutput.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"");
-				batoutput.close();
-				String liney = "powershell -Command Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+tempfile.getAbsolutePath()+"\"'";
-				System.out.println(liney);
-				commandline.run(liney, dir);
+				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.ps1");
+				java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
+				scriptwriter.write("$content = 'Manifest-Version: 1.0' + [Environment]::NewLine + 'Main-Class: "+main_class+"' + [Environment]::NewLine\n");
+				scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
+				scriptwriter.close();
+				Process process = commandline.runAsAdmin("\"powershell\" -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
+				try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
+				tempfile.delete();
 			}
 			else {
 				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
@@ -130,55 +130,43 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 				//output.write("\n");
 				output.close();
 			}
-
 		} catch(java.io.IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-	public AllFiles allfiles;
+	private AllFiles allfiles;
 	public boolean isMatthewJavaEditor(String main_class) {
 		allfiles = new AllFiles(main_class,dir);
 		return (allfiles.isSameDirectory(main) || (allfiles.exists() && !allfiles.delete()));
-	}
-	@Override
-	public AllFiles getAllFiles() {
-		return allfiles;
 	}
 	public void MakeJarUsingmsdos(int javaversionnumber,String main_class) {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			String createJarFolderLocation=isMoreThanOneJar.getCreateJarFolderLocation(dir);
-			if(!createJarFolderLocation.endsWith("\\"))
-				createJarFolderLocation=createJarFolderLocation+"\\";
-			JOptionPane.showMessageDialog(null,"output jar location is:"+createJarFolderLocation);
+			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			JOptionPane.showMessageDialog(null,"output jar location is:"+jarFolder);
 			
-			String input = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt .";
-				}
-			}
-			else { // packager.isInRightFolders() == true
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				if(javaversionnumber == 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				}	
-			}		
-	
-			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
-			String dir2=Main.getDirectory(main.fileName);
-			if(!dir2.endsWith("\\"))
-				dir2=dir2+"\\";
-			File mainjarfile=new File(dir2+main_class2+".jar");
-			if(mainjarfile.exists())
-				mainjarfile.delete();	
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+jarFolder+filename.getJarFileName(javaversionnumber)+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");	
 		
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
+			
+			// Main.jar inside package folder.
+			String classnameJar = dir + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
+			File existingJar = new File(classnameJar);
+			if(existingJar.exists()) {
+				existingJar.delete();
+			}
+			
+			// Main.jar in C:\Users\Owner\Documents\Main.jar when C:\Users\Owner\Documents\javaeditor\minorbugsfix\Main.java.
+			classnameJar = dir+main_class2+".jar";
+			existingJar = new File(classnameJar);
+			if(existingJar.exists()) {
+				existingJar.delete();
+			}
+			
 			Process process;
-			if(dir.replace("\\","").matches("[a-zA-Z]:") || createJarFolderLocation.replace("\\","").matches("[a-zA-Z]:")) {
+			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,dir);
 			}
 			else {
@@ -206,13 +194,7 @@ public class AllVersionsJarOnePackage implements AllVersionsJar {
 			ex.printStackTrace();
 		}
 	}
-	public void Powershell(String main_class) {
-		Powershell powershell = new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
-		for(int i = 18; i <= 23; i++) {
-			powershell.Compile(i,fileName);
-			powershell.makeJar(i);
-		}
-		powershell.Finish();
-
+	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
+		return new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,filename);
 	}
 }

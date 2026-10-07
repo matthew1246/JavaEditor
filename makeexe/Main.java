@@ -2261,11 +2261,12 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								sal.actionPerformed(null); // Save latest code.
 							}
 						}
-						
-Packager packager = new Packager(this);
+									
+						FileName filename=new FileName(fileName);
+						filename.makeAllVersionsJar();
+						Packager packager=new Packager(this);				
 						AllVersionsJar allversionsjar = null;
-						if(packager.containsPackage())
-						{
+						if(packager.containsPackage()) {
 							String[] options3={"One","More than One"};
 							int result = JOptionPane.showOptionDialog(
 							    null,
@@ -2277,35 +2278,36 @@ Packager packager = new Packager(this);
 							    options3,
 							    options3[1]  // <-- sets "More than one" as the default focused button
 							);
-							if(result == 0) {
-								allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
+if(result == 0) {
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true,filename);
 							}
 							else if(result == 1) {
 								String[] options5={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true,filename);
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 								}
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 							}
 						}
 						else {
 							removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true,filename);
 						}
+						
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
-					String main=allversionsjar.getMain(storeselectedfile,preferences);
-					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
-					allversionsjar.WriteManifest(main);
-					if(allversionsjar.isMatthewJavaEditor(main)) {
-						allversionsjar.Powershell(main);
-					}
+						String main=allversionsjar.getMain(storeselectedfile,preferences);
+						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
+						allversionsjar.WriteManifest(main);
+						if(allversionsjar.isMatthewJavaEditor(main)) {
+							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
+						}
 						else {
 							allversionsjar.deleteExistingMainJar(this,main);
 							for(int i = 18; i <= 23; i++) {
@@ -2352,79 +2354,60 @@ Packager packager = new Packager(this);
 								}
 							}
 							
-							Packager packager=new Packager(this);
-boolean isOnePackage = false;
-boolean isNoPackage = false;
-							boolean excludePackagesChosen = false;
-							AllVersionsJar allversionsjar = null;
-							if(packager.containsPackage()) {
-								String[] options3={"One","More than One"};
-								int result = JOptionPane.showOptionDialog(
-								    null,
-								    "Do you want to make a jar with one or more packages?",
-								    "Package Selection",
-								    JOptionPane.DEFAULT_OPTION,
-								    JOptionPane.QUESTION_MESSAGE,
-								    null,
-								    options3,
-								    options3[1]  // <-- sets "More than one" as the default focused button
-								);
-								if(result == 0) isOnePackage = true;
-								if(result == 1) {
-									String[] options5={"Yes","No"};
-									int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
-									if(excludepackages == JOptionPane.YES_OPTION) {
-										allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
-										excludePackagesChosen = true;
-									}
-									else {
-										allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
-									}
-								}
-								else if(isOnePackage) {
-									allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
+						FileName filename=new FileName(fileName);
+						filename.makeCertainVersionNumber();
+						AllVersionsJar allversionsjar = null;
+						Packager packager=new Packager(this);
+						if(packager.containsPackage()) {
+							String[] options3={"One","More than One"};
+							int result = JOptionPane.showOptionDialog(
+							    null,
+							    "Do you want to make a jar with one or more packages?",
+							    "Package Selection",
+							    JOptionPane.DEFAULT_OPTION,
+							    JOptionPane.QUESTION_MESSAGE,
+							    null,
+							    options3,
+							    options3[1]  // <-- sets "More than one" as the default focused button
+							);
+if(result == 0) {
+								allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev4,false,filename);
+							}
+							else if(result == 1) {
+								String[] options5={"Yes","No"};
+								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
+								if(excludepackages == JOptionPane.YES_OPTION) {
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false,filename);
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
 								}
-							}	
-							else {
-								removePackageNamesFromOtherFiles();
-								isNoPackage = true;
-								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
 							}
-							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-							Preferences preferences=allversionsjar.extractJars(storeselectedfile);
+							else {
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
+							}
+						}	
+						else {
+							removePackageNamesFromOtherFiles();
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false,filename);
+						}
+						
+						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+						Preferences preferences=allversionsjar.extractJars(storeselectedfile);
 						String main=allversionsjar.getMain(storeselectedfile,preferences);
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							Powershell powershell = null;
-if(isNoPackage) {
-									powershell=new PowershellNoPackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
-								}
-								else if(isOnePackage) {
-									powershell=new PowershellOnePackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
-								}
-								else if(excludePackagesChosen) {
-									AllVersionsJarMoreThanOnePackageExcludePackages excludejar = (AllVersionsJarMoreThanOnePackageExcludePackages) allversionsjar;
-									powershell=new PowershellMoreThanOnePackageExcludePackages(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false,excludejar.getClasspath(),excludejar.getIncludedFolders());
-								}
-								else {
-									powershell=new PowershellMoreThanOnePackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
-								}
-								powershell.Compile(javaversionnumber,fileName);
-								powershell.makeJar(javaversionnumber);							
-								powershell.Finish();
-							}
+							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
+							powershell.Compile(javaversionnumber,fileName);
+							powershell.makeJar(javaversionnumber);							
+							powershell.Finish();
+						}
 						else {
-								allversionsjar.deleteExistingMainJar(this,main);
-								allversionsjar.Compile(javaversionnumber);	
-								allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
-							}
-						/*} catch (Exception ex) {
-							ex.printStackTrace();
-						}*/
+							allversionsjar.deleteExistingMainJar(this,main);
+							allversionsjar.Compile(javaversionnumber);	
+							allversionsjar.MakeJarUsingmsdos(javaversionnumber,main);	
+						}
 						new Recents().add(Main.this.fileName);
 					});
 						
@@ -2461,15 +2444,12 @@ if(isNoPackage) {
 						}
 					}
 					
-					Packager packager=new Packager(this);
-					int result = 1;
-boolean isOnePackage = false;
-					boolean isNoPackage = false;
-					boolean excludePackagesChosen = false;
+					FileName filename=new FileName(fileName);
 					AllVersionsJar allversionsjar = null;
+					Packager packager=new Packager(this);
 					if(packager.containsPackage()) {
 						String[] options3={"One","More than One"};
-						result = JOptionPane.showOptionDialog(
+						int result = JOptionPane.showOptionDialog(
 						    null,
 						    "Do you want to make a jar with one or more packages?",
 						    "Package Selection",
@@ -2479,30 +2459,28 @@ boolean isOnePackage = false;
 						    options3,
 						    options3[1]  // <-- sets "More than one" as the default focused button
 						);
-						if(result == 0) isOnePackage = true;
-						if(isOnePackage) {
-							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
+if(result == 0) {  // isOnePackage = true;		
+							allversionsjar = new AllVersionsJarOnePackage(this,fileName,sal,ev,false,filename);
 						}
 						else if(result == 1) {
 							String[] options5={"Yes","No"};
 							int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 							if(excludepackages == JOptionPane.YES_OPTION) {
-								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
-								excludePackagesChosen = true;
+								allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false,filename);
 							}
 							else {
-								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+								allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
 							}
 						}
 						else {
-							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+							allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
 						}
 					}
 					else {
 						removePackageNamesFromOtherFiles();
-						isNoPackage = true;
-						allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false,filename);
 					}
+				
 					int no_java_verson_number = -2;
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					Preferences preferences=allversionsjar.extractJars(storeselectedfile);
@@ -2510,25 +2488,12 @@ boolean isOnePackage = false;
 					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 					allversionsjar.WriteManifest(main);
 					if(allversionsjar.isMatthewJavaEditor(main)) {
-						Powershell powershell = null;
-if(isNoPackage) {
-							powershell=new PowershellNoPackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
-						}
-						else if(isOnePackage) {
-							powershell=new PowershellOnePackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
-						}
-						else if(excludePackagesChosen) {
-							AllVersionsJarMoreThanOnePackageExcludePackages excludejar = (AllVersionsJarMoreThanOnePackageExcludePackages) allversionsjar;
-							powershell=new PowershellMoreThanOnePackageExcludePackages(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false,excludejar.getClasspath(),excludejar.getIncludedFolders());
-						}
-						else {
-							powershell=new PowershellMoreThanOnePackage(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles(),false);
-						}
+						Powershell powershell = allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						powershell.Compile(no_java_verson_number,fileName);
 						powershell.makeJar(no_java_verson_number);							
 						powershell.Finish();
 					}
-					else {
+				else {
 						allversionsjar.deleteExistingMainJar(this,main);
 						allversionsjar.Compile(no_java_verson_number);	
 						allversionsjar.MakeJarUsingmsdos(no_java_verson_number,main);	

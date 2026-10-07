@@ -6,11 +6,16 @@ import java.io.FileWriter;
 import javax.swing.JOptionPane;
 import java.io.BufferedWriter;
 public class PowershellNoPackage implements Powershell {
+	protected FileName filename;
 	protected Packager packager;
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellNoPackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,main_class,dir,allfiles,_isMoreThanOneJar);
+		this.filename=filename;
+	}
 	public PowershellNoPackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
 		this.isMoreThanOneJar = new IsMoreThanOneJar(_isMoreThanOneJar);
 		try {
@@ -71,11 +76,8 @@ public class PowershellNoPackage implements Powershell {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}		
-	
-	private String main_class2;	
-			
-	
+	}				
+	private String main_class2;						
 	public void makeJar(int javaversionnumber) {
 		try {
 			String createJarLocationFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
@@ -84,14 +86,9 @@ public class PowershellNoPackage implements Powershell {
 			main_class2 = main_class;
 			JOptionPane.showMessageDialog(null,"jar will be created on:"+createJarLocationFolder);
 			// START /B /WAIT cmd.exe /c "C:\Program Files\Java\jdk-23\bin\jar.exe" cfm Main.jar mf.txt .
-			if(javaversionnumber != 23 && javaversionnumber != -2) {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarLocationFolder+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .");
-				main_class2=createJarLocationFolder+"ForJava"+javaversionnumber+"_"+main_class2;
-			}
-			else {
-				output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarLocationFolder+main_class2+".jar mf.txt .");
-				main_class2=createJarLocationFolder+main_class2;
-			}
+			String jarname=filename.getJarFileName(javaversionnumber);
+			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarLocationFolder+jarname+".jar mf.txt .");
+			main_class2=createJarLocationFolder+jarname;
 			output2.write("\n");
 			// output2.close();
 		} catch (IOException ex) {
