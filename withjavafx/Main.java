@@ -2577,10 +2577,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							
+							FileName filename=new FileName(fileName);
+							filename.makeAllVersionsJar();
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							boolean isJavaFX= false;
-							if(option2 ==JOptionPane.YES_OPTION)
+							if(option2 ==JOptionPane.YES_OPTION) {
 								isJavaFX=true;
+								filename.makeForJavaFX();
+							}
 							AllVersionsJar allversionsjar=null;
 							Packager packager=new Packager(this);
 							ExtractJavaFXJars extractjavafxjars=null;

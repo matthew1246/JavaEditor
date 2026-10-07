@@ -10,6 +10,7 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public class AllVersionsJarOnePackage extends AllVersionsJar {
+	protected FileName filename;
 	private IsMoreThanOneJar isMoreThanOneJar;
 	private Packager packager;
 	private String dir;
@@ -17,6 +18,10 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
+	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public AllVersionsJarOnePackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		if(_isMoreThanOneJar)
 			this.isMoreThanOneJar=new IsMoreThanOneJar(false);
