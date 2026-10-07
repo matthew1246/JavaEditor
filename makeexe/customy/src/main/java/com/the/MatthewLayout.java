@@ -265,7 +265,7 @@ public boolean isOn = false;
 		return dimension;
 	}
 	int x = 0;
-	public void layoutContainer(Container container) 	{
+	public void layoutContainer(Container container) {
 		if(x == 0) 
 		for(int i = 0; i < xywidthheights.size(); i++) {
 			XYWidthHeight xywidthheight = xywidthheights.get(i);
@@ -355,7 +355,9 @@ public boolean isOn = false;
 			int padR = insets.right + padding.right;
 			int padT = insets.top + padding.top;
 			int padB = insets.bottom + padding.bottom;
-			double xsize = 800.0 / 6.0;
+			//double xsize = 800.0 / 6.0;
+			System.out.println("highestXSumFraction:"+highestXSumFraction);
+			double xsize=((double)originalWidth)/((double)highestXSumFraction);
 			int maxRow = 0;
 			for(XYWidthHeight xw : xywidthheights) {
 				if(xw.y >= maxRow) maxRow = xw.y + 1;
