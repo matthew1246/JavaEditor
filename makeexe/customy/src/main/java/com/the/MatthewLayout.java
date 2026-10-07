@@ -362,7 +362,7 @@ public boolean isOn = false;
 			for(XYWidthHeight xw : xywidthheights) {
 				if(xw.y >= maxRow) maxRow = xw.y + 1;
 			}
-			double ysize = ((double)(container.getHeight())) / ((double)highestYSumFraction);
+			double ysize = ((double)originalHeight) / ((double)highestYSumFraction);
 			// System.out.println("ysize is " +  ysize);
 			// container.setWidth(800);
 			
