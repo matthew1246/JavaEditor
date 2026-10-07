@@ -29,7 +29,7 @@ public class MatthewLayout implements LayoutManager2 {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
-		MatthewLayout matthewLayout = new MatthewLayout(true); // or MatthewLayout matthewLayout = new MatthewLayout(60,20);
+		MatthewLayout matthewLayout = new MatthewLayout(); // or MatthewLayout matthewLayout = new MatthewLayout(60,20);
 		panel.setLayout(matthewLayout);
 		frame.setSize(800,600);
 		
@@ -70,6 +70,9 @@ public class MatthewLayout implements LayoutManager2 {
 	private int minimumHeight;
 	private Insets padding = new Insets(0,0,0,0);
 	private int vGap = 0;
+	public MatthewLayout() {
+		this(true);
+	}
 	public MatthewLayout(boolean isFill) {
 		if(!isFill) {
 			throw new RuntimeException("Need isFill to be true to use this constructor.");
@@ -268,161 +271,127 @@ public boolean isOn = false;
 			XYWidthHeight xywidthheight = xywidthheights.get(i);
 		}
 		x++;
-		if(!isFill) {
-			for(int i = 0; i < components.size(); i++) {
-				int containerWidth = container.getWidth();
-				Component component = components.get(i);
-				XYWidthHeight xywidthheight = xywidthheights.get(i);
-			
-				int xSum = 0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-					Component component4 = components.get(j);
-					if(!xywidthheight2.equals(xywidthheight)) {
-						if(xywidthheight2.y == xywidthheight.y) {
-							xSum+= component4.getBounds().getWidth();
-						}
+	
+		int highestXSumFraction = 0;
+		for(int i = 0; i < components.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			int fractionXSum =0;
+			int count = 0;
+			for(int j = 0; j < components.size(); j++) {
+				XYWidthHeight xywidthheight2= xywidthheights.get(j);
+				if(xywidthheight.y == xywidthheight2.y) {
+					if(count != xywidthheight2.x) {
+						// JOptionPane.showMessageDialog(null,""+xywidthheight2.x+" "+count);
+						int z = xywidthheight2.x-count;
+						fractionXSum+= z;
+						count+= z;
 					}
-					else break;
-				}
-				int ySum = 0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-					Component component4 = components.get(j);
-					if(!xywidthheight2.equals(xywidthheight)) {
-						if(xywidthheight2.x == xywidthheight.x) {
-							ySum+= component4.getBounds().getHeight();
-						}
-					}
-					else break;
-				}
-			
-				Insets insets = container.getInsets();
-				component.setBounds(insets.left+padding.left+xSum,insets.top+padding.top+ySum,minimumWidth*xywidthheight.width,minimumHeight*xywidthheight.height);
-				if(showBorders) {
-					JComponent jcomponent = (JComponent)component;
-					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
-				}
+					fractionXSum+= xywidthheight2.width;
+					count++;
+				}					
+			}
+			if(fractionXSum > highestXSumFraction) {
+				highestXSumFraction=fractionXSum;
 			}
 		}
-		else { // isFill = true
-			int highestXSumFraction = 0;
-			for(int i = 0; i < components.size(); i++) {
-				XYWidthHeight xywidthheight = xywidthheights.get(i);
-				int fractionXSum =0;
-				int count = 0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2= xywidthheights.get(j);
-					if(xywidthheight.y == xywidthheight2.y) {
-						if(count != xywidthheight2.x) {
-							// JOptionPane.showMessageDialog(null,""+xywidthheight2.x+" "+count);
-							int z = xywidthheight2.x-count;
-							fractionXSum+= z;
-							count+= z;
-						}
-						fractionXSum+= xywidthheight2.width;
-						count++;
-					}					
-				}
-				if(fractionXSum > highestXSumFraction) {
-					highestXSumFraction=fractionXSum;
-				}
+		int highestYSumFraction = 0;
+		for(int i = 0; i < components.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			int fractionYSum =0;
+			for(int j = 0; j < components.size(); j++) {
+				XYWidthHeight xywidthheight2= xywidthheights.get(j);
+				if(xywidthheight.x == xywidthheight2.x) {
+					fractionYSum+= xywidthheight2.height;
+				}					
 			}
-			int highestYSumFraction = 0;
-			for(int i = 0; i < components.size(); i++) {
-				XYWidthHeight xywidthheight = xywidthheights.get(i);
-				int fractionYSum =0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2= xywidthheights.get(j);
-					if(xywidthheight.x == xywidthheight2.x) {
-						fractionYSum+= xywidthheight2.height;
-					}					
-				}
-				if(fractionYSum > highestYSumFraction) {
-					highestYSumFraction=fractionYSum;
-				}
+			if(fractionYSum > highestYSumFraction) {
+				highestYSumFraction=fractionYSum;
 			}
-			for(int i = 0; i < components.size(); i++) {
-				XYWidthHeight xywidthheight = xywidthheights.get(i);
-				Component component = components.get(i);
-				int xSum = 0;
-				int xcount = 0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-					Component component4 = components.get(j);
-					if(!xywidthheight2.equals(xywidthheight)) {
-						if(xywidthheight2.y == xywidthheight.y) {
-							if(xcount != xywidthheight2.x) {
-								int z = xywidthheight2.x-xcount;
-								xSum+= z;
-								xcount+=z;
-							}										
-							xSum+= xywidthheight2.width;
-							xcount++;
-						}
-					}
-					else {
+		}
+		for(int i = 0; i < components.size(); i++) {
+			XYWidthHeight xywidthheight = xywidthheights.get(i);
+			Component component = components.get(i);
+			int xSum = 0;
+			int xcount = 0;
+			for(int j = 0; j < components.size(); j++) {
+				XYWidthHeight xywidthheight2 = xywidthheights.get(j);
+				Component component4 = components.get(j);
+				if(!xywidthheight2.equals(xywidthheight)) {
+					if(xywidthheight2.y == xywidthheight.y) {
 						if(xcount != xywidthheight2.x) {
 							int z = xywidthheight2.x-xcount;
 							xSum+= z;
 							xcount+=z;
-						}		
-						break;
+						}										
+						xSum+= xywidthheight2.width;
+						xcount++;
 					}
+				}
+				else {
+					if(xcount != xywidthheight2.x) {
+						int z = xywidthheight2.x-xcount;
+						xSum+= z;
+						xcount+=z;
+					}		
+					break;
+				}
 
-				}
-				int ySum = 0;
-				for(int j = 0; j < components.size(); j++) {
-					XYWidthHeight xywidthheight2 = xywidthheights.get(j);
-					Component component4 = components.get(j);
-					if(!xywidthheight2.equals(xywidthheight)) {
-						if((getWeightx(xywidthheight2) == getWeightx(xywidthheight)) || isInclusiveY(xywidthheight,xywidthheight2)) {			
-							ySum+= xywidthheight2.height;
-						}
-					}
-					else break;
-				}
-				Insets insets = container.getInsets();
-				int padL = insets.left + padding.left;
-				int padR = insets.right + padding.right;
-				int padT = insets.top + padding.top;
-				int padB = insets.bottom + padding.bottom;
-				double xsize = ((double)(container.getWidth()-padL-padR)) / ((double)highestXSumFraction);
-				int maxRow = 0;
-				for(XYWidthHeight xw : xywidthheights) {
-					if(xw.y >= maxRow) maxRow = xw.y + 1;
-				}
-				double ysize = ((double)(container.getHeight()-padT-padB-(maxRow-1)*vGap)) / ((double)highestYSumFraction);
-				// System.out.println("ysize is " +  ysize);
-				// container.setWidth(800);
-				
-				if(component instanceof JButton) {
-					JButton button=(JButton) component;
-					Insets insets2=button.getMargin();
-					insets2.left = 0;
-					insets2.right=0;
-					button.setMargin(insets2);
-				}
-				
-				System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xywidthheight.width +" "+xywidthheight.height+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
-				component.setLocation(padL+(int)(xSum*xsize),padT+(int)(ySum*ysize)+xywidthheight.y*vGap);
-				// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
-				component.setMinimumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				component.setMaximumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				component.setSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				component.setPreferredSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
-				// System.out.println(container.getWidth()+" "+(int)(((double)xywidthheight.x)*xsize)+" "+(xywidthheight.width*((int)xsize))+" "+(xywidthheight.height*((int)ysize))+" "+(int)xsize+" "+(int)ysize);
-				component.validate();
-				component.repaint();
-				if(showBorders) {
-					JComponent jcomponent = (JComponent)component;
-					jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
-				}
 			}
-			for(XYWidthHeight xywidthheight:xywidthheights) {
-				System.out.println(xywidthheight);
-			}		
+			int ySum = 0;
+			for(int j = 0; j < components.size(); j++) {
+				XYWidthHeight xywidthheight2 = xywidthheights.get(j);
+				Component component4 = components.get(j);
+				if(!xywidthheight2.equals(xywidthheight)) {
+					if((getWeightx(xywidthheight2) == getWeightx(xywidthheight)) || isInclusiveY(xywidthheight,xywidthheight2)) {			
+						ySum+= xywidthheight2.height;
+					}
+				}
+				else break;
+			}
+			Insets insets = container.getInsets();
+			// JOptionPane.showMessageDialog(null,"container.getInsets():"+insets);
+			
+			int padL = insets.left + padding.left;
+			int padR = insets.right + padding.right;
+			int padT = insets.top + padding.top;
+			int padB = insets.bottom + padding.bottom;
+			double xsize = 800.0 / 6.0;
+			int maxRow = 0;
+			for(XYWidthHeight xw : xywidthheights) {
+				if(xw.y >= maxRow) maxRow = xw.y + 1;
+			}
+			double ysize = ((double)(container.getHeight())) / ((double)highestYSumFraction);
+			// System.out.println("ysize is " +  ysize);
+			// container.setWidth(800);
+			
+			/*if(component instanceof JButton) {
+				JButton button=(JButton) component;
+				Insets insets2=button.getMargin();
+				insets2.left = 0;
+				insets2.right=0;
+				button.setMargin(insets2);
+			}*/
+			
+			
+			System.out.println("sizes "+xywidthheight.x+" "+xywidthheight.y+" "+xywidthheight.width +" "+xywidthheight.height+" (int)("+xSum+"*"+xsize+") + (int)("+ySum+"*"+ysize+")");
+			// JOptionPane.showMessageDialog(null,(xywidthheight.width*((int)xsize))+"");
+			component.setMinimumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
+			component.setMaximumSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
+			component.setSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
+			component.setPreferredSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
+			// System.out.println(container.getWidth()+" "+(int)(((double)xywidthheight.x)*xsize)+" "+(xywidthheight.width*((int)xsize))+" "+(xywidthheight.height*((int)ysize))+" "+(int)xsize+" "+(int)ysize);
+			// component.setLocation((int)(xSum*xsize),(int)(ySum*ysize));
+			component.setLocation((int)(xsize*xywidthheight.x),(int)(ySum*ysize));
+			component.validate();
+			component.repaint();
+			if(showBorders) {
+				JComponent jcomponent = (JComponent)component;
+				jcomponent.setBorder(BorderFactory.createLineBorder(Color.black));
+			}
 		}
+		for(XYWidthHeight xywidthheight:xywidthheights) {
+			System.out.println(xywidthheight);
+		}		
 	}
 	public boolean isInclusiveY(XYWidthHeight xywidthheight,XYWidthHeight xywidthheight2) {
 		int weightx2= getWeightx(xywidthheight2);
