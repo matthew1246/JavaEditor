@@ -381,7 +381,7 @@ public boolean isOn = false;
 			component.setPreferredSize(new Dimension((int)(xywidthheight.width*xsize),(int)(xywidthheight.height*ysize)));
 			// System.out.println(container.getWidth()+" "+(int)(((double)xywidthheight.x)*xsize)+" "+(xywidthheight.width*((int)xsize))+" "+(xywidthheight.height*((int)ysize))+" "+(int)xsize+" "+(int)ysize);
 			// component.setLocation((int)(xSum*xsize),(int)(ySum*ysize));
-			component.setLocation((int)(xsize*xywidthheight.x),(int)(ySum*ysize));
+			component.setLocation((int)(xsize*xSum),(int)(ySum*ysize));
 			component.validate();
 			component.repaint();
 			if(showBorders) {
