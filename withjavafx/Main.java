@@ -2625,7 +2625,7 @@ else { // More than one package
 									String[] options5={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									}

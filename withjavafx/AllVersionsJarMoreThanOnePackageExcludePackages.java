@@ -19,6 +19,10 @@ import java.util.Set;
 public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersionsJarMoreThanOnePackage {
 	private String classpath;
 	private List<String> includedFolders;
+	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public AllVersionsJarMoreThanOnePackageExcludePackages(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		super(main,fileName,sal,ev4,_isMoreThanOneJar);
 		classpath = packager.classpath;
@@ -233,13 +237,9 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 				createdJarFolderCreation=createdJarFolderCreation+"\\";
 			JOptionPane.showMessageDialog(null,"Jar folder location is:"+createdJarFolderCreation);
 			
-			String input = "";
-			if(javaversionnumber == 23 || javaversionnumber == -2) {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createdJarFolderCreation+main_class2+".jar mf.txt";
-			}
-			else {
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createdJarFolderCreation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt";
-			}
+			main_class2=filename.getJarFileName(javaversionnumber);
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createdJarFolderCreation+main_class2+".jar mf.txt";
+			
 			for(String relative:includedFolders) {
 				input = input+" -C "+classpath+" "+relative;
 			}
@@ -280,6 +280,6 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 	}
 	@Override
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
-		return new PowershellMoreThanOnePackageExcludePackages(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders);
+		return new PowershellMoreThanOnePackageExcludePackages(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,classpath,includedFolders,filename);
 	}
 }
