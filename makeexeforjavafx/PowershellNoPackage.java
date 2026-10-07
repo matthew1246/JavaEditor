@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.IOException;
 public class PowershellNoPackage implements Powershell {
+	protected FileName filename;
 	protected AllFiles allfiles;
 	protected Main main;
 	protected Packager packager;
@@ -16,6 +17,10 @@ public class PowershellNoPackage implements Powershell {
 	protected String dir;
 	protected BufferedWriter output2;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellNoPackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,main_class,dir,allfiles,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public PowershellNoPackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
 		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.allfiles=allfiles;
@@ -224,27 +229,10 @@ public class PowershellNoPackage implements Powershell {
 			if(!createJarFolderLocation.endsWith("\\"))
 				createJarFolderLocation=createJarFolderLocation+"\\";
 			JOptionPane.showMessageDialog(null,"Create jar location is:"+createJarFolderLocation);
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				if(javaversionnumber != -2) { // Not Main.jar
-					if(hasJavaFX) {
-						output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
-						fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
-					}
-					else {
-						output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class+".jar mf.txt .");
-						fileName=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class+".jar";
-					}
-				}
-				else { // Is Main.jar
-					output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+main_class+".jar mf.txt .");
-					fileName=createJarFolderLocation+main_class+".jar";
-				}
-			}
-			else { // Code is a package and package.isInRightFolder() == true
-				//output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-				output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
-				fileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
-			}	
+			String jarFile=filename.getJarFileName(javaversionnumber);
+			output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+jarFile+".jar mf.txt .");
+			fileName=createJarFolderLocation+jarFile+".jar";
+				
 			output2.write("\n");
 			// output2.close();
 		} catch (IOException ex) {
@@ -254,7 +242,7 @@ public class PowershellNoPackage implements Powershell {
 	public void Finish() {
 		try {
 			output2.write("\n");
-			output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+fileName);
+			output2.write("java -jar "+fileName);
 			output2.write("\n");
 			output2.close();
 			CommandLine commandline = new CommandLine();

@@ -12,6 +12,10 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 	private IsMoreThanOneJar isMoreThanOneJar;
 	private String classpath;
 	private List<String> includedFolders;
+	public PowershellMoreThanOnePackageExcludePackages(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,String classpath,List<String> includedFolders,FileName filename) {
+		this(main,main_class,dir,allfiles,_isMoreThanOneJar,classpath,includedFolders);
+		this.filename=filename;
+	}				
 	public PowershellMoreThanOnePackageExcludePackages(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,String classpath,List<String> includedFolders) {
 		super(main,main_class,dir,allfiles,_isMoreThanOneJar);
 		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
@@ -36,20 +40,10 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 				createJarFolder=createJarFolder+"\\";
 			JOptionPane.showMessageDialog(null,"Create jar location is:"+createJarFolder);
 			
-			if(javaversionnumber != -2) {
-				if(hasJavaFX) {
-					output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolder+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt");
-					folderPlusFileName=createJarFolder+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
-				}
-				else {
-					output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolder+"ForJava"+javaversionnumber+"_"+main_class3+".jar mf.txt");
-					folderPlusFileName=createJarFolder+"ForJava"+javaversionnumber+"_"+main_class3+".jar";
-				}
-			}
-			else {
-				output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolder+main_class3+".jar mf.txt");
-				folderPlusFileName=createJarFolder+main_class3+".jar";
-			}
+			main_class3=filename.getJarFileName(javaversionnumber);
+			output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolder+main_class3+".jar mf.txt");
+			folderPlusFileName=createJarFolder+main_class3+".jar";
+			
 			for(String relative:includedFolders) {
 				output2.write(" -C "+classpath+" "+relative);
 			}

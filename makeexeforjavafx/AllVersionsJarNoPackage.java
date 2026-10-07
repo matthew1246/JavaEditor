@@ -10,6 +10,7 @@ import java.io.IOException;
 ** This class is only if Main.jar is not running.
 */
 public class AllVersionsJarNoPackage extends AllVersionsJar {
+	protected FileName filename;
 	private IsMoreThanOneJar isMoreThanOneJar;
 	private Packager packager;
 	private String dir;
@@ -17,6 +18,10 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 	private String fileName;
 	private SaveActionListener sal;
 	private ActionEvent ev4;
+	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,fileName,sal,ev4,_isMoreThanOneJar);
+		this.filename=filename;
+	}		
 	public AllVersionsJarNoPackage(Main main,String fileName,SaveActionListener sal,ActionEvent ev4,boolean _isMoreThanOneJar) {
 		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.main = main;
@@ -62,7 +67,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 				for(String jar:jars) {
 					try {
 						// jar = main.getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+						Process process=commandline.run("jar xf "+jar,dir);
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch (InterruptedException ex) {
@@ -79,7 +84,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 					try {
 						// jar = getFileName(jar);
 						// Process process=commandline.run("jar xf "+jar,dir+"jars");
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+						Process process=commandline.run("jar xf "+jar,dir);
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch(InterruptedException ex) {
@@ -114,18 +119,15 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 	public void WriteManifest(String main_class) {
 		try {
 			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
-				System.out.println("dir3:"+dir);
 				CommandLine commandline = new CommandLine();
-				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"writemf.bat");
-				java.io.FileWriter batwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
-				java.io.BufferedWriter batoutput = new java.io.BufferedWriter(batwriter);
-				batoutput.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"");
-				batoutput.write("\n");
-				batoutput.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"");
-				batoutput.close();
-				String liney = "powershell -Command Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+tempfile.getAbsolutePath()+"\"'";
-				System.out.println(liney);
-				commandline.run(liney, dir);
+				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.ps1");
+				java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
+				scriptwriter.write("$content = 'Manifest-Version: 1.0' + [Environment]::NewLine + 'Main-Class: "+main_class+"' + [Environment]::NewLine\n");
+				scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
+				scriptwriter.close();
+				Process process = commandline.runAsAdmin("\"powershell\" -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
+				try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
+				tempfile.delete();
 			}
 			else {
 				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
@@ -159,23 +161,8 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 				folderName=folderName+"\\";
 			JOptionPane.showMessageDialog(null,"jar folder creation:"+folderName);
 			
-			String input = "";
-			if(!packager.containsPackage() || !packager.isInRightFolders()) {
-				if(javaversionnumber== 23 || javaversionnumber == -2) {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt .";
-				}
-				else {
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				}	
-			}
-			else { // packager.isInRightFolders() == true
-				// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-				input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt .";
-				if(javaversionnumber==23 || javaversionnumber == -2) {
-					// input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-					input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt .";
-				}	
-			}
+			main_class2=filename.getJarFileName(javaversionnumber);
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+folderName+main_class2+".jar mf.txt .";
 			
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
@@ -209,6 +196,6 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 		}
 	}
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
-		 return new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
+		 return new PowershellNoPackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,filename);
 	 }		
 }

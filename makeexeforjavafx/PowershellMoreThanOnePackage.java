@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.IOException;
 public class PowershellMoreThanOnePackage implements Powershell {
+	protected FileName filename;
 	protected AllFiles allfiles;
 	protected Main main;
 	protected Packager packager;
@@ -16,6 +17,10 @@ public class PowershellMoreThanOnePackage implements Powershell {
 	protected String dir;
 	protected BufferedWriter output2;
 	private IsMoreThanOneJar isMoreThanOneJar;
+	public PowershellMoreThanOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,main_class,dir,allfiles,_isMoreThanOneJar	);
+		this.filename=filename;
+	}
 	public PowershellMoreThanOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
 		this.isMoreThanOneJar=new IsMoreThanOneJar(_isMoreThanOneJar);
 		this.allfiles=allfiles;
@@ -229,22 +234,11 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			if(!createJarFolder.endsWith("\\"))
 				createJarFolder=createJarFolder+"\\";
 			JOptionPane.showMessageDialog(null,"Create jar location is:"+createJarFolder);
+			main_class3=filename.getJarFileName(javaversionnumber);
 			
-			//output2.write("START /B /WAIT cmd.exe /c jar cfm "+parentdirectory.getAbsolutePath()+"\\HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-			if(javaversionnumber != -2) {
-				if(hasJavaFX) {
-					output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolder+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt .");
-					folderPlusFileName=createJarFolder+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
-				}
-				else {
-					output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolder+"ForJava"+javaversionnumber+"_"+main_class3+".jar mf.txt .");
-					folderPlusFileName=createJarFolder+"ForJava"+javaversionnumber+"_"+main_class3+".jar";
-				}
-			}
-			else {
-				output2.write("START /B /WAIT cmd.exe /c "+"\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createJarFolder+main_class3+".jar mf.txt .");
-				folderPlusFileName=createJarFolder+main_class3+".jar";
-			}
+			output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolder+main_class3+".jar mf.txt .");
+			folderPlusFileName=createJarFolder+main_class3+".jar";
+			
 			output2.write("\n");
 			
 			// output2.close();
@@ -254,7 +248,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 	}
 	public void Finish() {
 		try {
-			output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+folderPlusFileName);
+			output2.write("java -jar "+folderPlusFileName);
 			output2.write("\n");
 			output2.close();
 			CommandLine commandline = new CommandLine();
@@ -266,4 +260,4 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			ex.printStackTrace();
 		}
 	}
-}
+}

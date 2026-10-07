@@ -13,3 +13,4 @@ public interface Powershell {
 	public void makeJar(int javaversionnumber);
 	public void Finish();
 }
+

@@ -2597,10 +2597,14 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								}
 							}
 							
+							FileName filename=new FileName(fileName);
+							filename.makeAllVersionsJar();
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							boolean isJavaFX= false;
-							if(option2 ==JOptionPane.YES_OPTION)
+							if(option2 ==JOptionPane.YES_OPTION) {
 								isJavaFX=true;
+								filename.makeForJavaFX();
+							}
 							AllVersionsJar allversionsjar=null;
 							Packager packager=new Packager(this);
 							ExtractJavaFXJars extractjavafxjars=null;
@@ -2627,7 +2631,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
-									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev5,true,filename);
 								}
 else { // More than one package
 									if(!isJavaFX) {
@@ -2641,13 +2645,13 @@ else { // More than one package
 									String[] options5={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options5,options5[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev5,true,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									}
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									}
@@ -2666,7 +2670,7 @@ else { // More than one package
 									}
 								}
 								removePackageNamesFromOtherFiles();
-								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true);
+								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev5,true,filename);
 							}		
 							
 							StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2675,13 +2679,14 @@ else { // More than one package
 							storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
+								filename.isPowershell();
 								if(isJavaFX) {
 									if(!extractjavafxjars.isUnzippedAgain())
 										extractjavafxjars.unzipJars();
 								}	
 								allversionsjar.Powershell(isJavaFX,fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							}
-						else {
+							else {
 								allversionsjar.deleteExistingMainJar(this,main);
 								if(!isJavaFX) {
 									for(int i = 18; i <= 23; i++) {
@@ -2738,6 +2743,8 @@ else { // More than one package
 								}
 							}
 	
+							FileName filename=new FileName(fileName);
+							filename.makeCertainVersionNumber();
 							int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 							boolean isJavaFX= false;
 							if(option2 ==JOptionPane.YES_OPTION)
@@ -2768,7 +2775,7 @@ else { // More than one package
 											Main.this.filelistmodifier.removeFile(maintwo);
 										}
 									}
-									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev4,false,filename);
 								}
 else { // More than one package
 									if(!isJavaFX) {
@@ -2782,13 +2789,13 @@ else { // More than one package
 									String[] options4={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options4,options4[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev4,false,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									}
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev4,false,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									}
@@ -2807,7 +2814,7 @@ else { // More than one package
 									}
 								}
 								removePackageNamesFromOtherFiles();
-								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false);
+								allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev4,false,filename);
 							}		
 
 	
@@ -2818,6 +2825,7 @@ else { // More than one package
 							storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
+								filename.isPowershell();
 								if(isJavaFX) {
 									if(!extractjavafxjars.isUnzippedAgain())
 										extractjavafxjars.unzipJars();
@@ -2877,6 +2885,7 @@ else { // More than one package
 							}
 						}
 						
+						FileName filename=new FileName(fileName);
 						int javaversionnumber= -2;
 						int option2=JOptionPane.showOptionDialog(null,"Compile for JavaFX?","Make for JavaFX",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 						boolean isJavaFX= false;
@@ -2908,7 +2917,7 @@ else { // More than one package
 										Main.this.filelistmodifier.removeFile(maintwo);
 									}
 								}
-								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev,false);
+								allversionsjar=new AllVersionsJarOnePackage(this,fileName,sal,ev,false,filename);
 							}
 else { // More than one package
 								if(!isJavaFX) {
@@ -2922,13 +2931,13 @@ else { // More than one package
 								String[] options6={"Yes","No"};
 								int excludepackages = JOptionPane.showOptionDialog(null,"Do you want to exclude packages?","Exclude Packages",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options6,options6[1]);
 								if(excludepackages == JOptionPane.YES_OPTION) {
-									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackageExcludePackages(this,fileName,sal,ev,false,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this,true);
 									}
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev,false,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									}
@@ -2947,7 +2956,7 @@ else { // More than one package
 								}
 							}
 							removePackageNamesFromOtherFiles();
-							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false);
+							allversionsjar=new AllVersionsJarNoPackage(this,fileName,sal,ev,false,filename);
 						}		
 
 
@@ -2958,6 +2967,7 @@ else { // More than one package
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
+							filename.isPowershell();
 							if(isJavaFX) {
 								if(!extractjavafxjars.isUnzippedAgain())
 									extractjavafxjars.unzipJars();
