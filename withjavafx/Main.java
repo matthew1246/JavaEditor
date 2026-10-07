@@ -2631,7 +2631,7 @@ else { // More than one package
 									}
 								}
 								else {
-									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true);
+									allversionsjar=new AllVersionsJarMoreThanOnePackage(this,fileName,sal,ev5,true,filename);
 									if(isJavaFX) {
 										extractjavafxjars = new ExtractJavaFXJars(Main.this);
 									}

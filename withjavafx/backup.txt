@@ -6,7 +6,10 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarMoreThanOnePackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\FileName.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java"
     ],
     "caretposition": 0
   },
@@ -24,7 +27,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 98096
+    "caretposition": 95781
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -1562,7 +1565,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 6128
+    "caretposition": 5691
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java": {
     "isLocked": true,
@@ -1578,7 +1581,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 8323
+    "caretposition": 417
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\extractjavafxjars.java": {
     "isLocked": true,
@@ -1816,5 +1819,37 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 109100
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\FileName.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main",
+      "Control_F",
+      "MSDOS",
+      "Maven",
+      "ThreeComboboxes",
+      "AddPlugin",
+      "FileListModifier",
+      "AllClassesInFile",
+      "StoreSelectedFile",
+      "AllVersionsJar",
+      "TabFileNameAndContent",
+      "StarterJComboBox",
+      "CommandLine",
+      "Git",
+      "AddDependency",
+      "DependencyRemover",
+      "XML",
+      "Packager",
+      "Links",
+      "ManterX",
+      "Preferences",
+      "ExtractJavaFXJars"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
