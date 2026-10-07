@@ -147,10 +147,8 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 				createJarFolder=createJarFolder+"\\";
 			JOptionPane.showMessageDialog(null,"Create jar folder location is:"+createJarFolder);
 			
-			String input = "jar cfm "+createJarFolder+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-			if(javaversionnumber == 23 || javaversionnumber == -2) {
-				input = "jar cfm "+createJarFolder+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");
-			}	
+			String jarname=filename.getJarFileName(javaversionnumber);
+			String input = "jar cfm "+createJarFolder+jarname+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");	
 			
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
@@ -184,6 +182,6 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 		}
 	}
 	public Powershell getPowershell(Main main,String main_class,String dir,AllFiles allfiles) {
-		return new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar);
+		return new PowershellOnePackage(main,main_class,dir,allfiles,isMoreThanOneJar.isMoreThanOneJar,filename);
 	}
 }

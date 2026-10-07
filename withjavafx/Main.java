@@ -2659,6 +2659,7 @@ else { // More than one package
 							storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 							allversionsjar.WriteManifest(main);
 							if(allversionsjar.isMatthewJavaEditor(main)) {
+								filename.isPowershell();
 								if(isJavaFX) {
 									if(!extractjavafxjars.isUnzippedAgain())
 										extractjavafxjars.unzipJars();

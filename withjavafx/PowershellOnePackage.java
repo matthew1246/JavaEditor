@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.IOException;
 public class PowershellOnePackage implements Powershell {
+	protected FileName filename;
 	private Main main;
 	private AllFiles allfiles;
 	private IsMoreThanOneJar isMoreThanOneJar;
@@ -16,6 +17,10 @@ public class PowershellOnePackage implements Powershell {
 	protected String main_class;
 	protected String dir;
 	protected BufferedWriter output2;
+	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar,FileName filename) {
+		this(main,main_class,dir,allfiles,_isMoreThanOneJar);
+		this.filename = filename;
+	}						
 	public PowershellOnePackage(Main main,String main_class,String dir,AllFiles allfiles,boolean _isMoreThanOneJar) {
 		this.main = main;
 		this.allfiles=allfiles;
@@ -219,27 +224,10 @@ public class PowershellOnePackage implements Powershell {
 				createJarFolderLocation=createJarFolderLocation+"\\";
 			JOptionPane.showMessageDialog(null,"Create jar folder location is:"+createJarFolderLocation);
 			
-			if(hasJavaFX) {
-				if(main_class2.endsWith("two")) {
-					main_class2=main_class2.substring(0,(main_class2.length()-3));
-				}
-			}
-			if(javaversionnumber != -2) {
-				if(hasJavaFX) {
-					output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-					folderPlusFileName=createJarFolderLocation+"HasJavaFX_ForJava"+javaversionnumber+"_Windows11x64.jar";
-					
-					// input = "jar cfm "+parentdirectory.getAbsolutePath()+"\\ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");	
-				}
-				else {
-					output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-					folderPlusFileName=createJarFolderLocation+"ForJava"+javaversionnumber+"_"+main_class2+".jar";
-				}
-			}
-			else {
-				output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
-				folderPlusFileName=createJarFolderLocation+main_class2+".jar";
-			}
+			main_class2 = filename.getJarFileName(javaversionnumber);
+			output2.write("START /B /WAIT cmd.exe /c jar cfm "+createJarFolderLocation+main_class2+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\"));
+			folderPlusFileName=createJarFolderLocation+main_class2+".jar";
+		
 			output2.write("\n");
 			
 			// output2.close();
