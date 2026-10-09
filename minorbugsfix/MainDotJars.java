@@ -10,7 +10,7 @@ public class MainDotJars {
 		List<String> maindotjars=new ArrayList<String>();
 		Packager packager=new Packager(main);
 		if(!packager.containsPackage()) {
-			String filePath=getFilePath(main.fileName);
+			String filePath=getFilePath(Main.getDirectory(main.fileName));
 			if(isExists(filePath)) {
 				maindotjars.add(filePath);
 			}
@@ -18,23 +18,15 @@ public class MainDotJars {
 		}
 		else { // Contains package
 			if(packager.isInRightFolders()) {
-				String filePath=getFilePath(main.fileName);
+				String filePath=getFilePath(Main.getDirectory(main.fileName));
 				if(isExists(filePath)) {
 					maindotjars.add(filePath);
 				}
 				
-				// Get Main.jar inside javaeditor folder for eg) package is javaeditor.minorbugsfix
-				String[] packagefolders=packager.getPackageName().split("\\.");
-				String fileName2=packager.classpath;
-				if(!fileName2.endsWith("\\"))
-					fileName2=fileName2+"\\";
-				for(int i = 0; i < packagefolders.length-1; i++) {
-					String packageFolder=packagefolders[i];
-					fileName2=fileName2+packageFolder;
-					String filePath5=getFilePath(fileName2);
-					if(isExists(filePath5))
-						maindotjars.add(filePath5);
-				}	
+				List<String> maindotjars2=getMiddleFolders(packager.classpath);
+				for(String maindotjar:maindotjars2) {
+					maindotjars.add(maindotjar);
+				}
 					
 				// Get Documents\Main.jar if package is javaeditor.minorbugsfix
 				String filePath2=getFilePath(packager.classpath);
@@ -43,6 +35,23 @@ public class MainDotJars {
 				}
 			}
 			else { // !packager.isInRightFolders()
+				
+				// If javac -d then this is generated: javaeditor/minorbugsfix/javaeditor/minorbugsfix/Main.jar
+				String dir=Main.getDirectory(main.fileName);
+				if(!dir.endsWith("\\"))
+					dir=dir+"\\";
+				String filePath=getFilePath(dir+packager.getPackageName());
+				if(isExists(filePath))
+					maindotjars.add(filePath);
+				
+				List<String> maindotjars2=getMiddleFolders(dir);
+				for(String maindotjar:maindotjars2) {
+					maindotjars.add(maindotjar);
+				}	
+				
+				String filepath2=getFilePath(dir);
+				if(isExists(filepath2))
+					maindotjars.add(filepath2);	
 			}
 			return maindotjars;
 		}
@@ -57,5 +66,23 @@ public class MainDotJars {
 	private boolean isExists(String filepath) {
 		File maindir=new File(filepath);
 		return maindir.exists();
+	}
+	private List<String> getMiddleFolders(String classpath) {
+		List<String> maindotjars=new ArrayList<String>();
+		
+		// Get javaeditor/Main.jar from javaeditor.minorbugsfix folders
+		Packager packager=new Packager(main);
+		String[] packagefolders=packager.getPackageName().split("\\.");
+		String fileName2=classpath;
+		if(!fileName2.endsWith("\\"))
+			fileName2=fileName2+"\\";
+		for(int i = 0; i < packagefolders.length-1; i++) {
+			String packageFolder=packagefolders[i];
+			fileName2=fileName2+packageFolder;
+			String filePath5=getFilePath(fileName2);
+			if(isExists(filePath5))
+				maindotjars.add(filePath5);
+		}	
+		return maindotjars;
 	}
 }
