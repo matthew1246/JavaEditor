@@ -3174,7 +3174,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 1256
+    "caretposition": 808
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\packager.java": {
     "isLocked": true,

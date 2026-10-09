@@ -24,7 +24,7 @@ public class MainDotJars {
 				}
 				
 				// Get Main.jar inside javaeditor folder for eg) package is javaeditor.minorbugsfix
-				String[] packagefolders=packager.classpath.split("\\.");
+				String[] packagefolders=packager.getPackageName().split("\\.");
 				String fileName2=packager.classpath;
 				if(!fileName2.endsWith("\\"))
 					fileName2=fileName2+"\\";
