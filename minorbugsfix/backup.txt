@@ -2546,7 +2546,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 6972
+    "caretposition": 7106
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java": {
     "isLocked": true,
@@ -3174,6 +3174,64 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 552
+    "caretposition": 1256
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\packager.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Maven",
+      "XYWidthHeight",
+      "XYWidthHeightGridBagConstraints",
+      "FileListModifier",
+      "AllClassesInFile",
+      "DependencyManager",
+      "Compile",
+      "SteveJobsNot",
+      "TabFileNameAndContent",
+      "JTextAreaGroup",
+      "StarterJComboBox",
+      "AllFiles",
+      "AddDependency",
+      "DependencyRemover",
+      "SeeAllGitChanges",
+      "Packager",
+      "GoToLineNumber",
+      "FileComparator",
+      "Preferences",
+      "BillyGA",
+      "Control_F",
+      "MSDOS",
+      "Codes",
+      "ThreeComboboxes",
+      "AddPlugin",
+      "GetClassMethods",
+      "Fraction",
+      "GetClassName",
+      "StoreSelectedFile",
+      "AllVersionsJar",
+      "CompileErrors",
+      "CommandLine",
+      "Git",
+      "ExtractJUnit",
+      "ChuckyN",
+      "Content",
+      "XML",
+      "GuaranteedLayout",
+      "Links",
+      "MatthewLayout",
+      "LinkedHashMapInterface",
+      "Main",
+      "NewtonFirsty"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
