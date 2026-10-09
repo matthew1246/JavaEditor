@@ -7,15 +7,29 @@ public class MainDotJars {
 		List<String> maindotjars=new ArrayList<String>();
 		Packager packager=new Packager(main);
 		if(!packager.containsPackage()) {
-			String dir=Main.getDirectory(main.fileName);
-			if(!dir.endsWith("\\"))
-				dir=dir+"\\";
-			String classname=Main.getClassName(main.fileName);
-			String filepath=dir+classname+".jar";
-			File maindir=new File(filepath);
-			if(maindir.exists()) {
-				maindotjars.add(filepath);
+			String filePath=getFilePath(main.fileName);
+			if(isExists(filePath)) {
+				maindotjars.add(filePath);
 			}
+			return maindotjars;
 		}
 		else { // Contains package
+			String filePath=getFilePath(main.fileName);
+			if(isExists(filePath)) {
+				maindotjars.add(filePath);
+			}
 			
+		}
+	}
+	private String getFilePath(String dir) {
+		if(!dir.endsWith("\\"))
+			dir=dir+"\\";
+		String classname=Main.getClassName(main.fileName);
+		String filepath=dir+classname+".jar";
+		return filepath;
+	}
+	private boolean isExists(String filepath) {
+		File maindir=new File(filepath);
+		return maindir.exists();
+	}
+}
