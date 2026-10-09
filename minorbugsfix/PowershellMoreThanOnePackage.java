@@ -170,6 +170,12 @@ public class PowershellMoreThanOnePackage implements Powershell {
 					output2.write("\n");
 				}
 			}
+			MainDotJars maindotjars=new MainDotJars(main);
+			List<String> mainjars=maindotjars.getAllMainJars();
+			for(String maindotjar:mainjars) {
+				output2.write("del "+allfiles.files.get(i));
+				output2.write("\n");
+			}
 		// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
