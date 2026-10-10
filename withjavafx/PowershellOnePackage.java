@@ -238,7 +238,7 @@ public class PowershellOnePackage implements Powershell {
 	public void Finish() {
 		try {
 			
-			output2.write("java -jar "+folderPlusFileName);
+			output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+folderPlusFileName);
 			output2.write("\n");
 			output2.close();
 			CommandLine commandline = new CommandLine();
