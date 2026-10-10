@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import java.util.LinkedHashMap;
 public class IsEqual {
 	public boolean isEqual(LinkedHashMap<String,Preferences> linkedhashmap,LinkedHashMap<String,Preferences> linkedhashmap2) {

@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;

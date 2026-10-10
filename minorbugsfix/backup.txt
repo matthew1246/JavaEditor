@@ -12,11 +12,12 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MainDotJars.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MainDotJars.java"
     ],
     "caretposition": 0
   },
@@ -47,12 +48,12 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
+      "MainDotJars",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
       "Main",
-      "StoreSelectedFile",
-      "MainDotJars"
+      "StoreSelectedFile"
     ],
     "starterclass": "Main",
     "jars": [
@@ -62,7 +63,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 79960
+    "caretposition": 724
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -2595,7 +2596,7 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java": {
     "isLocked": true,
-    "lockedStartupClass": "Main",
+    "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
       "MainDotJars",
       "Main"
@@ -2608,7 +2609,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 7106
+    "caretposition": 7176
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellNoPackage.java": {
     "isLocked": true,
@@ -3194,7 +3195,6 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
-      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -3204,6 +3204,7 @@
       "Compile",
       "SteveJobsNot",
       "TabFileNameAndContent",
+      "MainDotJars",
       "JTextAreaGroup",
       "StarterJComboBox",
       "AllFiles",
@@ -3246,7 +3247,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 515
+    "caretposition": 960
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\packager.java": {
     "isLocked": true,

@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Preferences {

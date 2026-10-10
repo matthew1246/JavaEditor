@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import javax.swing.JTextArea;
 public class Tracker {
 	public boolean isDeleted = false;

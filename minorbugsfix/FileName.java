@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 public class FileName {
 	protected String main_class2;
 	public FileName(String fileName) {

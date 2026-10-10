@@ -1,3 +1,5 @@
+package javaeditor.minorbugsfix;
+
 import java.util.List;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
@@ -172,12 +174,12 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				}
 			}
 			*/
-			MainDotJars maindotjars=new MainDotJars(main);
+			/*MainDotJars maindotjars=new MainDotJars(main);
 			List<String> mainjars=maindotjars.getAllMainJars();
 			for(String maindotjar:mainjars) {
 				output2.write("del "+maindotjar);
 				output2.write("\n");
-			}
+			}*/
 		// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
