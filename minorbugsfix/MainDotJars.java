@@ -1,6 +1,3 @@
-package javaeditor.minorbugsfix;
-
-
 import javax.swing.JOptionPane;
 import java.io.File;
 import java.util.ArrayList;

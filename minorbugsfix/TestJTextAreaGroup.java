@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;

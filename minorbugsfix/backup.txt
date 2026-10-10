@@ -12,7 +12,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java",
@@ -34,8 +34,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Git",
       "GuaranteedLayout"
     ],
@@ -48,12 +48,12 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
-      "MainDotJars",
+      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
-      "Main",
-      "StoreSelectedFile"
+      "StoreSelectedFile",
+      "MainDotJars"
     ],
     "starterclass": "Main",
     "jars": [
@@ -63,14 +63,14 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 724
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -100,8 +100,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "FileListModifier"
     ],
     "starterclass": "",
@@ -131,8 +131,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -146,8 +146,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -161,8 +161,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "CommandLine"
     ],
     "starterclass": "",
@@ -174,8 +174,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Control_F"
     ],
     "starterclass": "",
@@ -190,8 +190,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "StarterJComboBox",
       "Preferences",
       "StoreSelectedFile"
@@ -208,8 +208,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -238,8 +238,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "JTextAreaGroup"
     ],
     "starterclass": "Main",
@@ -254,8 +254,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -269,8 +269,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -314,8 +314,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Compile"
     ],
     "starterclass": "",
@@ -330,8 +330,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -346,8 +346,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "AllFiles"
     ],
     "starterclass": "",
@@ -359,8 +359,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -391,8 +391,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -406,8 +406,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -421,8 +421,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "AllClassesInFile"
     ],
     "starterclass": "AllClassesInFile",
@@ -558,8 +558,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "ExtractJUnit"
     ],
     "starterclass": "",
@@ -588,8 +588,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [],
@@ -600,8 +600,8 @@
     "isLocked": true,
     "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "StarterJComboBox",
       "GuaranteedLayout",
       "Preferences",
@@ -619,8 +619,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -634,8 +634,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Preferences",
       "StoreSelectedFile"
     ],
@@ -651,8 +651,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Content"
     ],
     "starterclass": "",
@@ -667,8 +667,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "DependencyRemover",
       "GetClassMethods"
     ],
@@ -699,8 +699,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "ThreeComboboxes"
     ],
     "starterclass": "",
@@ -712,8 +712,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Maven"
     ],
     "starterclass": "Maven",
@@ -729,8 +729,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "DependencyManager"
     ],
     "starterclass": "",
@@ -742,8 +742,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "DependencyRemover"
     ],
     "starterclass": "",
@@ -793,8 +793,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "MSDOS"
     ],
     "starterclass": "",
@@ -849,8 +849,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "AddDependency"
     ],
     "starterclass": "AddDependency",
@@ -897,8 +897,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "AddPlugin"
     ],
     "starterclass": "",
@@ -921,8 +921,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "TabFileNameAndContent"
     ],
     "starterclass": "",
@@ -939,8 +939,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Links"
     ],
     "starterclass": "",
@@ -968,8 +968,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "LinkedHashMapInterface"
     ],
     "starterclass": "",
@@ -986,8 +986,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "GetClassName"
     ],
     "starterclass": "",
@@ -1004,8 +1004,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -1043,8 +1043,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "GoToLineNumber"
     ],
     "starterclass": "",
@@ -1056,8 +1056,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "CompileErrors"
     ],
     "starterclass": "",
@@ -1089,8 +1089,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Codes"
     ],
     "starterclass": "",
@@ -1107,8 +1107,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "FileComparator"
     ],
     "starterclass": "",
@@ -1125,8 +1125,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "XML"
     ],
     "starterclass": "",
@@ -1587,8 +1587,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Packager"
     ],
     "starterclass": "",
@@ -1600,8 +1600,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [],
@@ -1612,8 +1612,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "NewtonFirsty"
     ],
     "starterclass": "",
@@ -1625,8 +1625,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "SteveJobsNot"
     ],
     "starterclass": "",
@@ -1638,8 +1638,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "BillyGA"
     ],
     "starterclass": "",
@@ -1651,8 +1651,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "ChuckyN"
     ],
     "starterclass": "",
@@ -1664,8 +1664,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -1828,8 +1828,8 @@
     "isLocked": true,
     "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "GuaranteedLayout",
       "MatthewLayout"
     ],
@@ -1896,8 +1896,8 @@
     "isLocked": true,
     "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "GuaranteedLayout"
     ],
     "starterclass": "",
@@ -1920,8 +1920,8 @@
     "isLocked": true,
     "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "GuaranteedLayout",
       "Fraction"
     ],
@@ -1939,8 +1939,8 @@
     "isLocked": true,
     "lockedStartupClass": "GuaranteedLayout",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "GuaranteedLayout",
       "XYWidthHeight"
     ],
@@ -1958,8 +1958,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "XYWidthHeightGridBagConstraints"
     ],
     "starterclass": "",
@@ -1976,8 +1976,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "SeeAllGitChanges",
       "GuaranteedLayout"
     ],
@@ -2183,8 +2183,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [],
@@ -2283,8 +2283,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2300,8 +2300,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2581,8 +2581,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2615,8 +2615,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2632,8 +2632,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [],
@@ -2644,8 +2644,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2661,8 +2661,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2678,8 +2678,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2780,8 +2780,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [
@@ -2872,8 +2872,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -2931,8 +2931,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -2990,8 +2990,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
-      "Main"
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "",
     "jars": [],
@@ -3024,8 +3024,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -3195,6 +3195,7 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
+      "Main",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -3253,8 +3254,8 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "MainDotJars",
       "Main",
+      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",

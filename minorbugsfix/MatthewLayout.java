@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.awt.Toolkit;
 import javax.swing.JComponent;
 import javax.swing.BorderFactory;

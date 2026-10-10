@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;

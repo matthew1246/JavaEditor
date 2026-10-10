@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.util.List;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;

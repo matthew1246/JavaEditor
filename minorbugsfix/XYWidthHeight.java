@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 public class XYWidthHeight {
 	/*
 	** You can use get and set methods or do xywidtheheight.x = 1

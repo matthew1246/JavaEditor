@@ -1,5 +1,3 @@
-package javaeditor.minorbugsfix;
-
 import java.net.URISyntaxException;
 import java.io.IOException;
 import java.io.File;
