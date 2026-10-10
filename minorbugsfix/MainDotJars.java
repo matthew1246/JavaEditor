@@ -1,16 +1,27 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Test;
+import org.junit.Assert;
 public class MainDotJars {
-	protected Main main;
-	public MainDotJars(Main main) {
+	public Main main;
+	/*public MainDotJars(Main main) {
 		this.main=main;
+	}*/
+	@Test
+	public void testgetallMainJars() {
+		MainDotJars maindotjars =new MainDotJars();
+		maindotjars.main=new Main(new OpenDefaultContent());
+		List<String> mainjars=maindotjars.getAllMainJars();
+		String mainjar=mainjars.get(0);	
+		Assert.assertEquals(mainjar,"C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.jar");
 	}
 	public List<String> getAllMainJars() {
 		List<String> maindotjars=new ArrayList<String>();
 		Packager packager=new Packager(main);
 		if(!packager.containsPackage()) {
 			String filePath=getFilePath(Main.getDirectory(main.fileName));
+			System.out.println("filePath is:"+filePath);
 			if(isExists(filePath)) {
 				maindotjars.add(filePath);
 			}
