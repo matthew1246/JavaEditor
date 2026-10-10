@@ -233,7 +233,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 	public void Finish() {
 		try {
 			output2.write("\n");
-			output2.write("java -jar "+main_class2+".jar");
+			output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+main_class2+".jar");
 			output2.close();
 			CommandLine commandline = new CommandLine();
 			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
