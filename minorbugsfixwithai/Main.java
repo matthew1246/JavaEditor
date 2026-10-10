@@ -2309,6 +2309,7 @@ if(result == 0) {
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
+							filename.isPowershell();
 							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						}
 						else {
