@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\PowershellMoreThanOnePackage.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\PowershellMoreThanOnePackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -61,7 +61,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 213614
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -3198,6 +3198,7 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
+      "Main",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -3240,7 +3241,6 @@
       "Links",
       "MatthewLayout",
       "LinkedHashMapInterface",
-      "Main",
       "NewtonFirsty"
     ],
     "starterclass": "",
@@ -3409,20 +3409,20 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Main",
       "Control_F",
-      "Git",
-      "CompileErrors",
-      "MatthewLayout",
       "Maven",
+      "Git",
+      "PowershellMoreThanOnePackageExcludePackages",
       "Powershell",
+      "MatthewLayout",
       "NoFileOpen",
-      "PowershellMoreThanOnePackageExcludePackages"
+      "Main",
+      "CompileErrors"
     ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 9098
+    "caretposition": 9282
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\PowershellNoPackage.java": {
     "isLocked": false,

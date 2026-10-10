@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellNoPackage.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellNoPackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
     ],
     "caretposition": 0
   },
@@ -2205,6 +2205,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Powershell"
     ],
     "starterclass": "",
@@ -2420,6 +2421,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "NoFileOpen"
     ],
     "starterclass": "",
@@ -2515,6 +2517,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -2829,6 +2832,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Control_F"
     ],
     "starterclass": "",
@@ -2845,6 +2849,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "AllVersionsJarMoreThanOnePackageExcludePackages"
     ],
     "starterclass": "",
