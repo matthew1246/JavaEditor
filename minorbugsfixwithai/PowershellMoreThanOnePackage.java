@@ -1,3 +1,4 @@
+import java.util.List;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.nio.file.DirectoryStream;
@@ -163,12 +164,19 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			output2.write("\n");
 			output2.write("START /B /WAIT taskkill /F /im javaw.exe");
 			output2.write("\n");
-			for(int i = 0; i < allfiles.files.size(); i++) {
+			/*for(int i = 0; i < allfiles.files.size(); i++) {
 				File file2 = new File(allfiles.files.get(i));
 				if(file2.exists()) {
 					output2.write("del "+allfiles.files.get(i));
 					output2.write("\n");
 				}
+			}
+			*/
+			MainDotJars maindotjars=new MainDotJars(main);
+			List<String> mainjars=maindotjars.getAllMainJars();
+			for(String maindotjar:mainjars) {
+				output2.write("del "+maindotjar);
+				output2.write("\n");
 			}
 		// output2.close();
 		} catch (java.net.URISyntaxException ex) {
@@ -233,7 +241,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 	public void Finish() {
 		try {
 			output2.write("\n");
-			output2.write("java -jar "+main_class2+".jar");
+			output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+main_class2+".jar");
 			output2.close();
 			CommandLine commandline = new CommandLine();
 			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";

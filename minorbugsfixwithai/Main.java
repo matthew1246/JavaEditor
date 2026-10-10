@@ -1796,8 +1796,8 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() {
-		AI ai=new AI(this);		
+	public void setListeners() {	
+		AI ai=new AI(this);
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
@@ -2309,7 +2309,6 @@ if(result == 0) {
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							filename.isPowershell();
 							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						}
 						else {
@@ -2399,7 +2398,6 @@ if(result == 0) {
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							filename.isPowershell();
 							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							powershell.Compile(javaversionnumber,fileName);
 							powershell.makeJar(javaversionnumber);							
@@ -2487,7 +2485,6 @@ if(result == 0) {  // isOnePackage = true;
 					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 					allversionsjar.WriteManifest(main);
 					if(allversionsjar.isMatthewJavaEditor(main)) {
-						filename.isPowershell();
 						Powershell powershell = allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						powershell.Compile(no_java_verson_number,fileName);
 						powershell.makeJar(no_java_verson_number);							
