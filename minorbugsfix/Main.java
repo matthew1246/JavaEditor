@@ -1789,7 +1789,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 	
 	public boolean go_to_line_is_executed = false;
 	String deselected = "";
-	public void setListeners() 	{	
+	public void setListeners() {	
 		rightarrow.addActionListener((ev) -> {
 			JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
 			JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
@@ -2039,6 +2039,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			}
+			SwingUtilities.invokeLater(() -> {
+				StarterCode startercode=new StarterCode();
+				Main.this.textarea.setText(startercode.getNormalJava());
+			});
 		});		
 		closetab.addActionListener((ev) -> {					
 				
