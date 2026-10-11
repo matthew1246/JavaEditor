@@ -5069,6 +5069,7 @@ CommandLine commandline = new CommandLine();
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						
 						this.fileName = directoryandfilename;
+						new Recents().add(directoryandfilename);
 						int caretposition=storeselectedfile.getCaretPosition(this.fileName);
 						SwingUtilities.invokeLater(() -> {
 							scrollToCaretPosition(caretposition);

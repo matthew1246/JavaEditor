@@ -5046,6 +5046,7 @@ CommandLine commandline = new CommandLine();
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						
 						fileName=directoryandfilename;
+						new Recents().add(directoryandfilename);
 						int caretposition=storeselectedfile.getCaretPosition(fileName);
 						scrollToCaretPosition(caretposition);
 					}
