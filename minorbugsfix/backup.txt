@@ -12,14 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\MainDotJars.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\PowershellOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackage.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\MainDotJars.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\MainDotJars.java"
     ],
     "caretposition": 0
   },
@@ -50,10 +46,10 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
-      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
+      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -1214,7 +1210,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 258
+    "caretposition": 3835
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\Links.java": {
     "isLocked": false,
@@ -2580,7 +2576,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 258
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellOnePackage.java": {
     "isLocked": true,
@@ -3255,7 +3251,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 1123
+    "caretposition": 9433
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\packager.java": {
     "isLocked": true,
@@ -3451,7 +3447,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 9070
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\PowershellOnePackage.java": {
     "isLocked": false,
@@ -3477,7 +3473,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 9098
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\PowershellMoreThanOnePackage.java": {
     "isLocked": false,
@@ -3504,7 +3500,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
     ],
     "fileNames": [],
-    "caretposition": 9282
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\FileName.java": {
     "isLocked": true,
@@ -3543,36 +3539,36 @@
     "caretposition": 215
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\MainDotJars.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
-      "Links",
-      "ExtractJUnit",
+      "Maven",
+      "Powershell",
+      "AllClassesInFile",
+      "FileListModifier",
+      "Compile",
+      "MainDotJars",
+      "StarterJComboBox",
       "Muck",
+      "SeeAllGitChanges",
+      "Preferences",
+      "MSDOS",
+      "Control_F",
+      "ThreeComboboxes",
+      "VariableSuggestionBoxSelected",
+      "SuggestionBoxSelected",
+      "NoFileOpen",
       "CompileErrors",
       "StoreSelectedFile",
-      "MSDOS",
-      "NoDuplicate",
-      "VariableSuggestionBoxSelected",
       "AllVersionsJar",
-      "Powershell",
-      "SuggestionBoxSelected",
-      "Maven",
-      "XML",
-      "ThreeComboboxes",
-      "StarterJComboBox",
-      "AllClassesInFile",
-      "Preferences",
-      "FileListModifier",
+      "NoDuplicate",
       "CommandLine",
-      "Control_F",
-      "Compile",
-      "MatthewLayout",
+      "ExtractJUnit",
       "Git",
-      "SeeAllGitChanges",
-      "NoFileOpen",
-      "MainDotJars"
+      "XML",
+      "Links",
+      "MatthewLayout",
+      "Main"
     ],
     "starterclass": "",
     "jars": [
@@ -3652,5 +3648,33 @@
     ],
     "fileNames": [],
     "caretposition": 6608
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\MainDotJars.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Control_F",
+      "Maven",
+      "PowershellNoPackage",
+      "PowershellMoreThanOnePackage",
+      "Powershell",
+      "PowershellOnePackage",
+      "NoFileOpen",
+      "CompileErrors",
+      "MainDotJars",
+      "Git",
+      "PowershellMoreThanOnePackageExcludePackages",
+      "MatthewLayout",
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
