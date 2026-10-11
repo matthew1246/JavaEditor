@@ -12,14 +12,14 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\AllVersionsJar.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexe\\AllVersionsJar.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\AllVersionsJar.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\AllVersionsJar.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJar.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java"
     ],
     "caretposition": 0
   },
@@ -50,10 +50,10 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
+      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
-      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -65,7 +65,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 263063
+    "caretposition": 262279
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -96,7 +96,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 289225
+    "caretposition": 288441
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -2247,7 +2247,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 98205
+    "caretposition": 98258
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,
@@ -3255,7 +3255,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 3781
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\packager.java": {
     "isLocked": true,
@@ -3588,12 +3588,12 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Control_F",
       "PowershellMoreThanOnePackage",
       "AllVersionsJarMoreThanOnePackageExcludePackages",
       "Powershell",
       "NoFileOpen",
-      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -3610,13 +3610,13 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Control_F",
       "PowershellNoPackage",
       "PowershellMoreThanOnePackage",
       "AllVersionsJarMoreThanOnePackageExcludePackages",
       "Powershell",
       "NoFileOpen",
-      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -3633,6 +3633,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Control_F",
       "PowershellNoPackage",
       "PowershellMoreThanOnePackage",
@@ -3640,7 +3641,6 @@
       "Powershell",
       "PowershellOnePackage",
       "NoFileOpen",
-      "Main",
       "AllVersionsJar"
     ],
     "starterclass": "",
@@ -3723,7 +3723,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 22
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\AllVersionsJar.java": {
     "isLocked": false,
@@ -3748,5 +3748,16 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 1621
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\MainDotJars.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 245
   }
 }
