@@ -4376,6 +4376,7 @@ startercombobox.Change(fileName);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						
 						this.fileName=directoryandfilename;
+						new Recents().add(directoryandfilename);
 						int caretposition=storeselectedfile.getCaretPosition(directoryandfilename);
 						SwingUtilities.invokeLater(() -> {
 							scrollToCaretPosition(caretposition);
