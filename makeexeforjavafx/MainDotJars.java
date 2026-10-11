@@ -28,7 +28,6 @@ public class MainDotJars {
 		List<String> maindotjars=new ArrayList<String>();
 		Packager packager=new Packager(main);
 		if(!packager.containsPackage()) { // !packager.containsPackage()
-			JOptionPane.showMessageDialog(null,"No package");
 			String filePath=getFilePath(Main.getDirectory(main.fileName));
 			if(isExists(filePath)) {
 				maindotjars.add(filePath);

@@ -24,7 +24,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 91699
+    "caretposition": 1171
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\NoFileOpen.java": {
     "isLocked": false,
@@ -1922,5 +1922,42 @@
     ],
     "fileNames": [],
     "caretposition": 2006
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MainDotJars.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main",
+      "StoreSelectedFile",
+      "Git",
+      "FileListModifier",
+      "Control_F",
+      "AllVersionsJar",
+      "ExtractJavaFXJars",
+      "AllClassesInFile",
+      "StarterJComboBox",
+      "Preferences",
+      "ThreeComboboxes",
+      "MSDOS",
+      "Maven",
+      "AddDependency",
+      "DependencyRemover",
+      "TabFileNameAndContent",
+      "Links",
+      "AddPlugin",
+      "XML",
+      "ManterX",
+      "Packager",
+      "CommandLine"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 1123
   }
 }

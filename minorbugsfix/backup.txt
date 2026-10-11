@@ -12,10 +12,11 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -46,10 +47,10 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
+      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
-      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -92,7 +93,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 9004
+    "caretposition": 289225
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileListModifier.java": {
     "isLocked": true,
@@ -2713,8 +2714,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "PowershellOnePackage",
-      "Main"
+      "Main",
+      "PowershellOnePackage"
     ],
     "starterclass": "",
     "jars": [
@@ -2798,8 +2799,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "PowershellMoreThanOnePackage",
-      "Main"
+      "Main",
+      "PowershellMoreThanOnePackage"
     ],
     "starterclass": "",
     "jars": [
@@ -2815,8 +2816,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "PowershellNoPackage",
-      "Main"
+      "Main",
+      "PowershellNoPackage"
     ],
     "starterclass": "",
     "jars": [
@@ -3251,7 +3252,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 9433
+    "caretposition": 3781
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\packager.java": {
     "isLocked": true,
@@ -3681,6 +3682,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "Maven",
       "MinorCompile",
       "PowershellMoreThanOnePackage",
@@ -3708,7 +3710,6 @@
       "Git",
       "filename",
       "MatthewLayout",
-      "Main",
       "ExtractJavaFXJars"
     ],
     "starterclass": "",
