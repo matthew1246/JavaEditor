@@ -450,15 +450,8 @@ public class Main {
 			});
 			textarea2.addMouseListener(rightclick);
 			SwingUtilities.invokeLater(() -> {
-				textarea.setText(
-				"""
-				public class Main {
-					public static void main(String[] args) {
-						System.out.println("Hello World!");
-					}
-				}
-				"""
-				);
+				StarterCode startercode=new StarterCode();
+				textarea.setText(startercode.getNormalJava());
 			});
 		}
 		else { //if(!fileName.equals("")) {
