@@ -12,10 +12,11 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Recents.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Recents.java"
     ],
     "caretposition": 0
   },
@@ -61,7 +62,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 3705
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -3393,5 +3394,59 @@
     ],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Recents.java": {
+    "isLocked": true,
+    "lockedStartupClass": "MainDotJars",
+    "startupcombobox": [
+      "Main",
+      "MainDotJars",
+      "Git",
+      "GuaranteedLayout",
+      "StarterJComboBox",
+      "MatthewLayout",
+      "Preferences",
+      "StoreSelectedFile",
+      "FileListModifier",
+      "CommandLine",
+      "Control_F",
+      "JTextAreaGroup",
+      "Compile",
+      "AllVersionsJar",
+      "AllFiles",
+      "AllClassesInFile",
+      "ExtractJUnit",
+      "Content",
+      "DependencyRemover",
+      "GetClassMethods",
+      "ThreeComboboxes",
+      "Maven",
+      "DependencyManager",
+      "MSDOS",
+      "AddDependency",
+      "AddPlugin",
+      "TabFileNameAndContent",
+      "Links",
+      "LinkedHashMapInterface",
+      "GetClassName",
+      "GoToLineNumber",
+      "CompileErrors",
+      "Codes",
+      "FileComparator",
+      "XML",
+      "Packager",
+      "NewtonFirsty",
+      "SteveJobsNot",
+      "BillyGA",
+      "ChuckyN",
+      "Fraction",
+      "XYWidthHeight",
+      "XYWidthHeightGridBagConstraints",
+      "SeeAllGitChanges"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 1904
   }
 }

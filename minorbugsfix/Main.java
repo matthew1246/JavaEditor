@@ -2635,6 +2635,7 @@ if(result == 0) {  // isOnePackage = true;
 					String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
 					storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 					open(liney);
+					new Recents().add(maindirectory+liney);
 				}
 			}
 		});
@@ -2649,6 +2650,7 @@ if(result == 0) {  // isOnePackage = true;
 						String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
 						storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 						open(liney);
+						new Recents().add(maindirectory+liney);
 					}
 					searchTabIndex = -1;
 					filenamescombobox.setEditable(false);
@@ -2812,6 +2814,7 @@ if(result == 0) {  // isOnePackage = true;
 								String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
 								storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 								open(liney);
+								new Recents().add(maindirectory+liney);
 							}
 							searchTabIndex = -1;
 							filenamescombobox.setEditable(false);
