@@ -128,14 +128,6 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 			
 			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
 		
-			// Delete extra jars that would be inside Main.jar for example: Main.jar inside Main.jar	
-			String dir2=Main.getDirectory(main.fileName);
-			if(!dir2.endsWith("\\"))
-				dir2=dir2+"\\";
-			File mainjarfile=new File(dir2+main_class2+".jar");
-			if(mainjarfile.exists())
-				mainjarfile.delete();	
-		
 			JOptionPane.showMessageDialog(null,input);
 			Process process;
 			CommandLine commandline =new CommandLine();

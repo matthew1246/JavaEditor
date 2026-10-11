@@ -151,22 +151,6 @@ public class AllVersionsJarMoreThanOnePackage extends AllVersionsJar {
 		
 	JOptionPane.showMessageDialog(null,input);
 	CommandLine commandline = new CommandLine();
-	
-	// Remove C:\Users\Owner\Documents\javaeditor\minorbugsfix\Main.jar if C:\Users\Owner\Documents\javaeditor\minorbugsfix\Main.java
-	String classnameJar = dir + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
-	File existingJar = new File(classnameJar);
-	if(existingJar.exists()) {
-		existingJar.delete();
-	}
-	
-	// to do todo
-	// Remove C:\Users\Owner\Documents\Main.jar if C:\Users\Owner\Documents\javaeditor\minorbugsfix\Main.java
-	classnameJar = dir+main_class2+".jar";
-	existingJar = new File(classnameJar);
-	if(existingJar.exists()) {
-		existingJar.delete();
-	}
-	
 
 		Process process;
 		if(dir.replace("\\","").matches("[a-zA-Z]:")) {

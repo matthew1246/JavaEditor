@@ -151,20 +151,6 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
 			
-			// Main.jar inside package folder.
-			String classnameJar = dir + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
-			File existingJar = new File(classnameJar);
-			if(existingJar.exists()) {
-				existingJar.delete();
-			}
-			
-			// Main.jar in C:\Users\Owner\Documents\Main.jar when C:\Users\Owner\Documents\javaeditor\minorbugsfix\Main.java.
-			classnameJar = dir+main_class2+".jar";
-			existingJar = new File(classnameJar);
-			if(existingJar.exists()) {
-				existingJar.delete();
-			}
-			
 			Process process;
 			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,dir);
