@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\MainDotJars.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\makeexeforjavafx\\MainDotJars.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellMoreThanOnePackage.java"
     ],
     "caretposition": 0
   },
@@ -2724,7 +2724,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 9098
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\AllVersionsJarNoPackage.java": {
     "isLocked": false,
@@ -2809,7 +2809,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 9282
+    "caretposition": 7244
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\PowershellNoPackage.java": {
     "isLocked": false,
@@ -2826,7 +2826,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 9070
+    "caretposition": 0
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Control_F.java": {
     "isLocked": false,
@@ -3673,6 +3673,50 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MainDotJars.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Maven",
+      "MinorCompile",
+      "PowershellMoreThanOnePackage",
+      "IsMoreThanOneJar",
+      "Powershell",
+      "PowershellOnePackage",
+      "FileName",
+      "Compile",
+      "MainDotJars",
+      "StarterJComboBox",
+      "AllVersionsJarNoPackage",
+      "AllVersionsJarMoreThanOnePackage",
+      "SeeAllGitChanges",
+      "AllVersionsJarOnePackage",
+      "LiveIterator",
+      "Control_F",
+      "PowershellNoPackage",
+      "ThreeComboboxes",
+      "GetClassMethods",
+      "NoFileOpen",
+      "StoreSelectedFile",
+      "CompileErrors",
+      "AllVersionsJar",
+      "CommandLine",
+      "Git",
+      "filename",
+      "MatthewLayout",
+      "Main",
+      "ExtractJavaFXJars"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\MuckFX.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\withjavafx\\okio-1.6.0.jar"
     ],
     "fileNames": [],
     "caretposition": 0
