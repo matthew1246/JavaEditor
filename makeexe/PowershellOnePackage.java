@@ -1,3 +1,4 @@
+import java.util.List;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.nio.file.DirectoryStream;
@@ -160,13 +161,20 @@ public class PowershellOnePackage implements Powershell {
 			output2.write("\n");
 			output2.write("START /B /WAIT taskkill /F /im javaw.exe");
 			output2.write("\n");
-			for(int i = 0; i < allfiles.files.size(); i++) {
+			/*for(int i = 0; i < allfiles.files.size(); i++) {
 				File file2 = new File(allfiles.files.get(i));
 				if(file2.exists()) {
 					output2.write("del "+allfiles.files.get(i));
 					output2.write("\n");
 				}
+			}*/
+			MainDotJars maindotjars=new MainDotJars(main);
+			List<String> mainjars=maindotjars.getAllMainJars();
+			for(String maindotjar:mainjars) {
+				output2.write("del "+maindotjar);
+				output2.write("\n");
 			}
+
 			// output2.close();
 		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
