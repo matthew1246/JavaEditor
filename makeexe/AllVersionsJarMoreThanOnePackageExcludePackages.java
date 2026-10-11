@@ -239,18 +239,6 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
 			
-			String classnameJar = getDir() + packager.getPackageName().replace(".", "\\") + "\\" + main_class2 + ".jar";
-			File existingJar = new File(classnameJar);
-			if(existingJar.exists()) {
-				existingJar.delete();
-			}
-			
-			classnameJar = getDir()+main_class2+".jar";
-			existingJar = new File(classnameJar);
-			if(existingJar.exists()) {
-				existingJar.delete();
-			}
-			
 			Process process;
 			if(getDir().replace("\\","").matches("[a-zA-Z]:")) {
 				process=commandline.runAsAdmin(input,getDir());
