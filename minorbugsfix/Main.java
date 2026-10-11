@@ -450,7 +450,7 @@ public class Main {
 			});
 			textarea2.addMouseListener(rightclick);
 			SwingUtilities.invokeLater(() -> {
-				StarterCode startercode=new StarterCode();
+				StarterCode startercode=new StarterCode();		
 				textarea.setText(startercode.getNormalJava());
 			});
 		}
