@@ -67,6 +67,7 @@ public class NoFileOpen {
 
 		storeselectedfile12.setTabs(tabs);
 		main.fileNames = tabs;
+		new Recents().add(fileName);
 	}
 	public String CreateFile() {
 		while(true) {

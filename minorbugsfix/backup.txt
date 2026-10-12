@@ -15,8 +15,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\StarterCode.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -47,10 +46,10 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
+      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
-      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -4094,6 +4093,7 @@
     "isLocked": true,
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
+      "Main",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -4136,7 +4136,6 @@
       "Links",
       "MatthewLayout",
       "LinkedHashMapInterface",
-      "Main",
       "NewtonFirsty"
     ],
     "starterclass": "",
