@@ -450,15 +450,8 @@ public class Main {
 			});
 			textarea2.addMouseListener(rightclick);
 			SwingUtilities.invokeLater(() -> {
-				textarea.setText(
-				"""
-				public class Main {
-					public static void main(String[] args) {
-						System.out.println("Hello World!");
-					}
-				}
-				"""
-				);
+				StarterCode startercode=new StarterCode();
+				textarea.setText(startercode.getNormalJava());
 			});
 		}
 		else { //if(!fileName.equals("")) {
@@ -2047,6 +2040,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			}
+			SwingUtilities.invokeLater(() -> {
+				StarterCode startercode=new StarterCode();
+				Main.this.textarea.setText(startercode.getNormalJava());
+			});
 		});		
 		closetab.addActionListener((ev) -> {					
 				
