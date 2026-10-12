@@ -447,22 +447,8 @@ public class Main {
 			});
 			textarea2.addMouseListener(rightclick);
 			SwingUtilities.invokeLater(() -> {
-				textarea.setText(
-				"""
-				import javafx.application.Application;
-				import javafx.stage.Stage;
-				import javafx.scene.control.Label;
-				import javafx.scene.Scene;
-				public class Main extends Application {
-					@Override
-					public void start(Stage stage) {
-						Scene scene = new Scene(new Label("Hello World!"),800,600);
-						stage.setScene(scene);
-						stage.show();
-					}
-				}
-				"""
-				);
+				StarterCode startercode=new StarterCode();
+				textarea2.setText(startercode.getNormalJava());
 			});
 		}
 		else { //if(!fileName.equals("")) {
@@ -2165,6 +2151,10 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			}
+			SwingUtilities.invokeLater(() -> {
+				StarterCode startercode=new StarterCode();
+				textarea2.setText(startercode.getNormalJava());
+			});
 		});			
 		compileforjavafx.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
