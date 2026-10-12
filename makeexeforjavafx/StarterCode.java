@@ -1,5 +1,9 @@
 import javax.swing.JOptionPane;
 public class StarterCode {
+	public static void main(String[] args) {
+		StarterCode startercode= new StarterCode();
+		JOptionPane.showMessageDialog(null,startercode.getNormalJava());
+	}
 	private int hasCode=0;
 	public StarterCode() {
 		String[] options2 = {"Yes","No"};
@@ -8,7 +12,7 @@ public class StarterCode {
 	public String getNormalJava() {
 		if(hasCode==JOptionPane.YES_OPTION) {
 			String[] options2 = {"Normal Java","JavaFX"};
-			int result = JOptionPane.showOptionDialog(null,null,"Do you default java starter code or JavaFX?",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options2,options2[0]);
+			int result = JOptionPane.showOptionDialog(null,"Java or JavaFX?","Do you default java starter code or JavaFX?",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,options2,options2[0]);
 			if(result == 0) {
 				String main=	
 				"""
