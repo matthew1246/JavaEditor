@@ -1,0 +1,92 @@
+import java.util.List;
+import javax.swing.JTabbedPane;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.regex.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import java.io.File;
+public class NoFileOpen {
+	public Main main;
+	public JTabbedPane tabbedpane;
+	public JTextArea textarea;
+	public NoFileOpen(Main main,JTextArea textarea,JTabbedPane tabbedpane) {
+		this.main = main;
+		this.textarea = textarea;
+		this.tabbedpane = tabbedpane;
+	}		
+	public String getFileName() {
+		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+		String previousfile=storeselectedfile.get();
+		if(previousfile.equals("")) {
+			return CreateFile();
+		}
+		String output =previousfile.replaceAll("[^\\\\]+\\.java","");
+		
+		GetClassName getclassname = new GetClassName(textarea);
+		String classname=getclassname.getClassName();
+		
+		String[] options={"Yes","No"};
+		int yesorno2=JOptionPane.showOptionDialog(null,"Use previous flleName folder?","Do you want use the directory from "+previousfile+" to save new code?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		if(yesorno2 == JOptionPane.NO_OPTION) {
+			return CreateFile();
+		}
+		else if(yesorno2 == JOptionPane.YES_OPTION) {
+			String fileName = output+classname+".java";
+			File file = new File(fileName);
+			if(!file.exists()) {
+				saveTabs(fileName);
+				return fileName;
+			}
+			else { // If file already exists.
+				int yesorno=JOptionPane.showOptionDialog(null,"Overwrite existing file?","Do you want overwrite the existing file with this code?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+				
+				switch(yesorno) {
+					case JOptionPane.YES_OPTION:
+						saveTabs(fileName);
+						return fileName;
+					case JOptionPane.NO_OPTION:
+						return CreateFile();
+				}
+			}
+		}
+		return "";
+	}
+	public void saveTabs(String fileName) {
+		StoreSelectedFile storeselectedfile12 = new StoreSelectedFile();
+		if(storeselectedfile12.get().equals("")) storeselectedfile12.set(fileName);
+		
+		List<String> tabs=storeselectedfile12.getTabs();
+		int tabsize = tabbedpane.getSelectedIndex();
+		if(tabs.size() <= tabsize) {
+                       	tabs.add(fileName);
+               	}
+               	else {
+                       	tabs.set(tabsize,fileName);
+               	}
+
+		storeselectedfile12.setTabs(tabs);
+		main.fileNames = tabs;
+		new Recents().add(fileName);
+	}
+	public String CreateFile() {
+		while(true) {
+			JFileChooser fileChooser = new JFileChooser();
+			FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Save as .java","java");
+			fileChooser.setFileFilter(filenameextensionfilter);
+			int status =fileChooser.showSaveDialog(textarea);
+			if(status == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				
+				String fileName= file.getPath();
+				fileName=Main.addDotJava(fileName);
+				
+				saveTabs(fileName);
+				
+				return fileName;
+			}
+		}
+	}
+}
+
+		

@@ -1,0 +1,1 @@
+Manifest file must be saved as UTF-8
