@@ -4,6 +4,10 @@ import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.IOException;
 public class CommandLine {
+ 	public static void main(String[] args) {
+ 		CommandLine commandline = new CommandLine();
+ 		Process process=commandline.run("terminal",null);
+ 	}
  	public StarNorDot javac_star_nor_dot = new StarNorDot();
  	public StarNorDot java_star_nor_dot= new StarNorDot();
 	private String junitmain_class = "";
@@ -195,6 +199,8 @@ classpath = "-cp "+classpath;
 			String[] commands=command.split(" ");
 			ProcessBuilder processbuilder=new ProcessBuilder(commands);
 			processbuilder.redirectErrorStream(true);
+			if(dir != null)
+				processbuilder.directory(new File(dir));
 			
 			Process process=processbuilder.start();
 			return process;
