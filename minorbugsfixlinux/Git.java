@@ -74,7 +74,10 @@ public class Git {
 		            command2[0]="git";
 		            command2[1]="--version";
 		            
-		            Process process = Runtime.getRuntime().exec(command2,null);
+		            CommandLine commandline=new CommandLine();
+		            Process process=commandline.run("git --version",null);
+		            if(process ==null)
+		            	return false;	
 		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		            
 		            return reader.readLine() != null;
