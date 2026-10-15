@@ -9,7 +9,7 @@ public class CommandLine {
  	public static void main(String[] args) {
  		try {
 	 		CommandLine commandline = new CommandLine();
-	 		Process process=commandline.run("terminal",null);
+	 		Process process=commandline.run("cls",null);
 	 		if(process ==null)
 			            System.out.println("Command doesn't exist!");
 			else {

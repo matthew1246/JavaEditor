@@ -4197,7 +4197,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 169
+    "caretposition": 365
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java": {
     "isLocked": true,
