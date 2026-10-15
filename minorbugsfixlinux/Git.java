@@ -59,32 +59,22 @@ public class Git {
 		return !(oneline.equals("line is null"));
 	}
 	public boolean isGitInstalled() {
-		try {
-			/*String[] command2 =new String[3];
-			command2[0] = "cmd.exe";
-			command2[1] = "/c";
-			command2[2] = "git --version";
-			Process process = Runtime.getRuntime().exec(command2,null);
-		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		            
-		            String output;
-		            return reader.readLine() != null;
-		            */
-		            String[] command2 =new String[2];
-		            command2[0]="git";
-		            command2[1]="--version";
-		            
-		            CommandLine commandline=new CommandLine();
-		            Process process=commandline.run("git --version",null);
-		            if(process ==null)
-		            	return false;	
-		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		            
-		            return reader.readLine() != null;
-	            } catch(IOException ex) {
-	            	ex.printStackTrace();
-	            	return false;
-            	}
+		/*String[] command2 =new String[3];
+		command2[0] = "cmd.exe";
+		command2[1] = "/c";
+		command2[2] = "git --version";
+		Process process = Runtime.getRuntime().exec(command2,null);
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+	            
+	            String output;
+	            return reader.readLine() != null;
+	            */
+	            String[] command2 =new String[2];
+	            command2[0]="git";
+	            command2[1]="--version";
+	            
+	            CommandLine commandline=new CommandLine();
+	            return commandline.doesCommandExist("git --version");
             }
 
 	public void Change(String fileName) {

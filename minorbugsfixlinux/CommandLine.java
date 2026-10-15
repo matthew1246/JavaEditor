@@ -7,23 +7,11 @@ import java.io.File;
 import java.io.IOException;
 public class CommandLine {
  	public static void main(String[] args) {
- 		try {
-	 		CommandLine commandline = new CommandLine();
-	 		Process process=commandline.run("cls",null);
-	 		if(process ==null)
-			            System.out.println("Command doesn't exist!");
-			else {
-			       	BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			            
-			            if( reader.readLine() == null) {
-			            	System.out.println("Command doesn't exist!");
-		            	}
-		            	else {
-		            		System.out.println("Command does exist");
-	            		}
-	            	}
-            	} catch (IOException ex) {
-            		ex.printStackTrace();
+ 		CommandLine commandline = new CommandLine();
+ 		if(commandline.doesCommandExist("cls")) {
+		            System.out.println("Command does exist!");
+	            } else {
+		           	System.out.println("Command doesn't exist!");
             	}
  	}
  	public StarNorDot javac_star_nor_dot = new StarNorDot();
@@ -274,5 +262,21 @@ classpath = "-cp "+classpath;
 			return null;
 		}
 	}
+	public boolean doesCommandExist(String command) {
+		try {
+	 		CommandLine commandline = new CommandLine();
+	 		Process process=commandline.run(command,null);
+	 		if(process ==null)
+			            return false;
+			else {
+			       	BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			            
+			            return reader.readLine() != null;
+			}
+            	} catch (IOException ex) {
+            		ex.printStackTrace();
+            		return false;
+            	}
+            }
 }
 																																
