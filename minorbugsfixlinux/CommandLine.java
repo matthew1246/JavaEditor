@@ -84,28 +84,28 @@ private boolean isPackage = false;
 	** This adds all jars in public static void main(String[] args) directory.
 	*/
 	public void addClasspathCheckboxFeature() {
-		String default0 = ".;*";
+		String default0 = ".:*";
 		if(isPackage && !isPackageWithMinusD) {
-			default0=".;*";
+			default0=".:*";
 		}
 		else if(isPackageWithMinusD) {
-			default0=".;*";
+			default0=".:*";
 		}
 		javac_star_nor_dot.setStarNorDot(default0);
 		javac_star_nor_dot.lock();
 		
 		if(isPackage && !isPackageWithMinusD) {
-			default0=".;*";
+			default0=".:*";
 		}
 		else if(isPackageWithMinusD) {
-			default0=".;*";
+			default0=".:*";
 		}
 		java_star_nor_dot.setStarNorDot(default0);
 		java_star_nor_dot.lock();
 	}
 	
 	public String getJars() {
-		return String.join(";",jars);
+		return String.join(":",jars);
 	}
 	
 	public String getClasspath(StarNorDot isjavaorjavac) {
@@ -116,11 +116,11 @@ private boolean isPackage = false;
 		if(jars.size() > 0) { 
 			classpath= classpath+jars.get(0);
 			for(int i = 1; i < jars.size(); i++) {
-				classpath=classpath+";"+jars.get(i);
+				classpath=classpath+":"+jars.get(i);
 			}
 		}
 		if(!isjavaorjavac.isEmpty() && jars.size() > 0) {
-			classpath=";"+classpath;
+			classpath=":"+classpath;
 		}
 		if(!isjavaorjavac.isEmpty()) {
 			classpath=isjavaorjavac.getStarNorDot()+classpath;
@@ -146,9 +146,10 @@ classpath = "-cp "+classpath;
 	public String javac() {
 		String package1 = "";
 		if(isPackage && !isPackageWithMinusD) {
-			package1=packagename.replace(".","\\")+"\\";
+			package1=packagename.replace(".","/")+"/";
 		}						
-		String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
+		//String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
+		String str="javac";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
 		}
@@ -172,7 +173,8 @@ classpath = "-cp "+classpath;
 			package2=packagename+".";
 		}		
 		//String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
-		String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		//String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		String command=  "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
 		JOptionPane.showMessageDialog(null,command);
 		return command;
 	}	
@@ -183,12 +185,18 @@ classpath = "-cp "+classpath;
 	*/
 	public Process run(String command,String dir) {
 		try {
-			
-String[] command2 =new String[3];
+			/*String[] command2 =new String[3];
 			command2[0] = "cmd.exe";
 			command2[1] = "/c";
 			command2[2] = command;
 			Process process = Runtime.getRuntime().exec(command2,null,new File(dir));
+			return process;
+			*/
+			String[] commands=command.split(" ");
+			ProcessBuilder processbuilder=new ProcessBuilder(commands);
+			processbuilder.redirectErrorStream(true);
+			
+			Process process=processbuilder.start();
 			return process;
 		} catch (IOException ex) {
 			ex.printStackTrace();

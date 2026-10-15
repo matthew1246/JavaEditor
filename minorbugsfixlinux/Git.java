@@ -5,6 +5,10 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
+	public static void main(String[] args) {
+		Git git=new Git();
+		System.out.println("Git is installed? "+git.isGitInstalled());
+	}
 	public String root_directory;
 	public String directory;
 	public JFrame frame;
@@ -56,14 +60,23 @@ public class Git {
 	}
 	public boolean isGitInstalled() {
 		try {
-			String[] command2 =new String[3];
+			/*String[] command2 =new String[3];
 			command2[0] = "cmd.exe";
 			command2[1] = "/c";
 			command2[2] = "git --version";
 			Process process = Runtime.getRuntime().exec(command2,null);
 		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		
+		            
 		            String output;
+		            return reader.readLine() != null;
+		            */
+		            String[] command2 =new String[2];
+		            command2[0]="git";
+		            command2[1]="--version";
+		            
+		            Process process = Runtime.getRuntime().exec(command2,null);
+		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		            
 		            return reader.readLine() != null;
 	            } catch(IOException ex) {
 	            	ex.printStackTrace();
