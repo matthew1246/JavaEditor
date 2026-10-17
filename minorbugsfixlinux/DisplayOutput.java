@@ -68,7 +68,7 @@ try {
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
-			return "exception has occuried";
+			return "line is null";
 		}
 	}
 }
