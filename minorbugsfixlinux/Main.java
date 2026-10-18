@@ -730,13 +730,13 @@ public class Main {
 	}
 	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
-			return filename.replaceAll("[^\\\\]+\\.java","");
+			return filename.replaceAll("[^/]+\\.java","");
 		}
 		else if(filename.endsWith(".jar")) {
-			return filename.replaceAll("[^\\\\]+\\.jar","");
+			return filename.replaceAll("[^/]+\\.jar","");
 		}
 		else if(filename.endsWith(".xml")) {
-			return filename.replaceAll("[^\\\\]+\\.xml","");
+			return filename.replaceAll("[^/]+\\.xml","");
 		}
 		return filename;
 	}

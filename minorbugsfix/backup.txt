@@ -12,14 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\CommandLine.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java"
     ],
     "caretposition": 0
   },
@@ -44,16 +40,16 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 377
+    "caretposition": 13760
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
-    "lockedStartupClass": "MainDotJars",
+    "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
+      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -65,7 +61,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 74928
+    "caretposition": 50568
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -4168,14 +4164,14 @@
     "isLocked": true,
     "lockedStartupClass": "CommandLine",
     "startupcombobox": [
-      "Main",
       "CommandLine",
-      "Git"
+      "Git",
+      "Main"
     ],
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 29454
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\ComponentGridBagConstraints.java": {
     "isLocked": false,
@@ -4194,9 +4190,9 @@
     "isLocked": true,
     "lockedStartupClass": "CommandLine",
     "startupcombobox": [
-      "Main",
       "CommandLine",
-      "Git"
+      "Git",
+      "Main"
     ],
     "starterclass": "",
     "jars": [],
@@ -4214,7 +4210,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1667
+    "caretposition": 3815
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,

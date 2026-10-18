@@ -189,6 +189,7 @@ public class Main {
 	public JPanel comboboxpanel;	
 	public boolean searchingMethods = false;
 	private boolean filteringFilenames = false;
+	private boolean filteringMethodnames=false;
 	public boolean comboboxArrowNavigation = false;
 	public String comboboxSavedText = "";
 	public boolean comboboxItemSelectedFromPopup = false;
@@ -859,7 +860,6 @@ public class Main {
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		combobox = new JComboBox<String>();
-		combobox.setEditable(false);
 		comboboxsearchbutton = new JButton("\uD83D\uDD0D");
 		// comboboxsearchbutton.setMargin(new Insets(0,0,0,0));
 		
@@ -1459,6 +1459,35 @@ edit.add(functionLines);
 		}
 		} finally {
 			filteringFilenames = false;
+		}
+	}
+	private int searchTabIndex2=  -1;
+	public void filterMethodnames() {
+		if(filteringMethodnames) return;
+		filteringMethodnames = true;
+		searchTabIndex2 = -1;
+		try {
+		JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
+		String searchtext = filenameseditor.getText().trim().toLowerCase();
+		String savedText = filenameseditor.getText();
+		int savedCaret = filenameseditor.getCaretPosition();
+		filenamescombobox.hidePopup();
+		filenamescombobox.removeAllItems();
+		if(filelistmodifier != null && !filelistmodifier.isEmpty) {
+			List<String> filenames = filelistmodifier.getFileList();
+			for(String filename : filenames) {
+				if(searchtext.isEmpty() || filename.toLowerCase().startsWith(searchtext)) {
+					filenamescombobox.addItem(filename);
+				}
+			}
+		}
+		filenameseditor.setText(savedText);
+		filenameseditor.setCaretPosition(savedCaret);
+		if(filenamescombobox.getItemCount() > 0) {
+			filenamescombobox.showPopup();
+		}
+		} finally {
+			filteringMethodnames = false;
 		}
 	}
 	public void scrollToCaretPosition(JTextArea textarea3,int wholedocumenttindex) {

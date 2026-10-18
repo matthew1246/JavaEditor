@@ -30,19 +30,8 @@ public class Git {
 		return false;		
 	}
 	public boolean setWhereIsGitBashDotExeBackgroundThread() {
-		String[] commonPaths = {
-		    "C:\\Program Files\\Git\\git-bash.exe",
-		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
-		};
-		
-		for(String path : commonPaths) {
-			File file = new File(path);
-		    	if (file.exists()) {
-		        		gitbashdotexe=file.getAbsolutePath();
-		    		return true;		
-		    	}
-	    	}
-	    	return false;
+		CommandLine commandline=new CommandLine();
+		return commandline.doesCommandExist("bash");
     	}
     	public boolean setWhereIsGitBashDotExeEDT() {
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
@@ -116,8 +105,9 @@ public class Git {
 		      	}
 	      	}
       	}
+      	@Test
       	public void setDirectoryAndRootDirectory(String fileName) {
-		directory=fileName.replaceAll("[^\\\\]+\\.java","");
+		directory=Main.getDirectory(fileName);
 		CommandLine commandline = new CommandLine();
 		Process process=commandline.run("git rev-parse --show-toplevel",directory);
 		DisplayOutput displayoutput = new DisplayOutput();
