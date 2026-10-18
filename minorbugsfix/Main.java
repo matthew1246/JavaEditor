@@ -1476,19 +1476,16 @@ edit.add(functionLines);
 
 		String classname = (String)classnamescombobox.getSelectedItem();
 		if(classname != null && !classname.equals("")) {
-			String methodname = (String)combobox.getSelectedItem();
-			if(methodname != null && !methodname.equals("")) {
-				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
-				if(classnamesandmethodnames == null) return;
-				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
-				if(classandmethods == null) return;
-				
-				for(String key:classandmethods.keySet()) {
-					if(searchtext.isEmpty() || key.toLowerCase().startsWith(searchtext)) {
-						combobox.addItem(key);
-					}
+			LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+			if(classnamesandmethodnames == null) return;
+			LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+			if(classandmethods == null) return;
+			
+			for(String key:classandmethods.keySet()) {
+				if(searchtext.isEmpty() || key.toLowerCase().startsWith(searchtext)) {
+					combobox.addItem(key);
 				}
-			}	
+			}
 		}
 		
 		comboboxeditor.setText(savedText);
