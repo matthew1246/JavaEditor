@@ -1467,12 +1467,12 @@ edit.add(functionLines);
 		filteringMethodnames = true;
 		searchTabIndex2 = -1;
 		try {
-		JTextField filenameseditor = (JTextField)filenamescombobox.getEditor().getEditorComponent();
-		String searchtext = filenameseditor.getText().trim().toLowerCase();
-		String savedText = filenameseditor.getText();
-		int savedCaret = filenameseditor.getCaretPosition();
-		filenamescombobox.hidePopup();
-		filenamescombobox.removeAllItems();
+		JTextField comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
+		String searchtext = comboboxeditor.getText().trim().toLowerCase();
+		String savedText = comboboxeditor.getText();
+		int savedCaret = comboboxeditor.getCaretPosition();
+		combobox.hidePopup();
+		combobox.removeAllItems();
 		if(filelistmodifier != null && !filelistmodifier.isEmpty) {
 			List<String> filenames = filelistmodifier.getFileList();
 			for(String filename : filenames) {
@@ -1481,9 +1481,9 @@ edit.add(functionLines);
 				}
 			}
 		}
-		filenameseditor.setText(savedText);
-		filenameseditor.setCaretPosition(savedCaret);
-		if(filenamescombobox.getItemCount() > 0) {
+		comboboxeditor.setText(savedText);
+		comboboxeditor.setCaretPosition(savedCaret);
+		if(combobox.getItemCount() > 0) {
 			filenamescombobox.showPopup();
 		}
 		} finally {
