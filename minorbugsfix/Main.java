@@ -2769,66 +2769,93 @@ if(result == 0) {  // isOnePackage = true;
 			}
 			public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
 		});
-		comboboxsearchbutton.addActionListener((ev) -> {
+		comboboxsearchbutton.addActionListener((ev) -> {		
 			if(!combobox.isEditable()) {
 				combobox.setEditable(true);
-				JTextField filenameseditor = (JTextField)combobox.getEditor().getEditorComponent();
-				filenameseditor.setFocusTraversalKeysEnabled(false);
-				filenameseditor.setText("");
+				JTextField methodseditor = (JTextField)combobox.getEditor().getEditorComponent();
+				methodseditor.setFocusTraversalKeysEnabled(false);
+				methodseditor.setText("");
 				javax.swing.event.DocumentListener filterListener = new javax.swing.event.DocumentListener() {
 					public void insertUpdate(javax.swing.event.DocumentEvent e) { if(!filteringMethodnames) javax.swing.SwingUtilities.invokeLater(() -> filterMethodnames()); }
 					public void removeUpdate(javax.swing.event.DocumentEvent e) { if(!filteringMethodnames) javax.swing.SwingUtilities.invokeLater(() -> filterMethodnames()); }
 					public void changedUpdate(javax.swing.event.DocumentEvent e) { if(!filteringMethodnames) javax.swing.SwingUtilities.invokeLater(() -> filterMethodnames()); }
 				};
-				filenameseditor.getDocument().addDocumentListener(filterListener);
-				javax.swing.InputMap editorInputMap = filenameseditor.getInputMap(javax.swing.JComponent.WHEN_FOCUSED);
+				methodseditor.getDocument().addDocumentListener(filterListener);
+				javax.swing.InputMap editorInputMap = methodseditor.getInputMap(javax.swing.JComponent.WHEN_FOCUSED);
 				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_TAB, 0), "searchNext");
 				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DOWN, 0), "searchNext");
 				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_UP, 0), "searchPrev");
-				filenameseditor.getActionMap().put("searchNext", new javax.swing.AbstractAction() {
+				methodseditor.getActionMap().put("searchNext", new javax.swing.AbstractAction() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
-						int count = filenamescombobox.getItemCount();
+						int count = combobox.getItemCount();
 						if(count > 0) {
-							searchTabIndex = (searchTabIndex + 1) % count;
-							filteringFilenames = true;
-							filenamescombobox.setSelectedIndex(searchTabIndex);
-							filteringFilenames = false;
-							filenamescombobox.showPopup();
+							searchTabIndex2= (searchTabIndex2 + 1) % count;
+							filteringMethodnames = true;
+							combobox.setSelectedIndex(searchTabIndex2);
+							filteringMethodnames = false;
+							combobox.showPopup();
 						}
 					}
 				});
-				filenameseditor.getActionMap().put("searchPrev", new javax.swing.AbstractAction() {
+				methodseditor.getActionMap().put("searchPrev", new javax.swing.AbstractAction() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
-						int count = filenamescombobox.getItemCount();
+						int count = combobox.getItemCount();
 						if(count > 0) {
-							searchTabIndex = (searchTabIndex - 1 + count) % count;
-							filteringFilenames = true;
-							filenamescombobox.setSelectedIndex(searchTabIndex);
-							filteringFilenames = false;
-							filenamescombobox.showPopup();
+							searchTabIndex2= (searchTabIndex2 - 1 + count) % count;
+							filteringMethodnames = true;
+							combobox.setSelectedIndex(searchTabIndex2);
+							filteringMethodnames = false;
+							combobox.showPopup();
 						}
 					}
 				});
-				filenameseditor.addKeyListener(new java.awt.event.KeyAdapter() {
+				methodseditor.addKeyListener(new java.awt.event.KeyAdapter() {
 					public void keyPressed(java.awt.event.KeyEvent e) {
 						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-							String liney = (String)filenamescombobox.getSelectedItem();
-							if(liney != null && !liney.equals("")) {
-								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
-								int caretposition = textarea.getCaretPosition();
-								String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
-								storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
-								open(liney);
-								new Recents().add(maindirectory+liney);
+							String classname = (String)classnamescombobox.getSelectedItem();
+							if(classname != null && !classname.equals("")) {
+								String methodname = (String)combobox.getSelectedItem();
+								if(methodname != null && !methodname.equals("")) {
+									LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+									if(classnamesandmethodnames == null) return;
+									LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+									if(classandmethods == null) return;
+									
+									Integer position = classandmethods.get(methodname);
+									if(position == null) return;
+									int wholedocumenttindex = position;
+									
+									JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+									JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+								
+									MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+									mycaretlistener2.caret_tracker.caret_tracker.add(wholedocumenttindex);
+									
+									JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+									JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
+									
+									verticalscrollbar.setValue(0);
+									textarea.setCaretPosition(0);
+									textarea.requestFocus();
+									
+									verticalscrollbar.setValue(wholedocumenttindex);
+									textarea.setCaretPosition(wholedocumenttindex);
+									
+									verticalscrollbar.setValue(wholedocumenttindex);
+									
+									
+									scrollToCaretPosition(wholedocumenttindex);
+								}	
 							}
-							searchTabIndex = -1;
-							filenamescombobox.setEditable(false);
-							filenameseditor.setFocusTraversalKeysEnabled(true);
+							
+							searchTabIndex2 = -1;
+							combobox.setEditable(false);
+							methodseditor.setFocusTraversalKeysEnabled(true);
 							e.consume();
 						}
 					}
 				});
-				filenameseditor.requestFocusInWindow();
+				methodseditor.requestFocusInWindow();
 			}
 		});
 		filenamessearchbutton.addActionListener((ev) -> {
