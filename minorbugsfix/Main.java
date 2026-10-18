@@ -1473,18 +1473,28 @@ edit.add(functionLines);
 		int savedCaret = comboboxeditor.getCaretPosition();
 		combobox.hidePopup();
 		combobox.removeAllItems();
-		if(filelistmodifier != null && !filelistmodifier.isEmpty) {
-			List<String> filenames = filelistmodifier.getFileList();
-			for(String filename : filenames) {
-				if(searchtext.isEmpty() || filename.toLowerCase().startsWith(searchtext)) {
-					filenamescombobox.addItem(filename);
+
+		String classname = (String)classnamescombobox.getSelectedItem();
+		if(classname != null && !classname.equals("")) {
+			String methodname = (String)combobox.getSelectedItem();
+			if(methodname != null && !methodname.equals("")) {
+				LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+				if(classnamesandmethodnames == null) return;
+				LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+				if(classandmethods == null) return;
+				
+				for(String key:classandmethods.keySet()) {
+					if(searchtext.isEmpty() || key.toLowerCase().startsWith(searchtext)) {
+						combobox.addItem(key);
+					}
 				}
-			}
+			}	
 		}
+		
 		comboboxeditor.setText(savedText);
 		comboboxeditor.setCaretPosition(savedCaret);
 		if(combobox.getItemCount() > 0) {
-			filenamescombobox.showPopup();
+			combobox.showPopup();
 		}
 		} finally {
 			filteringMethodnames = false;
@@ -2705,8 +2715,8 @@ if(result == 0) {  // isOnePackage = true;
 			}
 		});
 		combobox.addActionListener((ev) -> {
-			if(!searchingMethods && comboboxItemSelectedFromPopup) {
-				comboboxItemSelectedFromPopup = false;
+			if(filteringMethodnames) return;
+			if(combobox.hasFocus()) {
 				selectCode(ev);
 			}
 		});
