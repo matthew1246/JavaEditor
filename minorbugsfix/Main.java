@@ -2721,83 +2721,114 @@ if(result == 0) {  // isOnePackage = true;
 			}
 		});
 		combobox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-			public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
-				if(comboboxPopupHiddenBySearch) {
-					comboboxPopupHiddenBySearch = false;
-					return;
-				}
-				comboboxItemSelectedFromPopup = true;
-				SwingUtilities.invokeLater(() -> {
-					comboboxItemSelectedFromPopup = false;
-					if(!searchingMethods) {
-						selectCode((ActionEvent)null);
-					}
-				});
-			}
 			public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent e) {}
+			public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
+				if(combobox.isEditable() && !filteringMethodnames) {
+					
+					String classname = (String)classnamescombobox.getSelectedItem();
+					if(classname != null && !classname.equals("")) {
+						String methodname = (String)combobox.getSelectedItem();
+						if(methodname != null && !methodname.equals("")) {
+							LinkedHashMap<String,LinkedHashMap<String,Integer>> classnamesandmethodnames = threecomboboxes.getclassmethods.getMethods();
+							if(classnamesandmethodnames == null) return;
+							LinkedHashMap<String,Integer> classandmethods = classnamesandmethodnames.get(classname);
+							if(classandmethods == null) return;
+							
+							Integer position = classandmethods.get(methodname);
+							if(position == null) return;
+							int wholedocumenttindex = position;
+							
+							JScrollPane jscrollpane2=(JScrollPane)tabbedpane.getSelectedComponent();
+							JTextArea textarea2=(JTextArea)jscrollpane2.getViewport().getView();
+						
+							MyCaretListener mycaretlistener2=(MyCaretListener)textarea2.getCaretListeners()[0];
+							mycaretlistener2.caret_tracker.caret_tracker.add(wholedocumenttindex);
+							
+							JScrollPane scrollpane=((JScrollPane)tabbedpane.getSelectedComponent());
+							JScrollBar verticalscrollbar=scrollpane.getVerticalScrollBar();
+							
+							verticalscrollbar.setValue(0);
+							textarea.setCaretPosition(0);
+							textarea.requestFocus();
+							
+							verticalscrollbar.setValue(wholedocumenttindex);
+							textarea.setCaretPosition(wholedocumenttindex);
+							
+							verticalscrollbar.setValue(wholedocumenttindex);
+							
+							
+							scrollToCaretPosition(wholedocumenttindex);
+						}	
+					}	
+					
+					searchTabIndex2 = -1;
+					combobox.setEditable(false);
+					JTextField fe = (JTextField)combobox.getEditor().getEditorComponent();
+					fe.setFocusTraversalKeysEnabled(true);
+				}
+			}
 			public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
-		});
-		combobox.addKeyListener(new java.awt.event.KeyListener() {
-			public void keyPressed(java.awt.event.KeyEvent e) {
-				if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
-					comboboxArrowNavigation = true;
-					comboboxSavedText = comboboxeditor != null ? comboboxeditor.getText() : "";
-				}
-			}
-			public void keyReleased(java.awt.event.KeyEvent e) {
-				if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
-					comboboxArrowNavigation = false;
-				}
-			}
-			public void keyTyped(java.awt.event.KeyEvent e) {}
 		});
 		comboboxsearchbutton.addActionListener((ev) -> {
 			if(!combobox.isEditable()) {
 				combobox.setEditable(true);
-				comboboxeditor = (JTextField)combobox.getEditor().getEditorComponent();
-				comboboxeditor.setText("");
-				comboboxeditor.addKeyListener(new java.awt.event.KeyListener() {
+				JTextField filenameseditor = (JTextField)combobox.getEditor().getEditorComponent();
+				filenameseditor.setFocusTraversalKeysEnabled(false);
+				filenameseditor.setText("");
+				javax.swing.event.DocumentListener filterListener = new javax.swing.event.DocumentListener() {
+					public void insertUpdate(javax.swing.event.DocumentEvent e) { if(!filteringMethodnames) javax.swing.SwingUtilities.invokeLater(() -> filterMethodnames()); }
+					public void removeUpdate(javax.swing.event.DocumentEvent e) { if(!filteringMethodnames) javax.swing.SwingUtilities.invokeLater(() -> filterMethodnames()); }
+					public void changedUpdate(javax.swing.event.DocumentEvent e) { if(!filteringMethodnames) javax.swing.SwingUtilities.invokeLater(() -> filterMethodnames()); }
+				};
+				filenameseditor.getDocument().addDocumentListener(filterListener);
+				javax.swing.InputMap editorInputMap = filenameseditor.getInputMap(javax.swing.JComponent.WHEN_FOCUSED);
+				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_TAB, 0), "searchNext");
+				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DOWN, 0), "searchNext");
+				editorInputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_UP, 0), "searchPrev");
+				filenameseditor.getActionMap().put("searchNext", new javax.swing.AbstractAction() {
+					public void actionPerformed(java.awt.event.ActionEvent e) {
+						int count = filenamescombobox.getItemCount();
+						if(count > 0) {
+							searchTabIndex = (searchTabIndex + 1) % count;
+							filteringFilenames = true;
+							filenamescombobox.setSelectedIndex(searchTabIndex);
+							filteringFilenames = false;
+							filenamescombobox.showPopup();
+						}
+					}
+				});
+				filenameseditor.getActionMap().put("searchPrev", new javax.swing.AbstractAction() {
+					public void actionPerformed(java.awt.event.ActionEvent e) {
+						int count = filenamescombobox.getItemCount();
+						if(count > 0) {
+							searchTabIndex = (searchTabIndex - 1 + count) % count;
+							filteringFilenames = true;
+							filenamescombobox.setSelectedIndex(searchTabIndex);
+							filteringFilenames = false;
+							filenamescombobox.showPopup();
+						}
+					}
+				});
+				filenameseditor.addKeyListener(new java.awt.event.KeyAdapter() {
 					public void keyPressed(java.awt.event.KeyEvent e) {
-						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
-							comboboxArrowNavigation = true;
-							comboboxSavedText = comboboxeditor.getText();
-						}
 						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+							String liney = (String)filenamescombobox.getSelectedItem();
+							if(liney != null && !liney.equals("")) {
+								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
+								int caretposition = textarea.getCaretPosition();
+								String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
+								storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
+								open(liney);
+								new Recents().add(maindirectory+liney);
+							}
+							searchTabIndex = -1;
+							filenamescombobox.setEditable(false);
+							filenameseditor.setFocusTraversalKeysEnabled(true);
 							e.consume();
-							combobox.hidePopup();
-							SwingUtilities.invokeLater(() -> {
-								if(!searchingMethods) {
-									selectCode((ActionEvent)null);
-								}
-							});
-						}
-					}
-					public void keyReleased(java.awt.event.KeyEvent e) {
-						if(e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN || e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
-							comboboxArrowNavigation = false;
-						}
-					}
-					public void keyTyped(java.awt.event.KeyEvent e) {}
-				});
-				((javax.swing.text.AbstractDocument)comboboxeditor.getDocument()).setDocumentFilter(new javax.swing.text.DocumentFilter() {
-					public void replace(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
-						if(!comboboxArrowNavigation) {
-							super.replace(fb, offset, length, text, attrs);
-						}
-					}
-					public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
-						if(!comboboxArrowNavigation) {
-							super.remove(fb, offset, length);
 						}
 					}
 				});
-				comboboxeditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-					public void insertUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
-					public void removeUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
-					public void changedUpdate(javax.swing.event.DocumentEvent e) { onComboboxEditorChange(); }
-				});
-				comboboxeditor.requestFocusInWindow();
-				return;
+				filenameseditor.requestFocusInWindow();
 			}
 		});
 		filenamessearchbutton.addActionListener((ev) -> {
