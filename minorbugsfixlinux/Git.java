@@ -1,4 +1,4 @@
-import org.junit.*;
+import org.junit.Test;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
@@ -110,7 +110,8 @@ public class Git {
       	@Test
       	public void testsetDirectoryAndRootDirectory() {
       		setDirectoryAndRootDirectory("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
-      		Assert.assertEquals("/home/owner/javaeditor",root_directory);
+      		org.junit.Assert.assertEquals("/home/owner/javaeditor",root_directory);
+      		org.junit.Assert.assertEquals("/home/owner/javaeditor/minorbugsfixlinux",directory);
       	}
       	public void setDirectoryAndRootDirectory(String fileName) {
 		directory=Main.getDirectory(fileName);
