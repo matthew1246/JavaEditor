@@ -255,8 +255,14 @@ classpath = "-cp "+classpath;
 	*/
 	public Process run(String[] arguments,String dir) {
 		try {
-			Process process = Runtime.getRuntime().exec(arguments,null,new File(dir));
+			ProcessBuilder processbuilder=new ProcessBuilder(arguments);
+			processbuilder.redirectErrorStream(true);
+			if(dir != null)
+				processbuilder.directory(new File(dir));
+			
+			Process process=processbuilder.start();
 			return process;
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return null;

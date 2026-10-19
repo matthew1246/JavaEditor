@@ -33,7 +33,9 @@ public class SeeAllGitChanges {
 		combobox1.addItem("<<Select which git commit title for file changes>>");
 		combobox2.addItem("<<Select which git commit title for content changes>>");
 		CommandLine commandline = new CommandLine();
-		Process process = commandline.run("git log --format=\"%h %s\"",directory);
+		String[] command={"git","log","--format=\"%h %s\""};
+		//Process process = commandline.run("git log --format=\"%h %s\"",directory);
+		Process process=commandline.run(command,directory);
 		DisplayOutput displayoutput = new DisplayOutput();
 		String multiline = displayoutput.Multiline(process);
 		String[] lines = multiline.split("\\r?\\n|\\r");
