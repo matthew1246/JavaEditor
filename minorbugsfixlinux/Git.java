@@ -363,26 +363,103 @@ public class Git {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					String[][] terminals = {
-						{"x-terminal-emulator", "-e", "bash", "-c", command + "; exec bash"},
-						{"gnome-terminal", "--", "bash", "-c", command + "; exec bash"},
-						{"konsole", "-e", "bash", "-c", command + "; exec bash"},
-						{"xterm", "-e", "bash", "-c", command + "; exec bash"}
-					};
-					for(String[] term : terminals) {
-						try {
-							ProcessBuilder processBuilder = new ProcessBuilder(term);
-							processBuilder.directory(new File(directory));
-							processBuilder.start();
-							return;
-						} catch(IOException ex) { }
+					File script = writeGitScript(command,directory);
+					String os = System.getProperty("os.name").toLowerCase();
+					JOptionPane.showMessageDialog(null,"OS is:"+os);
+					
+					if(os.contains("win")) {
+						openWindowsBashWindow(script);
 					}
-				} catch(Exception ex) {
+					else {
+						openLinuxBashWindow(script);
+					}
+				} catch(IOException ex) {
 					ex.printStackTrace();
+					showGitWindowError("Couldn't open a bash window: "+ex.getMessage());
 				}
 			}
 		};
 		thread.start();
+	}
+	public File writeGitScript(String command,String directory) throws IOException {
+		File script = File.createTempFile("gitcmd",".sh");
+		script.deleteOnExit();
+		PrintWriter out = new PrintWriter(new FileWriter(script));
+		out.print("cd '"+directory.replace('\\','/').replace("'","'\\''")+"'\n");
+		out.print(command+"\n");
+		out.print("exec bash\n");
+		out.close();
+		return script;
+	}
+	public String findWindowsBash() {
+		java.util.List<String> candidates = new java.util.ArrayList<String>();
+		if(gitbashdotexe.length() > 0) {
+			File parent = new File(gitbashdotexe).getParentFile();
+			if(parent != null)
+				candidates.add(new File(parent,"bin\\bash.exe").getAbsolutePath());
+		}
+		candidates.add("C:\\Program Files\\Git\\bin\\bash.exe");
+		candidates.add("C:\\Program Files (x86)\\Git\\bin\\bash.exe");
+		for(String path:candidates) {
+			if(new File(path).exists())
+				return path;
+		}
+		return "bash";
+	}
+	public void openWindowsBashWindow(File script) throws IOException {
+		String bash = findWindowsBash();
+		String scriptpath = script.getAbsolutePath().replace('\\','/');
+		String[] argv = new String[] {
+			"cmd.exe","/c","start","\"Git Bash\"","\""+bash+"\"","\""+scriptpath+"\""
+		};
+		ProcessBuilder processBuilder = new ProcessBuilder(argv);
+		processBuilder.start();
+	}
+	public void openLinuxBashWindow(File script) {
+		String scriptpath = script.getAbsolutePath();
+		String[][] attempts = {
+			{"x-terminal-emulator","-e","bash",scriptpath},
+			{"x-terminal-emulator","-e","bash "+scriptpath},
+			{"gnome-terminal","--","bash",scriptpath},
+			{"gnome-terminal","-e","bash "+scriptpath},
+			{"konsole","-e","bash",scriptpath},
+			{"xterm","-e","bash",scriptpath},
+			{"xfce4-terminal","-x","bash",scriptpath},
+			{"mate-terminal","--","bash",scriptpath},
+			{"lxterminal","-e","bash "+scriptpath},
+			{"tilix","-e","bash "+scriptpath},
+			{"alacritty","-e","bash",scriptpath},
+			{"kitty","bash",scriptpath},
+			{"urxvt","-e","bash",scriptpath},
+			{"st","-e","bash",scriptpath}
+		};
+		String errors = "";
+		for(String[] argv : attempts) {
+			try {
+				Process process = new ProcessBuilder(argv).start();
+				if(!process.waitFor(700,java.util.concurrent.TimeUnit.MILLISECONDS)) {
+					System.err.println("bash window opened by "+argv[0]);
+					return;
+				}
+				if(process.exitValue() == 0) {
+					System.err.println("bash window opened by "+argv[0]);
+					return;
+				}
+				errors = errors + argv[0]+" exited with "+process.exitValue()+"\n";
+			} catch(IOException ex) {
+				errors = errors + argv[0]+": "+ex.getMessage()+"\n";
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+				return;
+			}
+		}
+		showGitWindowError("Couldn't open a bash window. Tried every terminal emulator:\n"+errors);
+	}
+	public void showGitWindowError(String message) {
+		System.err.println(message);
+		if(!java.awt.GraphicsEnvironment.isHeadless()) {
+			JOptionPane.showMessageDialog(null,message);
+		}
 	}
 	
 	public void MSDOS() {
