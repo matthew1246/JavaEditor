@@ -108,7 +108,7 @@ public class Git {
 				setLayout();
 		      		setListeners();
 	      		}
-		      	// frame.setTitle(whichbranchopened);
+		      	frame.setTitle(whichbranchopened);
 	      	}
       	}
       	public void testsetDirectoryAndRootDirectory() {
