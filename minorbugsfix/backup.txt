@@ -4212,7 +4212,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 13692
+    "caretposition": 7791
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,
