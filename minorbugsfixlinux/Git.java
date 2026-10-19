@@ -363,23 +363,21 @@ public class Git {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
-					ProcessBuilder processBuilder = new ProcessBuilder("bash");
-					processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
-					processBuilder.directory(new File(directory));
-					processBuilder.start();
-					/*
-					String os = System.getProperty("os.name").toLowerCase();
-					JOptionPane.showMessageDialog(null,os);
-				       	ProcessBuilder pb = new ProcessBuilder(
-				                		"bash", "-c",
-				                		command + "; exec bash"
-				           		);
-				        	
-					pb.directory(new File(root_directory));
-					pb.start();
-					*/
-				} catch(IOException ex) {
+					String[][] terminals = {
+						{"x-terminal-emulator", "-e", "bash", "-c", command + "; exec bash"},
+						{"gnome-terminal", "--", "bash", "-c", command + "; exec bash"},
+						{"konsole", "-e", "bash", "-c", command + "; exec bash"},
+						{"xterm", "-e", "bash", "-c", command + "; exec bash"}
+					};
+					for(String[] term : terminals) {
+						try {
+							ProcessBuilder processBuilder = new ProcessBuilder(term);
+							processBuilder.directory(new File(directory));
+							processBuilder.start();
+							return;
+						} catch(IOException ex) { }
+					}
+				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
 			}
