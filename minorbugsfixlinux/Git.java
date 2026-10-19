@@ -197,7 +197,7 @@ public class Git {
 		});
 		addtoall.addActionListener( (ev) -> {
 			String branch = frame.getTitle();
-			String command = "eval $(git for-each-ref --shell --format=\"git checkout %(refname:lstrip=3); git rebase "+branch+"; git push;\" refs/remotes); git checkout "+branch;
+			String command = "eval $(git for-each-ref --shell --format='git checkout %(refname:lstrip=3); git rebase "+branch+"; git push;' refs/remotes); git checkout "+branch;
 			JOptionPane.showMessageDialog(null,command);
 			git(command);
 		});
@@ -363,7 +363,7 @@ public class Git {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					File script = writeGitScript(command,directory);
+					/*File script = writeGitScript(command,directory);
 					String os = System.getProperty("os.name").toLowerCase();
 					if(os.contains("win")) {
 						openWindowsBashWindow(script);
@@ -374,6 +374,15 @@ public class Git {
 					else {
 						openLinuxBashWindow(script);
 					}
+					*/
+					//String[] commands=command.split(" ");
+					String[] commands={"eval $(git for-each-ref --shell --format='git checkout %(refname:lstrip=3); git rebase "+whichbranchopened+"; git push;' refs/remotes); git checkout "+whichbranchopened};
+					ProcessBuilder processbuilder=new ProcessBuilder(commands);
+					processbuilder.redirectErrorStream(true);
+					if(directory != null)
+						processbuilder.directory(new File(directory));
+					
+					processbuilder.start();
 				} catch(IOException ex) {
 					ex.printStackTrace();
 					showGitWindowError("Couldn't open a bash window: "+ex.getMessage());
