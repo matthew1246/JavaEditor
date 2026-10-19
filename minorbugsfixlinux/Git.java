@@ -14,8 +14,8 @@ public class Git {
 		
 		/*git.ChangeBackgroundThread("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
 		git.ChangeEDT("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
-		git.setLayout();
 		*/
+		//git.setLayout();
 	}
 	public String root_directory;
 	public String directory;
@@ -139,26 +139,27 @@ public class Git {
 		frame=new JFrame();
 		frame.setSize(550,100);
 		JPanel panel=new JPanel();
+		panel.setLayout(new MatthewLayout());
  		// previously 500,100
 		frame.setLocation(980,0);
 		input.setText("git status");
-		panel.add(input);
+		panel.add(input,new XYWidthHeight(0,0,2,1));
 		
 		switch2_branch = new JButton("switch branch");
-		panel.add(switch2_branch);
+		panel.add(switch2_branch,new XYWidthHeight(1,0,4,1));
 		reset = new JButton("reset");
-		panel.add(reset);
+		panel.add(reset,new XYWidthHeight(2,0,1,1));
 		upload = new JButton("upload");
-		panel.add(upload);
+		panel.add(upload,new XYWidthHeight(3,0,2,1));
 		addtoall = new JButton("add to all");
-		panel.add(addtoall);
+		panel.add(addtoall,new XYWidthHeight(4,0,4,1));
 		everythingbutthekitchensink = new JButton("*");
-		panel.add(everythingbutthekitchensink);
+		panel.add(everythingbutthekitchensink,new XYWidthHeight(5,0,1,1));
 		seeallchanges=new JButton("\uD83D\uDD0D");
-		panel.add(seeallchanges);
+		panel.add(seeallchanges,new XYWidthHeight(6,0,1,1));
 		
 		run = new JButton("run");
-		panel.add(run);
+		panel.add(run,new XYWidthHeight(0,1,15,1));
 		
 		frame.add(panel);
 		
