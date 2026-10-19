@@ -375,9 +375,7 @@ public class Git {
 						openLinuxBashWindow(script);
 					}
 					*/
-					//String[] commands=command.split(" ");
-					String[] commands={"eval $(git for-each-ref --shell --format='git checkout %(refname:lstrip=3); git rebase "+whichbranchopened+"; git push;' refs/remotes); git checkout "+whichbranchopened};
-					ProcessBuilder processbuilder=new ProcessBuilder(commands);
+					ProcessBuilder processbuilder=new ProcessBuilder("bash","-c",command);
 					processbuilder.redirectErrorStream(true);
 					if(directory != null)
 						processbuilder.directory(new File(directory));
