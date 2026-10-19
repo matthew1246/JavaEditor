@@ -388,6 +388,7 @@ public class Git {
 				                		command + "; exec bash"
 				            	);
 				        	}
+					pb.directory(new File(root_directory));
 					pb.start();
 				} catch(IOException ex) {
 					ex.printStackTrace();
