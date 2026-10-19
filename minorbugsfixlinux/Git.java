@@ -108,13 +108,15 @@ public class Git {
 	      	}
       	}
       	@Test
+      	public void testsetDirectoryAndRootDirectory() {
+      		Assert.assertEquals("C:/test",root_directory);
+      	}
       	public void setDirectoryAndRootDirectory(String fileName) {
 		directory=Main.getDirectory(fileName);
 		CommandLine commandline = new CommandLine();
 		Process process=commandline.run("git rev-parse --show-toplevel",directory);
 		DisplayOutput displayoutput = new DisplayOutput();
 		root_directory = displayoutput.OneLine(process);
-		Assert.assertEquals("C:/test",root_directory);
       	}
       	
       	public JButton seeallchanges;

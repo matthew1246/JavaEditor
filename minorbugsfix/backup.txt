@@ -4177,9 +4177,9 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "CommandLine",
       "Main",
-      "Git",
-      "CommandLine"
+      "Git"
     ],
     "starterclass": "",
     "jars": [],
@@ -4210,7 +4210,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 395
+    "caretposition": 3997
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,
