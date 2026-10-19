@@ -4167,6 +4167,6 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 38
+    "caretposition": 1
   }
 }
