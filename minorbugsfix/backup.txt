@@ -4211,7 +4211,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 509
+    "caretposition": 3791
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,
