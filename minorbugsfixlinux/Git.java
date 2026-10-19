@@ -364,11 +364,11 @@ public class Git {
 			public void run() {
 				try {
 					//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
-					/*ProcessBuilder processBuilder = new ProcessBuilder("git");
+					ProcessBuilder processBuilder = new ProcessBuilder("bash");
 					processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
 					processBuilder.directory(new File(directory));
 					processBuilder.start();
-					*/
+					/*
 					String os = System.getProperty("os.name").toLowerCase();
 					JOptionPane.showMessageDialog(null,os);
 				       	ProcessBuilder pb = new ProcessBuilder(
@@ -378,6 +378,7 @@ public class Git {
 				        	
 					pb.directory(new File(root_directory));
 					pb.start();
+					*/
 				} catch(IOException ex) {
 					ex.printStackTrace();
 				}
