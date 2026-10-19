@@ -164,6 +164,21 @@ public class Git {
 		frame.pack();
 		frame.setLocation(980,0);
 		frame.setVisible(true);
+		/*
+		** The Linux window manager moves the window when it first appears and
+		** drops the position that was asked for before that. Setting it again
+		** a moment later, on the event dispatch thread, is what sticks: two
+		** goes through the same move it makes itself, so the second one ends
+		** up being the position that stays. On Windows the frame is already
+		** where it was asked to be, and setting the same point again does
+		** nothing.
+		*/
+		javax.swing.Timer fixlocation = new javax.swing.Timer(500, (ev) -> frame.setLocation(980,0));
+		fixlocation.setRepeats(false);
+		fixlocation.start();
+		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> frame.setLocation(980,0));
+		fixlocation2.setRepeats(false);
+		fixlocation2.start();
 	}
 	public void setListeners() {
 		seeallchanges.addActionListener((ev) -> {
