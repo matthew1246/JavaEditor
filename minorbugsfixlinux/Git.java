@@ -109,7 +109,8 @@ public class Git {
       	}
       	@Test
       	public void testsetDirectoryAndRootDirectory() {
-      		Assert.assertEquals("C:/test",root_directory);
+      		setDirectoryAndRootDirectory("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
+      		Assert.assertEquals("/home/owner/javaeditor",root_directory);
       	}
       	public void setDirectoryAndRootDirectory(String fileName) {
 		directory=Main.getDirectory(fileName);
