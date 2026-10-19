@@ -110,6 +110,12 @@ public class Git {
 	      		}
 		      	frame.setTitle(whichbranchopened);
 	      	}
+	      	try {
+      			String[] command={"bash","-c","echo Hello"};
+	      		Runtime.getRuntime().exec(command,null,new File(root_directory));
+      		} catch (IOException ex) {
+      			ex.printStackTrace();
+      		}
       	}
       	public void testsetDirectoryAndRootDirectory() {
       		setDirectoryAndRootDirectory("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
@@ -365,10 +371,11 @@ public class Git {
 				try {
 					File script = writeGitScript(command,directory);
 					String os = System.getProperty("os.name").toLowerCase();
-					JOptionPane.showMessageDialog(null,"OS is:"+os);
-					
 					if(os.contains("win")) {
 						openWindowsBashWindow(script);
+					}
+					else if(isWSL()) {
+						openWSLBashWindow(script);
 					}
 					else {
 						openLinuxBashWindow(script);
@@ -415,19 +422,56 @@ public class Git {
 		ProcessBuilder processBuilder = new ProcessBuilder(argv);
 		processBuilder.start();
 	}
+	public boolean isWSL() {
+		String os = System.getProperty("os.name").toLowerCase();
+		if(!os.contains("linux")) return false;
+		try {
+			java.io.File proc = new java.io.File("/proc/version");
+			if(proc.exists()) {
+				java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(proc));
+				String line;
+				while((line = br.readLine()) != null) {
+					String l = line.toLowerCase();
+					if(l.contains("microsoft") || l.contains("wsl")) {
+						br.close();
+						return true;
+					}
+				}
+				br.close();
+			}
+			String uname = System.getProperty("os.version","").toLowerCase();
+			if(uname.contains("microsoft")) return true;
+			try {
+				byte[] b = java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("/proc/version"));
+				String s = new String(b).toLowerCase();
+				if(s.contains("microsoft")||s.contains("wsl")) return true;
+			} catch(Exception ex2) {}
+		} catch(Exception ex) {}
+		return false;
+	}
+	public void openWSLBashWindow(File script) throws IOException {
+		String scriptpath = script.getAbsolutePath().replace('\\','/');
+		String wslScript = "/mnt/"+scriptpath.replaceFirst("^([A-Za-z]):","$1".toLowerCase());
+		// fallback if drive form weird
+		if(scriptpath.startsWith("/")) wslScript = scriptpath;
+		ProcessBuilder pb = new ProcessBuilder(
+			"cmd.exe","/c","start","\"WSL Bash\"","wsl.exe","bash",scriptpath.replace('\\','/')
+		);
+		try { pb.start(); return; } catch(IOException ex) {}
+		// try without spaces in title
+		new ProcessBuilder("cmd.exe","/c","start","wsl.exe","bash",scriptpath.replace('\\','/')).start();
+	}
 	public void openLinuxBashWindow(File script) {
 		String scriptpath = script.getAbsolutePath();
 		String[][] attempts = {
 			{"x-terminal-emulator","-e","bash",scriptpath},
-			{"x-terminal-emulator","-e","bash "+scriptpath},
 			{"gnome-terminal","--","bash",scriptpath},
-			{"gnome-terminal","-e","bash "+scriptpath},
 			{"konsole","-e","bash",scriptpath},
 			{"xterm","-e","bash",scriptpath},
 			{"xfce4-terminal","-x","bash",scriptpath},
 			{"mate-terminal","--","bash",scriptpath},
-			{"lxterminal","-e","bash "+scriptpath},
-			{"tilix","-e","bash "+scriptpath},
+			{"lxterminal","-e","bash",scriptpath},
+			{"tilix","-e","bash",scriptpath},
 			{"alacritty","-e","bash",scriptpath},
 			{"kitty","bash",scriptpath},
 			{"urxvt","-e","bash",scriptpath},
@@ -437,20 +481,22 @@ public class Git {
 		for(String[] argv : attempts) {
 			try {
 				Process process = new ProcessBuilder(argv).start();
-				if(!process.waitFor(700,java.util.concurrent.TimeUnit.MILLISECONDS)) {
-					System.err.println("bash window opened by "+argv[0]);
+				try {
+					if(!process.waitFor(700,java.util.concurrent.TimeUnit.MILLISECONDS)) {
+						System.err.println("bash window opened by "+argv[0]);
+						return;
+					}
+					if(process.exitValue() == 0) {
+						System.err.println("bash window opened by "+argv[0]);
+						return;
+					}
+					errors = errors + argv[0]+" exited with "+process.exitValue()+"\n";
+				} catch(InterruptedException ex) {
+					Thread.currentThread().interrupt();
 					return;
 				}
-				if(process.exitValue() == 0) {
-					System.err.println("bash window opened by "+argv[0]);
-					return;
-				}
-				errors = errors + argv[0]+" exited with "+process.exitValue()+"\n";
 			} catch(IOException ex) {
 				errors = errors + argv[0]+": "+ex.getMessage()+"\n";
-			} catch(InterruptedException ex) {
-				Thread.currentThread().interrupt();
-				return;
 			}
 		}
 		showGitWindowError("Couldn't open a bash window. Tried every terminal emulator:\n"+errors);

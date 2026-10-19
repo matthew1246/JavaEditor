@@ -3566,14 +3566,14 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 3844
+    "caretposition": 4248
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\CommandLine.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Git",
       "CommandLine",
+      "Git",
       "Main"
     ],
     "starterclass": "",
