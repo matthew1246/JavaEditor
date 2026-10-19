@@ -370,7 +370,7 @@ public class Git {
 					processBuilder.start();
 					*/
 					String os = System.getProperty("os.name").toLowerCase();
-
+					JOptionPane.showMessageDialog(null,os);
 				       	ProcessBuilder pb;
 				
 				        	if (os.contains("win")) {
