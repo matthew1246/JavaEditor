@@ -87,6 +87,7 @@ public class Git {
       	public void ChangeBackgroundThread(String fileName) {
      		if(isGitInstalled()) {
      			if(isFileInsideGitRepository(fileName)) {
+     				JOptionPane.showMessageDialog(null,"isInside Git repo");
      				isFileInsideGitRepository = true;
      				isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
      				if(isGitBashDotExeFoundByBackgroundThread) {
