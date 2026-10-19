@@ -96,17 +96,14 @@ public class Git {
      		}
      	}
       	public void ChangeEDT(String fileName) {
-      		if(isFileInsideGitRepository) {
-	      		if(!isGitBashDotExeFoundByBackgroundThread) {
-	      			isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
+      		if(!isFileInsideGitRepository) return;
+      		
+      		if(isGitBashDotExeFoundByBackgroundThread) {
+      			if(frame == null) {
+				setLayout();
+		      		setListeners();
 	      		}
-	      		if(isGitBashDotExeFoundByBackgroundThread) {
-	      			if(frame == null) {
-					setLayout();
-			      		setListeners();
-		      		}
-			      	frame.setTitle(whichbranchopened);
-		      	}
+		      	frame.setTitle(whichbranchopened);
 	      	}
       	}
       	public void testsetDirectoryAndRootDirectory() {
