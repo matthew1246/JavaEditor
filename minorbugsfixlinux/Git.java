@@ -103,7 +103,7 @@ public class Git {
 				setLayout();
 		      		setListeners();
 	      		}
-		      	frame.setTitle(whichbranchopened);
+		      	// frame.setTitle(whichbranchopened);
 	      	}
       	}
       	public void testsetDirectoryAndRootDirectory() {
@@ -130,7 +130,7 @@ public class Git {
 	public JButton switch2_branch;
 	
 	public JButton reset;
-	public void setLayout() 	{
+	public void setLayout() 		{
 		frame=new JFrame();
 		frame.setSize(550,100);
  		// previously 500,100

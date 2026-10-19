@@ -3565,7 +3565,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 80
+    "caretposition": 3844
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\CommandLine.java": {
     "isLocked": false,
