@@ -98,6 +98,7 @@ public class Git {
      		}
      	}
       	public void ChangeEDT(String fileName) {
+      		JOptionPane.showMessageDialog(null,isFileInsideGitRepository+" issy");
       		if(!isFileInsideGitRepository) return;
       		JOptionPane.showMessageDialog(null,""+isGitBashDotExeFoundByBackgroundThread);
       		if(isGitBashDotExeFoundByBackgroundThread) {
