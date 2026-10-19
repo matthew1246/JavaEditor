@@ -371,23 +371,11 @@ public class Git {
 					*/
 					String os = System.getProperty("os.name").toLowerCase();
 					JOptionPane.showMessageDialog(null,os);
-				       	ProcessBuilder pb;
-				
-				        	if (os.contains("win")) {
-				           		// Windows with WSL
-				            	pb = new ProcessBuilder(
-				                		"wt.exe", "new-window",
-				                		"wsl.exe", "bash", "-c",
-				                		command + "; exec bash"
-				           		);
-				        	} else {
-				            	// Linux with GNOME Terminal
-				            	pb = new ProcessBuilder(
-				                		"gnome-terminal", "--",
+				       	ProcessBuilder pb = new ProcessBuilder(
 				                		"bash", "-c",
 				                		command + "; exec bash"
-				            	);
-				        	}
+				           		);
+				        	
 					pb.directory(new File(root_directory));
 					pb.start();
 				} catch(IOException ex) {
