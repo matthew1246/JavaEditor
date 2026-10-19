@@ -188,7 +188,7 @@ public class Git {
 			String command = "eval $(";
 			// git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
 			for(String branch:getAllBranches()) {
-				command=command+"git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+branch+"; git push;\" refs/remotes; ";
+				command=command+"git for-each-ref --shell --format='git switch %(refname:lstrip=3); git merge "+branch+"; git push;' refs/remotes; ";
 			}
 			command+=")";
 			
@@ -197,7 +197,7 @@ public class Git {
 		});
 		addtoall.addActionListener( (ev) -> {
 			String branch = frame.getTitle();
-			String command = "eval $(git for-each-ref --shell --format=\"git checkout %(refname:lstrip=3); git rebase "+branch+"; git push;\" refs/remotes); git checkout "+branch;
+			String command = "eval $(git for-each-ref --shell --format='git checkout %(refname:lstrip=3); git rebase "+branch+"; git push;' refs/remotes); git checkout "+branch;
 			JOptionPane.showMessageDialog(null,command);
 			git(command);
 		});
