@@ -70,7 +70,7 @@ public class Git {
 
 	public void Change(String fileName) {
 		if(isGitInstalled()) {
-			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
+			if(isGitBashDotExeFoundByBackgroundThread && isFileInsideGitRepository(fileName)) {
 				setDirectoryAndRootDirectory(fileName);
 				if(frame == null) {
 					setLayout();
