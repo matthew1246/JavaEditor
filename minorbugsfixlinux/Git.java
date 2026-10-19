@@ -9,7 +9,8 @@ public class Git {
 	public static void main(String[] args) {
 		Git git=new Git();
 		System.out.println("Git is installed? "+git.isGitInstalled());
-		git.ChangeBackgroundThread("C:\testy");
+		git.ChangeBackgroundThread("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
+		git.ChangeEDT("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
 	}
 	public String root_directory;
 	public String directory;
@@ -130,7 +131,7 @@ public class Git {
 	public JButton switch2_branch;
 	
 	public JButton reset;
-	public void setLayout() {
+	public void setLayout() 	{
 		frame=new JFrame();
 		frame.setSize(550,100);
  		// previously 500,100
