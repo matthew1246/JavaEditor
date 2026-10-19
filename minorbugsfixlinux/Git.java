@@ -110,12 +110,6 @@ public class Git {
 	      		}
 		      	frame.setTitle(whichbranchopened);
 	      	}
-	      	try {
-      			String[] command={"bash","-c","git"};
-	      		Runtime.getRuntime().exec(command,null,new File(root_directory));
-      		} catch (IOException ex) {
-      			ex.printStackTrace();
-      		}
       	}
       	public void testsetDirectoryAndRootDirectory() {
       		setDirectoryAndRootDirectory("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
