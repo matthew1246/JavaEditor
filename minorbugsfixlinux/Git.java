@@ -14,8 +14,8 @@ public class Git {
 		
 		/*git.ChangeBackgroundThread("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
 		git.ChangeEDT("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
+		git.setLayout();
 		*/
-		//git.setLayout();
 	}
 	public String root_directory;
 	public String directory;
@@ -162,6 +162,7 @@ public class Git {
 		
 		frame.add(panel);
 		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	public void setListeners() {
