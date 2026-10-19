@@ -3548,6 +3548,7 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Git",
       "Main"
     ],
     "starterclass": "",
@@ -3571,8 +3572,8 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "CommandLine",
       "Git",
+      "CommandLine",
       "Main"
     ],
     "starterclass": "",
