@@ -376,7 +376,7 @@ public class Git {
 	@Test
 	public void testwhichBranchOpened() {
 		testsetDirectoryAndRootDirectory();
-		Assert.assertEquals("main",whichFolderOpened());
+		Assert.assertEquals("main",whichBranchOpened());
 	}
 	public String whichBranchOpened() {
 		/*try {
