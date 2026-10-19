@@ -1,3 +1,4 @@
+import org.junit.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
@@ -8,6 +9,7 @@ public class Git {
 	public static void main(String[] args) {
 		Git git=new Git();
 		System.out.println("Git is installed? "+git.isGitInstalled());
+		git.ChangeBackgroundThread("C:\testy");
 	}
 	public String root_directory;
 	public String directory;
@@ -112,6 +114,7 @@ public class Git {
 		Process process=commandline.run("git rev-parse --show-toplevel",directory);
 		DisplayOutput displayoutput = new DisplayOutput();
 		root_directory = displayoutput.OneLine(process);
+		Assert.assertEquals("C:/test",root_directory);
       	}
       	
       	public JButton seeallchanges;
