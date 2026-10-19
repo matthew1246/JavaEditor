@@ -11,6 +11,11 @@ public class Git {
 		System.out.println("Git is installed? "+git.isGitInstalled());
 		git.ChangeBackgroundThread("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
 		git.ChangeEDT("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
+		
+		/*git.ChangeBackgroundThread("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
+		git.ChangeEDT("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
+		*/
+		//git.setLayout();
 	}
 	public String root_directory;
 	public String directory;
@@ -130,31 +135,32 @@ public class Git {
 	public JButton switch2_branch;
 	
 	public JButton reset;
-	public void setLayout() 		{
+	public void setLayout() {
 		frame=new JFrame();
 		frame.setSize(550,100);
+		JPanel panel=new JPanel();
  		// previously 500,100
 		frame.setLocation(980,0);
 		input.setText("git status");
-		frame.getContentPane().add(input,BorderLayout.CENTER);
-		run = new JButton("run");
-		frame.getContentPane().add(run,BorderLayout.SOUTH);
-		
-		JPanel east = new JPanel();
+		panel.add(input);
 		
 		switch2_branch = new JButton("switch branch");
-		east.add(switch2_branch);
+		panel.add(switch2_branch);
 		reset = new JButton("reset");
-		east.add(reset);
+		panel.add(reset);
 		upload = new JButton("upload");
-		east.add(upload);
+		panel.add(upload);
 		addtoall = new JButton("add to all");
-		east.add(addtoall);
+		panel.add(addtoall);
 		everythingbutthekitchensink = new JButton("*");
-		east.add(everythingbutthekitchensink);
+		panel.add(everythingbutthekitchensink);
 		seeallchanges=new JButton("\uD83D\uDD0D");
-		east.add(seeallchanges);
-		frame.getContentPane().add(east,BorderLayout.EAST);
+		panel.add(seeallchanges);
+		
+		run = new JButton("run");
+		panel.add(run);
+		
+		frame.add(panel);
 		
 		frame.setVisible(true);
 	}
