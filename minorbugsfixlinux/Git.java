@@ -87,7 +87,6 @@ public class Git {
       	public void ChangeBackgroundThread(String fileName) {
      		if(isGitInstalled()) {
      			if(isFileInsideGitRepository(fileName)) {
-     				//JOptionPane.showMessageDialog(null,"isInside Git repo");
      				isFileInsideGitRepository = true;
      				isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
      				if(isGitBashDotExeFoundByBackgroundThread) {
@@ -98,9 +97,7 @@ public class Git {
      		}
      	}
       	public void ChangeEDT(String fileName) {
-      		JOptionPane.showMessageDialog(null,isFileInsideGitRepository+" issy");
       		if(!isFileInsideGitRepository) return;
-      		JOptionPane.showMessageDialog(null,""+isGitBashDotExeFoundByBackgroundThread);
       		if(isGitBashDotExeFoundByBackgroundThread) {
       			if(frame == null) {
 				setLayout();

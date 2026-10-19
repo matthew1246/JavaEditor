@@ -16,7 +16,9 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\CommandLine.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\CommandLine.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java"
     ],
     "caretposition": 0
   },

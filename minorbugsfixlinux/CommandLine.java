@@ -265,7 +265,7 @@ classpath = "-cp "+classpath;
 	public boolean doesCommandExist(String command) {
 		try {
 	 		CommandLine commandline = new CommandLine();
-	 		Process process=commandline.run(command,null);
+	 		Process process=commandline.run(command+" --version",null);
 	 		if(process ==null)
 			            return false;
 			else {
