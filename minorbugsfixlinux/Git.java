@@ -137,11 +137,8 @@ public class Git {
 	public JButton reset;
 	public void setLayout() {
 		frame=new JFrame();
-		frame.setSize(550,100);
 		JPanel panel=new JPanel();
 		panel.setLayout(new MatthewLayout());
- 		// previously 500,100
-		frame.setLocation(980,0);
 		input.setText("git status");
 		panel.add(input,new XYWidthHeight(0,0,2,1));
 		
@@ -155,7 +152,7 @@ public class Git {
 		panel.add(addtoall,new XYWidthHeight(4,0,4,1));
 		everythingbutthekitchensink = new JButton("*");
 		panel.add(everythingbutthekitchensink,new XYWidthHeight(5,0,1,1));
-		seeallchanges=new JButton("\uD83D\uDD0D");
+		seeallchanges=new JButton("\u2315");
 		panel.add(seeallchanges,new XYWidthHeight(6,0,1,1));
 		
 		run = new JButton("run");
@@ -164,6 +161,8 @@ public class Git {
 		frame.add(panel);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setLocation(980,0);
 		frame.setVisible(true);
 	}
 	public void setListeners() {
