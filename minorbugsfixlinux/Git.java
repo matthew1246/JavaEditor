@@ -364,10 +364,31 @@ public class Git {
 			public void run() {
 				try {
 					//ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
-					ProcessBuilder processBuilder = new ProcessBuilder("git");
+					/*ProcessBuilder processBuilder = new ProcessBuilder("git");
 					processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
 					processBuilder.directory(new File(directory));
 					processBuilder.start();
+					*/
+					String os = System.getProperty("os.name").toLowerCase();
+
+				       	ProcessBuilder pb;
+				
+				        	if (os.contains("win")) {
+				           		// Windows with WSL
+				            	pb = new ProcessBuilder(
+				                		"wt.exe", "new-window",
+				                		"wsl.exe", "bash", "-c",
+				                		command + "; exec bash"
+				           		);
+				        	} else {
+				            	// Linux with GNOME Terminal
+				            	pb = new ProcessBuilder(
+				                		"gnome-terminal", "--",
+				                		"bash", "-c",
+				                		command + "; exec bash"
+				            	);
+				        	}
+					pb.start();
 				} catch(IOException ex) {
 					ex.printStackTrace();
 				}
