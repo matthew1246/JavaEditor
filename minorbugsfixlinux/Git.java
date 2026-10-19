@@ -111,7 +111,7 @@ public class Git {
 		      	frame.setTitle(whichbranchopened);
 	      	}
 	      	try {
-      			String[] command={"bash","-c","echo Hello"};
+      			String[] command={"bash","-c","git"};
 	      		Runtime.getRuntime().exec(command,null,new File(root_directory));
       		} catch (IOException ex) {
       			ex.printStackTrace();
