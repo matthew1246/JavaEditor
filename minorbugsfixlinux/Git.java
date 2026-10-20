@@ -167,6 +167,8 @@ frame.add(panel);
 		//frame.setSize(550,100);
 		frame.pack();
 		frame.validate();
+		frame.invalidate();
+		frame.revalidate();
 		frame.repaint();
 
 		//Dimension packedSize = frame.getSize();

@@ -4182,7 +4182,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 25565
+    "caretposition": 25125
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\ComponentGridBagConstraints.java": {
     "isLocked": false,
@@ -4221,7 +4221,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 7206
+    "caretposition": 6253
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,
