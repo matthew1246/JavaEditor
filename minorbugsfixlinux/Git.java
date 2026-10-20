@@ -139,6 +139,7 @@ public class Git {
 	public JButton reset;
 	public void setLayout() {
 		frame=new JFrame();
+		frame.setSize(550,100);
 		JPanel panel=new JPanel();
 		panel.setLayout(new MatthewLayout());
 		input.setText("git status");

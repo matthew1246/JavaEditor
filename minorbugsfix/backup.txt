@@ -20,7 +20,8 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\MSDOS.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\msdos.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\msdos.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
     ],
     "caretposition": 0
   },
@@ -37,9 +38,9 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
       "Git",
       "GuaranteedLayout",
+      "Main",
       "MainDotJars"
     ],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
@@ -4169,9 +4170,9 @@
     "isLocked": true,
     "lockedStartupClass": "Git",
     "startupcombobox": [
+      "Main",
       "CommandLine",
-      "Git",
-      "Main"
+      "Git"
     ],
     "starterclass": "Main",
     "jars": [
@@ -4181,7 +4182,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 25125
+    "caretposition": 25518
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\ComponentGridBagConstraints.java": {
     "isLocked": false,
@@ -4220,7 +4221,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6964
+    "caretposition": 959
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,
