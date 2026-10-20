@@ -18,7 +18,9 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\commandline.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\MSDOS.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\msdos.java"
     ],
     "caretposition": 0
   },
@@ -4174,7 +4176,7 @@
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 26085
+    "caretposition": 14495
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\ComponentGridBagConstraints.java": {
     "isLocked": false,
@@ -4213,7 +4215,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 6980
+    "caretposition": 6964
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,
@@ -4264,5 +4266,31 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 14130
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\MSDOS.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Git",
+    "startupcombobox": [
+      "Main",
+      "CommandLine",
+      "Git"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\msdos.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Git",
+    "startupcombobox": [
+      "Main",
+      "CommandLine",
+      "Git"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }

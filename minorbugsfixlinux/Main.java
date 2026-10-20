@@ -663,7 +663,7 @@ public class Main {
 				setAllClassesInFile();	
 				startercombobox.EDT();				
 				
-				msdos.EDT();
+				//msdos.EDT();
 				maven.ChangeEDT();
 				
 				openLastSelectedLine();

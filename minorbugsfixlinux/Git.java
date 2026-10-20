@@ -181,7 +181,6 @@ public class Git {
 		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> frame.setLocation(980,0));
 		fixlocation2.setRepeats(false);
 		fixlocation2.start();
-		frame.pack();
 	}
 	public void setListeners() {
 		seeallchanges.addActionListener((ev) -> {
