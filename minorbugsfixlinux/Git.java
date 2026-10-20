@@ -140,6 +140,7 @@ public class Git {
 	public JButton reset;
 	public void setLayout() {
 		frame=new JFrame();
+		frame.setSize(new Dimension(550,100));
 		frame.setPreferredSize(new Dimension(550,100));
 		frame.setMinimumSize(new Dimension(550,100));
 		frame.setMaximumSize(new Dimension(550,100));
