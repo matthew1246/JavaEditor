@@ -620,7 +620,7 @@ public class Main {
 				}
 			}
 		};
-		//swingworker10.execute();
+		swingworker10.execute();
 		SwingWorker<Void,Void> swingworker20=new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {
