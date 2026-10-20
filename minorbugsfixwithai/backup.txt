@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\CommandLine.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java"
     ],
@@ -3548,20 +3548,20 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Git",
-      "Main"
+      "Main",
+      "Git"
     ],
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 267064
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Git",
-      "Main"
+      "Main",
+      "Git"
     ],
     "starterclass": "",
     "jars": [],
@@ -3572,9 +3572,9 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
+      "Main",
       "CommandLine",
-      "Git",
-      "Main"
+      "Git"
     ],
     "starterclass": "",
     "jars": [],
