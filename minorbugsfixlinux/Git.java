@@ -164,8 +164,11 @@ public class Git {
 frame.add(panel);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(550,100);
+		frame.validate();
+		frame.repaint();
 		frame.pack();
-		Dimension packedSize = frame.getSize();
+		//Dimension packedSize = frame.getSize();
 		frame.setLocation(980,0);
 		frame.setVisible(true);
 		/*
@@ -181,13 +184,17 @@ frame.add(panel);
 		*/
 		javax.swing.Timer fixlocation = new javax.swing.Timer(500, (ev) -> {
 			frame.setLocation(980,0);
-			frame.setSize(packedSize);
+			frame.setSize(550,100);
+			frame.validate();
+			frame.repaint();
 		});
 		fixlocation.setRepeats(false);
 		fixlocation.start();
 		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> {
 			frame.setLocation(980,0);
-			frame.setSize(packedSize);
+			frame.setSize(550,100);
+			frame.validate();
+			frame.repaint();
 		});
 		fixlocation2.setRepeats(false);
 		fixlocation2.start();
