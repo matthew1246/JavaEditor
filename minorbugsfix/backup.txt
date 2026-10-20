@@ -17,7 +17,8 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\commandline.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java"
     ],
     "caretposition": 0
   },
@@ -4173,7 +4174,7 @@
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 266784
+    "caretposition": 216887
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\ComponentGridBagConstraints.java": {
     "isLocked": false,
@@ -4212,7 +4213,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 14130
+    "caretposition": 784
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,

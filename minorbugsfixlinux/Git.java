@@ -7,15 +7,17 @@ import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
 	public static void main(String[] args) {
-		Git git=new Git();
-		System.out.println("Git is installed? "+git.isGitInstalled());
-		git.ChangeBackgroundThread("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
-		git.ChangeEDT("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
-		
-		/*git.ChangeBackgroundThread("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
-		git.ChangeEDT("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
-		*/
-		//git.setLayout();
+		SwingUtilities.invokeLater( () -> {
+			Git git=new Git();
+			System.out.println("Git is installed? "+git.isGitInstalled());
+			git.ChangeBackgroundThread("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
+			git.ChangeEDT("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
+			
+			/*git.ChangeBackgroundThread("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
+			git.ChangeEDT("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
+			*/
+			//git.setLayout();
+		});
 	}
 	public String root_directory;
 	public String directory;
