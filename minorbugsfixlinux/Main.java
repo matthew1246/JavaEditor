@@ -646,6 +646,7 @@ public class Main {
 				git.ChangeEDT(fileName);
 			}
 		};
+		swingworker23.execute();
 		SwingWorker<Void,Void> swingworker4 = new SwingWorker<>() {
 			@Override
 			protected Void doInBackground() {				
@@ -669,7 +670,6 @@ public class Main {
 			}
 		};
 		swingworker4.execute();
-		swingworker23.execute();
 	}
 	public void openLastSelectedLine(int caretposition,JTextArea textarea3,String filename) {
 		if(filename != null && !filename.equals("")) {

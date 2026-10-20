@@ -4174,7 +4174,7 @@
     "starterclass": "Main",
     "jars": [],
     "fileNames": [],
-    "caretposition": 14421
+    "caretposition": 26766
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\ComponentGridBagConstraints.java": {
     "isLocked": false,
@@ -4213,7 +4213,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 784
+    "caretposition": 3221
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\DisplayOutput.java": {
     "isLocked": true,

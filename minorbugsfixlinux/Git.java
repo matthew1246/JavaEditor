@@ -80,11 +80,12 @@ public class Git {
 		if(isGitInstalled()) {
 			if(isGitBashDotExeFoundByBackgroundThread && isFileInsideGitRepository(fileName)) {
 				setDirectoryAndRootDirectory(fileName);
-				if(frame == null) {
+				/*if(frame == null) {
 					setLayout();
 			      		setListeners();
 		      		}
 			      	frame.setTitle(whichBranchOpened());
+			      	*/
 		      	}
 	      	}
       	}
