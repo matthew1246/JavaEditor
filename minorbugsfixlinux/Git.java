@@ -3,6 +3,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
@@ -160,10 +161,11 @@ public class Git {
 		run = new JButton("run");
 		panel.add(run,new XYWidthHeight(0,1,15,1));
 		
-		frame.add(panel);
+frame.add(panel);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
+		Dimension packedSize = frame.getSize();
 		frame.setLocation(980,0);
 		frame.setVisible(true);
 		/*
@@ -174,11 +176,19 @@ public class Git {
 		** up being the position that stays. On Windows the frame is already
 		** where it was asked to be, and setting the same point again does
 		** nothing.
+		**
+		** Also fix the size in case the window manager resizes it.
 		*/
-		javax.swing.Timer fixlocation = new javax.swing.Timer(500, (ev) -> frame.setLocation(980,0));
+		javax.swing.Timer fixlocation = new javax.swing.Timer(500, (ev) -> {
+			frame.setLocation(980,0);
+			frame.setSize(packedSize);
+		});
 		fixlocation.setRepeats(false);
 		fixlocation.start();
-		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> frame.setLocation(980,0));
+		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> {
+			frame.setLocation(980,0);
+			frame.setSize(packedSize);
+		});
 		fixlocation2.setRepeats(false);
 		fixlocation2.start();
 	}
@@ -236,19 +246,16 @@ public class Git {
 			git(input.getText(),root_directory);
 		});
 		switch2_branch.addActionListener( (ev) -> {
-			Thread thread = new Thread( () -> {
+			SwingUtilities.invokeLater( () -> {
 				String mainbranch = getMainBranch();
 				String whichbranch = whichBranchOpened();
 				String whichfolderopened=whichFolderOpened();
 				if(whichbranch.equals(whichfolderopened)) {
-					//substring = "master";
 					gitWaitUntilFinish("git switch "+mainbranch,root_directory);
-					//getBranchAndSetTitle();
 				}
 				else {
 					if(isBranch(whichfolderopened)) {
 						gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
-						//getBranchAndSetTitle();
 					}
 					else
 					{
@@ -269,21 +276,22 @@ public class Git {
 							String selectedbranch = (String)combobox.getSelectedItem();
 							
 							gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
-							//getBranchAndSetTitle();
 							selectbranch.dispose();
 						});
 						selectpanel.add(openbranch);
 	
 						selectbranch.add(selectpanel);
-						selectbranch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						selectbranch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						selectbranch.pack();
-						
+						Dimension selectPackedSize = selectbranch.getSize();
+						selectbranch.setLocationRelativeTo(frame);
 						selectbranch.setVisible(true);
+						javax.swing.Timer fixSelectSize = new javax.swing.Timer(500, (ev3) -> selectbranch.setSize(selectPackedSize));
+						fixSelectSize.setRepeats(false);
+						fixSelectSize.start();
 					}
 				}
 			});
-			thread.start();
-			
 		});
 	}
 	public void gitWaitUntilFinish(String command) {
