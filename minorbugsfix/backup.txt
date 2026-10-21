@@ -4170,9 +4170,9 @@
     "isLocked": true,
     "lockedStartupClass": "Git",
     "startupcombobox": [
-      "Main",
       "CommandLine",
-      "Git"
+      "Git",
+      "Main"
     ],
     "starterclass": "Main",
     "jars": [
@@ -4182,7 +4182,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 25349
+    "caretposition": 25561
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\ComponentGridBagConstraints.java": {
     "isLocked": false,
