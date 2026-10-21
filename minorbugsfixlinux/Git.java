@@ -161,41 +161,26 @@ public void setLayout() {
 		run = new JButton("run");
 		panel.add(run,new XYWidthHeight(0,1,15,1));
 		
-		frame.add(panel);
+		/*
+		** The panel is put inside a holder instead of being added straight to
+		** the content pane. A panel that sits straight in the content pane is
+		** given the top inset of the window as extra padding, so that its
+		** first row does not sit flush against the title bar. The window
+		** manager only tells Java how big that inset is after the window is
+		** on the screen, so the padding is there for the first window of the
+		** program and missing for every window after that, and the same
+		** window comes out a different height depending on which one it is.
+		** The holder is not the content pane, so no padding is added and the
+		** height is the same every time. The frame already keeps the border
+		** of the window away from the panel, so nothing is lost by it.
+		*/
+		JPanel holder = new JPanel(new BorderLayout());
+		holder.add(panel,BorderLayout.CENTER);
+		frame.getContentPane().add(holder,BorderLayout.CENTER);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
 		frame.setLocation(980,0);
-		
-		// Register listeners BEFORE making visible
-		final Dimension[] packedSize = new Dimension[1];
-		frame.addComponentListener(new java.awt.event.ComponentAdapter() {
-			public void componentResized(java.awt.event.ComponentEvent e) {
-				if (packedSize[0] != null && !frame.getSize().equals(packedSize[0])) {
-					frame.setSize(packedSize[0]);
-				}
-			}
-			public void componentMoved(java.awt.event.ComponentEvent e) {
-				if (frame.getX() != 980 || frame.getY() != 0) {
-					frame.setLocation(980, 0);
-				}
-			}
-		});
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowOpened(java.awt.event.WindowEvent e) {
-				// Capture the correct size after window is opened and laid out
-				packedSize[0] = frame.getSize();
-				frame.setMinimumSize(packedSize[0]);
-				frame.setPreferredSize(packedSize[0]);
-				frame.setMaximumSize(packedSize[0]);
-			}
-		});
-		
 		frame.pack();
-		packedSize[0] = frame.getSize();
-		frame.setMinimumSize(packedSize[0]);
-		frame.setPreferredSize(packedSize[0]);
-		frame.setMaximumSize(packedSize[0]);
 		frame.setVisible(true);
 		/*
 		** The Linux window manager moves the window when it first appears and
@@ -206,33 +191,38 @@ public void setLayout() {
 		** where it was asked to be, and setting the same point again does
 		** nothing.
 		**
-		** Also fix the size in case the window manager resizes it.
+		** The size is put right as well, because the window manager can also
+		** change that, and the size of the border of the window is only known
+		** once the window is on the screen.
 		*/
 		javax.swing.Timer fixlocation = new javax.swing.Timer(500, (ev) -> {
 			frame.setLocation(980,0);
-			if (packedSize[0] != null) frame.setSize(packedSize[0]);
+			fixFrameSize();
 		});
 		fixlocation.setRepeats(false);
 		fixlocation.start();
 		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> {
 			frame.setLocation(980,0);
-			if (packedSize[0] != null) frame.setSize(packedSize[0]);
+			fixFrameSize();
 		});
 		fixlocation2.setRepeats(false);
 		fixlocation2.start();
-		// Additional timers to fight persistent window manager resizing
-		javax.swing.Timer fixlocation3 = new javax.swing.Timer(2000, (ev) -> {
-			frame.setLocation(980,0);
-			if (packedSize[0] != null) frame.setSize(packedSize[0]);
-		});
-		fixlocation3.setRepeats(false);
-		fixlocation3.start();
-		javax.swing.Timer fixlocation4 = new javax.swing.Timer(5000, (ev) -> {
-			frame.setLocation(980,0);
-			if (packedSize[0] != null) frame.setSize(packedSize[0]);
-		});
-		fixlocation4.setRepeats(false);
-		fixlocation4.start();
+	}
+	/*
+	** Puts the window to the size that the panel inside it asks for, plus the
+	** border of the window. The border is only known once the window is on the
+	** screen, so the window is packed before that and put right afterwards.
+	*/
+	public void fixFrameSize() {
+		if(frame == null) return;
+		java.awt.Insets insets = frame.getInsets();
+		Dimension preferred = frame.getContentPane().getPreferredSize();
+		if((preferred.width <= 0) || (preferred.height <= 0)) return;
+		Dimension wanted = new Dimension(preferred.width+insets.left+insets.right,
+											preferred.height+insets.top+insets.bottom);
+		if(!frame.getSize().equals(wanted)) {
+			frame.setSize(wanted);
+		}
 	}
 	public void setListeners() {
 		seeallchanges.addActionListener((ev) -> {
@@ -324,47 +314,19 @@ public void setLayout() {
 	
 						selectbranch.add(selectpanel);
 						selectbranch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						selectbranch.setResizable(false);
 						selectbranch.setLocationRelativeTo(frame);
-						
-						final Dimension[] selectPackedSize = new Dimension[1];
-						selectbranch.addComponentListener(new java.awt.event.ComponentAdapter() {
-							public void componentResized(java.awt.event.ComponentEvent e) {
-								if (selectPackedSize[0] != null && !selectbranch.getSize().equals(selectPackedSize[0])) {
-									selectbranch.setSize(selectPackedSize[0]);
-								}
-							}
-						});
-						selectbranch.addWindowListener(new java.awt.event.WindowAdapter() {
-							public void windowOpened(java.awt.event.WindowEvent e) {
-								selectPackedSize[0] = selectbranch.getSize();
-								selectbranch.setMinimumSize(selectPackedSize[0]);
-								selectbranch.setPreferredSize(selectPackedSize[0]);
-								selectbranch.setMaximumSize(selectPackedSize[0]);
-							}
-						});
-						
 						selectbranch.pack();
-						selectPackedSize[0] = selectbranch.getSize();
-						selectbranch.setMinimumSize(selectPackedSize[0]);
-						selectbranch.setPreferredSize(selectPackedSize[0]);
-						selectbranch.setMaximumSize(selectPackedSize[0]);
 						selectbranch.setVisible(true);
 						javax.swing.Timer fixSelectSize = new javax.swing.Timer(500, (ev3) -> {
-							if (selectPackedSize[0] != null) selectbranch.setSize(selectPackedSize[0]);
+							java.awt.Insets insets = selectbranch.getInsets();
+							Dimension preferred = selectbranch.getContentPane().getPreferredSize();
+							if((preferred.width > 0) && (preferred.height > 0)) {
+								selectbranch.setSize(new Dimension(preferred.width+insets.left+insets.right,
+																preferred.height+insets.top+insets.bottom));
+							}
 						});
 						fixSelectSize.setRepeats(false);
 						fixSelectSize.start();
-						javax.swing.Timer fixSelectSize2 = new javax.swing.Timer(900, (ev3) -> {
-							if (selectPackedSize[0] != null) selectbranch.setSize(selectPackedSize[0]);
-						});
-						fixSelectSize2.setRepeats(false);
-						fixSelectSize2.start();
-						javax.swing.Timer fixSelectSize3 = new javax.swing.Timer(2000, (ev3) -> {
-							if (selectPackedSize[0] != null) selectbranch.setSize(selectPackedSize[0]);
-						});
-						fixSelectSize3.setRepeats(false);
-						fixSelectSize3.start();
 					}
 				}
 			});
