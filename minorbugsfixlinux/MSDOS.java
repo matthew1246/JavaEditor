@@ -27,7 +27,9 @@ public class MSDOS {
 		panel.add(exp);
 		frame.getContentPane().add(panel);
 		frame.pack();
-		frame.setLocation(1210,100);
+		SwingUtilities.invokeLater(() -> {
+			frame.setLocation(1210,100);
+		});
 		frame.setVisible(true);
 	}
 	public void setListeners() {

@@ -4284,7 +4284,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 697
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\msdos.java": {
     "isLocked": true,
