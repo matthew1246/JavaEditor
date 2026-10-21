@@ -166,8 +166,27 @@ public void setLayout() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		Dimension packedSize = frame.getSize();
+		// Constrain size so window manager can't resize it
+		frame.setMinimumSize(packedSize);
+		frame.setPreferredSize(packedSize);
+		frame.setMaximumSize(packedSize);
+		frame.setResizable(false);
 		frame.setLocation(980,0);
 		frame.setVisible(true);
+		
+		// ComponentListener to immediately restore size if window manager changes it
+		frame.addComponentListener(new java.awt.event.ComponentAdapter() {
+			public void componentResized(java.awt.event.ComponentEvent e) {
+				if (!frame.getSize().equals(packedSize)) {
+					frame.setSize(packedSize);
+				}
+			}
+			public void componentMoved(java.awt.event.ComponentEvent e) {
+				if (frame.getX() != 980 || frame.getY() != 0) {
+					frame.setLocation(980, 0);
+				}
+			}
+		});
 		/*
 		** The Linux window manager moves the window when it first appears and
 		** drops the position that was asked for before that. Setting it again
@@ -191,6 +210,19 @@ public void setLayout() {
 		});
 		fixlocation2.setRepeats(false);
 		fixlocation2.start();
+		// Additional timers to fight persistent window manager resizing
+		javax.swing.Timer fixlocation3 = new javax.swing.Timer(2000, (ev) -> {
+			frame.setLocation(980,0);
+			frame.setSize(packedSize);
+		});
+		fixlocation3.setRepeats(false);
+		fixlocation3.start();
+		javax.swing.Timer fixlocation4 = new javax.swing.Timer(5000, (ev) -> {
+			frame.setLocation(980,0);
+			frame.setSize(packedSize);
+		});
+		fixlocation4.setRepeats(false);
+		fixlocation4.start();
 	}
 	public void setListeners() {
 		seeallchanges.addActionListener((ev) -> {
@@ -284,11 +316,28 @@ public void setLayout() {
 						selectbranch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						selectbranch.pack();
 						Dimension selectPackedSize = selectbranch.getSize();
+						selectbranch.setMinimumSize(selectPackedSize);
+						selectbranch.setPreferredSize(selectPackedSize);
+						selectbranch.setMaximumSize(selectPackedSize);
+						selectbranch.setResizable(false);
 						selectbranch.setLocationRelativeTo(frame);
 						selectbranch.setVisible(true);
+						selectbranch.addComponentListener(new java.awt.event.ComponentAdapter() {
+							public void componentResized(java.awt.event.ComponentEvent e) {
+								if (!selectbranch.getSize().equals(selectPackedSize)) {
+									selectbranch.setSize(selectPackedSize);
+								}
+							}
+						});
 						javax.swing.Timer fixSelectSize = new javax.swing.Timer(500, (ev3) -> selectbranch.setSize(selectPackedSize));
 						fixSelectSize.setRepeats(false);
 						fixSelectSize.start();
+						javax.swing.Timer fixSelectSize2 = new javax.swing.Timer(900, (ev3) -> selectbranch.setSize(selectPackedSize));
+						fixSelectSize2.setRepeats(false);
+						fixSelectSize2.start();
+						javax.swing.Timer fixSelectSize3 = new javax.swing.Timer(2000, (ev3) -> selectbranch.setSize(selectPackedSize));
+						fixSelectSize3.setRepeats(false);
+						fixSelectSize3.start();
 					}
 				}
 			});
