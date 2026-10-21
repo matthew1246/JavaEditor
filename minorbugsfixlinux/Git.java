@@ -138,12 +138,8 @@ public class Git {
 	public JButton switch2_branch;
 	
 	public JButton reset;
-	public void setLayout() {
+public void setLayout() {
 		frame=new JFrame();
-		frame.setSize(new Dimension(550,100));
-		frame.setPreferredSize(new Dimension(550,100));
-		frame.setMinimumSize(new Dimension(550,100));
-		frame.setMaximumSize(new Dimension(550,100));
 		JPanel panel=new JPanel();
 		panel.setLayout(new MatthewLayout());
 		input.setText("git status");
@@ -165,17 +161,11 @@ public class Git {
 		run = new JButton("run");
 		panel.add(run,new XYWidthHeight(0,1,15,1));
 		
-frame.add(panel);
+		frame.add(panel);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setSize(550,100);
 		frame.pack();
-		frame.validate();
-		frame.invalidate();
-		frame.revalidate();
-		frame.repaint();
-
-		//Dimension packedSize = frame.getSize();
+		Dimension packedSize = frame.getSize();
 		frame.setLocation(980,0);
 		frame.setVisible(true);
 		/*
@@ -191,17 +181,13 @@ frame.add(panel);
 		*/
 		javax.swing.Timer fixlocation = new javax.swing.Timer(500, (ev) -> {
 			frame.setLocation(980,0);
-			frame.pack();
-			frame.validate();
-			frame.repaint();
+			frame.setSize(packedSize);
 		});
 		fixlocation.setRepeats(false);
 		fixlocation.start();
 		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> {
 			frame.setLocation(980,0);
-			frame.pack();
-			frame.validate();
-			frame.repaint();
+			frame.setSize(packedSize);
 		});
 		fixlocation2.setRepeats(false);
 		fixlocation2.start();
