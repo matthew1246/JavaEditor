@@ -423,12 +423,12 @@ public void setLayout() {
 						openLinuxBashWindow(script);
 					}
 					*/
-					ProcessBuilder processbuilder=new ProcessBuilder("bash","-c",command);
+					ProcessBuilder processbuilder=new ProcessBuilder("bash","-c",command+"; exec bash");
 					processbuilder.redirectErrorStream(true);
 					if(directory != null)
 						processbuilder.directory(new File(directory));
 					
-					Process process=processbuilder.start();
+					processbuilder.start();
 					/*DisplayOutput displayoutput = new DisplayOutput();
 					String substring = displayoutput.Multiline(process);
 					System.out.println(substring);
