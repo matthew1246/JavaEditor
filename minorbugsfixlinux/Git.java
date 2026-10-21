@@ -424,6 +424,7 @@ public void setLayout() {
 					}
 					*/
 					ProcessBuilder processbuilder=new ProcessBuilder("bash","-c",command+"; exec bash");
+					processbuilder.inheritIO();
 					processbuilder.redirectErrorStream(true);
 					if(directory != null)
 						processbuilder.directory(new File(directory));
