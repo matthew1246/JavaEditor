@@ -428,7 +428,10 @@ public void setLayout() {
 					if(directory != null)
 						processbuilder.directory(new File(directory));
 					
-					processbuilder.start();
+					Process process=processbuilder.start();
+					DisplayOutput displayoutput = new DisplayOutput();
+					String substring = displayoutput.Multiline(process);
+					System.out.println(substring);
 				} catch(IOException ex) {
 					ex.printStackTrace();
 					showGitWindowError("Couldn't open a bash window: "+ex.getMessage());
