@@ -117,7 +117,7 @@ public class Control_F {
 			}
 		}
 		else {
-			String dir =main.fileName.replaceAll("[^\\\\]+\\.java","");
+			String dir =Platform.directoryOf(main.fileName);
 			while(liveiterator.hasNext()) {
 				try {
 					if(z == 0)
@@ -331,7 +331,7 @@ public class Control_F {
 			}
 		}
 		else {
-			String dir =main.fileName.replaceAll("[^\\\\]+\\.java","");
+			String dir =Platform.directoryOf(main.fileName);
 			while(liveiterator.hasNext()) {
 				try {
 					if(z == 0)
@@ -371,7 +371,7 @@ public class Control_F {
 										z = 0;
 									}
 									break;
-								}
+								}
 							}
 							if(i == (lines.length-1) )
 								z = 0;

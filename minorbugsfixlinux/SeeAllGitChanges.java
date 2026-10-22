@@ -25,6 +25,45 @@ public class SeeAllGitChanges {
 	public JTextPane fileChanges;
 	public Style bold,red,green,yellow,cyan;
 	public JButton gitStatus,gitDiff;
+	/*
+	** Runs a git command in the repository and gives the output of it back.
+	** When the command could not be run at all, a message is given back
+	** instead of the output.
+	*/
+	public String runGit(String[] arguments) {
+		CommandLine commandline = new CommandLine();
+		Process process = commandline.run(arguments,directory);
+		return outputOf(process);
+	}
+	public String runGit(String command) {
+		CommandLine commandline = new CommandLine();
+		Process process = commandline.run(command,directory);
+		return outputOf(process);
+	}
+	public String outputOf(Process process) {
+		if(process == null) {
+			return "Git could not be run.";
+		}
+		DisplayOutput displayoutput = new DisplayOutput();
+		String output = displayoutput.Multiline(process);
+		try {
+			process.waitFor();
+		} catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
+		return output;
+	}
+	/*
+	** A line that tells that git failed is not a commit, so it is not put
+	** into the list of commits.
+	*/
+	public boolean isErrorLine(String line) {
+		if(line == null) {
+			return true;
+		}
+		String trimmed=line.trim();
+		return trimmed.equals("") || trimmed.startsWith("fatal:") || trimmed.startsWith("error:");
+	}
 	public void setLayout() {
 		frame = new JFrame();
 		frame.setSize(800,600);
@@ -32,14 +71,12 @@ public class SeeAllGitChanges {
 		combobox2=new JComboBox<String>();
 		combobox1.addItem("<<Select which git commit title for file changes>>");
 		combobox2.addItem("<<Select which git commit title for content changes>>");
-		CommandLine commandline = new CommandLine();
-		String[] command={"git","log","--format=%h %s"};
-		//Process process = commandline.run("git log --format=\"%h %s\"",directory);
-		Process process=commandline.run(command,directory);
-		DisplayOutput displayoutput = new DisplayOutput();
-		String multiline = displayoutput.Multiline(process);
+		String multiline = runGit(new String[]{"git","log","--format=%h %s"});
 		String[] lines = multiline.split("\\r?\\n|\\r");
 		for(String line : lines) {
+			if(isErrorLine(line)) {
+				continue;
+			}
 			combobox1.addItem(line);
 			combobox2.addItem(line);
 		}
@@ -82,11 +119,8 @@ public class SeeAllGitChanges {
 			String selected = (String)combobox1.getSelectedItem();
 			if(selected == null || selected.equals("No output.") || selected.startsWith("<<")) return;
 			String hash = selected.split(" ")[0];
-			CommandLine commandline = new CommandLine();
-			Process process = commandline.run("git diff-tree --no-commit-id -r --name-only " + hash,directory);
-			DisplayOutput displayoutput = new DisplayOutput();
-			String files = displayoutput.Multiline(process);
-			if(files.equals("No output.")) {
+			String files = runGit("git diff-tree --no-commit-id -r --name-only " + hash);
+			if(files.equals("No output.") || isErrorLine(files)) {
 				fileChanges.setText("");
 			} else {
 				fileChanges.setText(files);
@@ -97,11 +131,8 @@ public class SeeAllGitChanges {
 			String selected = (String)combobox2.getSelectedItem();
 			if(selected == null || selected.equals("No output.") || selected.startsWith("<<")) return;
 			String hash = selected.split(" ")[0];
-			CommandLine commandline = new CommandLine();
-			Process process = commandline.run("git show --color=always " + hash,directory);
-			DisplayOutput displayoutput = new DisplayOutput();
-			String files = displayoutput.Multiline(process);
-			if(files.equals("No output.")) {
+			String files = runGit("git show --color=always " + hash);
+			if(files.equals("No output.") || isErrorLine(files)) {
 				fileChanges.setText("");
 			} else {
 				appendAnsiColoredText(files);
@@ -109,11 +140,8 @@ public class SeeAllGitChanges {
 			fileChanges.setCaretPosition(0);
 		});
 		gitStatus.addActionListener((ev) -> {
-			CommandLine commandline = new CommandLine();
-			Process process = commandline.run("git status",directory);
-			DisplayOutput displayoutput = new DisplayOutput();
-			String output = displayoutput.Multiline(process);
-			if(output.equals("No output.")) {
+			String output = runGit("git status");
+			if(output.equals("No output.") || isErrorLine(output)) {
 				fileChanges.setText("");
 			} else {
 				fileChanges.setText(output);
@@ -121,11 +149,8 @@ public class SeeAllGitChanges {
 			fileChanges.setCaretPosition(0);
 		});
 		gitDiff.addActionListener((ev) -> {
-			CommandLine commandline = new CommandLine();
-			Process process = commandline.run("git diff --color=always",directory);
-			DisplayOutput displayoutput = new DisplayOutput();
-			String output = displayoutput.Multiline(process);
-			if(output.equals("No output.")) {
+			String output = runGit("git diff --color=always");
+			if(output.equals("No output.") || isErrorLine(output)) {
 				fileChanges.setText("");
 			} else {
 				appendAnsiColoredText(output);

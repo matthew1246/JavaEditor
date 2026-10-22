@@ -10,7 +10,7 @@ public class NoDuplicate {
 	IsEqual isequal = new IsEqual();
 	private String getBackupDir() {
 		String userDir = System.getProperty("user.dir");
-		if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
+		if(Platform.isRootDirectory(userDir)) {
 			return System.getProperty("user.home");
 		}
 		return userDir;

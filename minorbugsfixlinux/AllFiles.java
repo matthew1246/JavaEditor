@@ -23,12 +23,8 @@ public class AllFiles {
 	public boolean isSameDirectory(Main main2) {
 		try {	
 			String filename=AllFiles.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-			String dir2 = filename.replaceAll("[^/]+\\.jar","");
-			if(dir2.startsWith("/"))
-				dir2=dir2.substring(1,dir2.length());
-			dir2=dir2.replace("/","\\");
-		
-			String filename2 =filename.replaceAll(".+/","");
+			String dir2 = Platform.directoryOf(filename);
+			String filename2 = Platform.fileNameOf(filename);
 			if(dir.equals(dir2)) {
 				filename2=dir+filename2;	
 				if(filename2.endsWith(".jar") && !files.contains(filename2))
@@ -41,15 +37,12 @@ public class AllFiles {
 			else {
 				JOptionPane.showMessageDialog(null,dir+" "+dir2);
 				dir=Main.getDirectory(main2.fileName);
-				if(filename.startsWith("/"))
-					filename=filename.substring(1,filename.length());
-				filename=filename.replace("/","\\");
 				dir2=Main.getDirectory(filename);
 				if(dir.equals(dir2)) {
 					filename2=dir+filename2;	
 					if(filename2.endsWith(".jar") && !files.contains(filename2))
 						files.add(filename2);
-						
+					
 					return true;
 				}
 				else {

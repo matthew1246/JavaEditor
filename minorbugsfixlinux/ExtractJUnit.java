@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.io.IOException;
 public class ExtractJUnit {
 	public boolean isDriveRoot(String dir) {
-		return dir.matches("^[A-Za-z]:\\\\+$");
+		return Platform.isRootDirectory(dir);
 	}
 	public boolean canWriteToDriveRoot(String dir) {
 		try {
@@ -28,7 +28,7 @@ public class ExtractJUnit {
 				command="Start-Process '"+exePath+"' -Verb RunAs";
 			}
 			else {
-				String javaBin=System.getProperty("java.home")+"\\bin\\java.exe";
+				String javaBin=Platform.javaTool("java");
 				String classpath=System.getProperty("java.class.path");
 				if(classpath == null || classpath.trim().isEmpty())
 					classpath=getCodeSourcePath();
@@ -90,7 +90,7 @@ public class ExtractJUnit {
 			String classpath=System.getProperty("java.class.path");
 			if(classpath == null || classpath.trim().isEmpty())
 				return null;
-			String first=classpath.split(";")[0];
+			String first=classpath.split(java.util.regex.Pattern.quote(java.io.File.pathSeparator))[0];
 			java.io.File cpfile=new java.io.File(first);
 			java.io.File appdir=cpfile.isFile() ? cpfile.getParentFile() : null;
 			if(appdir == null)
@@ -121,20 +121,24 @@ public class ExtractJUnit {
 			else { // packager.isInRightFolders() == true
 				dir=packager.classpath;
 			}
-			if(!dir.endsWith("\\"))
-				dir=dir+"\\";
+			if(!dir.endsWith(Platform.separator()))
+				dir=dir+Platform.separator();
 			Path outputpath=Paths.get(dir+jar);
 			if(Files.exists(outputpath))
 				return;
 			boolean needsAdmin = isDriveRoot(dir) || !canWriteToDriveRoot(dir);
 
-			String resPath = ExtractJUnit.class.getPackage().getName().replace('.','/') + "/" + jar;
+			Package pack = ExtractJUnit.class.getPackage();
+			String resPath = (pack == null ? "" : pack.getName().replace('.','/')+"/") + jar;
 			String jarPath = "";
 			try {
 				java.net.URI jarUri = ExtractJUnit.class.getProtectionDomain().getCodeSource().getLocation().toURI();
-				jarPath = jarUri.getPath();
-				if(jarPath.startsWith("/"))
-					jarPath=jarPath.substring(1,jarPath.length());
+				/*
+				** The file of the location is used instead of the path of the
+				** uri, because the path of the uri has a slash in front of it
+				** on Windows that is not part of the path.
+				*/
+				jarPath = new java.io.File(jarUri).getPath();
 			} catch(Exception ex) {}
 
 			if(!jarPath.isEmpty()) {
@@ -194,6 +198,27 @@ public class ExtractJUnit {
 		}
 	}
 	public boolean elevatedCopy(Path source, Path outputpath) {
+		if(!Platform.isWindows()) {
+			/*
+			** Linux has no administrator rights that work the same way as they
+			** do on Windows. The copy is done with pkexec when that is there,
+			** and without it when it is not.
+			*/
+			try {
+				if(Platform.commandExists("pkexec")) {
+					ProcessBuilder pb=new ProcessBuilder("pkexec","cp",source.toString(),outputpath.toAbsolutePath().toString());
+					pb.redirectErrorStream(true);
+					Process process=pb.start();
+					process.waitFor();
+					return Files.exists(outputpath);
+				}
+				Files.copy(source,outputpath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+				return true;
+			} catch(Exception ex) {
+				ex.printStackTrace();
+				return false;
+			}
+		}
 		try {
 			String copyCommand = "Copy-Item -LiteralPath '"+singleQuote(source.toString())+"' -Destination '"+singleQuote(outputpath.toAbsolutePath().toString())+"' -Force\r\nif ($?) { exit 0 } else { Write-Error 'Copy failed'; exit 1 }";
 			String encoded = java.util.Base64.getEncoder().encodeToString(copyCommand.getBytes("UTF-16LE"));

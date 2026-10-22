@@ -2,10 +2,37 @@ import java.io.*;
 import javax.swing.JOptionPane;
 public class DisplayOutput {
 	/*
+	** This gets all the output of a command as one string. The error output
+	** of the command is mixed into the output of the command, because the
+	** commands are started with the error output redirected into the output.
+	** An empty string is given when the command had no output at all.
+	*/
+	public String All(Process process) {
+		if(process == null) {
+			return "";
+		}
+		try {
+			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			StringBuilder lines = new StringBuilder();
+			String line = input.readLine();
+			while(line != null) {
+				if(lines.length() > 0) {
+					lines.append("\n");
+				}
+				lines.append(line);
+				line = input.readLine();
+			}
+			return lines.toString();
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+			return "";
+		}
+	}
+	/*
 	** This gets all multiline output from MSDOS command
 	*/
-	public void From(Process process) {
-		try {
+	public void From(Process process) {		try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String lines = input.readLine();
 			if(lines != null) {
@@ -29,6 +56,9 @@ public class DisplayOutput {
 	** This displays all multiline output from MSDOS command.
 	*/
 	public String Multiline(Process process) {
+		if(process == null) {
+			return "No output.";
+		}
 		try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String lines = input.readLine();
@@ -58,7 +88,9 @@ while ((error = err.readLine()) != null) {
 		}
 	}
 	public String OneLine(Process process) {
-		
+		if(process == null) {
+			return "line is null";
+		}
 try {
 			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String line = input.readLine();

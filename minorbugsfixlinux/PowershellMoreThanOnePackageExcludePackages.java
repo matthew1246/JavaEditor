@@ -30,16 +30,21 @@ public class PowershellMoreThanOnePackageExcludePackages extends PowershellMoreT
 				main_class2 = splited[splited.length-1];
 			}
 			String createFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
-			if(!createFolder.endsWith("\\"))
-				createFolder=createFolder+"\\";
+			if(!createFolder.endsWith(Platform.separator()))
+				createFolder=createFolder+Platform.separator();
 			JOptionPane.showMessageDialog(null,"Output jar location is:"+createFolder);
 			main_class2=filename.getJarFileName(javaversionnumber);
-			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createFolder+main_class2+".jar mf.txt");
+			if(Platform.isWindows()) {
+				output2.write("START /B /WAIT cmd.exe /c "+Platform.quote(Platform.javaTool("jar"))+" cfm "+createFolder+main_class2+".jar mf.txt");
+			}
+			else {
+				output2.write(Platform.quote(Platform.javaTool("jar"))+" cfm "+createFolder+main_class2+".jar mf.txt");
+			}
 			main_class2=createFolder+main_class2;
 			for(String relative:includedFolders) {
 				output2.write(" -C "+classpath+" "+relative);
 			}
-			if(new File(classpath+"\\jars").exists()) {
+			if(new File(classpath+Platform.separator()+"jars").exists()) {
 				output2.write(" -C jars .");
 			}
 			output2.write("\n");

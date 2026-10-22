@@ -26,13 +26,13 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 		this.ev4 = ev4;
 		packager=new Packager(main);
 		if(!packager.containsPackage() || !packager.isInRightFolders()) {
-			dir = fileName.replaceAll("[^\\\\]+\\.java","");
+			dir = Platform.directoryOf(fileName);
 		}
 		else {
 			dir=packager.classpath;
 		}
-		if(!dir.endsWith("\\"))
-			dir=dir+"\\";
+		if(!dir.endsWith(Platform.separator()))
+			dir=dir+Platform.separator();
 	}
 	public String getDir() {
 		return dir;
@@ -52,7 +52,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 			for(String jar:jars) {
 				try {
 					// jar = main.getFileName(jar);
-					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+					Process process=commandline.run(Platform.quote(Platform.javaTool("jar"))+" xf "+jar,dir);
 					process.waitFor();
 					//output.write(" "+jar);
 				} catch (InterruptedException ex) {
@@ -66,7 +66,7 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 		String main_string=preferences.starterclass;
 		if(!fileName.equals("")) {
 			if(main_string.equals("")) {
-				main_string=fileName.replaceAll(".+\\\\","");
+				main_string=Platform.fileNameOf(fileName);
 				main_string = main_string.replaceAll("\\.java","");
 			}
 			storeselectedfile.set(fileName);
@@ -81,21 +81,31 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 	}
 	public void WriteManifest(String main_class) {
 		try {
-			if(dir.endsWith("\\\\"))
+			while(dir.endsWith(Platform.separator()) && dir.length() > 1) {
 				dir=dir.substring(0,dir.length()-1);
-			if(!dir.endsWith("\\"))
-				dir=dir+"\\";
-			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+			}
+			if(!dir.endsWith(Platform.separator()))
+				dir=dir+Platform.separator();
+			if(Platform.isRootDirectory(dir)) {
 				System.out.println("dir3:"+dir);
 				CommandLine commandline = new CommandLine();
-				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"writemf.bat");
+				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"writemf"+Platform.scriptExtension());
 				java.io.FileWriter batwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
 				java.io.BufferedWriter batoutput = new java.io.BufferedWriter(batwriter);
-				batoutput.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"");
-				batoutput.write("\n");
-				batoutput.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"");
+				if(Platform.isWindows()) {
+					batoutput.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"");
+					batoutput.write("\n");
+					batoutput.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"");
+				}
+				else {
+					batoutput.write("#!/bin/sh");
+					batoutput.write("\n");
+					batoutput.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"");
+					batoutput.write("\n");
+					batoutput.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"");
+				}
 				batoutput.close();
-				String liney = "powershell -Command Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+tempfile.getAbsolutePath()+"\"'";
+				String liney = Platform.scriptRunCommand(tempfile.getAbsolutePath());
 				System.out.println(liney);
 				commandline.run(liney, dir);
 			}
@@ -125,37 +135,27 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 		try {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
-			
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
-		
+
+			String input = Platform.quote(Platform.javaTool("jar"))+" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
+
 			JOptionPane.showMessageDialog(null,input);
 			Process process;
 			CommandLine commandline =new CommandLine();
-			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+			if(Platform.isRootDirectory(dir)) {
 				process=commandline.runAsAdmin(input,dir);
 			}
 			else {
 				process=commandline.run(input,dir);
 			}
-			
-			java.io.InputStream inputstream = process.getErrorStream();
-			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);
-			java.io.BufferedReader bufferedreader = new java.io.BufferedReader(inputstreamreader);
-			String line = bufferedreader.readLine();
-			if(line == null) {
+
+			String output = new DisplayOutput().All(process);
+			if(output.equals("")) {
 				JOptionPane.showMessageDialog(null,"jar created");
 			}
 			else {
-				String lines = line;
-				while(true) {
-					line = bufferedreader.readLine();
-					if(line == null)
-						break;
-					lines = lines+"\n"+line;
-				}
-				JOptionPane.showMessageDialog(null,lines);
+				JOptionPane.showMessageDialog(null,output);
 			}
-		} catch (java.io.IOException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}

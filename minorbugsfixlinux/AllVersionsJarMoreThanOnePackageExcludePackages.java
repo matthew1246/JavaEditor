@@ -30,7 +30,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		classpath = packager.classpath;
 		if(classpath == null || classpath.equals(""))
 			classpath = getDir();
-		if(classpath.endsWith("\\"))
+		if(classpath.endsWith(Platform.separator()))
 			classpath = classpath.substring(0,classpath.length()-1);
 		includedFolders = selectIncludedFolders();
 	}
@@ -46,13 +46,13 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		Preferences preferences=storeselectedfile.get(fileName);
 		if(!fileName.equals("")) {
 			java.util.List<String> jars = preferences.jars;
-			File createdir = new File(classpath+"\\jars");
+			File createdir = new File(classpath+Platform.separator()+"jars");
 			if(!createdir.exists()) {
 				createdir.mkdir();
 			}
 			for(String jar:jars) {
 				try {
-					Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,classpath+"\\jars");
+					Process process=commandline.run(Platform.quote(Platform.javaTool("jar"))+" xf "+jar,classpath+Platform.separator()+"jars");
 					process.waitFor();
 				} catch(InterruptedException ex) {
 					ex.printStackTrace();
@@ -70,7 +70,7 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 		}
 		String pkgPath = pkg.getAbsolutePath();
 		String folderPath = folder.getAbsolutePath();
-		return pkgPath.equals(folderPath) || pkgPath.startsWith(folderPath+"\\") || pkgPath.startsWith(folderPath+"/");
+		return pkgPath.equals(folderPath) || pkgPath.startsWith(folderPath+Platform.separator()) || pkgPath.startsWith(folderPath+"/");
 	}
 	private void addAllDescendantFolders(File dir,List<File> list) {
 		File[] subfolders = dir.listFiles(File::isDirectory);
@@ -223,48 +223,38 @@ public class AllVersionsJarMoreThanOnePackageExcludePackages extends AllVersions
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
 			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(getDir());
-			if(!jarFolder.endsWith("\\"))
-				jarFolder=jarFolder+"\\";
+			if(!jarFolder.endsWith(Platform.separator()))
+				jarFolder=jarFolder+Platform.separator();
 			JOptionPane.showMessageDialog(null,"Output jar location is:"+jarFolder);
 			
 			main_class2=filename.getJarFileName(javaversionnumber);
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+jarFolder+"\\"+main_class2+".jar mf.txt";
+			String input = Platform.quote(Platform.javaTool("jar"))+" cfm "+jarFolder+Platform.separator()+main_class2+".jar mf.txt";
 			for(String relative:includedFolders) {
 				input = input+" -C "+classpath+" "+relative;
 			}
-			if(new File(classpath+"\\jars").exists()) {
+			if(new File(classpath+Platform.separator()+"jars").exists()) {
 				input = input+" -C jars .";
 			}
-		
+
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
-			
+
 			Process process;
-			if(getDir().replace("\\","").matches("[a-zA-Z]:")) {
+			if(Platform.isRootDirectory(getDir())) {
 				process=commandline.runAsAdmin(input,getDir());
 			}
 			else {
 				process=commandline.run(input,getDir());
 			}
-			
-			java.io.InputStream inputstream = process.getErrorStream();
-			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);
-			java.io.BufferedReader bufferedreader = new java.io.BufferedReader(inputstreamreader);
-			String line = bufferedreader.readLine();
-			if(line == null) {
+
+			String output = new DisplayOutput().All(process);
+			if(output.equals("")) {
 				JOptionPane.showMessageDialog(null,"jar created");
 			}
 			else {
-				String lines = line;
-				while(true) {
-					line = bufferedreader.readLine();
-					if(line == null)
-						break;
-					lines = lines+"\n"+line;
-				}
-				JOptionPane.showMessageDialog(null,lines);
+				JOptionPane.showMessageDialog(null,output);
 			}
-		} catch (java.io.IOException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}

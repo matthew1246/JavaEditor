@@ -18,7 +18,7 @@ public class MSDOS {
 		
 		JPanel panel = new JPanel();
 		input =	new JTextField(17);
-		input.setText("del backup.txt");
+		input.setText(Platform.isWindows() ? "del backup.txt" : "rm backup.txt");
 		
 		
 		panel.add(input);
@@ -37,16 +37,15 @@ public class MSDOS {
 			public void actionPerformed
 (ActionEvent ev) {
 				CommandLine commandline = new CommandLine();
-				String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
+				String dir=Platform.directoryOf(main.fileName);
 				commandline.runWithMSDOS(input.getText(),dir);
 			}
 		};
 		run.addActionListener(actionlistener);
 		input.addActionListener(actionlistener);
 		exp.addActionListener((ev) -> {
-			CommandLine commandline = new CommandLine();
-			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
-			commandline.runWithMSDOS("explorer .",dir);
+			String dir=Platform.directoryOf(main.fileName);
+			Platform.openInFileManager(".",dir);
 		});
 	}
 }

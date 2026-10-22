@@ -21,7 +21,7 @@ public class NoFileOpen {
 		if(previousfile.equals("")) {
 			return CreateFile();
 		}
-		String output =previousfile.replaceAll("[^\\\\]+\\.java","");
+		String output =Platform.directoryOf(previousfile);
 		
 		GetClassName getclassname = new GetClassName(textarea);
 		String classname=getclassname.getClassName();

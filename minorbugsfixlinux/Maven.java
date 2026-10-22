@@ -241,9 +241,7 @@ public class Maven {
 			File extrafiles = new File(app,"extra-files");
 			File mavenfolder = new File(extrafiles,"maven");
 			String maven = mavenfolder.getAbsolutePath();
-			String cmd =
-"set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
-"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +"mvn --version";
+			String cmd = Platform.withMavenPath(maven,Platform.mavenCommand()+" --version");
 			CommandLine commandline = new CommandLine();
 			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
 		});
@@ -262,11 +260,10 @@ public class Maven {
 "set \"PATH=%JAVA_HOME%\\bin;" + maven + "\\bin;%PATH%\" && " +
 "mvn.cmd clean package && " +
 "mvn.cmd clean package jpackage:jpackage"; */
-			String cmd =
-"set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
-"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +
-"mvn.cmd antrun:run@copy-old && "+"mvn.cmd clean package && " +
-"mvn.cmd clean package jpackage:jpackage && "+"mvn.cmd exec:exec@xdelta";
+			String mvn = Platform.mavenCommand();
+			String cmd = Platform.withMavenPath(maven,
+			mvn+" antrun:run@copy-old && "+mvn+" clean package && " +
+			mvn+" clean package jpackage:jpackage && "+mvn+" exec:exec@xdelta");
 
 			/*mvn antrun:run@copy-old
 mvn clean package
@@ -652,18 +649,32 @@ mvn exec:exec@xdelta
 			File extrafiles = new File(app,"extra-files");
 			File mavenfolder = new File(extrafiles,"maven");
 			String maven = mavenfolder.getAbsolutePath();
-			String cmd =
- "set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
-"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +
+			String mvn = Platform.mavenCommand();
+			String cmd;
+			if(Platform.isWindows()) {
+				cmd = Platform.withMavenPath(maven,
     "(if exist jars rmdir /s /q jars || echo no jars folder) && " +
     "mkdir jars && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
-    "  mvn clean package -Pjava%v && " +
+    "  "+mvn+" clean package -Pjava%v && " +
     "  copy /Y target\\"+artifactId+"-"+version+"-java%v.jar jars\\ " +
     ") && " +
     "for %v in (17 18 19 20 21 22 23) do (" +
     "  copy /Y jars\\"+artifactId+"-"+version+"-java%v.jar target\\ " +
-    ")";
+    ")");
+			}
+			else {
+				cmd = Platform.withMavenPath(maven,
+    "rm -rf jars && " +
+    "mkdir jars && " +
+    "for v in 17 18 19 20 21 22 23; do " +
+    "  "+mvn+" clean package -Pjava$v && " +
+    "  cp target/"+artifactId+"-"+version+"-java$v.jar jars/ " +
+    "done && " +
+    "for v in 17 18 19 20 21 22 23; do " +
+    "  cp jars/"+artifactId+"-"+version+"-java$v.jar target/ " +
+    "done");
+			}
 			commandline.runWithMSDOS(cmd,Main.getDirectory(getPOMXMLs()));
 		});
 
@@ -691,8 +702,7 @@ mvn exec:exec@xdelta
 			updatecode();
 		});
 		code.addActionListener((ev) -> {
-			CommandLine commandline = new CommandLine();
-			commandline.run("explorer ." ,Main.getDirectory(getPOMXMLs())+"src/main/java/"+getPackageName());				
+			Platform.openInFileManager(".",Main.getDirectory(getPOMXMLs())+"src"+Platform.separator()+"main"+Platform.separator()+"java"+Platform.separator()+getPackageName());
 		});
 		initialise.addActionListener( ev -> {
 			showMavenAlreadyInitialised();
@@ -703,23 +713,20 @@ mvn exec:exec@xdelta
 			File extrafiles = new File(app,"extra-files");
 			File mavenfolder = new File(extrafiles,"maven");
 			String maven = mavenfolder.getAbsolutePath();
-			String cmd =
-"set \"JAVA_HOME=" + System.getProperty("java.home") + "\" && " +
-"set \"PATH="+System.getProperty("java.home")+"\\bin;" + maven + "\\bin;%PATH%\" && " +"echo mvn archetype:generate && mvn archetype:generate";
+			String cmd = Platform.withMavenPath(maven,"echo "+Platform.mavenCommand()+" archetype:generate && "+Platform.mavenCommand()+" archetype:generate");
 			CommandLine commandline = new CommandLine();
-			commandline.runWithMSDOS(cmd,Main.getDirectory(fileName));	
+			commandline.runWithMSDOS(cmd,Main.getDirectory(fileName));
 		});
 		pomxml.addActionListener( ev -> {
-			CommandLine commandline = new CommandLine();
 			String pomxml = getPOMXMLs();
 			if(!pomxml.equals("")) {
-				commandline.run("explorer pom.xml",Main.getDirectory(pomxml));
+				Platform.openInFileManager("pom.xml",Main.getDirectory(pomxml));
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null,"Could not find pom.xml");
 			}
-		});	
+		});
 		removedependency.addActionListener( ev -> {
 			DependencyRemover dependencyremover=new DependencyRemover(getPOMXMLs());
 		});		

@@ -102,7 +102,7 @@ public class GetClassMethods {
 		try {
 			List<String> filelist = filelistmodifier.getFileList();
 			String directoryandfilename = filelistmodifier.directoryandfilename;
-			String directory = directoryandfilename.replaceAll("[^\\\\]+\\.java","");
+			String directory = Platform.directoryOf(directoryandfilename);
 			
 			for(String filename:filelist) {
 				Stack<Integer> stackleftcurlybrace = new Stack<Integer>();

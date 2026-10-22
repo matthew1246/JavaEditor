@@ -52,11 +52,11 @@ public class StoreSelectedFile {
 		if(fileName == null || fileName.equals(""))
 			return list;
 		LinkedHashMap<String,Preferences> hashmap = getBackup();
-		String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+		String directory = Platform.directoryOf(fileName);
 		for(String key:hashmap.keySet()) {
 			if(key.equals(fileName))
 				continue;
-			String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+			String directory2 = Platform.directoryOf(key);
 			if(!directory.equals(directory2))
 				continue;
 			Preferences preferences = hashmap.get(key);
@@ -99,9 +99,9 @@ public class StoreSelectedFile {
 			set(fileName);
 			hashmap = getBackup();
 		}
-		String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+		String directory = Platform.directoryOf(fileName);
 		for(String key:new ArrayList<String>(hashmap.keySet())) {
-			String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+			String directory2 = Platform.directoryOf(key);
 			if(!directory.equals(directory2))
 				continue;
 			Preferences preferences = hashmap.get(key);
@@ -196,7 +196,7 @@ public class StoreSelectedFile {
 	private NoDuplicate noduplicate = new NoDuplicate();
 	private String getBackupDir() {
 		String userDir = System.getProperty("user.dir");
-		if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
+		if(Platform.isRootDirectory(userDir)) {
 			return System.getProperty("user.home");
 		}
 		return userDir;
@@ -224,9 +224,9 @@ public class StoreSelectedFile {
 			noduplicate.Delete();
 			preferences = new Preferences();
 			
-			String directory = filenameandpath.replaceAll("[^\\\\]+\\.java","");
+			String directory = Platform.directoryOf(filenameandpath);
 			for(String key:linkedhashmap.keySet()) {
-				String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+				String directory2 = Platform.directoryOf(key);
 				if(directory.equals(directory2)) {
 					Preferences selectedpreferences=linkedhashmap.get(key);
 					for(String jar:selectedpreferences.jars) {
@@ -324,7 +324,7 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			if(lastopened.starterclass.contains("\\") || lastopened.starterclass.contains("\\")) {
+			if(lastopened.starterclass.contains("\\") || lastopened.starterclass.contains("/")) {
 				return lastopened.starterclass;
 			}
 			else {
@@ -411,7 +411,7 @@ public class StoreSelectedFile {
 		/*for(String key : linkedhashmap.keySet()) {
 			if(!key.equals("lastopened")) {
 				Preferences preferences=linkedhashmap.get(key);
-				String directory2=key.replaceAll("[^\\\\]+\\.java","");
+				String directory2=Platform.directoryOf(key);
 
 				if(directory.equals(directory2)) {
 					boolean haveJarAlready=false;

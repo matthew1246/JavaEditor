@@ -11,8 +11,9 @@ public class Git {
 		SwingUtilities.invokeLater( () -> {
 			Git git=new Git();
 			System.out.println("Git is installed? "+git.isGitInstalled());
-			git.ChangeBackgroundThread("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
-			git.ChangeEDT("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
+			String testfile=new File("Git.java").getAbsolutePath();
+			git.ChangeBackgroundThread(testfile);
+			git.ChangeEDT(testfile);
 			
 			/*git.ChangeBackgroundThread("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
 			git.ChangeEDT("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
@@ -25,6 +26,16 @@ public class Git {
 	public JFrame frame;
 	public String gitbashdotexe = "";
 	public boolean setWhereIsGitBashDotExe(String fileName) {
+		if(!Platform.isWindows()) {
+			/*
+			** Linux has no git bash, but it has bash and git, and those are
+			** what the git features need.
+			*/
+			if(Platform.commandExists("bash") && Platform.commandExists("git")) {
+				gitbashdotexe=Platform.shellName();
+				return true;
+			}
+		}
 		String[] commonPaths = {
 		    "C:\\Program Files\\Git\\git-bash.exe",
 		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
@@ -32,17 +43,29 @@ public class Git {
 		
 		for(String path : commonPaths) {
 			File file = new File(path);
-		    	if (file.exists()) {
-		        		gitbashdotexe=file.getAbsolutePath();
-		    		return true;		
-		    	}
-	    	}
+	    	if (file.exists()) {
+        		gitbashdotexe=file.getAbsolutePath();
+    			return true;		
+    		}
+    	}
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 		return false;		
 	}
 	public boolean setWhereIsGitBashDotExeBackgroundThread() {
 		CommandLine commandline=new CommandLine();
-		return commandline.doesCommandExist("bash");
+		boolean exists = commandline.doesCommandExist("bash");
+		if(exists) {
+			if(Platform.isWindows()) {
+				String bash=findWindowsBash();
+				if(new File(bash).exists()) {
+					gitbashdotexe=bash;
+				}
+			}
+			else {
+				gitbashdotexe=Platform.shellName();
+			}
+		}
+		return exists;
     	}
     	public boolean setWhereIsGitBashDotExeEDT() {
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
@@ -51,11 +74,25 @@ public class Git {
 	public boolean isFileInsideGitRepository(String fileName) {
 		if(fileName.equals(""))
 			return false;	
-		directory=fileName.replaceAll("[^/]+\\.java","");
+		directory=Platform.directoryOf(fileName);
 		CommandLine commandline = new CommandLine();
 		Process process=commandline.run("git rev-parse --show-toplevel",directory);
+		if(process == null)
+			return false;
 		DisplayOutput displayoutput = new DisplayOutput();
 		String oneline=displayoutput.OneLine(process);
+		try {
+			/*
+			** The command gives an error when the file is not inside a git
+			** repository, and that error is in the output, so the exit code
+			** of the command is what says whether it worked.
+			*/
+			if(process.waitFor() != 0)
+				return false;
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+			return false;
+		}
 		return !(oneline.equals("line is null"));
 	}
 	public boolean isGitInstalled() {
@@ -115,17 +152,17 @@ public class Git {
 	      	}
       	}
       	public void testsetDirectoryAndRootDirectory() {
-      		setDirectoryAndRootDirectory("/home/owner/javaeditor/minorbugsfixlinux/Git.java");
+      		setDirectoryAndRootDirectory(new File("Git.java").getAbsolutePath());
       		/*org.junit.Assert.assertEquals("/home/owner/javaeditor",root_directory);
       		org.junit.Assert.assertEquals("/home/owner/javaeditor/minorbugsfixlinux/",directory);
       		*/
       	}
       	public void setDirectoryAndRootDirectory(String fileName) {
-		directory=Main.getDirectory(fileName);
-		CommandLine commandline = new CommandLine();
-		Process process=commandline.run("git rev-parse --show-toplevel",directory);
-		DisplayOutput displayoutput = new DisplayOutput();
-		root_directory = displayoutput.OneLine(process);
+      		directory=Main.getDirectory(fileName);
+      		CommandLine commandline = new CommandLine();
+      		Process process=commandline.run("git rev-parse --show-toplevel",directory);
+      		DisplayOutput displayoutput = new DisplayOutput();
+      		root_directory = displayoutput.OneLine(process);
       	}
       	
       	public JButton seeallchanges;
@@ -337,11 +374,24 @@ public void setLayout() {
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
-			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
-			processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
-			processBuilder.directory(new File(directory));
-			Process process = processBuilder.start();
-			process.waitFor();
+			if(Platform.isWindows() && gitbashdotexe.length() > 0) {
+				ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+				processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
+				processBuilder.directory(new File(directory));
+				Process process = processBuilder.start();
+				process.waitFor();
+			}
+			else {
+				/*
+				** The other systems have no prompt command, so the command is
+				** simply run and waited for.
+				*/
+				CommandLine commandline = new CommandLine();
+				Process process = commandline.run(command,directory);
+				if(process != null) {
+					process.waitFor();
+				}
+			}
 			getBranchAndSetTitle();
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();				
@@ -364,8 +414,23 @@ public void setLayout() {
 		}*/
 	}
 	public String whichFolderOpened() {
-		String substring=directory.replace(root_directory.replace("/","\\"),"");
-		return substring.replace("\\","");
+		/*
+		** The root of the repository and the folder of the file can have
+		** different separators in them, so both of them are changed to
+		** forward slashes before the folder is worked out.
+		*/
+		String substring=directory.replace("\\","/");
+		String root=root_directory.replace("\\","/");
+		if(substring.startsWith(root)) {
+			substring=substring.substring(root.length());
+		}
+		while(substring.startsWith("/")) {
+			substring=substring.substring(1);
+		}
+		while(substring.endsWith("/")) {
+			substring=substring.substring(0,substring.length()-1);
+		}
+		return substring;
 	}
 	public boolean isBranch(String folder) {
 		String[] branches=getAllBranches();
@@ -423,7 +488,7 @@ public void setLayout() {
 						openLinuxBashWindow(script);
 					}
 					*/
-					ProcessBuilder processbuilder=new ProcessBuilder("bash","-c",command+"; exec bash");
+					ProcessBuilder processbuilder=new ProcessBuilder(gitShell(),"-c",command+"; exec "+gitShell());
 					processbuilder.inheritIO();
 					processbuilder.redirectErrorStream(true);
 					if(directory != null)
@@ -572,12 +637,30 @@ public void setLayout() {
 	public void gitwithoutthread(String command) {
 		try {
 			CommandLine commandline = new CommandLine();
-			// commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'git status; exec bash\'",root_directory);
-			Process process=commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'"+command+"; exec bash\'",directory);
-			process.waitFor();
+			String command2;
+			if(Platform.isWindows()) {
+				command2="start \""+findWindowsBash()+"\" -i -c '"+command+"; exec bash'";
+			}
+			else {
+				command2=gitShell()+" -i -c '"+command+"; exec "+gitShell()+"'";
+			}
+			Process process=commandline.run(command2,directory);
+			if(process != null) {
+				process.waitFor();
+			}
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 		}
+	}
+	/*
+	** The shell that runs the git commands. Windows has the bash of the git
+	** installation and the other systems have the shell of the system.
+	*/
+	public String gitShell() {
+		if(Platform.isWindows()) {
+			return findWindowsBash();
+		}
+		return Platform.shellName();
 	}
 	public void testwhichBranchOpened() {
 		testsetDirectoryAndRootDirectory();
