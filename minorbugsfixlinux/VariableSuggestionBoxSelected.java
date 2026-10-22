@@ -10,11 +10,7 @@ import java.util.Arrays;
 public class VariableSuggestionBoxSelected {
 	private LinkedHashMap<String,ArrayList<String>> linkedhashmap;
 	private String getBackupDir() {
-		String userDir = System.getProperty("user.dir");
-		if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
-			return System.getProperty("user.home");
-		}
-		return userDir;
+		return Platform.settingsFolder();
 	}
 	public VariableSuggestionBoxSelected() {
 		GsonBuilder gsonbuilder=new GsonBuilder();

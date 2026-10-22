@@ -8,8 +8,8 @@ import java.util.List;
 ** put in this class, so that the rest of the code does not have to know which
 ** one it is running on.
 **
-** The class only uses java.io and java.util, so it compiles on every java
-** version the editor can compile for when it makes a jar.
+** The class only uses java.io, java.net and java.util, so it compiles on
+** every java version the editor can compile for when it makes a jar.
 */
 public class Platform {
 	private static final String osname = System.getProperty("os.name","").toLowerCase();
@@ -373,5 +373,58 @@ public class Platform {
 	*/
 	public static String mavenCommand() {
 		return isWindows() ? "mvn.cmd" : "mvn";
+	}
+	/*
+	** The folder that the program is in. When the program is a jar file this
+	** is the folder the jar file is in, and when it is a group of class files
+	** this is the folder the class files are in. It is used to find the files
+	** that belong to the program, so that they are found no matter which
+	** folder the program is started from.
+	** An empty string is given when the folder cannot be worked out.
+	*/
+	public static String programFolder() {
+		try {
+			java.net.URL location = Platform.class.getProtectionDomain().getCodeSource().getLocation();
+			if(location == null) {
+				return "";
+			}
+			/*
+			** The file of the location is used and not the path of the uri,
+			** because the path of the uri has a slash in front of it on
+			** Windows that is not part of the path.
+			*/
+			File file = new File(location.toURI());
+			if(file.isFile()) {
+				File parent = file.getParentFile();
+				if(parent == null) {
+					return "";
+				}
+				return parent.getAbsolutePath();
+			}
+			return file.getAbsolutePath();
+		}
+		catch(Exception ex) {
+			return "";
+		}
+	}
+	/*
+	** The folder where the files with the settings of the editor are kept.
+	** They are kept in the folder of the program, so that they are found and
+	** kept no matter which folder the program is started from. The working
+	** directory is used when the folder of the program cannot be written to.
+	*/
+	public static String settingsFolder() {
+		String programfolder = programFolder();
+		if(!programfolder.equals("")) {
+			File file = new File(programfolder);
+			if(file.isDirectory() && file.canWrite()) {
+				return programfolder;
+			}
+		}
+		String userDir = System.getProperty("user.dir");
+		if(isRootDirectory(userDir)) {
+			return System.getProperty("user.home");
+		}
+		return userDir;
 	}
 }

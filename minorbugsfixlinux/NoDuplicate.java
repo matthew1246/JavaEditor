@@ -9,11 +9,7 @@ import java.io.IOException;
 public class NoDuplicate {
 	IsEqual isequal = new IsEqual();
 	private String getBackupDir() {
-		String userDir = System.getProperty("user.dir");
-		if(Platform.isRootDirectory(userDir)) {
-			return System.getProperty("user.home");
-		}
-		return userDir;
+		return Platform.settingsFolder();
 	}
 	public boolean IsDuplicate(LinkedHashMap<String,Preferences> linkedhashmap) {
 		GsonBuilder gsonbuilder=new GsonBuilder();

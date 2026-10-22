@@ -243,8 +243,22 @@ public class Main {
 				}
 				@Override
 				protected void done() {
+					OpenDefaultContent opendefaultcontent = null;
 					try {
-						Main main = new Main(get());
+						opendefaultcontent = get();
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					/*
+					** The editor is opened even when the file of last time
+					** could not be read, because a window that never opens
+					** looks like the program has crashed.
+					*/
+					if(opendefaultcontent == null) {
+						opendefaultcontent = new OpenDefaultContent("");
+					}
+					try {
+						Main main = new Main(opendefaultcontent);
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -4719,8 +4733,16 @@ class OpenDefaultContent {
 		try {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		this.fileName = storeselectedfile.get();
-		File file2 = new File(fileName); 
-		if(!file2.exists()) {
+		/*
+		** An empty name means that there is no file to open yet. The name is
+		** checked here and not with the file that the name gives, because a
+		** file with an empty path exists on Linux and does not exist on
+		** Windows, so the two systems would give a different answer and the
+		** program would crash on one of them.
+		*/
+		boolean nofile = fileName == null || fileName.trim().equals("");
+		File file2 = new File(fileName == null ? "" : fileName);
+		if(nofile || !file2.exists()) {
 			String userDir = System.getProperty("user.dir");
 			String userHome = System.getProperty("user.home");
 			String baseDir = "";
@@ -4776,6 +4798,13 @@ class OpenDefaultContent {
 	*/
 	OpenDefaultContent(String fileName3) {
 		try {
+		/*
+		** An empty name means that there is no file to open, and the editor
+		** starts with an empty tab.
+		*/
+		if(fileName3 == null || fileName3.trim().equals("")) {
+			return;
+		}
 		File file2 = new File(fileName3);
 		FileReader filereader = new FileReader(file2);
 		char[] chars = new char[(int)file2.length()];

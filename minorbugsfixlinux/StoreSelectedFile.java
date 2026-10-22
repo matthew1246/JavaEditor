@@ -195,11 +195,7 @@ public class StoreSelectedFile {
 	}
 	private NoDuplicate noduplicate = new NoDuplicate();
 	private String getBackupDir() {
-		String userDir = System.getProperty("user.dir");
-		if(Platform.isRootDirectory(userDir)) {
-			return System.getProperty("user.home");
-		}
-		return userDir;
+		return Platform.settingsFolder();
 	}
 	public void set(String filenameandpath) {
 		LinkedHashMap<String,Preferences> linkedhashmap = getBackup();
@@ -268,6 +264,14 @@ public class StoreSelectedFile {
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null,"IOException");
 				System.exit(0);
+			} catch(RuntimeException ex) {
+				/*
+				** The file of the backup can be broken, and a broken file
+				** should not stop the editor from starting, so an empty
+				** backup is used instead of it.
+				*/
+				ex.printStackTrace();
+				return new LinkedHashMap<String,Preferences>();
 			}
 		}
 		System.out.println("StoreSelectedFile.getBackup() this should never be reached.");
@@ -324,12 +328,21 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			if(lastopened.starterclass.contains("\\") || lastopened.starterclass.contains("/")) {
-				return lastopened.starterclass;
+			String starterclass=lastopened.starterclass;
+			if(starterclass == null) {
+				starterclass="";
 			}
-			else {
+			if(starterclass.contains("\\") || starterclass.contains("/")) {
+				return starterclass;
+			}
+			/*
+			** The list of the tabs can be empty, and then there is no file in
+			** it to open, so the name of the starter class is all there is.
+			*/
+			if(lastopened.fileNames != null && !lastopened.fileNames.isEmpty()) {
 				return lastopened.fileNames.get(0);
 			}
+			return starterclass;
 		}
 		else {
 			return "";
