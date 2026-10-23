@@ -2214,7 +2214,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 					
-					git.Change(fileName);
 					expandable.open();
 					
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2223,7 +2222,19 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 					threecomboboxes.load(fileName);
 					expandable.open();
-					git.Change(fileName);
+					
+					SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+						@Override
+						protected Void doInBackground() {
+							git.ChangeBackgroundThread(fileName);
+							return null;
+						}
+						@Override
+						protected void done() {
+							git.ChangeEDT(fileName);
+						}
+					};
+					gitWorker.execute();
 						
 					//loadComboboxes(filelistmodifier);
 					//filenamescombobox.setSelectedItem(getFileName(fileName));
@@ -4298,24 +4309,34 @@ startercombobox.Change(fileName);
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				git.Change(fileName);
-				
-				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
-				storeselectedfile3.set(fileName);
-				startercombobox.Change(fileName);
-				if(fileName != null && !fileName.equals("")) {
-					try {
-						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-						if(Platform.isWindows() && filename2.startsWith("/"))
-							filename2=filename2.substring(1,filename2.length());
-						frame.setTitle(filename2 +" "+fileName);
-					} catch (URISyntaxException ex) {
-						ex.printStackTrace();
-					}
+StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			storeselectedfile3.set(fileName);
+			startercombobox.Change(fileName);
+			if(fileName != null && !fileName.equals("")) {
+				try {
+					String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+					if(Platform.isWindows() && filename2.startsWith("/"))
+						filename2=filename2.substring(1,filename2.length());
+					frame.setTitle(filename2 +" "+fileName);
+				} catch (URISyntaxException ex) {
+					ex.printStackTrace();
 				}
-				threecomboboxes.load(fileName);
-				expandable.open();
-				git.Change(fileName);
+			}
+			threecomboboxes.load(fileName);
+			expandable.open();
+			
+			SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+				@Override
+				protected Void doInBackground() {
+					git.ChangeBackgroundThread(fileName);
+					return null;
+				}
+				@Override
+				protected void done() {
+					git.ChangeEDT(fileName);
+				}
+			};
+			gitWorker.execute();
 
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
@@ -4461,7 +4482,6 @@ startercombobox.Change(fileName);
 						return;
 					}	
 						
-					git.Change(fileName);
 					expandable.open();
 					
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -4471,7 +4491,19 @@ startercombobox.Change(fileName);
 					threecomboboxes.load(fileName);
 					expandable.open();
 					this.fileName=fileName;
-					git.Change(fileName);
+					
+					SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+						@Override
+						protected Void doInBackground() {
+							git.ChangeBackgroundThread(fileName);
+							return null;
+						}
+						@Override
+						protected void done() {
+							git.ChangeEDT(fileName);
+						}
+					};
+					gitWorker.execute();
 						
 					//loadComboboxes(filelistmodifier);
 					//filenamescombobox.setSelectedItem(getFileName(fileName));

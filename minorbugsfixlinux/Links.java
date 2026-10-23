@@ -128,16 +128,7 @@ public class Links {
 			for(String sublink:classes.values()) {
 				String link = getLink(sublink);
 				// Runtime.getRuntime().exec("cmd /c start chrome "+link);
-				if(java.awt.Desktop.isDesktopSupported()) {
-					java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
-				}
-				else {
-					/*
-					** Not every Linux has the desktop of java, so the browser of
-					** the system is used instead.
-					*/
-					Platform.openInFileManager(link,null);
-				}
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

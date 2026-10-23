@@ -3557,7 +3557,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 216740
+    "caretposition": 216775
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java": {
     "isLocked": false,
@@ -3569,7 +3569,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 16361
+    "caretposition": 3328
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\CommandLine.java": {
     "isLocked": false,
