@@ -4178,7 +4178,7 @@
     "startupcombobox": [
       "Main"
     ],
-    "starterclass": "",
+    "starterclass": "Main",
     "jars": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\gson-2.10.1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Muck.jar",
@@ -4186,7 +4186,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 266917
+    "caretposition": 667
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java": {
     "isLocked": false,
@@ -4204,5 +4204,34 @@
     ],
     "fileNames": [],
     "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\FileListModifier.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 266917
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\FileName.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main",
+      "Git",
+      "FileName"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 520
   }
 }

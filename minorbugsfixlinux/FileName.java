@@ -14,7 +14,7 @@ public class FileName {
 	public String getJarFileName(int javaversionnumber) {
 		if(makeAllVersionsJar) {
 			if(javaversionnumber != 23 && javaversionnumber != -2) {
-				return "ForJava"+javaversionnumber+"_"+main_class2;
+				return "OnLinuxForJava"+javaversionnumber+"_"+main_class2;
 			}
 			else {
 				return main_class2;
