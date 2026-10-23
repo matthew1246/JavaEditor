@@ -126,7 +126,17 @@ public class AllVersionsJarNoPackage extends AllVersionsJar {
 			String[] splited=  main_class.split("\\.");
 			String main_class2 = splited[splited.length-1];
 			
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+isMoreThanOneJar.getCreateJarFolderLocation(dir)+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
+			
+			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
+			if(!jarFolder.endsWith("\\") && !jarFolder.endsWith("/")) {
+				if(jarFolder.contains("\\")) {
+					jarFolder=jarFolder+"\\";
+				}
+				else {
+					jarFolder=jarFolder+"/";
+				}
+			}								
+			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+jarFolder+filename.getJarFileName(javaversionnumber)+".jar mf.txt .";
 		
 			JOptionPane.showMessageDialog(null,input);
 			Process process;
