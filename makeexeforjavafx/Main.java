@@ -1924,12 +1924,11 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					}
 					tabbedpane.setSelectedIndex(tab_index);
 					
-					Main.this.fileName = fileNames.get(tab_index);
+Main.this.fileName = fileNames.get(tab_index);
 					//((CurlyBraceKeyListener)textarea.getKeyListeners()[0]).positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 					
-					git.Change(fileName);
 					expandable.open();
 					
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -1938,7 +1937,19 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 					threecomboboxes.load(fileName);
 					expandable.open();
-					git.Change(fileName);
+					
+					SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+						@Override
+						protected Void doInBackground() {
+							git.ChangeBackgroundThread(fileName);
+							return null;
+						}
+						@Override
+						protected void done() {
+							git.ChangeEDT(fileName);
+						}
+					};
+					gitWorker.execute();
 						
 					//loadComboboxes(filelistmodifier);
 					//filenamescombobox.setSelectedItem(getFileName(fileName));
@@ -5001,8 +5012,6 @@ CommandLine commandline = new CommandLine();
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				git.Change(fileName);
-				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
 			
@@ -5028,7 +5037,19 @@ CommandLine commandline = new CommandLine();
 				threecomboboxes.load(fileName);
 				expandable.open();
 				maven.Change(fileName);
-				git.Change(fileName);
+				
+				SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+					@Override
+					protected Void doInBackground() {
+						git.ChangeBackgroundThread(fileName);
+						return null;
+					}
+					@Override
+					protected void done() {
+						git.ChangeEDT(fileName);
+					}
+				};
+				gitWorker.execute();
 			} catch(IOException ex) {
 				ex.printStackTrace();
 			}
@@ -5148,7 +5169,7 @@ CommandLine commandline = new CommandLine();
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						
-						fileName=directoryandfilename;
+fileName=directoryandfilename;
 						new Recents().add(directoryandfilename);
 						int caretposition=storeselectedfile.getCaretPosition(fileName);
 						scrollToCaretPosition(caretposition);
@@ -5157,7 +5178,6 @@ CommandLine commandline = new CommandLine();
 						return;
 					}	
 						
-					git.Change(fileName);
 					expandable.open();
 					
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -5167,7 +5187,19 @@ CommandLine commandline = new CommandLine();
 					threecomboboxes.load(fileName);
 					expandable.open();
 					this.fileName=fileName;
-					git.Change(fileName);
+					
+					SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+						@Override
+						protected Void doInBackground() {
+							git.ChangeBackgroundThread(fileName);
+							return null;
+						}
+						@Override
+						protected void done() {
+							git.ChangeEDT(fileName);
+						}
+					};
+					gitWorker.execute();
 						
 					//loadComboboxes(filelistmodifier);
 					//filenamescombobox.setSelectedItem(getFileName(fileName));

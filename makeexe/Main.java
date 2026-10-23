@@ -2189,7 +2189,6 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 					Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 					
-					git.Change(fileName);
 					expandable.open();
 					
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -2198,7 +2197,19 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 				
 					threecomboboxes.load(fileName);
 					expandable.open();
-					git.Change(fileName);
+					
+					SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+						@Override
+						protected Void doInBackground() {
+							git.ChangeBackgroundThread(fileName);
+							return null;
+						}
+						@Override
+						protected void done() {
+							git.ChangeEDT(fileName);
+						}
+					};
+					gitWorker.execute();
 						
 					//loadComboboxes(filelistmodifier);
 					//filenamescombobox.setSelectedItem(getFileName(fileName));
@@ -4329,7 +4340,7 @@ startercombobox.Change(fileName);
 					ex.printStackTrace();
 				}
 			});
-			textarea2.addMouseListener(rightclick);
+textarea2.addMouseListener(rightclick);
 				
 				tabbedpane.addTab(getFileName(filename),scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
@@ -4339,8 +4350,6 @@ startercombobox.Change(fileName);
 				//((CurlyBraceKeyListener)textarea2.getKeyListeners()[0]).positiontracker=positiontrackers.get(tabbedpane.getSelectedIndex());
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
-				
-				git.Change(fileName);
 				
 				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
 				storeselectedfile3.set(fileName);
@@ -4357,7 +4366,19 @@ startercombobox.Change(fileName);
 				}
 				threecomboboxes.load(fileName);
 				expandable.open();
-				git.Change(fileName);
+				
+				SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+					@Override
+					protected Void doInBackground() {
+						git.ChangeBackgroundThread(fileName);
+						return null;
+					}
+					@Override
+					protected void done() {
+						git.ChangeEDT(fileName);
+					}
+				};
+				gitWorker.execute();
 
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
@@ -4492,7 +4513,7 @@ startercombobox.Change(fileName);
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						
-						this.fileName=directoryandfilename;
+this.fileName=directoryandfilename;
 						new Recents().add(directoryandfilename);
 						int caretposition=storeselectedfile.getCaretPosition(this.fileName);
 						scrollToCaretPosition(caretposition);
@@ -4501,7 +4522,6 @@ startercombobox.Change(fileName);
 						return;
 					}	
 						
-					git.Change(fileName);
 					expandable.open();
 					
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -4511,7 +4531,19 @@ startercombobox.Change(fileName);
 					threecomboboxes.load(fileName);
 					expandable.open();
 					this.fileName=fileName;
-					git.Change(fileName);
+					
+					SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+						@Override
+						protected Void doInBackground() {
+							git.ChangeBackgroundThread(fileName);
+							return null;
+						}
+						@Override
+						protected void done() {
+							git.ChangeEDT(fileName);
+						}
+					};
+					gitWorker.execute();
 						
 					//loadComboboxes(filelistmodifier);
 					//filenamescombobox.setSelectedItem(getFileName(fileName));
