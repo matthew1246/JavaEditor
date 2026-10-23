@@ -12,12 +12,12 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\AllVersionsJarNoPackage.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\AllVersionsJarNoPackage.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\AllFiles.java",
       "C:\\Users\\Owner\\Documents\\git\\foldersizecalculator\\LargeFolderFinder.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\isMoreThanOneJar.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java"
     ],
     "caretposition": 0
   },
@@ -4166,9 +4166,9 @@
     "isLocked": true,
     "lockedStartupClass": "Git",
     "startupcombobox": [
-      "Main",
       "CommandLine",
-      "Git"
+      "Git",
+      "Main"
     ],
     "starterclass": "Main",
     "jars": [
@@ -4366,5 +4366,63 @@
     ],
     "fileNames": [],
     "caretposition": 600
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\AllFiles.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Git",
+    "startupcombobox": [
+      "Main",
+      "CommandLine",
+      "Git"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 4063
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\AllVersionsJarMoreThanOnePackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Git",
+    "startupcombobox": [
+      "Main",
+      "CommandLine",
+      "Git"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\PowershellMoreThanOnePackage.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 6485
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\PowershellNoPackage.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Git",
+    "startupcombobox": [
+      "Main",
+      "CommandLine",
+      "Git"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
+    ],
+    "fileNames": [],
+    "caretposition": 0
   }
 }

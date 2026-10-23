@@ -51,21 +51,23 @@ public class Git {
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 		return false;		
 	}
-	public boolean setWhereIsGitBashDotExeBackgroundThread() {
-		CommandLine commandline=new CommandLine();
-		boolean exists = commandline.doesCommandExist("bash");
-		if(exists) {
-			if(Platform.isWindows()) {
-				String bash=findWindowsBash();
-				if(new File(bash).exists()) {
-					gitbashdotexe=bash;
-				}
+public boolean setWhereIsGitBashDotExeBackgroundThread() {
+		if(Platform.isWindows()) {
+			String bash = findWindowsBash();
+			if(new File(bash).exists()) {
+				gitbashdotexe = bash;
+				return true;
 			}
-			else {
-				gitbashdotexe=Platform.shellName();
-			}
+			return false;
 		}
-		return exists;
+		else {
+			CommandLine commandline = new CommandLine();
+			boolean exists = commandline.doesCommandExist("bash");
+			if(exists) {
+				gitbashdotexe = Platform.shellName();
+			}
+			return exists;
+		}
     	}
     	public boolean setWhereIsGitBashDotExeEDT() {
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
@@ -95,23 +97,9 @@ public class Git {
 		}
 		return !(oneline.equals("line is null"));
 	}
-	public boolean isGitInstalled() {
-		/*String[] command2 =new String[3];
-		command2[0] = "cmd.exe";
-		command2[1] = "/c";
-		command2[2] = "git --version";
-		Process process = Runtime.getRuntime().exec(command2,null);
-	            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-	            
-	            String output;
-	            return reader.readLine() != null;
-	            */
-	            String[] command2 =new String[2];
-	            command2[0]="git";
-	            command2[1]="--version";
-	            
-	            CommandLine commandline=new CommandLine();
-	            return commandline.doesCommandExist("git --version");
+public boolean isGitInstalled() {
+		CommandLine commandline = new CommandLine();
+		return commandline.doesCommandExist("git");
             }
 
 	public void Change(String fileName) {
