@@ -16,9 +16,7 @@
     "jars": [],
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
-      "C:\\Users\\Owner\\Documents\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
     ],
     "caretposition": 0
   },
@@ -35,10 +33,10 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
-      "MainDotJars",
       "Git",
-      "GuaranteedLayout"
+      "GuaranteedLayout",
+      "Main",
+      "MainDotJars"
     ],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
@@ -4173,10 +4171,11 @@
     "caretposition": 1
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main"
+      "Main",
+      "Git"
     ],
     "starterclass": "Main",
     "jars": [
@@ -4186,11 +4185,11 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 667
+    "caretposition": 724
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java": {
-    "isLocked": false,
-    "lockedStartupClass": "",
+    "isLocked": true,
+    "lockedStartupClass": "Main",
     "startupcombobox": [
       "Main",
       "Git"
@@ -4203,13 +4202,14 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 17074
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\FileListModifier.java": {
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Main"
+      "Main",
+      "Git"
     ],
     "starterclass": "",
     "jars": [],

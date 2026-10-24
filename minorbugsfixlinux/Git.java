@@ -464,29 +464,36 @@ public void setLayout() {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					/*File script = writeGitScript(command,directory);
+					// File script = writeGitScript(command,directory);
 					String os = System.getProperty("os.name").toLowerCase();
-					if(os.contains("win")) {
-						openWindowsBashWindow(script);
+					if(os.contains("win") && hasGitBashDotExe()) {
+						// openWindowsBashWindow(script);
+						ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+						processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
+						processBuilder.directory(new File(directory));
+						processBuilder.start();
+
 					}
-					else if(isWSL()) {
-						openWSLBashWindow(script);
+					else {	
+						/*else if(isWSL()) {
+							openWSLBashWindow(script);
+						}
+						else {
+							openLinuxBashWindow(script);
+						}
+						*/
+						ProcessBuilder processbuilder=new ProcessBuilder(gitShell(),"-c",command+"; exec "+gitShell());
+						processbuilder.inheritIO();
+						processbuilder.redirectErrorStream(true);
+						if(directory != null)
+							processbuilder.directory(new File(directory));
+						
+						processbuilder.start();
+						/*DisplayOutput displayoutput = new DisplayOutput();
+						String substring = displayoutput.Multiline(process);
+						System.out.println(substring);
+						*/
 					}
-					else {
-						openLinuxBashWindow(script);
-					}
-					*/
-					ProcessBuilder processbuilder=new ProcessBuilder(gitShell(),"-c",command+"; exec "+gitShell());
-					processbuilder.inheritIO();
-					processbuilder.redirectErrorStream(true);
-					if(directory != null)
-						processbuilder.directory(new File(directory));
-					
-					processbuilder.start();
-					/*DisplayOutput displayoutput = new DisplayOutput();
-					String substring = displayoutput.Multiline(process);
-					System.out.println(substring);
-					*/
 				} catch(IOException ex) {
 					ex.printStackTrace();
 					showGitWindowError("Couldn't open a bash window: "+ex.getMessage());
@@ -494,6 +501,19 @@ public void setLayout() {
 			}
 		};
 		thread.start();
+	}
+	public boolean hasGitBashDotExe() {
+		String[] commonPaths = {"C:\\Program Files\\Git\\git-bash.exe",
+		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
+		};
+		for(String path : commonPaths) {
+			File file = new File(path);
+		    	if (file.exists()) {
+		        		gitbashdotexe=file.getAbsolutePath();
+		        		return true;
+		    	}	   
+		}
+		return false;
 	}
 	public File writeGitScript(String command,String directory) throws IOException {
 		File script = File.createTempFile("gitcmd",".sh");
@@ -679,4 +699,4 @@ public void setLayout() {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
