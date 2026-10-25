@@ -229,7 +229,8 @@ public class Main {
 	public JFrame frame;
 	public JTextArea textarea;
 	public String fileName = "";
-	public static String value = System.getProperty("user.home")+"\\load_program.ser";
+public static String value = 
+System.getProperty("user.home")+File.separator+"load_program.ser";
 	//public String value="load_program.ser";
 	public MouseAdapter rightclick = new RightClick();
 	public ThreeComboboxes threecomboboxes;
