@@ -422,8 +422,14 @@ public class Platform {
 			}
 		}
 		String userDir = System.getProperty("user.dir");
-		if(isRootDirectory(userDir)) {
-			return System.getProperty("user.home");
+		File userDirFile = new File(userDir);
+		if(userDirFile.isDirectory() && userDirFile.canWrite() && !isRootDirectory(userDir)) {
+			return userDir;
+		}
+		String userHome = System.getProperty("user.home");
+		File userHomeFile = new File(userHome);
+		if(userHomeFile.isDirectory() && userHomeFile.canWrite()) {
+			return userHome;
 		}
 		return userDir;
 	}

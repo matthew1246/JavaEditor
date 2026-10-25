@@ -294,7 +294,11 @@ public class StoreSelectedFile {
 			gsonbuilder.setPrettyPrinting();
 			Gson gson = gsonbuilder.create();
 			String contents = gson.toJson(hashmap);
-			PrintWriter printwriter=new PrintWriter(new File(getBackupDir() + File.separator + "backup.txt"));
+			File backupDir = new File(getBackupDir());
+			if(!backupDir.exists()) {
+				backupDir.mkdirs();
+			}
+			PrintWriter printwriter=new PrintWriter(new File(backupDir, "backup.txt"));
 			printwriter.print(contents);		
 			printwriter.close();
 		}
