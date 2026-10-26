@@ -17,7 +17,7 @@ public class FileName {
 				return "OnLinuxForJava"+javaversionnumber+"_"+main_class2;
 			}
 			else {
-				return main_class2;
+				return "OnLinux_"+main_class2;
 			}
 		}
 		else if(makeCertainVersionNumber) {
