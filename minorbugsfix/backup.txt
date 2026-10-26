@@ -12,12 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileName.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\AllFiles.java",
-      "C:\\Users\\Owner\\Documents\\git\\foldersizecalculator\\LargeFolderFinder.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\FileName.java"
     ],
     "caretposition": 0
   },
@@ -2936,8 +2934,6 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
-      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -2947,6 +2943,7 @@
       "Compile",
       "SteveJobsNot",
       "TabFileNameAndContent",
+      "MainDotJars",
       "JTextAreaGroup",
       "StarterJComboBox",
       "AllFiles",
@@ -2979,6 +2976,7 @@
       "Links",
       "MatthewLayout",
       "LinkedHashMapInterface",
+      "Main",
       "NewtonFirsty"
     ],
     "starterclass": "",
@@ -2989,7 +2987,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 871
+    "caretposition": 599
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\PowershellMoreThanOnePackageExcludePackages.java": {
     "isLocked": true,
@@ -3088,7 +3086,6 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [
-      "Main",
       "Maven",
       "MinorCompile",
       "PowershellMoreThanOnePackage",
@@ -3114,6 +3111,7 @@
       "CommandLine",
       "Git",
       "MatthewLayout",
+      "Main",
       "ExtractJavaFXJars"
     ],
     "starterclass": "",
@@ -4422,6 +4420,19 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okhttp-3.0.0-RC1.jar",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\okio-1.6.0.jar"
     ],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\FileName.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Git",
+    "startupcombobox": [
+      "CommandLine",
+      "Git",
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
     "fileNames": [],
     "caretposition": 0
   }
