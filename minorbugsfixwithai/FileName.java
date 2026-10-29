@@ -19,10 +19,10 @@ public class FileName {
 		if(makeAllVersionsJar) {
 			if(isPowershell) {
 				if(javaversionnumber != 23 && javaversionnumber != -2) {
-					return "ForJava"+javaversionnumber+"_"+main_class2+"Withai";
+					return "LinuxandWindowsForJava"+javaversionnumber+"_"+main_class2+"Withai";
 				}
 				else {
-					return main_class2+"Withai";
+					return "LinuxandWindows"+main_class2+"Withai";
 				}
 			}
 			else {

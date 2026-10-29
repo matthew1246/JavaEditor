@@ -97,7 +97,7 @@ public class AI {
 	public void setLayout() {
 		JFrame frame =new JFrame("AI");
 		JPanel panel = new JPanel();
-		runAI = new JButton("Launch AI");
+		runAI = new JButton("Launch ai");
 		panel.add(runAI);
 		panel.setPreferredSize(new java.awt.Dimension(200,100));
 		frame.add(panel);
