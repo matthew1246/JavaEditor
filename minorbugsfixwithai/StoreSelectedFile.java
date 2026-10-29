@@ -52,11 +52,11 @@ public class StoreSelectedFile {
 		if(fileName == null || fileName.equals(""))
 			return list;
 		LinkedHashMap<String,Preferences> hashmap = getBackup();
-		String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+		String directory = Platform.directoryOf(fileName);
 		for(String key:hashmap.keySet()) {
 			if(key.equals(fileName))
 				continue;
-			String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+			String directory2 = Platform.directoryOf(key);
 			if(!directory.equals(directory2))
 				continue;
 			Preferences preferences = hashmap.get(key);
@@ -99,9 +99,9 @@ public class StoreSelectedFile {
 			set(fileName);
 			hashmap = getBackup();
 		}
-		String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+		String directory = Platform.directoryOf(fileName);
 		for(String key:new ArrayList<String>(hashmap.keySet())) {
-			String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+			String directory2 = Platform.directoryOf(key);
 			if(!directory.equals(directory2))
 				continue;
 			Preferences preferences = hashmap.get(key);
@@ -195,11 +195,7 @@ public class StoreSelectedFile {
 	}
 	private NoDuplicate noduplicate = new NoDuplicate();
 	private String getBackupDir() {
-		String userDir = System.getProperty("user.dir");
-		if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
-			return System.getProperty("user.home");
-		}
-		return userDir;
+		return Platform.settingsFolder();
 	}
 	public void set(String filenameandpath) {
 		LinkedHashMap<String,Preferences> linkedhashmap = getBackup();
@@ -224,9 +220,9 @@ public class StoreSelectedFile {
 			noduplicate.Delete();
 			preferences = new Preferences();
 			
-			String directory = filenameandpath.replaceAll("[^\\\\]+\\.java","");
+			String directory = Platform.directoryOf(filenameandpath);
 			for(String key:linkedhashmap.keySet()) {
-				String directory2 = key.replaceAll("[^\\\\]+\\.java","");
+				String directory2 = Platform.directoryOf(key);
 				if(directory.equals(directory2)) {
 					Preferences selectedpreferences=linkedhashmap.get(key);
 					for(String jar:selectedpreferences.jars) {
@@ -268,6 +264,14 @@ public class StoreSelectedFile {
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null,"IOException");
 				System.exit(0);
+			} catch(RuntimeException ex) {
+				/*
+				** The file of the backup can be broken, and a broken file
+				** should not stop the editor from starting, so an empty
+				** backup is used instead of it.
+				*/
+				ex.printStackTrace();
+				return new LinkedHashMap<String,Preferences>();
 			}
 		}
 		System.out.println("StoreSelectedFile.getBackup() this should never be reached.");
@@ -328,12 +332,21 @@ public class StoreSelectedFile {
 		LinkedHashMap<String,Preferences> hashmap= getBackup();
 		Preferences lastopened=hashmap.get("lastopened");
 		if(lastopened != null) {
-			if(lastopened.starterclass.contains("\\") || lastopened.starterclass.contains("\\")) {
-				return lastopened.starterclass;
+			String starterclass=lastopened.starterclass;
+			if(starterclass == null) {
+				starterclass="";
 			}
-			else {
+			if(starterclass.contains("\\") || starterclass.contains("/")) {
+				return starterclass;
+			}
+			/*
+			** The list of the tabs can be empty, and then there is no file in
+			** it to open, so the name of the starter class is all there is.
+			*/
+			if(lastopened.fileNames != null && !lastopened.fileNames.isEmpty()) {
 				return lastopened.fileNames.get(0);
 			}
+			return starterclass;
 		}
 		else {
 			return "";
@@ -415,7 +428,7 @@ public class StoreSelectedFile {
 		/*for(String key : linkedhashmap.keySet()) {
 			if(!key.equals("lastopened")) {
 				Preferences preferences=linkedhashmap.get(key);
-				String directory2=key.replaceAll("[^\\\\]+\\.java","");
+				String directory2=Platform.directoryOf(key);
 
 				if(directory.equals(directory2)) {
 					boolean haveJarAlready=false;

@@ -33,13 +33,13 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 		this.ev4 = ev4;
 		packager=new Packager(main);
 		if(!packager.containsPackage() || !packager.isInRightFolders()) {
-			dir = fileName.replaceAll("[^\\\\]+\\.java","");
+			dir = Platform.directoryOf(fileName);
 		}
 		else {
 			dir=packager.classpath;
 		}
-		if(!dir.endsWith("\\"))
-			dir=dir+"\\";
+		if(!dir.endsWith(Platform.separator()))
+			dir=dir+Platform.separator();
 	}
 	public String getDir() {
 		return dir;
@@ -60,7 +60,7 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 				for(String jar:jars) {
 					try {
 						// jar = main.getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir);
+						Process process=commandline.run(Platform.quote(Platform.javaTool("jar"))+" xf "+jar,dir);
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch (InterruptedException ex) {
@@ -76,7 +76,7 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 				for(String jar:jars) {
 					try {
 						// jar = getFileName(jar);
-						Process process=commandline.run("\""+System.getProperty("java.home")+"\\bin\\jar.exe\" xf "+jar,dir+"jars");
+						Process process=commandline.run(Platform.quote(Platform.javaTool("jar"))+" xf "+jar,dir+"jars");
 						process.waitFor();
 						//output.write(" "+jar);
 					} catch(InterruptedException ex) {
@@ -91,7 +91,7 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 		String main_string=preferences.starterclass;
 		if(!fileName.equals("")) {
 			if(main_string.equals("")) {
-				main_string=fileName.replaceAll(".+\\\\","");
+				main_string=Platform.fileNameOf(fileName);
 				main_string = main_string.replaceAll("\\.java","");
 			}
 			storeselectedfile.set(fileName);
@@ -106,16 +106,29 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 	}
 	public void WriteManifest(String main_class) {
 		try {
-			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+			if(Platform.isRootDirectory(dir)) {
 				CommandLine commandline = new CommandLine();
-				java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.ps1");
-				java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
-				scriptwriter.write("$content = 'Manifest-Version: 1.0' + [Environment]::NewLine + 'Main-Class: "+main_class+"' + [Environment]::NewLine\n");
-				scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
-				scriptwriter.close();
-				Process process = commandline.runAsAdmin("\"powershell\" -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
-				try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
-				tempfile.delete();
+				if(Platform.isWindows()) {
+					java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.ps1");
+					java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
+					scriptwriter.write("$content = 'Manifest-Version: 1.0' + [Environment]::NewLine + 'Main-Class: "+main_class+"' + [Environment]::NewLine\n");
+					scriptwriter.write("Set-Content -Path '"+dir+"mf.txt' -Value $content -Force -Encoding UTF8\n");
+					scriptwriter.close();
+					Process process = commandline.runAsAdmin("\"powershell\" -NoProfile -ExecutionPolicy Bypass -File \""+tempfile.getAbsolutePath()+"\"",dir);
+					try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
+					tempfile.delete();
+				}
+				else {
+					java.io.File tempfile = new java.io.File(System.getProperty("java.io.tmpdir"),"write_mf.sh");
+					java.io.FileWriter scriptwriter = new java.io.FileWriter(tempfile,java.nio.charset.StandardCharsets.UTF_8);
+					scriptwriter.write("#!/bin/sh\n");
+					scriptwriter.write("echo Manifest-Version: 1.0 > \""+dir+"mf.txt\"\n");
+					scriptwriter.write("echo Main-Class: "+main_class+" >> \""+dir+"mf.txt\"\n");
+					scriptwriter.close();
+					Process process = commandline.runAsAdmin(Platform.scriptRunCommand(tempfile.getAbsolutePath()),dir);
+					try { process.waitFor(); } catch(InterruptedException ex) { ex.printStackTrace(); }
+					tempfile.delete();
+				}
 			}
 			else {
 				java.io.FileWriter filewriter = new java.io.FileWriter( dir+"mf.txt",java.nio.charset.StandardCharsets.UTF_8);
@@ -146,37 +159,27 @@ public class AllVersionsJarOnePackage extends AllVersionsJar {
 			String jarFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
 			JOptionPane.showMessageDialog(null,"output jar location is:"+jarFolder);
 			
-			String input = "\""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+jarFolder+filename.getJarFileName(javaversionnumber)+".jar mf.txt -C jars . "+packager.getPackageName().replace(".","\\");	
-		
+			String input = Platform.quote(Platform.javaTool("jar"))+" cfm "+jarFolder+filename.getJarFileName(javaversionnumber)+".jar mf.txt -C jars . "+Platform.packageToPath(packager.getPackageName());
+
 			JOptionPane.showMessageDialog(null,input);
 			CommandLine commandline = new CommandLine();
-			
+
 			Process process;
-			if(dir.replace("\\","").matches("[a-zA-Z]:")) {
+			if(Platform.isRootDirectory(dir)) {
 				process=commandline.runAsAdmin(input,dir);
 			}
 			else {
 				process=commandline.run(input,dir);
 			}
-			
-			java.io.InputStream inputstream = process.getErrorStream();
-			java.io.InputStreamReader inputstreamreader = new java.io.InputStreamReader(inputstream);
-			java.io.BufferedReader bufferedreader = new java.io.BufferedReader(inputstreamreader);
-			String line = bufferedreader.readLine();
-			if(line == null) {
+
+			String output = new DisplayOutput().All(process);
+			if(output.equals("")) {
 				JOptionPane.showMessageDialog(null,"jar created");
 			}
 			else {
-				String lines = line;
-				while(true) {
-					line = bufferedreader.readLine();
-					if(line == null)
-						break;
-					lines = lines+"\n"+line;
-				}
-				JOptionPane.showMessageDialog(null,lines);
+				JOptionPane.showMessageDialog(null,output);
 			}
-		} catch (java.io.IOException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}

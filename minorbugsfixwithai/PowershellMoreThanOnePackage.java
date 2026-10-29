@@ -116,7 +116,7 @@ public class PowershellMoreThanOnePackage implements Powershell {
 					}
 					
 					// Copy all classes with the same package name to new folder
-					File targetDir = new File(dir+packagename.replace(".","\\"));   
+					File targetDir = new File(dir+Platform.packageToPath(packagename));   
 					// destination folder
 					targetDir.mkdirs();
 					for(String file:main.filelistmodifier.fullpath) {
@@ -145,25 +145,17 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			
 			String filename=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			filename = main.getFileName(filename);
-			if(filename.startsWith("/"))
+			if(Platform.isWindows() && filename.startsWith("/"))
 				filename=filename.substring(1,filename.length());
-			if(dir.contains("\\")) {
-				if(!dir.endsWith("\\"))
-					dir=dir+"\\";
-			}
-			else if(dir.contains("/")) {
-				if(!dir.endsWith("/"))
-					dir=dir+"/";
-			}
+			if(!dir.endsWith(Platform.separator()))
+				dir=dir+Platform.separator();
 			JOptionPane.showMessageDialog(null,filename+" is already open. Run script to close "+filename);
-			FileWriter filewriter2 = new FileWriter(dir+"closeandcreatejar.bat",StandardCharsets.UTF_8);
+			FileWriter filewriter2 = new FileWriter(dir+Platform.closeAndCreateJarScriptName(),StandardCharsets.UTF_8);
 			output2 = new BufferedWriter(filewriter2);
-			output2.write("cd "+dir);
-			output2.write("\n");
-			output2.write("START /B /WAIT taskkill /F /im java.exe");
-			output2.write("\n");
-			output2.write("START /B /WAIT taskkill /F /im javaw.exe");
-			output2.write("\n");
+			for(String line:Platform.scriptHeader(dir)) {
+				output2.write(line);
+				output2.write("\n");
+			}
 			/*for(int i = 0; i < allfiles.files.size(); i++) {
 				File file2 = new File(allfiles.files.get(i));
 				if(file2.exists()) {
@@ -175,7 +167,12 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			MainDotJars maindotjars=new MainDotJars(main);
 			List<String> mainjars=maindotjars.getAllMainJars();
 			for(String maindotjar:mainjars) {
-				output2.write("del "+maindotjar);
+				if(Platform.isWindows()) {
+					output2.write("del "+maindotjar);
+				}
+				else {
+					output2.write("rm -f "+Platform.quote(Platform.toShellPath(maindotjar)));
+				}
 				output2.write("\n");
 			}
 		// output2.close();
@@ -208,7 +205,12 @@ public class PowershellMoreThanOnePackage implements Powershell {
 			if(javaversionnumber != -2)	
 				commandline.earlierjavaversion(javaversionnumber);
 			
-			output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
+			if(Platform.isWindows()) {
+				output2.write("START /B /WAIT cmd.exe /c "+commandline.javac());
+			}
+			else {
+				output2.write(commandline.javac());
+			}
 			output2.write("\n");
 			
 			//output2.close();
@@ -225,11 +227,16 @@ public class PowershellMoreThanOnePackage implements Powershell {
 				main_class2 = splited[splited.length-1];
 			}
 			String createFolder=isMoreThanOneJar.getCreateJarFolderLocation(dir);
-			if(!createFolder.endsWith("\\"))
-				createFolder=createFolder+"\\";
+			if(!createFolder.endsWith(Platform.separator()))
+				createFolder=createFolder+Platform.separator();
 			JOptionPane.showMessageDialog(null,"Output jar location is:"+createFolder);
 			main_class2=filename.getJarFileName(javaversionnumber);
-			output2.write("START /B /WAIT cmd.exe /c \""+System.getProperty("java.home")+"\\bin\\jar.exe\" cfm "+createFolder+main_class2+".jar mf.txt .");
+			if(Platform.isWindows()) {
+				output2.write("START /B /WAIT cmd.exe /c "+Platform.quote(Platform.javaTool("jar"))+" cfm "+createFolder+main_class2+".jar mf.txt .");
+			}
+			else {
+				output2.write(Platform.quote(Platform.javaTool("jar"))+" cfm "+createFolder+main_class2+".jar mf.txt .");
+			}
 			main_class2=createFolder+main_class2;
 			
 			output2.write("\n");
@@ -241,10 +248,10 @@ public class PowershellMoreThanOnePackage implements Powershell {
 	public void Finish() {
 		try {
 			output2.write("\n");
-			output2.write("\""+System.getProperty("java.home")+"\\bin\\java.exe\" -jar "+main_class2+".jar");
+			output2.write(Platform.quote(Platform.javaTool("java"))+" -jar "+main_class2+".jar");
 			output2.close();
 			CommandLine commandline = new CommandLine();
-			String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandcreatejar.bat\"'\"";
+			String liney = Platform.scriptRunCommand(dir+Platform.closeAndCreateJarScriptName());
 		
 			commandline.runWithMSDOS(liney,dir);
 

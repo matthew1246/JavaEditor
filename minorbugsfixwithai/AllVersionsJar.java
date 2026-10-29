@@ -1,3 +1,4 @@
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -5,7 +6,6 @@ import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.List;
 /*
 ** This generates all versions of Java for Jars
 ** This class is only if Main.jar is not running.
@@ -36,7 +36,7 @@ public abstract class AllVersionsJar {
 			File dirJarFile = new File(jar);
 			if(dirJarFile.exists())
 			dirJarFile.delete();
-		}
+		}
 	}
 }
 

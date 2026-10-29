@@ -58,8 +58,8 @@ public class FileListModifier implements Cloneable {
 	public void fillList(String filenameanddirectory) {
 		directoryandfilename = filenameanddirectory;
 		if(!filenameanddirectory.equals("")) {
-			String current_editorfilename =filenameanddirectory.replaceAll(".+\\\\","");		
-			File currentdirectory = new File(filenameanddirectory.replaceAll("[^\\\\]+\\.java",""));
+			String current_editorfilename =Platform.fileNameOf(filenameanddirectory);		
+			File currentdirectory = new File(Platform.directoryOf(filenameanddirectory));
 			
 			File[] files=currentdirectory.listFiles();
 			Arrays.sort(files,new FileComparator());
@@ -75,8 +75,8 @@ public class FileListModifier implements Cloneable {
 		}
 		
 		if(!filenameanddirectory.equals("")) {
-			String current_editorfilename =filenameanddirectory.replaceAll(".+\\\\","");		
-			File currentdirectory = new File(filenameanddirectory.replaceAll("[^\\\\]+\\.java",""));
+			String current_editorfilename =Platform.fileNameOf(filenameanddirectory);		
+			File currentdirectory = new File(Platform.directoryOf(filenameanddirectory));
 			
 			File[] files=currentdirectory.listFiles();
 			List<File> originalfiles = new ArrayList<File>();			
@@ -95,8 +95,8 @@ public class FileListModifier implements Cloneable {
 			isEmpty = false;
 		}
 		if(!filenameanddirectory.equals("")) {
-			String current_editorfilename =filenameanddirectory.replaceAll(".+\\\\","");		
-			File currentdirectory = new File(filenameanddirectory.replaceAll("[^\\\\]+\\.java",""));
+			String current_editorfilename =Platform.fileNameOf(filenameanddirectory);		
+			File currentdirectory = new File(Platform.directoryOf(filenameanddirectory));
 			
 			File[] files=currentdirectory.listFiles();
 

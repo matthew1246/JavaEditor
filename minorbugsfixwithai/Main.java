@@ -229,8 +229,7 @@ public class Main {
 	public JFrame frame;
 	public JTextArea textarea;
 	public String fileName = "";
-public static String value = 
-System.getProperty("user.home")+File.separator+"load_program.ser";
+	public static String value = System.getProperty("user.home")+File.separator+"load_program.ser";
 	//public String value="load_program.ser";
 	public MouseAdapter rightclick = new RightClick();
 	public ThreeComboboxes threecomboboxes;
@@ -244,8 +243,22 @@ System.getProperty("user.home")+File.separator+"load_program.ser";
 				}
 				@Override
 				protected void done() {
+					OpenDefaultContent opendefaultcontent = null;
 					try {
-						Main main = new Main(get());
+						opendefaultcontent = get();
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					/*
+					** The editor is opened even when the file of last time
+					** could not be read, because a window that never opens
+					** looks like the program has crashed.
+					*/
+					if(opendefaultcontent == null) {
+						opendefaultcontent = new OpenDefaultContent("");
+					}
+					try {
+						Main main = new Main(opendefaultcontent);
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -452,8 +465,8 @@ System.getProperty("user.home")+File.separator+"load_program.ser";
 			});
 			textarea2.addMouseListener(rightclick);
 			SwingUtilities.invokeLater(() -> {
-				StarterCode startercode=new StarterCode();
-				textarea.setText(startercode.getNormalJava());
+				StarterCode startercode=new StarterCode();		
+				textarea.setText(startercode.getNormalJava());
 			});
 		}
 		else { //if(!fileName.equals("")) {
@@ -732,13 +745,13 @@ System.getProperty("user.home")+File.separator+"load_program.ser";
 	}
 	public static String getDirectory(String filename) {
 		if(filename.endsWith(".java")) {
-			return filename.replaceAll("[^\\\\]+\\.java","");
+			return Platform.directoryOf(filename);
 		}
 		else if(filename.endsWith(".jar")) {
-			return filename.replaceAll("[^\\\\]+\\.jar","");
+			return Platform.directoryOf(filename);
 		}
 		else if(filename.endsWith(".xml")) {
-			return filename.replaceAll("[^\\\\]+\\.xml","");
+			return Platform.directoryOf(filename);
 		}
 		return filename;
 	}
@@ -779,7 +792,7 @@ System.getProperty("user.home")+File.separator+"load_program.ser";
 		}
 	}
 	public static String getFileName(String directoryandfilename) {
-		return directoryandfilename.replaceAll(".+\\\\","");
+		return Platform.fileNameOf(directoryandfilename);
 	}
 	public static String getClassName(String filename) {
 		filename=getFileName(filename);
@@ -834,7 +847,7 @@ System.getProperty("user.home")+File.separator+"load_program.ser";
 		frame2.setVisible(true);*/
 		
 		/*if(fileName != null && !fileName.equals("")) {
-			frame.setTitle(fileName.replaceAll(".+\\\\",""));
+			frame.setTitle(Platform.fileNameOf(fileName));
 		}
 		
 		else {
@@ -844,7 +857,7 @@ System.getProperty("user.home")+File.separator+"load_program.ser";
 		if(fileName != null && !fileName.equals("")) {
 			try {
 				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-				if(filename2.startsWith("/"))
+				if(Platform.isWindows() && filename2.startsWith("/"))
 					filename2=filename2.substring(1,filename2.length());
 				frame.setTitle(filename2 +" "+fileName);
 			} catch(Exception ex) {
@@ -1751,7 +1764,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			String dir = fileName;
 			if(dir == null) JOptionPane.showMessageDialog(null,"dir is null");
 			
-			dir = dir.replaceAll("[^\\\\]+\\.java","");
+			dir = Platform.directoryOf(dir);
 			if(dir == null) JOptionPane.showMessageDialog(null,"2 dir is null");
 				
 	
@@ -1780,7 +1793,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			if(fileName != null && !fileName.equals("")) {
 				try {
 					String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-					if(filename2.startsWith("/"))
+					if(Platform.isWindows() && filename2.startsWith("/"))
 						filename2=filename2.substring(1,filename2.length());
 					frame.setTitle(filename2 +" "+fileName);
 				} catch (URISyntaxException ex) {
@@ -1913,35 +1926,44 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					String renamedfile = filename_textfield.getText();
 					String filename=Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 					File file = new File(filename);
-								
+					
 					//JOptionPane.showMessageDialog(null,filename);
-					
-					if(filename.startsWith("/"))
-						filename=filename.substring(1,filename.length());
-					filename=filename.replace("/","\\");
+                    
+					if(Platform.isWindows()) {
+						/*
+						** The path of a jar on Windows starts with a slash that
+						** is not part of the path, and the slashes of the path
+						** are backslashes.
+						*/
+						if(filename.startsWith("/"))
+							filename=filename.substring(1,filename.length());
+						filename=filename.replace("/","\\");
+					}
 					//JOptionPane.showMessageDialog(null,filename);
+                    
+					String dir = Platform.directoryOf(filename);
 					
-					String dir = filename.replaceAll("[^\\\\]+\\.jar","");
-					
-					
-					FileWriter filewriter2 = new FileWriter(dir+"closeandrenamejar.bat",StandardCharsets.UTF_8);
-					BufferedWriter output2 = new BufferedWriter(filewriter2);
-					output2.write("cd "+dir);
-					output2.write("\n");
-					output2.write("START /B /WAIT taskkill /F /im java.exe");
-					output2.write("\n");
-					output2.write("START /B /WAIT taskkill /F /im javaw.exe");
-					output2.write("\n");
 					String onlyfilename = file.getName();
+					List<String> lines = Platform.scriptHeader(dir);
+					if(Platform.isWindows()) {
+						lines.add("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " "+renamedfile);
+						lines.add("java -jar "+renamedfile);
+					}
+					else {
+						lines.add("mv "+Platform.quote(onlyfilename)+" "+Platform.quote(renamedfile));
+						lines.add("java -jar "+Platform.quote(renamedfile));
+					}
 					
-					output2.write("START /B /WAIT cmd.exe /c RENAME "+onlyfilename+ " "+renamedfile);
-					output2.write("\n");
-					output2.write("java -jar "+renamedfile);
-					output2.write("\n");
-					output2.write("\n");
+					String scriptpath = dir+Platform.closeAndRenameJarScriptName();
+					FileWriter filewriter2 = new FileWriter(scriptpath,StandardCharsets.UTF_8);
+					BufferedWriter output2 = new BufferedWriter(filewriter2);
+					for(String line:lines) {
+						output2.write(line);
+						output2.write("\n");
+					}
 					output2.close();
 					CommandLine commandline = new CommandLine();
-					String liney = "powershell -Command \"Start-Process powershell -Verb runAs -ArgumentList '-Command cmd /c \""+dir+"closeandrenamejar.bat\"'\"";
+					String liney = Platform.scriptRunCommand(scriptpath);
 				
 					commandline.runWithMSDOS(liney,dir);
 				} catch(IOException ex) {
@@ -2072,7 +2094,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			
 			try {
 				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-				if(filename2.startsWith("/"))
+				if(Platform.isWindows() && filename2.startsWith("/"))
 					filename2=filename2.substring(1,filename2.length());
 				frame.setTitle(filename2 +" \"\"");
 			} catch(Exception ex) {
@@ -2227,7 +2249,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					if(fileName != null && !fileName.equals("")) {
 						try {
 							String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-							if(filename2.startsWith("/"))
+							if(Platform.isWindows() && filename2.startsWith("/"))
 								filename2=filename2.substring(1,filename2.length());
 							frame.setTitle(filename2 +" "+fileName);
 						} catch(Exception ex) {
@@ -2286,7 +2308,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 							if(sal == null)
 								sal = new SaveActionListener(this);
 							sal.actionPerformed(null); // Save file and update UI.
-							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
+							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Platform.fileNameOf(Main.this.fileName));
 							List<String> tabs=fileNames;
 							int tabsize=tabbedpane.getSelectedIndex();
 							if(tabs.size()<=tabsize)
@@ -2355,7 +2377,6 @@ if(result == 0) {
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
-							filename.isPowershell();
 							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						}
 						else {
@@ -2378,7 +2399,7 @@ if(result == 0) {
 							if(sal == null)
 								sal = new SaveActionListener(this);
 							sal.actionPerformed(null); // Save file and update UI.
-							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
+							tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Platform.fileNameOf(Main.this.fileName));
 							List<String> tabs=fileNames;
 							int tabsize=tabbedpane.getSelectedIndex();
 							if(tabs.size()<=tabsize)
@@ -2465,7 +2486,7 @@ if(result == 0) {
 						if(sal == null)
 							sal = new SaveActionListener(this);
 						sal.actionPerformed(null); // Save file and update UI.
-						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Main.this.fileName.replaceAll(".+\\\\",""));
+						tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),Platform.fileNameOf(Main.this.fileName));
 						List<String> tabs=fileNames;
 						int tabsize=tabbedpane.getSelectedIndex();
 						if(tabs.size()<=tabsize)
@@ -2588,7 +2609,7 @@ if(result == 0) {  // isOnePackage = true;
 			StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			Preferences preferences=storeselectedfile.get(fileName);
 			/*if(preferences == null || preferences.jars.size() == 0) {
-				String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+				String directory = Platform.directoryOf(fileName);
 				JFileChooser filechooser = new JFileChooser(new File(directory));
 				FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .jar","jar");
 				fileChooser.setFileFilter(filenameextensionfilter);
@@ -2628,7 +2649,7 @@ if(result == 0) {  // isOnePackage = true;
 				south.add(add);
 				jarframe.add(south,BorderLayout.SOUTH);
 				add.addActionListener( (ev1) -> {
-					String directory = fileName.replaceAll("[^\\\\]+\\.java","");
+					String directory = Platform.directoryOf(fileName);
 					JFileChooser filechooser = new JFileChooser(new File(directory));
 					FileNameExtensionFilter filenameextensionfilter= new FileNameExtensionFilter("Open .jar","jar");
 					filechooser.setFileFilter(filenameextensionfilter);
@@ -2680,7 +2701,7 @@ if(result == 0) {  // isOnePackage = true;
 				if(liney != null && !liney.equals("")) {
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 					int caretposition = textarea.getCaretPosition();
-					String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
+					String maindirectory=Platform.directoryOf(fileName);
 					storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 					open(liney);
 					new Recents().add(maindirectory+liney);
@@ -2695,7 +2716,7 @@ if(result == 0) {  // isOnePackage = true;
 					if(liney != null && !liney.equals("")) {
 						StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 						int caretposition = textarea.getCaretPosition();
-						String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
+						String maindirectory=Platform.directoryOf(fileName);
 						storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 						open(liney);
 						new Recents().add(maindirectory+liney);
@@ -2918,7 +2939,7 @@ if(result == 0) {  // isOnePackage = true;
 							if(liney != null && !liney.equals("")) {
 								StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 								int caretposition = textarea.getCaretPosition();
-								String maindirectory=fileName.replaceAll("[^\\\\]+\\.java","");
+								String maindirectory=Platform.directoryOf(fileName);
 								storeselectedfile.setCaretPosition(maindirectory+deselected,caretposition);
 								open(liney);
 								new Recents().add(maindirectory+liney);
@@ -3124,7 +3145,7 @@ if(result == 0) {  // isOnePackage = true;
 					
 					String dir = fileName;
 					if(!dir.equals("")) {
-						dir = fileName.replaceAll("[^\\\\]+\\.java","");
+						dir = Platform.directoryOf(fileName);
 					}
 					else {
 						dir = System.getProperty("user.home");
@@ -3146,7 +3167,7 @@ if(result == 0) {  // isOnePackage = true;
 						if(Main.this.fileName != null && !Main.this.fileName.equals("")) {
 							try {
 								String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-								if(filename2.startsWith("/"))
+								if(Platform.isWindows() && filename2.startsWith("/"))
 									filename2=filename2.substring(1,filename2.length());
 								Main.this.frame.setTitle(filename2 +" "+fileName);
 							}
@@ -3212,7 +3233,7 @@ if(result == 0) {  // isOnePackage = true;
 						String dir = fileName;
 						System.out.println("dir before is: "+dir);
 						if(!dir.equals("")) {
-							dir = dir.replaceAll("[^\\\\]+\\.java","");
+							dir = Platform.directoryOf(dir);
 						}
 						else {
 							dir = System.getProperty("user.home");
@@ -3256,7 +3277,7 @@ if(result == 0) {  // isOnePackage = true;
 			/* try {
 				sal.actionPerformed(ev);
 				if(!fileName.equals("")) {
-					String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+					String classpath = Platform.directoryOf(fileName);
 					CommandLine commandline = new CommandLine();
 					commandline.compileAll();
 					StoreSelectedFile storeselectedfile = new StoreSelectedFile();
@@ -3324,7 +3345,7 @@ if(result == 0) {  // isOnePackage = true;
 				(new StoreSelectedFile()).setCaretPosition(fileName,caretposition);
 					if(!fileName.equals("")) {
 						CommandLine commandline = new CommandLine();
-						String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+						String classpath = Platform.directoryOf(fileName);
 						
 						String filename = getFileName(fileName);
 						Packager packager = new Packager(Main.this);
@@ -3420,7 +3441,7 @@ if(result == 0) {  // isOnePackage = true;
 								}
 								
 								// Copy all classes with the same package name to new folder
-								File targetDir = new File(classpath+packagename.replace(".","\\"));   
+								File targetDir = new File(classpath+Platform.packageToPath(packagename));   
 								// destination folder
 								targetDir.mkdirs();
 								for(String file:filelistmodifier.fullpath) {
@@ -3491,37 +3512,21 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 							ExtractJUnit extractjunit = new ExtractJUnit(Main.this);
 							commandline.addJunit();
 						}
-						String main_class = fileName.replaceAll(".+\\\\","");						
+						String main_class = Platform.fileNameOf(fileName);						
 						main_class =main_class.replaceAll("\\.java","");
 						commandline.setMainClass(main_class);
 						if(checkbox.isSelected()) {
 							commandline.addClasspathCheckboxFeature();
 						}
 						// JOptionPane.showMessageDialog(null,commandline.javac());
-						// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
-						String[] command = new String[3];
-						command[0] = "cmd.exe";
-						command[1] = "/c";
-						command[2] = commandline.javac();
-						Runtime runtime = Runtime.getRuntime();
-						Process process = runtime.exec(command,null,new File(classpath));
+						Process process = commandline.run(commandline.javac(),classpath);
 						// process = compileFromMSDOS(fileName,classpath);
-						
-						InputStream inputstream = process.getErrorStream();
-						InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-						BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-						String line = bufferedreader.readLine();
-						if(line == null) {
+
+						String lines = new DisplayOutput().All(process);
+						if(lines.equals("")) {
 							JOptionPane.showMessageDialog(null,"compiled");
 						}
 						else {
-							String lines = line;
-							while(true) {
-								line = bufferedreader.readLine();
-								if(line == null)
-									break;
-								lines = lines+"\n"+line;
-							}
 							JOptionPane.showMessageDialog(null,lines);
 							CompileErrors compileerrors= new CompileErrors(Main.this,lines);
 						}
@@ -3535,7 +3540,7 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 						JOptionPane.showMessageDialog(null,"No filename saved.");
 					}
 				}
-				catch(IOException ex) {
+				catch(Exception ex) {
 					ex.printStackTrace();
 				}
 			}
@@ -3574,9 +3579,9 @@ JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath);
 								tabbedpane.setTitleAt(tabbedpane.getSelectedIndex(),getFileName(fileName));
 							}
 							storeselectedfile10.set(fileName);
-							String classpath1 = fileName.replaceAll("[^\\\\]+\\.java","");
-							String replaceAll = fileName.replaceAll("[^\\\\]+\\.java","");
-							String fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
+							String classpath1 = Platform.directoryOf(fileName);
+							String replaceAll = Platform.directoryOf(fileName);
+							String fileNameWithoutDotJava = Platform.fileNameOf(fileName).replace(".java","");
 							if(isClassExists(fileName) && isCompiled && string.equals(lines2)) { // End check if already saved
 								System.out.println("Is equal.");
 								
@@ -3609,8 +3614,8 @@ CommandLine commandline = new CommandLine();
 									StoreSelectedFile storeselectedfile2 = new StoreSelectedFile();
 									Preferences preferences=storeselectedfile2.get(fileName);
 									String rightfolder=Main.getDirectory(fileName);
-									if(!rightfolder.endsWith("\\"))
-										rightfolder=rightfolder+"\\";
+									if(!rightfolder.endsWith(Platform.separator()))
+										rightfolder=rightfolder+Platform.separator();
 									Preferences lockedPrefs=storeselectedfile2.get(rightfolder+selected+".java");
 									for(String jar:preferences.jars) {
 										commandline.addExternalJar(jar);
@@ -3632,13 +3637,6 @@ CommandLine commandline = new CommandLine();
 								if(checkbox.isSelected()) {
 									commandline.addClasspathCheckboxFeature();									
 								}
-								String[] command = new String[6];								
-								command[0] = "cmd";
-								command[1] = "/c";
-								command[2] = "start";
-								command[3] = "cmd";
-								command[4]= "/k";
-								command[5] = commandline.java();
 								StoreSelectedFile ssf = new StoreSelectedFile();
 								if(lock.isSelected()) {
 									ssf.setLocked(fileName, true);
@@ -3658,7 +3656,7 @@ CommandLine commandline = new CommandLine();
 								ssf.addStartupComboBoxInSameDirectory(fileName, commandline.main_class);
 								new Recents().add(getSelectedTabFileName());
 								startercombobox.Change(fileName);
-								Process process=runtime.exec(command,null,new File(classpath1));
+								commandline.runWithMSDOS(commandline.java(),classpath1);
 								// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath1);
 								
 								maven.Change(fileName);
@@ -3685,14 +3683,14 @@ CommandLine commandline = new CommandLine();
 									ExtractJUnit extractjunit = new ExtractJUnit(Main.this);										commandline.addJunit();
 								}
 
-								String main_class = fileName.replaceAll(".+\\\\","");									
+								String main_class = Platform.fileNameOf(fileName);									
 								main_class =main_class.replaceAll("\\.java","");
 								commandline.setMainClass(main_class);
 								if(checkbox.isSelected()) {
 									commandline.addClasspathCheckboxFeature();
 								}	
 						
-								classpath1=fileName.replaceAll("[^\\\\]+\\.java","");
+								classpath1=Platform.directoryOf(fileName);
 								
 								String filename = getFileName(fileName);
 								Packager packager = new Packager(Main.this);
@@ -3788,7 +3786,7 @@ CommandLine commandline = new CommandLine();
 										}
 										
 										// Copy all classes with the same package name to new folder
-										File targetDir = new File(classpath1+packagename.replace(".","\\"));   
+										File targetDir = new File(classpath1+Platform.packageToPath(packagename));   
 										// destination folder
 										targetDir.mkdirs();
 										for(String file:filelistmodifier.fullpath) {
@@ -3846,23 +3844,15 @@ CommandLine commandline = new CommandLine();
 								JOptionPane.showMessageDialog(null,"Output location of Jar: "+classpath1);
 								
 								startercombobox.Change(fileName);
-								// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
-								String[] command = new String[3];
-								command[0] = "cmd.exe";
-								command[1] = "/c";
-								command[2] = commandline.javac();
-								runtime = Runtime.getRuntime();
-								Process process = runtime.exec(command,null,new File(classpath1));
+								// runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+Platform.fileNameOf(fileName)},null,new File(classpath));
+								Process process = commandline.run(commandline.javac(),classpath1);
 								// process=Main.this.compileFromMSDOS(fileName,classpath1);
-								
-								InputStream inputstream = process.getErrorStream();
-								InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-								BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-								String line = bufferedreader.readLine();
-								if(line == null) {
+
+								String output = new DisplayOutput().All(process);
+								if(output.equals("")) {
 									JOptionPane.showMessageDialog(null,"compiled");
 									// run
-	 								String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+	 								String classpath = Platform.directoryOf(fileName);
 
 									commandline = new CommandLine();
 									
@@ -3886,8 +3876,8 @@ CommandLine commandline = new CommandLine();
 										storeselectedfile = new StoreSelectedFile();
 										preferences=storeselectedfile.get(fileName);
 										String rightfolder=Main.getDirectory(fileName);
-										if(!rightfolder.endsWith("\\"))
-											rightfolder=rightfolder+"\\";
+										if(!rightfolder.endsWith(Platform.separator()))
+											rightfolder=rightfolder+Platform.separator();
 										Preferences lockedPrefs=storeselectedfile.get(rightfolder+selected+".java");
 										for(String jar:preferences.jars) {
 											commandline.addExternalJar(jar);
@@ -3899,7 +3889,7 @@ CommandLine commandline = new CommandLine();
 										commandline.setMainClass(save);
 									}
 									else {
-										fileNameWithoutDotJava = fileName.replaceAll(".+\\\\","").replace(".java","");
+										fileNameWithoutDotJava = Platform.fileNameOf(fileName).replace(".java","");
 										commandline.setMainClass(fileNameWithoutDotJava);
 										
 										storeselectedfile = new StoreSelectedFile();
@@ -3916,14 +3906,7 @@ CommandLine commandline = new CommandLine();
 										commandline.addJunit();
 									}
 									// JOptionPane.showMessageDialog(null,commandline.java());
-									command = new String[6];
-									command[0] = "cmd";
-									command[1] = "/c";
-									command[2] = "start";
-									command[3] = "cmd";									
-									command[4]= "/k";
-									command[5] = commandline.java();
-									
+
 									StoreSelectedFile ssf = new StoreSelectedFile();
 									if(lock.isSelected()) {
 										ssf.setLocked(fileName, true);
@@ -3944,7 +3927,7 @@ CommandLine commandline = new CommandLine();
 									new Recents().add(getSelectedTabFileName());
 									
 startercombobox.Change(fileName);
-									process=runtime.exec(command,null,new File(classpath1));
+									process=commandline.runWithMSDOS(commandline.java(),classpath1);
 									// process = runJavaProgramFromMSDOS(fileNameWithoutDotJava,classpath);
 									
 									maven.Change(fileName);
@@ -3954,14 +3937,8 @@ startercombobox.Change(fileName);
 									git.Change(fileName);				
 								}
 								else {
-									String lines = line;
-									while(true) {
-										line = bufferedreader.readLine();
-										if(line == null)
-											break;
-										lines = lines+"\n"+line;
-									}
-									
+									String lines = output;
+
 									maven.Change(fileName);
 									threecomboboxes.load(fileName);
 									expandable.open();
@@ -4021,7 +3998,7 @@ startercombobox.Change(fileName);
 		if(fileName != null && !fileName.equals("")) {
 			try {
 				String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-				if(filename2.startsWith("/"))
+				if(Platform.isWindows() && filename2.startsWith("/"))
 					filename2=filename2.substring(1,filename2.length());
 				frame.setTitle(filename2 +" "+fileName);
 			} catch(Exception ex) {
@@ -4239,7 +4216,7 @@ startercombobox.Change(fileName);
 				//Component plustab = tabbedpane.getComponentAt(tindex);
 				String dir = filename;
 				if(!dir.equals("")) {
-					dir = dir.replaceAll("[^\\\\]+\\.java","");
+					dir = Platform.directoryOf(dir);
 				}
 				else {
 					dir = System.getProperty("user.home");
@@ -4322,7 +4299,7 @@ startercombobox.Change(fileName);
 					}
 				});
 				
-textarea2.addMouseListener(rightclick);
+				textarea2.addMouseListener(rightclick);
 				
 				tabbedpane.addTab(getFileName(filename),scrollpane2);
 				tabbedpane.addTab("+",pluspanel);
@@ -4333,34 +4310,34 @@ textarea2.addMouseListener(rightclick);
 				JScrollPane jscrollpane5=((JScrollPane)tabbedpane.getSelectedComponent());
 				Main.this.textarea=(JTextArea)jscrollpane5.getViewport().getView();
 				
-				StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
-				storeselectedfile3.set(fileName);
-				startercombobox.Change(fileName);
-				if(fileName != null && !fileName.equals("")) {
-					try {
-						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-						if(filename2.startsWith("/"))
-							filename2=filename2.substring(1,filename2.length());
-						frame.setTitle(filename2 +" "+fileName);
-					} catch (URISyntaxException ex) {
-						ex.printStackTrace();
-					}
+StoreSelectedFile storeselectedfile3 = new StoreSelectedFile();
+			storeselectedfile3.set(fileName);
+			startercombobox.Change(fileName);
+			if(fileName != null && !fileName.equals("")) {
+				try {
+					String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+					if(Platform.isWindows() && filename2.startsWith("/"))
+						filename2=filename2.substring(1,filename2.length());
+					frame.setTitle(filename2 +" "+fileName);
+				} catch (URISyntaxException ex) {
+					ex.printStackTrace();
 				}
-				threecomboboxes.load(fileName);
-				expandable.open();
-				
-				SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
-					@Override
-					protected Void doInBackground() {
-						git.ChangeBackgroundThread(fileName);
-						return null;
-					}
-					@Override
-					protected void done() {
-						git.ChangeEDT(fileName);
-					}
-				};
-				gitWorker.execute();
+			}
+			threecomboboxes.load(fileName);
+			expandable.open();
+			
+			SwingWorker<Void,Void> gitWorker = new SwingWorker<>() {
+				@Override
+				protected Void doInBackground() {
+					git.ChangeBackgroundThread(fileName);
+					return null;
+				}
+				@Override
+				protected void done() {
+					git.ChangeEDT(fileName);
+				}
+			};
+			gitWorker.execute();
 
 				/*if(!deselected.equals("")) {
 					filelistmodifier.setToMostRecentAfterSelected(deselected);	
@@ -4397,7 +4374,7 @@ textarea2.addMouseListener(rightclick);
 					//Component plustab = tabbedpane.getComponentAt(tindex);
 					String dir = Main.this.fileName;
 					if(!dir.equals("")) {
-						dir = dir.replaceAll("[^\\\\]+\\.java","");
+						dir = Platform.directoryOf(dir);
 					}
 					else {
 						dir = System.getProperty("user.home");
@@ -4495,7 +4472,7 @@ textarea2.addMouseListener(rightclick);
 						tabbedpane.addTab("+",pluspanel);
 						tabbedpane.setSelectedIndex(tabbedpane.getTabCount()-2);
 						
-this.fileName=directoryandfilename;
+						this.fileName=directoryandfilename;
 						new Recents().add(directoryandfilename);
 						int caretposition=storeselectedfile.getCaretPosition(directoryandfilename);
 						SwingUtilities.invokeLater(() -> {
@@ -4571,35 +4548,35 @@ this.fileName=directoryandfilename;
 	}
 	public Process compileSourceCodeWithClasspath(String fileName,String classpath) {
 		try {
-			Runtime runtime = Runtime.getRuntime();
-			return runtime.exec(new String[]{"cmd.exe","/c","javac -cp *;. "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
+			CommandLine commandline = new CommandLine();
+			return commandline.run("javac -cp "+Platform.classpathWildcard()+" "+Platform.fileNameOf(fileName),classpath);
 		}
-		catch(IOException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	}	
-	public Process compileSourceCodeWithoutClasspath(String fileName,String classpath) {
-		try {
-			Runtime runtime = Runtime.getRuntime();
-			return runtime.exec(new String[]{"cmd.exe","/c","javac "+fileName.replaceAll(".+\\\\","")},null,new File(classpath));
-		}
-		catch(IOException ex) {
+		catch(Exception ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
-	
+	public Process compileSourceCodeWithoutClasspath(String fileName,String classpath) {
+		try {
+			CommandLine commandline = new CommandLine();
+			return commandline.run("javac "+Platform.fileNameOf(fileName),classpath);
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
 	public Process runJavaProgramFromMSDOS(String fileNameWithoutDotJava,String classpath) {
 		try {
-			Runtime runtime = Runtime.getRuntime();
-			if(checkbox.isSelected()) {		
-				return runtime.exec(new String[]{"cmd","/c","start","cmd","/k","java -cp *;. "+fileNameWithoutDotJava},null,new File(classpath));
+			CommandLine commandline = new CommandLine();
+			if(checkbox.isSelected()) {
+				return commandline.runWithMSDOS("java -cp "+Platform.classpathWildcard()+" "+fileNameWithoutDotJava,classpath);
 			}
 			else {
-				return runtime.exec(new String[]{"cmd","/c","start","cmd","/k","java "+fileNameWithoutDotJava},null,new File(classpath));
+				return commandline.runWithMSDOS("java "+fileNameWithoutDotJava,classpath);
 			}
-		} catch(IOException ex) {
+		} catch(Exception ex) {
 			ex.printStackTrace();
 			return null;
 		}
@@ -4789,8 +4766,16 @@ class OpenDefaultContent {
 		try {
 		StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 		this.fileName = storeselectedfile.get();
-		File file2 = new File(fileName); 
-		if(!file2.exists()) {
+		/*
+		** An empty name means that there is no file to open yet. The name is
+		** checked here and not with the file that the name gives, because a
+		** file with an empty path exists on Linux and does not exist on
+		** Windows, so the two systems would give a different answer and the
+		** program would crash on one of them.
+		*/
+		boolean nofile = fileName == null || fileName.trim().equals("");
+		File file2 = new File(fileName == null ? "" : fileName);
+		if(nofile || !file2.exists()) {
 			String userDir = System.getProperty("user.dir");
 			String userHome = System.getProperty("user.home");
 			String baseDir = "";
@@ -4803,7 +4788,7 @@ class OpenDefaultContent {
 				}
 			}
 			if(baseDir.equals("")) {
-				if(userDir.replace("\\","").matches("[a-zA-Z]:")) {
+				if(Platform.isRootDirectory(userDir)) {
 					baseDir = userHome;
 				} else {
 					baseDir = userDir;
@@ -4846,6 +4831,13 @@ class OpenDefaultContent {
 	*/
 	OpenDefaultContent(String fileName3) {
 		try {
+		/*
+		** An empty name means that there is no file to open, and the editor
+		** starts with an empty tab.
+		*/
+		if(fileName3 == null || fileName3.trim().equals("")) {
+			return;
+		}
 		File file2 = new File(fileName3);
 		FileReader filereader = new FileReader(file2);
 		char[] chars = new char[(int)file2.length()];
@@ -4887,7 +4879,7 @@ class SaveActionListener implements ActionListener {
 				if(main.fileName != null && !main.fileName.equals("")) {
 					try {
 						String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-						if(filename2.startsWith("/"))
+						if(Platform.isWindows() && filename2.startsWith("/"))
 							filename2=filename2.substring(1,filename2.length());
 						main.frame.setTitle(filename2 +" "+main.fileName);
 					} catch (URISyntaxException ex) {
@@ -4913,7 +4905,7 @@ class SaveActionListener implements ActionListener {
 					if(main.fileName != null && !main.fileName.equals("")) {
 						try {
 							String filename2=Powershell.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-							if(filename2.startsWith("/"))
+							if(Platform.isWindows() && filename2.startsWith("/"))
 								filename2=filename2.substring(1,filename2.length());
 							main.frame.setTitle(filename2 +" "+main.fileName);
 						} catch (URISyntaxException ex) {
@@ -4921,7 +4913,7 @@ class SaveActionListener implements ActionListener {
 						}
 					}
 					
-					main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),main.fileName.replaceAll(".+\\\\",""));
+					main.tabbedpane.setTitleAt(main.tabbedpane.getSelectedIndex(),Platform.fileNameOf(main.fileName));
 					List<String> tabs=main.fileNames;
 					int tabsize = main.tabbedpane.getSelectedIndex();
 
@@ -4960,7 +4952,7 @@ class OpenActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		String dir = main.fileName;
 		if(!dir.equals("")) {
-			dir = dir.replaceAll("[^\\\\]+\\.java","");
+			dir = Platform.directoryOf(dir);
 		}
 		else {
 			dir = System.getProperty("user.home");
@@ -5858,7 +5850,7 @@ class AutoKeyListener {
 			for(String filename:main.allclassesinfolder) {
 				if(filename.startsWith(input)) {
 					try {
-						String dir = main.fileName.replaceAll("[^\\\\]+\\.java","");
+						String dir = Platform.directoryOf(main.fileName);
 						ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);
 						Class<?> clazz = classloader.loadClass(filename);
 						java.lang.reflect.Constructor<?>[] constructors = clazz.getDeclaredConstructors();
@@ -6276,7 +6268,7 @@ class MethodSuggestionBox {
 				classname = classname.replaceAll("<.+>","");
 			}
 			if(main.fileName == null) return null;
-			String dir=main.fileName.replaceAll("[^\\\\]+\\.java","");
+			String dir=Platform.directoryOf(main.fileName);
 			ClassInFolderClassLoader classloader = new ClassInFolderClassLoader(dir);			
 			Class<?> classquestionmark=classloader.loadClass(dir+classname);
 			// Class<?> classquestionmark=Class.forName();
@@ -7121,4 +7113,4 @@ class Caret_Tracker {
 		selected++;
 		return caret_tracker.get(selected);
 	}
-}
+}

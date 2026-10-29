@@ -61,8 +61,8 @@ public class MainDotJars {
 				
 				// If javac -d then this is generated: javaeditor/minorbugsfix/javaeditor/minorbugsfix/Main.jar
 				String dir=Main.getDirectory(main.fileName);
-				if(!dir.endsWith("\\"))
-					dir=dir+"\\";
+				if(!dir.endsWith(Platform.separator()))
+					dir=dir+Platform.separator();
 				String filePath=getFilePath(dir+packager.getPackageName());
 				if(isExists(filePath))
 					maindotjars.add(filePath);
@@ -80,8 +80,8 @@ public class MainDotJars {
 		}
 	}
 	private String getFilePath(String dir) {
-		if(!dir.endsWith("\\"))
-			dir=dir+"\\";
+		if(!dir.endsWith(Platform.separator()))
+			dir=dir+Platform.separator();
 		String classname=Main.getClassName(main.fileName);
 		String filepath=dir+classname+".jar";
 		return filepath;
@@ -98,8 +98,8 @@ public class MainDotJars {
 		String[] packagefolders=packager.getPackageName().split("\\.");
 		//String[] packagefolders="javaeditor.minorbugsfix".split("\\.");
 		String fileName2=classpath;
-		if(!fileName2.endsWith("\\"))
-			fileName2=fileName2+"\\";
+		if(!fileName2.endsWith(Platform.separator()))
+			fileName2=fileName2+Platform.separator();
 		for(int i = 0; i < packagefolders.length-1; i++) {
 			String packageFolder=packagefolders[i];
 			fileName2=fileName2+packageFolder;

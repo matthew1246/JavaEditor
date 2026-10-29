@@ -9,15 +9,22 @@ public class ClassInFolderClassLoader extends ClassLoader {
 	}
 	@Override 
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
-		if(!name.contains("\\") && !name.contains(".")) {
+		if(!isPath(name) && !name.contains(".")) {
 			name=folder+name;
 		}
 		return super.loadClass(name);
 	}
+	/*
+	** A class name that is a path to a class file has a separator in it.
+	** The separator is a backslash on Windows and a forward slash on Linux.
+	*/
+	private boolean isPath(String name) {
+		return name.contains("\\") || name.contains("/");
+	}
 	protected Class<?> findClass(String classname) throws ClassNotFoundException {
 		try {
 		FileInputStream fileinputstream;
-		if(classname.contains("\\")) {
+		if(isPath(classname)) {
 			fileinputstream = new FileInputStream(classname+".class");
 		}
 		else {
@@ -36,7 +43,7 @@ public class ClassInFolderClassLoader extends ClassLoader {
 		fileinputstream.read(bytes);
 		if(bytes == null) throw new ClassNotFoundException("Class "+classname+" not found.");
 		
-		if(classname.contains("\\")) {
+		if(isPath(classname)) {
 			classname = classname.replace(folder,"");
 		}
 		Class<?> classquestionmark=defineClass(classname,bytes,0,bytes.length);

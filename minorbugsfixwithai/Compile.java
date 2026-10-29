@@ -12,7 +12,7 @@ public class Compile {
 			sal.actionPerformed(ev);
 			if(fileName.equals(""))
 				fileName = main.fileName;
-			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+			String classpath = Platform.directoryOf(fileName);
 			CommandLine commandline = new CommandLine();
 			commandline.compileAll();
 			
@@ -109,7 +109,7 @@ public class Compile {
 						}
 					}
 					// Copy all classes with the same package name to new folder
-					File targetDir = new File(classpath+packagename.replace(".","\\"));   
+					File targetDir = new File(classpath+Platform.packageToPath(packagename));
 					// destination folder
 					targetDir.mkdirs();
 					for(String file:main.filelistmodifier.fullpath) {
@@ -182,41 +182,26 @@ public class Compile {
 			}
 			
 			//Process process = compileFromMSDOS("*.java",classpath);
-			String[] command = new String[3];
-			command[0] = "cmd.exe";
-			command[1] = "/c";
-			command[2] = commandline.javac();
-			Runtime runtime = Runtime.getRuntime();
-			Process process = runtime.exec(command,null,new File(classpath));
+			Process process = commandline.run(commandline.javac(),classpath);
 			
-			InputStream inputstream = process.getErrorStream();
-			InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-			BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-			String line = bufferedreader.readLine();
-			if(line == null) {
+			String lines = new DisplayOutput().All(process);
+			if(lines.equals("")) {
 				JOptionPane.showMessageDialog(null,"compiled");
 			}
 			else {
-				String lines = line;
-				while(true) {
-					line = bufferedreader.readLine();
-					if(line == null)
-						break;
-					lines = lines+"\n"+line;
-				}
 				JOptionPane.showMessageDialog(null,lines);
 				CompileErrors compileerrors=new CompileErrors(main,lines);
 			}
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
-		}		
+		}
 	}
 	public void compileall(Main main,String fileName,SaveActionListener sal,ActionEvent ev) {
 		try {
 			sal.actionPerformed(ev);
 			if(fileName.equals(""))
 				fileName = main.fileName;
-			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+			String classpath = Platform.directoryOf(fileName);
 			CommandLine commandline = new CommandLine();
 			commandline.compileAll();
 			
@@ -313,7 +298,7 @@ public class Compile {
 						}
 					}
 					// Copy all classes with the same package name to new folder
-					File targetDir = new File(classpath+packagename.replace(".","\\"));   
+					File targetDir = new File(classpath+Platform.packageToPath(packagename));
 					// destination folder
 					targetDir.mkdirs();
 					for(String file:main.filelistmodifier.fullpath) {
@@ -378,40 +363,25 @@ public class Compile {
 			}
 			
 			//Process process = compileFromMSDOS("*.java",classpath);
-			String[] command = new String[3];
-			command[0] = "cmd.exe";
-			command[1] = "/c";
-			command[2] = commandline.javac();
-			Runtime runtime = Runtime.getRuntime();
-			Process process = runtime.exec(command,null,new File(classpath));
+			Process process = commandline.run(commandline.javac(),classpath);
 			
-			InputStream inputstream = process.getErrorStream();
-			InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-			BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-			String line = bufferedreader.readLine();
-			if(line == null) {
+			String lines = new DisplayOutput().All(process);
+			if(lines.equals("")) {
 				JOptionPane.showMessageDialog(null,"compiled");
 			}
 			else {
-				String lines = line;
-				while(true) {
-					line = bufferedreader.readLine();
-					if(line == null)
-						break;
-					lines = lines+"\n"+line;
-				}
 				JOptionPane.showMessageDialog(null,lines);
 			}
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
-		}		
+		}
 	}
 	public void compileall(Main main,String fileName,int javaversionnumber,SaveActionListener sal,ActionEvent ev) {
 		try {
 			sal.actionPerformed(ev);
 			if(fileName.equals(""))
 				fileName = main.fileName;
-			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+			String classpath = Platform.directoryOf(fileName);
 			CommandLine commandline = new CommandLine();
 			commandline.compileAll();
 			
@@ -508,7 +478,7 @@ public class Compile {
 						}
 					}
 					// Copy all classes with the same package name to new folder
-					File targetDir = new File(classpath+packagename.replace(".","\\"));   
+					File targetDir = new File(classpath+Platform.packageToPath(packagename));
 					// destination folder
 					targetDir.mkdirs();
 					for(String file:main.filelistmodifier.fullpath) {
@@ -576,40 +546,25 @@ public class Compile {
 				commandline.earlierjavaversion(javaversionnumber);
 			
 			//Process process = compileFromMSDOS("*.java",classpath);
-			String[] command = new String[3];
-			command[0] = "cmd.exe";
-			command[1] = "/c";
-			command[2] = commandline.javac();
-			Runtime runtime = Runtime.getRuntime();
-			Process process = runtime.exec(command,null,new File(classpath));
+			Process process = commandline.run(commandline.javac(),classpath);
 			
-			InputStream inputstream = process.getErrorStream();
-			InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-			BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-			String line = bufferedreader.readLine();
-			if(line == null) {
+			String lines = new DisplayOutput().All(process);
+			if(lines.equals("")) {
 				JOptionPane.showMessageDialog(null,"compiled");
 			}
 			else {
-				String lines = line;
-				while(true) {
-					line = bufferedreader.readLine();
-					if(line == null)
-						break;
-					lines = lines+"\n"+line;
-				}
 				JOptionPane.showMessageDialog(null,lines);
 			}
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
-		}		
+		}
 	}
 	public void compileallbutton(Main main,String fileName,SaveActionListener sal,ActionEvent ev) {
 		try {
 			sal.actionPerformed(ev);
 			if(fileName.equals(""))
 				fileName = main.fileName;
-			String classpath = fileName.replaceAll("[^\\\\]+\\.java","");
+			String classpath = Platform.directoryOf(fileName);
 			CommandLine commandline = new CommandLine();
 			commandline.compileAll();
 			
@@ -706,7 +661,7 @@ public class Compile {
 						}
 					}
 					// Copy all classes with the same package name to new folder
-					File targetDir = new File(classpath+packagename.replace(".","\\"));   
+					File targetDir = new File(classpath+Platform.packageToPath(packagename));
 					// destination folder
 					targetDir.mkdirs();
 					for(String file:main.filelistmodifier.fullpath) {
@@ -779,32 +734,17 @@ public class Compile {
 			}
 			
 			//Process process = compileFromMSDOS("*.java",classpath);
-			String[] command = new String[3];
-			command[0] = "cmd.exe";
-			command[1] = "/c";
-			command[2] = commandline.javac();
-			Runtime runtime = Runtime.getRuntime();
-			Process process = runtime.exec(command,null,new File(classpath));
+			Process process = commandline.run(commandline.javac(),classpath);
 			
-			InputStream inputstream = process.getErrorStream();
-			InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-			BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-			String line = bufferedreader.readLine();
-			if(line == null) {
+			String lines = new DisplayOutput().All(process);
+			if(lines.equals("")) {
 				JOptionPane.showMessageDialog(null,"compiled");
 			}
 			else {
-				String lines = line;
-				while(true) {
-					line = bufferedreader.readLine();
-					if(line == null)
-						break;
-					lines = lines+"\n"+line;
-				}
 				JOptionPane.showMessageDialog(null,lines);
 			}
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
-		}		
+		}
 	}
 }

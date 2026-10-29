@@ -1,9 +1,19 @@
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.IOException;
 public class CommandLine {
+ 	public static void main(String[] args) {
+ 		CommandLine commandline = new CommandLine();
+ 		if(commandline.doesCommandExist("cls")) {
+		            System.out.println("Command does exist!");
+	            } else {
+		           	System.out.println("Command doesn't exist!");
+            	}
+ 	}
  	public StarNorDot javac_star_nor_dot = new StarNorDot();
  	public StarNorDot java_star_nor_dot= new StarNorDot();
 	private String junitmain_class = "";
@@ -84,48 +94,48 @@ private boolean isPackage = false;
 	** This adds all jars in public static void main(String[] args) directory.
 	*/
 	public void addClasspathCheckboxFeature() {
-		String default0 = ".;*";
+		String default0 = Platform.isWindows() ? ".*" : ".:*";
 		if(isPackage && !isPackageWithMinusD) {
-			default0=".;*";
+			default0=Platform.isWindows() ? ".*" : ".:*";
 		}
 		else if(isPackageWithMinusD) {
-			default0=".;*";
+			default0=Platform.isWindows() ? ".*" : ".:*";
 		}
 		javac_star_nor_dot.setStarNorDot(default0);
 		javac_star_nor_dot.lock();
-		
+
 		if(isPackage && !isPackageWithMinusD) {
-			default0=".;*";
+			default0=Platform.isWindows() ? ".*" : ".:*";
 		}
 		else if(isPackageWithMinusD) {
-			default0=".;*";
+			default0=Platform.isWindows() ? ".*" : ".:*";
 		}
 		java_star_nor_dot.setStarNorDot(default0);
 		java_star_nor_dot.lock();
 	}
-	
+
 	public String getJars() {
-		return String.join(";",jars);
+		return String.join(File.pathSeparator,jars);
 	}
-	
+
 	public String getClasspath(StarNorDot isjavaorjavac) {
 		if(isjavaorjavac.isEmpty() && jars.size() == 0) {
 			return "";
 		}
 		String classpath = "";
-		if(jars.size() > 0) { 
+		if(jars.size() > 0) {
 			classpath= classpath+jars.get(0);
 			for(int i = 1; i < jars.size(); i++) {
-				classpath=classpath+";"+jars.get(i);
+				classpath=classpath+File.pathSeparator+jars.get(i);
 			}
 		}
 		if(!isjavaorjavac.isEmpty() && jars.size() > 0) {
-			classpath=";"+classpath;
+			classpath=File.pathSeparator+classpath;
 		}
 		if(!isjavaorjavac.isEmpty()) {
 			classpath=isjavaorjavac.getStarNorDot()+classpath;
 		}
-		
+
 classpath = "-cp "+classpath;
 		return classpath;
 	}
@@ -146,9 +156,10 @@ classpath = "-cp "+classpath;
 	public String javac() {
 		String package1 = "";
 		if(isPackage && !isPackageWithMinusD) {
-			package1=packagename.replace(".","\\")+"\\";
+			package1=packagename.replace(".","/")+"/";
 		}						
-		String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
+		//String str = "\""+System.getProperty("java.home")+"\\bin\\javac.exe\"";
+		String str="javac";
 		if(isdeprecated) {
 			str+=" -Xlint:deprecation";
 		}
@@ -159,7 +170,9 @@ classpath = "-cp "+classpath;
 			str+=" -d . ";			
 		}		
 		str=str+Prettify(getClasspath(javac_star_nor_dot))+" "+package1+main_class+".java";
-		JOptionPane.showMessageDialog(null,str);
+		if(!java.awt.GraphicsEnvironment.isHeadless()) {
+			JOptionPane.showMessageDialog(null,str);
+		}
 		return str;
 	}
 	
@@ -172,8 +185,11 @@ classpath = "-cp "+classpath;
 			package2=packagename+".";
 		}		
 		//String command = "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
-		String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
-		JOptionPane.showMessageDialog(null,command);
+		//String command=  "\""+System.getProperty("java.home")+"\\bin\\java.exe\""+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		String command=  "java"+Prettify(getClasspath(java_star_nor_dot))+Prettify(junitmain_class)+" "+package2+main_class;
+		if(!java.awt.GraphicsEnvironment.isHeadless()) {
+			JOptionPane.showMessageDialog(null,command);
+		}
 		return command;
 	}	
 	
@@ -183,12 +199,18 @@ classpath = "-cp "+classpath;
 	*/
 	public Process run(String command,String dir) {
 		try {
+			/*
+			** The command is given to the shell of the system, so that the
+			** quotes and the paths with spaces in them are kept as they are.
+			** On Windows that is cmd.exe and on Linux it is bash.
+			*/
+			String[] commands=Platform.shellCommand(command);
+			ProcessBuilder processbuilder=new ProcessBuilder(commands);
+			processbuilder.redirectErrorStream(true);
+			if(dir != null)
+				processbuilder.directory(new File(dir));
 			
-String[] command2 =new String[3];
-			command2[0] = "cmd.exe";
-			command2[1] = "/c";
-			command2[2] = command;
-			Process process = Runtime.getRuntime().exec(command2,null,new File(dir));
+			Process process=processbuilder.start();
 			return process;
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -202,13 +224,24 @@ String[] command2 =new String[3];
 		try {
 			// command format: "C:\path\to\jar.exe" arg1 arg2 ...
 			int endQuote = command.indexOf("\"", 1);
+			if(endQuote < 0) {
+				return run(command,dir);
+			}
 			String exePath = command.substring(1, endQuote);
 			String args = command.substring(endQuote + 1).trim();
+			if(!Platform.isWindows()) {
+				/*
+				** Linux has no administrator rights that work the same way as
+				** they do on Windows, so the command is simply run.
+				*/
+				return run(command,dir);
+			}
 			String ps = "Start-Process -FilePath '" + exePath + "' -Verb RunAs -ArgumentList '" + args.replace(" ", "','") + "'";
 			System.out.println("command: "+ps);
 			ProcessBuilder pb = new ProcessBuilder(
 				"powershell", "-NoProfile", "-Command", ps
 			);
+			pb.redirectErrorStream(true);
 			pb.directory(new File(dir));
 			Process process = pb.start();
 			return process;
@@ -221,26 +254,55 @@ String[] command2 =new String[3];
 	** Run any command while showing MSDOS console
 	*/
 	public Process runWithMSDOS(String command,String dir) {
-		String[] command2 = new String[6];
-		command2[0] = "cmd";
-		command2[1] = "/c";
-		command2[2] = "start";
-		command2[3] = "cmd";
-		command2[4]= "/k";
-		command2[5] = command;
-		return run(command2,dir);
+		if(Platform.isWindows()) {
+			String[] command2 = new String[6];
+			command2[0] = "cmd";
+			command2[1] = "/c";
+			command2[2] = "start";
+			command2[3] = "cmd";
+			command2[4]= "/k";
+			command2[5] = command;
+			return run(command2,dir);
+		}
+		/*
+		** Linux has no console window of its own, so a terminal emulator is
+		** used to show the command. When there is no terminal emulator on the
+		** computer the command is run without a window.
+		*/
+		if(Platform.openConsole(command,dir)) {
+			return null;
+		}
+		try {
+			ProcessBuilder processbuilder=new ProcessBuilder(Platform.shellCommand(command));
+			processbuilder.inheritIO();
+			if(dir != null)
+				processbuilder.directory(new File(dir));
+			return processbuilder.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 	/*
 	** Run any program without msdos
 	*/
 	public Process run(String[] arguments,String dir) {
 		try {
-			Process process = Runtime.getRuntime().exec(arguments,null,new File(dir));
+			ProcessBuilder processbuilder=new ProcessBuilder(arguments);
+			processbuilder.redirectErrorStream(true);
+			if(dir != null)
+				processbuilder.directory(new File(dir));
+			
+			Process process=processbuilder.start();
 			return process;
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
+	public boolean doesCommandExist(String command) {
+		return Platform.commandExists(command);
+    }
 }
 																																

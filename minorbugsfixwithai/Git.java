@@ -1,15 +1,41 @@
+// import org.junit.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater( () -> {
+			Git git=new Git();
+			System.out.println("Git is installed? "+git.isGitInstalled());
+			String testfile=new File("Git.java").getAbsolutePath();
+			git.ChangeBackgroundThread(testfile);
+			git.ChangeEDT(testfile);
+			
+			/*git.ChangeBackgroundThread("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
+			git.ChangeEDT("C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java");
+			*/
+			//git.setLayout();
+		});
+	}
 	public String root_directory;
 	public String directory;
 	public JFrame frame;
 	public String gitbashdotexe = "";
 	public boolean setWhereIsGitBashDotExe(String fileName) {
+		if(!Platform.isWindows()) {
+			/*
+			** Linux has no git bash, but it has bash and git, and those are
+			** what the git features need.
+			*/
+			if(Platform.commandExists("bash") && Platform.commandExists("git")) {
+				gitbashdotexe=Platform.shellName();
+				return true;
+			}
+		}
 		String[] commonPaths = {
 		    "C:\\Program Files\\Git\\git-bash.exe",
 		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
@@ -17,28 +43,31 @@ public class Git {
 		
 		for(String path : commonPaths) {
 			File file = new File(path);
-		    	if (file.exists()) {
-		        		gitbashdotexe=file.getAbsolutePath();
-		    		return true;		
-		    	}
-	    	}
+	    	if (file.exists()) {
+        		gitbashdotexe=file.getAbsolutePath();
+    			return true;		
+    		}
+    	}
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
 		return false;		
 	}
-	public boolean setWhereIsGitBashDotExeBackgroundThread() {
-		String[] commonPaths = {
-		    "C:\\Program Files\\Git\\git-bash.exe",
-		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
-		};
-		
-		for(String path : commonPaths) {
-			File file = new File(path);
-		    	if (file.exists()) {
-		        		gitbashdotexe=file.getAbsolutePath();
-		    		return true;		
-		    	}
-	    	}
-	    	return false;
+public boolean setWhereIsGitBashDotExeBackgroundThread() {
+		if(Platform.isWindows()) {
+			String bash = findWindowsBash();
+			if(new File(bash).exists()) {
+				gitbashdotexe = bash;
+				return true;
+			}
+			return false;
+		}
+		else {
+			CommandLine commandline = new CommandLine();
+			boolean exists = commandline.doesCommandExist("bash");
+			if(exists) {
+				gitbashdotexe = Platform.shellName();
+			}
+			return exists;
+		}
     	}
     	public boolean setWhereIsGitBashDotExeEDT() {
 		JOptionPane.showMessageDialog(null,"Can't show Git features for Matthew Java Editor.");
@@ -47,33 +76,35 @@ public class Git {
 	public boolean isFileInsideGitRepository(String fileName) {
 		if(fileName.equals(""))
 			return false;	
-		directory=fileName.replaceAll("[^\\\\]+\\.java","");
+		directory=Platform.directoryOf(fileName);
 		CommandLine commandline = new CommandLine();
 		Process process=commandline.run("git rev-parse --show-toplevel",directory);
+		if(process == null)
+			return false;
 		DisplayOutput displayoutput = new DisplayOutput();
 		String oneline=displayoutput.OneLine(process);
+		try {
+			/*
+			** The command gives an error when the file is not inside a git
+			** repository, and that error is in the output, so the exit code
+			** of the command is what says whether it worked.
+			*/
+			if(process.waitFor() != 0)
+				return false;
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+			return false;
+		}
 		return !(oneline.equals("line is null"));
 	}
-	public boolean isGitInstalled() {
-		try {
-			String[] command2 =new String[3];
-			command2[0] = "cmd.exe";
-			command2[1] = "/c";
-			command2[2] = "git --version";
-			Process process = Runtime.getRuntime().exec(command2,null);
-		            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		
-		            String output;
-		            return reader.readLine() != null;
-	            } catch(IOException ex) {
-	            	ex.printStackTrace();
-	            	return false;
-            	}
+public boolean isGitInstalled() {
+		CommandLine commandline = new CommandLine();
+		return commandline.doesCommandExist("git");
             }
 
 	public void Change(String fileName) {
 		if(isGitInstalled()) {
-			if(isFileInsideGitRepository(fileName) && setWhereIsGitBashDotExe(fileName)) {
+			if(isGitBashDotExeFoundByBackgroundThread && isFileInsideGitRepository(fileName)) {
 				setDirectoryAndRootDirectory(fileName);
 				if(frame == null) {
 					setLayout();
@@ -91,31 +122,35 @@ public class Git {
      			if(isFileInsideGitRepository(fileName)) {
      				isFileInsideGitRepository = true;
      				isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeBackgroundThread();
-     				setDirectoryAndRootDirectory(fileName);
-     				whichbranchopened=whichBranchOpened();	
+     				if(isGitBashDotExeFoundByBackgroundThread) {
+	     				setDirectoryAndRootDirectory(fileName);
+	     				whichbranchopened=whichBranchOpened();
+     				}
      			}
      		}
      	}
       	public void ChangeEDT(String fileName) {
-      		if(isFileInsideGitRepository) {
-	      		if(!isGitBashDotExeFoundByBackgroundThread) {
-	      			isGitBashDotExeFoundByBackgroundThread=setWhereIsGitBashDotExeEDT();
+      		if(!isFileInsideGitRepository) return;
+      		if(isGitBashDotExeFoundByBackgroundThread) {
+      			if(frame == null) {
+				setLayout();
+		      		setListeners();
 	      		}
-	      		if(isGitBashDotExeFoundByBackgroundThread) {
-	      			if(frame == null) {
-					setLayout();
-			      		setListeners();
-		      		}
-			      	frame.setTitle(whichbranchopened);
-		      	}
+		      	frame.setTitle(whichbranchopened);
 	      	}
       	}
+      	public void testsetDirectoryAndRootDirectory() {
+      		setDirectoryAndRootDirectory(new File("Git.java").getAbsolutePath());
+      		/*org.junit.Assert.assertEquals("/home/owner/javaeditor",root_directory);
+      		org.junit.Assert.assertEquals("/home/owner/javaeditor/minorbugsfixlinux/",directory);
+      		*/
+      	}
       	public void setDirectoryAndRootDirectory(String fileName) {
-		directory=fileName.replaceAll("[^\\\\]+\\.java","");
-		CommandLine commandline = new CommandLine();
-		Process process=commandline.run("git rev-parse --show-toplevel",directory);
-		DisplayOutput displayoutput = new DisplayOutput();
-		root_directory = displayoutput.OneLine(process);
+      		directory=Main.getDirectory(fileName);
+      		CommandLine commandline = new CommandLine();
+      		Process process=commandline.run("git rev-parse --show-toplevel",directory);
+      		DisplayOutput displayoutput = new DisplayOutput();
+      		root_directory = displayoutput.OneLine(process);
       	}
       	
       	public JButton seeallchanges;
@@ -128,33 +163,91 @@ public class Git {
 	public JButton switch2_branch;
 	
 	public JButton reset;
-	public void setLayout() {
+public void setLayout() {
 		frame=new JFrame();
-		frame.setSize(550,100);
- 		// previously 500,100
-		frame.setLocation(980,0);
+		JPanel panel=new JPanel();
+		panel.setLayout(new MatthewLayout());
 		input.setText("git status");
-		frame.getContentPane().add(input,BorderLayout.CENTER);
-		run = new JButton("run");
-		frame.getContentPane().add(run,BorderLayout.SOUTH);
-		
-		JPanel east = new JPanel();
+		panel.add(input,new XYWidthHeight(0,0,2,1));
 		
 		switch2_branch = new JButton("switch branch");
-		east.add(switch2_branch);
+		panel.add(switch2_branch,new XYWidthHeight(1,0,4,1));
 		reset = new JButton("reset");
-		east.add(reset);
+		panel.add(reset,new XYWidthHeight(2,0,1,1));
 		upload = new JButton("upload");
-		east.add(upload);
+		panel.add(upload,new XYWidthHeight(3,0,2,1));
 		addtoall = new JButton("add to all");
-		east.add(addtoall);
+		panel.add(addtoall,new XYWidthHeight(4,0,4,1));
 		everythingbutthekitchensink = new JButton("*");
-		east.add(everythingbutthekitchensink);
-		seeallchanges=new JButton("\uD83D\uDD0D");
-		east.add(seeallchanges);
-		frame.getContentPane().add(east,BorderLayout.EAST);
+		panel.add(everythingbutthekitchensink,new XYWidthHeight(5,0,1,1));
+		seeallchanges=new JButton("\u2315");
+		panel.add(seeallchanges,new XYWidthHeight(6,0,1,1));
 		
+		run = new JButton("run");
+		panel.add(run,new XYWidthHeight(0,1,15,1));
+		
+		/*
+		** The panel is put inside a holder instead of being added straight to
+		** the content pane. A panel that sits straight in the content pane is
+		** given the top inset of the window as extra padding, so that its
+		** first row does not sit flush against the title bar. The window
+		** manager only tells Java how big that inset is after the window is
+		** on the screen, so the padding is there for the first window of the
+		** program and missing for every window after that, and the same
+		** window comes out a different height depending on which one it is.
+		** The holder is not the content pane, so no padding is added and the
+		** height is the same every time. The frame already keeps the border
+		** of the window away from the panel, so nothing is lost by it.
+		*/
+		JPanel holder = new JPanel(new BorderLayout());
+		holder.add(panel,BorderLayout.CENTER);
+		frame.getContentPane().add(holder,BorderLayout.CENTER);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(980,0);
+		frame.pack();
 		frame.setVisible(true);
+		/*
+		** The Linux window manager moves the window when it first appears and
+		** drops the position that was asked for before that. Setting it again
+		** a moment later, on the event dispatch thread, is what sticks: two
+		** goes through the same move it makes itself, so the second one ends
+		** up being the position that stays. On Windows the frame is already
+		** where it was asked to be, and setting the same point again does
+		** nothing.
+		**
+		** The size is put right as well, because the window manager can also
+		** change that, and the size of the border of the window is only known
+		** once the window is on the screen.
+		*/
+		javax.swing.Timer fixlocation = new javax.swing.Timer(500, (ev) -> {
+			frame.setLocation(980,0);
+			fixFrameSize();
+		});
+		fixlocation.setRepeats(false);
+		fixlocation.start();
+		javax.swing.Timer fixlocation2 = new javax.swing.Timer(900, (ev) -> {
+			frame.setLocation(980,0);
+			fixFrameSize();
+		});
+		fixlocation2.setRepeats(false);
+		fixlocation2.start();
+	}
+	/*
+	** Puts the window to the size that the panel inside it asks for, plus the
+	** border of the window. The border is only known once the window is on the
+	** screen, so the window is packed before that and put right afterwards.
+	*/
+	public void fixFrameSize() {
+		if(frame == null) return;
+		java.awt.Insets insets = frame.getInsets();
+		Dimension preferred = frame.getContentPane().getPreferredSize();
+		if((preferred.width <= 0) || (preferred.height <= 0)) return;
+		Dimension wanted = new Dimension(preferred.width+insets.left+insets.right,
+											preferred.height+insets.top+insets.bottom);
+		if(!frame.getSize().equals(wanted)) {
+			frame.setSize(wanted);
+		}
 	}
 	public void setListeners() {
 		seeallchanges.addActionListener((ev) -> {
@@ -164,7 +257,7 @@ public class Git {
 			String command = "eval $(";
 			// git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
 			for(String branch:getAllBranches()) {
-				command=command+"git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+branch+"; git push;\" refs/remotes; ";
+				command=command+"git for-each-ref --shell --format='git switch %(refname:lstrip=3); git merge "+branch+"; git push;' refs/remotes; ";
 			}
 			command+=")";
 			
@@ -173,7 +266,7 @@ public class Git {
 		});
 		addtoall.addActionListener( (ev) -> {
 			String branch = frame.getTitle();
-			String command = "eval $(git for-each-ref --shell --format=\"git checkout %(refname:lstrip=3); git rebase "+branch+"; git push;\" refs/remotes); git checkout "+branch;
+			String command = "eval $(git for-each-ref --shell --format='git checkout %(refname:lstrip=3); git rebase "+branch+"; git push;' refs/remotes); git checkout "+branch;
 			JOptionPane.showMessageDialog(null,command);
 			git(command);
 		});
@@ -210,19 +303,16 @@ public class Git {
 			git(input.getText(),root_directory);
 		});
 		switch2_branch.addActionListener( (ev) -> {
-			Thread thread = new Thread( () -> {
+			SwingUtilities.invokeLater( () -> {
 				String mainbranch = getMainBranch();
 				String whichbranch = whichBranchOpened();
 				String whichfolderopened=whichFolderOpened();
 				if(whichbranch.equals(whichfolderopened)) {
-					//substring = "master";
 					gitWaitUntilFinish("git switch "+mainbranch,root_directory);
-					//getBranchAndSetTitle();
 				}
 				else {
 					if(isBranch(whichfolderopened)) {
 						gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
-						//getBranchAndSetTitle();
 					}
 					else
 					{
@@ -243,21 +333,28 @@ public class Git {
 							String selectedbranch = (String)combobox.getSelectedItem();
 							
 							gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
-							//getBranchAndSetTitle();
 							selectbranch.dispose();
 						});
 						selectpanel.add(openbranch);
 	
 						selectbranch.add(selectpanel);
-						selectbranch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						selectbranch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						selectbranch.setLocationRelativeTo(frame);
 						selectbranch.pack();
-						
 						selectbranch.setVisible(true);
+						javax.swing.Timer fixSelectSize = new javax.swing.Timer(500, (ev3) -> {
+							java.awt.Insets insets = selectbranch.getInsets();
+							Dimension preferred = selectbranch.getContentPane().getPreferredSize();
+							if((preferred.width > 0) && (preferred.height > 0)) {
+								selectbranch.setSize(new Dimension(preferred.width+insets.left+insets.right,
+																preferred.height+insets.top+insets.bottom));
+							}
+						});
+						fixSelectSize.setRepeats(false);
+						fixSelectSize.start();
 					}
 				}
 			});
-			thread.start();
-			
 		});
 	}
 	public void gitWaitUntilFinish(String command) {
@@ -265,11 +362,24 @@ public class Git {
 	}
 	public void gitWaitUntilFinish(String command,String directory) {
 		try {
-			ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
-			processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
-			processBuilder.directory(new File(directory));
-			Process process = processBuilder.start();
-			process.waitFor();
+			if(Platform.isWindows() && gitbashdotexe.length() > 0) {
+				ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+				processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
+				processBuilder.directory(new File(directory));
+				Process process = processBuilder.start();
+				process.waitFor();
+			}
+			else {
+				/*
+				** The other systems have no prompt command, so the command is
+				** simply run and waited for.
+				*/
+				CommandLine commandline = new CommandLine();
+				Process process = commandline.run(command,directory);
+				if(process != null) {
+					process.waitFor();
+				}
+			}
 			getBranchAndSetTitle();
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();				
@@ -292,8 +402,23 @@ public class Git {
 		}*/
 	}
 	public String whichFolderOpened() {
-		String substring=directory.replace(root_directory.replace("/","\\"),"");
-		return substring.replace("\\","");
+		/*
+		** The root of the repository and the folder of the file can have
+		** different separators in them, so both of them are changed to
+		** forward slashes before the folder is worked out.
+		*/
+		String substring=directory.replace("\\","/");
+		String root=root_directory.replace("\\","/");
+		if(substring.startsWith(root)) {
+			substring=substring.substring(root.length());
+		}
+		while(substring.startsWith("/")) {
+			substring=substring.substring(1);
+		}
+		while(substring.endsWith("/")) {
+			substring=substring.substring(0,substring.length()-1);
+		}
+		return substring;
 	}
 	public boolean isBranch(String folder) {
 		String[] branches=getAllBranches();
@@ -339,16 +464,175 @@ public class Git {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
-					processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
-					processBuilder.directory(new File(directory));
-					processBuilder.start();
+					// File script = writeGitScript(command,directory);
+					String os = System.getProperty("os.name").toLowerCase();
+					if(os.contains("win") && hasGitBashDotExe()) {
+						// openWindowsBashWindow(script);
+						ProcessBuilder processBuilder = new ProcessBuilder(gitbashdotexe);
+						processBuilder.environment().put("PROMPT_COMMAND", command + "; unset PROMPT_COMMAND");
+						processBuilder.directory(new File(directory));
+						processBuilder.start();
+
+					}
+					else {	
+						/*else if(isWSL()) {
+							openWSLBashWindow(script);
+						}
+						else {
+							openLinuxBashWindow(script);
+						}
+						*/
+						ProcessBuilder processbuilder=new ProcessBuilder(gitShell(),"-c",command+"; exec "+gitShell());
+						processbuilder.inheritIO();
+						processbuilder.redirectErrorStream(true);
+						if(directory != null)
+							processbuilder.directory(new File(directory));
+						
+						processbuilder.start();
+						/*DisplayOutput displayoutput = new DisplayOutput();
+						String substring = displayoutput.Multiline(process);
+						System.out.println(substring);
+						*/
+					}
 				} catch(IOException ex) {
 					ex.printStackTrace();
+					showGitWindowError("Couldn't open a bash window: "+ex.getMessage());
 				}
 			}
 		};
 		thread.start();
+	}
+	public boolean hasGitBashDotExe() {
+		String[] commonPaths = {"C:\\Program Files\\Git\\git-bash.exe",
+		    "C:\\Program Files (x86)\\Git\\git-bash.exe"
+		};
+		for(String path : commonPaths) {
+			File file = new File(path);
+		    	if (file.exists()) {
+		        		gitbashdotexe=file.getAbsolutePath();
+		        		return true;
+		    	}	   
+		}
+		return false;
+	}
+	public File writeGitScript(String command,String directory) throws IOException {
+		File script = File.createTempFile("gitcmd",".sh");
+		script.deleteOnExit();
+		PrintWriter out = new PrintWriter(new FileWriter(script));
+		out.print("cd '"+directory.replace('\\','/').replace("'","'\\''")+"'\n");
+		out.print(command+"\n");
+		out.print("exec bash\n");
+		out.close();
+		return script;
+	}
+	public String findWindowsBash() {
+		java.util.List<String> candidates = new java.util.ArrayList<String>();
+		if(gitbashdotexe.length() > 0) {
+			File parent = new File(gitbashdotexe).getParentFile();
+			if(parent != null)
+				candidates.add(new File(parent,"bin\\bash.exe").getAbsolutePath());
+		}
+		candidates.add("C:\\Program Files\\Git\\bin\\bash.exe");
+		candidates.add("C:\\Program Files (x86)\\Git\\bin\\bash.exe");
+		for(String path:candidates) {
+			if(new File(path).exists())
+				return path;
+		}
+		return "bash";
+	}
+	public void openWindowsBashWindow(File script) throws IOException {
+		String bash = findWindowsBash();
+		String scriptpath = script.getAbsolutePath().replace('\\','/');
+		String[] argv = new String[] {
+			"cmd.exe","/c","start","\"Git Bash\"","\""+bash+"\"","\""+scriptpath+"\""
+		};
+		ProcessBuilder processBuilder = new ProcessBuilder(argv);
+		processBuilder.start();
+	}
+	public boolean isWSL() {
+		String os = System.getProperty("os.name").toLowerCase();
+		if(!os.contains("linux")) return false;
+		try {
+			java.io.File proc = new java.io.File("/proc/version");
+			if(proc.exists()) {
+				java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(proc));
+				String line;
+				while((line = br.readLine()) != null) {
+					String l = line.toLowerCase();
+					if(l.contains("microsoft") || l.contains("wsl")) {
+						br.close();
+						return true;
+					}
+				}
+				br.close();
+			}
+			String uname = System.getProperty("os.version","").toLowerCase();
+			if(uname.contains("microsoft")) return true;
+			try {
+				byte[] b = java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("/proc/version"));
+				String s = new String(b).toLowerCase();
+				if(s.contains("microsoft")||s.contains("wsl")) return true;
+			} catch(Exception ex2) {}
+		} catch(Exception ex) {}
+		return false;
+	}
+	public void openWSLBashWindow(File script) throws IOException {
+		String scriptpath = script.getAbsolutePath().replace('\\','/');
+		String wslScript = "/mnt/"+scriptpath.replaceFirst("^([A-Za-z]):","$1".toLowerCase());
+		// fallback if drive form weird
+		if(scriptpath.startsWith("/")) wslScript = scriptpath;
+		ProcessBuilder pb = new ProcessBuilder(
+			"cmd.exe","/c","start","\"WSL Bash\"","wsl.exe","bash",scriptpath.replace('\\','/')
+		);
+		try { pb.start(); return; } catch(IOException ex) {}
+		// try without spaces in title
+		new ProcessBuilder("cmd.exe","/c","start","wsl.exe","bash",scriptpath.replace('\\','/')).start();
+	}
+	public void openLinuxBashWindow(File script) {
+		String scriptpath = script.getAbsolutePath();
+		String[][] attempts = {
+			{"x-terminal-emulator","-e","bash",scriptpath},
+			{"gnome-terminal","--","bash",scriptpath},
+			{"konsole","-e","bash",scriptpath},
+			{"xterm","-e","bash",scriptpath},
+			{"xfce4-terminal","-x","bash",scriptpath},
+			{"mate-terminal","--","bash",scriptpath},
+			{"lxterminal","-e","bash",scriptpath},
+			{"tilix","-e","bash",scriptpath},
+			{"alacritty","-e","bash",scriptpath},
+			{"kitty","bash",scriptpath},
+			{"urxvt","-e","bash",scriptpath},
+			{"st","-e","bash",scriptpath}
+		};
+		String errors = "";
+		for(String[] argv : attempts) {
+			try {
+				Process process = new ProcessBuilder(argv).start();
+				try {
+					if(!process.waitFor(700,java.util.concurrent.TimeUnit.MILLISECONDS)) {
+						System.err.println("bash window opened by "+argv[0]);
+						return;
+					}
+					if(process.exitValue() == 0) {
+						System.err.println("bash window opened by "+argv[0]);
+						return;
+					}
+					errors = errors + argv[0]+" exited with "+process.exitValue()+"\n";
+				} catch(InterruptedException ex) {
+					Thread.currentThread().interrupt();
+					return;
+				}
+			} catch(IOException ex) {
+				errors = errors + argv[0]+": "+ex.getMessage()+"\n";
+			}
+		}
+		showGitWindowError("Couldn't open a bash window. Tried every terminal emulator:\n"+errors);
+	}
+	public void showGitWindowError(String message) {
+		System.err.println(message);
+		if(!java.awt.GraphicsEnvironment.isHeadless()) {
+			JOptionPane.showMessageDialog(null,message);
+		}
 	}
 	
 	public void MSDOS() {
@@ -361,12 +645,34 @@ public class Git {
 	public void gitwithoutthread(String command) {
 		try {
 			CommandLine commandline = new CommandLine();
-			// commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'git status; exec bash\'",root_directory);
-			Process process=commandline.run("start C:\\\"Program Files\"\\Git\\bin\\bash.exe -i -c \'"+command+"; exec bash\'",directory);
-			process.waitFor();
+			String command2;
+			if(Platform.isWindows()) {
+				command2="start \""+findWindowsBash()+"\" -i -c '"+command+"; exec bash'";
+			}
+			else {
+				command2=gitShell()+" -i -c '"+command+"; exec "+gitShell()+"'";
+			}
+			Process process=commandline.run(command2,directory);
+			if(process != null) {
+				process.waitFor();
+			}
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 		}
+	}
+	/*
+	** The shell that runs the git commands. Windows has the bash of the git
+	** installation and the other systems have the shell of the system.
+	*/
+	public String gitShell() {
+		if(Platform.isWindows()) {
+			return findWindowsBash();
+		}
+		return Platform.shellName();
+	}
+	public void testwhichBranchOpened() {
+		testsetDirectoryAndRootDirectory();
+		// Assert.assertEquals("main",whichBranchOpened());
 	}
 	public String whichBranchOpened() {
 		/*try {
@@ -393,4 +699,4 @@ public class Git {
 		substring=substring.trim();
 		return substring;
 	}
-}
+}
