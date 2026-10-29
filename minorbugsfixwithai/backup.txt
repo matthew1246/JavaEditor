@@ -12,10 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java",
+    "starterclass": "/mnt/c/Users/Owner/Documents/javaeditor/minorbugsfixwithai/Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\Main.java"
+      "/mnt/c/Users/Owner/Documents/javaeditor/minorbugsfixwithai/Main.java"
     ],
     "caretposition": 0
   },
@@ -2243,7 +2243,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 65088
+    "caretposition": 64617
   },
   "C:\\javaeditor\\minorbugsfix\\AllVersionsJar.java": {
     "isLocked": false,
@@ -4252,5 +4252,61 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 294360
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\AI.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main",
+      "Control_F",
+      "PowershellNoPackage",
+      "PowershellMoreThanOnePackage",
+      "Powershell",
+      "PowershellOnePackage",
+      "AI",
+      "NoFileOpen",
+      "AllVersionsJar",
+      "AllVersionsJarMoreThanOnePackageExcludePackages",
+      "AllVersionsJarMoreThanOnePackage",
+      "AllVersionsJarNoPackage",
+      "AllVersionsJarOnePackage"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixwithai\\CommandLine.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main",
+      "Control_F",
+      "PowershellNoPackage",
+      "PowershellMoreThanOnePackage",
+      "Powershell",
+      "PowershellOnePackage",
+      "AI",
+      "NoFileOpen",
+      "AllVersionsJar",
+      "CommandLine",
+      "AllVersionsJarMoreThanOnePackageExcludePackages",
+      "AllVersionsJarMoreThanOnePackage",
+      "AllVersionsJarNoPackage",
+      "AllVersionsJarOnePackage"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "/mnt/c/Users/Owner/Documents/javaeditor/minorbugsfixwithai/Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }

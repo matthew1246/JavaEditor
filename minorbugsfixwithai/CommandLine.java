@@ -207,7 +207,7 @@ classpath = "-cp "+classpath;
 			String[] commands=Platform.shellCommand(command);
 			ProcessBuilder processbuilder=new ProcessBuilder(commands);
 			processbuilder.redirectErrorStream(true);
-			if(dir != null)
+			if(dir != null && !dir.isEmpty())
 				processbuilder.directory(new File(dir));
 			
 			Process process=processbuilder.start();
@@ -242,7 +242,8 @@ classpath = "-cp "+classpath;
 				"powershell", "-NoProfile", "-Command", ps
 			);
 			pb.redirectErrorStream(true);
-			pb.directory(new File(dir));
+			if(dir != null && !dir.isEmpty())
+				pb.directory(new File(dir));
 			Process process = pb.start();
 			return process;
 		} catch (IOException ex) {
@@ -275,7 +276,7 @@ classpath = "-cp "+classpath;
 		try {
 			ProcessBuilder processbuilder=new ProcessBuilder(Platform.shellCommand(command));
 			processbuilder.inheritIO();
-			if(dir != null)
+			if(dir != null && !dir.isEmpty())
 				processbuilder.directory(new File(dir));
 			return processbuilder.start();
 		} catch (IOException ex) {
@@ -290,7 +291,7 @@ classpath = "-cp "+classpath;
 		try {
 			ProcessBuilder processbuilder=new ProcessBuilder(arguments);
 			processbuilder.redirectErrorStream(true);
-			if(dir != null)
+			if(dir != null && !dir.isEmpty())
 				processbuilder.directory(new File(dir));
 			
 			Process process=processbuilder.start();

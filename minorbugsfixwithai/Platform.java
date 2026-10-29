@@ -223,7 +223,7 @@ public class Platform {
 		if(isWindows()) {
 			try {
 				ProcessBuilder processbuilder = new ProcessBuilder("cmd.exe","/c","start","cmd","/k",command);
-				if(dir != null) {
+				if(dir != null && !dir.isEmpty()) {
 					processbuilder.directory(new File(dir));
 				}
 				processbuilder.start();
@@ -234,24 +234,34 @@ public class Platform {
 			}
 		}
 		String shell = shellName();
-		String[][] attempts = {
-			{"x-terminal-emulator","-e",shell,"-c",command+"; exec "+shell},
-			{"gnome-terminal","--",shell,"-c",command+"; exec "+shell},
-			{"konsole","-e",shell,"-c",command+"; exec "+shell},
-			{"xterm","-e",shell,"-c",command+"; exec "+shell},
-			{"xfce4-terminal","-x",shell,"-c",command+"; exec "+shell},
-			{"mate-terminal","--",shell,"-c",command+"; exec "+shell},
-			{"lxterminal","-e",shell,"-c",command+"; exec "+shell},
-			{"tilix","-e",shell,"-c",command+"; exec "+shell},
-			{"alacritty","-e",shell,"-c",command+"; exec "+shell},
-			{"kitty",shell,"-c",command+"; exec "+shell},
-			{"urxvt","-e",shell,"-c",command+"; exec "+shell},
-			{"st","-e",shell,"-c",command+"; exec "+shell}
-		};
-		for(int i = 0; i < attempts.length; i++) {
+		String terminal = System.getenv("TERMINAL");
+		java.util.List<String[]> attempts = new java.util.ArrayList<String[]>();
+		if(terminal != null && !terminal.isEmpty()) {
+			attempts.add(new String[]{terminal,"-e",shell,"-c",command+"; exec "+shell});
+			attempts.add(new String[]{terminal,"--",shell,"-c",command+"; exec "+shell});
+		}
+		attempts.add(new String[]{"x-terminal-emulator","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"gnome-terminal","--",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"konsole","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"xterm","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"xfce4-terminal","-x",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"mate-terminal","--",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"lxterminal","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"tilix","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"alacritty","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"kitty",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"urxvt","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"st","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"gnome-console","--",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"foot",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"wezterm","start","--",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"terminator","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"deepin-terminal","-e",shell,"-c",command+"; exec "+shell});
+		attempts.add(new String[]{"pantheon-terminal","-e",shell,"-c",command+"; exec "+shell});
+		for(int i = 0; i < attempts.size(); i++) {
 			try {
-				ProcessBuilder processbuilder = new ProcessBuilder(attempts[i]);
-				if(dir != null) {
+				ProcessBuilder processbuilder = new ProcessBuilder(attempts.get(i));
+				if(dir != null && !dir.isEmpty()) {
 					processbuilder.directory(new File(dir));
 				}
 				processbuilder.start();
@@ -279,7 +289,7 @@ public class Platform {
 		try {
 			ProcessBuilder processbuilder = new ProcessBuilder(shellCommand(command));
 			processbuilder.redirectErrorStream(true);
-			if(dir != null) {
+			if(dir != null && !dir.isEmpty()) {
 				processbuilder.directory(new File(dir));
 			}
 			processbuilder.start();
