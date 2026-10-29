@@ -2260,7 +2260,7 @@ StoreSelectedFile storeselectedfile = new StoreSelectedFile();
 			}
 		});
 		
-		generatejar.addActionListener((ev) -> {												
+		generatejar.addActionListener((ev) -> {														
 			// 3a85e18ee02774cb28448df6ce540ad792d54fc9 is git commit id for -C make a jar for only package.																		
 			int caretposition=rememberPosition(fileName,textarea);
 			JTextAreaGroup textarea3=(JTextAreaGroup)textarea;
@@ -2377,6 +2377,7 @@ if(result == 0) {
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
+							filename.isPowershell();
 							allversionsjar.Powershell(fileName,this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						}
 						else {
@@ -2466,6 +2467,7 @@ if(result == 0) {
 						storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 						allversionsjar.WriteManifest(main);
 						if(allversionsjar.isMatthewJavaEditor(main)) {
+							filename.isPowershell();
 							Powershell powershell =allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 							powershell.Compile(javaversionnumber,fileName);
 							powershell.makeJar(javaversionnumber);							
@@ -2553,6 +2555,7 @@ if(result == 0) {  // isOnePackage = true;
 					storeselectedfile.addStartupComboBoxInSameDirectory(Main.this.fileName, main);
 					allversionsjar.WriteManifest(main);
 					if(allversionsjar.isMatthewJavaEditor(main)) {
+						filename.isPowershell();
 						Powershell powershell = allversionsjar.getPowershell(this,main,allversionsjar.getDir(),allversionsjar.getAllFiles());
 						powershell.Compile(no_java_verson_number,fileName);
 						powershell.makeJar(no_java_verson_number);							
