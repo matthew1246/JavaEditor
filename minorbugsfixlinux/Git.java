@@ -303,58 +303,69 @@ public void setLayout() {
 			git(input.getText(),root_directory);
 		});
 		switch2_branch.addActionListener( (ev) -> {
-			SwingUtilities.invokeLater( () -> {
-				String mainbranch = getMainBranch();
-				String whichbranch = whichBranchOpened();
-				String whichfolderopened=whichFolderOpened();
-				if(whichbranch.equals(whichfolderopened)) {
-					gitWaitUntilFinish("git switch "+mainbranch,root_directory);
-				}
-				else {
-					if(isBranch(whichfolderopened)) {
-						gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
+			Thread thread = new Thread() {
+				public void run() {
+					String mainbranch = getMainBranch();
+					String whichbranch = whichBranchOpened();
+					String whichfolderopened=whichFolderOpened();
+					if(whichbranch.equals(whichfolderopened)) {
+						gitWaitUntilFinish("git switch "+mainbranch,root_directory);
 					}
-					else
-					{
-						JFrame selectbranch = new JFrame();
-						selectbranch.setSize(400,200);
-						
-						selectbranch.setTitle("Select Which Branch");
-						JPanel selectpanel = new JPanel();
-						JLabel selectlabel = new JLabel("Select branch:");
-						selectpanel.add(selectlabel);
-						JComboBox<String> combobox = new JComboBox<String>();
-						for(String branch:getAllBranches()) {
-							combobox.addItem(branch);
+					else {
+						if(isBranch(whichfolderopened)) {
+							gitWaitUntilFinish("git switch "+whichfolderopened,root_directory);
 						}
-						selectpanel.add(combobox);
-						JButton openbranch = new JButton("open branch");
-						openbranch.addActionListener( (ev2) -> {
-							String selectedbranch = (String)combobox.getSelectedItem();
-							
-							gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
-							selectbranch.dispose();
-						});
-						selectpanel.add(openbranch);
-	
-						selectbranch.add(selectpanel);
-						selectbranch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						selectbranch.setLocationRelativeTo(frame);
-						selectbranch.pack();
-						selectbranch.setVisible(true);
-						javax.swing.Timer fixSelectSize = new javax.swing.Timer(500, (ev3) -> {
-							java.awt.Insets insets = selectbranch.getInsets();
-							Dimension preferred = selectbranch.getContentPane().getPreferredSize();
-							if((preferred.width > 0) && (preferred.height > 0)) {
-								selectbranch.setSize(new Dimension(preferred.width+insets.left+insets.right,
-																preferred.height+insets.top+insets.bottom));
-							}
-						});
-						fixSelectSize.setRepeats(false);
-						fixSelectSize.start();
+						else
+						{
+							String[] branches=getAllBranches();
+							SwingUtilities.invokeLater( () -> {
+								JFrame selectbranch = new JFrame();
+								selectbranch.setSize(400,200);
+
+								selectbranch.setTitle("Select Which Branch");
+								JPanel selectpanel = new JPanel();
+								JLabel selectlabel = new JLabel("Select branch:");
+								selectpanel.add(selectlabel);
+								JComboBox<String> combobox = new JComboBox<String>();
+								for(String branch:branches) {
+									combobox.addItem(branch);
+								}
+								selectpanel.add(combobox);
+								JButton openbranch = new JButton("open branch");
+								openbranch.addActionListener( (ev2) -> {
+									String selectedbranch = (String)combobox.getSelectedItem();
+
+									Thread thread2 = new Thread() {
+										public void run() {
+											gitWaitUntilFinish("git switch "+selectedbranch,root_directory);
+											SwingUtilities.invokeLater( () -> selectbranch.dispose());
+										}
+									};
+									thread2.start();
+								});
+								selectpanel.add(openbranch);
+
+								selectbranch.add(selectpanel);
+								selectbranch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+								selectbranch.setLocationRelativeTo(frame);
+								selectbranch.pack();
+								selectbranch.setVisible(true);
+								javax.swing.Timer fixSelectSize = new javax.swing.Timer(500, (ev3) -> {
+									java.awt.Insets insets = selectbranch.getInsets();
+									Dimension preferred = selectbranch.getContentPane().getPreferredSize();
+									if((preferred.width > 0) && (preferred.height > 0)) {
+										selectbranch.setSize(new Dimension(preferred.width+insets.left+insets.right,
+																		preferred.height+insets.top+insets.bottom));
+									}
+								});
+								fixSelectSize.setRepeats(false);
+								fixSelectSize.start();
+							});
+						}
 					}
 				}
-			});
+			};
+			thread.start();
 		});
 	}
 	public void gitWaitUntilFinish(String command) {
@@ -388,18 +399,11 @@ public void setLayout() {
 		}
 	}	
 	public void getBranchAndSetTitle() {
-		//try {
-			//thread.wait();
-			//JOptionPane.showMessageDialog(null,"hello");
-			//SwingUtilities.invokeLater( () -> {
-				String branch=whichBranchOpened();
-				
-				frame.setTitle(branch);
-			//});
-		/*}
-		catch(InterruptedException ex) {
-			ex.printStackTrace();
-		}*/
+		String branch=whichBranchOpened();
+		
+		SwingUtilities.invokeLater( () -> {
+			frame.setTitle(branch);
+		});
 	}
 	public String whichFolderOpened() {
 		/*
