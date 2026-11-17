@@ -24,23 +24,24 @@ public class Main {
 		}
 		System.out.println();
 	}
-	public static int[] Sort(int[] array) {
+	public static void Sort(int[] array) {
 		return Sort(array,0,array.length-1);
 	}
-	public static int[] Sort(int[] array,int left,int right) {
+	public static void Sort(int[] array,int left,int right) {
 		toString(array);
 		if(left == right)
 			return array;
-		int middle=((right+1)-(left))/2;
-		Sort(array,left,left+(middle-1)); // Left Array
-		Sort(array,middle,right); // Right Array
+		int middle=((right+1)-(left+1))/2;
+		int leftarrayleft=
+		Sort(array,left,left+middle); // Left Array
+		Sort(array,middle+1,right); // Right Array
 		
-		array=Merge(firstarray,secondarray);
+		Merge(array,firstarray,secondarray);
 		toString(array);
 		
 		return array;	
 	}		
-	public static int[] Merge(int[] array,int firstarraylength,int rightarray,int secondleftarray,int secondarray) {
+	public static void Merge(int[] array,int firstarraylength,int rightarray,int secondleftarray,int secondarray) {
 		int secondleftarray = 0;
 		int rightarray=0;
 		int Count = 0;
