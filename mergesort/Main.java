@@ -32,16 +32,15 @@ public class Main {
 		if(left == right)
 			return array;
 		int middle=((right+1)-(left+1))/2;
-		int leftarrayleft=
 		Sort(array,left,left+middle); // Left Array
-		Sort(array,middle+1,right); // Right Array
+		Sort(array,left+middle+1,right); // Right Array
 		
-		Merge(array,firstarray,secondarray);
+		Merge(array,left,left+middle,left+middle+1,right);
 		toString(array);
 		
 		return array;	
 	}		
-	public static void Merge(int[] array,int firstarraylength,int rightarray,int secondleftarray,int secondarray) {
+	public static void Merge(int[] array,int rightarray,int firstarraylength,int secondarray,int secondarraylength) {
 		int secondleftarray = 0;
 		int rightarray=0;
 		int Count = 0;
