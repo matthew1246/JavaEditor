@@ -41,6 +41,9 @@ public class Main {
 		toString(onetemp);
 	}		
 	public static void Merge(int[] array,int[] temp,int firstarray,int firstarraylength,int secondarray,int secondarraylength) {
+		int savefirstarray =firstarray;
+		int savesecondarraylength=secondarraylength;
+		
 		int start=firstarray;
 		while(firstarray <= firstarraylength && secondarray <=secondarraylength) {
 			if(array[firstarray] < array[secondarray]) {
@@ -75,6 +78,9 @@ public class Main {
 				start++;
 				secondarray++;
 			}
-		}						
+		}	
+		for(int i = savefirstarray; i < savesecondarraylength; i++) {
+			array[i]	=temp[i];
+		}
 	}
 }
