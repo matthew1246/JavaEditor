@@ -6,7 +6,7 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\TestSaveNewTabFour.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 127
+    "caretposition": 0
   },
   "lastopened": {
     "isLocked": false,
@@ -17,7 +17,8 @@
     "fileNames": [
       "C:\\Users\\Owner\\Documents\\git\\chess\\ChessBoard.java",
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\mergesort\\Main.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\mergesort\\Main.java",
+      "C:\\Users\\Owner\\Documents\\git\\MergeSort\\Main.java"
     ],
     "caretposition": 0
   },
@@ -4248,6 +4249,17 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 2189
+    "caretposition": 543
+  },
+  "C:\\Users\\Owner\\Documents\\git\\MergeSort\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 221
   }
 }

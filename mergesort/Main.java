@@ -1,20 +1,28 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 public class Main {
 	public static void main(String[] args) {
 		int[] array={2,3,5,1,4,9,10,6,8,7};
 		Sort(array);
-		/*
-		for(int i = 0; i < 10; i++) {
+		System.out.println();
+		
+		for(int i = 0; i < 1; i++) {
 			Sort(Generate());
 			System.out.println();
 		}
-		*/
 	}
 	public static int[] Generate() {
+		Map<Integer,Integer> hashmap=new HashMap<Integer,Integer>();
 		int[] array=new int[10];
 		Random random=new Random();
 		for(int i = 0; i < array.length; i++) {
-			array[i]=random.nextInt(10)+1;
+			int y = -1;
+			do {
+				y = random.nextInt(10)+1;
+			} while(hashmap.containsKey(y));
+			hashmap.put(y,y);
+			array[i]=y;
 		}
 		return array;
 	}
