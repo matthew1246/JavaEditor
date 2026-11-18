@@ -1,14 +1,14 @@
 import java.util.Random;
 public class Main {
 	public static void main(String[] args) {
-		int[] array=Generate();
-		toString(array);
+		int[] array={2,3,5,1,4,9,10,6,8,7};
 		Sort(array);
-		
+		/*
 		for(int i = 0; i < 10; i++) {
 			Sort(Generate());
 			System.out.println();
 		}
+		*/
 	}
 	public static int[] Generate() {
 		int[] array=new int[10];
@@ -25,59 +25,63 @@ public class Main {
 		System.out.println();
 	}
 	public static void Sort(int[] array) {
-		return Sort(array,0,array.length-1);
+		Sort(array,0,array.length-1);
 	}
 	public static void Sort(int[] array,int left,int right) {
 		toString(array);
 		if(left == right)
-			return array;
+			return;
 		int middle=((right+1)-(left+1))/2;
 		Sort(array,left,left+middle); // Left Array
 		Sort(array,left+middle+1,right); // Right Array
 		
 		Merge(array,left,left+middle,left+middle+1,right);
 		toString(array);
-		
-		return array;	
 	}		
-	public static void Merge(int[] array,int rightarray,int firstarraylength,int secondarray,int secondarraylength) {
-		int secondleftarray = 0;
-		int rightarray=0;
-		int Count = 0;
-		while(secondleftarray < firstarray.length && rightarray < secondarray.length) {
-			if(firstarray[secondleftarray] < secondarray[rightarray]) {
-				array[Count]=firstarray[secondleftarray];
-				Count++;
-				secondleftarray++;
+	public static void Merge(int[] array,int firstarray,int firstarraylength,int secondarray,int secondarraylength) {
+		int start=firstarray;
+		while(firstarray <= firstarraylength && secondarray <= secondarraylength) {
+			if(array[firstarray] < array[secondarray]) {
+				int temp=array[start];
+				array[start]=array[firstarray];
+				array[firstarray]=temp;
+				start++;
+				firstarray++;
 			}
-			else if(firstarray[secondleftarray] > secondarray[rightarray]) {
-				array[Count]=secondarray[rightarray];
-				Count++;
-				rightarray++;
+			else if(array[firstarray] > array[secondarray]) {
+				int temp=array[start];
+				array[start]=array[secondarray];
+				array[secondarray]=temp;
+				start++;
+				secondarray++;
 			}
 			else { // If firstarray[secondleftarray] == secondarray[rightarray]
-				array[Count]=firstarray[secondleftarray];
-				Count++;
-				secondleftarray++;
-				array[Count]=secondarray[rightarray];
-				Count++;
-				rightarray++;
+				int temp=array[start];
+				array[start]=array[firstarray];
+				array[firstarray]=temp;
+				start++;
+				firstarray++;
+				
+				int temp2=array[start];
+				array[start]=array[secondarray];
+				array[secondarray]=temp2;
+				start++;
+				secondarray++;
 			}
 		}
-		if(secondleftarray < firstarray.length) {
-			while(secondleftarray < firstarray.length) {
-				array[Count]=firstarray[secondleftarray];
-				Count++;
-				secondleftarray++;
+		if(firstarray <= firstarraylength) {
+			while(firstarray <= firstarraylength) {
+				array[start]=array[firstarray];
+				start++;
+				firstarray++;
 			}
 		}
-		else {  //if(rightarray > secondarray.length) 
-			while(rightarray < secondarray.length) {
-				array[Count]=secondarray[rightarray];
-				Count++;
-				rightarray++;
+		else if(secondarray <= secondarraylength) {
+			while(secondarray <= secondarraylength) {
+				array[start]=array[secondarray];
+				start++;
+				secondarray++;
 			}
 		}						
-		return array;
 	}
 }
