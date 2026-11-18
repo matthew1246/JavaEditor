@@ -25,35 +25,43 @@ public class Main {
 		System.out.println();
 	}
 	public static void Sort(int[] array) {
-		Sort(array,0,array.length-1);
+		int[] onetemp=new int[array.length];
+		Sort(array,onetemp,0,array.length-1);
 	}
-	public static void Sort(int[] array,int left,int right) {
+	public static void Sort(int[] array,int[] onetemp,int left,int right) {
 		toString(array);
 		if(left == right)
 			return;
 		int middle=((right+1)-(left+1))/2;
-		Sort(array,left,left+middle); // Left Array
-		Sort(array,left+middle+1,right); // Right Array
+		Sort(array,onetemp,left,left+middle); // Left Array
+		Sort(array,onetemp,left+middle+1,right); // Right Array
 		
-		Merge(array,left,left+middle,left+middle+1,right);
+		Merge(array,onetemp,left,left+middle,left+middle+1,right);
 		toString(array);
 	}		
-	public static void Merge(int[] array,int firstarray,int firstarraylength,int secondarray,int secondarraylength) {
-		while(firstarray <=firstarraylength) {
+	public static void Merge(int[] array,int[] temp,int firstarray,int firstarraylength,int secondarray,int secondarraylength) {
+		int start=0;
+		while(firstarray <= firstarraylength && secondarray <=secondarraylength) {
 			if(array[firstarray] < array[secondarray]) {
+				temp[start]=array[firstarray];
+				start++;
 				firstarray++;
 			}
 			else if(array[secondarray] < array[firstarray]) {
-				int temp=array[firstarray];
-				array[firstarray]=array[secondarray];
-				array[secondarray]=temp;
-				firstarray++;
+				temp[start]=array[secondarray];
+				start++;
+				secondarray++;
 			}
 			else { // If firstarray[secondleftarray] == secondarray[rightarray]
+				temp[start]=array[firstarray];
+				start++;
 				firstarray++;
+				temp[start]=array[secondarray];
+				start++;
+				secondarray++;
 			}
 		}
-		/*if(firstarray <= firstarraylength) {
+		if(firstarray <= firstarraylength) {
 			while(firstarray <= firstarraylength) {
 				array[start]=array[firstarray];
 				start++;
@@ -66,6 +74,6 @@ public class Main {
 				start++;
 				secondarray++;
 			}
-		}*/						
+		}						
 	}
 }
