@@ -39,37 +39,21 @@ public class Main {
 		toString(array);
 	}		
 	public static void Merge(int[] array,int firstarray,int firstarraylength,int secondarray,int secondarraylength) {
-		int start=firstarray;
-		while(firstarray <= firstarraylength && secondarray <= secondarraylength) {
+		while(firstarray <=firstarraylength) {
 			if(array[firstarray] < array[secondarray]) {
-				int temp=array[start];
-				array[start]=array[firstarray];
-				array[firstarray]=temp;
-				start++;
 				firstarray++;
 			}
-			else if(array[firstarray] > array[secondarray]) {
-				int temp=array[start];
-				array[start]=array[secondarray];
+			else if(array[secondarray] < array[firstarray]) {
+				int temp=array[firstarray];
+				array[firstarray]=array[secondarray];
 				array[secondarray]=temp;
-				start++;
-				secondarray++;
+				firstarray++;
 			}
 			else { // If firstarray[secondleftarray] == secondarray[rightarray]
-				int temp=array[start];
-				array[start]=array[firstarray];
-				array[firstarray]=temp;
-				start++;
 				firstarray++;
-				
-				int temp2=array[start];
-				array[start]=array[secondarray];
-				array[secondarray]=temp2;
-				start++;
-				secondarray++;
 			}
 		}
-		if(firstarray <= firstarraylength) {
+		/*if(firstarray <= firstarraylength) {
 			while(firstarray <= firstarraylength) {
 				array[start]=array[firstarray];
 				start++;
@@ -82,6 +66,6 @@ public class Main {
 				start++;
 				secondarray++;
 			}
-		}						
+		}*/						
 	}
 }
