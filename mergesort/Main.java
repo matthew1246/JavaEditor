@@ -2,7 +2,6 @@ import java.util.Random;
 public class Main {
 	public static void main(String[] args) {
 		int[] array={2,3,5,1,4,9,10,6,8,7};
-		toString(array);
 		Sort(array);
 		/*
 		for(int i = 0; i < 10; i++) {
@@ -30,7 +29,7 @@ public class Main {
 		Sort(array,onetemp,0,array.length-1);
 	}
 	public static void Sort(int[] array,int[] onetemp,int left,int right) {
-		toString(onetemp);
+		toString(array);
 		if(left == right)
 			return;
 		int middle=((right+1)-(left+1))/2;
@@ -38,7 +37,7 @@ public class Main {
 		Sort(array,onetemp,left+middle+1,right); // Right Array
 		
 		Merge(array,onetemp,left,left+middle,left+middle+1,right);
-		toString(onetemp);
+		toString(array);
 	}		
 	public static void Merge(int[] array,int[] temp,int firstarray,int firstarraylength,int secondarray,int secondarraylength) {
 		int savefirstarray =firstarray;
@@ -79,7 +78,7 @@ public class Main {
 				secondarray++;
 			}
 		}	
-		for(int i = savefirstarray; i < savesecondarraylength; i++) {
+		for(int i = savefirstarray; i <= savesecondarraylength; i++) {
 			array[i]	=temp[i];
 		}
 	}
