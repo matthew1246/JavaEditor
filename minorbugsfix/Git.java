@@ -119,6 +119,7 @@ public class Git {
       	}
       	
       	public JButton seeallchanges;
+	public JButton change_commit;
 	public JButton everythingbutthekitchensink;
       	public JButton addtoall;
       	public JButton upload;
@@ -132,11 +133,16 @@ public class Git {
 		frame=new JFrame();
 		frame.setSize(550,100);
  		// previously 500,100
-		frame.setLocation(980,0);
+		java.awt.Rectangle screen = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		frame.setLocation(Math.max(screen.x, Math.min(980, screen.x + screen.width - frame.getWidth())), 0);
 		input.setText("git status");
 		frame.getContentPane().add(input,BorderLayout.CENTER);
 		run = new JButton("run");
-		frame.getContentPane().add(run,BorderLayout.SOUTH);
+		JPanel south = new JPanel();
+		south.add(run);
+		change_commit = new JButton("Change Commit");
+		south.add(change_commit);
+		frame.getContentPane().add(south,BorderLayout.SOUTH);
 		
 		JPanel east = new JPanel();
 		

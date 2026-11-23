@@ -12,10 +12,12 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Main.java"
+      "C:\\Users\\Owner\\Documents\\git\\quicksort\\MainUsingIndex.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\git\\MergeSort\\Main.java"
     ],
     "caretposition": 0
   },
@@ -32,10 +34,10 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Git",
-      "GuaranteedLayout",
       "Main",
-      "MainDotJars"
+      "MainDotJars",
+      "Git",
+      "GuaranteedLayout"
     ],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
@@ -44,12 +46,12 @@
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
-    "lockedStartupClass": "MainDotJars",
+    "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
+      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -61,7 +63,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 74928
+    "caretposition": 268217
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -313,8 +315,8 @@
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
       "Main",
-      "Compile",
-      "MainDotJars"
+      "MainDotJars",
+      "Compile"
     ],
     "starterclass": "",
     "jars": [
@@ -329,8 +331,8 @@
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
       "Main",
-      "AllVersionsJar",
-      "MainDotJars"
+      "MainDotJars",
+      "AllVersionsJar"
     ],
     "starterclass": "",
     "jars": [
@@ -1831,9 +1833,9 @@
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
       "Main",
+      "MainDotJars",
       "GuaranteedLayout",
-      "MatthewLayout",
-      "MainDotJars"
+      "MatthewLayout"
     ],
     "starterclass": "",
     "jars": [
@@ -3032,6 +3034,7 @@
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
       "Main",
+      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -3041,7 +3044,6 @@
       "Compile",
       "SteveJobsNot",
       "TabFileNameAndContent",
-      "MainDotJars",
       "JTextAreaGroup",
       "StarterJComboBox",
       "AllFiles",
@@ -3203,6 +3205,7 @@
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
       "Main",
+      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -3212,7 +3215,6 @@
       "Compile",
       "SteveJobsNot",
       "TabFileNameAndContent",
-      "MainDotJars",
       "JTextAreaGroup",
       "StarterJComboBox",
       "AllFiles",
@@ -4098,6 +4100,7 @@
     "lockedStartupClass": "MainDotJars",
     "startupcombobox": [
       "Main",
+      "MainDotJars",
       "Maven",
       "XYWidthHeight",
       "XYWidthHeightGridBagConstraints",
@@ -4107,7 +4110,6 @@
       "Compile",
       "SteveJobsNot",
       "TabFileNameAndContent",
-      "MainDotJars",
       "JTextAreaGroup",
       "StarterJComboBox",
       "AllFiles",
@@ -4281,7 +4283,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 947
+    "caretposition": 306
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\quicksort\\MainUsingIndex.java": {
     "isLocked": false,
