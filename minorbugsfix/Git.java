@@ -2,6 +2,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
@@ -161,9 +162,34 @@ public class Git {
 		frame.setVisible(true);
 	}
 	public void setListeners() {
+		change_commit.addActionListener((ev) -> {
+			JFrame changecommit = new JFrame("Change Commit");
+			changecommit.setSize(800,600);
+			JComboBox<String> commits = new JComboBox<String>();
+			CommandLine commandline = new CommandLine();
+			Process process = commandline.run("git log --format=\"%h %s\"",root_directory);
+			DisplayOutput displayoutput = new DisplayOutput();
+			String multiline = displayoutput.Multiline(process);
+			String[] lines = multiline.split("\\r?\\n|\\r");
+			for(String line : lines) {
+				commits.addItem(line);
+			}
+			JPanel north = new JPanel(new BorderLayout());
+			JPanel row = new JPanel(new BorderLayout());
+			JPanel selectcommit = new JPanel(new GridLayout(1,2));
+			selectcommit.add(commits);
+			JButton changeToSelectedCommit = new JButton("Change to Selected Commit");
+			selectcommit.add(changeToSelectedCommit);
+			row.add(selectcommit,BorderLayout.CENTER);
+			north.add(row,BorderLayout.CENTER);
+			changecommit.add(north,BorderLayout.NORTH);
+			changecommit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			changecommit.setVisible(true);
+		});
 		seeallchanges.addActionListener((ev) -> {
 			SeeAllGitChanges seeallgitchanges=new SeeAllGitChanges(root_directory);
 		});
+
 		everythingbutthekitchensink.addActionListener(ev -> {
 			String command = "eval $(";
 			// git for-each-ref --shell --format=\"git switch %(refname:lstrip=3); git merge "+frame.getTitle()+"; git push;\" refs/remotes)";
