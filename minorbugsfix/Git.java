@@ -2,7 +2,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
@@ -176,10 +175,10 @@ public class Git {
 			}
 			JPanel north = new JPanel(new BorderLayout());
 			JPanel row = new JPanel(new BorderLayout());
-			JPanel selectcommit = new JPanel(new GridLayout(1,2));
-			selectcommit.add(commits);
+			JPanel selectcommit = new JPanel(new BorderLayout());
+			selectcommit.add(commits,BorderLayout.CENTER);
 			JButton changeToSelectedCommit = new JButton("Change to Selected Commit");
-			selectcommit.add(changeToSelectedCommit);
+			selectcommit.add(changeToSelectedCommit,BorderLayout.EAST);
 			row.add(selectcommit,BorderLayout.CENTER);
 			north.add(row,BorderLayout.CENTER);
 			changecommit.add(north,BorderLayout.NORTH);
