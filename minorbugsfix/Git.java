@@ -123,7 +123,7 @@ public class Git {
 	public JButton everythingbutthekitchensink;
       	public JButton addtoall;
       	public JButton upload;
-	public JTextField input = new JTextField();
+	public JTextField input = new JTextField("git status");
 	public JButton run;
 	public JButton clear;
 	public JButton switch2_branch;
@@ -135,30 +135,28 @@ public class Git {
  		// previously 500,100
 		java.awt.Rectangle screen = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		frame.setLocation(Math.max(screen.x, Math.min(980, screen.x + screen.width - frame.getWidth())), 0);
-		input.setText("git status");
-		frame.getContentPane().add(input,BorderLayout.CENTER);
-		run = new JButton("run");
-		JPanel south = new JPanel();
-		south.add(run);
-		change_commit = new JButton("Change Commit");
-		south.add(change_commit);
-		frame.getContentPane().add(south,BorderLayout.SOUTH);
-		
-		JPanel east = new JPanel();
+		JPanel panel=new JPanel(new MatthewLayout());
+		frame.getContentPane().add(panel);
+		panel.add(input,new XYWidthHeight(0,0,2,1));
 		
 		switch2_branch = new JButton("switch branch");
-		east.add(switch2_branch);
+		panel.add(switch2_branch,new XYWidthHeight(1,0,4,1));
 		reset = new JButton("reset");
-		east.add(reset);
+		panel.add(reset,new XYWidthHeight(2,0,2,1));
 		upload = new JButton("upload");
-		east.add(upload);
+		panel.add(upload,new XYWidthHeight(3,0,2,1));
 		addtoall = new JButton("add to all");
-		east.add(addtoall);
+		panel.add(addtoall,new XYWidthHeight(4,0,3,1));
 		everythingbutthekitchensink = new JButton("*");
-		east.add(everythingbutthekitchensink);
-		seeallchanges=new JButton("\uD83D\uDD0D");
-		east.add(seeallchanges);
-		frame.getContentPane().add(east,BorderLayout.EAST);
+		panel.add(everythingbutthekitchensink,new XYWidthHeight(5,0,1,1));
+		seeallchanges=new JButton("\u2315");
+		panel.add(seeallchanges,new XYWidthHeight(6,0,1,1));
+		change_commit=new JButton("Change Commit");
+		panel.add(change_commit,new XYWidthHeight(7,0,4,1));
+		
+		run = new JButton("run");
+		panel.add(run,new XYWidthHeight(0,1,19,1));
+
 		
 		frame.setVisible(true);
 	}
