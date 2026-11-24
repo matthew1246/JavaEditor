@@ -23,6 +23,7 @@ public class ChangeCommit {
 		}
 		JPanel panel = new JPanel(new BorderLayout());
 		JPanel row = new JPanel(new BorderLayout());
+		row.setBorder(new javax.swing.border.EmptyBorder(10,0,0,0));
 		row.add(commits,BorderLayout.CENTER);
 		JButton changeToSelectedCommit = new JButton("Change to Selected Commit");
 		row.add(changeToSelectedCommit,BorderLayout.EAST);
