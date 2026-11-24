@@ -1,3 +1,4 @@
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -21,15 +22,14 @@ public class ChangeCommit {
 		for(String line : lines) {
 			commits.addItem(line);
 		}
-		JPanel north = new JPanel(new BorderLayout());
-		JPanel row = new JPanel(new BorderLayout());
-		JPanel selectcommit = new JPanel(new BorderLayout());
-		selectcommit.add(commits,BorderLayout.CENTER);
+		JPanel panel = new JPanel();
+		JPanel row = new JPanel(new GridLayout(1,2));
+		row.add(commits);
 		JButton changeToSelectedCommit = new JButton("Change to Selected Commit");
-		selectcommit.add(changeToSelectedCommit,BorderLayout.EAST);
-		row.add(selectcommit,BorderLayout.CENTER);
-		north.add(row,BorderLayout.CENTER);
-		changecommit.add(north,BorderLayout.NORTH);
+		row.add(changeToSelectedCommit);
+		panel.add(row);
+		
+		changecommit.add(panel);
 		changecommit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		changecommit.setVisible(true);
 	}

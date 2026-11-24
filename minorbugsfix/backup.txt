@@ -36,9 +36,9 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "Git",
       "GuaranteedLayout",
-      "Main",
       "MainDotJars"
     ],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
@@ -1978,9 +1978,9 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "SeeAllGitChanges",
       "GuaranteedLayout",
-      "Main",
       "MainDotJars"
     ],
     "starterclass": "",
@@ -4492,6 +4492,6 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 0
+    "caretposition": 924
   }
 }
