@@ -48,10 +48,10 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
+      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
-      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -4424,6 +4424,6 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 2865
+    "caretposition": 2354
   }
 }

@@ -59,7 +59,7 @@ public class ChangeCommit {
 	}
 	public void setListeners() {
 		changeToSelectedCommit.addActionListener((ev) -> {
-			if(!isDetachedHead()) {	
+			if(isDetachedHead()) {	
 				gitswitchdash();
 			}
 			String selected = (String)commits.getSelectedItem();
