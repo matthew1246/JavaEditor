@@ -12,11 +12,10 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\javaeditor\\minorbugsfix\\Main.java",
+    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChangeCommit.java",
     "jars": [],
     "fileNames": [
-      "C:\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\javaeditor\\minorbugsfix\\AddPlugin.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChangeCommit.java"
     ],
     "caretposition": 0
   },
@@ -4491,7 +4490,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 924
+    "caretposition": 1272
   },
   "C:\\slowingdownnetwork\\Main.java": {
     "isLocked": false,
