@@ -7102,23 +7102,19 @@ class MyCaretListener implements CaretListener {
 	}
 }
 class Caret_Tracker {
-	public Deque<Integer> future=new ArrayDeque<Integer>();
-	public Deque<Integer> caret_tracker=new ArrayDeque<>();	
+	public List<Integer> caret_tracker=new ArrayList<Integer>();	
+	public int selected = 0;
 	public void add(int caretposition) {
-		caret_tracker.push(caretposition);
+		caret_tracker.add(caretposition);
 	}
 	public int getPrevious() {
-		if(caret_tracker.isEmpty())
-			return 0;
-		int selected= caret_tracker.pop();
-		future.push(selected);
-		return selected;
+		if(selected == 0)
+			selected = caret_tracker.size()-1;
+		selected--;
+		return caret_tracker.get(selected);
 	}
 	public int getNext() {
-		if(future.isEmpty())
-			return 0;	
-		int selected=future.pop();
-		caret_tracker.push(selected);
-		return selected;
+		selected++;
+		return caret_tracker.get(selected);
 	}
 }

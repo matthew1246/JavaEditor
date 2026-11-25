@@ -5,6 +5,10 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
+	public static void main(String[] args) {
+		Git git = new Git();
+		git.setLayout();
+	}
 	public String root_directory;
 	public String directory;
 	public JFrame frame;

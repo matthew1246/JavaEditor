@@ -12,14 +12,11 @@
     "isLocked": false,
     "lockedStartupClass": "",
     "startupcombobox": [],
-    "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChangeCommit.java",
+    "starterclass": "C:\\javaeditor\\minorbugsfix\\Main.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfixlinux\\Git.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\SeeAllGitChanges.java",
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChangeCommit.java"
+      "C:\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\javaeditor\\minorbugsfix\\AddPlugin.java"
     ],
     "caretposition": 0
   },
@@ -2869,7 +2866,9 @@
   "C:\\Users\\Matth\\Documents\\Main.java": {
     "isLocked": false,
     "lockedStartupClass": "",
-    "startupcombobox": [],
+    "startupcombobox": [
+      "Main"
+    ],
     "starterclass": "",
     "jars": [],
     "fileNames": [],
@@ -4493,5 +4492,35 @@
     "jars": [],
     "fileNames": [],
     "caretposition": 924
+  },
+  "C:\\slowingdownnetwork\\Main.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "Main"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 8133
+  },
+  "C:\\javaeditor\\minorbugsfix\\AddPlugin.java": {
+    "isLocked": false,
+    "lockedStartupClass": "",
+    "startupcombobox": [
+      "MiddleString",
+      "FindMethodName",
+      "Maven",
+      "MSDOS",
+      "AddPlugin",
+      "MatthewLayout",
+      "Main",
+      "AllVersionsJar",
+      "Middle"
+    ],
+    "starterclass": "",
+    "jars": [],
+    "fileNames": [],
+    "caretposition": 0
   }
 }
