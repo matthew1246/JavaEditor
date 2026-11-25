@@ -105,6 +105,20 @@ import java.awt.event.KeyAdapter;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 public class Main {
+	public void updateAllTabs() {
+		for(int i = 0; i < fileNames.size(); i++) {
+			try {
+				String fileName=fileNames.get(i);
+				JScrollPane jscrollpane5=(JScrollPane)tabbedpane.getTabComponentAt(i);
+				JTextArea textarea=(JTextArea)jscrollpane5.getViewport().getView();
+				Path path = Paths.get(fileName);
+				String lines2= Files.readString(path,StandardCharsets.UTF_8);
+				textarea.setText(lines2);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 	/*
 	** Rebuilds the Recent Files menu from recents.txt.
 	** Called every time the menu is opened so files executed or jar files

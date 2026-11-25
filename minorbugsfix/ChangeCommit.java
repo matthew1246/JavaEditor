@@ -75,7 +75,7 @@ public class ChangeCommit {
 			DisplayOutput displayoutput = new DisplayOutput();
 			output.setText(displayoutput.Multiline(process));
 			output.setCaretPosition(0);
-			if(main.isMainSet())
+			if(main != null)
 				main.updateAllTabs();
 		});
 	}
