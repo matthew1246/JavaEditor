@@ -15,6 +15,20 @@ public class ChangeCommit {
 		setLayout();
 		setListeners();
 	}
+	public boolean isDetachedHead() {
+		CommandLine commandline = new CommandLine();
+		Process process = commandline.run("git rev-parse --abbrev-ref HEAD",root_directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		String branch = displayoutput.OneLine(process);
+		return branch != null && branch.trim().equals("HEAD");
+	}
+	public void gitswitchdash() {
+		CommandLine commandline = new CommandLine();
+		Process process = commandline.run("git switch - 2>&1",root_directory);
+		DisplayOutput displayoutput = new DisplayOutput();
+		output.setText(displayoutput.Multiline(process));
+		output.setCaretPosition(0);
+	}
 	public void setLayout() {
 		JFrame changecommit = new JFrame("Change Commit");
 		changecommit.setSize(800,600);
@@ -45,6 +59,9 @@ public class ChangeCommit {
 	}
 	public void setListeners() {
 		changeToSelectedCommit.addActionListener((ev) -> {
+			if(!isDetachedHead()) {	
+				gitswitchdash();
+			}
 			String selected = (String)commits.getSelectedItem();
 			if(selected == null || selected.equals("No output.") || selected.startsWith("<<")) return;
 			String hash = selected.split(" ")[0];
