@@ -362,6 +362,7 @@ System.getProperty("user.home")+File.separator+"load_program.ser";
 	*/
 	public Main(OpenDefaultContent odc) 
 	{
+		git.setMain(this);
 		msdos = new MSDOS(this);
 		fileName = odc.getFileName();
 		threecomboboxes = new ThreeComboboxes(this);

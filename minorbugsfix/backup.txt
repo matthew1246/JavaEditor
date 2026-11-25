@@ -15,7 +15,9 @@
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChangeCommit.java",
     "jars": [],
     "fileNames": [
-      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChangeCommit.java"
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\ChangeCommit.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java"
     ],
     "caretposition": 0
   },
@@ -32,24 +34,24 @@
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
       "Git",
       "GuaranteedLayout",
+      "Main",
       "MainDotJars"
     ],
     "starterclass": "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Git.java",
     "jars": [],
     "fileNames": [],
-    "caretposition": 5694
+    "caretposition": 6232
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Main.java": {
     "isLocked": true,
     "lockedStartupClass": "Main",
     "startupcombobox": [
-      "Main",
       "StarterJComboBox",
       "MatthewLayout",
       "Preferences",
+      "Main",
       "StoreSelectedFile",
       "MainDotJars"
     ],
@@ -61,7 +63,7 @@
       "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
     ],
     "fileNames": [],
-    "caretposition": 50838
+    "caretposition": 14501
   },
   "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\NoFileOpen.java": {
     "isLocked": true,
@@ -4490,7 +4492,7 @@
     "starterclass": "",
     "jars": [],
     "fileNames": [],
-    "caretposition": 1272
+    "caretposition": 3041
   },
   "C:\\slowingdownnetwork\\Main.java": {
     "isLocked": false,
@@ -4519,6 +4521,65 @@
     ],
     "starterclass": "",
     "jars": [],
+    "fileNames": [],
+    "caretposition": 0
+  },
+  "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\fileName.java": {
+    "isLocked": true,
+    "lockedStartupClass": "Main",
+    "startupcombobox": [
+      "Main",
+      "Git",
+      "GuaranteedLayout",
+      "MainDotJars",
+      "StarterJComboBox",
+      "MatthewLayout",
+      "Preferences",
+      "StoreSelectedFile",
+      "FileListModifier",
+      "CommandLine",
+      "Control_F",
+      "JTextAreaGroup",
+      "Compile",
+      "AllVersionsJar",
+      "AllFiles",
+      "AllClassesInFile",
+      "ExtractJUnit",
+      "Content",
+      "DependencyRemover",
+      "GetClassMethods",
+      "ThreeComboboxes",
+      "Maven",
+      "DependencyManager",
+      "MSDOS",
+      "AddDependency",
+      "AddPlugin",
+      "TabFileNameAndContent",
+      "Links",
+      "LinkedHashMapInterface",
+      "GetClassName",
+      "GoToLineNumber",
+      "CompileErrors",
+      "Codes",
+      "FileComparator",
+      "XML",
+      "Packager",
+      "NewtonFirsty",
+      "SteveJobsNot",
+      "BillyGA",
+      "ChuckyN",
+      "Fraction",
+      "XYWidthHeight",
+      "XYWidthHeightGridBagConstraints",
+      "SeeAllGitChanges"
+    ],
+    "starterclass": "",
+    "jars": [
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\gson-2.10.1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\Muck.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okhttp-3.0.0-RC1.jar",
+      "C:\\Users\\Owner\\Documents\\javaeditor\\minorbugsfix\\okio-1.6.0.jar"
+    ],
     "fileNames": [],
     "caretposition": 0
   }

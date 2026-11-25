@@ -5,6 +5,16 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.regex.*;
 public class Git {
+	public Main main;
+	public void setMain(Main main) {
+		this.main=main;
+	}
+	public Main getMain() {
+		return main;
+	}
+	public boolean isMainSet() {
+		return main != null;
+	}
 	public static void main(String[] args) {
 		Git git = new Git();
 		git.setLayout();
@@ -166,7 +176,12 @@ public class Git {
 	}
 	public void setListeners() {
 		change_commit.addActionListener((ev) -> {
-			ChangeCommit changecommit=new ChangeCommit(root_directory);
+			if(!isMainSet()) {
+				ChangeCommit changecommit=new ChangeCommit(root_directory);
+			}
+			else {
+				ChangeCommit changecommit=new ChangeCommit(getMain(),root_directory);
+			}
 		});
 		seeallchanges.addActionListener((ev) -> {
 			SeeAllGitChanges seeallgitchanges=new SeeAllGitChanges(root_directory);

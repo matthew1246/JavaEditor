@@ -6,14 +6,19 @@ import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 public class ChangeCommit {
+	public Main main;	
 	protected String root_directory;
 	public JComboBox<String> commits;
 	public JButton changeToSelectedCommit;
 	public JTextArea output;
-	public ChangeCommit(String root_directory) {
+	public ChangeCommit(Main main,String root_directory) {
+		this.main=main;
 		this.root_directory=root_directory;
 		setLayout();
 		setListeners();
+	}
+	public ChangeCommit(String root_directory) {
+		this(null,root_directory);	
 	}
 	public boolean isDetachedHead() {
 		CommandLine commandline = new CommandLine();
@@ -70,6 +75,8 @@ public class ChangeCommit {
 			DisplayOutput displayoutput = new DisplayOutput();
 			output.setText(displayoutput.Multiline(process));
 			output.setCaretPosition(0);
+			if(main.isMainSet())
+				main.updateAllTabs();
 		});
 	}
 }
